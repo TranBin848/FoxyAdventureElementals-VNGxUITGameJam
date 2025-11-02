@@ -40,12 +40,9 @@ func control_jump_attack() -> bool:
 	return false
 
 func control_throw_blade() -> bool:
-	if Input.is_action_just_pressed("throw"):
+	if Input.is_action_just_pressed("throw") and obj.can_attack():
 		change_state(fsm.states.throwattack)
 		return true
-	#if Input.is_action_just_pressed("throw") and obj.can_attack():
-		#change_state(fsm.states.throwattack)
-		#return true
 	return false
 
 func take_damage(direction: Variant, damage: int = 1) -> void:
