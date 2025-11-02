@@ -16,6 +16,8 @@ var blade_hit_area: Area2D;
 @onready var jump_fx_factory: Node2DFactory = $Direction/JumpFXFactory
 @onready var skill_factory: Node2DFactory = $Direction/SkillFactory
 
+@export var push_strength = 100.0
+
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Idle)
@@ -39,9 +41,21 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	invulnerable_timer -= delta
 	
-	if (invulnerable_timer <= 0):
+	handle_invulnerable(delta)
+		
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		var body = c.get_collider()
+		
+		if body is RigidBody2D:
+			var normal = -c.get_normal()
+			body.apply_central_impulse(normal * push_strength)
+			
+func handle_invulnerable(delta) -> void:
+	if (invulnerable_timer > 0):
+		invulnerable_timer -= delta
+	else:
 		is_invulnerable = false
 		
 	if is_invulnerable:
@@ -110,7 +124,7 @@ func is_char_invulnerable() -> bool:
 	
 func jump() -> void:
 	super.jump()
-	var jump_fx = jump_fx_factory.create() as Node2D
+	jump_fx_factory.create() as Node2D
 
 func _on_hurt_area_2d_hurt(_direction: Variant, _damage: Variant) -> void:
 	fsm.current_state.take_damage(_direction, _damage)
