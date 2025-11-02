@@ -17,7 +17,7 @@ func _update(_delta: float):
 	
 	if update_timer(_delta):
 		var walk_fx = walk_fx_factory.create() as Node2D
-		print(obj.scale)
+		#print(obj.scale)
 		walk_fx.scale.x = obj.direction
 		timer = 0.2
 	
