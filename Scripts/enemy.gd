@@ -1,19 +1,18 @@
 class_name EnemyCharacter
 extends BaseCharacter
 
-enum Elements {METAL, WOOD, WATER, FIRE, EARTH}
-@export var elements_color : Dictionary[Elements, Color] = {
-	Elements.METAL: Color.LIGHT_GRAY,
-	Elements.WOOD: Color.LIME_GREEN,
-	Elements.WATER: Color.AQUA,
-	Elements.FIRE: Color("ff3216"),
-	Elements.EARTH: Color("d36f00")
+@export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
+	ElementsEnum.Elements.METAL: Color.LIGHT_GRAY,
+	ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
+	ElementsEnum.Elements.WATER: Color.AQUA,
+	ElementsEnum.Elements.FIRE: Color("ff3216"),
+	ElementsEnum.Elements.EARTH: Color("d36f00")
 }
 
 # Shader that will be used for outlining the enemy based on its element
 @export_file("*.gdshader") var shader_path
 # Element of the enemy
-@export var element: Elements
+@export var element: ElementsEnum.Elements
 # Damage deal damage when player touch (HP)
 @export var spike: float
 # Detect player within this range (radius in pixel)
