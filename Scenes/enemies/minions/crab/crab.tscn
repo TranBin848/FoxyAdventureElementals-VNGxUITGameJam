@@ -60,6 +60,7 @@ size = Vector2(40, 24)
 [node name="Crab" type="CharacterBody2D"]
 collision_layer = 8
 script = ExtResource("1_4p1sk")
+movement_range = 200.0
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Direction" type="Node2D" parent="."]

@@ -71,6 +71,7 @@ height = 28.0
 collision_layer = 8
 script = ExtResource("1_sl7hc")
 shader_path = "uid://doovon2v0i5dx"
+movement_range = 100.0
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

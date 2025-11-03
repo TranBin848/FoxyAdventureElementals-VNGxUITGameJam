@@ -44,6 +44,9 @@ var hit_area: HitArea2D = null
 # Material to change outline
 var shader_material: Material
 
+# Enemy can only move in a range around this position
+var start_position: Vector2
+
 func _ready() -> void:
 	super._ready()
 	_init_ray_cast()
@@ -51,8 +54,13 @@ func _ready() -> void:
 	_init_hurt_area()
 	_init_hit_area()
 	_init_material()
+	_init_start_position()
 
-# -- Initilize material
+# -- Initialize start position
+func _init_start_position():
+	start_position = position
+
+# -- Initialize material
 func _init_material():
 	shader_material = ShaderMaterial.new()
 	if shader_path == null: return

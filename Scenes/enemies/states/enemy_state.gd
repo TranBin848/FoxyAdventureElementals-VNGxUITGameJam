@@ -13,7 +13,12 @@ func control_moving() -> bool:
 	return false
 
 func _should_turn_around() -> bool:
-	return (obj.is_touch_wall() or obj.is_can_fall()) and obj.is_on_floor()
+	if obj.position.x < obj.start_position.x - obj.movement_range:
+		if obj.direction < 0: return true
+	if obj.position.x > obj.start_position.x + obj.movement_range:
+		if obj.direction > 0: return true
+	if (obj.is_touch_wall() or obj.is_can_fall()) and obj.is_on_floor(): return true
+	return false
 
 func take_damage(direction: Variant, damage: int = 1) -> void:
 	#Enemy take damage
