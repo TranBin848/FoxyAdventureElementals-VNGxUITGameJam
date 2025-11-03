@@ -9,6 +9,7 @@ var direction: int = 1
 @export var _next_direction: int = 1
 @export var attack_damage: int = 1
 @export var max_health: int = 3
+@export var elemental_type: int = 0 #0: none, 1: fire, 2: earth, 3: water
 var health: int = max_health
 
 
@@ -25,8 +26,12 @@ func _ready() -> void:
 	set_animated_sprite($Direction/AnimatedSprite2D)
 
 func _physics_process(delta: float) -> void:
-	# Animation
+	# Animation - must run first to set animated_sprite
 	_check_changed_animation()
+	
+	# Update palette after sprite is set
+	if animated_sprite != null:
+		_update_elemental_palette()
 
 	if fsm != null:
 		fsm._update(delta)
@@ -35,6 +40,14 @@ func _physics_process(delta: float) -> void:
 	# Direction
 	_check_changed_direction()
 
+func _update_elemental_palette() -> void:
+	var shader_material = ShaderMaterial.new()
+	shader_material.shader = load("res://Scenes/player/player_glowing.gdshader")
+	animated_sprite.material = shader_material
+	
+	var shader_mat = animated_sprite.material as ShaderMaterial
+	shader_mat.set_shader_parameter("elemental_type", elemental_type)
+	shader_mat.set_shader_parameter("glow_intensity", 1.5)
 
 func _update_movement(delta: float) -> void:
 	velocity.y += gravity * delta

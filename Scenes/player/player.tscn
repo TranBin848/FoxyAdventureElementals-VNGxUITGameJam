@@ -1,5 +1,6 @@
-[gd_scene load_steps=55 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=58 format=3 uid="uid://d0jou4iuydvkg"]
 
+[ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://Scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://Scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
 [ext_resource type="Texture2D" uid="uid://bkabwrpxdc7cc" path="res://assets/foxy/fox_hat_blade/fox_atk_2.png" id="3_j4nxn"]
@@ -49,6 +50,29 @@
 [ext_resource type="Script" uid="uid://d3tdm7uhl16p7" path="res://Scenes/player/states/attack.gd" id="43_niom3"]
 [ext_resource type="Script" uid="uid://blp1td1nitt5f" path="res://Scenes/player/states/jump_attack.gd" id="44_ttakn"]
 [ext_resource type="Script" uid="uid://ke058dpyk512" path="res://Scenes/player/states/throw_attack.gd" id="45_rw8a5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_am21h"]
+shader = ExtResource("1_am21h")
+shader_parameter/elemental_type = 0
+shader_parameter/border_threshold = Vector2(0.1, 0.1)
+shader_parameter/glow_intensity = 1.0
+shader_parameter/alpha_threshold = 0.5
+shader_parameter/color_tolerance = 0.2
+shader_parameter/fire_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/fire_replace_1 = Color(1, 0.3, 0, 1)
+shader_parameter/fire_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/fire_replace_2 = Color(0.8, 0.1, 0, 1)
+shader_parameter/earth_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/earth_replace_1 = Color(0.6, 0.5, 0.2, 1)
+shader_parameter/earth_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/earth_replace_2 = Color(0.561293, 0.426662, 0.158432, 1)
+shader_parameter/water_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/water_replace_1 = Color(0, 0.5, 1, 1)
+shader_parameter/water_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/water_replace_2 = Color(0, 0.2, 0.8, 1)
+shader_parameter/fire_glow = Color(1, 0.5, 0, 1)
+shader_parameter/earth_glow = Color(0.8, 0.6, 0.2, 1)
+shader_parameter/water_glow = Color(0, 0.5, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ge24q"]
 animations = [{
@@ -138,6 +162,29 @@ animations = [{
 "name": &"run",
 "speed": 10.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1scxs"]
+shader = ExtResource("1_am21h")
+shader_parameter/elemental_type = 0
+shader_parameter/border_threshold = Vector2(0.003, 0.003)
+shader_parameter/glow_intensity = 1.0
+shader_parameter/alpha_threshold = 0.5
+shader_parameter/color_tolerance = 0.2
+shader_parameter/fire_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/fire_replace_1 = Color(1, 0.3, 0, 1)
+shader_parameter/fire_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/fire_replace_2 = Color(0.8, 0.1, 0, 1)
+shader_parameter/earth_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/earth_replace_1 = Color(0.6, 0.5, 0.2, 1)
+shader_parameter/earth_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/earth_replace_2 = Color(0.4, 0.3, 0.1, 1)
+shader_parameter/water_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/water_replace_1 = Color(0, 0.5, 1, 1)
+shader_parameter/water_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/water_replace_2 = Color(0, 0.2, 0.8, 1)
+shader_parameter/fire_glow = Color(1, 0.5, 0, 1)
+shader_parameter/earth_glow = Color(0.8, 0.6, 0.2, 1)
+shader_parameter/water_glow = Color(0, 0.5, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t1aof"]
 animations = [{
@@ -253,6 +300,7 @@ height = 28.0
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_wodsf")
+elemental_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -61)
@@ -260,13 +308,14 @@ position = Vector2(1, -61)
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
-visible = false
-position = Vector2(0, -15)
+material = SubResource("ShaderMaterial_am21h")
+position = Vector2(-4, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"idle"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+material = SubResource("ShaderMaterial_1scxs")
 position = Vector2(-1, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
 animation = &"jump attack"

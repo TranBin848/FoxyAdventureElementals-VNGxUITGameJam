@@ -146,6 +146,7 @@ tile_set = ExtResource("1_m27ls")
 
 [node name="Player" parent="." instance=ExtResource("2_s7lma")]
 position = Vector2(30, 212)
+elemental_type = 2
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
