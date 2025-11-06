@@ -1,2 +1,0 @@
-extends ProjectileBase
-class_name FireProjectile
