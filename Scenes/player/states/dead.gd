@@ -1,6 +1,5 @@
 extends PlayerState
 
-
 func _enter():
 	#change animation to dead
 	obj.change_animation("dead")
