@@ -94,7 +94,7 @@ shape = SubResource("RectangleShape2D_elrge")
 sprite_frames = SubResource("SpriteFrames_836ip")
 animation = &"throw"
 autoplay = "throw"
-frame_progress = 0.46902
+frame_progress = 0.814208
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

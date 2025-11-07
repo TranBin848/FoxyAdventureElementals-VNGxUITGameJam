@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg8jpqwmm4tc2"]
+
+[ext_resource type="Script" uid="uid://cqoavximieiqo" path="res://scenes/ui/skill_bar.gd" id="1_30qg4"]
+[ext_resource type="PackedScene" uid="uid://cbop0r31m7elf" path="res://scenes/ui/spell_button.tscn" id="1_gxe63"]
+
+[node name="SkillBar" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -20.0
+offset_right = 108.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_30qg4")
+
+[node name="SpellButton" parent="." instance=ExtResource("1_gxe63")]
+layout_mode = 2
+
+[node name="SpellButton2" parent="." instance=ExtResource("1_gxe63")]
+layout_mode = 2
+
+[node name="SpellButton3" parent="." instance=ExtResource("1_gxe63")]
+layout_mode = 2
+
+[node name="SpellButton4" parent="." instance=ExtResource("1_gxe63")]
+layout_mode = 2
+
+[node name="SpellButton5" parent="." instance=ExtResource("1_gxe63")]
+layout_mode = 2

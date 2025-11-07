@@ -1,0 +1,259 @@
+[gd_scene load_steps=34 format=4 uid="uid://c47jft3el2tid"]
+
+[ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_g2lgl"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_njnvt"]
+[ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="3_5m7h2"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="3_psyei"]
+[ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="4_nby2r"]
+[ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="5_0qtpp"]
+[ext_resource type="Texture2D" uid="uid://b6dilwf04d4be" path="res://assets/island/background/water_reflect_big_02.png" id="6_pxq0b"]
+[ext_resource type="Texture2D" uid="uid://drl3x1wfs0vai" path="res://assets/island/background/water_reflect_big_03.png" id="7_ouyqu"]
+[ext_resource type="Texture2D" uid="uid://c5ur36rqix0vh" path="res://assets/island/background/water_reflect_big_04.png" id="8_f8fta"]
+[ext_resource type="Texture2D" uid="uid://clqwctkiuocld" path="res://assets/island/background/water_reflect_medium_01.png" id="9_23l66"]
+[ext_resource type="Texture2D" uid="uid://cc473o8yawaex" path="res://assets/island/background/water_reflect_medium_02.png" id="10_o1b8y"]
+[ext_resource type="Texture2D" uid="uid://853x36mkfxu8" path="res://assets/island/background/water_reflect_medium_03.png" id="11_6op4l"]
+[ext_resource type="Texture2D" uid="uid://7ph1avmw5ka6" path="res://assets/island/background/water_reflect_medium_04.png" id="12_w222s"]
+[ext_resource type="Texture2D" uid="uid://do3ghl5b5mpgy" path="res://assets/island/background/water_reflect_small_01.png" id="13_gtl1k"]
+[ext_resource type="Texture2D" uid="uid://cm71bsgwox0jq" path="res://assets/island/background/water_reflect_small_02.png" id="14_gintu"]
+[ext_resource type="Texture2D" uid="uid://d0b0yg85xphrg" path="res://assets/island/background/water_reflect_small_03.png" id="15_pj5ip"]
+[ext_resource type="Texture2D" uid="uid://o4iqthotrkum" path="res://assets/island/background/water_reflect_small_04.png" id="16_0qcjy"]
+[ext_resource type="Texture2D" uid="uid://ck8762h1hy2cf" path="res://assets/island/background/additional_water.png" id="17_lidjr"]
+[ext_resource type="Texture2D" uid="uid://m5yds3bm8pou" path="res://assets/island/background/big_clouds.png" id="18_q1rol"]
+[ext_resource type="Texture2D" uid="uid://ci5tpl05cnmra" path="res://assets/island/background/small_cloud_1.png" id="19_e2pfd"]
+[ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="20_w81qi"]
+[ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="21_kby4s"]
+[ext_resource type="Texture2D" uid="uid://cheu53nimdwyt" path="res://assets/island/back_palm_trees/back_palm_tree_regular_01.png" id="22_njpod"]
+[ext_resource type="Texture2D" uid="uid://dt1od2hyke60g" path="res://assets/island/back_palm_trees/back_palm_tree_regular_02.png" id="23_vgggu"]
+[ext_resource type="Texture2D" uid="uid://frimagh5yfit" path="res://assets/island/back_palm_trees/back_palm_tree_regular_03.png" id="24_lq3eo"]
+[ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_jg7il"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="26_ybxfk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0qtpp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pxq0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ouyqu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f8fta")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dyxlk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_23l66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_o1b8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6op4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_w222s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tlud5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_gtl1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_gintu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pj5ip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0qcjy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_cpvyx"]
+script/source = "extends ParallaxLayer
+
+@export var speed: float = 0.0
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	motion_offset.x -= delta*speed
+"
+
+[sub_resource type="GDScript" id="GDScript_rpm3b"]
+script/source = "extends ParallaxLayer
+
+@export var player: Node2D 
+@export var repeat_start: float = 200
+@export var repeat_distance: float = 500
+var repeat_end: float = INF
+func _process(delta):
+	if not player:
+		return 
+	
+	var player_pos = player.global_position.x
+	
+	if player_pos < repeat_start or player_pos > repeat_end:
+		motion_mirroring = Vector2.ZERO
+	else:
+		motion_mirroring = Vector2(repeat_distance, 0)
+		
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_et5yk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_njpod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_vgggu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_lq3eo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_jg7il")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Stage" type="Node2D"]
+
+[node name="World" type="TileMapLayer" parent="."]
+position = Vector2(101, 160)
+tile_map_data = PackedByteArray("AAD9/wMAAAABAAAAAAD+/wMAAAABAAAAAAD//wMAAAABAAAAAAAAAAMAAAABAAAAAAABAAMAAAABAAAAAAAEAAMAAAABAAAAAAAFAAMAAAABAAAAAAAJAAMAAAABAAAAAAAKAAMAAAABAAAAAAALAAMAAAABAAAAAAD9/wQAAAABAAEAAAD+/wQAAAABAAEAAAD//wQAAAABAAEAAAAAAAQAAAABAAEAAAABAAQAAAABAAEAAAAEAAQAAAABAAEAAAAFAAQAAAABAAEAAAAGAAQAAAABAAEAAAAGAAUAAAABAAEAAAAHAAUAAAABAAEAAAAHAAQAAAABAAEAAAAIAAQAAAABAAEAAAAIAAUAAAABAAEAAAAJAAUAAAABAAEAAAAKAAUAAAABAAEAAAALAAUAAAABAAEAAAALAAQAAAABAAEAAAAKAAQAAAABAAEAAAAJAAQAAAABAAEAAAABAAUAAAABAAEAAAAAAAUAAAABAAEAAAD//wUAAAABAAEAAAD+/wUAAAABAAEAAAD9/wUAAAABAAEAAAD9/wYAAAABAAEAAAD+/wYAAAABAAEAAAD//wYAAAABAAEAAAAAAAYAAAABAAEAAAABAAYAAAABAAEAAAAEAAUAAAABAAEAAAAEAAYAAAABAAEAAAAFAAYAAAABAAEAAAAGAAYAAAABAAEAAAAFAAUAAAABAAEAAAAHAAYAAAABAAEAAAAIAAYAAAABAAEAAAAJAAYAAAABAAEAAAAKAAYAAAABAAEAAAALAAYAAAABAAEAAAD8/wUAAAABAAEAAAD7/wQAAAABAAEAAAD8/wQAAAABAAEAAAD8/wMAAAAGAAEAAAD8/wIAAAACAAEAAAD8/wEAAAACAAEAAAD8/wAAAAACAAEAAAD7////AAAGAAEAAAD7/wAAAAABAAEAAAD7/wEAAAABAAEAAAD6/wEAAAABAAEAAAD7/wIAAAABAAEAAAD7/wMAAAABAAEAAAD6/wAAAAABAAEAAAD6////AAABAAEAAAD6//7/AAABAAEAAAD6//3/AAAGAAEAAAD6/wIAAAABAAEAAAD7/wUAAAABAAEAAAD7/wYAAAABAAEAAAD8/wYAAAABAAEAAAD6/wMAAAABAAEAAAD6/wQAAAABAAEAAAD6/wUAAAABAAEAAAD6/wYAAAABAAEAAAACAAYAAAABAAEAAAADAAYAAAABAAEAAAADAAMAAAABAAAAAAADAAQAAAABAAEAAAADAAUAAAABAAEAAAD6/wcAAAABAAIAAAD7/wcAAAABAAIAAAD8/wcAAAABAAIAAAD9/wcAAAABAAIAAAD+/wcAAAABAAIAAAD//wcAAAABAAIAAAAAAAcAAAABAAIAAAABAAcAAAABAAIAAAACAAcAAAABAAIAAAADAAcAAAABAAIAAAAEAAcAAAABAAIAAAAFAAcAAAABAAIAAAAGAAcAAAABAAIAAAAHAAcAAAABAAIAAAAIAAcAAAABAAIAAAAJAAcAAAABAAIAAAAKAAcAAAABAAIAAAALAAcAAAABAAIAAAACAAUAAAABAAEAAAD8////AAACAAAAAAD7//3/AAACAAAAAAD7//7/AAACAAEAAAD6//z/AAACAAAAAAD5//z/AAAGAAEAAAD5//3/AAABAAEAAAD5//7/AAABAAEAAAD5////AAABAAEAAAD5/wAAAAABAAEAAAD5/wEAAAABAAEAAAD5/wIAAAABAAEAAAD5/wMAAAABAAEAAAD5/wQAAAABAAEAAAD5/wUAAAABAAEAAAD5/wYAAAABAAEAAAD5/wcAAAABAAIAAAD4/wUAAAABAAEAAAD4/wQAAAABAAEAAAD4/wMAAAABAAEAAAD4/wEAAAABAAEAAAD4/wIAAAABAAEAAAD4/wAAAAABAAEAAAD4////AAABAAEAAAD4//7/AAABAAEAAAD3//7/AAAAAAEAAAD3//3/AAAAAAEAAAD3//z/AAAAAAEAAAD3//v/AAAAAAEAAAD3//r/AAAAAAAAAAD4//r/AAACAAAAAAD4//v/AAAGAAEAAAD4//z/AAABAAEAAAD4//3/AAABAAEAAAD3////AAAAAAEAAAD3/wAAAAAAAAEAAAD3/wEAAAAAAAEAAAD3/wIAAAAAAAEAAAD3/wMAAAAAAAEAAAD4/wYAAAABAAEAAAD4/wcAAAABAAIAAAD3/wcAAAAAAAIAAAD3/wYAAAAAAAEAAAD3/wUAAAAAAAEAAAD3/wQAAAAAAAEAAAD5//v/AAACAAAAAAACAAMAAAABAAAAAAACAAQAAAABAAEAAAAGAAMAAAABAAAAAAAHAAMAAAABAAAAAAAIAAMAAAABAAAAAAAFAAIAAgAAAAAABAAWAAcAAAABAAIAAAAWAAYAAAABAAEAAAAWAAUAAAABAAEAAAAWAAQAAAABAAEAAAAWAAMAAAABAAAAAAAVAAcAAAABAAIAAAAVAAYAAAABAAEAAAAVAAUAAAABAAEAAAAVAAQAAAABAAEAAAAVAAMAAAABAAAAAAAUAAcAAAABAAIAAAAUAAYAAAABAAEAAAAUAAUAAAABAAEAAAAUAAQAAAABAAEAAAAUAAMAAAABAAAAAAATAAcAAAABAAIAAAATAAYAAAABAAEAAAATAAUAAAABAAEAAAATAAQAAAABAAEAAAATAAMAAAABAAAAAAASAAcAAAABAAIAAAASAAYAAAABAAEAAAASAAUAAAABAAEAAAASAAQAAAABAAEAAAASAAMAAAABAAAAAAARAAcAAAABAAIAAAARAAYAAAABAAEAAAARAAUAAAABAAEAAAARAAQAAAABAAEAAAARAAMAAAABAAAAAAAQAAcAAAABAAIAAAAQAAYAAAABAAEAAAAQAAUAAAABAAEAAAAQAAQAAAABAAEAAAAQAAMAAAABAAAAAAAPAAcAAAABAAIAAAAPAAYAAAABAAEAAAAPAAUAAAABAAEAAAAPAAQAAAABAAEAAAAPAAMAAAABAAAAAAAOAAcAAAABAAIAAAAOAAYAAAABAAEAAAAOAAUAAAABAAEAAAAOAAQAAAABAAEAAAAOAAMAAAABAAAAAAANAAcAAAABAAIAAAANAAYAAAABAAEAAAANAAUAAAABAAEAAAANAAQAAAABAAEAAAANAAMAAAABAAAAAAAMAAcAAAABAAIAAAAMAAYAAAABAAEAAAAMAAUAAAABAAEAAAAMAAQAAAABAAEAAAAMAAMAAAABAAAAAAAbAAcAAAABAAIAAAAbAAYAAAABAAEAAAAbAAUAAAABAAEAAAAbAAQAAAABAAEAAAAbAAMAAAAHAAEAAAAaAAcAAAABAAIAAAAaAAYAAAABAAEAAAAaAAUAAAABAAEAAAAaAAQAAAABAAEAAAAaAAMAAAABAAAAAAAZAAcAAAABAAIAAAAZAAYAAAABAAEAAAAZAAUAAAABAAEAAAAZAAQAAAABAAEAAAAZAAMAAAABAAAAAAAYAAcAAAABAAIAAAAYAAYAAAABAAEAAAAYAAUAAAABAAEAAAAYAAQAAAABAAEAAAAYAAMAAAABAAAAAAAXAAcAAAABAAIAAAAXAAYAAAABAAEAAAAXAAUAAAABAAEAAAAXAAQAAAABAAEAAAAXAAMAAAABAAAAAAAfAAcAAAACAAIAAAAfAAYAAAACAAEAAAAfAAUAAAACAAEAAAAfAAQAAAACAAEAAAAfAAMAAAACAAEAAAAfAAIAAAACAAEAAAAfAAEAAAACAAEAAAAfAAAAAAACAAEAAAAfAP//AAACAAEAAAAfAP7/AAACAAEAAAAfAP3/AAACAAEAAAAfAPz/AAACAAAAAAAeAAcAAAABAAIAAAAeAAYAAAABAAEAAAAeAAUAAAABAAEAAAAeAAQAAAABAAEAAAAeAAMAAAABAAEAAAAeAAIAAAABAAEAAAAeAAEAAAABAAEAAAAeAAAAAAABAAEAAAAeAP//AAABAAEAAAAeAP7/AAABAAEAAAAeAP3/AAABAAEAAAAeAPz/AAABAAAAAAAdAAcAAAABAAIAAAAdAAYAAAABAAEAAAAdAAUAAAABAAEAAAAdAAQAAAABAAEAAAAdAAMAAAABAAEAAAAdAAIAAAABAAEAAAAdAAEAAAABAAEAAAAdAAAAAAABAAEAAAAdAP//AAABAAEAAAAdAP7/AAABAAEAAAAdAP3/AAABAAEAAAAdAPz/AAABAAAAAAAcAAcAAAABAAIAAAAcAAYAAAABAAEAAAAcAAUAAAABAAEAAAAcAAQAAAABAAEAAAAcAAMAAAABAAEAAAAcAAIAAAABAAEAAAAcAAEAAAABAAEAAAAcAAAAAAABAAEAAAAcAP//AAABAAEAAAAcAP7/AAABAAEAAAAcAP3/AAABAAEAAAAcAPz/AAABAAAAAAAbAAIAAAAAAAEAAAAbAAEAAAAAAAEAAAAbAAAAAAAAAAEAAAAbAP//AAAAAAEAAAAbAP7/AAAAAAEAAAAbAP3/AAAAAAEAAAAbAPz/AAAAAAAAAAA=")
+tile_set = ExtResource("1_g2lgl")
+
+[node name="Player" parent="." instance=ExtResource("2_njnvt")]
+position = Vector2(317, 211)
+
+[node name="UI" type="CanvasLayer" parent="Player"]
+
+[node name="SkillBar" parent="Player/UI" instance=ExtResource("3_psyei")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(767, 0)
+
+[node name="SkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(417, -11)
+scale = Vector2(26.125, 20.531)
+texture = ExtResource("3_5m7h2")
+
+[node name="SeaSkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(0, 57)
+scale = Vector2(2, 2)
+texture = ExtResource("4_nby2r")
+centered = false
+
+[node name="WaterReflectBig" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(0, 231)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_lmnj4")
+autoplay = "default"
+frame_progress = 0.479546
+centered = false
+
+[node name="WaterReflectMedium" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(340, 231)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_dyxlk")
+autoplay = "default"
+frame_progress = 0.176833
+centered = false
+
+[node name="WaterReflectSmall" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(449, 231)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_tlud5")
+autoplay = "default"
+frame_progress = 0.872845
+centered = false
+
+[node name="WaterSprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(384.5, 404.5)
+scale = Vector2(23.969, 5.969)
+texture = ExtResource("17_lidjr")
+
+[node name="ParallaxLayerCloud" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(510, 0)
+script = SubResource("GDScript_cpvyx")
+speed = 20.0
+
+[node name="BigClouds" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud"]
+position = Vector2(0, 111)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("18_q1rol")
+centered = false
+
+[node name="ParallaxLayerSmallCloudSmall" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(510, 0)
+script = SubResource("GDScript_cpvyx")
+speed = 40.0
+
+[node name="SmallClouds_1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloudSmall"]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("19_e2pfd")
+centered = false
+
+[node name="SmallClouds_2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloudSmall"]
+position = Vector2(100, -50)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("20_w81qi")
+centered = false
+
+[node name="SmallClouds_3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerSmallCloudSmall"]
+position = Vector2(200, -50)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("21_kby4s")
+centered = false
+
+[node name="ParallaxLayerTree" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(500, 0)
+script = SubResource("GDScript_rpm3b")
+
+[node name="Tree" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayerTree"]
+position = Vector2(25, 226)
+sprite_frames = SubResource("SpriteFrames_et5yk")
+autoplay = "default"
+frame_progress = 0.0557195
+
+[node name="Tree2" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayerTree"]
+position = Vector2(128, 226)
+sprite_frames = SubResource("SpriteFrames_et5yk")
+autoplay = "default"
+frame_progress = 0.914773
+
+[node name="Tree3" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayerTree"]
+position = Vector2(320, 226)
+sprite_frames = SubResource("SpriteFrames_et5yk")
+autoplay = "default"
+frame_progress = 0.914773
+
+[node name="BladeCollectable2" parent="." instance=ExtResource("26_ybxfk")]
+position = Vector2(388, 242)

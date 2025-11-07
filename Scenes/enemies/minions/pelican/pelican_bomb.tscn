@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ywndjg6kc5hy"]
+
+[ext_resource type="Texture2D" uid="uid://hxgavvljbom4" path="res://assets/enemy/pelican/pelican_bullet.png" id="1_lnl4l"]
+[ext_resource type="Script" uid="uid://cucrlcqyu4yhi" path="res://Scenes/enemies/minions/pelican/pelican_bomb.gd" id="1_tent7"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://Scripts/hit_area_2d.gd" id="2_tent7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ud2m"]
+radius = 9.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eql8j"]
+height = 20.0
+
+[node name="Pelican_Bomb" type="RigidBody2D"]
+collision_layer = 0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_tent7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1ud2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lnl4l")
+
+[node name="HitArea2D" type="Area2D" parent="."]
+collision_mask = 4
+script = ExtResource("2_tent7")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+shape = SubResource("CapsuleShape2D_eql8j")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

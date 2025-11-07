@@ -228,11 +228,10 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("9_7xf2g")
 centered = false
 
-[node name="ParallaxLayerTree" type="ParallaxLayer" parent="ParallaxBackground" node_paths=PackedStringArray("player")]
+[node name="ParallaxLayerTree" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.9, 0.9)
 motion_mirroring = Vector2(500, 0)
 script = SubResource("GDScript_rpm3b")
-player = NodePath("../../Player")
 
 [node name="Tree" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayerTree"]
 position = Vector2(25, 226)
