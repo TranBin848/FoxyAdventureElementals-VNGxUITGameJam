@@ -17,10 +17,8 @@ func setup(skill: Skill, dir: Vector2) -> void:
 		print(skill.animation_name)
 		$AnimatedSprite2D.play(skill.animation_name)
 	
-	if $AnimatedSprite2D.animation != "WaterTornado":
+	if skill.animation_name != "WaterTornado":
 		rotation = direction.angle()
-	else:
-		change_position(-36)
 
 func _physics_process(delta: float) -> void:
 	position += speed * direction * delta
