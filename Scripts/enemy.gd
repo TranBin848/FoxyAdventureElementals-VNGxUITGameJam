@@ -169,8 +169,67 @@ func _on_player_not_in_sight() -> void:
 
 
 # --- When enemy takes damage
-func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float) -> void:
-	_take_damage_from_dir(_direction, _damage)
+func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
+	# Tính damage dựa trên quan hệ sinh - khắc
+	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
+	print(elemental_type)
+	print(_elemental_type)
+	print(modified_damage)
+	fsm.current_state.take_damage(_direction, modified_damage)
+	handle_elemental_damage(_elemental_type)
+
+func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
+	# Nếu tấn công không có nguyên tố, dùng damage gốc
+	if attacker_element == 0:
+		return base_damage
+	
+	# Định nghĩa quan hệ khắc (lợi thế)
+	# Fire (1) > Earth (2), Earth (2) > Water (3), Water (3) > Fire (1)
+	var advantage_table = {
+		1: [2],  # Fire khắc Earth
+		2: [3],  # Earth khắc Water
+		3: [1]   # Water khắc Fire
+	}
+	
+	# Định nghĩa quan hệ sinh (bị khắc)
+	var weakness_table = {
+		1: [3],  # Fire bị Water khắc
+		2: [1],  # Earth bị Fire khắc
+		3: [2]   # Water bị Earth khắc
+	}
+	
+	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
+	if attacker_element in advantage_table and elemental_type in advantage_table[attacker_element]:
+		return base_damage * 1.25  # +25% damage
+	
+	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)
+	if attacker_element in weakness_table and elemental_type in weakness_table[attacker_element]:
+		return base_damage * 0.75  # -25% damage
+	
+	return base_damage
+
+func handle_elemental_damage(elemental_type: int) -> void:
+	match elemental_type:
+		0:  # None
+			pass
+		1:  # Fire - burn status
+			apply_fire_effect()
+		2:  # Earth - slow status
+			apply_earth_effect()
+		3:  # Water - freeze status
+			apply_water_effect()
+
+func apply_fire_effect() -> void:
+	# Có thể thêm hiệu ứng lửa (burn status, animation, etc)
+	pass
+
+func apply_earth_effect() -> void:
+	# Có thể thêm hiệu ứng đất (slow, knockback, etc)
+	pass
+
+func apply_water_effect() -> void:
+	# Có thể thêm hiệu ứng nước (freeze, slow, etc)
+	pass
 
 
 # --- Apply damage through FSM

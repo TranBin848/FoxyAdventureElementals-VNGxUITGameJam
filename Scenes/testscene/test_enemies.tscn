@@ -151,22 +151,27 @@ tile_set = ExtResource("1_4qlm2")
 
 [node name="Mushroom" parent="." instance=ExtResource("4_qg72l")]
 position = Vector2(852, 224)
+elemental_type = 2
 
 [node name="Mushroom2" parent="." instance=ExtResource("4_qg72l")]
 position = Vector2(965, 222)
 element = 1
+elemental_type = 2
 
 [node name="Mushroom3" parent="." instance=ExtResource("4_qg72l")]
 position = Vector2(1060, 218)
 element = 2
+elemental_type = 1
 
 [node name="Mushroom4" parent="." instance=ExtResource("4_qg72l")]
 position = Vector2(1134, 218)
 element = 3
+elemental_type = 2
 
 [node name="Mushroom5" parent="." instance=ExtResource("4_qg72l")]
 position = Vector2(1218, 218)
 element = 4
+elemental_type = 1
 
 [node name="Player" parent="." instance=ExtResource("2_qg72l")]
 position = Vector2(324, 189)
@@ -288,6 +293,7 @@ element = 2
 
 [node name="Starfish" parent="." instance=ExtResource("30_8nwpw")]
 position = Vector2(1851, 224)
+elemental_type = 1
 
 [node name="Pelican" parent="." instance=ExtResource("31_82uhe")]
 position = Vector2(320, 4)

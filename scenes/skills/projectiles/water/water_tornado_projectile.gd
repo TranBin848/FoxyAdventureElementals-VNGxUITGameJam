@@ -11,6 +11,11 @@ var pull_timer: float = 0.0
 
 var pulled_enemies: Array[EnemyCharacter] = []
 
+func _ready() -> void:
+	if has_node("HitArea2D"):
+		var hit_area: HitArea2D = $HitArea2D
+		hit_area.damage = damage
+		hit_area.elemental_type = elemental_type
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
