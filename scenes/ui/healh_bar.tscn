@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfg7ew4joocvp"]
+
+[ext_resource type="Script" uid="uid://cxnby176o2lfo" path="res://scenes/ui/heart_container.gd" id="1_uo2hs"]
+[ext_resource type="Texture2D" uid="uid://cq40il32pklvp" path="res://assets/ui/Hearts/PNG/basic/heart.png" id="2_aq6dw"]
+[ext_resource type="Texture2D" uid="uid://dacc2rubl3io4" path="res://assets/ui/Hearts/PNG/basic/background.png" id="3_p7hu1"]
+
+[node name="HealhBar" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 70.0
+grow_horizontal = 2
+script = ExtResource("1_uo2hs")
+heart_full = ExtResource("2_aq6dw")
+heart_empty = ExtResource("3_p7hu1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_aq6dw")
+expand_mode = 3

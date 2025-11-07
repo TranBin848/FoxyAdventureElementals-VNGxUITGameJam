@@ -18,6 +18,8 @@ var blade_hit_area: Area2D
 
 @export var push_strength = 100.0
 
+signal health_changed
+
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Idle)
@@ -186,3 +188,4 @@ func jump() -> void:
 
 func _on_hurt_area_2d_hurt(_direction: Variant, _damage: Variant) -> void:
 	fsm.current_state.take_damage(_direction, _damage)
+	health_changed.emit()
