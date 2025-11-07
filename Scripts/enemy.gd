@@ -172,6 +172,9 @@ func _on_player_not_in_sight() -> void:
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
+	print(elemental_type)
+	print(_elemental_type)
+	print(modified_damage)
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 
@@ -196,7 +199,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	}
 	
 	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
-	if attacker_element in advantage_table and health in advantage_table[attacker_element]:
+	if attacker_element in advantage_table and elemental_type in advantage_table[attacker_element]:
 		return base_damage * 1.25  # +25% damage
 	
 	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)

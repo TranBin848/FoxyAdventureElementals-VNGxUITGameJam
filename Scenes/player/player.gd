@@ -34,7 +34,7 @@ func cast_spell(skill: Skill) -> void:
 		return
 
 	# Gọi animation cast spell
-	print("Casting skill: %s (%s)" % [skill.name, skill.element])
+	#print("Casting skill: %s (%s)" % [skill.name, skill.element])
 
 	# Xử lý theo loại skill
 	match skill.type:
@@ -212,6 +212,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	
 	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
 	if attacker_element in advantage_table and health in advantage_table[attacker_element]:
+		print("True")
 		return base_damage * 1.25  # +25% damage
 	
 	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)

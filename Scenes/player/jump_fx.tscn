@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dtvvbmgptni3i"]
 
 [ext_resource type="Texture2D" uid="uid://8usoreyem8l6" path="res://assets/foxy/smoke/jump_smoke_1.png" id="1_8li6b"]
-[ext_resource type="Script" uid="uid://bwcwbd68abn2j" path="res://Scenes/FX/animated_fx.gd" id="1_28vk8"]
+[ext_resource type="Script" uid="uid://bwcwbd68abn2j" path="res://scenes/FX/animated_fx.gd" id="1_28vk8"]
 [ext_resource type="Texture2D" uid="uid://jtpy308mqnwi" path="res://assets/foxy/smoke/jump_smoke_2.png" id="2_28vk8"]
 [ext_resource type="Texture2D" uid="uid://cbk136ktae42o" path="res://assets/foxy/smoke/jump_smoke_3.png" id="3_f8pku"]
 [ext_resource type="Texture2D" uid="uid://c8cs1hwh7venp" path="res://assets/foxy/smoke/jump_smoke_4.png" id="4_1yfmn"]
