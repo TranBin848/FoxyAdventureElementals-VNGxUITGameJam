@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b4j3dswx4n2cy"]
 
-[ext_resource type="Script" uid="uid://bwcwbd68abn2j" path="res://Scenes/FX/animated_fx.gd" id="1_5if1t"]
+[ext_resource type="Script" uid="uid://bwcwbd68abn2j" path="res://scenes/FX/animated_fx.gd" id="1_5if1t"]
 [ext_resource type="Texture2D" uid="uid://lx7c3exk2vl1" path="res://assets/foxy/smoke/smoke_walk_1.png" id="1_43k3t"]
 [ext_resource type="Texture2D" uid="uid://ikyx0hjrhytx" path="res://assets/foxy/smoke/smoke_walk_2.png" id="2_5if1t"]
 [ext_resource type="Texture2D" uid="uid://b3xo3vc5p2imc" path="res://assets/foxy/smoke/smoke_walk_3.png" id="3_ubqbi"]

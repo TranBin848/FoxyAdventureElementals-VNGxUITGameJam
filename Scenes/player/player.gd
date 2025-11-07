@@ -18,6 +18,8 @@ var blade_hit_area: Area2D
 
 @export var push_strength = 100.0
 
+signal health_changed
+
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Idle)
@@ -189,6 +191,7 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
+  health_changed.emit()
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	# Nếu tấn công không có nguyên tố, dùng damage gốc

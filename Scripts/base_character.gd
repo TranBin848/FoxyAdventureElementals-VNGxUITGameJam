@@ -26,6 +26,7 @@ var _next_animated_sprite: AnimatedSprite2D = null
 
 func _ready() -> void:
 	set_animated_sprite($Direction/AnimatedSprite2D)
+	health = max_health
 
 func _physics_process(delta: float) -> void:
 	# Animation - must run first to set animated_sprite
