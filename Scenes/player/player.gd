@@ -191,7 +191,7 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
-  health_changed.emit()
+	health_changed.emit()
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	# Nếu tấn công không có nguyên tố, dùng damage gốc
@@ -246,3 +246,12 @@ func apply_earth_effect() -> void:
 func apply_water_effect() -> void:
 	# Có thể thêm hiệu ứng nước (freeze, slow, etc)
 	pass
+
+func _update_elemental_palette() -> void:
+	var shader_material = ShaderMaterial.new()
+	shader_material.shader = load("res://Scenes/player/player_glowing.gdshader")
+	animated_sprite.material = shader_material
+	
+	var shader_mat = animated_sprite.material as ShaderMaterial
+	shader_mat.set_shader_parameter("elemental_type", elemental_type)
+	shader_mat.set_shader_parameter("glow_intensity", 1.5)

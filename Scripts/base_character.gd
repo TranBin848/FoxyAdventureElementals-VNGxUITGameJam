@@ -44,13 +44,7 @@ func _physics_process(delta: float) -> void:
 	_check_changed_direction()
 
 func _update_elemental_palette() -> void:
-	var shader_material = ShaderMaterial.new()
-	shader_material.shader = load("res://Scenes/player/player_glowing.gdshader")
-	animated_sprite.material = shader_material
-	
-	var shader_mat = animated_sprite.material as ShaderMaterial
-	shader_mat.set_shader_parameter("elemental_type", elemental_type)
-	shader_mat.set_shader_parameter("glow_intensity", 1.5)
+	pass
 
 func _update_movement(delta: float) -> void:
 	if not is_movable:

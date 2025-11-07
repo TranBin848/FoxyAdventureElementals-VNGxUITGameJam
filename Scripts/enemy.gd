@@ -5,7 +5,7 @@ extends BaseCharacter
 	ElementsEnum.Elements.METAL: Color.LIGHT_GRAY,
 	ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
 	ElementsEnum.Elements.WATER: Color.AQUA,
-	ElementsEnum.Elements.FIRE: Color("ff3216"),
+	ElementsEnum.Elements.FIRE: Color("ff5219"),
 	ElementsEnum.Elements.EARTH: Color("d36f00")
 }
 

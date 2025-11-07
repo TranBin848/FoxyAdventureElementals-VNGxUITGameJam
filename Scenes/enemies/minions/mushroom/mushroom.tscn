@@ -19,7 +19,7 @@ height = 26.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16htk"]
 shader = ExtResource("2_o68j7")
-shader_parameter/line_color = Color(1.54018e-06, 0.682245, 0.613443, 1)
+shader_parameter/line_color = Color(1, 0.32288, 0.0992486, 1)
 shader_parameter/line_thickness = 1.0
 shader_parameter/glow_opacity = 0.75
 shader_parameter/glow_thickness = 1.0
