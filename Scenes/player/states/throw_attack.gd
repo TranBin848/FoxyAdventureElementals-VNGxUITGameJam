@@ -12,6 +12,5 @@ func _enter() -> void:
 func _update(delta: float) -> void:
 	#If attack is finished change to previous state
 	if update_timer(delta):
-		obj.single_shot()
-		#obj.throw_blade()
+		obj.throw_blade()
 		change_state(fsm.previous_state)

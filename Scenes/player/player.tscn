@@ -1,6 +1,7 @@
-[gd_scene load_steps=57 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=59 format=3 uid="uid://d0jou4iuydvkg"]
 
-[ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://Scenes/player/player.gd" id="1_wodsf"]
+[ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
+[ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
 [ext_resource type="Texture2D" uid="uid://bkabwrpxdc7cc" path="res://assets/foxy/fox_hat_blade/fox_atk_2.png" id="3_j4nxn"]
 [ext_resource type="Texture2D" uid="uid://byd3g4nnxwfcq" path="res://assets/foxy/fox_hat_blade/fox_atk_3.png" id="4_28m0y"]
@@ -18,13 +19,13 @@
 [ext_resource type="Texture2D" uid="uid://3g5hdrfwcd2c" path="res://assets/foxy/fox_hat/fox_walk_2.png" id="15_b8hi5"]
 [ext_resource type="Texture2D" uid="uid://cg0s41812vukj" path="res://assets/foxy/fox_hat/fox_walk_3.png" id="16_2uvqg"]
 [ext_resource type="Texture2D" uid="uid://8u26ji11yaua" path="res://assets/foxy/fox_hat/fox_walk_4.png" id="17_1s1yo"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://Scripts/hit_area_2d.gd" id="17_ioxgp"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/hit_area_2d.gd" id="17_ioxgp"]
 [ext_resource type="Texture2D" uid="uid://cp2ag6s67gj73" path="res://assets/foxy/fox_hat_blade/fox_defeat_1.png" id="19_genst"]
-[ext_resource type="Script" uid="uid://li1jbn65pf6r" path="res://Scenes/player/states/hurt.gd" id="20_8ydkj"]
+[ext_resource type="Script" uid="uid://li1jbn65pf6r" path="res://scenes/player/states/hurt.gd" id="20_8ydkj"]
 [ext_resource type="Texture2D" uid="uid://cx3p62gjf57ep" path="res://assets/foxy/fox_hat_blade/fox_defeat_2.png" id="20_niom3"]
 [ext_resource type="Texture2D" uid="uid://blvo22k8hckk0" path="res://assets/foxy/fox_hat_blade/fox_defeat_3.png" id="21_ttakn"]
 [ext_resource type="Texture2D" uid="uid://bv5er34emc8g1" path="res://assets/foxy/fox_hat_blade/fox_jump_2.png" id="22_rw8a5"]
-[ext_resource type="Script" uid="uid://21al21syvgln" path="res://Scenes/player/states/dead.gd" id="22_yj68g"]
+[ext_resource type="Script" uid="uid://21al21syvgln" path="res://scenes/player/states/dead.gd" id="22_yj68g"]
 [ext_resource type="Texture2D" uid="uid://bh18dgm068hhf" path="res://assets/foxy/fox_hat_blade/fox_hit_1.png" id="23_iwuka"]
 [ext_resource type="Texture2D" uid="uid://gg8v11cck4hu" path="res://assets/foxy/fox_hat_blade/fox_hit_2.png" id="24_hyqqp"]
 [ext_resource type="Texture2D" uid="uid://cbfcke2rlqmtw" path="res://assets/foxy/fox_hat_blade/fox_hit_3.png" id="25_ds1xl"]
@@ -37,20 +38,42 @@
 [ext_resource type="Texture2D" uid="uid://cr8a68nw3dww1" path="res://assets/foxy/fox_hat_blade/fox_walk_2.png" id="32_upxxc"]
 [ext_resource type="Texture2D" uid="uid://d0jfmp24jrfcy" path="res://assets/foxy/fox_hat_blade/fox_walk_3.png" id="33_ln3h3"]
 [ext_resource type="Texture2D" uid="uid://ce35c6mn7dcok" path="res://assets/foxy/fox_hat_blade/fox_walk_4.png" id="34_uygh0"]
-[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://Scripts/hurt_area_2d.gd" id="35_o1e43"]
-[ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://Scripts/node2d_factory.gd" id="37_iwuka"]
-[ext_resource type="PackedScene" uid="uid://dtvvbmgptni3i" path="res://Scenes/player/jump_fx.tscn" id="37_k00gf"]
-[ext_resource type="PackedScene" uid="uid://b4j3dswx4n2cy" path="res://Scenes/player/walk_fx.tscn" id="38_48wxx"]
-[ext_resource type="PackedScene" uid="uid://cs0qvp0xeh0tn" path="res://Scenes/blade/blade_projectile.tscn" id="38_hyqqp"]
-[ext_resource type="PackedScene" uid="uid://ushcmfmtyxuu" path="res://Scenes/skills/projectiles/fire/fireProjectile.tscn" id="39_am21h"]
-[ext_resource type="Script" uid="uid://dp3lba7mnpcyn" path="res://Scenes/player/states/idle.gd" id="39_art4l"]
-[ext_resource type="Script" uid="uid://bn74l4ngryo6x" path="res://Scenes/player/states/run.gd" id="40_fjxoa"]
-[ext_resource type="Script" uid="uid://di3w8xw7t025o" path="res://Scenes/player/states/jump.gd" id="41_gswnw"]
-[ext_resource type="Script" uid="uid://caxtbpdyga1ay" path="res://Scenes/player/states/fall.gd" id="42_xcnuv"]
-[ext_resource type="Script" uid="uid://d3tdm7uhl16p7" path="res://Scenes/player/states/attack.gd" id="43_niom3"]
-[ext_resource type="Script" uid="uid://blp1td1nitt5f" path="res://Scenes/player/states/jump_attack.gd" id="44_ttakn"]
-[ext_resource type="Script" uid="uid://ke058dpyk512" path="res://Scenes/player/states/throw_attack.gd" id="45_rw8a5"]
-[ext_resource type="Script" uid="uid://c3c1jskkab60p" path="res://Scenes/player/cast_spell.gd" id="51_jrbya"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/hurt_area_2d.gd" id="35_o1e43"]
+[ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="37_iwuka"]
+[ext_resource type="PackedScene" uid="uid://dtvvbmgptni3i" path="res://scenes/player/jump_fx.tscn" id="37_k00gf"]
+[ext_resource type="PackedScene" uid="uid://b4j3dswx4n2cy" path="res://scenes/player/walk_fx.tscn" id="38_48wxx"]
+[ext_resource type="PackedScene" uid="uid://cs0qvp0xeh0tn" path="res://scenes/blade/blade_projectile.tscn" id="38_hyqqp"]
+[ext_resource type="Script" uid="uid://dp3lba7mnpcyn" path="res://scenes/player/states/idle.gd" id="39_art4l"]
+[ext_resource type="Script" uid="uid://bn74l4ngryo6x" path="res://scenes/player/states/run.gd" id="40_fjxoa"]
+[ext_resource type="Script" uid="uid://di3w8xw7t025o" path="res://scenes/player/states/jump.gd" id="41_gswnw"]
+[ext_resource type="Script" uid="uid://caxtbpdyga1ay" path="res://scenes/player/states/fall.gd" id="42_xcnuv"]
+[ext_resource type="Script" uid="uid://d3tdm7uhl16p7" path="res://scenes/player/states/attack.gd" id="43_niom3"]
+[ext_resource type="Script" uid="uid://blp1td1nitt5f" path="res://scenes/player/states/jump_attack.gd" id="44_ttakn"]
+[ext_resource type="Script" uid="uid://ke058dpyk512" path="res://scenes/player/states/throw_attack.gd" id="45_rw8a5"]
+[ext_resource type="Script" uid="uid://c3c1jskkab60p" path="res://scenes/player/cast_spell.gd" id="51_jrbya"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_am21h"]
+shader = ExtResource("1_am21h")
+shader_parameter/elemental_type = 0
+shader_parameter/border_threshold = Vector2(0.1, 0.1)
+shader_parameter/glow_intensity = 1.0
+shader_parameter/alpha_threshold = 0.5
+shader_parameter/color_tolerance = 0.2
+shader_parameter/fire_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/fire_replace_1 = Color(1, 0.3, 0, 1)
+shader_parameter/fire_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/fire_replace_2 = Color(0.8, 0.1, 0, 1)
+shader_parameter/earth_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/earth_replace_1 = Color(0.6, 0.5, 0.2, 1)
+shader_parameter/earth_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/earth_replace_2 = Color(0.561293, 0.426662, 0.158432, 1)
+shader_parameter/water_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/water_replace_1 = Color(0, 0.5, 1, 1)
+shader_parameter/water_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/water_replace_2 = Color(0, 0.2, 0.8, 1)
+shader_parameter/fire_glow = Color(1, 0.5, 0, 1)
+shader_parameter/earth_glow = Color(0.8, 0.6, 0.2, 1)
+shader_parameter/water_glow = Color(0, 0.5, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ge24q"]
 animations = [{
@@ -140,6 +163,29 @@ animations = [{
 "name": &"run",
 "speed": 10.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1scxs"]
+shader = ExtResource("1_am21h")
+shader_parameter/elemental_type = 0
+shader_parameter/border_threshold = Vector2(0.003, 0.003)
+shader_parameter/glow_intensity = 1.0
+shader_parameter/alpha_threshold = 0.5
+shader_parameter/color_tolerance = 0.2
+shader_parameter/fire_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/fire_replace_1 = Color(1, 0.3, 0, 1)
+shader_parameter/fire_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/fire_replace_2 = Color(0.8, 0.1, 0, 1)
+shader_parameter/earth_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/earth_replace_1 = Color(0.6, 0.5, 0.2, 1)
+shader_parameter/earth_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/earth_replace_2 = Color(0.4, 0.3, 0.1, 1)
+shader_parameter/water_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/water_replace_1 = Color(0, 0.5, 1, 1)
+shader_parameter/water_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/water_replace_2 = Color(0, 0.2, 0.8, 1)
+shader_parameter/fire_glow = Color(1, 0.5, 0, 1)
+shader_parameter/earth_glow = Color(0.8, 0.6, 0.2, 1)
+shader_parameter/water_glow = Color(0, 0.5, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t1aof"]
 animations = [{
@@ -255,6 +301,7 @@ height = 28.0
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_wodsf")
+elemental_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -61)
@@ -263,13 +310,14 @@ zoom = Vector2(2, 2)
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
-visible = false
-position = Vector2(0, -15)
+material = SubResource("ShaderMaterial_am21h")
+position = Vector2(-4, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"idle"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+material = SubResource("ShaderMaterial_1scxs")
 position = Vector2(-1, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
 animation = &"jump attack"
@@ -297,10 +345,8 @@ target_container_name = &"WalkFX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="SkillFactory" type="Marker2D" parent="Direction"]
-position = Vector2(15, -14)
+position = Vector2(16, -14)
 script = ExtResource("37_iwuka")
-product_packed_scene = ExtResource("39_am21h")
-target_container_name = &"Skill"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
@@ -364,7 +410,5 @@ script = ExtResource("51_jrbya")
 [node name="Jump" type="Node" parent="."]
 
 [node name="WalkFX" type="Node" parent="."]
-
-[node name="Skill" type="Node" parent="."]
 
 [connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]

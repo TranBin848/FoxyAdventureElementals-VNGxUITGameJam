@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="BTL_Godot"
-run/main_scene="uid://c47jft3el2tid"
+run/main_scene="uid://qv25yj3rt5ql"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Elements="*res://scripts/elements.gd"
 
 [display]
 

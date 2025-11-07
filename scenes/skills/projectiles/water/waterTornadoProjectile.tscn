@@ -1,0 +1,167 @@
+[gd_scene load_steps=24 format=3 uid="uid://d0kbj7vc5hjhj"]
+
+[ext_resource type="Script" uid="uid://cl6qeq12ugag0" path="res://scenes/skills/projectiles/water/water_tornado_projectile.gd" id="1_a7uo3"]
+[ext_resource type="Texture2D" uid="uid://b6e7bqero8rk7" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - Startup and Infinite.png" id="2_a7uo3"]
+[ext_resource type="Texture2D" uid="uid://cmhfp428s70tb" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - End.png" id="3_a7uo3"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/hit_area_2d.tscn" id="3_d4fu0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yppl"]
+atlas = ExtResource("2_a7uo3")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ianv"]
+atlas = ExtResource("2_a7uo3")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl1fm"]
+atlas = ExtResource("2_a7uo3")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gr4t1"]
+atlas = ExtResource("2_a7uo3")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhjr2"]
+atlas = ExtResource("2_a7uo3")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv1ei"]
+atlas = ExtResource("2_a7uo3")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apl7g"]
+atlas = ExtResource("2_a7uo3")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fv4d"]
+atlas = ExtResource("2_a7uo3")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4fu0"]
+atlas = ExtResource("3_a7uo3")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhtky"]
+atlas = ExtResource("3_a7uo3")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv1qj"]
+atlas = ExtResource("3_a7uo3")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6he7h"]
+atlas = ExtResource("3_a7uo3")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbchv"]
+atlas = ExtResource("3_a7uo3")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmbjc"]
+atlas = ExtResource("3_a7uo3")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbkpt"]
+atlas = ExtResource("3_a7uo3")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2ndj"]
+atlas = ExtResource("3_a7uo3")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yppl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ianv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl1fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gr4t1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhjr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv1ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apl7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fv4d")
+}],
+"loop": true,
+"name": &"WaterTornado",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4fu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhtky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv1qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6he7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbchv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmbjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbkpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2ndj")
+}],
+"loop": false,
+"name": &"WaterTornado_End",
+"speed": 14.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7uo3"]
+size = Vector2(33, 73)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wn83h"]
+size = Vector2(35, 81)
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_a7uo3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -33)
+sprite_frames = SubResource("SpriteFrames_tbddh")
+animation = &"WaterTornado_End"
+frame = 7
+frame_progress = 1.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -32.5)
+shape = SubResource("RectangleShape2D_a7uo3")
+
+[node name="HitArea2d" parent="." instance=ExtResource("3_d4fu0")]
+position = Vector2(0, -33)
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+position = Vector2(-0.5, 7.5)
+shape = SubResource("RectangleShape2D_wn83h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]
