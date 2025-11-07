@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://6xi2g30dwfkp"]
+[gd_scene load_steps=42 format=4 uid="uid://6xi2g30dwfkp"]
 
 [ext_resource type="TileSet" uid="uid://biqt4w0osvp12" path="res://assets/island/TileSets/DarkCastle.tres" id="1_h2ecu"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_ue4vr"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="32_lnt82"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="33_ypxo0"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="34_uoael"]
+[ext_resource type="PackedScene" uid="uid://dfg7ew4joocvp" path="res://scenes/ui/healh_bar.tscn" id="35_ypxo0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pypgq"]
 animations = [{
@@ -465,3 +466,8 @@ position = Vector2(1040, 115)
 element = 1
 
 [node name="PelicanBombs" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealhBar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("35_ypxo0")]
+player = NodePath("../../Player")
