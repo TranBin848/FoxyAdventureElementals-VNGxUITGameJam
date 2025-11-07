@@ -146,7 +146,7 @@ tile_map_data = PackedByteArray("AAATABAAAAAEAAAAAAASABAAAAAEAAAAAAARABAAAAAEAAA
 tile_set = ExtResource("2_vxrrm")
 
 [node name="Player" parent="." instance=ExtResource("3_lkovr")]
-position = Vector2(1318, 240)
+position = Vector2(1324, -513)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
