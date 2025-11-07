@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bqmwdnppiuh3u"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bqmwdnppiuh3u"]
 
 [ext_resource type="Texture2D" uid="uid://dd8hxyf5xgpc3" path="res://assets/island/TileSets/FireSet.png" id="1_0u4k8"]
+[ext_resource type="PackedScene" uid="uid://y73cfviopk7u" path="res://levels/objects/VariantOfSpike/Lava.tscn" id="2_3s2dd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3s2dd"]
 texture = ExtResource("1_0u4k8")
@@ -55,6 +56,10 @@ texture = ExtResource("1_0u4k8")
 4:4/0 = 0
 4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ehmdt"]
+scenes/1/scene = ExtResource("2_3s2dd")
+
 [resource]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_3s2dd")
+sources/1 = SubResource("TileSetScenesCollectionSource_ehmdt")
