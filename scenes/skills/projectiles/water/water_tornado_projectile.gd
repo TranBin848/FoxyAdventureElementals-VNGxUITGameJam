@@ -67,7 +67,8 @@ func _stop_pulling() -> void:
 
 	# Trả lại quyền di chuyển cho toàn bộ enemy
 	for enemy in pulled_enemies:
-		enemy.is_movable = true
+		if enemy and is_instance_valid(enemy):
+			enemy.is_movable = true
 	pulled_enemies.clear()
 
 	if $AnimatedSprite2D.animation != "WaterTornado_End":
