@@ -345,7 +345,7 @@ target_container_name = &"WalkFX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="SkillFactory" type="Marker2D" parent="Direction"]
-position = Vector2(16, -14)
+position = Vector2(22, -17)
 script = ExtResource("37_iwuka")
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
