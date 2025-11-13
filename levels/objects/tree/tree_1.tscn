@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://5nj0c207ldgc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8bqbb"]
+load_path = "res://.godot/imported/Tree1.png-a9096b960c21fcd8f2fa0ca73ca3b9cb.ctex"
+
+[node name="Tree1" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = SubResource("CompressedTexture2D_8bqbb")
