@@ -62,7 +62,7 @@
 [ext_resource type="Texture2D" uid="uid://bwj5x3dlfght3" path="res://assets/skills/fire/1/1_58.png" id="60_t7raq"]
 [ext_resource type="Texture2D" uid="uid://d0eb3iv3ltgsi" path="res://assets/skills/fire/1/1_59.png" id="61_6oghc"]
 [ext_resource type="Texture2D" uid="uid://bjv07uxcv7oir" path="res://assets/skills/fire/1/1_60.png" id="62_al4yp"]
-[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/hit_area_2d.tscn" id="63_o3ne1"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="63_o3ne1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
 animations = [{

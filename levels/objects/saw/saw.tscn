@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://cbqtsaa12jxkv"]
 
 [ext_resource type="Texture2D" uid="uid://d2nj8onb7k6m4" path="res://assets/island/objects/saw/Suriken.png" id="1_lpgya"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/hit_area_2d.gd" id="2_f3ph2"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_f3ph2"]
 
 [sub_resource type="Curve2D" id="Curve2D_1f3o5"]
 _data = {
