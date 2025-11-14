@@ -22,6 +22,7 @@ signal health_changed
 
 func _ready() -> void:
 	super._ready()
+	extra_sprites.append($Direction/SilhouetteSprite2D)
 	fsm = FSM.new(self, $States, $States/Idle)
 	add_to_group("player")
 	if has_blade:

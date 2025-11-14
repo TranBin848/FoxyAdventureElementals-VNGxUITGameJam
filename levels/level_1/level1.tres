@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://b8xtiyc1j22cq"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://b8xtiyc1j22cq"]
 
 [ext_resource type="Texture2D" uid="uid://dk85vjjkah550" path="res://assets/terrain_plus/Floor Tiles1.png" id="2_gecsc"]
 [ext_resource type="PackedScene" uid="uid://5nj0c207ldgc" path="res://levels/objects/tree/tree_1.tscn" id="3_8tsl1"]
 [ext_resource type="Texture2D" uid="uid://hgtbpriwasmr" path="res://assets/terrain_plus/Other Tiles1.png" id="3_8x0gd"]
+[ext_resource type="PackedScene" uid="uid://dvs3j65i3c27e" path="res://levels/objects/tree/tree_2.tscn" id="4_8x0gd"]
 [ext_resource type="Texture2D" uid="uid://clilecwvvs5g4" path="res://assets/terrain_plus/Decor.png" id="4_gecsc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l6v1j"]
@@ -348,6 +349,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_yqulw"]
 resource_name = "Tree"
 scenes/1/scene = ExtResource("3_8tsl1")
+scenes/2/scene = ExtResource("4_8x0gd")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8x0gd"]
 texture = ExtResource("4_gecsc")
@@ -376,6 +378,13 @@ texture_region_size = Vector2i(32, 32)
 8:3/0 = 0
 7:3/0 = 0
 6:3/0 = 0
+3:2/size_in_atlas = Vector2i(3, 1)
+3:2/0 = 0
+3:1/size_in_atlas = Vector2i(3, 1)
+3:1/0 = 0
+6:2/size_in_atlas = Vector2i(2, 1)
+6:2/0 = 0
+6:0/0 = 0
 
 [resource]
 tile_size = Vector2i(32, 32)
