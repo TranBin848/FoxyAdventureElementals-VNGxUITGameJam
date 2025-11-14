@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://plut0bvriiy0" path="res://assets/enemy/crab/crab_01.png" id="4_l1170"]
 [ext_resource type="Texture2D" uid="uid://hvmpun86fh2b" path="res://assets/enemy/crab/crab_02.png" id="5_oirif"]
 [ext_resource type="Texture2D" uid="uid://h5y5vqxjhhvh" path="res://assets/enemy/crab/crab_03.png" id="6_gvprn"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/hit_area_2d.gd" id="7_oeh51"]
-[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/hurt_area_2d.gd" id="8_2qm7m"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="7_oeh51"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_2qm7m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c52ow"]
 animations = [{

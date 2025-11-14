@@ -15,10 +15,11 @@ var direction: int = 1
 var health: int = max_health
 
 
-var jump_speed: float = 320.0
+var jump_speed: float = 450.0
 var fsm: FSM = null
 var current_animation = null
 var animated_sprite: AnimatedSprite2D = null
+@onready var extra_sprites: Array[AnimatedSprite2D] = []
 
 var _next_animation = null
 
@@ -97,7 +98,7 @@ func set_animated_sprite(new_animated_sprite: AnimatedSprite2D) -> void:
 
 # Check if the animation or animated sprite has changed and play the new animation
 func _check_changed_animation() -> void:
-	var need_play: bool = false
+	var need_play := false
 	if _next_animation != current_animation:
 		current_animation = _next_animation
 		need_play = true
@@ -107,9 +108,12 @@ func _check_changed_animation() -> void:
 		animated_sprite = _next_animated_sprite
 		animated_sprite.show()
 		need_play = true
-	if need_play:
-		if animated_sprite != null and current_animation != null:
+	if need_play and current_animation != null:
+		if animated_sprite != null:
 			animated_sprite.play(current_animation)
+		for sprite in extra_sprites:
+			if sprite != null:
+				sprite.play(current_animation)
 
 # Check if the direction has changed and set the new direction
 func _check_changed_direction() -> void:

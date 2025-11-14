@@ -11,7 +11,7 @@ const vec2 OFFSETS[5] = {
 
 void vertex() {
 	// Called for every vertex the material is visible on.
-	
+
 }
 
 void fragment() {
@@ -22,7 +22,7 @@ void fragment() {
 		vec2 line_pixel_distance = TEXTURE_PIXEL_SIZE * line_thickness;
 		vec2 glow_pixel_distance = line_pixel_distance + TEXTURE_PIXEL_SIZE * glow_thickness;
 		float outline = 0.0;
-		
+
 		for (int i = 0; i < OFFSETS.length(); i++) {
 			//outline += texture(TEXTURE, UV + size * OFFSETS[i]).a;
 			if (texture(TEXTURE, UV + line_pixel_distance * OFFSETS[i]).a == 1.0f){
@@ -37,7 +37,7 @@ void fragment() {
 			}
 		}
 		//outline = min(outline, 1.0);
-		
+
 		vec4 color = texture(TEXTURE, UV);
 		COLOR = mix(color, line_color, outline - color.a);
 	}

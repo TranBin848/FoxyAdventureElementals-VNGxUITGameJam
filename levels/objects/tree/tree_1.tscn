@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://5nj0c207ldgc"]
+
+[ext_resource type="Shader" uid="uid://dlu85sjyq6g2v" path="res://shaders/tree_shake/shaketree.tres" id="1_owou4"]
+[ext_resource type="Texture2D" uid="uid://by1cvp27sfnlb" path="res://assets/terrain_plus/Tree2.png" id="2_o6t6u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whfga"]
+shader = ExtResource("1_owou4")
+shader_parameter/WindStrength = 10.0
+
+[node name="Tree1" type="Sprite2D"]
+material = SubResource("ShaderMaterial_whfga")
+position = Vector2(0, 8)
+texture = ExtResource("2_o6t6u")

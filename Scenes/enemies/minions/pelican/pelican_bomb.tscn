@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://ywndjg6kc5hy"]
 
 [ext_resource type="Texture2D" uid="uid://hxgavvljbom4" path="res://assets/enemy/pelican/pelican_bullet.png" id="1_lnl4l"]
-[ext_resource type="Script" uid="uid://cucrlcqyu4yhi" path="res://Scenes/enemies/minions/pelican/pelican_bomb.gd" id="1_tent7"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/hit_area_2d.gd" id="2_tent7"]
+[ext_resource type="Script" uid="uid://cucrlcqyu4yhi" path="res://scenes/enemies/minions/pelican/pelican_bomb.gd" id="1_tent7"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_tent7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ud2m"]
 radius = 9.0
