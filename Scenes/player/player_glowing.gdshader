@@ -38,38 +38,38 @@ bool is_on_border(sampler2D tex, vec2 uv, vec4 center_color)
 	vec4 color_down = texture(tex, uv + vec2(0.0, -border_threshold.y));
 	vec4 color_left = texture(tex, uv + vec2(-border_threshold.x, 0.0));
 	vec4 color_right = texture(tex, uv + vec2(border_threshold.x, 0.0));
-	
+
 	if (center_color.a < alpha_threshold) {
 		return false;
 	}
-	
-	bool has_transparent_neighbor = 
-		color_up.a < alpha_threshold || 
-		color_down.a < alpha_threshold || 
-		color_left.a < alpha_threshold || 
+
+	bool has_transparent_neighbor =
+		color_up.a < alpha_threshold ||
+		color_down.a < alpha_threshold ||
+		color_left.a < alpha_threshold ||
 		color_right.a < alpha_threshold;
-	
+
 	return has_transparent_neighbor;
 }
 
 vec4 apply_palette_swap(vec4 color, vec4 target_1, vec4 replace_1, vec4 target_2, vec4 replace_2)
 {
 	vec4 result = color;
-	
+
 	// Check first color mapping
 	float dist1 = distance(color.rgb, target_1.rgb);
 	if (dist1 < color_tolerance) {
 		result.rgb = replace_1.rgb;
 		return result;
 	}
-	
+
 	// Check second color mapping
 	float dist2 = distance(color.rgb, target_2.rgb);
 	if (dist2 < color_tolerance) {
 		result.rgb = replace_2.rgb;
 		return result;
 	}
-	
+
 	return result;
 }
 
@@ -88,7 +88,7 @@ vec4 get_glow_color()
 void fragment() {
 	vec4 sprite_tex = texture(TEXTURE, UV);
 	vec4 swapped = sprite_tex;
-	
+
 	// Apply palette swap based on element type
 	if (elemental_type == 1) {
 		swapped = apply_palette_swap(sprite_tex, fire_target_1, fire_replace_1, fire_target_2, fire_replace_2);
@@ -97,7 +97,7 @@ void fragment() {
 	} else if (elemental_type == 3) {
 		swapped = apply_palette_swap(sprite_tex, water_target_1, water_replace_1, water_target_2, water_replace_2);
 	}
-	
+
 	// Apply glow to borders
 	if (is_on_border(TEXTURE, UV, sprite_tex)) {
 		vec4 glow = get_glow_color();
