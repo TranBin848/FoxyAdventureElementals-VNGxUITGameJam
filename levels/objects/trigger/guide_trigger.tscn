@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="2_v85d0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0j1gu"]
-size = Vector2(152, 37)
+size = Vector2(138, 37)
 
 [node name="GuideTrigger" type="Area2D"]
 collision_mask = 2

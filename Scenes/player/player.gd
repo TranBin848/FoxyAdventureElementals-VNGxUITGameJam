@@ -18,11 +18,17 @@ var blade_hit_area: Area2D
 
 @export var push_strength = 100.0
 
+@onready var normal_sprite: AnimatedSprite2D = $Direction/AnimatedSprite2D
+@onready var blade_sprite: AnimatedSprite2D = $Direction/BladeAnimatedSprite2D
+@onready var silhouette_normal_sprite: AnimatedSprite2D = $Direction/SilhouetteSprite2D
+@onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
+
 signal health_changed
 
 func _ready() -> void:
 	super._ready()
-	extra_sprites.append($Direction/SilhouetteSprite2D)
+	extra_sprites.append(silhouette_normal_sprite)
+	silhouette_blade_sprite.hide()
 	fsm = FSM.new(self, $States, $States/Idle)
 	add_to_group("player")
 	if has_blade:
@@ -159,7 +165,16 @@ func can_attack() -> bool:
 
 func collected_blade() -> void:
 	has_blade = true
-	set_animated_sprite($Direction/BladeAnimatedSprite2D)
+	set_animated_sprite(blade_sprite) # Sprite chính: cầm kiếm
+
+	# Quản lý sprite silhouette:
+	# 1. Ẩn sprite silhouette CŨ
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+	# 2. Thêm sprite silhouette MỚI (cầm kiếm) và hiện nó
+	extra_sprites.append(silhouette_blade_sprite)
+	silhouette_blade_sprite.show()
 
 func throw_blade() -> void:
 	var blade = blade_factory.create() as RigidBody2D
@@ -175,6 +190,15 @@ func cast_skill(skill_name: String) -> void:
 func throwed_blade() -> void:
 	has_blade = false
 	set_animated_sprite($Direction/AnimatedSprite2D)
+	
+	# Quản lý sprite silhouette:
+	# 1. Ẩn sprite silhouette CŨ
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+	# 2. Thêm sprite silhouette MỚI (thường) và hiện nó
+	extra_sprites.append(silhouette_normal_sprite)
+	silhouette_normal_sprite.show()
 
 func set_invulnerable() -> void:
 	is_invulnerable = true

@@ -15,7 +15,7 @@ var direction: int = 1
 var health: int = max_health
 
 
-var jump_speed: float = 450.0
+var jump_speed: float = 400.0
 var fsm: FSM = null
 var current_animation = null
 var animated_sprite: AnimatedSprite2D = null
