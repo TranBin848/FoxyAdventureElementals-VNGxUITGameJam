@@ -5,13 +5,12 @@ var tween
 var transitioning := false
 
 func _ready():
-	print(camera2D.name)
 	if camera2D == null:
 		push_error("Camera2D node not found!")
 		return
 
 
-func transition_camera2D(to: Camera2D, from: Camera2D = get_viewport().get_camera_2d(), duration := 1.0) -> void:
+func transition_camera2D(to: Camera2D, duration := 1.0, from: Camera2D = get_viewport().get_camera_2d()) -> void:
 	if transitioning:
 		return
 	

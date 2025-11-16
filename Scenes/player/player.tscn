@@ -323,6 +323,7 @@ sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+visible = false
 material = SubResource("ShaderMaterial_am21h")
 position = Vector2(-4, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")

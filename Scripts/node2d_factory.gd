@@ -7,6 +7,9 @@ signal created(product)
 @export var target_container_name: StringName
 
 func create(_product_packed_scene := product_packed_scene) -> Node2D:
+	if (product_packed_scene == null ):
+		print("no scene")
+		return
 	var product: Node2D = _product_packed_scene.instantiate()
 	product.global_position = global_position
 	

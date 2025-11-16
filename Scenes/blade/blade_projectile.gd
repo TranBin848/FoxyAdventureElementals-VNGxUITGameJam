@@ -9,14 +9,14 @@ func _physics_process(delta: float) -> void:
 	
 func _on_body_entered(_body: Node) -> void:
 	drop_blade()
-	print("enterbody:" + _body.name)
+	#print("enterbody:" + _body.name)
 
 func _on_hit_area_2d_hitted(area: Variant) -> void:
-	print("enterarea:" + area.name)
+	#print("enterarea:" + area.name)
 	drop_blade()
 	
 func drop_blade() -> void:
-	print("drop")
+	#print("drop")
 	var blade = blade_scene.instantiate()
 	blade.global_position = global_position
 	get_tree().current_scene.add_child(blade)

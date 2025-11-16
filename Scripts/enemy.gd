@@ -160,12 +160,14 @@ func _get_player_from_raycasts() -> Player:
 
 # --- Called when player is in sight
 func _on_player_in_sight(_player_pos: Vector2) -> void:
-	print("Player detected at:", _player_pos)
+	#print("Player detected at:", _player_pos)
+	pass
 
 
 # --- Called when player is not in sight
 func _on_player_not_in_sight() -> void:
-	print("Player lost from sight")
+	#print("Player lost from sight")
+	pass
 
 
 # --- When enemy takes damage
