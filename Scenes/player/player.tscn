@@ -1,6 +1,6 @@
 [gd_scene load_steps=61 format=3 uid="uid://d0jou4iuydvkg"]
 
-[ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
+[ext_resource type="Shader" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
 [ext_resource type="Shader" uid="uid://hxfbyuvi3j8m" path="res://shaders/player_shader/silhouetter.gdshader" id="2_ahqnk"]

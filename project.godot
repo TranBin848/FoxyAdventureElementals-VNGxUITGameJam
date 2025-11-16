@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ElementsEnum="*res://scripts/elements.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+CameraTransition="*res://Autoloads/camera_transition.tscn"
 
 [dialogic]
 

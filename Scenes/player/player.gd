@@ -1,5 +1,6 @@
 class_name Player
 extends BaseCharacter
+@onready var camera_2d: Camera2D = $Camera2D
 
 @export var invulnerable_duration: float = 2
 var is_invulnerable: bool = false
@@ -27,6 +28,7 @@ func _ready() -> void:
 	add_to_group("player")
 	if has_blade:
 		collected_blade()
+	camera_2d.make_current()
 
 # ================================================================
 # === SKILL SYSTEM ===============================================
