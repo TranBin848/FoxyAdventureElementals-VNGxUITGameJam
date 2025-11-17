@@ -1,6 +1,7 @@
 extends Node2D
 
 var start_pos: Vector2 = Vector2.ZERO
+var king_crab: KingCrab
 var atk_range: float = 0
 var speed = 0
 var direction: float = 0
@@ -10,7 +11,6 @@ func _physics_process(delta: float) -> void:
 	var dist: float = global_position.x - start_pos.x
 	#print(dist)
 	#print("X: " + str(global_position.x) + ", Start: " + str(start_pos.x))
-	
 	scale.x = direction
 
 	if abs(dist) > atk_range:
@@ -18,7 +18,6 @@ func _physics_process(delta: float) -> void:
 			speed = -abs(speed)
 		elif dist < 0:
 			speed = abs(speed)
-
 	# Move the object
 	global_position.x += speed * delta
 

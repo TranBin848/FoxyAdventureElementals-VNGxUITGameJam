@@ -1,13 +1,22 @@
 class_name KingCrab
 extends EnemyCharacter
 
-var is_stunned: bool = false
+@onready var hit_box: CollisionShape2D = $Direction/HitArea2D/CollisionShape2D
+@onready var hurt_box: CollisionShape2D = $Direction/HurtArea2D/CollisionShape2D2
+@onready var collision: CollisionShape2D = $CollisionShape2D
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $Direction/AnimatedSprite2D
 @onready var claw_factory: Node2DFactory = $Direction/ClawFactory
+@onready var health_bar: ProgressBar = $UI/Control/ProgressBar
+@onready var label: Label = $Label
+
 @export var atk_range: float = 200
 @export var skill_cd: float = 10
-@onready var health_bar: ProgressBar = $UI/ProgressBar
-@onready var animated_sprite_2d: AnimatedSprite2D = $Direction/AnimatedSprite2D
-@onready var label: Label = $Label
+@export var spin_velocity = 300
+
+var is_stunned: bool = false
+var fired_claw: Node2D = null
+var boss_zone: Area2D = null
 
 var skills = {
 	0: "spin",
@@ -50,22 +59,42 @@ func fire_claw() -> void:
 	claw.atk_range = atk_range
 	claw.speed = movement_speed * direction
 	claw.direction = direction
+	claw.king_crab = self
+	fired_claw = claw
 
 func retrieve_claw() -> void:
+	fired_claw = null
 	fsm.change_state(fsm.states.retrieveclaw)
 
 func take_damage(damage: int) -> void:
 	super.take_damage(damage)
+	
 	flash_corountine()
 	var health_percent = (float(health) / max_health) * 100
-	#print("health: " + str(health) + " max health: " + str(max_health) + " percent: " + str(health_percent))
 	health_bar.value = health_percent
+	#print("health: " + str(health) + " max health: " + str(max_health) + " percent: " + str(health_percent))
 	
 func flash_corountine() -> void:
 	animated_sprite_2d.modulate = Color(20, 20, 20)
 	await get_tree().create_timer(0.3).timeout
 	animated_sprite_2d.modulate = Color.WHITE  # go back to normal	
 
+func start_fight() -> void:
+	health_bar.show()
+
+func handle_dead() -> void:
+	hurt_box.disabled = true
+	collision.disabled = true
+	hit_box.disabled = true
+	gravity = 0
+	velocity.x = 0
+	health_bar.hide()
+	
+	if fired_claw:
+		fired_claw.queue_free()
+	if boss_zone:
+		boss_zone._on_boss_dead()
+	
 func is_at_camera_edge(margin: float = 15.0) -> bool:
 	var cam := get_viewport().get_camera_2d()
 	if cam == null:

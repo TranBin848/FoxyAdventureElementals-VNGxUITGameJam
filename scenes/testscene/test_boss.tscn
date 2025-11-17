@@ -264,12 +264,13 @@ frame_progress = 0.914773
 [node name="HealhBar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("31_crrga")]
 player = NodePath("../../Player")
 
-[node name="Bosszone" type="Area2D" parent="."]
+[node name="Bosszone" type="Area2D" parent="." node_paths=PackedStringArray("boss")]
 position = Vector2(644, 78)
 scale = Vector2(27, 18)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("27_qv7h7")
+boss = NodePath("Boss")
 
 [node name="Boss" parent="Bosszone" instance=ExtResource("28_smwot")]
 position = Vector2(-2.74074, 4.5)
