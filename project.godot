@@ -17,8 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+GameManager="*res://scripts/autoload/game_manager.gd"
+SaveSystem="*res://scripts/autoload/save_system.gd"
 ElementsEnum="*res://scripts/elements.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+FadeLayer="*res://scenes/ui/fade_layer.tscn"
 
 [dialogic]
 
@@ -27,6 +30,7 @@ directories/dch_directory={
 "npc_villager": "res://dialogs/npc_villager.dch"
 }
 directories/dtl_directory={
+"end_lv1": "res://dialogs/end_lv1.dtl",
 "start_game": "res://dialogs/start_game.dtl"
 }
 layout/style_directory={

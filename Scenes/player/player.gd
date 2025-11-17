@@ -31,9 +31,10 @@ func _ready() -> void:
 	silhouette_blade_sprite.hide()
 	fsm = FSM.new(self, $States, $States/Idle)
 	add_to_group("player")
+	GameManager.player = self	
 	if has_blade:
 		collected_blade()
-
+	
 # ================================================================
 # === SKILL SYSTEM ===============================================
 # ================================================================
@@ -166,7 +167,7 @@ func can_attack() -> bool:
 func collected_blade() -> void:
 	has_blade = true
 	set_animated_sprite(blade_sprite) # Sprite chính: cầm kiếm
-
+	
 	# Quản lý sprite silhouette:
 	# 1. Ẩn sprite silhouette CŨ
 	if extra_sprites.size() > 0 and extra_sprites[0] != null:
@@ -217,6 +218,28 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 	health_changed.emit()
+
+func save_state() -> Dictionary:
+	return {
+		"position": [global_position.x, global_position.y],
+		"health": health,
+		"has_blade": has_blade
+	}
+
+func load_state(data: Dictionary) -> void:
+	"""Load player state from checkpoint data"""
+	if data.has("position"):
+		var pos_array = data["position"]
+		global_position = Vector2(pos_array[0], pos_array[1])
+	
+	if data.has("health"):
+		health = clamp(data["health"], 0, max_health)
+	
+	if data.has("has_blade"):
+		has_blade = data["has_blade"]
+		if has_blade:
+			normal_sprite.hide()
+			collected_blade() 
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	# Nếu tấn công không có nguyên tố, dùng damage gốc
