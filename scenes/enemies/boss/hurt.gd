@@ -8,7 +8,8 @@ func _enter() -> void:
 	collision.disabled = true
 	hit_box.disabled = true
 	obj.gravity = 0
+	obj.velocity.x = 0
 	obj.change_animation("die")
-	Engine.time_scale = 0.4
+	Engine.time_scale = 0.2
 	await $"../../Direction/AnimatedSprite2D".animation_finished
 	Engine.time_scale = 1.0

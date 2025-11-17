@@ -35,9 +35,12 @@ func can_use_skill() -> bool:
 	return true
 	
 func use_skill() -> void:
-	fsm.change_state(fsm.states[skills[cur_skill]])
+	var skill = skills[cur_skill]
+	fsm.change_state(fsm.states[skill])
+	
 	skill_cd_timer = skill_cd
 	cur_skill = (cur_skill + 1) % skills.size()
+	
 	pass
 
 func fire_claw() -> void:

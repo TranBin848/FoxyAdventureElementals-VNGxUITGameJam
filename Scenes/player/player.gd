@@ -218,7 +218,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	
 	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
 	if attacker_element in advantage_table and health in advantage_table[attacker_element]:
-		print("True")
+		#print("True")
 		return base_damage * 1.25  # +25% damage
 	
 	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)
