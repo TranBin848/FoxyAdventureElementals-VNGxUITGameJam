@@ -19,7 +19,7 @@ func setup(skill: Skill, dir: Vector2) -> void:
 		var hit_area: HitArea2D = $HitArea2d
 		hit_area.damage = damage
 		hit_area.elemental_type = elemental_type
-		print("✅ Gán HitArea cho WaterTornado:", damage, elemental_type)
+		#print("✅ Gán HitArea cho WaterTornado:", damage, elemental_type)
 		
 	# Play animation if có AnimatedSprite2D
 	if has_node("AnimatedSprite2D"):
