@@ -1,5 +1,6 @@
 class_name Player
 extends BaseCharacter
+@onready var camera_2d: Camera2D = $Camera2D
 
 @export var invulnerable_duration: float = 2
 var is_invulnerable: bool = false
@@ -27,6 +28,7 @@ func _ready() -> void:
 	add_to_group("player")
 	if has_blade:
 		collected_blade()
+	camera_2d.make_current()
 
 # ================================================================
 # === SKILL SYSTEM ===============================================
@@ -216,7 +218,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	
 	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
 	if attacker_element in advantage_table and health in advantage_table[attacker_element]:
-		print("True")
+		#print("True")
 		return base_damage * 1.25  # +25% damage
 	
 	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)
