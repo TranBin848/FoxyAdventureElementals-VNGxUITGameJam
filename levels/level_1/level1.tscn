@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://8qflg27g53dv"]
+[gd_scene load_steps=44 format=4 uid="uid://8qflg27g53dv"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
@@ -35,6 +35,8 @@
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="31_dl781"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="32_vspgp"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="35_iy6cw"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="36_ijil1"]
+[ext_resource type="PackedScene" uid="uid://c0wy3en1cr4hn" path="res://scenes/ui/heart_container.tscn" id="37_w745m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mjh6"]
 animations = [{
@@ -56,6 +58,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w745m"]
+size = Vector2(49, 471)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_omn1t"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lf3p4"]
@@ -68,7 +73,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.318631
+shader_parameter/y_zoom = 1.77156
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -128,20 +133,24 @@ frame_progress = 0.143494
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("8_xoq1q")]
-position = Vector2(662, 153)
+position = Vector2(631, 151)
 element = 2
+elemental_type = 3
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(2165, -489)
 element = 1
+elemental_type = 5
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("8_xoq1q")]
-position = Vector2(2905, -96)
+position = Vector2(3097, -189)
 element = 2
+elemental_type = 3
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("8_xoq1q")]
-position = Vector2(2825, 128)
+position = Vector2(3017, 35)
 element = 2
+elemental_type = 3
 
 [node name="Pelican" parent="Enemies" instance=ExtResource("9_n1ndl")]
 position = Vector2(2098, -679)
@@ -150,21 +159,27 @@ element = 1
 [node name="Crab" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(1721, -400)
 element = 1
+elemental_type = 5
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2823, -364)
 element = 1
+elemental_type = 5
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2624, -364)
 element = 1
+elemental_type = 5
+
+[node name="Boat" parent="." instance=ExtResource("25_4iddc")]
+position = Vector2(-1859, 443)
 
 [node name="Door" parent="." instance=ExtResource("35_iy6cw")]
 position = Vector2(5280, -440)
 target_stage = "uid://c47jft3el2tid"
 
 [node name="Player" parent="." instance=ExtResource("11_m7n46")]
-position = Vector2(-1720, 420)
+position = Vector2(-1855, 434)
 collision_mask = 73
 platform_floor_layers = 4294967231
 
@@ -321,9 +336,6 @@ position = Vector2(-1031, 403)
 [node name="CampFire2" parent="Object" instance=ExtResource("24_m54h2")]
 position = Vector2(4795, -429)
 
-[node name="Boat" parent="Object" instance=ExtResource("25_4iddc")]
-position = Vector2(-1859, 443)
-
 [node name="Blade" parent="Object" instance=ExtResource("26_mpt5m")]
 position = Vector2(-18, 314)
 
@@ -346,6 +358,15 @@ position = Vector2(3386, -428)
 [node name="Platform" parent="Object" instance=ExtResource("29_uvsuj")]
 position = Vector2(3538, -454)
 
+[node name="Bounder" type="StaticBody2D" parent="Object"]
+position = Vector2(-1940, 0)
+disable_mode = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object/Bounder"]
+position = Vector2(14.5, 225.5)
+shape = SubResource("RectangleShape2D_w745m")
+
 [node name="Water" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_lf3p4")
 position = Vector2(-1290.03, 565)
@@ -356,4 +377,27 @@ script = ExtResource("31_dl781")
 [node name="platform" parent="." instance=ExtResource("32_vspgp")]
 position = Vector2(1203, 138)
 
+[node name="platform2" parent="." instance=ExtResource("32_vspgp")]
+position = Vector2(1482, 140)
+
+[node name="platform3" parent="." instance=ExtResource("32_vspgp")]
+position = Vector2(1560, 140)
+
 [node name="PelicanBombs" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SkillBar" parent="CanvasLayer" instance=ExtResource("36_ijil1")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+offset_bottom = -16.0
+grow_vertical = 0
+
+[node name="HeartContainer" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("37_w745m")]
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 17.0
+offset_bottom = 86.0
+player = NodePath("../../Player")

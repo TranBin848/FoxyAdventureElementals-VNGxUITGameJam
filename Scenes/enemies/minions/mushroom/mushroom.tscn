@@ -72,6 +72,7 @@ collision_layer = 8
 script = ExtResource("1_sl7hc")
 shader_path = "uid://doovon2v0i5dx"
 movement_range = 100.0
+max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -114,3 +115,6 @@ script = ExtResource("10_dxuq7")
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("10_pkus5")
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)
