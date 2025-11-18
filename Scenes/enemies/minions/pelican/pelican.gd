@@ -42,6 +42,6 @@ func drop_bomb() -> void:
 		if bomb != null:
 			if bomb is RigidBody2D:
 				var drop_direction : Vector2 = Vector2.DOWN.rotated(deg_to_rad(drop_bomb_angle * -direction))
-				print(drop_direction)
+				#print(drop_direction)
 				(bomb as RigidBody2D).apply_impulse(drop_direction * drop_bomb_force, bomb.position)
 	pass
