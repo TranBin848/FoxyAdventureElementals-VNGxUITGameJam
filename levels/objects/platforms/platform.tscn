@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx4xi7ffye88x"]
+
+[ext_resource type="Texture2D" uid="uid://bn23ps3jhu4ru" path="res://assets/island/objects/moving_platform/moving_platform.png" id="1_kjyib"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5dqd"]
+size = Vector2(84, 14)
+
+[node name="platform" type="AnimatableBody2D"]
+sync_to_physics = false
+
+[node name="MovingPlatform" type="Sprite2D" parent="."]
+texture = ExtResource("1_kjyib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l5dqd")
+one_way_collision = true

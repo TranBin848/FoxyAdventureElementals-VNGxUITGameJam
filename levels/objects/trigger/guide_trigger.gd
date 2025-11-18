@@ -7,7 +7,6 @@ extends Area2D
 var shown := false
 
 func _ready():
-	print(guide_text)
 	var clean_text = guide_text.replace("\\n", "\n")
 
 	label.text = clean_text

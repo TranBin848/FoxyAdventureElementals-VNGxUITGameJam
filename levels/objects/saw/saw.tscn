@@ -5,7 +5,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_1f3o5"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, -50)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 272, 50)
 }
 point_count = 2
 
@@ -117,6 +117,7 @@ _data = {
 }
 
 [node name="Saw" type="Path2D"]
+position = Vector2(96, 24)
 curve = SubResource("Curve2D_1f3o5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]

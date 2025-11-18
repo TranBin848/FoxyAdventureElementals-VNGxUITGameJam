@@ -19,15 +19,23 @@ var blade_hit_area: Area2D
 
 @export var push_strength = 100.0
 
+@onready var normal_sprite: AnimatedSprite2D = $Direction/AnimatedSprite2D
+@onready var blade_sprite: AnimatedSprite2D = $Direction/BladeAnimatedSprite2D
+@onready var silhouette_normal_sprite: AnimatedSprite2D = $Direction/SilhouetteSprite2D
+@onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
+
 signal health_changed
 
 func _ready() -> void:
 	super._ready()
-	extra_sprites.append($Direction/SilhouetteSprite2D)
+	extra_sprites.append(silhouette_normal_sprite)
+	silhouette_blade_sprite.hide()
 	fsm = FSM.new(self, $States, $States/Idle)
 	add_to_group("player")
+	GameManager.player = self	
 	if has_blade:
 		collected_blade()
+	
 	camera_2d.make_current()
 
 # ================================================================
@@ -161,7 +169,16 @@ func can_attack() -> bool:
 
 func collected_blade() -> void:
 	has_blade = true
-	set_animated_sprite($Direction/BladeAnimatedSprite2D)
+	set_animated_sprite(blade_sprite) # Sprite chính: cầm kiếm
+	
+	# Quản lý sprite silhouette:
+	# 1. Ẩn sprite silhouette CŨ
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+	# 2. Thêm sprite silhouette MỚI (cầm kiếm) và hiện nó
+	extra_sprites.append(silhouette_blade_sprite)
+	silhouette_blade_sprite.show()
 
 func throw_blade() -> void:
 	var blade = blade_factory.create() as RigidBody2D
@@ -177,6 +194,15 @@ func cast_skill(skill_name: String) -> void:
 func throwed_blade() -> void:
 	has_blade = false
 	set_animated_sprite($Direction/AnimatedSprite2D)
+	
+	# Quản lý sprite silhouette:
+	# 1. Ẩn sprite silhouette CŨ
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+	# 2. Thêm sprite silhouette MỚI (thường) và hiện nó
+	extra_sprites.append(silhouette_normal_sprite)
+	silhouette_normal_sprite.show()
 
 func set_invulnerable() -> void:
 	is_invulnerable = true
@@ -195,6 +221,28 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 	health_changed.emit()
+
+func save_state() -> Dictionary:
+	return {
+		"position": [global_position.x, global_position.y],
+		"health": health,
+		"has_blade": has_blade
+	}
+
+func load_state(data: Dictionary) -> void:
+	"""Load player state from checkpoint data"""
+	if data.has("position"):
+		var pos_array = data["position"]
+		global_position = Vector2(pos_array[0], pos_array[1])
+	
+	if data.has("health"):
+		health = clamp(data["health"], 0, max_health)
+	
+	if data.has("has_blade"):
+		has_blade = data["has_blade"]
+		if has_blade:
+			normal_sprite.hide()
+			collected_blade() 
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	# Nếu tấn công không có nguyên tố, dùng damage gốc
