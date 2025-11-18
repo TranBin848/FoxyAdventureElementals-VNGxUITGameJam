@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://ctvqtbns8ojyh"]
+[gd_scene load_steps=39 format=4 uid="uid://ctvqtbns8ojyh"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_52u8e"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_4vqmw"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="29_jw02k"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="30_f4tpa"]
 [ext_resource type="PackedScene" uid="uid://dfg7ew4joocvp" path="res://scenes/ui/healh_bar.tscn" id="31_4vqmw"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="32_1n815"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
 animations = [{
@@ -283,4 +284,7 @@ position = Vector2(1024, 150)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealhBar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("31_4vqmw")]
+custom_minimum_size = Vector2(100, 100)
 player = NodePath("../../Player")
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("32_1n815")]

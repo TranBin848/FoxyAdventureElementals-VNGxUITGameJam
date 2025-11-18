@@ -3,6 +3,7 @@ extends PlayerState
 func _enter() -> void:
 	#Change animation to jump
 	obj.change_animation("jump")
+	AudioPlayer.play_sound_once(obj.jump_sfx)
 	pass
 
 func _update(_delta: float):

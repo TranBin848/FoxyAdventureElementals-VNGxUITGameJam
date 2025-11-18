@@ -1,9 +1,10 @@
-[gd_scene load_steps=62 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=63 format=3 uid="uid://d0jou4iuydvkg"]
 
-[ext_resource type="Shader" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
+[ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
 [ext_resource type="Shader" uid="uid://hxfbyuvi3j8m" path="res://shaders/player_shader/silhouetter.gdshader" id="2_ahqnk"]
+[ext_resource type="AudioStream" uid="uid://irnmtldt0n5y" path="res://assets/sounds/jump.mp3" id="2_vb1ce"]
 [ext_resource type="Texture2D" uid="uid://bkabwrpxdc7cc" path="res://assets/foxy/fox_hat_blade/fox_atk_2.png" id="3_j4nxn"]
 [ext_resource type="Texture2D" uid="uid://byd3g4nnxwfcq" path="res://assets/foxy/fox_hat_blade/fox_atk_3.png" id="4_28m0y"]
 [ext_resource type="Texture2D" uid="uid://m4di78taixns" path="res://assets/foxy/fox_hat/fox_defeat_1.png" id="4_c35mf"]
@@ -312,6 +313,7 @@ height = 28.0
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_wodsf")
+jump_sfx = ExtResource("2_vb1ce")
 elemental_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]

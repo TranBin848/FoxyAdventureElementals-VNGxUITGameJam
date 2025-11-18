@@ -26,6 +26,9 @@ var blade_hit_area: Area2D
 
 signal health_changed
 
+#Sound SF
+@export var jump_sfx: AudioStream = null
+
 func _ready() -> void:
 	super._ready()
 	extra_sprites.append(silhouette_normal_sprite)
