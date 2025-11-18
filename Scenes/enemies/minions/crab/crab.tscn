@@ -63,6 +63,7 @@ script = ExtResource("1_4p1sk")
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 movement_range = 200.0
+max_health = 15
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Direction" type="Node2D" parent="."]
@@ -111,3 +112,6 @@ script = ExtResource("3_280wf")
 
 [node name="Hurt" type="Node" parent="States"]
 script = ExtResource("4_gw7ur")
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)

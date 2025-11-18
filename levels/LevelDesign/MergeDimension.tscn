@@ -371,67 +371,54 @@ element = 1
 
 [node name="Crab" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-1929, 1749)
-shader_path = "uid://doovon2v0i5dx"
 element = 3
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-1923, 1624)
-shader_path = "uid://doovon2v0i5dx"
 element = 3
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-1526, 1639)
-shader_path = "uid://doovon2v0i5dx"
 element = 3
 
 [node name="Crab4" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-1412, 517)
-shader_path = "uid://doovon2v0i5dx"
 element = 4
 
 [node name="Crab5" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-856, 534)
-shader_path = "uid://doovon2v0i5dx"
 element = 4
 
 [node name="Crab6" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-632, 513)
-shader_path = "uid://doovon2v0i5dx"
 element = 4
 
 [node name="Crab7" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-184, 579)
-shader_path = "uid://doovon2v0i5dx"
 element = 4
 
 [node name="Crab8" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-2125, -146)
-shader_path = "uid://doovon2v0i5dx"
 element = 1
 
 [node name="Crab9" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-1208, 201)
-shader_path = "uid://doovon2v0i5dx"
 element = 1
 
 [node name="Crab10" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-633, 208)
-shader_path = "uid://doovon2v0i5dx"
 element = 1
 
 [node name="Crab11" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-497, -114)
-shader_path = "uid://doovon2v0i5dx"
 element = 1
 
 [node name="Crab12" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-377, -346)
-shader_path = "uid://doovon2v0i5dx"
 element = 1
 
 [node name="Crab13" parent="Enemies" instance=ExtResource("33_ypxo0")]
 position = Vector2(-657, -353)
-shader_path = "uid://doovon2v0i5dx"
 element = 1
 
 [node name="Starfish" parent="Enemies" instance=ExtResource("34_uoael")]

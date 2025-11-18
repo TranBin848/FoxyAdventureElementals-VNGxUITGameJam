@@ -22,6 +22,7 @@ SaveSystem="*res://scripts/autoload/save_system.gd"
 ElementsEnum="*res://scripts/elements.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 FadeLayer="*res://scenes/ui/fade_layer.tscn"
+DamageNumbers="*res://scripts/autoload/damage_numbers.gd"
 CameraTransition="*res://Autoloads/camera_transition.tscn"
 
 [dialogic]

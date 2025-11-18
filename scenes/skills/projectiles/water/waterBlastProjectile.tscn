@@ -189,7 +189,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"WaterBlast",
-"speed": 12.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -239,7 +239,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"WaterBlast_Explosion",
-"speed": 20.0
+"speed": 18.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uj2b8"]
@@ -254,8 +254,7 @@ script = ExtResource("1_uj2b8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"WaterBlast_Explosion"
-frame_progress = 1.0
+animation = &"WaterBlast"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
