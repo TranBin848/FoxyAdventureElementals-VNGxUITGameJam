@@ -347,7 +347,7 @@ visible = false
 material = SubResource("ShaderMaterial_1scxs")
 position = Vector2(-4, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"idle"
+animation = &"fall"
 autoplay = "idle"
 
 [node name="BladeFactory" type="Marker2D" parent="Direction"]
