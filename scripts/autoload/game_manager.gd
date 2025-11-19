@@ -12,10 +12,11 @@ signal checkpoint_changed(new_checkpoint_id: String)
 
 # --- Player states ---
 var has_blade: bool = false
+var isReloadScene: bool = false
 
 func _ready() -> void:
 	# Load checkpoint khi mở game
-	#load_checkpoint_data()
+	load_checkpoint_data()
 	# Theo dõi thay đổi scene để tự khôi phục trạng thái
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
 
@@ -34,6 +35,7 @@ func _on_scene_changed() -> void:
 	if current_checkpoint_id in checkpoint_data:
 		var checkpoint_info = checkpoint_data[current_checkpoint_id]
 		player.health = checkpoint_info.get("health", player.max_health)
+		print("Player Health:",player.health)
 		player.has_blade = checkpoint_info.get("has_blade", false)
 		player.load_state(checkpoint_info.get("player_state", {}))
 
