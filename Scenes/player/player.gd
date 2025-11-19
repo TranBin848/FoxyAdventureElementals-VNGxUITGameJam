@@ -240,6 +240,7 @@ func load_state(data: Dictionary) -> void:
 	
 	if data.has("health"):
 		health = clamp(data["health"], 0, max_health)
+		health_changed.emit()
 	
 	if data.has("has_blade"):
 		has_blade = data["has_blade"]

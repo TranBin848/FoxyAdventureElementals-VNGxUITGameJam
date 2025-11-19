@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=66 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -53,6 +53,9 @@
 [ext_resource type="Script" uid="uid://blp1td1nitt5f" path="res://scenes/player/states/jump_attack.gd" id="44_ttakn"]
 [ext_resource type="Script" uid="uid://ke058dpyk512" path="res://scenes/player/states/throw_attack.gd" id="45_rw8a5"]
 [ext_resource type="Script" uid="uid://c3c1jskkab60p" path="res://scenes/player/cast_spell.gd" id="51_jrbya"]
+[ext_resource type="Script" uid="uid://cxnby176o2lfo" path="res://scenes/ui/heart_container.gd" id="54_ln3h3"]
+[ext_resource type="Texture2D" uid="uid://cq40il32pklvp" path="res://assets/ui/Hearts/PNG/basic/heart.png" id="55_uygh0"]
+[ext_resource type="Texture2D" uid="uid://dacc2rubl3io4" path="res://assets/ui/Hearts/PNG/basic/background.png" id="56_t1aof"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -440,5 +443,22 @@ script = ExtResource("51_jrbya")
 [node name="Jump" type="Node" parent="."]
 
 [node name="WalkFX" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 70.0
+grow_horizontal = 2
+script = ExtResource("54_ln3h3")
+player = NodePath("../..")
+heart_full = ExtResource("55_uygh0")
+heart_empty = ExtResource("56_t1aof")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HeartContainer"]
+layout_mode = 2
+texture = ExtResource("55_uygh0")
+expand_mode = 3
 
 [connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]
