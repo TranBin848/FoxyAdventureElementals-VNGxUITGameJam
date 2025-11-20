@@ -1,0 +1,179 @@
+[gd_scene load_steps=25 format=3 uid="uid://ob1cvfrn26du"]
+
+[ext_resource type="Script" uid="uid://dhjy816rov0pm" path="res://Scenes/skills/projectiles/fire/fire_explosion_projectile.gd" id="1_i50lh"]
+[ext_resource type="Texture2D" uid="uid://cld72nn514rmh" path="res://assets/skills/fire/Fireexplosion/Explosion 2 SpriteSheet.png" id="2_lg4hk"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://Scripts/area_component/hit_area_2d.tscn" id="3_lg4hk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ahuh"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q04v"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bbxw"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj7b1"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glqmq"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i50lh"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbx4r"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg4hk"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0agsa"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sala4"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cq7dl"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(480, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30y6t"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(528, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y7ia"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(576, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdnwn"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(624, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fagib"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(672, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pa47"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(720, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6s3ux"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(768, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc4tc"]
+atlas = ExtResource("2_lg4hk")
+region = Rect2(816, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ahuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q04v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bbxw")
+}],
+"loop": true,
+"name": &"FireExplosion",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj7b1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glqmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i50lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbx4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg4hk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0agsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sala4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cq7dl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30y6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y7ia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdnwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fagib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pa47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6s3ux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc4tc")
+}],
+"loop": false,
+"name": &"FireExplosion_End",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhoxj"]
+size = Vector2(32.5, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnvla"]
+size = Vector2(32, 20)
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_i50lh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_tbddh")
+animation = &"FireExplosion"
+autoplay = "FireExplosion"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.75, -0.5)
+shape = SubResource("RectangleShape2D_uhoxj")
+
+[node name="HitArea2d" parent="." instance=ExtResource("3_lg4hk")]
+position = Vector2(0, -7)
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_tnvla")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]

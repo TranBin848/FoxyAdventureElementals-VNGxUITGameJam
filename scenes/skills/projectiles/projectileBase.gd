@@ -35,6 +35,9 @@ func setup(skill: Skill, dir: Vector2) -> void:
 		#hit_area.elemental_type = elemental_type
 
 func _physics_process(delta: float) -> void:
+	_move(delta)
+
+func _move(delta: float) -> void:
 	position += speed * direction * delta
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
