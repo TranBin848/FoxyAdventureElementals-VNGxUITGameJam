@@ -9,6 +9,7 @@ func _enter():
 
 func _update(delta: float):
 	if update_timer(delta):
+		GameManager.isReloadScene = true
 		obj.get_tree().reload_current_scene()
 
 
