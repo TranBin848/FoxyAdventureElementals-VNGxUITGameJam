@@ -22,5 +22,3 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = ExtResource("1_0mwgc")
 stretch_mode = 0
-
-[connection signal="pressed" from="HBoxContainer/SettingsTextureButton" to="." method="_on_settings_texture_button_pressed"]
