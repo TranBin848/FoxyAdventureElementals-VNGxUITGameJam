@@ -24,18 +24,30 @@ var blade_hit_area: Area2D
 @onready var silhouette_normal_sprite: AnimatedSprite2D = $Direction/SilhouetteSprite2D
 @onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
 
-signal health_changed
-
 #Sound SF
 @export var jump_sfx: AudioStream = null
 
+#Movement
+var last_dir: float = 0.0
+@export var wall_slide_speed: float = 50.0
+@export var max_fall_speed: float = 100.0
+
+@export var dash_speed_mul: float = 5.0
+@export var dash_dist: float = 200.0
+@export var is_dashing: bool = false
+@export var dash_cd: float = 5.0
+var can_dash: bool = true
+
+#Debug
+@onready var debuglabel: Label = $debuglabel
+
 func _ready() -> void:
 	super._ready()
+	fsm = FSM.new(self, $States, $States/Idle)
+	GameManager.player = self	
 	extra_sprites.append(silhouette_normal_sprite)
 	silhouette_blade_sprite.hide()
-	fsm = FSM.new(self, $States, $States/Idle)
 	add_to_group("player")
-	GameManager.player = self	
 	if has_blade:
 		collected_blade()
 	
@@ -150,6 +162,8 @@ func _physics_process(delta: float) -> void:
 		if body is RigidBody2D:
 			var normal = -c.get_normal()
 			body.apply_central_impulse(normal * push_strength)
+	
+	debuglabel.text = str(fsm.current_state.name)
 			
 func handle_invulnerable(delta) -> void:
 	if (invulnerable_timer > 0):
@@ -218,12 +232,16 @@ func jump() -> void:
 	super.jump()
 	jump_fx_factory.create() as Node2D
 
+func wall_jump() -> void:
+	turn_around()
+	jump()
+
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
-	health_changed.emit()
+	#health_changed.emit()
 
 func save_state() -> Dictionary:
 	return {
@@ -310,3 +328,35 @@ func _update_elemental_palette() -> void:
 	var shader_mat = animated_sprite.material as ShaderMaterial
 	shader_mat.set_shader_parameter("elemental_type", elemental_type)
 	shader_mat.set_shader_parameter("glow_intensity", 1.5)
+
+func _update_movement(delta: float) -> void:
+	#if is_on_floor() or is_on_wall():
+		#reset_jump()
+		#reset_dashes()
+		
+	velocity.y += gravity*delta
+	
+	if fsm.current_state == fsm.states.wallcling:
+		velocity.y = clamp(velocity.y, -INF, wall_slide_speed)
+	else:
+		velocity.y = clamp(velocity.y, -INF, max_fall_speed)
+	
+	if is_dashing:
+		velocity.y = 0
+
+	#print(velocity)
+	#print(global_position)
+	move_and_slide()
+	pass
+
+func dash() -> void:
+	velocity.x = movement_speed * dash_speed_mul * direction
+	velocity.y = 0.0
+
+	is_dashing = true
+	can_dash = false
+	await get_tree().create_timer(dash_cd).timeout
+	can_dash = true
+
+func is_can_dash() -> bool:
+	return can_dash

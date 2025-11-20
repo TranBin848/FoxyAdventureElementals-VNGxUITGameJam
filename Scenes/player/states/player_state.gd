@@ -1,10 +1,22 @@
 class_name PlayerState
 extends FSMState
 
+
+
 #Control moving and changing state to run
 #Return true if moving
 func control_moving() -> bool:
 	var dir: float = Input.get_action_strength("right") - Input.get_action_strength("left")
+	
+	if (Input.is_action_just_pressed("right")):
+		obj.last_dir = Input.get_action_strength("right")
+	if (Input.is_action_just_pressed("left")):
+		obj.last_dir = -Input.get_action_strength("left")
+	if (Input.get_action_strength("right") + Input.get_action_strength("left") == 0):
+		obj.last_dir = 0
+	if (Input.get_action_strength("right") + Input.get_action_strength("left") > 1):
+		dir = obj.last_dir
+		
 	var is_moving: bool = abs(dir) > 0.1
 	if is_moving:
 		dir = sign(dir)
@@ -15,6 +27,9 @@ func control_moving() -> bool:
 		return true
 	else:
 		obj.velocity.x = 0
+		#print(fsm.current_state.name)
+		if fsm.current_state.name == "Dash":
+			print("wtf")
 	return false
 
 #Control jumping
@@ -24,6 +39,14 @@ func control_jump() -> bool:
 	if Input.is_action_just_pressed("jump"):
 		obj.jump()
 		change_state(fsm.states.jump)
+		return true
+	return false
+
+func control_wall_jump() -> bool:
+	#If jump is pressed change to jump state and return true
+	if Input.is_action_just_pressed("jump"):
+		obj.wall_jump()
+		change_state(fsm.states.walljump)
 		return true
 	return false
 
@@ -45,11 +68,16 @@ func control_throw_blade() -> bool:
 		return true
 	return false
 
+func control_dash() -> void:
+	if Input.is_action_just_pressed("dash") and obj.is_can_dash():
+		change_state(fsm.states.dash)
+
 func take_damage(direction: Variant, damage: int = 1) -> void:
 	if obj.is_char_invulnerable():
 		return
 	#Player take damage
 	obj.take_damage(damage)
+
 	obj.velocity.x = 250 * direction.x
 	#Player die if health is 0 and change to dead state
 	#Player hurt if health is not 0 and change to hurt state
