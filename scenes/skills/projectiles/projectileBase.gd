@@ -5,20 +5,34 @@ class_name ProjectileBase
 var speed: float
 var direction: Vector2 = Vector2.RIGHT
 var damage: int
+var elemental_type: int = 0
 
 func setup(skill: Skill, dir: Vector2) -> void:
-	print(skill.animation_name)
+	#print(skill.damage)
+	#print(skill.elemental_type)
 	speed = skill.speed
 	damage = skill.damage
+	elemental_type = skill.elemental_type
 	direction = dir.normalized() if dir.length() > 0 else Vector2.RIGHT
 	
+	if has_node("HitArea2d"):
+		var hit_area: HitArea2D = $HitArea2d
+		hit_area.damage = damage
+		hit_area.elemental_type = elemental_type
+		#print("✅ Gán HitArea cho WaterTornado:", damage, elemental_type)
+		
 	# Play animation if có AnimatedSprite2D
 	if has_node("AnimatedSprite2D"):
-		print(skill.animation_name)
 		$AnimatedSprite2D.play(skill.animation_name)
 	
 	if skill.animation_name != "WaterTornado":
 		rotation = direction.angle()
+
+#func _ready() -> void:
+	#if has_node("HitArea2D"):
+		#var hit_area: HitArea2D = $HitArea2D
+		#hit_area.damage = damage
+		#hit_area.elemental_type = elemental_type
 
 func _physics_process(delta: float) -> void:
 	position += speed * direction * delta

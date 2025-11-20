@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cl6qeq12ugag0" path="res://scenes/skills/projectiles/water/water_tornado_projectile.gd" id="1_a7uo3"]
 [ext_resource type="Texture2D" uid="uid://b6e7bqero8rk7" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - Startup and Infinite.png" id="2_a7uo3"]
 [ext_resource type="Texture2D" uid="uid://cmhfp428s70tb" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - End.png" id="3_a7uo3"]
-[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/hit_area_2d.tscn" id="3_d4fu0"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_d4fu0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1yppl"]
 atlas = ExtResource("2_a7uo3")
@@ -131,7 +131,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7uo3"]
-size = Vector2(33, 73)
+size = Vector2(33, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wn83h"]
 size = Vector2(35, 81)
@@ -150,7 +150,7 @@ frame_progress = 1.0
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -32.5)
+position = Vector2(-0.5, -12)
 shape = SubResource("RectangleShape2D_a7uo3")
 
 [node name="HitArea2d" parent="." instance=ExtResource("3_d4fu0")]

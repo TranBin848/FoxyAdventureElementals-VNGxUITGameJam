@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://6o0ryerh3t3f" path="res://assets/enemy/mushroom/mushroom_01.png" id="5_8xtti"]
 [ext_resource type="Texture2D" uid="uid://dh2yf13qglxxf" path="res://assets/enemy/mushroom/mushroom_02.png" id="6_pqg2d"]
 [ext_resource type="Texture2D" uid="uid://b6dn5oietc0js" path="res://assets/enemy/mushroom/mushroom_03.png" id="7_wy1pw"]
-[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/hurt_area_2d.gd" id="8_m6me8"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_m6me8"]
 [ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://scenes/enemies/states/moving.gd" id="8_sl7hc"]
 [ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="10_dxuq7"]
 [ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="10_pkus5"]
@@ -19,7 +19,7 @@ height = 26.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16htk"]
 shader = ExtResource("2_o68j7")
-shader_parameter/line_color = Color(1.54018e-06, 0.682245, 0.613443, 1)
+shader_parameter/line_color = Color(1, 0.32288, 0.0992486, 1)
 shader_parameter/line_thickness = 1.0
 shader_parameter/glow_opacity = 0.75
 shader_parameter/glow_thickness = 1.0
@@ -72,6 +72,7 @@ collision_layer = 8
 script = ExtResource("1_sl7hc")
 shader_path = "uid://doovon2v0i5dx"
 movement_range = 100.0
+max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -89,11 +90,11 @@ frame_progress = 1.0
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(12, 0)
-target_position = Vector2(8, 0)
+target_position = Vector2(10, 0)
 
 [node name="DownRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(13, 0)
-target_position = Vector2(0, 18)
+target_position = Vector2(0, 22)
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
 collision_layer = 16
@@ -114,3 +115,6 @@ script = ExtResource("10_dxuq7")
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("10_pkus5")
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)

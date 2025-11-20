@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0hlcumjqo0a4"]
+
+[ext_resource type="Texture2D" uid="uid://bnyyso8r3xy7h" path="res://assets/island/images/boat/boat_sail_1.png" id="1_ndtfy"]
+[ext_resource type="Texture2D" uid="uid://vtdtt6qgcrpm" path="res://assets/island/images/boat/boat_sail_2.png" id="2_2l30g"]
+[ext_resource type="Texture2D" uid="uid://y8tmjcm0d6ki" path="res://assets/island/images/boat/boat_sail_3.png" id="3_hlncd"]
+[ext_resource type="Texture2D" uid="uid://bv2po7d5rema6" path="res://assets/island/images/boat/boat_sail_4.png" id="4_kc5hd"]
+[ext_resource type="Texture2D" uid="uid://cbrqqsfiyiei0" path="res://assets/island/images/boat/boat_sail_5.png" id="5_5ayfn"]
+[ext_resource type="PackedScene" uid="uid://byppetx6bipfj" path="res://levels/objects/boat/boat_frame.tscn" id="6_fotra"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w62em"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ndtfy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2l30g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hlncd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kc5hd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5ayfn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Boat" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(6, -36)
+sprite_frames = SubResource("SpriteFrames_w62em")
+autoplay = "default"
+frame_progress = 0.548366
+
+[node name="BoatFrame" parent="." instance=ExtResource("6_fotra")]

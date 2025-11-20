@@ -1,11 +1,12 @@
 class_name EnemyCharacter
 extends BaseCharacter
 
+@onready var damage_number_origin = $DamageNumbersOrigin
 @export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
 	ElementsEnum.Elements.METAL: Color.LIGHT_GRAY,
 	ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
 	ElementsEnum.Elements.WATER: Color.AQUA,
-	ElementsEnum.Elements.FIRE: Color("ff3216"),
+	ElementsEnum.Elements.FIRE: Color("ff5219"),
 	ElementsEnum.Elements.EARTH: Color("d36f00")
 }
 
@@ -160,18 +161,26 @@ func _get_player_from_raycasts() -> Player:
 
 # --- Called when player is in sight
 func _on_player_in_sight(_player_pos: Vector2) -> void:
-	print("Player detected at:", _player_pos)
+	#print("Player detected at:", _player_pos)
+	pass
 
 
 # --- Called when player is not in sight
 func _on_player_not_in_sight() -> void:
-	print("Player lost from sight")
+	#print("Player lost from sight")
+	pass
 
 
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
+	print(_elemental_type)
+	print(elemental_type)
+	print(_damage)
+	print(modified_damage)
+	var is_critical = modified_damage > _damage
+	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 
@@ -183,7 +192,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	# Định nghĩa quan hệ khắc (lợi thế)
 	# Fire (1) > Earth (2), Earth (2) > Water (3), Water (3) > Fire (1)
 	var advantage_table = {
-		1: [2],  # Fire khắc Earth
+		1: [5],  # Fire khắc Wood
 		2: [3],  # Earth khắc Water
 		3: [1]   # Water khắc Fire
 	}
@@ -191,12 +200,12 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	# Định nghĩa quan hệ sinh (bị khắc)
 	var weakness_table = {
 		1: [3],  # Fire bị Water khắc
-		2: [1],  # Earth bị Fire khắc
+		5: [1],  # Wood bị Fire khắc
 		3: [2]   # Water bị Earth khắc
 	}
 	
 	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
-	if attacker_element in advantage_table and health in advantage_table[attacker_element]:
+	if attacker_element in advantage_table and elemental_type in advantage_table[attacker_element]:
 		return base_damage * 1.25  # +25% damage
 	
 	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)

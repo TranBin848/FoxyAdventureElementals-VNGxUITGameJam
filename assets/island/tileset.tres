@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=8 format=3 uid="uid://clee474g44v61"]
 
 [ext_resource type="Texture2D" uid="uid://v2dtejovry7r" path="res://assets/island/terrain/terrain_32x32.png" id="1_x61fc"]
-[ext_resource type="PackedScene" uid="uid://c8iyq6ukbtgdh" path="res://levels/objects/palm_tree_1.tscn" id="2_ysup1"]
-[ext_resource type="PackedScene" uid="uid://bghk1nocyicg" path="res://levels/objects/palm_tree_2.tscn" id="3_fgag5"]
-[ext_resource type="PackedScene" uid="uid://kgiks45x5kpk" path="res://levels/objects/palm_tree_3.tscn" id="4_7a5rw"]
-[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spike.tscn" id="5_fgag5"]
+[ext_resource type="PackedScene" uid="uid://c8iyq6ukbtgdh" path="res://levels/objects/tree/palm_tree_1.tscn" id="2_ysup1"]
+[ext_resource type="PackedScene" uid="uid://bghk1nocyicg" path="res://levels/objects/tree/palm_tree_2.tscn" id="3_fgag5"]
+[ext_resource type="PackedScene" uid="uid://kgiks45x5kpk" path="res://levels/objects/tree/palm_tree_3.tscn" id="4_7a5rw"]
+[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/VariantOfSpike/spike.tscn" id="5_fgag5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6gm7o"]
 texture = ExtResource("1_x61fc")

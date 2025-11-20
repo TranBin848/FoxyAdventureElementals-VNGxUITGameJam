@@ -11,6 +11,11 @@ var pull_timer: float = 0.0
 
 var pulled_enemies: Array[EnemyCharacter] = []
 
+func _ready() -> void:
+	if has_node("HitArea2D"):
+		var hit_area: HitArea2D = $HitArea2D
+		hit_area.damage = damage
+		hit_area.elemental_type = elemental_type
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -62,7 +67,8 @@ func _stop_pulling() -> void:
 
 	# Trả lại quyền di chuyển cho toàn bộ enemy
 	for enemy in pulled_enemies:
-		enemy.is_movable = true
+		if enemy and is_instance_valid(enemy):
+			enemy.is_movable = true
 	pulled_enemies.clear()
 
 	if $AnimatedSprite2D.animation != "WaterTornado_End":

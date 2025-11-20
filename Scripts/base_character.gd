@@ -15,10 +15,11 @@ var direction: int = 1
 var health: int = max_health
 
 
-var jump_speed: float = 320.0
+var jump_speed: float = 400.0
 var fsm: FSM = null
 var current_animation = null
 var animated_sprite: AnimatedSprite2D = null
+@onready var extra_sprites: Array[AnimatedSprite2D] = []
 
 var _next_animation = null
 
@@ -26,6 +27,7 @@ var _next_animated_sprite: AnimatedSprite2D = null
 
 func _ready() -> void:
 	set_animated_sprite($Direction/AnimatedSprite2D)
+	health = max_health
 
 func _physics_process(delta: float) -> void:
 	# Animation - must run first to set animated_sprite
@@ -43,13 +45,7 @@ func _physics_process(delta: float) -> void:
 	_check_changed_direction()
 
 func _update_elemental_palette() -> void:
-	var shader_material = ShaderMaterial.new()
-	shader_material.shader = load("res://Scenes/player/player_glowing.gdshader")
-	animated_sprite.material = shader_material
-	
-	var shader_mat = animated_sprite.material as ShaderMaterial
-	shader_mat.set_shader_parameter("elemental_type", elemental_type)
-	shader_mat.set_shader_parameter("glow_intensity", 1.5)
+	pass
 
 func _update_movement(delta: float) -> void:
 	if not is_movable:
@@ -102,7 +98,7 @@ func set_animated_sprite(new_animated_sprite: AnimatedSprite2D) -> void:
 
 # Check if the animation or animated sprite has changed and play the new animation
 func _check_changed_animation() -> void:
-	var need_play: bool = false
+	var need_play := false
 	if _next_animation != current_animation:
 		current_animation = _next_animation
 		need_play = true
@@ -112,9 +108,12 @@ func _check_changed_animation() -> void:
 		animated_sprite = _next_animated_sprite
 		animated_sprite.show()
 		need_play = true
-	if need_play:
-		if animated_sprite != null and current_animation != null:
+	if need_play and current_animation != null:
+		if animated_sprite != null:
 			animated_sprite.play(current_animation)
+		for sprite in extra_sprites:
+			if sprite != null:
+				sprite.play(current_animation)
 
 # Check if the direction has changed and set the new direction
 func _check_changed_direction() -> void:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=4 uid="uid://cqnd7frongyh6"]
 
 [ext_resource type="TileSet" uid="uid://bcaskpe0ryls0" path="res://assets/island/TileSets/BasicGreen.tres" id="2_vxrrm"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://Scenes/player/player.tscn" id="3_lkovr"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="3_lkovr"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="4_7e847"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="5_64fow"]
 [ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="6_nmtbg"]
@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://frimagh5yfit" path="res://assets/island/back_palm_trees/back_palm_tree_regular_03.png" id="25_12ttm"]
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="26_s1nqw"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="27_q0cye"]
-[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="27_wadko"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="27_wadko"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gli4j"]
 animations = [{
@@ -146,7 +146,7 @@ tile_map_data = PackedByteArray("AAATABAAAAAEAAAAAAASABAAAAAEAAAAAAARABAAAAAEAAA
 tile_set = ExtResource("2_vxrrm")
 
 [node name="Player" parent="." instance=ExtResource("3_lkovr")]
-position = Vector2(1318, 240)
+position = Vector2(1324, -513)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

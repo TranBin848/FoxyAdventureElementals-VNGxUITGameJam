@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://plut0bvriiy0" path="res://assets/enemy/crab/crab_01.png" id="4_l1170"]
 [ext_resource type="Texture2D" uid="uid://hvmpun86fh2b" path="res://assets/enemy/crab/crab_02.png" id="5_oirif"]
 [ext_resource type="Texture2D" uid="uid://h5y5vqxjhhvh" path="res://assets/enemy/crab/crab_03.png" id="6_gvprn"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/hit_area_2d.gd" id="7_oeh51"]
-[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/hurt_area_2d.gd" id="8_2qm7m"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="7_oeh51"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_2qm7m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c52ow"]
 animations = [{
@@ -60,8 +60,10 @@ size = Vector2(40, 24)
 [node name="Crab" type="CharacterBody2D"]
 collision_layer = 8
 script = ExtResource("1_4p1sk")
+shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 movement_range = 200.0
+max_health = 15
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Direction" type="Node2D" parent="."]
@@ -110,3 +112,6 @@ script = ExtResource("3_280wf")
 
 [node name="Hurt" type="Node" parent="States"]
 script = ExtResource("4_gw7ur")
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)

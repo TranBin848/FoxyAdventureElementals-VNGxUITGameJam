@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://byppetx6bipfj"]
+
+[ext_resource type="Texture2D" uid="uid://crflavbexmqg2" path="res://assets/island/images/boat/boat_body.png" id="1_48xfn"]
+
+[node name="BoatFrame" type="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(0, 8)
+polygon = PackedVector2Array(-13, -18, 13, -18, 42, -18, 42, -5, -43, -5, -43, -18)
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_48xfn")

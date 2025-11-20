@@ -1,5 +1,6 @@
 class_name Player
 extends BaseCharacter
+@onready var camera_2d: Camera2D = $Camera2D
 
 @export var invulnerable_duration: float = 2
 var is_invulnerable: bool = false
@@ -18,12 +19,24 @@ var blade_hit_area: Area2D
 
 @export var push_strength = 100.0
 
+@onready var normal_sprite: AnimatedSprite2D = $Direction/AnimatedSprite2D
+@onready var blade_sprite: AnimatedSprite2D = $Direction/BladeAnimatedSprite2D
+@onready var silhouette_normal_sprite: AnimatedSprite2D = $Direction/SilhouetteSprite2D
+@onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
+
+signal health_changed
+
 func _ready() -> void:
 	super._ready()
+	extra_sprites.append(silhouette_normal_sprite)
+	silhouette_blade_sprite.hide()
 	fsm = FSM.new(self, $States, $States/Idle)
 	add_to_group("player")
+	GameManager.player = self	
 	if has_blade:
 		collected_blade()
+	
+	camera_2d.make_current()
 
 # ================================================================
 # === SKILL SYSTEM ===============================================
@@ -34,7 +47,7 @@ func cast_spell(skill: Skill) -> void:
 		return
 
 	# Gọi animation cast spell
-	print("Casting skill: %s (%s)" % [skill.name, skill.element])
+	#print("Casting skill: %s (%s)" % [skill.name, skill.element])
 
 	# Xử lý theo loại skill
 	match skill.type:
@@ -156,7 +169,16 @@ func can_attack() -> bool:
 
 func collected_blade() -> void:
 	has_blade = true
-	set_animated_sprite($Direction/BladeAnimatedSprite2D)
+	set_animated_sprite(blade_sprite) # Sprite chính: cầm kiếm
+	
+	# Quản lý sprite silhouette:
+	# 1. Ẩn sprite silhouette CŨ
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+	# 2. Thêm sprite silhouette MỚI (cầm kiếm) và hiện nó
+	extra_sprites.append(silhouette_blade_sprite)
+	silhouette_blade_sprite.show()
 
 func throw_blade() -> void:
 	var blade = blade_factory.create() as RigidBody2D
@@ -172,6 +194,15 @@ func cast_skill(skill_name: String) -> void:
 func throwed_blade() -> void:
 	has_blade = false
 	set_animated_sprite($Direction/AnimatedSprite2D)
+	
+	# Quản lý sprite silhouette:
+	# 1. Ẩn sprite silhouette CŨ
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+	# 2. Thêm sprite silhouette MỚI (thường) và hiện nó
+	extra_sprites.append(silhouette_normal_sprite)
+	silhouette_normal_sprite.show()
 
 func set_invulnerable() -> void:
 	is_invulnerable = true
@@ -189,6 +220,29 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
+	health_changed.emit()
+
+func save_state() -> Dictionary:
+	return {
+		"position": [global_position.x, global_position.y],
+		"health": health,
+		"has_blade": has_blade
+	}
+
+func load_state(data: Dictionary) -> void:
+	"""Load player state from checkpoint data"""
+	if data.has("position"):
+		var pos_array = data["position"]
+		global_position = Vector2(pos_array[0], pos_array[1])
+	
+	if data.has("health"):
+		health = clamp(data["health"], 0, max_health)
+	
+	if data.has("has_blade"):
+		has_blade = data["has_blade"]
+		if has_blade:
+			normal_sprite.hide()
+			collected_blade() 
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	# Nếu tấn công không có nguyên tố, dùng damage gốc
@@ -212,6 +266,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	
 	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
 	if attacker_element in advantage_table and health in advantage_table[attacker_element]:
+		#print("True")
 		return base_damage * 1.25  # +25% damage
 	
 	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)
@@ -242,3 +297,12 @@ func apply_earth_effect() -> void:
 func apply_water_effect() -> void:
 	# Có thể thêm hiệu ứng nước (freeze, slow, etc)
 	pass
+
+func _update_elemental_palette() -> void:
+	var shader_material = ShaderMaterial.new()
+	shader_material.shader = load("res://Scenes/player/player_glowing.gdshader")
+	animated_sprite.material = shader_material
+	
+	var shader_mat = animated_sprite.material as ShaderMaterial
+	shader_mat.set_shader_parameter("elemental_type", elemental_type)
+	shader_mat.set_shader_parameter("glow_intensity", 1.5)
