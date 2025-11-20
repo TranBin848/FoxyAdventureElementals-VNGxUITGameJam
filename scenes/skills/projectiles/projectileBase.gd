@@ -6,6 +6,8 @@ var speed: float
 var direction: Vector2 = Vector2.RIGHT
 var damage: int
 var elemental_type: int = 0
+var affected_enemies: Array[EnemyCharacter] = []
+
 
 func setup(skill: Skill, dir: Vector2) -> void:
 	#print(skill.damage)
@@ -28,11 +30,6 @@ func setup(skill: Skill, dir: Vector2) -> void:
 	if skill.animation_name != "WaterTornado":
 		rotation = direction.angle()
 
-#func _ready() -> void:
-	#if has_node("HitArea2D"):
-		#var hit_area: HitArea2D = $HitArea2D
-		#hit_area.damage = damage
-		#hit_area.elemental_type = elemental_type
 
 func _physics_process(delta: float) -> void:
 	_move(delta)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d0kbj7vc5hjhj"]
+[gd_scene load_steps=25 format=3 uid="uid://d0kbj7vc5hjhj"]
 
 [ext_resource type="Script" uid="uid://cl6qeq12ugag0" path="res://Scenes/skills/projectiles/water/water_tornado_projectile.gd" id="1_a7uo3"]
 [ext_resource type="Texture2D" uid="uid://b6e7bqero8rk7" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - Startup and Infinite.png" id="2_a7uo3"]
@@ -136,12 +136,15 @@ size = Vector2(33, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wn83h"]
 size = Vector2(35, 81)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ejyq"]
+radius = 113.004
+
 [node name="Projectile" type="Area2D"]
 collision_layer = 32
 script = ExtResource("1_a7uo3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -33)
+position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_tbddh")
 animation = &"WaterTornado_End"
 frame = 7
@@ -161,6 +164,13 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
 position = Vector2(-0.5, 7.5)
 shape = SubResource("RectangleShape2D_wn83h")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_5ejyq")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

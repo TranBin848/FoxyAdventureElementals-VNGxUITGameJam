@@ -49,7 +49,7 @@ func _update_elemental_palette() -> void:
 
 func _update_movement(delta: float) -> void:
 	if not is_movable:
-		#velocity = Vector2.ZERO
+		velocity = Vector2.ZERO
 		return
 	velocity.y += gravity * delta
 	move_and_slide()
