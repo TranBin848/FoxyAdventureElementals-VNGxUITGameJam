@@ -26,6 +26,8 @@ var blade_hit_area: Area2D
 
 signal health_changed
 
+var _targets_in_range: Array[Node2D] = []
+
 func _ready() -> void:
 	super._ready()
 	extra_sprites.append(silhouette_normal_sprite)
@@ -54,9 +56,23 @@ func cast_spell(skill: Skill) -> void:
 		"single_shot":
 			_single_shot(skill)
 		"multi_shot":
-			await _multi_shot(skill, 3, 0.3)
+			await _multi_shot(skill, 2, 0.3)
 		"radial":
 			_radial(skill, 18)
+		"area": 
+			# Kiểm tra mục tiêu CHỈ cho skill dạng area
+			if has_valid_target_in_range():
+				var target = get_closest_target()
+				if is_instance_valid(target):
+					# 2. Lấy vị trí mục tiêu
+					var target_pos = target.global_position
+					
+					# 3. Gọi hàm triệu hồi, truyền cả skill, vị trí VÀ đối tượng target
+					_area_shot(skill as Skill, target_pos, target)
+			else:
+				print("⚠️ Không có kẻ địch trong phạm vi để dùng skill dạng Area.")
+				# Tùy chọn: Đặt cooldown = 0 nếu không có mục tiêu để người chơi không bị phạt.
+				# Ví dụ: skill_timer.stop()
 		_:
 			print("Unknown skill type: %s" % skill.type)
 
@@ -130,6 +146,29 @@ func _spawn_projectile(skill: Skill, dir: Vector2) -> Area2D:
 	get_tree().current_scene.add_child(proj)
 
 	return proj
+
+# ====== AREA SHOT (Triệu hồi vùng) ======
+# NHẬN THÊM THAM SỐ target_position: Vector2
+func _area_shot(skill: Skill, target_position: Vector2, target_enemy: Node2D) -> void:	
+	if not skill.area_scene:
+		print("Area skill %s missing area_scene!" % skill.name)
+		return
+		
+	var area_node: Node = skill.area_scene.instantiate()
+	if not area_node:
+		return
+
+	var area_effect = area_node as AreaBase
+	if area_effect == null:
+		return
+
+	if area_effect.has_method("setup"):
+		# Vùng lửa sẽ được tạo tại VỊ TRÍ KẺ ĐỊCH GẦN NHẤT
+		area_effect.setup(skill, target_position, target_enemy)
+	else:
+		pass
+
+	get_tree().current_scene.add_child(area_effect)
 
 # ================================================================
 # === END SKILL SYSTEM ===========================================
@@ -306,3 +345,53 @@ func _update_elemental_palette() -> void:
 	var shader_mat = animated_sprite.material as ShaderMaterial
 	shader_mat.set_shader_parameter("elemental_type", elemental_type)
 	shader_mat.set_shader_parameter("glow_intensity", 1.5)
+
+# ================================================================
+# === DETECTION AREA SIGNALS =====================================
+# ================================================================
+
+# Hàm được gọi khi một Node2D đi vào DetectionArea2D
+func _on_detection_area_2d_body_entered(body: Node2D):
+	# Giả sử mọi kẻ địch đều có group "enemies"
+	# Hoặc sử dụng class_name "EnemyCharacter" nếu bạn đã định nghĩa nó
+	if body.is_in_group("enemies") or body is EnemyCharacter:
+		if not _targets_in_range.has(body):
+			_targets_in_range.append(body)
+			# print("Enemy entered range: ", body.name)
+
+# Hàm được gọi khi một Node2D đi ra khỏi DetectionArea2D
+func _on_detection_area_2d_body_exited(body: Node2D):
+	if _targets_in_range.has(body):
+		_targets_in_range.erase(body)
+		# print("Enemy exited range: ", body.name)
+
+# --- NEW HELPER FUNCTION ---
+# Hàm kiểm tra xem có mục tiêu hợp lệ nào trong phạm vi không
+func has_valid_target_in_range() -> bool:
+	# Lọc qua danh sách để đảm bảo các Node vẫn hợp lệ (chưa bị xóa)
+	_targets_in_range = _targets_in_range.filter(func(target): return is_instance_valid(target))
+	
+	return not _targets_in_range.is_empty()
+
+# Hàm lấy vị trí mục tiêu gần nhất để định vị Area Skill
+func get_closest_target() -> Node2D:
+	# Lọc qua danh sách để đảm bảo các Node vẫn hợp lệ (chưa bị xóa)
+	_targets_in_range = _targets_in_range.filter(func(target): return is_instance_valid(target))
+	
+	if _targets_in_range.is_empty():
+		return null
+	
+	var closest_target: Node2D = null
+	var min_distance_sq: float = INF
+	
+	for target in _targets_in_range:
+		var distance_sq = global_position.distance_squared_to(target.global_position)
+		if distance_sq < min_distance_sq:
+			min_distance_sq = distance_sq
+			closest_target = target
+			
+	return closest_target
+
+# ================================================================
+# === END DETECTION AREA SIGNALS =================================
+# ================================================================

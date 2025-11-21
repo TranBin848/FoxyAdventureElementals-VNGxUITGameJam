@@ -10,7 +10,7 @@ class_name FireExplosionProjectile
 @export var explosion_anim: String = "FireExplosion_End"
 @onready var explosion_area: Area2D = $ExplosionArea	
 @export var knockback_force: float = 400.0 # Lực đẩy văng kẻ địch ra sau khi hút
-@export var vertical_offset: float = -30.0
+@export var vertical_offset: float = -20.0
 # --- State ---
 var exploding: bool = false
 
@@ -36,7 +36,7 @@ func _trigger_explosion() -> void:
 	for b in overlaps:
 		if b is EnemyCharacter:
 			affected_enemies.append(b)
-			b.enter_tornado(global_position)   # hút vào tâm
+			b.enter_skill(global_position)   # hút vào tâm
 	
 	# Reset scale + play animation
 	$AnimatedSprite2D.scale = start_scale
@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
 func _on_animation_finished() -> void:
 	for e in affected_enemies:
 		if e and e.is_inside_tree():
-			e.exit_tornado()
+			e.exit_skill()
 
 			# Đẩy enemy văng ra
 			e.apply_knockback(global_position, knockback_force)

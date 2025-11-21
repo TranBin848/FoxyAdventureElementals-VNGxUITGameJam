@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://c47jft3el2tid"]
+[gd_scene load_steps=36 format=4 uid="uid://c47jft3el2tid"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_g2lgl"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_njnvt"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_jg7il"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="26_ybxfk"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="28_38tfo"]
+[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="29_jx6ob"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
 animations = [{
@@ -262,3 +263,9 @@ position = Vector2(388, 242)
 [node name="Door" parent="." instance=ExtResource("28_38tfo")]
 position = Vector2(561, 229)
 target_stage = "uid://c47jft3el2tid"
+
+[node name="Mushroom" parent="." instance=ExtResource("29_jx6ob")]
+position = Vector2(843, 243)
+
+[node name="Mushroom2" parent="." instance=ExtResource("29_jx6ob")]
+position = Vector2(809, 243)

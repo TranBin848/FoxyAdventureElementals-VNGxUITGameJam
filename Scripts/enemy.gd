@@ -249,11 +249,10 @@ func disable_collision():
 	if hit_area != null and hit_area.has_node("CollisionShape2D"):
 		hit_area.get_node("CollisionShape2D").disabled = true
 
-# Enemy bị hút vào lốc xoáy
-func enter_tornado(tornado_pos: Vector2) -> void:
+# Enemy bị hút vào vùng nổ
+func enter_skill(tornado_pos: Vector2) -> void:
 	# 1. Thiết lập trạng thái
 	is_movable = false
-	stop_move() 
 	velocity = Vector2.ZERO
 
 	# 3. Bắt đầu hiệu ứng "bay lên"
@@ -271,13 +270,15 @@ func enter_tornado(tornado_pos: Vector2) -> void:
 	
 	tween.tween_callback(Callable(self, "_on_reach_tornado_top"))
 
-# Khi rời khỏi lốc xoáy (được gọi bởi tornado projectile khi kết thúc)
-func exit_tornado() -> void:
+# Khi rời khỏi
+func exit_skill() -> void:
 	# Khôi phục khả năng di chuyển
 	is_movable = true
 	velocity = Vector2.ZERO
 	
-func apply_knockback(from_pos: Vector2, force: float) -> void:
-	# dir = (Vị trí Enemy - Vị trí Tâm Nổ).normalized()
-	var dir := (global_position - from_pos).normalized()
+func apply_knockback(from_pos: Vector2, force: float):
+	var dir = (global_position - from_pos).normalized()
 	velocity = dir * force
+	ignore_gravity = true
+	await get_tree().create_timer(0.25).timeout
+	ignore_gravity = false

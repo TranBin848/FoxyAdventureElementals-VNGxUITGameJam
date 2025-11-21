@@ -7,6 +7,7 @@ extends CharacterBody2D
 var is_movable: bool = true
 
 @export var gravity: float = 700.0
+var ignore_gravity := false
 var direction: int = 1
 @export var _next_direction: int = 1
 @export var attack_damage: int = 1
@@ -51,7 +52,8 @@ func _update_movement(delta: float) -> void:
 	if not is_movable:
 		velocity = Vector2.ZERO
 		return
-	velocity.y += gravity * delta
+	if not ignore_gravity:
+		velocity.y += gravity * delta
 	move_and_slide()
 
 func turn_around() -> void:
