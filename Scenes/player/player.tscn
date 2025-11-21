@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=74 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -62,6 +62,8 @@
 [ext_resource type="Script" uid="uid://df4tai7suuyna" path="res://scenes/player/states/dash.gd" id="56_hdvrm"]
 [ext_resource type="Texture2D" uid="uid://dacc2rubl3io4" path="res://assets/ui/Hearts/PNG/basic/background.png" id="56_t1aof"]
 [ext_resource type="PackedScene" uid="uid://cpadeikbdhgul" path="res://scenes/ui/death_ui.tscn" id="57_uygh0"]
+[ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="63_gmu8b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -493,6 +495,7 @@ script = ExtResource("56_hdvrm")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+visible = false
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 70.0
@@ -511,6 +514,16 @@ expand_mode = 3
 [node name="DeathUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("57_uygh0")]
 visible = false
 player = NodePath("../..")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme = ExtResource("63_gmu8b")
+
+[node name="icon_and_health" parent="CanvasLayer/MarginContainer" node_paths=PackedStringArray("player") instance=ExtResource("63_7072n")]
+layout_mode = 2
+player = NodePath("../../..")
 
 [node name="debuglabel" type="Label" parent="."]
 offset_left = -25.0
