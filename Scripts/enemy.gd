@@ -249,32 +249,36 @@ func disable_collision():
 	if hit_area != null and hit_area.has_node("CollisionShape2D"):
 		hit_area.get_node("CollisionShape2D").disabled = true
 
-# Enemy bị hút vào lốc xoáy
-func enter_tornado(tornado_pos: Vector2) -> void:
+# Enemy bị hút vào vùng nổ
+func enter_skill(tornado_pos: Vector2) -> void:
+	# 1. Thiết lập trạng thái
 	is_movable = false
-	stop_move() # Dừng mọi chuyển động hiện tại
 	velocity = Vector2.ZERO
 
-	# Bắt đầu hiệu ứng "bay lên"
-	var tween := get_tree().create_tween()
-	tween.tween_property(self, "global_position", tornado_pos + Vector2(0, -30), 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_callback(Callable(self, "_on_reach_tornado_top"))
+	# 3. Bắt đầu hiệu ứng "bay lên"
+	var target_pos = tornado_pos + Vector2(0, -30)
+	var duration = 0.5 
 	
+	var tween := get_tree().create_tween()
+	
+	tween.tween_property(
+		self, 
+		"global_position", 
+		target_pos, 
+		duration
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	
+	tween.tween_callback(Callable(self, "_on_reach_tornado_top"))
 
-
-# Callback khi chạm đỉnh lốc xoáy
-func _on_reach_tornado_top() -> void:
-	# Có thể lắc nhẹ, hoặc xoay tròn quanh tâm
-	if animated_sprite:
-		animated_sprite.rotation_degrees = 0
-	print("Enemy reached top of tornado")
-
-
-# Khi rời khỏi lốc xoáy (được gọi bởi tornado projectile khi kết thúc)
-func exit_tornado() -> void:
+# Khi rời khỏi
+func exit_skill() -> void:
+	# Khôi phục khả năng di chuyển
 	is_movable = true
 	velocity = Vector2.ZERO
-	# (Tuỳ chọn) rơi xuống đất sau khi thoát
-	var tween := get_tree().create_tween()
-	tween.tween_property(self, "global_position:y", global_position.y + 60, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	
+func apply_knockback(from_pos: Vector2, force: float):
+	var dir = (global_position - from_pos).normalized()
+	velocity = dir * force
+	ignore_gravity = true
+	await get_tree().create_timer(0.25).timeout
+	ignore_gravity = false

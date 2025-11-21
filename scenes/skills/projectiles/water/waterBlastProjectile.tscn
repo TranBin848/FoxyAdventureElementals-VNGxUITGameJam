@@ -238,7 +238,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_dvq6e")
 }],
 "loop": false,
-"name": &"WaterBlast_Explosion",
+"name": &"WaterBlast_End",
 "speed": 18.0
 }]
 
@@ -254,7 +254,7 @@ script = ExtResource("1_uj2b8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"WaterBlast"
+animation = &"WaterBlast_End"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

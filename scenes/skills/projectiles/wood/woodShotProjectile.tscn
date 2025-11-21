@@ -1,0 +1,161 @@
+[gd_scene load_steps=23 format=3 uid="uid://bcutoe1r1m3ri"]
+
+[ext_resource type="Script" uid="uid://o6y3568xed83" path="res://scenes/skills/projectiles/wood/wood_shot_projectile.gd" id="1_20k7x"]
+[ext_resource type="Texture2D" uid="uid://cbsic5dlhha0s" path="res://assets/skills/wood/Wood VFX 01 Repeatable.png" id="2_20k7x"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_6soxv"]
+[ext_resource type="Texture2D" uid="uid://bblij5acpwboj" path="res://assets/skills/wood/Wood VFX 01 Hit.png" id="3_jtyha"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcjrs"]
+atlas = ExtResource("2_20k7x")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iloqt"]
+atlas = ExtResource("2_20k7x")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf413"]
+atlas = ExtResource("2_20k7x")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q75cn"]
+atlas = ExtResource("2_20k7x")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3qw6"]
+atlas = ExtResource("2_20k7x")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2vxs"]
+atlas = ExtResource("2_20k7x")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mby6g"]
+atlas = ExtResource("2_20k7x")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7n8d"]
+atlas = ExtResource("2_20k7x")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0ubg"]
+atlas = ExtResource("3_jtyha")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_is41i"]
+atlas = ExtResource("3_jtyha")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmx4s"]
+atlas = ExtResource("3_jtyha")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40eci"]
+atlas = ExtResource("3_jtyha")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26ju6"]
+atlas = ExtResource("3_jtyha")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tflnu"]
+atlas = ExtResource("3_jtyha")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssme1"]
+atlas = ExtResource("3_jtyha")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcjrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iloqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf413")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q75cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3qw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2vxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mby6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7n8d")
+}],
+"loop": true,
+"name": &"WoodShot",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0ubg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is41i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmx4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40eci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26ju6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tflnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssme1")
+}],
+"loop": false,
+"name": &"WoodShot_End",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhoxj"]
+size = Vector2(32.5, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnvla"]
+size = Vector2(32, 20)
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_20k7x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_tbddh")
+animation = &"WoodShot_End"
+autoplay = "WoodShot"
+frame = 6
+frame_progress = 1.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.75, -0.5)
+shape = SubResource("RectangleShape2D_uhoxj")
+
+[node name="HitArea2d" parent="." instance=ExtResource("3_6soxv")]
+position = Vector2(0, -7)
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_tnvla")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]

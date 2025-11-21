@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=63 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -332,6 +332,9 @@ size = Vector2(17, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8qe1"]
 size = Vector2(15.3181, 31.9904)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahqnk"]
+size = Vector2(306, 266)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_genst"]
 radius = 7.0
 height = 28.0
@@ -439,6 +442,15 @@ rotation = 0.785398
 shape = SubResource("RectangleShape2D_w8qe1")
 disabled = true
 
+[node name="DetectionArea2D" type="Area2D" parent="Direction"]
+position = Vector2(0, -10)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/DetectionArea2D"]
+position = Vector2(135, -45)
+shape = SubResource("RectangleShape2D_ahqnk")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_genst")
@@ -535,3 +547,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]
+[connection signal="body_entered" from="Direction/DetectionArea2D" to="." method="_on_detection_area_2d_body_entered"]
+[connection signal="body_exited" from="Direction/DetectionArea2D" to="." method="_on_detection_area_2d_body_exited"]

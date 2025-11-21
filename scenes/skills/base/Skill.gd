@@ -5,9 +5,11 @@ class_name Skill
 @export var name: String
 @export var element: String = "Fire" # Fire, Water, Earth, Metal, Wood
 @export var cooldown: float = 1.0
+@export var duration: float = 1.0
 @export var texture: Texture2D
 @export var animation_name: String
 @export var projectile_scene: PackedScene = null
+@export var area_scene: PackedScene = null
 @export var speed: float = 250
 @export var damage: int = 10
 @export var sound_effect: AudioStream = null

@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bu243mknusv0a"]
 
 [ext_resource type="Script" uid="uid://cabedch21gycd" path="res://scenes/skills/projectiles/fire/fire_shot_projectile.gd" id="1_uhoxj"]
-[ext_resource type="Texture2D" uid="uid://b4q2gs3lihqub" path="res://assets/skills/fire/Firebolt SpriteSheet.png" id="2_ht11m"]
+[ext_resource type="Texture2D" uid="uid://b4q2gs3lihqub" path="res://assets/skills/fire/Fireshot/Firebolt SpriteSheet.png" id="2_ht11m"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="63_o3ne1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7puen"]
@@ -83,7 +83,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_a5ie1")
 }],
 "loop": false,
-"name": &"FireShot_Explosion",
+"name": &"FireShot_End",
 "speed": 12.0
 }]
 
@@ -100,7 +100,7 @@ script = ExtResource("1_uhoxj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"FireShot"
+animation = &"FireShot_End"
 autoplay = "FireShot"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

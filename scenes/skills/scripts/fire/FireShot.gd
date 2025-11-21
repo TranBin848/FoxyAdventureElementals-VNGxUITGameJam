@@ -5,7 +5,7 @@ class_name FireShot
 func _init():
 	name = "Fire Shot"
 	element = "Fire"
-	type = "single_shot"
+	type = "multi_shot"
 	cooldown = 2.0
 	speed = 350
 	damage = 2

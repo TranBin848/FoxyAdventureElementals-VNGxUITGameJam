@@ -68,6 +68,7 @@ radius = 13.0
 height = 28.0
 
 [node name="Mushroom" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 8
 script = ExtResource("1_sl7hc")
 shader_path = "uid://doovon2v0i5dx"
