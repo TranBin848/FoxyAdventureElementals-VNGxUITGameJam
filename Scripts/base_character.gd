@@ -9,11 +9,14 @@ var is_movable: bool = true
 @export var gravity: float = 700.0
 var ignore_gravity := false
 var direction: int = 1
+
 @export var _next_direction: int = 1
 @export var attack_damage: int = 1
-@export var max_health: int = 3
+@export var max_health: int = 4
 @export var elemental_type: int = 0 #0: none, 1: fire, 2: earth, 3: water
 var health: int = max_health
+signal health_changed
+signal died
 
 
 var jump_speed: float = 400.0
@@ -82,6 +85,9 @@ func stop_move() -> void:
 
 func take_damage(damage: int) -> void:
 	health -= damage
+	health_changed.emit()
+	if health <= 0:
+		died.emit()
 
 # Change the animation of the character on the next frame
 func change_animation(new_animation: String) -> void:
