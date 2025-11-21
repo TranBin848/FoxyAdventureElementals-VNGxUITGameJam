@@ -296,9 +296,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("33_wemfg")
 
-[node name="ToolBox" parent="CanvasLayer/MarginContainer" instance=ExtResource("34_ju10s")]
+[node name="SkillBar" parent="CanvasLayer/MarginContainer" instance=ExtResource("34_ju10s")]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 size_flags_vertical = 8
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("32_1n815")]
