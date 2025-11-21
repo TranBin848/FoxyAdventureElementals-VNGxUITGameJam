@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://8qflg27g53dv"]
+[gd_scene load_steps=46 format=4 uid="uid://8qflg27g53dv"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="35_iy6cw"]
 [ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="36_ijil1"]
 [ext_resource type="PackedScene" uid="uid://c0wy3en1cr4hn" path="res://scenes/ui/heart_container.tscn" id="37_w745m"]
+[ext_resource type="PackedScene" uid="uid://d28vgb0lxesvt" path="res://shaders/leaf_particles_2d.tscn" id="38_fk4ex"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mjh6"]
 animations = [{
@@ -60,6 +61,12 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w745m"]
 size = Vector2(49, 471)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xoq1q"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_omn1t"]
 
@@ -339,7 +346,7 @@ position = Vector2(4795, -429)
 [node name="Blade" parent="Object" instance=ExtResource("26_mpt5m")]
 position = Vector2(-18, 314)
 
-[node name="Boulder" parent="Object" instance=ExtResource("27_mf820")]
+[node name="Boundary" parent="Object" instance=ExtResource("27_mf820")]
 position = Vector2(3039, -362)
 
 [node name="Boulder2" parent="Object" instance=ExtResource("27_mf820")]
@@ -367,10 +374,16 @@ collision_mask = 2
 position = Vector2(14.5, 225.5)
 shape = SubResource("RectangleShape2D_w745m")
 
+[node name="LeafGPUParticles2D" parent="." instance=ExtResource("38_fk4ex")]
+material = SubResource("CanvasItemMaterial_xoq1q")
+position = Vector2(-1450, 234)
+amount = 100
+visibility_rect = Rect2(-500, -50, 2500, 250)
+
 [node name="Water" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_lf3p4")
-position = Vector2(-1290.03, 565)
-scale = Vector2(1787.94, 244.5)
+position = Vector2(-1310.03, 565)
+scale = Vector2(1827.94, 244.5)
 texture = SubResource("CanvasTexture_omn1t")
 script = ExtResource("31_dl781")
 
