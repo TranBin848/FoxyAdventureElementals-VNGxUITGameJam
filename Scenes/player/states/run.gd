@@ -11,18 +11,20 @@ func _enter() -> void:
 	pass
 
 func _update(_delta: float):
-	control_attack()
-	
-	control_throw_blade()
-	
 	if update_timer(_delta):
 		var walk_fx = walk_fx_factory.create() as Node2D
 		#print(obj.scale)
 		walk_fx.scale.x = obj.direction
 		timer = 0.2
 	
+	control_attack()
+	
+	control_throw_blade()
+	
 	#Control jump
 	control_jump()
+	
+	control_dash()
 	
 	#Control moving and if not moving change to idle
 	if not control_moving():
