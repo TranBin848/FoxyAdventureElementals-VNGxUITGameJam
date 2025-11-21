@@ -9,7 +9,7 @@ class_name FireExplosionProjectile
 @export var scale_ease := Tween.EASE_OUT
 @export var explosion_anim: String = "FireExplosion_End"
 @onready var explosion_area: Area2D = $ExplosionArea	
-@export var knockback_force: float = 400.0 # Lực đẩy văng kẻ địch ra sau khi hút
+@export var knockback_force: float = 300.0 # Lực đẩy văng kẻ địch ra sau khi hút
 @export var vertical_offset: float = -20.0
 # --- State ---
 var exploding: bool = false

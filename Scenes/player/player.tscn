@@ -304,8 +304,8 @@ size = Vector2(17, 28)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8qe1"]
 size = Vector2(15.3181, 31.9904)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ahqnk"]
-radius = 197.01
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahqnk"]
+size = Vector2(306, 266)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_genst"]
 radius = 7.0
@@ -406,7 +406,8 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/DetectionArea2D"]
-shape = SubResource("CircleShape2D_ahqnk")
+position = Vector2(135, -45)
+shape = SubResource("RectangleShape2D_ahqnk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)

@@ -1,6 +1,6 @@
 # res://skills/fire/FireShot.gd
 extends Skill
-class_name FireShot
+class_name FireExplosion
 
 func _init():
 	name = "Fire Explosion"

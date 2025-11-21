@@ -2,7 +2,7 @@ extends ProjectileBase
 class_name WaterTornadoProjectile
 
 @export var tornado_duration: float = 3.0 # <-- THỜI GIAN LỐC XOÁY TỒN TẠI
-@export var knockback_force: float = 400.0 # Lực đẩy văng kẻ địch ra sau khi hút
+@export var knockback_force: float = 300.0 # Lực đẩy văng kẻ địch ra sau khi hút
 @onready var explosion_area: Area2D = $ExplosionArea	
 @export var explosion_anim: String = "WaterTornado_End"
 
