@@ -59,24 +59,31 @@ func _ready() -> void:
 # === SKILL SYSTEM ===============================================
 # ================================================================
 
-func cast_spell(skill: Skill) -> bool:
+func cast_spell(skill: Skill) -> String:
 	if not skill:
-		return false
-
-	# Gọi animation cast spell
-	#print("Casting skill: %s (%s)" % [skill.name, skill.element])
-
+		return "Skill invalid"
+	
+	print(mana)
+	
+	if(mana - skill.mana < 0): 
+		return "Not Enough Mana"
 	# Xử lý theo loại skill
 	match skill.type:
 		"single_shot":
 			_single_shot(skill)
-			return true
+			mana = max(0, mana - skill.mana)
+			mana_changed.emit()
+			return ""
 		"multi_shot":
 			_multi_shot(skill, 2, 0.3)
-			return true
+			mana = max(0, mana - skill.mana)
+			mana_changed.emit()
+			return ""
 		"radial":
 			_radial(skill, 18)
-			return true
+			mana = max(0, mana - skill.mana)
+			mana_changed.emit()
+			return ""
 		"area": 
 			cast_skill(skill.animation_name)
 			# Kiểm tra mục tiêu CHỈ cho skill dạng area
@@ -85,23 +92,26 @@ func cast_spell(skill: Skill) -> bool:
 				if is_instance_valid(target):
 					# 2. Lấy vị trí mục tiêu
 					var target_pos = target.global_position
-					
+					mana = max(0, mana - skill.mana)
+					mana_changed.emit()
 					# 3. Gọi hàm triệu hồi, truyền cả skill, vị trí VÀ đối tượng target
 					_area_shot(skill as Skill, target_pos, target)
-					return true
+					return ""
 			else:
 				print("⚠️ Không có kẻ địch trong phạm vi để dùng skill dạng Area.")
 				# Tùy chọn: Đặt cooldown = 0 nếu không có mục tiêu để người chơi không bị phạt.
 				# Ví dụ: skill_timer.stop()
-				return false
+				return "Enemy Out of Range"
 		"buff": # ⬅️ THÊM LOGIC CHO BUFF SKILL VÀO ĐÂY
 			cast_skill(skill.animation_name)
 			_apply_buff(skill)
-			return true # Kỹ năng Buff lên bản thân luôn thành công
+			mana = max(0, mana - skill.mana)
+			mana_changed.emit()
+			return "" # Kỹ năng Buff lên bản thân luôn thành công
 		_:
 			print("Unknown skill type: %s" % skill.type)
-			return false
-	return true
+			return "Unknown Skill Type"
+	return ""
 
 # ====== SINGLE SHOT ======
 func _single_shot(skill: Skill) -> void:

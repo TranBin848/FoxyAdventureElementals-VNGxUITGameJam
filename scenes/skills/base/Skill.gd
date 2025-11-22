@@ -13,6 +13,7 @@ class_name Skill
 @export var speed: float = 250
 @export var damage: int = 10
 @export var sound_effect: AudioStream = null
+@export var mana: int = 1.0
 
 @export var type: String = "single_shot" 
 # có thể là: "single_shot", "multi_shot", "radial", "melee", "buff"
