@@ -26,6 +26,9 @@ var blade_hit_area: Area2D
 
 #Sound SF
 @export var jump_sfx: AudioStream = null
+@export var hurt_sfx: AudioStream = null
+@export var attack_sfx: AudioStream = null
+@export var throw_sfx: AudioStream = null
 
 #Movement
 var last_dir: float = 0.0
