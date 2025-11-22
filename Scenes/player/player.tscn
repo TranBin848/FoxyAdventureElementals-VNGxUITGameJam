@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=72 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://Scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://Scenes/player/player.gd" id="1_wodsf"]
@@ -66,6 +66,26 @@
 [ext_resource type="PackedScene" uid="uid://cpadeikbdhgul" path="res://Scenes/ui/death_ui.tscn" id="57_uygh0"]
 [ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://Scenes/ui/icon_and_health.tscn" id="63_7072n"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="63_gmu8b"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="35_o1e43"]
+[ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="37_iwuka"]
+[ext_resource type="PackedScene" uid="uid://dtvvbmgptni3i" path="res://scenes/player/jump_fx.tscn" id="37_k00gf"]
+[ext_resource type="PackedScene" uid="uid://b4j3dswx4n2cy" path="res://scenes/player/walk_fx.tscn" id="38_48wxx"]
+[ext_resource type="PackedScene" uid="uid://cs0qvp0xeh0tn" path="res://scenes/blade/blade_projectile.tscn" id="38_hyqqp"]
+[ext_resource type="Script" uid="uid://dp3lba7mnpcyn" path="res://scenes/player/states/idle.gd" id="39_art4l"]
+[ext_resource type="Script" uid="uid://bn74l4ngryo6x" path="res://scenes/player/states/run.gd" id="40_fjxoa"]
+[ext_resource type="Script" uid="uid://di3w8xw7t025o" path="res://scenes/player/states/jump.gd" id="41_gswnw"]
+[ext_resource type="PackedScene" uid="uid://dy04qa0qn7d0r" path="res://scenes/FX/ghost.tscn" id="42_5xbmr"]
+[ext_resource type="Script" uid="uid://caxtbpdyga1ay" path="res://scenes/player/states/fall.gd" id="42_xcnuv"]
+[ext_resource type="Script" uid="uid://d3tdm7uhl16p7" path="res://scenes/player/states/attack.gd" id="43_niom3"]
+[ext_resource type="Script" uid="uid://blp1td1nitt5f" path="res://scenes/player/states/jump_attack.gd" id="44_ttakn"]
+[ext_resource type="Script" uid="uid://ke058dpyk512" path="res://scenes/player/states/throw_attack.gd" id="45_rw8a5"]
+[ext_resource type="Script" uid="uid://c3c1jskkab60p" path="res://scenes/player/cast_spell.gd" id="51_jrbya"]
+[ext_resource type="Script" uid="uid://bj844sdvrx8tj" path="res://scenes/player/states/wallcling.gd" id="54_t1aof"]
+[ext_resource type="Script" uid="uid://c0cdtrjscwk6k" path="res://scenes/player/states/wall_jump.gd" id="55_w8qe1"]
+[ext_resource type="Script" uid="uid://df4tai7suuyna" path="res://scenes/player/states/dash.gd" id="56_hdvrm"]
+[ext_resource type="PackedScene" uid="uid://cpadeikbdhgul" path="res://scenes/ui/death_ui.tscn" id="57_uygh0"]
+[ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="63_gmu8b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -500,32 +520,7 @@ script = ExtResource("55_w8qe1")
 [node name="Dash" type="Node" parent="States"]
 script = ExtResource("56_hdvrm")
 
-[node name="Blade" type="Node" parent="."]
-
-[node name="Jump" type="Node" parent="."]
-
-[node name="GhostFX" type="Node" parent="."]
-
-[node name="WalkFX" type="Node" parent="."]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
-visible = false
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 70.0
-grow_horizontal = 2
-mouse_filter = 2
-script = ExtResource("54_ln3h3")
-player = NodePath("../..")
-heart_full = ExtResource("55_uygh0")
-heart_empty = ExtResource("56_t1aof")
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HeartContainer"]
-layout_mode = 2
-texture = ExtResource("55_uygh0")
-expand_mode = 3
 
 [node name="DeathUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("57_uygh0")]
 visible = false
@@ -537,7 +532,7 @@ offset_bottom = 40.0
 mouse_filter = 2
 theme = ExtResource("63_gmu8b")
 
-[node name="icon_and_health" parent="CanvasLayer/MarginContainer" node_paths=PackedStringArray("player") instance=ExtResource("63_7072n")]
+[node name="icon_and_bars" parent="CanvasLayer/MarginContainer" node_paths=PackedStringArray("player") instance=ExtResource("63_7072n")]
 layout_mode = 2
 player = NodePath("../../..")
 
