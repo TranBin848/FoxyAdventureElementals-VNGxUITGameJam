@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://8qflg27g53dv"]
+[gd_scene load_steps=49 format=4 uid="uid://8qflg27g53dv"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="8_xoq1q"]
 [ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="9_n1ndl"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="10_f06vl"]
+[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://scenes/skills/scripts/water/WaterBall.gd" id="10_m7n46"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="11_m7n46"]
 [ext_resource type="Texture2D" uid="uid://dojy8pmq2a5p7" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 5.png" id="12_ufn31"]
 [ext_resource type="Texture2D" uid="uid://bxcxwyyup8ew8" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 3.png" id="13_p1ob1"]
@@ -35,9 +36,10 @@
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="31_dl781"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="32_vspgp"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="35_iy6cw"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="36_ijil1"]
-[ext_resource type="PackedScene" uid="uid://c0wy3en1cr4hn" path="res://scenes/ui/heart_container.tscn" id="37_w745m"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="37_n1ndl"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="38_f06vl"]
 [ext_resource type="PackedScene" uid="uid://d28vgb0lxesvt" path="res://shaders/leaf_particles_2d.tscn" id="38_fk4ex"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="39_m7n46"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="39_xoq1q"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mjh6"]
@@ -81,11 +83,11 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.318631
+shader_parameter/y_zoom = 1.21
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
-[node name="Stage2" type="Node2D"]
+[node name="Stage" type="Node2D"]
 script = ExtResource("1_038dw")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
@@ -144,6 +146,8 @@ frame_progress = 0.143494
 position = Vector2(631, 151)
 element = 2
 elemental_type = 3
+skill_to_drop = ExtResource("10_m7n46")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(2165, -489)
@@ -401,20 +405,21 @@ position = Vector2(1560, 140)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SkillBar" parent="CanvasLayer" instance=ExtResource("36_ijil1")]
-anchors_preset = 7
-anchor_top = 1.0
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -56.0
-offset_bottom = -16.0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("37_n1ndl")
 
-[node name="HeartContainer" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("37_w745m")]
-offset_left = 17.0
-offset_top = 16.0
-offset_right = 17.0
-offset_bottom = 86.0
-player = NodePath("../../Player")
+[node name="SkillBar" parent="CanvasLayer/MarginContainer" instance=ExtResource("38_f06vl")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("39_m7n46")]
+offset_bottom = 100.0
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 visible = false
@@ -423,12 +428,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -118.0
-offset_top = -81.0
-offset_right = 126.0
-offset_bottom = -65.0
+offset_left = -122.0
+offset_top = -104.0
+offset_right = 122.0
+offset_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("39_xoq1q")
-text = "Enemy Out of Range."
+text = "Enemy Out of Range"
+horizontal_alignment = 1

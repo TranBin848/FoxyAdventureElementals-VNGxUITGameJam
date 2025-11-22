@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbop0r31m7elf"]
+[gd_scene load_steps=6 format=3 uid="uid://cbop0r31m7elf"]
 
 [ext_resource type="Script" uid="uid://cgwmnsu6dbojw" path="res://scenes/ui/spell_button.gd" id="2_02r78"]
 [ext_resource type="Texture2D" uid="uid://ckirn2a8e6sjq" path="res://assets/skills/glossy-white.png" id="2_we2kx"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="3_a8xnk"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_we2kx"]
 
@@ -32,9 +33,13 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 40.0
+offset_left = 2.0
+offset_top = -26.0
+offset_right = 42.0
+offset_bottom = -3.0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_a8xnk")
+theme_override_font_sizes/font_size = 8
 text = "1"
 vertical_alignment = 2
 
@@ -43,11 +48,15 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 40.0
+offset_left = -2.0
+offset_top = -26.0
+offset_right = 38.0
+offset_bottom = -3.0
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_a8xnk")
 theme_override_font_sizes/font_size = 8
+text = "12"
 horizontal_alignment = 2
 vertical_alignment = 2
 

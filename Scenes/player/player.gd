@@ -43,6 +43,8 @@ var can_dash: bool = true
 
 var _targets_in_range: Array[Node2D] = []
 
+signal skill_collected(skill_resource_class)
+
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Idle)
@@ -58,6 +60,13 @@ func _ready() -> void:
 # ================================================================
 # === SKILL SYSTEM ===============================================
 # ================================================================
+
+func add_new_skill(new_skill_class: Script) -> bool:
+	# 1. Phát tín hiệu cho SkillBar (để SkillBar tự quản lý Slot)
+	skill_collected.emit(new_skill_class)
+	
+	# Giả sử luôn thành công khi nhặt được skill
+	return true
 
 func cast_spell(skill: Skill) -> String:
 	if not skill:
