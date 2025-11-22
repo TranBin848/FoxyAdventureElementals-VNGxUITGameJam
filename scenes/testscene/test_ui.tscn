@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://ctvqtbns8ojyh"]
+[gd_scene load_steps=42 format=4 uid="uid://ctvqtbns8ojyh"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_52u8e"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_4vqmw"]
@@ -32,8 +32,9 @@
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="30_f4tpa"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="32_1n815"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="32_08tte"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="33_wemfg"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="33_wemfg"]
 [ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="34_ju10s"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="35_ju10s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
 animations = [{
@@ -298,8 +299,25 @@ theme = ExtResource("33_wemfg")
 
 [node name="SkillBar" parent="CanvasLayer/MarginContainer" instance=ExtResource("34_ju10s")]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("32_1n815")]
 offset_bottom = 100.0
+
+[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -104.0
+offset_right = 122.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("35_ju10s")
+text = "Enemy Out of Range"
+horizontal_alignment = 1

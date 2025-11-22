@@ -6,10 +6,10 @@ const ERROR_DISPLAY_TIME: float = 1.0
 @onready var key_label: Label = $Key
 @onready var time_label: Label = $Time
 @onready var timer: Timer = $Timer
-@onready var alert_label: Label = get_tree().root.find_child("Label", true, false)
+var alert_label: Label = null # ⬅️ Khai báo biến thành viên thường
 
 var skill: Skill = null
-var _change_key: String = ""
+var _change_key: String = ""	
 
 var change_key: String:
 	set(value):
@@ -29,7 +29,7 @@ func _ready() -> void:
 	else:
 		cooldown.max_value = timer.wait_time
 	set_process(false)
-
+	alert_label = get_tree().root.find_child("ErrorLabel", true, false) as Label
 func _process(_delta: float) -> void:
 	if timer.is_stopped():
 		return
@@ -46,14 +46,16 @@ func _on_pressed() -> void:
 	else:
 		printerr("Không tìm thấy Player trong group 'player'")
 	
-	var cast_successful: bool = player.cast_spell(skill)
+	var cast_result = player.cast_spell(skill)
+	print(cast_result)
 	# 2. CHỈ KÍCH HOẠT COOLDOWN nếu thi triển THÀNH CÔNG
-	if cast_successful:
+	if cast_result == "":
 		timer.start()
 		disabled = true
 		set_process(true)
 	else:
-		_show_error_text("Enemy Out of Range.")
+		var error_message: String = cast_result
+		_show_error_text(error_message)
 	
 func _on_timer_timeout() -> void:
 	disabled = false
