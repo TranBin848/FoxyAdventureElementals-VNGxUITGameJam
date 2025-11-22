@@ -31,10 +31,12 @@ AudioPlayer="*res://Autoloads/audio_player.gd"
 
 directories/dch_directory={
 "foxy": "res://dialogs/foxy.dch",
+"npc_master_fox": "res://dialogs/npc_master_fox.dch",
 "npc_villager": "res://dialogs/npc_villager.dch"
 }
 directories/dtl_directory={
 "end_lv1": "res://dialogs/end_lv1.dtl",
+"guide_elemental": "res://dialogs/guide_elemental.dtl",
 "start_game": "res://dialogs/start_game.dtl"
 }
 layout/style_directory={

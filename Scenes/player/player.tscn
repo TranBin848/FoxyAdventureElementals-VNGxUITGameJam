@@ -358,7 +358,6 @@ zoom = Vector2(2, 2)
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="SilhouetteSprite2D" type="AnimatedSprite2D" parent="Direction"]
-visible = false
 z_index = 199
 material = SubResource("ShaderMaterial_ahqnk")
 position = Vector2(0, -15)
@@ -366,6 +365,7 @@ sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"idle"
 
 [node name="SilhouetteBladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+visible = false
 z_index = 199
 material = SubResource("ShaderMaterial_vb1ce")
 position = Vector2(0, -15)
