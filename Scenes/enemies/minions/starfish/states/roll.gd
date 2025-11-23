@@ -13,8 +13,8 @@ func _enter() -> void:
 	pass
 
 func _exit() -> void:
-	if obj.detected_player_icon != null:
-		obj.detected_player_icon.visible = false
+	#if obj.detected_player_icon != null:
+		#obj.detected_player_icon.visible = false
 	obj.movement_speed = start_speed
 	pass
 

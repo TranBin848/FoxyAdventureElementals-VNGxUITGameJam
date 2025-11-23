@@ -1,5 +1,5 @@
 extends EnemyState
-@export var prepare_time: float = 1
+@export var prepare_time: float = 0.25
 
 func _enter() -> void:
 	obj.velocity.x = 0

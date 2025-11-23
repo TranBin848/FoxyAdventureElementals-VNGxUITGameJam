@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6htfcmfseu2c"]
+
+[ext_resource type="Texture2D" uid="uid://b4b58vuic36vy" path="res://assets/particles/dirt.png" id="1_vgj3j"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7hrw8"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g05f2"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 70.0
+initial_velocity_max = 90.0
+gravity = Vector3(0, 150, 0)
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[node name="Earth" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_7hrw8")
+texture = ExtResource("1_vgj3j")
+process_material = SubResource("ParticleProcessMaterial_g05f2")

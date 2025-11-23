@@ -3,11 +3,18 @@ extends BaseCharacter
 
 @onready var damage_number_origin = $DamageNumbersOrigin
 @export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
-	ElementsEnum.Elements.METAL: Color.LIGHT_GRAY,
+	ElementsEnum.Elements.METAL: Color("f0f0f0"),
 	ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
 	ElementsEnum.Elements.WATER: Color.AQUA,
 	ElementsEnum.Elements.FIRE: Color("ff5219"),
 	ElementsEnum.Elements.EARTH: Color("d36f00")
+}
+@export var elements_particle : Dictionary[ElementsEnum.Elements, String] = {
+	ElementsEnum.Elements.METAL: "Metal",
+	ElementsEnum.Elements.WOOD: "Wood",
+	ElementsEnum.Elements.WATER: "Water",
+	ElementsEnum.Elements.FIRE: "Fire",
+	ElementsEnum.Elements.EARTH: "Earth"
 }
 
 # Shader that will be used for outlining the enemy based on its element
@@ -38,14 +45,16 @@ var right_detect_ray: RayCast2D
 # Player reference
 var found_player: Player = null
 
-# Hit Area
-var hit_area: HitArea2D = null
+# Spike Hit Area
+var spike_hit_area: HitArea2D = null
 
 # Material to change outline
 var shader_material: Material
 
 # Enemy can only move in a range around this position
 var start_position: Vector2
+
+var current_particle: GPUParticles2D
 
 func _ready() -> void:
 	super._ready()
@@ -55,6 +64,7 @@ func _ready() -> void:
 	_init_hit_area()
 	_init_material()
 	_init_start_position()
+	_init_particle()
 
 # -- Initialize start position
 func _init_start_position():
@@ -97,8 +107,10 @@ func _init_ray_cast():
 func _init_detect_player_raycast():
 	if has_node("Direction/LeftDetectRayCast2D"):
 		left_detect_ray = $Direction/LeftDetectRayCast2D
+		left_detect_ray.target_position = Vector2(-sight, 0)
 	if has_node("Direction/RightDetectRayCast2D"):
 		right_detect_ray = $Direction/RightDetectRayCast2D
+		right_detect_ray.target_position = Vector2(sight, 0)
 
 
 # --- Initialize hurt area
@@ -110,10 +122,27 @@ func _init_hurt_area():
 
 # --- Initialize hit area
 func _init_hit_area():
-	if has_node("Direction/HitArea2D"):
-		hit_area = $Direction/HitArea2D
-		hit_area.damage = spike
+	if has_node("Direction/SpikeHitArea2D"):
+		spike_hit_area = $Direction/SpikeHitArea2D
+		spike_hit_area.damage = spike
 
+func _init_particle():
+	if has_node("Particles"):
+		var particle_holder = $Particles
+		if particle_holder.get_child_count() == 0:
+			return
+		var particles: Array = particle_holder.get_children()
+		for particle in particles:
+			if particle is GPUParticles2D:
+				var particle_name: String = particle.name
+				if particle_name == elements_particle[element]:
+					if current_particle != null:
+						current_particle.emitting = false
+					current_particle = particle
+					if current_particle != null:
+						current_particle.emitting = true
+	print(current_particle)
+	pass
 
 # --- Check if touching wall
 func is_touch_wall() -> bool:
@@ -246,8 +275,8 @@ func _take_damage_from_dir(_damage_dir: Vector2, _damage: float):
 # -- Disable collision, enemy will no longer has collision with player
 func disable_collision():
 	collision_layer = 0
-	if hit_area != null and hit_area.has_node("CollisionShape2D"):
-		hit_area.get_node("CollisionShape2D").disabled = true
+	if spike_hit_area != null and spike_hit_area.has_node("CollisionShape2D"):
+		spike_hit_area.get_node("CollisionShape2D").disabled = true
 
 # Enemy bị hút vào vùng nổ
 func enter_skill(tornado_pos: Vector2) -> void:

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0llkjwu21gqr"]
+
+[ext_resource type="Texture2D" uid="uid://b4x2ssj1cgj2w" path="res://assets/particles/water.png" id="1_ojf5w"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_50u0f"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_afkm4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.265813), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5t338"]
+curve = SubResource("Curve_afkm4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kvfmh"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 43.47
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = -50.0
+radial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+scale_curve = SubResource("CurveTexture_5t338")
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+anim_speed_max = 1.0
+
+[node name="Water" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_50u0f")
+texture = ExtResource("1_ojf5w")
+process_material = SubResource("ParticleProcessMaterial_kvfmh")
