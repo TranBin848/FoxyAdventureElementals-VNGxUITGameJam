@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://61tb28lqenaq"]
+[gd_scene load_steps=46 format=4 uid="uid://61tb28lqenaq"]
 
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="1_l6he8"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="2_ik3x1"]
@@ -35,8 +35,10 @@
 [ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://Scenes/ui/skill_bar_new.tscn" id="33_kvc81"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://Scenes/ui/hud.tscn" id="34_brdiw"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="35_fqsjq"]
-[ext_resource type="PackedScene" uid="uid://cpkjgg6d8yonu" path="res://Scenes/object/pressure_plate.tscn" id="36_b5rv8"]
-[ext_resource type="PackedScene" uid="uid://c15o6qkwmcw44" path="res://Scenes/object/wooden_door.tscn" id="37_4yvv1"]
+[ext_resource type="PackedScene" uid="uid://cpkjgg6d8yonu" path="res://Scenes/objects/pressure_plate.tscn" id="36_b5rv8"]
+[ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="36_hhgk3"]
+[ext_resource type="PackedScene" uid="uid://c15o6qkwmcw44" path="res://Scenes/objects/wooden_door.tscn" id="37_4yvv1"]
+[ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="39_5rued"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
 animations = [{
@@ -335,3 +337,9 @@ connected_doors = [NodePath("../WoodenDoor")]
 
 [node name="WoodenDoor" parent="." instance=ExtResource("37_4yvv1")]
 position = Vector2(390, 241)
+
+[node name="Chest" parent="." instance=ExtResource("39_5rued")]
+position = Vector2(451, 240)
+
+[node name="ChestKey" parent="." instance=ExtResource("36_hhgk3")]
+position = Vector2(418, 242)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpkjgg6d8yonu"]
 
 [ext_resource type="Texture2D" uid="uid://ta3pgidt857v" path="res://assets/object/pressure_plate/pressure-plate-pressed.png" id="1_lq1kb"]
-[ext_resource type="Script" uid="uid://crnnwyjy20p45" path="res://Scenes/object/pressure_plate_root.gd" id="1_ratse"]
-[ext_resource type="Script" uid="uid://b1nr26b8pd41r" path="res://Scenes/object/pressure_plate.gd" id="1_tj1g2"]
+[ext_resource type="Script" uid="uid://crnnwyjy20p45" path="res://Scenes/objects/pressure_plate_root.gd" id="1_ratse"]
+[ext_resource type="Script" uid="uid://b1nr26b8pd41r" path="res://Scenes/objects/pressure_plate.gd" id="1_tj1g2"]
 [ext_resource type="Texture2D" uid="uid://biluvjiridulf" path="res://assets/object/pressure_plate/pressure-plate.png" id="2_tj1g2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ratse"]

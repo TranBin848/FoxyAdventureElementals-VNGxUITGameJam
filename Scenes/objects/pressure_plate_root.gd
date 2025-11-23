@@ -102,7 +102,7 @@ func _update_visual():
 			animated_sprite.play("pressed")
 		else:
 			animated_sprite.play("unpressed")
-	else:
+	else:	
 		print("AnimatedSprite2D not found at AnimatedSprite2D")
 
 # Method để manually connect door từ code (nếu cần)
