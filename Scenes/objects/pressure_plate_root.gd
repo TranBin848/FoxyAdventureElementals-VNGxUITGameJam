@@ -34,8 +34,6 @@ func _ready():
 		connected_doors.append(connected_door)
 
 func _on_body_entered(body: Node2D):
-	print("Body entered pressure plate: ", body, " | Type: ", body.get_class())
-	
 	# Check if it's a valid body (Player, enemies, etc.)
 	if body is Player or body is CharacterBody2D or body.is_in_group("activatable"):
 		if body not in bodies_on_plate:

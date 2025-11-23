@@ -45,17 +45,6 @@
 [ext_resource type="Script" uid="uid://op6pss6c2qh4" path="res://Scenes/enemies/boss/retrieve_claw.gd" id="41_200mk"]
 [ext_resource type="Script" uid="uid://bmnx2xxwrq08j" path="res://Scenes/enemies/boss/hurt.gd" id="44_5alav"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="45_vjhg0"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="32_xr7g7"]
-[ext_resource type="Script" uid="uid://epiedpy5442a" path="res://scenes/enemies/boss/FireClaw.gd" id="33_bpmbe"]
-[ext_resource type="Script" uid="uid://cs8woms85hknp" path="res://scenes/enemies/boss/spin.gd" id="33_fh3hm"]
-[ext_resource type="PackedScene" uid="uid://bgh51tc6bjjdv" path="res://scenes/enemies/boss/king_crab_claw.tscn" id="33_lbx4o"]
-[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="34_200mk"]
-[ext_resource type="Script" uid="uid://u2ljgxpr1wtg" path="res://scenes/enemies/boss/stun.gd" id="35_g3b6p"]
-[ext_resource type="Script" uid="uid://ykl4ijk6ptbg" path="res://scenes/enemies/boss/sleep.gd" id="37_rhcfd"]
-[ext_resource type="Script" uid="uid://ch0s3e74g070t" path="res://scenes/enemies/boss/brake.gd" id="38_p2itk"]
-[ext_resource type="Script" uid="uid://op6pss6c2qh4" path="res://scenes/enemies/boss/retrieve_claw.gd" id="41_200mk"]
-[ext_resource type="Script" uid="uid://bmnx2xxwrq08j" path="res://scenes/enemies/boss/hurt.gd" id="44_5alav"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="45_vjhg0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
 animations = [{
