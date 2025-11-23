@@ -9,6 +9,7 @@ const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
 
 @export var has_blade: bool = false
+@export var has_wand: bool = false
 var blade_hit_area: Area2D
 @export var blade_throw_speed: float = 300
 @export var skill_throw_speed: float = 200
@@ -21,8 +22,10 @@ var blade_hit_area: Area2D
 
 @onready var normal_sprite: AnimatedSprite2D = $Direction/AnimatedSprite2D
 @onready var blade_sprite: AnimatedSprite2D = $Direction/BladeAnimatedSprite2D
+@onready var wand_sprite: AnimatedSprite2D = $Direction/WandAnimatedSprite2D #
 @onready var silhouette_normal_sprite: AnimatedSprite2D = $Direction/SilhouetteSprite2D
 @onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
+@onready var silhouette_wand_sprite: AnimatedSprite2D = $Direction/SilhouetteWandAnimatedSprite2D
 
 #Sound SF
 @export var jump_sfx: AudioStream = null
@@ -51,6 +54,7 @@ func _ready() -> void:
 	GameManager.player = self	
 	extra_sprites.append(silhouette_normal_sprite)
 	silhouette_blade_sprite.hide()
+	silhouette_wand_sprite.hide()
 	add_to_group("player")
 	if has_blade:
 		collected_blade()
@@ -73,9 +77,10 @@ func cast_spell(skill: Skill) -> String:
 		return "Skill invalid"
 	
 	print(mana)
-	
 	if(mana - skill.mana < 0): 
 		return "Not Enough Mana"
+		
+	await get_tree().create_timer(0.15).timeout
 	# Xử lý theo loại skill
 	match skill.type:
 		"single_shot":
@@ -327,9 +332,35 @@ func invulnerable_flicker(delta) -> void:
 		animated_sprite.modulate.a = 1/(animated_sprite.modulate.a/(0.4*0.7))
 
 func can_attack() -> bool:
-	return has_blade
+	return has_blade or has_wand
+
+func collected_wand() -> void:
+	# 1. Cập nhật trạng thái
+	has_wand = true
+	has_blade = false # Nếu Player có cả 2, bạn có thể chọn vô hiệu hóa Blade
+
+	# 2. Đổi Sprite chính sang Wand
+	set_animated_sprite(wand_sprite) # Sprite chính: cầm gậy
+	
+	# 3. Quản lý Sprite Silhouette (Giả sử bạn cần ẩn Blade và hiện Wand)
+	
+	# 3a. Ẩn tất cả Silhouette cũ (Blade/Normal)
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+		
+	# 3b. Thêm sprite silhouette MỚI (Wand) và hiện nó
+	extra_sprites.append(silhouette_wand_sprite)
+	silhouette_wand_sprite.show()
+	
+	# 4. Cập nhật khả năng tấn công (Tùy chọn)
+	# can_attack_with_wand = true
 
 func collected_blade() -> void:
+	# Nếu đang cầm Wand, không nhặt Blade (hoặc swap)
+	if has_wand:
+		return # Hoặc logic swap: collected_wand_to_blade()
+	
 	has_blade = true
 	set_animated_sprite(blade_sprite) # Sprite chính: cầm kiếm
 	

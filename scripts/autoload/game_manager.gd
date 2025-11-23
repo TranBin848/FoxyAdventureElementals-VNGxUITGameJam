@@ -12,6 +12,7 @@ signal checkpoint_changed(new_checkpoint_id: String)
 
 # --- Player states ---
 var has_blade: bool = false
+var has_wand: bool = false
 var isReloadScene: bool = false
 
 func _ready() -> void:
@@ -181,3 +182,13 @@ func collect_blade() -> void:
 
 	if player:
 		player.collected_blade()
+
+func collect_wand() -> void:
+	if has_wand:
+		return
+		
+	has_wand = true
+	
+	if player:
+		player.collected_wand()
+	

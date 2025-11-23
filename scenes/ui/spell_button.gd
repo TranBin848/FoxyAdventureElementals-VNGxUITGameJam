@@ -46,7 +46,7 @@ func _on_pressed() -> void:
 	else:
 		printerr("Không tìm thấy Player trong group 'player'")
 	
-	var cast_result = player.cast_spell(skill)
+	var cast_result = await player.cast_spell(skill)
 	print(cast_result)
 	# 2. CHỈ KÍCH HOẠT COOLDOWN nếu thi triển THÀNH CÔNG
 	if cast_result == "":
