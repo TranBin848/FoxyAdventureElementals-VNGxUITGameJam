@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dekwkca5hfw3l" path="res://assets/ui/basic_ui_sprite.png" id="1_5pf0f"]
 [ext_resource type="Texture2D" uid="uid://rb25hlntywjy" path="res://assets/ui/MediavelFree.png" id="1_v3a22"]
 [ext_resource type="Texture2D" uid="uid://pjg067fjvr3h" path="res://assets/ui/pannel_player.png" id="2_yxdl1"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_swjfl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1nv5v"]
 atlas = ExtResource("1_v3a22")
@@ -15,6 +16,8 @@ texture_margin_top = 12.0
 texture_margin_right = 12.0
 texture_margin_bottom = 12.0
 region_rect = Rect2(0, 0, 71, 72)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mfetm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mxalb"]
 atlas = ExtResource("2_yxdl1")
@@ -42,19 +45,7 @@ texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 6.0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v3a22"]
-load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_grl66"]
-atlas = SubResource("CompressedTexture2D_v3a22")
-region = Rect2(11, 107, 26, 28)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1cg2p"]
-texture = SubResource("AtlasTexture_grl66")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 6.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swjfl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_grl66"]
 load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
@@ -103,11 +94,31 @@ MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
+Menu/base_type = &"PanelContainer"
+Menu/styles/panel = SubResource("StyleBoxEmpty_mfetm")
 PlayerPanel/base_type = &"PanelContainer"
 PlayerPanel/styles/panel = SubResource("StyleBoxTexture_m26ve")
 ToolButton/base_type = &"Button"
+ToolButton/colors/font_color = Color(1, 1, 1, 1)
+ToolButton/colors/font_disabled_color = Color(0, 0, 0, 1)
+ToolButton/colors/font_hover_color = Color(0, 0, 0, 1)
+ToolButton/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+ToolButton/colors/font_outline_color = Color(0, 0, 0, 1)
+ToolButton/colors/font_pressed_color = Color(0, 0, 0, 1)
+ToolButton/colors/icon_disabled_color = Color(0, 0, 0, 1)
+ToolButton/colors/icon_focus_color = Color(0, 0, 0, 1)
+ToolButton/colors/icon_hover_color = Color(0, 0, 0, 1)
+ToolButton/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+ToolButton/colors/icon_normal_color = Color(0, 0, 0, 1)
+ToolButton/colors/icon_pressed_color = Color(0, 0, 0, 1)
+ToolButton/constants/align_to_largest_stylebox = 0
+ToolButton/constants/h_separation = 0
+ToolButton/constants/icon_max_width = 0
+ToolButton/constants/outline_size = 0
+ToolButton/font_sizes/font_size = 16
+ToolButton/fonts/font = ExtResource("3_swjfl")
 ToolButton/styles/disabled = SubResource("StyleBoxTexture_uv5qm")
-ToolButton/styles/focus = SubResource("StyleBoxTexture_1cg2p")
+ToolButton/styles/focus = SubResource("StyleBoxEmpty_swjfl")
 ToolButton/styles/hover = SubResource("StyleBoxTexture_rqg33")
 ToolButton/styles/normal = SubResource("StyleBoxTexture_1nv5v")
 ToolButton/styles/pressed = SubResource("StyleBoxTexture_grl66")

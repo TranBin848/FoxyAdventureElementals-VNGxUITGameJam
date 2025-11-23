@@ -154,7 +154,6 @@ collision_visibility_mode = 1
 position = Vector2(94, 178)
 collision_mask = 73
 platform_floor_layers = 4294967231
-max_health = 5
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
