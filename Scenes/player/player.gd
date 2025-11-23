@@ -7,6 +7,7 @@ var is_invulnerable: bool = false
 var invulnerable_timer: float = 0
 const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
+var saved_collision_layer: int
 
 @export var has_blade: bool = false
 var blade_hit_area: Area2D
@@ -16,6 +17,9 @@ var blade_hit_area: Area2D
 @onready var blade_factory: Node2DFactory = $Direction/BladeFactory
 @onready var jump_fx_factory: Node2DFactory = $Direction/JumpFXFactory
 @onready var skill_factory: Node2DFactory = $Direction/SkillFactory
+@onready var hurt_particle: CPUParticles2D = $Direction/HurtFXFactory
+
+@onready var hurt_area: HurtArea2D = $Direction/HurtArea2D
 
 @export var push_strength = 100.0
 
@@ -305,9 +309,12 @@ func _physics_process(delta: float) -> void:
 	debuglabel.text = str(fsm.current_state.name)
 			
 func handle_invulnerable(delta) -> void:
-	if (invulnerable_timer > 0):
+	if invulnerable_timer > 0:
 		invulnerable_timer -= delta
 	else:
+		if is_invulnerable:
+			# Restore collision layer when invulnerability ends
+			hurt_area.collision_layer = saved_collision_layer
 		is_invulnerable = false
 	if is_invulnerable:
 		invulnerable_flicker(delta)
@@ -363,6 +370,10 @@ func throwed_blade() -> void:
 func set_invulnerable() -> void:
 	is_invulnerable = true
 	invulnerable_timer = invulnerable_duration
+	# Save current layer and disable player's collision layer
+	saved_collision_layer = hurt_area.collision_layer
+	hurt_area.collision_layer = 0  # Temporarily disable collision layer
+	
 
 func is_char_invulnerable() -> bool:
 	return is_invulnerable
@@ -381,6 +392,7 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 	#health_changed.emit()
+	hurt_particle.emitting = true
 
 func save_state() -> Dictionary:
 	return {

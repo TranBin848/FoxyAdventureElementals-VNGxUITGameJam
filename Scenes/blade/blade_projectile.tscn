@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://w8tgxlewnrq8" path="res://Scenes/blade/blade_projectile.gd" id="1_ndoma"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="2_hyln0"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://Scripts/area_component/hit_area_2d.gd" id="2_k5v1g"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_k5v1g"]
 [ext_resource type="Texture2D" uid="uid://d0s8rm2fj4wef" path="res://assets/foxy/blade/blade_anim_1.png" id="2_ndoma"]
 [ext_resource type="AudioStream" uid="uid://bdqlg3r45gegn" path="res://assets/sounds/20_orc_special_atk.mp3" id="3_gc68j"]
 [ext_resource type="Texture2D" uid="uid://bfgelm7h8ouvo" path="res://assets/foxy/blade/blade_anim_2.png" id="3_k5v1g"]
