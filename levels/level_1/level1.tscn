@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://8qflg27g53dv"]
+[gd_scene load_steps=53 format=4 uid="uid://8qflg27g53dv"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
@@ -10,13 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="7_fk4ex"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="8_xoq1q"]
 [ext_resource type="PackedScene" uid="uid://cemwql616mbqj" path="res://scenes/npc/npc_master_fox.tscn" id="9_m7n46"]
-[ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="9_n1ndl"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="10_f06vl"]
 [ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://scenes/skills/scripts/water/WaterBall.gd" id="10_m7n46"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="11_m7n46"]
 [ext_resource type="Texture2D" uid="uid://dojy8pmq2a5p7" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 5.png" id="12_ufn31"]
+[ext_resource type="Script" uid="uid://n0h5gosjpnrv" path="res://scenes/skills/scripts/wood/HealOverTime.gd" id="12_wpna4"]
 [ext_resource type="Texture2D" uid="uid://bxcxwyyup8ew8" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 3.png" id="13_p1ob1"]
+[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://scenes/skills/scripts/water/Tornado.gd" id="13_uabgq"]
 [ext_resource type="Texture2D" uid="uid://d3cwcjjmlgblu" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 2.png" id="14_wpna4"]
+[ext_resource type="Script" uid="uid://obmi03ksefk2" path="res://scenes/skills/scripts/wood/WoodShot.gd" id="15_420sh"]
 [ext_resource type="Texture2D" uid="uid://de17r1sc64b2p" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 1.png" id="15_uabgq"]
 [ext_resource type="Script" uid="uid://b82lj4mrhdgs1" path="res://levels/level_1/scripts/parallax_layer_small_cloud.gd" id="16_420sh"]
 [ext_resource type="Texture2D" uid="uid://d2lmketl0r6ot" path="res://assets/terrain_plus/cloud1.png" id="17_lpcgt"]
@@ -85,7 +87,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.0
+shader_parameter/y_zoom = 1.21
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -156,17 +158,11 @@ elemental_type = 3
 skill_to_drop = ExtResource("10_m7n46")
 skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
-[node name="Mushroom5" parent="Enemies" instance=ExtResource("8_xoq1q")]
-position = Vector2(511, 151)
-element = 2
-elemental_type = 3
-skill_to_drop = ExtResource("10_m7n46")
-skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
-
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(2165, -489)
 element = 1
 elemental_type = 5
+skill_to_drop = ExtResource("12_wpna4")
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("8_xoq1q")]
 z_index = 0
@@ -174,31 +170,32 @@ position = Vector2(3097, -107)
 scale = Vector2(1.02679, 0.975904)
 element = 2
 elemental_type = 3
+skill_to_drop = ExtResource("10_m7n46")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("8_xoq1q")]
 z_index = 0
 position = Vector2(3017, 173)
 element = 2
 elemental_type = 3
-
-[node name="Pelican" parent="Enemies" instance=ExtResource("9_n1ndl")]
-position = Vector2(2098, -679)
-element = 1
+skill_to_drop = ExtResource("13_uabgq")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(1721, -400)
 element = 1
 elemental_type = 5
+skill_to_drop = ExtResource("15_420sh")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2823, -364)
 element = 1
 elemental_type = 5
+skill_to_drop = ExtResource("12_wpna4")
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2624, -364)
 element = 1
 elemental_type = 5
+skill_to_drop = ExtResource("15_420sh")
 
 [node name="Boat" parent="." instance=ExtResource("25_4iddc")]
 position = Vector2(-1859, 443)
