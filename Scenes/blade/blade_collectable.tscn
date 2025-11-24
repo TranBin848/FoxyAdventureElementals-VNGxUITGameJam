@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://c1hph2plir0qc"]
 
 [ext_resource type="Texture2D" uid="uid://d0s8rm2fj4wef" path="res://assets/foxy/blade/blade_anim_1.png" id="1_vlr3n"]
-[ext_resource type="Script" uid="uid://c2ontfkxki7ms" path="res://Scenes/blade/blade_collectable.gd" id="1_y0t1o"]
+[ext_resource type="Script" uid="uid://c2ontfkxki7ms" path="res://scenes/blade/blade_collectable.gd" id="1_y0t1o"]
 [ext_resource type="Texture2D" uid="uid://bfgelm7h8ouvo" path="res://assets/foxy/blade/blade_anim_2.png" id="2_y0t1o"]
 [ext_resource type="Texture2D" uid="uid://cpb4wgmvkk3w2" path="res://assets/foxy/blade/blade_anim_3.png" id="3_4ln2y"]
 [ext_resource type="Texture2D" uid="uid://bnm1ol1ugbdsv" path="res://assets/foxy/blade/blade_anim_4.png" id="4_h1gsu"]
