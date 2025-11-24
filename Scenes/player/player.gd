@@ -10,6 +10,8 @@ var flicker_timer := 0.0
 
 @export var has_blade: bool = false
 @export var has_wand: bool = false
+var is_equipped_blade: bool = false    #Đang cầm Blade?
+var is_equipped_wand: bool = false     # Đang cầm Wand?
 var blade_hit_area: Area2D
 @export var blade_throw_speed: float = 300
 @export var skill_throw_speed: float = 200
@@ -79,6 +81,11 @@ func cast_spell(skill: Skill) -> String:
 	print(mana)
 	if(mana - skill.mana < 0): 
 		return "Not Enough Mana"
+	
+	if not is_equipped_wand:
+		#Sẽ cần thêm một biến để theo dõi vũ khí đang cầm
+		#Giả sử logic Swap Weapon đã được triển khai với biến is_equipped_wand
+		return "Require Wand"
 		
 	await get_tree().create_timer(0.15).timeout
 	# Xử lý theo loại skill
@@ -334,68 +341,9 @@ func invulnerable_flicker(delta) -> void:
 func can_attack() -> bool:
 	return has_blade or has_wand
 
-func collected_wand() -> void:
-	# 1. Cập nhật trạng thái
-	has_wand = true
-	has_blade = false # Nếu Player có cả 2, bạn có thể chọn vô hiệu hóa Blade
-
-	# 2. Đổi Sprite chính sang Wand
-	set_animated_sprite(wand_sprite) # Sprite chính: cầm gậy
-	
-	# 3. Quản lý Sprite Silhouette (Giả sử bạn cần ẩn Blade và hiện Wand)
-	
-	# 3a. Ẩn tất cả Silhouette cũ (Blade/Normal)
-	if extra_sprites.size() > 0 and extra_sprites[0] != null:
-		extra_sprites[0].hide()
-		extra_sprites.clear()
-		
-	# 3b. Thêm sprite silhouette MỚI (Wand) và hiện nó
-	extra_sprites.append(silhouette_wand_sprite)
-	silhouette_wand_sprite.show()
-	
-	# 4. Cập nhật khả năng tấn công (Tùy chọn)
-	# can_attack_with_wand = true
-
-func collected_blade() -> void:
-	# Nếu đang cầm Wand, không nhặt Blade (hoặc swap)
-	if has_wand:
-		return # Hoặc logic swap: collected_wand_to_blade()
-	
-	has_blade = true
-	set_animated_sprite(blade_sprite) # Sprite chính: cầm kiếm
-	
-	# Quản lý sprite silhouette:
-	# 1. Ẩn sprite silhouette CŨ
-	if extra_sprites.size() > 0 and extra_sprites[0] != null:
-		extra_sprites[0].hide()
-		extra_sprites.clear()
-	# 2. Thêm sprite silhouette MỚI (cầm kiếm) và hiện nó
-	extra_sprites.append(silhouette_blade_sprite)
-	silhouette_blade_sprite.show()
-
-func throw_blade() -> void:
-	var blade = blade_factory.create() as RigidBody2D
-	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
-	blade.direction = direction
-	blade.apply_impulse(throw_velocity)
-	throwed_blade()
-
 func cast_skill(skill_name: String) -> void:
 	if fsm.current_state != fsm.states.castspell:
 		fsm.change_state(fsm.states.castspell)
-
-func throwed_blade() -> void:
-	has_blade = false
-	set_animated_sprite($Direction/AnimatedSprite2D)
-	
-	# Quản lý sprite silhouette:
-	# 1. Ẩn sprite silhouette CŨ
-	if extra_sprites.size() > 0 and extra_sprites[0] != null:
-		extra_sprites[0].hide()
-		extra_sprites.clear()
-	# 2. Thêm sprite silhouette MỚI (thường) và hiện nó
-	extra_sprites.append(silhouette_normal_sprite)
-	silhouette_normal_sprite.show()
 
 func set_invulnerable() -> void:
 	is_invulnerable = true
@@ -554,3 +502,110 @@ func get_closest_target() -> Node2D:
 # ================================================================
 # === END DETECTION AREA SIGNALS =================================
 # ================================================================
+
+
+# === SWAP WEAPON SYSTEM =================================
+func collected_wand() -> void:
+	has_wand = true
+	_equip_wand_from_swap()
+	
+func collected_blade() -> void:	
+	has_blade = true
+	_equip_blade_from_swap()
+	
+func throw_blade() -> void:
+	var blade = blade_factory.create() as RigidBody2D
+	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
+	blade.direction = direction
+	blade.apply_impulse(throw_velocity)
+	throwed_blade()
+	
+func throwed_blade() -> void:
+	has_blade = false
+	set_animated_sprite($Direction/AnimatedSprite2D)
+	
+	# Quản lý sprite silhouette:
+	# 1. Ẩn sprite silhouette CŨ
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+	# 2. Thêm sprite silhouette MỚI (thường) và hiện nó
+	extra_sprites.append(silhouette_normal_sprite)
+	silhouette_normal_sprite.show()
+	
+# ====== WEAPON SWAP LOGIC ======
+func swap_weapon() -> void:
+	#Nếu không sở hữu bất kỳ vũ khí nào, không làm gì
+	if not has_blade and not has_wand:
+		print("⚠️ Không có vũ khí nào để đổi.")
+		return
+
+	#Nếu đang cầm Blade
+	if is_equipped_blade:
+		if has_wand:
+			_equip_wand_from_swap() #Đổi sang Wand
+		else:
+			_equip_normal_from_swap() #Về Normal (vì không có Wand)
+			
+	#Nếu đang cầm Wand
+	elif is_equipped_wand:
+		if has_blade:
+			_equip_blade_from_swap() #Đổi sang Blade
+		else:
+			_equip_normal_from_swap() #Về Normal (vì không có Blade)
+			
+	#Nếu không cầm gì (Normal)
+	else: 
+		if has_blade:
+			_equip_blade_from_swap() #Đổi sang Blade
+		elif has_wand:
+			_equip_wand_from_swap() #Đổi sang Wand
+		# Nếu không sở hữu gì, return (đã xử lý ở đầu hàm)
+	
+	# Debug
+	print("Weapon swapped. Has Blade: %s, Has Wand: %s" % [has_blade, has_wand])
+
+# --- Helper Functions cho việc Đổi Sprite ---
+
+func _equip_blade_from_swap() -> void:
+	# 1. Cập nhật trạng thái
+	is_equipped_blade = true   #✅ Đang cầm Blade
+	is_equipped_wand = false
+	
+	# 2. Đổi Sprite
+	set_animated_sprite(blade_sprite)
+	
+	# 3. Quản lý Silhouette (Ẩn Wand, Hiện Blade)
+	_update_silhouette(silhouette_blade_sprite)
+
+func _equip_wand_from_swap() -> void:
+	# 1. Cập nhật trạng thái
+	is_equipped_wand = true    #✅ Đang cầm Wand
+	is_equipped_blade = false
+	
+	# 2. Đổi Sprite
+	set_animated_sprite(wand_sprite)
+	
+	# 3. Quản lý Silhouette (Ẩn Blade, Hiện Wand)
+	_update_silhouette(silhouette_wand_sprite)
+
+func _equip_normal_from_swap() -> void:
+	# 1. Cập nhật trạng thái
+	is_equipped_blade = false
+	is_equipped_wand = false
+	
+	# 2. Đổi Sprite (về sprite thường)
+	set_animated_sprite(normal_sprite) 
+	
+	# 3. Quản lý Silhouette (Ẩn tất cả và hiện Normal)
+	_update_silhouette(silhouette_normal_sprite)
+
+func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
+	# 1. Ẩn sprite silhouette CŨ
+	if not extra_sprites.is_empty() and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+		
+	# 2. Thêm sprite silhouette MỚI và hiện nó
+	extra_sprites.append(new_silhouette)
+	new_silhouette.show()

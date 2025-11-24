@@ -71,6 +71,16 @@ func control_throw_blade() -> bool:
 func control_dash() -> void:
 	if Input.is_action_just_pressed("dash") and obj.is_can_dash():
 		change_state(fsm.states.dash)
+		
+func control_swap_weapon() -> bool:
+	if Input.is_action_just_pressed("swap_weapon"): 
+		
+		# Player.swap_weapon() đã tự xử lý việc kiểm tra xem có vũ khí để đổi hay không.
+		obj.swap_weapon()
+		
+		# Không cần đổi trạng thái FSM (vì swap weapon là một hành động tức thời, không chặn)
+		return true
+	return false		
 
 func take_damage(direction: Variant, damage: int = 1) -> void:
 	if obj.is_char_invulnerable():
