@@ -12,6 +12,8 @@ var flicker_timer := 0.0
 @export var has_wand: bool = false
 var is_equipped_blade: bool = false    #Đang cầm Blade?
 var is_equipped_wand: bool = false     # Đang cầm Wand?
+signal weapon_swapped(equipped_weapon_type: String)
+
 var blade_hit_area: Area2D
 @export var blade_throw_speed: float = 300
 @export var skill_throw_speed: float = 200
@@ -577,7 +579,9 @@ func _equip_blade_from_swap() -> void:
 	
 	# 3. Quản lý Silhouette (Ẩn Wand, Hiện Blade)
 	_update_silhouette(silhouette_blade_sprite)
-
+	
+	weapon_swapped.emit("blade")
+	
 func _equip_wand_from_swap() -> void:
 	# 1. Cập nhật trạng thái
 	is_equipped_wand = true    #✅ Đang cầm Wand
@@ -588,7 +592,9 @@ func _equip_wand_from_swap() -> void:
 	
 	# 3. Quản lý Silhouette (Ẩn Blade, Hiện Wand)
 	_update_silhouette(silhouette_wand_sprite)
-
+	
+	weapon_swapped.emit("wand")
+	
 func _equip_normal_from_swap() -> void:
 	# 1. Cập nhật trạng thái
 	is_equipped_blade = false
@@ -599,7 +605,9 @@ func _equip_normal_from_swap() -> void:
 	
 	# 3. Quản lý Silhouette (Ẩn tất cả và hiện Normal)
 	_update_silhouette(silhouette_normal_sprite)
-
+	
+	weapon_swapped.emit("normal")
+	
 func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	# 1. Ẩn sprite silhouette CŨ
 	if not extra_sprites.is_empty() and extra_sprites[0] != null:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://8qflg27g53dv"]
+[gd_scene load_steps=51 format=4 uid="uid://8qflg27g53dv"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
@@ -37,11 +37,12 @@
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="31_dl781"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="32_vspgp"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="35_iy6cw"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="37_n1ndl"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="37_n1ndl"]
 [ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="38_f06vl"]
 [ext_resource type="PackedScene" uid="uid://d28vgb0lxesvt" path="res://shaders/leaf_particles_2d.tscn" id="38_fk4ex"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="39_m7n46"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="39_xoq1q"]
+[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="43_ufn31"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mjh6"]
 animations = [{
@@ -84,7 +85,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.683013
+shader_parameter/y_zoom = 0.620921
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -451,3 +452,16 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("39_xoq1q")
 text = "Enemy Out of Range"
 horizontal_alignment = 1
+
+[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("43_ufn31")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -111.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
