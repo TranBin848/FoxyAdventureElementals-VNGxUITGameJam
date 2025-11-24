@@ -128,13 +128,11 @@ func _set_door_open_visual():
 	var animated_sprite = $AnimatedSprite2D as AnimatedSprite2D
 	if animated_sprite:
 		animated_sprite.play("open")
-		animated_sprite.modulate = Color(1, 1, 1, 0.7)  # Make slightly transparent
 
 func _set_door_closed_visual():
 	var animated_sprite = $AnimatedSprite2D as AnimatedSprite2D
 	if animated_sprite:
 		animated_sprite.play("close")
-		animated_sprite.modulate = Color.WHITE
 
 func _simple_open_animation():
 	# Simple tween animation as fallback

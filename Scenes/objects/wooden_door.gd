@@ -125,12 +125,10 @@ func _set_collision_disabled(disabled: bool):
 func _set_door_open_visual():
 	if sprite:
 		sprite.play("open")
-		sprite.modulate = Color(1, 1, 1, 0.7)  # Make slightly transparent
 
 func _set_door_closed_visual():
 	if sprite:
 		sprite.play("close")
-		sprite.modulate = Color.WHITE
 
 func _simple_open_animation():
 	# Simple tween animation as fallback
