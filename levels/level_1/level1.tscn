@@ -3,15 +3,15 @@
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
 [ext_resource type="TileSet" uid="uid://b8xtiyc1j22cq" path="res://levels/level_1/level1.tres" id="2_0brgb"]
-[ext_resource type="PackedScene" uid="uid://pmtagssfa754" path="res://scenes/npc/npc_villager.tscn" id="3_038dw"]
+[ext_resource type="PackedScene" uid="uid://pmtagssfa754" path="res://Scenes/npc/npc_villager.tscn" id="3_038dw"]
 [ext_resource type="Texture2D" uid="uid://bfyqrhkykx21u" path="res://assets/spear/spear/spear_9.png" id="4_iy6cw"]
 [ext_resource type="Texture2D" uid="uid://bibbggt5jgslb" path="res://assets/spear/spear/spear_10.png" id="5_ijil1"]
 [ext_resource type="Texture2D" uid="uid://b6g0qbxr2udas" path="res://assets/spear/spear/spear_11.png" id="6_w745m"]
 [ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="7_fk4ex"]
-[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="8_xoq1q"]
-[ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="9_n1ndl"]
-[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="10_f06vl"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="11_m7n46"]
+[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://Scenes/enemies/minions/mushroom/mushroom.tscn" id="8_xoq1q"]
+[ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://Scenes/enemies/minions/pelican/pelican.tscn" id="9_n1ndl"]
+[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://Scenes/enemies/minions/crab/crab.tscn" id="10_f06vl"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://Scenes/player/player.tscn" id="11_m7n46"]
 [ext_resource type="Texture2D" uid="uid://dojy8pmq2a5p7" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 5.png" id="12_ufn31"]
 [ext_resource type="Texture2D" uid="uid://bxcxwyyup8ew8" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 3.png" id="13_p1ob1"]
 [ext_resource type="Texture2D" uid="uid://d3cwcjjmlgblu" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 2.png" id="14_wpna4"]
@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://j5oaxshr3fdy" path="res://levels/objects/trigger/guide_trigger.tscn" id="23_fdnpj"]
 [ext_resource type="PackedScene" uid="uid://bmqknea8bh0ev" path="res://levels/objects/campfire/campfire.tscn" id="24_m54h2"]
 [ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="25_4iddc"]
-[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="26_mpt5m"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="26_mpt5m"]
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/Boulder/boulder.tscn" id="27_mf820"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="28_30140"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="29_uvsuj"]
@@ -35,8 +35,8 @@
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="31_dl781"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="32_vspgp"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="35_iy6cw"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="36_ijil1"]
-[ext_resource type="PackedScene" uid="uid://c0wy3en1cr4hn" path="res://scenes/ui/heart_container.tscn" id="37_w745m"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://Scenes/ui/skill_bar.tscn" id="36_ijil1"]
+[ext_resource type="PackedScene" uid="uid://c0wy3en1cr4hn" path="res://Scenes/ui/heart_container.tscn" id="37_w745m"]
 [ext_resource type="PackedScene" uid="uid://d28vgb0lxesvt" path="res://shaders/leaf_particles_2d.tscn" id="38_fk4ex"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="39_xoq1q"]
 
@@ -81,7 +81,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.933015
+shader_parameter/y_zoom = 0.179859
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
