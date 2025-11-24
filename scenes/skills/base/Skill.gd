@@ -18,6 +18,9 @@ class_name Skill
 @export var type: String = "single_shot" 
 # có thể là: "single_shot", "multi_shot", "radial", "melee", "buff"
 
+@export var max_stack: int = 99 #Cấp độ/Stack tối đa
+var current_stack: int = 1      #Cấp độ/Stack hiện tại
+
 # 11122Thêm trường mã hóa element để tiện xử lý logic
 # 0: None, 1: Fire, 2: Water, 3: Earth, 4: Metal, 5: Wood
 var elemental_type: int:
@@ -34,7 +37,10 @@ func apply_to_button(button: TextureButton):
 	button.cooldown.max_value = cooldown
 	button.texture_normal = texture
 	button.timer.wait_time = cooldown
-
+	if button.has_method("update_stack_ui"):
+		#Hàm này chỉ tồn tại trong lớp SpellButton mở rộng
+		button.update_stack_ui()
+	
 func cast_spell(caster: Node2D):
 	#print("%s (%s) casted by %s" % [name, element, caster.name])
 	return self

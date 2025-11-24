@@ -69,6 +69,47 @@ func _ready() -> void:
 # === SKILL SYSTEM ===============================================
 # ================================================================
 
+func _check_and_use_skill_stack(skill_to_use: Skill):
+	#1. Tìm Skill đó trong SkillBar
+	var skillbar_root = get_tree().get_first_node_in_group("skill_bar")
+	var skill_bar
+	if skillbar_root:
+		skill_bar = skillbar_root.get_node("MarginContainer/SkillBar")
+	if skill_bar:
+		for slot in skill_bar.slots:
+			if slot.skill == skill_to_use:
+				
+				print("Stack trước khi dùng: %d" % skill_to_use.current_stack)
+			
+				# KIỂM TRA HỦY BỎ - Cần phải dùng LẦN NÀY (Stack == 1)
+				if skill_to_use.current_stack == 1:
+					
+					# Trừ Stack về 0 (để logic nội bộ đúng)
+					skill_to_use.current_stack -= 1 
+					
+					# Thực hiện logic HỦY BỎ
+					slot.skill = null
+					
+					# Reset UI Slot (giữ nguyên)
+					slot.texture_normal = null
+					slot.time_label.text = ""
+					slot.disabled = true
+					# Thêm dòng này để cập nhật UI stack thành trống nếu cần
+					slot.update_stack_ui() 
+					
+					print("☠️ Skill '%s' consumed and removed from slot!" % skill_to_use.name)
+				
+				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
+				elif skill_to_use.current_stack > 1:
+					
+					skill_to_use.current_stack -= 1
+					print("✨ Skill '%s' còn lại: %d" % [skill_to_use.name, skill_to_use.current_stack])
+					
+					# Cập nhật UI ngay lập tức (giữ nguyên)
+					slot.update_stack_ui()
+				
+				return # Thoát sau khi xử lý Stack
+
 func add_new_skill(new_skill_class: Script) -> bool:
 	# 1. Phát tín hiệu cho SkillBar (để SkillBar tự quản lý Slot)
 	skill_collected.emit(new_skill_class)
@@ -96,16 +137,19 @@ func cast_spell(skill: Skill) -> String:
 			_single_shot(skill)
 			mana = max(0, mana - skill.mana)
 			mana_changed.emit()
+			_check_and_use_skill_stack(skill)
 			return ""
 		"multi_shot":
 			_multi_shot(skill, 2, 0.3)
 			mana = max(0, mana - skill.mana)
 			mana_changed.emit()
+			_check_and_use_skill_stack(skill)
 			return ""
 		"radial":
 			_radial(skill, 18)
 			mana = max(0, mana - skill.mana)
 			mana_changed.emit()
+			_check_and_use_skill_stack(skill)
 			return ""
 		"area": 
 			cast_skill(skill.animation_name)
@@ -119,6 +163,7 @@ func cast_spell(skill: Skill) -> String:
 					mana_changed.emit()
 					# 3. Gọi hàm triệu hồi, truyền cả skill, vị trí VÀ đối tượng target
 					_area_shot(skill as Skill, target_pos, target)
+					_check_and_use_skill_stack(skill)
 					return ""
 			else:
 				print("⚠️ Không có kẻ địch trong phạm vi để dùng skill dạng Area.")
@@ -130,6 +175,7 @@ func cast_spell(skill: Skill) -> String:
 			_apply_buff(skill)
 			mana = max(0, mana - skill.mana)
 			mana_changed.emit()
+			_check_and_use_skill_stack(skill)
 			return "" # Kỹ năng Buff lên bản thân luôn thành công
 		_:
 			print("Unknown skill type: %s" % skill.type)
