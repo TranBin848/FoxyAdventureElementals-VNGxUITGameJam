@@ -69,7 +69,7 @@ func control_throw_blade() -> bool:
 	return false
 
 func control_dash() -> void:
-	if Input.is_action_just_pressed("dash") and obj.is_can_dash():
+	if Input.is_action_just_pressed("dash") and obj.can_dash:
 		change_state(fsm.states.dash)
 		
 func control_swap_weapon() -> bool:

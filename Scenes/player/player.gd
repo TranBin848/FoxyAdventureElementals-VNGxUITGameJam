@@ -33,6 +33,9 @@ var blade_hit_area: Area2D
 
 #Sound SF
 @export var jump_sfx: AudioStream = null
+@export var hurt_sfx: AudioStream = null
+@export var attack_sfx: AudioStream = null
+@export var throw_sfx: AudioStream = null
 
 #Movement
 var last_dir: float = 0.0
@@ -663,3 +666,31 @@ func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	# 2. Thêm sprite silhouette MỚI và hiện nó
 	extra_sprites.append(new_silhouette)
 	new_silhouette.show()
+func _update_movement(delta: float) -> void:
+	#if is_on_floor() or is_on_wall():
+		#reset_jump()
+		#reset_dashes()
+		
+	velocity.y += gravity*delta
+	
+	if fsm.current_state == fsm.states.wallcling:
+		velocity.y = clamp(velocity.y, -INF, wall_slide_speed)
+	else:
+		velocity.y = clamp(velocity.y, -INF, max_fall_speed)
+	
+	if is_dashing:
+		velocity.y = 0
+
+	#print(velocity)
+	#print(global_position)
+	move_and_slide()
+	pass
+
+func dash() -> void:
+	velocity.x = movement_speed * dash_speed_mul * direction
+	velocity.y = 0.0
+
+	is_dashing = true
+	can_dash = false
+	await get_tree().create_timer(dash_cd).timeout
+	can_dash = true

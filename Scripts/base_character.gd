@@ -17,9 +17,11 @@ var direction: int = 1
 @export var elemental_type: int = 0 #0: none, 1: fire, 2: earth, 3: water
 var health: int = max_health
 var mana: int = max_mana
+signal hurt
 signal health_changed
-signal mana_changed
 signal died
+signal mana_changed
+
 
 @export var skill_to_drop: Script = null      
 @export var skill_icon_path: String = ""      
@@ -90,6 +92,7 @@ func stop_move() -> void:
 
 func take_damage(damage: int) -> void:
 	health -= damage
+	hurt.emit()
 	health_changed.emit()
 	if health <= 0:
 		died.emit()

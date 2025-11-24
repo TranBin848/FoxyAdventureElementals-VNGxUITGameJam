@@ -16,4 +16,5 @@ func play_sound_once(sound: AudioStream) -> void:
 
 	player.stream = sound
 	player.stop()
+	player.pitch_scale = 1
 	player.play()
