@@ -42,7 +42,7 @@ metadata/_custom_type_script = "uid://0qvd447gmgon"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="InteractiveArea2D"]
 sprite_frames = SubResource("SpriteFrames_ljhs7")
 autoplay = "default"
-frame_progress = 0.520488
+frame_progress = 0.309798
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
 position = Vector2(0.5, -0.5)

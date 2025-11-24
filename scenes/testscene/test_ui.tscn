@@ -306,6 +306,7 @@ size_flags_vertical = 8
 offset_bottom = 100.0
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

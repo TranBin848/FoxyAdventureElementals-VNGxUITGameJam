@@ -9,6 +9,11 @@ const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
 
 @export var has_blade: bool = false
+@export var has_wand: bool = false
+var is_equipped_blade: bool = false    #Đang cầm Blade?
+var is_equipped_wand: bool = false     # Đang cầm Wand?
+signal weapon_swapped(equipped_weapon_type: String)
+
 var blade_hit_area: Area2D
 @export var blade_throw_speed: float = 300
 @export var skill_throw_speed: float = 200
@@ -21,8 +26,10 @@ var blade_hit_area: Area2D
 
 @onready var normal_sprite: AnimatedSprite2D = $Direction/AnimatedSprite2D
 @onready var blade_sprite: AnimatedSprite2D = $Direction/BladeAnimatedSprite2D
+@onready var wand_sprite: AnimatedSprite2D = $Direction/WandAnimatedSprite2D #
 @onready var silhouette_normal_sprite: AnimatedSprite2D = $Direction/SilhouetteSprite2D
 @onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
+@onready var silhouette_wand_sprite: AnimatedSprite2D = $Direction/SilhouetteWandAnimatedSprite2D
 
 #Sound SF
 @export var jump_sfx: AudioStream = null
@@ -46,12 +53,15 @@ var can_dash: bool = true
 
 var _targets_in_range: Array[Node2D] = []
 
+signal skill_collected(skill_resource_class)
+
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Idle)
 	GameManager.player = self	
 	extra_sprites.append(silhouette_normal_sprite)
 	silhouette_blade_sprite.hide()
+	silhouette_wand_sprite.hide()
 	add_to_group("player")
 	if has_blade:
 		collected_blade()
@@ -62,30 +72,87 @@ func _ready() -> void:
 # === SKILL SYSTEM ===============================================
 # ================================================================
 
+func _check_and_use_skill_stack(skill_to_use: Skill):
+	#1. Tìm Skill đó trong SkillBar
+	var skillbar_root = get_tree().get_first_node_in_group("skill_bar")
+	var skill_bar
+	if skillbar_root:
+		skill_bar = skillbar_root.get_node("MarginContainer/SkillBar")
+	if skill_bar:
+		for slot in skill_bar.slots:
+			if slot.skill == skill_to_use:
+				
+				print("Stack trước khi dùng: %d" % skill_to_use.current_stack)
+			
+				# KIỂM TRA HỦY BỎ - Cần phải dùng LẦN NÀY (Stack == 1)
+				if skill_to_use.current_stack == 1:
+					
+					# Trừ Stack về 0 (để logic nội bộ đúng)
+					skill_to_use.current_stack -= 1 
+					
+					# Thực hiện logic HỦY BỎ
+					slot.skill = null
+					
+					# Reset UI Slot (giữ nguyên)
+					slot.texture_normal = null
+					slot.time_label.text = ""
+					slot.disabled = true
+					# Thêm dòng này để cập nhật UI stack thành trống nếu cần
+					slot.update_stack_ui() 
+					
+					print("☠️ Skill '%s' consumed and removed from slot!" % skill_to_use.name)
+				
+				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
+				elif skill_to_use.current_stack > 1:
+					
+					skill_to_use.current_stack -= 1
+					print("✨ Skill '%s' còn lại: %d" % [skill_to_use.name, skill_to_use.current_stack])
+					
+					# Cập nhật UI ngay lập tức (giữ nguyên)
+					slot.update_stack_ui()
+				
+				return # Thoát sau khi xử lý Stack
+
+func add_new_skill(new_skill_class: Script) -> bool:
+	# 1. Phát tín hiệu cho SkillBar (để SkillBar tự quản lý Slot)
+	skill_collected.emit(new_skill_class)
+	
+	# Giả sử luôn thành công khi nhặt được skill
+	return true
+
 func cast_spell(skill: Skill) -> String:
 	if not skill:
 		return "Skill invalid"
 	
 	print(mana)
-	
 	if(mana - skill.mana < 0): 
 		return "Not Enough Mana"
+	
+	if not is_equipped_wand:
+		#Sẽ cần thêm một biến để theo dõi vũ khí đang cầm
+		#Giả sử logic Swap Weapon đã được triển khai với biến is_equipped_wand
+		return "Require Wand"
+		
+	await get_tree().create_timer(0.15).timeout
 	# Xử lý theo loại skill
 	match skill.type:
 		"single_shot":
 			_single_shot(skill)
 			mana = max(0, mana - skill.mana)
 			mana_changed.emit()
+			_check_and_use_skill_stack(skill)
 			return ""
 		"multi_shot":
 			_multi_shot(skill, 2, 0.3)
 			mana = max(0, mana - skill.mana)
 			mana_changed.emit()
+			_check_and_use_skill_stack(skill)
 			return ""
 		"radial":
 			_radial(skill, 18)
 			mana = max(0, mana - skill.mana)
 			mana_changed.emit()
+			_check_and_use_skill_stack(skill)
 			return ""
 		"area": 
 			cast_skill(skill.animation_name)
@@ -99,6 +166,7 @@ func cast_spell(skill: Skill) -> String:
 					mana_changed.emit()
 					# 3. Gọi hàm triệu hồi, truyền cả skill, vị trí VÀ đối tượng target
 					_area_shot(skill as Skill, target_pos, target)
+					_check_and_use_skill_stack(skill)
 					return ""
 			else:
 				print("⚠️ Không có kẻ địch trong phạm vi để dùng skill dạng Area.")
@@ -110,6 +178,7 @@ func cast_spell(skill: Skill) -> String:
 			_apply_buff(skill)
 			mana = max(0, mana - skill.mana)
 			mana_changed.emit()
+			_check_and_use_skill_stack(skill)
 			return "" # Kỹ năng Buff lên bản thân luôn thành công
 		_:
 			print("Unknown skill type: %s" % skill.type)
@@ -321,44 +390,11 @@ func invulnerable_flicker(delta) -> void:
 		animated_sprite.modulate.a = 1/(animated_sprite.modulate.a/(0.4*0.7))
 
 func can_attack() -> bool:
-	return has_blade
-
-func collected_blade() -> void:
-	has_blade = true
-	set_animated_sprite(blade_sprite) # Sprite chính: cầm kiếm
-	
-	# Quản lý sprite silhouette:
-	# 1. Ẩn sprite silhouette CŨ
-	if extra_sprites.size() > 0 and extra_sprites[0] != null:
-		extra_sprites[0].hide()
-		extra_sprites.clear()
-	# 2. Thêm sprite silhouette MỚI (cầm kiếm) và hiện nó
-	extra_sprites.append(silhouette_blade_sprite)
-	silhouette_blade_sprite.show()
-
-func throw_blade() -> void:
-	var blade = blade_factory.create() as RigidBody2D
-	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
-	blade.direction = direction
-	blade.apply_impulse(throw_velocity)
-	throwed_blade()
+	return has_blade or has_wand
 
 func cast_skill(skill_name: String) -> void:
 	if fsm.current_state != fsm.states.castspell:
 		fsm.change_state(fsm.states.castspell)
-
-func throwed_blade() -> void:
-	has_blade = false
-	set_animated_sprite($Direction/AnimatedSprite2D)
-	
-	# Quản lý sprite silhouette:
-	# 1. Ẩn sprite silhouette CŨ
-	if extra_sprites.size() > 0 and extra_sprites[0] != null:
-		extra_sprites[0].hide()
-		extra_sprites.clear()
-	# 2. Thêm sprite silhouette MỚI (thường) và hiện nó
-	extra_sprites.append(silhouette_normal_sprite)
-	silhouette_normal_sprite.show()
 
 func set_invulnerable() -> void:
 	is_invulnerable = true
@@ -518,6 +554,118 @@ func get_closest_target() -> Node2D:
 # === END DETECTION AREA SIGNALS =================================
 # ================================================================
 
+
+# === SWAP WEAPON SYSTEM =================================
+func collected_wand() -> void:
+	has_wand = true
+	_equip_wand_from_swap()
+	
+func collected_blade() -> void:	
+	has_blade = true
+	_equip_blade_from_swap()
+	
+func throw_blade() -> void:
+	var blade = blade_factory.create() as RigidBody2D
+	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
+	blade.direction = direction
+	blade.apply_impulse(throw_velocity)
+	throwed_blade()
+	
+func throwed_blade() -> void:
+	has_blade = false
+	set_animated_sprite($Direction/AnimatedSprite2D)
+	
+	# Quản lý sprite silhouette:
+	# 1. Ẩn sprite silhouette CŨ
+	if extra_sprites.size() > 0 and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+	# 2. Thêm sprite silhouette MỚI (thường) và hiện nó
+	extra_sprites.append(silhouette_normal_sprite)
+	silhouette_normal_sprite.show()
+	
+# ====== WEAPON SWAP LOGIC ======
+func swap_weapon() -> void:
+	#Nếu không sở hữu bất kỳ vũ khí nào, không làm gì
+	if not has_blade and not has_wand:
+		print("⚠️ Không có vũ khí nào để đổi.")
+		return
+
+	#Nếu đang cầm Blade
+	if is_equipped_blade:
+		if has_wand:
+			_equip_wand_from_swap() #Đổi sang Wand
+		else:
+			_equip_normal_from_swap() #Về Normal (vì không có Wand)
+			
+	#Nếu đang cầm Wand
+	elif is_equipped_wand:
+		if has_blade:
+			_equip_blade_from_swap() #Đổi sang Blade
+		else:
+			_equip_normal_from_swap() #Về Normal (vì không có Blade)
+			
+	#Nếu không cầm gì (Normal)
+	else: 
+		if has_blade:
+			_equip_blade_from_swap() #Đổi sang Blade
+		elif has_wand:
+			_equip_wand_from_swap() #Đổi sang Wand
+		# Nếu không sở hữu gì, return (đã xử lý ở đầu hàm)
+	
+	# Debug
+	print("Weapon swapped. Has Blade: %s, Has Wand: %s" % [has_blade, has_wand])
+
+# --- Helper Functions cho việc Đổi Sprite ---
+
+func _equip_blade_from_swap() -> void:
+	# 1. Cập nhật trạng thái
+	is_equipped_blade = true   #✅ Đang cầm Blade
+	is_equipped_wand = false
+	
+	# 2. Đổi Sprite
+	set_animated_sprite(blade_sprite)
+	
+	# 3. Quản lý Silhouette (Ẩn Wand, Hiện Blade)
+	_update_silhouette(silhouette_blade_sprite)
+	
+	weapon_swapped.emit("blade")
+	
+func _equip_wand_from_swap() -> void:
+	# 1. Cập nhật trạng thái
+	is_equipped_wand = true    #✅ Đang cầm Wand
+	is_equipped_blade = false
+	
+	# 2. Đổi Sprite
+	set_animated_sprite(wand_sprite)
+	
+	# 3. Quản lý Silhouette (Ẩn Blade, Hiện Wand)
+	_update_silhouette(silhouette_wand_sprite)
+	
+	weapon_swapped.emit("wand")
+	
+func _equip_normal_from_swap() -> void:
+	# 1. Cập nhật trạng thái
+	is_equipped_blade = false
+	is_equipped_wand = false
+	
+	# 2. Đổi Sprite (về sprite thường)
+	set_animated_sprite(normal_sprite) 
+	
+	# 3. Quản lý Silhouette (Ẩn tất cả và hiện Normal)
+	_update_silhouette(silhouette_normal_sprite)
+	
+	weapon_swapped.emit("normal")
+	
+func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
+	# 1. Ẩn sprite silhouette CŨ
+	if not extra_sprites.is_empty() and extra_sprites[0] != null:
+		extra_sprites[0].hide()
+		extra_sprites.clear()
+		
+	# 2. Thêm sprite silhouette MỚI và hiện nó
+	extra_sprites.append(new_silhouette)
+	new_silhouette.show()
 func _update_movement(delta: float) -> void:
 	#if is_on_floor() or is_on_wall():
 		#reset_jump()

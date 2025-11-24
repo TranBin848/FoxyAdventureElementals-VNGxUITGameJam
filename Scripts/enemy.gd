@@ -2,6 +2,8 @@ class_name EnemyCharacter
 extends BaseCharacter
 
 @onready var damage_number_origin = $DamageNumbersOrigin
+
+
 @export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
 	ElementsEnum.Elements.METAL: Color.LIGHT_GRAY,
 	ElementsEnum.Elements.WOOD: Color.LIME_GREEN,

@@ -11,4 +11,4 @@ func _init():
 	projectile_scene = preload("res://scenes/skills/projectiles/water/waterBlastProjectile.tscn")
 	speed = 250
 	damage = 2
-	mana = 30.0
+	mana = 5.0
