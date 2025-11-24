@@ -15,7 +15,7 @@ var current_state: DoorState = DoorState.CLOSED
 var auto_close_timer: Timer = null
 
 # Nodes
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: AnimatedSprite2D = $"../AnimatedSprite2D"
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 

@@ -5,7 +5,7 @@ extends InteractiveArea2D
 var is_opened: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var coin_scene: PackedScene = preload("../collectibles/coin.tscn")
+@onready var coin_scene: PackedScene = preload("../../collectibles/coin/coin.tscn")
 
 func _ready():
 	interacted.connect(_on_interacted)

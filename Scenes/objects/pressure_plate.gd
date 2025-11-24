@@ -14,8 +14,7 @@ var is_activated: bool = false
 var bodies_on_plate: Array[Node2D] = []
 
 # Visual feedback
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@export var pressed_sprite: Texture2D = null  # Có thể assign texture khác khi bị nhấn
+@onready var sprite: AnimatedSprite2D = $"../AnimatedSprite2D"
 
 func _ready():
 	# Connect Area2D signals
