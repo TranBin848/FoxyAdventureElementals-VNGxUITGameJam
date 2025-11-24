@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=40 format=3 uid="uid://dtqlltg7txue8"]
+[gd_resource type="TileSet" load_steps=39 format=3 uid="uid://dtqlltg7txue8"]
 
 [ext_resource type="Texture2D" uid="uid://bnmuiut4rgvqk" path="res://assets/terrain_plus/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="1_rfrfk"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="2_4pnhf"]
@@ -24,8 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://2ao4jldohksr" path="res://levels/objects/tree/tree_4.tscn" id="12_k8t1i"]
 [ext_resource type="Texture2D" uid="uid://clilecwvvs5g4" path="res://assets/terrain_plus/Decor.png" id="13_dsv3y"]
 [ext_resource type="Texture2D" uid="uid://bcutbm7w0s6o1" path="res://assets/terrain_plus/Other Tiles2.png" id="14_lkf61"]
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_wkgmh"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_wqd52"]
 tile_data = PackedInt32Array(0, 10, 655360, 1, 10, 655360, 2, 10, 655360)
@@ -2511,5 +2509,4 @@ sources/10 = SubResource("TileSetScenesCollectionSource_n4nvx")
 sources/1 = SubResource("TileSetAtlasSource_qk5dn")
 sources/11 = SubResource("TileSetAtlasSource_5w12q")
 sources/12 = SubResource("TileSetAtlasSource_rhcjj")
-pattern_0 = SubResource("TileMapPattern_wkgmh")
-pattern_1 = SubResource("TileMapPattern_wqd52")
+pattern_0 = SubResource("TileMapPattern_wqd52")
