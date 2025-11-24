@@ -28,6 +28,7 @@ animations = [{
 size = Vector2(32, 3)
 
 [node name="PressurePlate" type="Node2D"]
+position = Vector2(0, 8)
 script = ExtResource("1_ratse")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
