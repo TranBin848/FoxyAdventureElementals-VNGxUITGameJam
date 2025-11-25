@@ -9,7 +9,7 @@ func _ready() -> void:
 	add_child(player)
 
 	# Set which audio bus this player uses
-	player.bus = "SFX"  
+	player.bus = "SFX"
 
 func play_sound_once(sound: AudioStream) -> void:
 	if sound == null:
