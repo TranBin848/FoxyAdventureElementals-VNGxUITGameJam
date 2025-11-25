@@ -2,25 +2,42 @@ class_name EnemyCharacter
 extends BaseCharacter
 
 @onready var damage_number_origin = $DamageNumbersOrigin
-@export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
-	ElementsEnum.Elements.METAL: Color("f0f0f0"),
-	ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
-	ElementsEnum.Elements.WATER: Color.AQUA,
-	ElementsEnum.Elements.FIRE: Color("ff5219"),
-	ElementsEnum.Elements.EARTH: Color("d36f00")
+#@export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
+	#ElementsEnum.Elements.METAL: Color("f0f0f0"),
+	#ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
+	#ElementsEnum.Elements.WATER: Color.AQUA,
+	#ElementsEnum.Elements.FIRE: Color("ff5219"),
+	#ElementsEnum.Elements.EARTH: Color("d36f00")
+#}
+#@export var elements_particle : Dictionary[ElementsEnum.Elements, String] = {
+	#ElementsEnum.Elements.METAL: "Metal",
+	#ElementsEnum.Elements.WOOD: "Wood",
+	#ElementsEnum.Elements.WATER: "Water",
+	#ElementsEnum.Elements.FIRE: "Fire",
+	#ElementsEnum.Elements.EARTH: "Earth"
+#}
+# 0: None, 1: Fire, 2: Water, 3: Earth, 4: Metal, 5: Wood
+@export var elements_color : Dictionary[int, Color] = {
+	4: Color("f0f0f0"),
+	5: Color.LIME_GREEN,
+	2: Color.AQUA,
+	1: Color("ff5219"),
+	3: Color("d36f00"),
+	0: Color.BLACK
 }
 @export var elements_particle : Dictionary[ElementsEnum.Elements, String] = {
-	ElementsEnum.Elements.METAL: "Metal",
-	ElementsEnum.Elements.WOOD: "Wood",
-	ElementsEnum.Elements.WATER: "Water",
-	ElementsEnum.Elements.FIRE: "Fire",
-	ElementsEnum.Elements.EARTH: "Earth"
+	4: "Metal",
+	5: "Wood",
+	2: "Water",
+	1: "Fire",
+	3: "Earth",
+	0: "Fire"
 }
 
 # Shader that will be used for outlining the enemy based on its element
 @export_file("*.gdshader") var shader_path
-# Element of the enemy
-@export var element: ElementsEnum.Elements
+## Element of the enemy
+#@export var element: ElementsEnum.Elements
 # Damage deal damage when player touch (HP)
 @export var spike: float
 # Detect player within this range (radius in pixel)
@@ -47,6 +64,7 @@ var found_player: Player = null
 
 # Spike Hit Area
 var spike_hit_area: HitArea2D = null
+
 
 # Material to change outline
 var shader_material: Material
@@ -78,7 +96,7 @@ func _init_material():
 	if my_shader != null:
 		shader_material.shader = my_shader
 	
-	var outline_color = elements_color[element]
+	var outline_color = elements_color[elemental_type]
 	if outline_color == null: return
 	shader_material.set("shader_parameter/line_color", outline_color)
 	pass
@@ -135,7 +153,7 @@ func _init_particle():
 		for particle in particles:
 			if particle is GPUParticles2D:
 				var particle_name: String = particle.name
-				if particle_name == elements_particle[element]:
+				if particle_name == elements_particle[elemental_type]:
 					if current_particle != null:
 						current_particle.emitting = false
 					current_particle = particle

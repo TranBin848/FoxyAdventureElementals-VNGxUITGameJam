@@ -21,6 +21,7 @@ func _update( _delta ):
 		pass
 	if update_timer(_delta):
 		obj.queue_free()
+	super._update(_delta)
 
 func get_shader_values() -> void:
 	shader_material = obj.animated_sprite.material

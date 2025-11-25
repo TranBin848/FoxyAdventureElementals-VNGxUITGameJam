@@ -15,6 +15,6 @@ func control_flying_away() -> void:
 	obj.velocity.y = -obj.fly_force
 	
 func _update( _delta ):
-	if obj.update_leave_timer(_delta):
-		change_state(fsm.states.leave)
+	#if obj.update_leave_timer(_delta):
+		#change_state(fsm.states.leave)
 	pass

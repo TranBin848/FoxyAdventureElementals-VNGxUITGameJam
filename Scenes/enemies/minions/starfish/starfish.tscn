@@ -107,11 +107,13 @@ radius = 16.0
 height = 32.0
 
 [node name="Starfish" type="CharacterBody2D"]
+collision_layer = 8
 script = ExtResource("1_wfme5")
 shader_path = "uid://doovon2v0i5dx"
-element = 2
-sight = 140.0
+spike = 1.0
+sight = 200.0
 movement_range = 500.0
+max_health = 15
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Particles" type="Node2D" parent="."]
@@ -138,7 +140,7 @@ emitting = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_ji8a0")
-animation = &"prepare"
+animation = &"hurt"
 
 [node name="DetectedPlayerIcon" type="Sprite2D" parent="Direction"]
 visible = false

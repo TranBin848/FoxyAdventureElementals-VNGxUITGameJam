@@ -20,6 +20,8 @@ func _update( _delta ):
 		return
 	
 	var direction: Vector2 = obj.found_player.position - obj.position
+	print(obj.found_player.position)
+	print(obj.position)
 	obj.change_direction(sign(direction.x))
 	
 	if update_timer(_delta):

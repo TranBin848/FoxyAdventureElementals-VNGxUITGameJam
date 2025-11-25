@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b35vjjohukg22"]
+[gd_scene load_steps=33 format=3 uid="uid://b35vjjohukg22"]
 
 [ext_resource type="Script" uid="uid://b586ix60tpkyt" path="res://Scenes/enemies/minions/spear_warrior/spear_warrior.gd" id="1_nmrfe"]
 [ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="2_67m24"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="4_1ilut"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="5_pkd16"]
 [ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="6_ipcoo"]
-[ext_resource type="Texture2D" uid="uid://bfyqrhkykx21u" path="res://assets/spear/spear/spear_9.png" id="8_51kyg"]
 [ext_resource type="Texture2D" uid="uid://bibbggt5jgslb" path="res://assets/spear/spear/spear_10.png" id="9_u4c4y"]
 [ext_resource type="Texture2D" uid="uid://b6g0qbxr2udas" path="res://assets/spear/spear/spear_11.png" id="10_nmrfe"]
 [ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="11_asimf"]
@@ -20,8 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://msqmxa6pfab3" path="res://assets/spear/spear/spear_13.png" id="19_vu5q8"]
 [ext_resource type="Texture2D" uid="uid://dykghmg88arcl" path="res://assets/spear/spear/spear_14.png" id="20_fj7ns"]
 [ext_resource type="Texture2D" uid="uid://63a7n5kmt405" path="res://assets/spear/spear/spear_15.png" id="21_e1rgo"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="22_2fwu8"]
 [ext_resource type="Script" uid="uid://c6a7nn5btn3hk" path="res://Scenes/enemies/minions/spear_warrior/states/idle.gd" id="22_asimf"]
 [ext_resource type="Texture2D" uid="uid://cr0xgcau0x5hn" path="res://assets/spear/spear/spear_16.png" id="22_qqttw"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="22_ri6fp"]
 [ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="22_u4c4y"]
 [ext_resource type="Script" uid="uid://ye5ltbp62i0r" path="res://Scenes/enemies/minions/spear_warrior/states/prepare.gd" id="23_asimf"]
 [ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="23_nmrfe"]
@@ -30,12 +31,6 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_72rcn"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_51kyg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_u4c4y")
-}, {
 "duration": 1.0,
 "texture": ExtResource("10_nmrfe")
 }, {
@@ -48,9 +43,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_u4c4y")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -103,20 +98,35 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("22_qqttw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u4c4y")
 }],
 "loop": true,
 "name": &"prepare",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_asimf"]
-radius = 19.0
-height = 38.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ri6fp"]
+size = Vector2(11, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxdmg"]
+size = Vector2(13, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fwu8"]
+size = Vector2(30.25, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awyxo"]
+size = Vector2(46, 34)
 
 [node name="SpearWarrior" type="CharacterBody2D"]
+collision_layer = 8
 script = ExtResource("1_nmrfe")
 shader_path = "uid://doovon2v0i5dx"
-element = 2
+spike = 1.0
+sight = 200.0
+attack_speed = 200.0
+max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Particles" type="Node2D" parent="."]
@@ -139,37 +149,82 @@ emitting = false
 position = Vector2(0, 5)
 emitting = false
 
-[node name="EnemyHealthBar" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("2_67m24")]
-offset_left = -24.0
-offset_top = -20.0
-offset_right = 72.0
-offset_bottom = -12.0
-enemy = NodePath("..")
-
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_72rcn")
-animation = &"prepare"
-frame_progress = 0.603885
+animation = &"dead"
+
+[node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
+target_position = Vector2(139, 0)
+collision_mask = 2
+
+[node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
+target_position = Vector2(-48, 0)
+collision_mask = 2
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+script = ExtResource("22_2fwu8")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+position = Vector2(-20.5, -0.5)
+shape = SubResource("RectangleShape2D_ri6fp")
+
+[node name="SpearHitArea2D" type="Area2D" parent="Direction"]
+position = Vector2(6, 10)
+collision_mask = 4
+script = ExtResource("22_ri6fp")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/SpearHitArea2D"]
+shape = SubResource("RectangleShape2D_yxdmg")
+disabled = true
+
+[node name="SpikeHitArea2D" type="Area2D" parent="Direction"]
+position = Vector2(-43, -37)
+collision_mask = 4
+script = ExtResource("22_ri6fp")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/SpikeHitArea2D"]
+position = Vector2(42.875, 37.5)
+shape = SubResource("RectangleShape2D_2fwu8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 0)
-shape = SubResource("CapsuleShape2D_asimf")
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_awyxo")
 
 [node name="States" type="Node" parent="."]
 
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource("22_asimf")
+bounce_back_velocity = 0.0
 
 [node name="Prepare" type="Node" parent="States"]
 script = ExtResource("23_asimf")
+bounce_back_velocity = 0.0
 
 [node name="Attack" type="Node" parent="States"]
 script = ExtResource("24_huggj")
+attack_frames = 4
+bounce_back_velocity = 0.0
 
 [node name="Hurt" type="Node" parent="States"]
 script = ExtResource("22_u4c4y")
+bounce_back_velocity = 0.0
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("23_nmrfe")
+bounce_back_velocity = 0.0
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
+[node name="EnemyHealthBar" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("2_67m24")]
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 72.0
+offset_bottom = -20.0
+enemy = NodePath("..")
