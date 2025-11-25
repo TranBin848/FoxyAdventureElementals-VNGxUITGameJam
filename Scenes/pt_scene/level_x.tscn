@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://iroicajspq1k"]
+[gd_scene load_steps=16 format=4 uid="uid://iroicajspq1k"]
 
 [ext_resource type="TileSet" uid="uid://bqmwdnppiuh3u" path="res://assets/island/TileSets/FireSet.tres" id="1_ppd7i"]
 [ext_resource type="TileSet" uid="uid://djaukmqu8p2nq" path="res://assets/island/TileSets/IceSet.tres" id="2_hy12l"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="11_58g1w"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://Scenes/enemies/minions/mushroom/mushroom.tscn" id="11_ua8l5"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="14_sfpm8"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://Scenes/ui/skill_bar.tscn" id="15_ua8l5"]
 
 [node name="LevelX" type="Node2D"]
 
@@ -222,3 +223,13 @@ element = 2
 [node name="Crab" parent="." instance=ExtResource("7_kf0a5")]
 position = Vector2(1593, 659)
 element = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SkillBar" parent="CanvasLayer" instance=ExtResource("15_ua8l5")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+offset_bottom = -16.0
+grow_vertical = 0
