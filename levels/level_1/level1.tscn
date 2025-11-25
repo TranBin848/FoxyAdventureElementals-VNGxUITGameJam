@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://8qflg27g53dv"]
+[gd_scene load_steps=53 format=4 uid="uid://8qflg27g53dv"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
@@ -9,12 +9,16 @@
 [ext_resource type="Texture2D" uid="uid://b6g0qbxr2udas" path="res://assets/spear/spear/spear_11.png" id="6_w745m"]
 [ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="7_fk4ex"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="8_xoq1q"]
-[ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="9_n1ndl"]
+[ext_resource type="PackedScene" uid="uid://cemwql616mbqj" path="res://scenes/npc/npc_master_fox.tscn" id="9_m7n46"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="10_f06vl"]
+[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://scenes/skills/scripts/water/WaterBall.gd" id="10_m7n46"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="11_m7n46"]
 [ext_resource type="Texture2D" uid="uid://dojy8pmq2a5p7" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 5.png" id="12_ufn31"]
+[ext_resource type="Script" uid="uid://n0h5gosjpnrv" path="res://scenes/skills/scripts/wood/HealOverTime.gd" id="12_wpna4"]
 [ext_resource type="Texture2D" uid="uid://bxcxwyyup8ew8" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 3.png" id="13_p1ob1"]
+[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://scenes/skills/scripts/water/Tornado.gd" id="13_uabgq"]
 [ext_resource type="Texture2D" uid="uid://d3cwcjjmlgblu" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 2.png" id="14_wpna4"]
+[ext_resource type="Script" uid="uid://obmi03ksefk2" path="res://scenes/skills/scripts/wood/WoodShot.gd" id="15_420sh"]
 [ext_resource type="Texture2D" uid="uid://de17r1sc64b2p" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 1.png" id="15_uabgq"]
 [ext_resource type="Script" uid="uid://b82lj4mrhdgs1" path="res://levels/level_1/scripts/parallax_layer_small_cloud.gd" id="16_420sh"]
 [ext_resource type="Texture2D" uid="uid://d2lmketl0r6ot" path="res://assets/terrain_plus/cloud1.png" id="17_lpcgt"]
@@ -35,10 +39,12 @@
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="31_dl781"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="32_vspgp"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="35_iy6cw"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="36_ijil1"]
-[ext_resource type="PackedScene" uid="uid://c0wy3en1cr4hn" path="res://scenes/ui/heart_container.tscn" id="37_w745m"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="37_n1ndl"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="38_f06vl"]
 [ext_resource type="PackedScene" uid="uid://d28vgb0lxesvt" path="res://shaders/leaf_particles_2d.tscn" id="38_fk4ex"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="39_m7n46"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="39_xoq1q"]
+[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="43_ufn31"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mjh6"]
 animations = [{
@@ -81,11 +87,11 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.933015
+shader_parameter/y_zoom = 1.4641
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
-[node name="Stage2" type="Node2D"]
+[node name="Stage" type="Node2D"]
 script = ExtResource("1_038dw")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
@@ -100,7 +106,7 @@ texture = ExtResource("1_rm1dv")
 
 [node name="Back" type="TileMapLayer" parent="."]
 position = Vector2(-1214, 355)
-tile_map_data = PackedByteArray("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")
+tile_map_data = PackedByteArray("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")
 tile_set = ExtResource("2_0brgb")
 
 [node name="Ground" type="TileMapLayer" parent="."]
@@ -138,46 +144,58 @@ sprite_frames = SubResource("SpriteFrames_4mjh6")
 autoplay = "default"
 frame_progress = 0.143494
 
+[node name="NpcMasterFox" parent="Npc" instance=ExtResource("9_m7n46")]
+position = Vector2(3673, 21)
+scale = Vector2(-1, 1)
+hoithoai = "guide_elemental"
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(631, 151)
 element = 2
 elemental_type = 3
+skill_to_drop = ExtResource("10_m7n46")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(2165, -489)
 element = 1
 elemental_type = 5
+skill_to_drop = ExtResource("12_wpna4")
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("8_xoq1q")]
-position = Vector2(3097, -189)
+z_index = 0
+position = Vector2(3097, -107)
+scale = Vector2(1.02679, 0.975904)
 element = 2
 elemental_type = 3
+skill_to_drop = ExtResource("10_m7n46")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("8_xoq1q")]
-position = Vector2(3017, 35)
+z_index = 0
+position = Vector2(3017, 173)
 element = 2
 elemental_type = 3
-
-[node name="Pelican" parent="Enemies" instance=ExtResource("9_n1ndl")]
-position = Vector2(2098, -679)
-element = 1
+skill_to_drop = ExtResource("13_uabgq")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(1721, -400)
 element = 1
 elemental_type = 5
+skill_to_drop = ExtResource("15_420sh")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2823, -364)
 element = 1
 elemental_type = 5
+skill_to_drop = ExtResource("12_wpna4")
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2624, -364)
 element = 1
 elemental_type = 5
+skill_to_drop = ExtResource("15_420sh")
 
 [node name="Boat" parent="." instance=ExtResource("25_4iddc")]
 position = Vector2(-1859, 443)
@@ -187,13 +205,13 @@ position = Vector2(5280, -440)
 target_stage = "uid://c47jft3el2tid"
 
 [node name="Player" parent="." instance=ExtResource("11_m7n46")]
-position = Vector2(431, 162)
+position = Vector2(3576, 35)
 collision_mask = 73
 platform_floor_layers = 4294967231
 
 [node name="Front" type="TileMapLayer" parent="."]
 position = Vector2(-1055, 355)
-tile_map_data = PackedByteArray("AAD8//7/BwAAAAAAAQD2/wEACAAAAA0AAAD3/wEACAACAA0AAAD4/wEACAAAAAYAAAD5/wEACAAAAAYAAAD6/wEACAAAAAYAAAD7/wEACAAAAAYAAAD1/wEACAABAAQAAAD0/wEACAAAAAQAAADz/wEACAABAAQAAADy/wEACAAAAAQAAAD9/wEACAABAAQAAAD+/wEACAABAAQAAABEAPr/AAAAAAIAAABFAPr/AAAAAAIAAABGAPr/AAAAAAYAAABHAPr/AAAAAAIAAABIAPr/AAAAAAIAAABDAPr/AAAAAAAAAABJAPr/AAAAAAEAAABHAPH/AAAAAAIAAABIAPH/AAAAAAIAAABJAPH/AAAAAAIAAABKAPH/AAAAAAIAAABLAPH/AAAAAAIAAABMAPH/AAAAAAIAAABNAPH/AAAAAAIAAABOAPH/AAAAAAIAAABPAPH/AAAAAAIAAABQAPH/AAAAAAIAAABRAPH/AAAAAAIAAABSAPH/AAAAAAIAAABTAPH/AAAAAAIAAABUAPH/AAAAAAIAAABVAPH/AAAAAAIAAABWAPH/AAAAAAEAAAAOAAEACAAAAAYAAAANAAEACAAAAAUAAAAKAAIACAAAAAUAAAABAAEACAACAAQAAAAMAAEACAACAAQAAADx/wEACAAAAAYAAADw/wEACAAAAAUAAADv/wEACAAAAAUAAADu/wEACAAAAAUAAADt/wEACAAAAAYAAADs/wEACAACAAQAAADq/wEACAAAAAQAAADr/wEACAAAAAQAAADo/wEACAAAAAQAAADp/wEACAAAAAQAAABdAPj/CAAAAAYAAABiAPj/CAAAAAYAAABjAPj/CAAAAAYAAABkAPj/CAAAAAUAAABnAPj/CAAAAAUAAABrAPj/CAAAAAYAAABvAPj/CAAAAAUAAABwAPj/CAAAAAYAAABxAPj/CAAAAAYAAABUAPj/CAAAAAQAABBVAPj/CAAAAAQAABBWAPj/CAAAAAQAABBxAOn/CAABAAcAAABuAOn/CAAAAA0AAABzAOn/CAAAAA0AAABtAOn/CAACAA0AAAB8APr/AAAAAAAAAACDAPr/AAAAAAEAAAB9APr/AAAAAAIAAAB+APr/AAAAAAIAAAB/APr/AAAAAAIAAACAAPr/AAAAAAIAAACBAPr/AAAAAAIAAACCAPr/AAAAAAIAAAB5APL/AAAAAAIAAAB6APL/AAAAAAIAAAB7APL/AAAAAAIAAAB8APL/AAAAAAIAAAB9APL/AAAAAAIAAAB4APL/AAAAAAAAAAB+APL/AAAAAAEAAAB4APP/AAABAAgAAAB5APP/AAABAAgAAAB6APP/AAABAAgAAAB7APP/AAABAAgAAAB8APP/AAABAAgAAAB9APP/AAABAAgAAAC+AOf/CAAGAAIAAAC/AOf/CAAHAAAAAACtAOf/CAAAAA0AAACuAOf/CAACAA0AAAA=")
+tile_map_data = PackedByteArray("AAD8//7/BwAAAAAAAQD5/wEACAAAAAYAAAD6/wEACAAAAAUAAAD7/wEACAAAAAYAAAD1/wEACAABAAQAAAD0/wEACAAAAAYAAADz/wEACAABAAQAAADy/wEACAAAAAQAAAD9/wEACAABAAQAAAD+/wEACAABAAQAAABEAPr/AAAAAAIAAABFAPr/AAAAAAIAAABGAPr/AAAAAAYAAABHAPr/AAAAAAIAAABIAPr/AAAAAAIAAABDAPr/AAAAAAAAAABJAPr/AAAAAAEAAABHAPH/AAAAAAIAAABIAPH/AAAAAAIAAABJAPH/AAAAAAIAAABKAPH/AAAAAAIAAABLAPH/AAAAAAIAAABMAPH/AAAAAAIAAABNAPH/AAAAAAIAAABOAPH/AAAAAAIAAABPAPH/AAAAAAIAAABQAPH/AAAAAAIAAABRAPH/AAAAAAIAAABSAPH/AAAAAAIAAABTAPH/AAAAAAIAAABUAPH/AAAAAAIAAABVAPH/AAAAAAIAAABWAPH/AAAAAAEAAAAOAAEACAAAAAYAAAANAAEACAAAAAUAAAAKAAIACAAAAAUAAAABAAEACAACAAQAAAAMAAEACAACAAQAAADx/wEACAAAAAYAAADw/wEACAAAAAUAAADv/wEACAAAAAUAAADu/wEACAAAAAUAAADt/wEACAAAAAYAAADs/wEACAACAAQAAADq/wEACAAAAAQAAADr/wEACAAAAAQAAADo/wEACAAAAAQAAADp/wEACAAAAAQAAABdAPj/CAAAAAYAAABiAPj/CAAAAAYAAABjAPj/CAAAAAYAAABkAPj/CAAAAAUAAABnAPj/CAAAAAUAAABrAPj/CAAAAAYAAABvAPj/CAAAAAUAAABwAPj/CAAAAAYAAABxAPj/CAAAAAYAAABUAPj/CAAAAAQAABBVAPj/CAAAAAQAABBWAPj/CAAAAAQAABBxAOn/CAABAAcAAABuAOn/CAAAAA0AAABzAOn/CAAAAA0AAABtAOn/CAACAA0AAAB8APr/AAAAAAAAAACDAPr/AAAAAAEAAAB9APr/AAAAAAIAAAB+APr/AAAAAAIAAAB/APr/AAAAAAIAAACAAPr/AAAAAAIAAACBAPr/AAAAAAIAAACCAPr/AAAAAAIAAAB5APL/AAAAAAIAAAB6APL/AAAAAAIAAAB7APL/AAAAAAIAAAB8APL/AAAAAAIAAAB9APL/AAAAAAIAAAB4APL/AAAAAAAAAAB+APL/AAAAAAEAAAB4APP/AAABAAgAAAB5APP/AAABAAgAAAB6APP/AAABAAgAAAB7APP/AAABAAgAAAB8APP/AAABAAgAAAB9APP/AAABAAgAAAC+AOf/CAAGAAIAAAC/AOf/CAAHAAAAAACtAOf/CAAAAA0AAACuAOf/CAACAA0AAADy//7/BwAAAAAAAQD3/wEACAAAAAQAAAD4/wEACAACAAQAAAD2/wEACAAAAAYAAAA=")
 tile_set = ExtResource("2_0brgb")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -305,7 +323,7 @@ position = Vector2(-1588, 418)
 guide_text = "A, D to move left, right\\nSpace to jump"
 
 [node name="GuideTrigger2" parent="." instance=ExtResource("23_fdnpj")]
-position = Vector2(-1191, 414)
+position = Vector2(-1166, 414)
 guide_text = "F to interact"
 
 [node name="GuideTrigger3" parent="." instance=ExtResource("23_fdnpj")]
@@ -318,6 +336,10 @@ guide_text = "Huh hah Huh hah"
 
 [node name="GuideTrigger5" parent="." instance=ExtResource("23_fdnpj")]
 position = Vector2(4720, -440)
+guide_text = "F to interact"
+
+[node name="GuideTrigger6" parent="." instance=ExtResource("23_fdnpj")]
+position = Vector2(3631, 9)
 guide_text = "F to interact"
 
 [node name="Checkpoint1" parent="." instance=ExtResource("30_0brgb")]
@@ -401,21 +423,21 @@ position = Vector2(1560, 140)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SkillBar" parent="CanvasLayer" instance=ExtResource("36_ijil1")]
-anchors_preset = 7
-anchor_top = 1.0
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -56.0
-offset_bottom = -16.0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("37_n1ndl")
 
-[node name="HeartContainer" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("37_w745m")]
-visible = false
-offset_left = 17.0
-offset_top = 16.0
-offset_right = 17.0
-offset_bottom = 86.0
-player = NodePath("../../Player")
+[node name="SkillBar" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("38_f06vl")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("39_m7n46")]
+offset_bottom = 100.0
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 visible = false
@@ -424,12 +446,26 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -118.0
-offset_top = -81.0
-offset_right = 126.0
-offset_bottom = -65.0
+offset_left = -122.0
+offset_top = -104.0
+offset_right = 122.0
+offset_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("39_xoq1q")
-text = "Enemy Out of Range."
+text = "Enemy Out of Range"
+horizontal_alignment = 1
+
+[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("43_ufn31")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -111.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
