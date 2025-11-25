@@ -1,6 +1,7 @@
-[gd_scene load_steps=38 format=4 uid="uid://qv25yj3rt5ql"]
+[gd_scene load_steps=40 format=4 uid="uid://qv25yj3rt5ql"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_4qlm2"]
+[ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_aq1cd"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://Scenes/player/player.tscn" id="2_qg72l"]
 [ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://Scenes/ui/skill_bar.tscn" id="3_0lii6"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="4_8nwpw"]
@@ -31,6 +32,12 @@
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://Scenes/enemies/minions/crab/crab.tscn" id="29_0lii6"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://Scenes/enemies/minions/starfish/starfish.tscn" id="30_8nwpw"]
 [ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://Scenes/enemies/minions/pelican/pelican.tscn" id="31_82uhe"]
+
+[sub_resource type="GDScript" id="GDScript_82uhe"]
+script/source = "extends Node2D
+
+@export var background_music: AudioStream = null
+"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
 animations = [{
@@ -143,6 +150,8 @@ animations = [{
 }]
 
 [node name="Stage" type="Node2D"]
+script = SubResource("GDScript_82uhe")
+background_music = ExtResource("1_aq1cd")
 
 [node name="World" type="TileMapLayer" parent="."]
 position = Vector2(101, 160)

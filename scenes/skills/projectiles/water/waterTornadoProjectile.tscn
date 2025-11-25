@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://d0kbj7vc5hjhj"]
 
-[ext_resource type="Script" uid="uid://cl6qeq12ugag0" path="res://scenes/skills/projectiles/water/water_tornado_projectile.gd" id="1_a7uo3"]
+[ext_resource type="Script" uid="uid://cl6qeq12ugag0" path="res://Scenes/skills/projectiles/water/water_tornado_projectile.gd" id="1_a7uo3"]
 [ext_resource type="Texture2D" uid="uid://b6e7bqero8rk7" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - Startup and Infinite.png" id="2_a7uo3"]
 [ext_resource type="Texture2D" uid="uid://cmhfp428s70tb" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - End.png" id="3_a7uo3"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_d4fu0"]

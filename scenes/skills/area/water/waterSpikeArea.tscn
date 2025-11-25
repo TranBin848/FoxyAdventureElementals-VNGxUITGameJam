@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://cngeatewj4pjb"]
 
-[ext_resource type="Script" uid="uid://clb6s57bfued6" path="res://scenes/skills/area/water/water_spike.gd" id="1_2y23c"]
+[ext_resource type="Script" uid="uid://clb6s57bfued6" path="res://Scenes/skills/area/water/water_spike.gd" id="1_2y23c"]
 [ext_resource type="Texture2D" uid="uid://cucp2lw6434d4" path="res://assets/skills/water/Water Spike/Water Spike 01 - SpriteSheet.png" id="2_3m6ur"]
 [ext_resource type="Texture2D" uid="uid://df7r3xcswk3di" path="res://assets/skills/water/Water Spike/Water StartUp 1 SpriteSheet(30fps).png" id="3_3m6ur"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_686kg"]
