@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://6o0ryerh3t3f" path="res://assets/enemy/mushroom/mushroom_01.png" id="5_8xtti"]
 [ext_resource type="Texture2D" uid="uid://dh2yf13qglxxf" path="res://assets/enemy/mushroom/mushroom_02.png" id="6_pqg2d"]
 [ext_resource type="Texture2D" uid="uid://b6dn5oietc0js" path="res://assets/enemy/mushroom/mushroom_03.png" id="7_wy1pw"]
-[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://Scripts/area_component/hurt_area_2d.gd" id="8_m6me8"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_m6me8"]
 [ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://Scenes/enemies/states/moving.gd" id="8_sl7hc"]
 [ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="10_dxuq7"]
 [ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="10_pkus5"]

@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var attack_sfx: AudioStream = null
+
 var start_pos: Vector2 = Vector2.ZERO
 var king_crab: KingCrab
 var atk_range: float = 0

@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://cb08y1slu5bnw"]
+
+[ext_resource type="Texture2D" uid="uid://byerwws2uqc36" path="res://assets/ui/menu_bg.png" id="1_hw0b7"]
+[ext_resource type="Script" uid="uid://vnwo1hlbsuex" path="res://levels/Menu/menu.gd" id="1_v4w18"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="2_v4w18"]
+[ext_resource type="PackedScene" uid="uid://ctvqtbns8ojyh" path="res://scenes/testscene/test_ui.tscn" id="2_wterf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wterf"]
+texture = ExtResource("1_hw0b7")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw0b7"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_v4w18")
+target_scene = ExtResource("2_wterf")
+
+[node name="Background" type="Panel" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_wterf")
+
+[node name="PanelContainer" type="PanelContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -70.0
+offset_right = 310.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_v4w18")
+theme_type_variation = &"Menu"
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Menu/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(810, 60)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="PlayButton" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"ToolButton"
+theme_override_font_sizes/font_size = 29
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hw0b7")
+text = "PLAY"
+
+[node name="SettingButton" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"ToolButton"
+theme_override_font_sizes/font_size = 29
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"ToolButton"
+theme_override_font_sizes/font_size = 29
+text = "QUIT"
+
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="Menu" method="_on_play_button_pressed"]
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/SettingButton" to="Menu" method="_on_setting_button_pressed"]
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]

@@ -2,7 +2,6 @@ class_name EnemyState
 extends FSMState
 
 @export var bounce_back_velocity: float = 150
-
 #Control moving and changing state to run
 #Return true if moving
 func control_moving() -> bool:

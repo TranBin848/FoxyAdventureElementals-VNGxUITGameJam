@@ -12,6 +12,7 @@ signal checkpoint_changed(new_checkpoint_id: String)
 
 # --- Player states ---
 var has_blade: bool = false
+var has_wand: bool = false
 var isReloadScene: bool = false
 
 # --- Inventory system ---
@@ -20,14 +21,12 @@ var inventory_system: InventorySystem = null
 func _ready() -> void:
 	# Load checkpoint khi mở game
 	load_checkpoint_data()
+	# Theo dõi thay đổi scene để tự khôi phục trạng thái
+	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
 	
 	# Init inventory system
 	inventory_system = InventorySystem.new()
 	add_child(inventory_system)
-#
-	## Theo dõi thay đổi scene để tự khôi phục trạng thái
-	#get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
-
 
 # --- Khi đổi scene ---
 func _on_scene_changed() -> void:
@@ -57,12 +56,15 @@ func _on_scene_changed() -> void:
 		print("✅ Player đã được khôi phục từ checkpoint:", current_checkpoint_id)
 	else:
 		print("ℹ️ Không có dữ liệu checkpoint cho scene này.")
+		
 
 
 # --- Chuyển stage ---
 func change_stage(stage_path: String, _target_portal_name: String = "") -> void:
 	target_portal_name = _target_portal_name
-	get_tree().change_scene_to_file(stage_path)
+	await get_tree().change_scene_to_file(stage_path)
+	
+	current_stage = get_tree().current_scene
 
 
 # --- Gọi từ Dialogic ---
@@ -203,3 +205,13 @@ func collect_blade() -> void:
 
 	if player:
 		player.collected_blade()
+
+func collect_wand() -> void:
+	if has_wand:
+		return
+		
+	has_wand = true
+	
+	if player:
+		player.collected_wand()
+	

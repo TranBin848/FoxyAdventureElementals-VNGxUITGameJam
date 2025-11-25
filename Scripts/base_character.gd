@@ -23,6 +23,8 @@ signal died
 signal mana_changed
 
 
+@export var skill_to_drop: Script = null      
+@export var skill_icon_path: String = ""      
 
 var jump_speed: float = 400.0
 var fsm: FSM = null
