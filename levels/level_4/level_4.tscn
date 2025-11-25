@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=61 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="TileSet" uid="uid://bqmwdnppiuh3u" path="res://assets/island/TileSets/FireSet.tres" id="1_otmpl"]
 [ext_resource type="TileSet" uid="uid://djaukmqu8p2nq" path="res://assets/island/TileSets/IceSet.tres" id="2_ac2k2"]
@@ -29,12 +29,22 @@
 [ext_resource type="Texture2D" uid="uid://clilecwvvs5g4" path="res://assets/terrain_plus/Decor.png" id="27_sjyfi"]
 [ext_resource type="Texture2D" uid="uid://bcutbm7w0s6o1" path="res://assets/terrain_plus/Other Tiles2.png" id="28_nntlx"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="29_34bpf"]
+[ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="29_ah671"]
 [ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://Scenes/enemies/minions/pelican/pelican.tscn" id="30_b7cep"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://Scenes/enemies/minions/mushroom/mushroom.tscn" id="31_b44px"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://Scenes/enemies/minions/crab/crab.tscn" id="32_wsco1"]
+[ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://Scenes/skills/scripts/fire/FireShot.gd" id="33_nyqcx"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://Scenes/enemies/minions/starfish/starfish.tscn" id="33_tepfr"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="34_83j61"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://Scenes/ui/skill_bar.tscn" id="35_sepos"]
+[ext_resource type="Script" uid="uid://cf7o1kqvk2msb" path="res://Scenes/skills/scripts/fire/FireExplosion.gd" id="35_tn3ix"]
+[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://Scenes/skills/scripts/water/Tornado.gd" id="37_pyrf2"]
+[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://Scenes/skills/scripts/water/WaterBall.gd" id="39_g4e08"]
+[ext_resource type="Script" uid="uid://bnywkjm1hy4ke" path="res://Scenes/skills/scripts/water/WaterSpike.gd" id="40_0ob0i"]
+[ext_resource type="Script" uid="uid://obmi03ksefk2" path="res://Scenes/skills/scripts/wood/WoodShot.gd" id="41_mk7g3"]
+[ext_resource type="Script" uid="uid://n0h5gosjpnrv" path="res://Scenes/skills/scripts/wood/HealOverTime.gd" id="42_82kae"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://Scenes/ui/skill_bar_new.tscn" id="43_ah671"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="43_nyqcx"]
+[ext_resource type="PackedScene" uid="uid://bh4o4646vlfjr" path="res://levels/objects/wand_collectable.tscn" id="45_tn3ix"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_wqd52"]
 tile_data = PackedInt32Array(0, 10, 655360, 1, 10, 655360, 2, 10, 655360)
@@ -2581,8 +2591,14 @@ position = Vector2(4344, 856)
 [node name="WoodenDoor3" parent="Objects" instance=ExtResource("14_0ob0i")]
 position = Vector2(4312, 848)
 
+[node name="Checkpoint" parent="Objects" instance=ExtResource("29_ah671")]
+position = Vector2(2104, 624)
+
+[node name="Checkpoint2" parent="Objects" instance=ExtResource("29_ah671")]
+position = Vector2(3391, -80)
+
 [node name="BladeCollectable" parent="." instance=ExtResource("29_34bpf")]
-position = Vector2(464, -12)
+position = Vector2(390, 87)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -2592,29 +2608,43 @@ position = Vector2(986, -40)
 [node name="Mushroom" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(1080, 788)
 element = 3
+skill_to_drop = ExtResource("33_nyqcx")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(1248, 788)
 element = 3
+skill_to_drop = ExtResource("33_nyqcx")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(525, 787)
 element = 3
+skill_to_drop = ExtResource("35_tn3ix")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons3.png"
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(352, 787)
 element = 3
+skill_to_drop = ExtResource("35_tn3ix")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons3.png"
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(1409, 436)
 element = 3
+skill_to_drop = ExtResource("35_tn3ix")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons3.png"
 
 [node name="Crab4" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(1129, 147)
 element = 3
+skill_to_drop = ExtResource("33_nyqcx")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
 
 [node name="Starfish2" parent="Enemies" instance=ExtResource("33_tepfr")]
 position = Vector2(3060, 1137)
+skill_to_drop = ExtResource("37_pyrf2")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
 
 [node name="Saw" parent="Enemies" instance=ExtResource("34_83j61")]
 position = Vector2(3139, 318)
@@ -2628,10 +2658,14 @@ position = Vector2(3721, 318)
 [node name="Starfish3" parent="Enemies" instance=ExtResource("33_tepfr")]
 position = Vector2(347, 81)
 element = 3
+skill_to_drop = ExtResource("33_nyqcx")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
 
 [node name="Crab" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(600, -13)
 element = 3
+skill_to_drop = ExtResource("35_tn3ix")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons3.png"
 
 [node name="Crab5" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(2520, 1044)
@@ -2639,40 +2673,60 @@ position = Vector2(2520, 1044)
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(2520, 1044)
 element = 2
+skill_to_drop = ExtResource("39_g4e08")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Starfish4" parent="Enemies" instance=ExtResource("33_tepfr")]
 position = Vector2(3246, 1137)
+skill_to_drop = ExtResource("37_pyrf2")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
 
 [node name="Starfish5" parent="Enemies" instance=ExtResource("33_tepfr")]
 position = Vector2(3432, 1137)
+skill_to_drop = ExtResource("37_pyrf2")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
 
 [node name="Crab6" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(2867, 1107)
 element = 2
+skill_to_drop = ExtResource("40_0ob0i")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons19.png"
 
 [node name="Mushroom5" parent="Enemies" instance=ExtResource("31_b44px")]
-position = Vector2(2909, -139)
+position = Vector2(2909, -140)
 element = 1
+skill_to_drop = ExtResource("41_mk7g3")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons38.png"
 
 [node name="Mushroom6" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(2497, -172)
 element = 1
+skill_to_drop = ExtResource("42_82kae")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons36.png"
 
 [node name="Mushroom7" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(2808, -236)
 element = 1
+skill_to_drop = ExtResource("41_mk7g3")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons38.png"
 
 [node name="Mushroom8" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(3005, -236)
 element = 1
+skill_to_drop = ExtResource("41_mk7g3")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons38.png"
 
 [node name="Crab15" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(1593, 659)
 element = 3
+skill_to_drop = ExtResource("35_tn3ix")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons3.png"
 
 [node name="Crab7" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(2330, 115)
 element = 1
+skill_to_drop = ExtResource("41_mk7g3")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons38.png"
 
 [node name="Saw4" parent="Enemies" instance=ExtResource("34_83j61")]
 position = Vector2(2881, -98)
@@ -2680,62 +2734,111 @@ position = Vector2(2881, -98)
 [node name="Starfish6" parent="Enemies" instance=ExtResource("33_tepfr")]
 position = Vector2(3221, -47)
 element = 1
+skill_to_drop = ExtResource("42_82kae")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons36.png"
 
 [node name="Crab8" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(3520, -109)
 element = 1
+skill_to_drop = ExtResource("41_mk7g3")
 
 [node name="Crab9" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(3694, -109)
 element = 1
+skill_to_drop = ExtResource("41_mk7g3")
 
 [node name="Mushroom9" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(2182, 629)
 element = 1
+skill_to_drop = ExtResource("42_82kae")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons36.png"
 
 [node name="Starfish7" parent="Enemies" instance=ExtResource("33_tepfr")]
 position = Vector2(3801, 1009)
+skill_to_drop = ExtResource("39_g4e08")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Starfish8" parent="Enemies" instance=ExtResource("33_tepfr")]
 position = Vector2(4104, 913)
+skill_to_drop = ExtResource("39_g4e08")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Starfish9" parent="Enemies" instance=ExtResource("33_tepfr")]
 position = Vector2(4264, 945)
+skill_to_drop = ExtResource("39_g4e08")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Crab10" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(4490, 947)
 element = 2
+skill_to_drop = ExtResource("40_0ob0i")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons19.png"
 
 [node name="Crab11" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(4684, 979)
 element = 2
+skill_to_drop = ExtResource("39_g4e08")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Mushroom10" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(4245, 501)
 element = 1
+skill_to_drop = ExtResource("42_82kae")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons36.png"
 
 [node name="Mushroom11" parent="Enemies" instance=ExtResource("31_b44px")]
 position = Vector2(4342, 501)
 element = 1
+skill_to_drop = ExtResource("42_82kae")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons36.png"
 
 [node name="Crab12" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(4536, 531)
 element = 1
+skill_to_drop = ExtResource("41_mk7g3")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons38.png"
 
 [node name="Crab13" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(4458, 691)
 element = 2
+skill_to_drop = ExtResource("37_pyrf2")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
 
 [node name="Crab14" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(3132, 819)
 element = 2
+skill_to_drop = ExtResource("37_pyrf2")
+skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
+
+[node name="Checkpoint" parent="Enemies" instance=ExtResource("29_ah671")]
+position = Vector2(1294, 784)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SkillBar" parent="CanvasLayer" instance=ExtResource("35_sepos")]
-anchors_preset = 7
-anchor_top = 1.0
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -56.0
-offset_bottom = -16.0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("43_nyqcx")
+
+[node name="SkillBar" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_ah671")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Checkpoint" parent="." instance=ExtResource("29_ah671")]
+position = Vector2(4444, 240)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("29_ah671")]
+position = Vector2(2598, 816)
+
+[node name="Checkpoint3" parent="." instance=ExtResource("29_ah671")]
+position = Vector2(4039, 912)
+
+[node name="Checkpoint4" parent="." instance=ExtResource("29_ah671")]
+position = Vector2(6235, 624)
+
+[node name="WandCollectable" parent="." instance=ExtResource("45_tn3ix")]
+position = Vector2(1215, 130)
