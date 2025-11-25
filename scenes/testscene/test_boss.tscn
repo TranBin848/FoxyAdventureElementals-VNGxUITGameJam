@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dt1od2hyke60g" path="res://assets/island/back_palm_trees/back_palm_tree_regular_02.png" id="23_1upys"]
 [ext_resource type="Texture2D" uid="uid://frimagh5yfit" path="res://assets/island/back_palm_trees/back_palm_tree_regular_03.png" id="24_b4b1q"]
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_meh6h"]
-[ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/boss_area.gd" id="27_qv7h7"]
+[ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://Scripts/boss_area.gd" id="27_qv7h7"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://Scenes/enemies/boss/king_crab.tscn" id="28_smwot"]
 [ext_resource type="AudioStream" uid="uid://dxm63t53brxfa" path="res://assets/sounds/Three Red Hearts - Save the City.ogg" id="28_wo2fk"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="29_ol1w0"]
