@@ -40,6 +40,9 @@ var blade_hit_area: Area2D
 @export var hurt_sfx: AudioStream = null
 @export var attack_sfx: AudioStream = null
 @export var throw_sfx: AudioStream = null
+@export var walk_sfx: AudioStream = null
+
+@onready var walk_sfx_player: AudioStreamPlayer2D = null
 
 #Movement
 var last_dir: float = 0.0
@@ -71,6 +74,10 @@ func _ready() -> void:
 		collected_blade()
 	
 	camera_2d.make_current()
+	
+	walk_sfx_player = AudioStreamPlayer2D.new()
+	walk_sfx_player.stream = walk_sfx
+	add_child(walk_sfx_player)
 
 # ================================================================
 # === SKILL SYSTEM ===============================================
@@ -410,6 +417,9 @@ func set_invulnerable() -> void:
 	saved_collision_layer = hurt_area.collision_layer
 	hurt_area.collision_layer = 0  # Temporarily disable collision layer
 	
+func _process(delta: float) -> void:
+	if (fsm.current_state != fsm.states.run):
+		walk_sfx_player.stop()
 
 func is_char_invulnerable() -> bool:
 	return is_invulnerable

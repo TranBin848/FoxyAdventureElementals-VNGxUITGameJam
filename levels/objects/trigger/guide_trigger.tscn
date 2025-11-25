@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://j5oaxshr3fdy"]
+[gd_scene load_steps=5 format=3 uid="uid://j5oaxshr3fdy"]
 
 [ext_resource type="Script" uid="uid://5l7jhm0i6snh" path="res://levels/objects/trigger/guide_trigger.gd" id="1_psmjo"]
+[ext_resource type="AudioStream" uid="uid://ddj58l1v507ji" path="res://assets/sounds/Text 1.wav" id="2_ay60q"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="2_v85d0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0j1gu"]
@@ -9,6 +10,7 @@ size = Vector2(138, 37)
 [node name="GuideTrigger" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_psmjo")
+enter_sfx = ExtResource("2_ay60q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -18.5)

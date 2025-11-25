@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var guide_text: String = ""   # Text có thể nhập trong inspector
+@export var enter_sfx: AudioStream = null
 
 @onready var label = $RichTextLabel
 

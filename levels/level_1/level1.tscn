@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://8qflg27g53dv"]
+[gd_scene load_steps=54 format=4 uid="uid://8qflg27g53dv"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://b82lj4mrhdgs1" path="res://levels/level_1/scripts/parallax_layer_small_cloud.gd" id="16_420sh"]
 [ext_resource type="Texture2D" uid="uid://d2lmketl0r6ot" path="res://assets/terrain_plus/cloud1.png" id="17_lpcgt"]
 [ext_resource type="Texture2D" uid="uid://entd33irjxkk" path="res://assets/terrain_plus/cloud2.png" id="18_xgtia"]
+[ext_resource type="AudioStream" uid="uid://32juag5l2aky" path="res://assets/sounds/11485__inchadney__light-rain-in-forestwav.mp3" id="19_uabgq"]
 [ext_resource type="Texture2D" uid="uid://dgw41jsn5uaup" path="res://assets/terrain_plus/cloud3.png" id="19_wqxfy"]
 [ext_resource type="Texture2D" uid="uid://bx81r144ln5ox" path="res://assets/terrain_plus/cloud4.png" id="20_6onc1"]
 [ext_resource type="Texture2D" uid="uid://cgi6nqgna4gq" path="res://assets/terrain_plus/cloud5.png" id="21_s88ls"]
@@ -87,7 +88,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.122846
+shader_parameter/y_zoom = 0.751315
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -213,6 +214,13 @@ platform_floor_layers = 4294967231
 position = Vector2(-1055, 355)
 tile_map_data = PackedByteArray("AAD8//7/BwAAAAAAAQD5/wEACAAAAAYAAAD6/wEACAAAAAUAAAD7/wEACAAAAAYAAAD1/wEACAABAAQAAAD0/wEACAAAAAYAAADz/wEACAABAAQAAADy/wEACAAAAAQAAAD9/wEACAABAAQAAAD+/wEACAABAAQAAABEAPr/AAAAAAIAAABFAPr/AAAAAAIAAABGAPr/AAAAAAYAAABHAPr/AAAAAAIAAABIAPr/AAAAAAIAAABDAPr/AAAAAAAAAABJAPr/AAAAAAEAAABHAPH/AAAAAAIAAABIAPH/AAAAAAIAAABJAPH/AAAAAAIAAABKAPH/AAAAAAIAAABLAPH/AAAAAAIAAABMAPH/AAAAAAIAAABNAPH/AAAAAAIAAABOAPH/AAAAAAIAAABPAPH/AAAAAAIAAABQAPH/AAAAAAIAAABRAPH/AAAAAAIAAABSAPH/AAAAAAIAAABTAPH/AAAAAAIAAABUAPH/AAAAAAIAAABVAPH/AAAAAAIAAABWAPH/AAAAAAEAAAAOAAEACAAAAAYAAAANAAEACAAAAAUAAAAKAAIACAAAAAUAAAABAAEACAACAAQAAAAMAAEACAACAAQAAADx/wEACAAAAAYAAADw/wEACAAAAAUAAADv/wEACAAAAAUAAADu/wEACAAAAAUAAADt/wEACAAAAAYAAADs/wEACAACAAQAAADq/wEACAAAAAQAAADr/wEACAAAAAQAAADo/wEACAAAAAQAAADp/wEACAAAAAQAAABdAPj/CAAAAAYAAABiAPj/CAAAAAYAAABjAPj/CAAAAAYAAABkAPj/CAAAAAUAAABnAPj/CAAAAAUAAABrAPj/CAAAAAYAAABvAPj/CAAAAAUAAABwAPj/CAAAAAYAAABxAPj/CAAAAAYAAABUAPj/CAAAAAQAABBVAPj/CAAAAAQAABBWAPj/CAAAAAQAABBxAOn/CAABAAcAAABuAOn/CAAAAA0AAABzAOn/CAAAAA0AAABtAOn/CAACAA0AAAB8APr/AAAAAAAAAACDAPr/AAAAAAEAAAB9APr/AAAAAAIAAAB+APr/AAAAAAIAAAB/APr/AAAAAAIAAACAAPr/AAAAAAIAAACBAPr/AAAAAAIAAACCAPr/AAAAAAIAAAB5APL/AAAAAAIAAAB6APL/AAAAAAIAAAB7APL/AAAAAAIAAAB8APL/AAAAAAIAAAB9APL/AAAAAAIAAAB4APL/AAAAAAAAAAB+APL/AAAAAAEAAAB4APP/AAABAAgAAAB5APP/AAABAAgAAAB6APP/AAABAAgAAAB7APP/AAABAAgAAAB8APP/AAABAAgAAAB9APP/AAABAAgAAAC+AOf/CAAGAAIAAAC/AOf/CAAHAAAAAACtAOf/CAAAAA0AAACuAOf/CAACAA0AAADy//7/BwAAAAAAAQD3/wEACAAAAAQAAAD4/wEACAACAAQAAAD2/wEACAAAAAYAAAA=")
 tile_set = ExtResource("2_0brgb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Front"]
+position = Vector2(2264, -187)
+stream = ExtResource("19_uabgq")
+autoplay = true
+max_distance = 300.0
+bus = &"SFX"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

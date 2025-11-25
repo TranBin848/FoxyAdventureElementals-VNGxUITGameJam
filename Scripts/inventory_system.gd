@@ -26,6 +26,13 @@ func use_key() -> bool:
 		keys -= 1
 		return true
 	return false
+	
+func save_data() -> Dictionary:
+	return {"coins": coins, "keys": keys}
+	
+func load_data(saved_data: Dictionary) -> void:
+	coins = saved_data.get("coins", 0)
+	keys = saved_data.get("keys", 0)
 
 func has_key() -> bool:
 	return keys > 0	

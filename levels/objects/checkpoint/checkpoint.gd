@@ -4,6 +4,8 @@ class_name Checkpoint
 signal checkpoint_activated(checkpoint_id: String)
 
 @export var checkpoint_id: String = ""
+@export var activate_sfx: AudioStream = null
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_activated: bool = false
@@ -40,6 +42,8 @@ func activate() -> void:
 	print("✅ Checkpoint activated:", checkpoint_id)
 
 	animated_sprite_2d.play("active")
+	
+	AudioPlayer.play_sound_once(activate_sfx)
 
 
 func activate_visual_only() -> void:
