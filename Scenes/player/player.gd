@@ -62,7 +62,7 @@ signal skill_collected(skill_resource_class)
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Idle)
-	GameManager.player = self	
+	GameManager.player = self
 	extra_sprites.append(silhouette_normal_sprite)
 	silhouette_blade_sprite.hide()
 	silhouette_wand_sprite.hide()
@@ -566,6 +566,14 @@ func get_closest_target() -> Node2D:
 # === END DETECTION AREA SIGNALS =================================
 # ================================================================
 
+# Thêm biến để lưu multiplier
+var speed_multiplier: float = 1.0
+
+# Phương thức để thay đổi multiplier
+func set_speed_multiplier(multiplier: float) -> void:
+	speed_multiplier = multiplier
+
+# Cập nhật logic di chuyển
 
 # === SWAP WEAPON SYSTEM =================================
 func collected_wand() -> void:
@@ -679,22 +687,16 @@ func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	extra_sprites.append(new_silhouette)
 	new_silhouette.show()
 func _update_movement(delta: float) -> void:
-	#if is_on_floor() or is_on_wall():
-		#reset_jump()
-		#reset_dashes()
-		
-	velocity.y += gravity*delta
-	
+	velocity.y += gravity * delta
+
 	if fsm.current_state == fsm.states.wallcling:
 		velocity.y = clamp(velocity.y, -INF, wall_slide_speed)
 	else:
 		velocity.y = clamp(velocity.y, -INF, max_fall_speed)
-	
+
 	if is_dashing:
 		velocity.y = 0
 
-	#print(velocity)
-	#print(global_position)
 	move_and_slide()
 	pass
 

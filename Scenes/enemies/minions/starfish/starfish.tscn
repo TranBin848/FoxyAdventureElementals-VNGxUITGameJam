@@ -18,8 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://dw71rasxvd57m" path="res://assets/enemy/starfish/starfish_atk_04.png" id="10_yw3rq"]
 [ext_resource type="Texture2D" uid="uid://h0oumqkqx32d" path="res://assets/enemy/starfish/starfish_atk_05.png" id="11_ffn74"]
 [ext_resource type="Texture2D" uid="uid://oapb6eisegnx" path="res://assets/enemy/starfish/starfish_atk_06.png" id="12_jhkca"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="14_yw546"]
-[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="15_xe046"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://Scripts/area_component/hit_area_2d.gd" id="14_yw546"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://Scripts/area_component/hurt_area_2d.gd" id="15_xe046"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ji8a0"]
 animations = [{
