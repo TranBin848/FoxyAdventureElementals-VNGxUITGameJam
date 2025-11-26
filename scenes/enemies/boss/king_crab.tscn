@@ -46,7 +46,7 @@
 [ext_resource type="Script" uid="uid://ch0s3e74g070t" path="res://scenes/enemies/boss/brake.gd" id="38_p2itk"]
 [ext_resource type="Script" uid="uid://op6pss6c2qh4" path="res://scenes/enemies/boss/retrieve_claw.gd" id="41_200mk"]
 [ext_resource type="Script" uid="uid://bmnx2xxwrq08j" path="res://scenes/enemies/boss/hurt.gd" id="44_5alav"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="45_vjhg0"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="45_vjhg0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
 animations = [{
@@ -299,6 +299,9 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_5alav")
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(25, -14)
 
 [node name="States" type="Node" parent="."]
 
