@@ -2784,6 +2784,7 @@ skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
 
 [node name="Checkpoint" parent="Enemies" instance=ExtResource("29_ah671")]
 position = Vector2(1294, 784)
+checkpoint_id = "401"
 
 [node name="Checkpoint" parent="." instance=ExtResource("29_ah671")]
 position = Vector2(4444, 240)
