@@ -18,6 +18,9 @@ var isReloadScene: bool = false
 # --- Inventory system ---
 var inventory_system: InventorySystem = null
 
+# --- Logger ---
+var logger: Logger = ConsoleLogger.new()
+
 func _ready() -> void:
 	# Load checkpoint khi mở game
 	#load_checkpoint_data()
