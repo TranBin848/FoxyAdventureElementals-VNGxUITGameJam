@@ -40,8 +40,10 @@ func drop_bomb() -> void:
 	if bomb_factory != null:
 		var bomb = bomb_factory.create()
 		if bomb != null:
-			if bomb is RigidBody2D:
-				var drop_direction : Vector2 = Vector2.DOWN.rotated(deg_to_rad(drop_bomb_angle * -direction))
-				#print(drop_direction)
-				(bomb as RigidBody2D).apply_impulse(drop_direction * drop_bomb_force, bomb.position)
+			if bomb is EnemyCharacter:
+				var drop_direction : Vector2 = Vector2.DOWN.rotated(deg_to_rad(drop_bomb_angle * -direction)).normalized()
+				(bomb as EnemyCharacter).velocity = drop_direction * drop_bomb_force
+				(bomb as EnemyCharacter).elemental_type = elemental_type				
+				(bomb as EnemyCharacter).spike = attack_damage
+				(bomb as EnemyCharacter)._ready()
 	pass

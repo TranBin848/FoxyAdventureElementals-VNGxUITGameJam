@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://dchncc7ynoxdl"]
+[gd_scene load_steps=21 format=3 uid="uid://dchncc7ynoxdl"]
 
 [ext_resource type="Texture2D" uid="uid://pjg067fjvr3h" path="res://assets/ui/pannel_player.png" id="1_0545j"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="1_u3i16"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="1_u3i16"]
 [ext_resource type="Script" uid="uid://dxv2pgo8vl74m" path="res://scenes/ui/icon_and_health.gd" id="2_8np0s"]
 [ext_resource type="Texture2D" uid="uid://ccr478wasxi54" path="res://assets/ui/bars.png" id="3_27flr"]
 [ext_resource type="Texture2D" uid="uid://r4uk8rh3cg1h" path="res://assets/foxy/face/foxy_faces.png" id="3_lwx6g"]
@@ -57,11 +57,8 @@ font = ExtResource("6_kci34")
 atlas = ExtResource("3_27flr")
 region = Rect2(1, 29, 80, 7)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1tfoj"]
-load_path = "res://.godot/imported/rpg (1).png-d829a869e2b0b7bde4cfa1575ba9d76a.ctex"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ptex"]
-atlas = SubResource("CompressedTexture2D_1tfoj")
+atlas = ExtResource("3_27flr")
 region = Rect2(9, 64, 64, 5)
 margin = Rect2(3.1, 0, 6, 0.8)
 

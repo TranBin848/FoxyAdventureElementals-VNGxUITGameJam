@@ -6,7 +6,7 @@ npc_master_fox:Không có gậy phép, cậu không thể dùng bất kỳ chiê
 
 Một cây gậy sáng nhẹ rơi xuống trước mặt Foxy.
 
-npc_master_fox: Hãy cầm nó. Khi cậu đánh bại quái, chúng sẽ rơi ra mảnh linh kỹ.
+npc_master_fox: Hãy cầm nó. Khi cậu đánh bại quái, chúng sẽ rơi ra mảnh linh kỹ. Cậu có thể dùng V để đổi vũ khí
 do GameManager.collect_wand()
 npc_master_fox: Mãnh linh kỹ chứa một phần ký ức và bản năng chiến đấu của linh thú hệ đó.
 

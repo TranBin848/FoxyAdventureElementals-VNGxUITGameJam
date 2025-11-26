@@ -1,28 +1,29 @@
-[gd_scene load_steps=53 format=4 uid="uid://8qflg27g53dv"]
+[gd_scene load_steps=59 format=4 uid="uid://8qflg27g53dv"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_038dw"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="1_rm1dv"]
 [ext_resource type="TileSet" uid="uid://b8xtiyc1j22cq" path="res://levels/level_1/level1.tres" id="2_0brgb"]
-[ext_resource type="PackedScene" uid="uid://pmtagssfa754" path="res://Scenes/npc/npc_villager.tscn" id="3_038dw"]
+[ext_resource type="PackedScene" uid="uid://pmtagssfa754" path="res://scenes/npc/npc_villager.tscn" id="3_038dw"]
 [ext_resource type="Texture2D" uid="uid://bfyqrhkykx21u" path="res://assets/spear/spear/spear_9.png" id="4_iy6cw"]
 [ext_resource type="Texture2D" uid="uid://bibbggt5jgslb" path="res://assets/spear/spear/spear_10.png" id="5_ijil1"]
 [ext_resource type="Texture2D" uid="uid://b6g0qbxr2udas" path="res://assets/spear/spear/spear_11.png" id="6_w745m"]
 [ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="7_fk4ex"]
-[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://Scenes/enemies/minions/mushroom/mushroom.tscn" id="8_xoq1q"]
-[ext_resource type="PackedScene" uid="uid://cemwql616mbqj" path="res://Scenes/npc/npc_master_fox.tscn" id="9_m7n46"]
-[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://Scenes/enemies/minions/crab/crab.tscn" id="10_f06vl"]
-[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://Scenes/skills/scripts/water/WaterBall.gd" id="10_m7n46"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://Scenes/player/player.tscn" id="11_m7n46"]
+[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="8_xoq1q"]
+[ext_resource type="PackedScene" uid="uid://cemwql616mbqj" path="res://scenes/npc/npc_master_fox.tscn" id="9_m7n46"]
+[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="10_f06vl"]
+[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://scenes/skills/scripts/water/WaterBall.gd" id="10_m7n46"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="11_m7n46"]
 [ext_resource type="Texture2D" uid="uid://dojy8pmq2a5p7" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 5.png" id="12_ufn31"]
-[ext_resource type="Script" uid="uid://n0h5gosjpnrv" path="res://Scenes/skills/scripts/wood/HealOverTime.gd" id="12_wpna4"]
+[ext_resource type="Script" uid="uid://n0h5gosjpnrv" path="res://scenes/skills/scripts/wood/HealOverTime.gd" id="12_wpna4"]
 [ext_resource type="Texture2D" uid="uid://bxcxwyyup8ew8" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 3.png" id="13_p1ob1"]
-[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://Scenes/skills/scripts/water/Tornado.gd" id="13_uabgq"]
+[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://scenes/skills/scripts/water/Tornado.gd" id="13_uabgq"]
 [ext_resource type="Texture2D" uid="uid://d3cwcjjmlgblu" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 2.png" id="14_wpna4"]
-[ext_resource type="Script" uid="uid://obmi03ksefk2" path="res://Scenes/skills/scripts/wood/WoodShot.gd" id="15_420sh"]
+[ext_resource type="Script" uid="uid://obmi03ksefk2" path="res://scenes/skills/scripts/wood/WoodShot.gd" id="15_420sh"]
 [ext_resource type="Texture2D" uid="uid://de17r1sc64b2p" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 1.png" id="15_uabgq"]
 [ext_resource type="Script" uid="uid://b82lj4mrhdgs1" path="res://levels/level_1/scripts/parallax_layer_small_cloud.gd" id="16_420sh"]
 [ext_resource type="Texture2D" uid="uid://d2lmketl0r6ot" path="res://assets/terrain_plus/cloud1.png" id="17_lpcgt"]
 [ext_resource type="Texture2D" uid="uid://entd33irjxkk" path="res://assets/terrain_plus/cloud2.png" id="18_xgtia"]
+[ext_resource type="AudioStream" uid="uid://32juag5l2aky" path="res://assets/sounds/11485__inchadney__light-rain-in-forestwav.mp3" id="19_uabgq"]
 [ext_resource type="Texture2D" uid="uid://dgw41jsn5uaup" path="res://assets/terrain_plus/cloud3.png" id="19_wqxfy"]
 [ext_resource type="Texture2D" uid="uid://bx81r144ln5ox" path="res://assets/terrain_plus/cloud4.png" id="20_6onc1"]
 [ext_resource type="Texture2D" uid="uid://cgi6nqgna4gq" path="res://assets/terrain_plus/cloud5.png" id="21_s88ls"]
@@ -30,7 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://j5oaxshr3fdy" path="res://levels/objects/trigger/guide_trigger.tscn" id="23_fdnpj"]
 [ext_resource type="PackedScene" uid="uid://bmqknea8bh0ev" path="res://levels/objects/campfire/campfire.tscn" id="24_m54h2"]
 [ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="25_4iddc"]
-[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="26_mpt5m"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="26_mpt5m"]
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/Boulder/boulder.tscn" id="27_mf820"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="28_30140"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="29_uvsuj"]
@@ -40,11 +41,14 @@
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="32_vspgp"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="35_iy6cw"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="37_n1ndl"]
-[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://Scenes/ui/skill_bar_new.tscn" id="38_f06vl"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="38_f06vl"]
 [ext_resource type="PackedScene" uid="uid://d28vgb0lxesvt" path="res://shaders/leaf_particles_2d.tscn" id="38_fk4ex"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://Scenes/ui/hud.tscn" id="39_m7n46"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="39_m7n46"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="39_xoq1q"]
-[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://Scenes/ui/weapon_panel.tscn" id="43_ufn31"]
+[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="43_ufn31"]
+[ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="47_420sh"]
+[ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/boss_area.gd" id="47_xgtia"]
+[ext_resource type="AudioStream" uid="uid://dxm63t53brxfa" path="res://assets/sounds/Three Red Hearts - Save the City.ogg" id="48_wqxfy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mjh6"]
 animations = [{
@@ -69,6 +73,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w745m"]
 size = Vector2(49, 471)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgtia"]
+size = Vector2(839, 20)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xoq1q"]
 particles_animation = true
 particles_anim_h_frames = 5
@@ -87,9 +94,11 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.77156
+shader_parameter/y_zoom = 0.683013
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6onc1"]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_038dw")
@@ -153,14 +162,12 @@ hoithoai = "guide_elemental"
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(631, 151)
-element = 2
-elemental_type = 3
+elemental_type = 2
 skill_to_drop = ExtResource("10_m7n46")
 skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(2165, -489)
-element = 1
 elemental_type = 5
 skill_to_drop = ExtResource("12_wpna4")
 
@@ -168,32 +175,27 @@ skill_to_drop = ExtResource("12_wpna4")
 z_index = 0
 position = Vector2(3097, -107)
 scale = Vector2(1.02679, 0.975904)
-element = 2
-elemental_type = 3
+elemental_type = 2
 skill_to_drop = ExtResource("10_m7n46")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("8_xoq1q")]
 z_index = 0
 position = Vector2(3017, 173)
-element = 2
-elemental_type = 3
+elemental_type = 2
 skill_to_drop = ExtResource("13_uabgq")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(1721, -400)
-element = 1
 elemental_type = 5
 skill_to_drop = ExtResource("15_420sh")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2823, -364)
-element = 1
 elemental_type = 5
 skill_to_drop = ExtResource("12_wpna4")
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2624, -364)
-element = 1
 elemental_type = 5
 skill_to_drop = ExtResource("15_420sh")
 
@@ -202,17 +204,26 @@ position = Vector2(-1859, 443)
 
 [node name="Door" parent="." instance=ExtResource("35_iy6cw")]
 position = Vector2(5280, -440)
-target_stage = "uid://c47jft3el2tid"
+target_stage = "uid://wopr13pq4dnf"
 
 [node name="Player" parent="." instance=ExtResource("11_m7n46")]
-position = Vector2(3576, 35)
+position = Vector2(4591, -559)
 collision_mask = 73
 platform_floor_layers = 4294967231
+max_health = 1000
 
 [node name="Front" type="TileMapLayer" parent="."]
 position = Vector2(-1055, 355)
 tile_map_data = PackedByteArray("AAD8//7/BwAAAAAAAQD5/wEACAAAAAYAAAD6/wEACAAAAAUAAAD7/wEACAAAAAYAAAD1/wEACAABAAQAAAD0/wEACAAAAAYAAADz/wEACAABAAQAAADy/wEACAAAAAQAAAD9/wEACAABAAQAAAD+/wEACAABAAQAAABEAPr/AAAAAAIAAABFAPr/AAAAAAIAAABGAPr/AAAAAAYAAABHAPr/AAAAAAIAAABIAPr/AAAAAAIAAABDAPr/AAAAAAAAAABJAPr/AAAAAAEAAABHAPH/AAAAAAIAAABIAPH/AAAAAAIAAABJAPH/AAAAAAIAAABKAPH/AAAAAAIAAABLAPH/AAAAAAIAAABMAPH/AAAAAAIAAABNAPH/AAAAAAIAAABOAPH/AAAAAAIAAABPAPH/AAAAAAIAAABQAPH/AAAAAAIAAABRAPH/AAAAAAIAAABSAPH/AAAAAAIAAABTAPH/AAAAAAIAAABUAPH/AAAAAAIAAABVAPH/AAAAAAIAAABWAPH/AAAAAAEAAAAOAAEACAAAAAYAAAANAAEACAAAAAUAAAAKAAIACAAAAAUAAAABAAEACAACAAQAAAAMAAEACAACAAQAAADx/wEACAAAAAYAAADw/wEACAAAAAUAAADv/wEACAAAAAUAAADu/wEACAAAAAUAAADt/wEACAAAAAYAAADs/wEACAACAAQAAADq/wEACAAAAAQAAADr/wEACAAAAAQAAADo/wEACAAAAAQAAADp/wEACAAAAAQAAABdAPj/CAAAAAYAAABiAPj/CAAAAAYAAABjAPj/CAAAAAYAAABkAPj/CAAAAAUAAABnAPj/CAAAAAUAAABrAPj/CAAAAAYAAABvAPj/CAAAAAUAAABwAPj/CAAAAAYAAABxAPj/CAAAAAYAAABUAPj/CAAAAAQAABBVAPj/CAAAAAQAABBWAPj/CAAAAAQAABBxAOn/CAABAAcAAABuAOn/CAAAAA0AAABzAOn/CAAAAA0AAABtAOn/CAACAA0AAAB8APr/AAAAAAAAAACDAPr/AAAAAAEAAAB9APr/AAAAAAIAAAB+APr/AAAAAAIAAAB/APr/AAAAAAIAAACAAPr/AAAAAAIAAACBAPr/AAAAAAIAAACCAPr/AAAAAAIAAAB5APL/AAAAAAIAAAB6APL/AAAAAAIAAAB7APL/AAAAAAIAAAB8APL/AAAAAAIAAAB9APL/AAAAAAIAAAB4APL/AAAAAAAAAAB+APL/AAAAAAEAAAB4APP/AAABAAgAAAB5APP/AAABAAgAAAB6APP/AAABAAgAAAB7APP/AAABAAgAAAB8APP/AAABAAgAAAB9APP/AAABAAgAAAC+AOf/CAAGAAIAAAC/AOf/CAAHAAAAAACtAOf/CAAAAA0AAACuAOf/CAACAA0AAADy//7/BwAAAAAAAQD3/wEACAAAAAQAAAD4/wEACAACAAQAAAD2/wEACAAAAAYAAAA=")
 tile_set = ExtResource("2_0brgb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Front"]
+position = Vector2(2264, -187)
+stream = ExtResource("19_uabgq")
+volume_db = 10.0
+autoplay = true
+max_distance = 300.0
+bus = &"SFX"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -328,7 +339,7 @@ guide_text = "F to interact"
 
 [node name="GuideTrigger3" parent="." instance=ExtResource("23_fdnpj")]
 position = Vector2(-23, 310)
-guide_text = "Take the blade \\n C to attack, X t o throw"
+guide_text = "Take the blade \\n C to attack, X to throw"
 
 [node name="GuideTrigger4" parent="." instance=ExtResource("23_fdnpj")]
 position = Vector2(-326, 310)
@@ -389,6 +400,7 @@ position = Vector2(3386, -428)
 position = Vector2(3538, -454)
 
 [node name="Bounder" type="StaticBody2D" parent="Object"]
+visible = false
 position = Vector2(-1940, 0)
 disable_mode = 2
 collision_mask = 2
@@ -396,6 +408,15 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Object/Bounder"]
 position = Vector2(14.5, 225.5)
 shape = SubResource("RectangleShape2D_w745m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Object"]
+visible = false
+position = Vector2(-1837, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object/StaticBody2D"]
+position = Vector2(354.5, 0)
+shape = SubResource("RectangleShape2D_xgtia")
 
 [node name="LeafGPUParticles2D" parent="." instance=ExtResource("38_fk4ex")]
 material = SubResource("CanvasItemMaterial_xoq1q")
@@ -469,3 +490,25 @@ offset_right = -15.0
 offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="Bosszone" type="Area2D" parent="." node_paths=PackedStringArray("boss")]
+position = Vector2(5176, -527)
+scale = Vector2(27, 18)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("47_xgtia")
+boss = NodePath("Boss")
+boss_bgm = ExtResource("48_wqxfy")
+
+[node name="Boss" parent="Bosszone" instance=ExtResource("47_420sh")]
+position = Vector2(-2.74074, 4.5)
+scale = Vector2(0.037037, 0.0555556)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bosszone"]
+shape = SubResource("RectangleShape2D_6onc1")
+debug_color = Color(0.988235, 0, 0.290196, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Bosszone"]
+zoom = Vector2(2, 2)
+
+[connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]

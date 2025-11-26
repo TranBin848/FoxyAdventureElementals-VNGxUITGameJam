@@ -4,9 +4,12 @@ extends PlayerState
 @export var dist_between_walk_fx: float = 50
 @export var cur_walk_dist: float = 0
 
+@onready var walk_sfx_player: AudioStreamPlayer2D = null
+
 func _enter() -> void:
 	#Change animation to run
 	obj.change_animation("run")
+	obj.walk_sfx_player.play()
 	timer = 0.2
 	pass
 

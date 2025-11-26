@@ -1,7 +1,7 @@
 extends Area2D
 class_name HitArea2D
 
-@export var damage = 1
+@export var damage = 5
 @export var elemental_type: int = 0 #0: none, 1: fire, 2: earth, 3: water
 signal hitted(area)
 
