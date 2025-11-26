@@ -23,6 +23,10 @@
 [ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="19_5lwol"]
 [ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="19_wa382"]
 [ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="20_ovw27"]
+[ext_resource type="Script" uid="uid://cufl3p0vdicln" path="res://Scenes/enemies/minions/pelican/states/leave.gd" id="7_vr5qo"]
+[ext_resource type="Script" uid="uid://bog5fjackwlfe" path="res://Scenes/enemies/minions/pelican/drop_bomb.gd" id="7_y5g72"]
+[ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://Scripts/node2d_factory.gd" id="9_34k3o"]
+[ext_resource type="PackedScene" uid="uid://ywndjg6kc5hy" path="res://Scenes/enemies/minions/pelican/pelican_bomb.tscn" id="10_kbikv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y02p1"]
 animations = [{

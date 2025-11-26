@@ -1,0 +1,26 @@
+foxy:Cậu… giống hệt tôi… Cậu là ai?
+
+npc_master_fox:Một phần của cậu. Ta đến để nhắc cậu điều quan trọng.
+
+npc_master_fox:Không có gậy phép, cậu không thể dùng bất kỳ chiêu thức nào.
+
+Một cây gậy sáng nhẹ rơi xuống trước mặt Foxy.
+
+npc_master_fox: Hãy cầm nó. Khi cậu đánh bại quái, chúng sẽ rơi ra mảnh linh kỹ.
+do GameManager.collect_wand()
+npc_master_fox: Mãnh linh kỹ chứa một phần ký ức và bản năng chiến đấu của linh thú hệ đó.
+
+foxy:Vậy tôi nhận biết hệ bằng cách nào?
+
+npc_master_fox:Viền màu quanh chúng sẽ cho biết: 
+– Hỏa: đỏ
+– Thủy: xanh lam
+– Mộc: lục nhạt
+– Thổ: nâu
+– Kim: vàng
+
+foxy:Những điều này… sao tôi thấy quen?
+
+npc_master_fox:Vì cậu từng biết. Chỉ là ký ức đang ngủ. Hãy đi tiếp. Ta sẽ lại gặp cậu sớm thôi.
+
+Chú cáo ánh sáng mờ dần và biến mất. Foxy nhìn cây gậy trong tay, cảm nhận năng lượng yếu ớt tỏa ra từ nó.

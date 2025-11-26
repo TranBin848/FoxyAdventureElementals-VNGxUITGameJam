@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="2_gvprn"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="2_oeh51"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="2_oirif"]
+[ext_resource type="Texture2D" uid="uid://cic78p2ro7out" path="res://assets/enemy/crab/crab_hit_01.png" id="2_4p1sk"]
 [ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://Scenes/enemies/states/moving.gd" id="2_tccyh"]
 [ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="3_280wf"]
 [ext_resource type="Texture2D" uid="uid://2utfw8mnjxfa" path="res://assets/enemy/crab/crab_hit_02.png" id="3_clpyl"]
@@ -17,6 +18,8 @@
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="7_oeh51"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_2qm7m"]
 [ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="13_l1170"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://Scripts/area_component/hit_area_2d.gd" id="7_oeh51"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://Scripts/area_component/hurt_area_2d.gd" id="8_2qm7m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c52ow"]
 animations = [{

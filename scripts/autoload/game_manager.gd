@@ -12,14 +12,21 @@ signal checkpoint_changed(new_checkpoint_id: String)
 
 # --- Player states ---
 var has_blade: bool = false
+var has_wand: bool = false
 var isReloadScene: bool = false
+
+# --- Inventory system ---
+var inventory_system: InventorySystem = null
 
 func _ready() -> void:
 	# Load checkpoint khi mở game
-	#load_checkpoint_data()
+	load_checkpoint_data()
 	# Theo dõi thay đổi scene để tự khôi phục trạng thái
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
-
+	
+	# Init inventory system
+	inventory_system = InventorySystem.new()
+	add_child(inventory_system)
 
 # --- Khi đổi scene ---
 func _on_scene_changed() -> void:
@@ -35,22 +42,29 @@ func _on_scene_changed() -> void:
 	if current_checkpoint_id in checkpoint_data:
 		var checkpoint_info = checkpoint_data[current_checkpoint_id]
 		player.health = checkpoint_info.get("health", player.max_health)
-		print("Player Health:",player.health)
 		player.has_blade = checkpoint_info.get("has_blade", false)
 		player.load_state(checkpoint_info.get("player_state", {}))
 
+		# Khôi phục inventory nếu có
+		if checkpoint_info.has("inventory_data") and inventory_system:
+			inventory_system.load_data(checkpoint_info["inventory_data"])
+			print("👜 Inventory đã được khôi phục từ checkpoint")
+		
 		if player.has_blade:
 			player.collected_blade()
 
 		print("✅ Player đã được khôi phục từ checkpoint:", current_checkpoint_id)
 	else:
 		print("ℹ️ Không có dữ liệu checkpoint cho scene này.")
+		
 
 
 # --- Chuyển stage ---
 func change_stage(stage_path: String, _target_portal_name: String = "") -> void:
 	target_portal_name = _target_portal_name
-	get_tree().change_scene_to_file(stage_path)
+	await get_tree().change_scene_to_file(stage_path)
+	
+	current_stage = get_tree().current_scene
 
 
 # --- Gọi từ Dialogic ---
@@ -79,16 +93,15 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	emit_signal("checkpoint_changed", checkpoint_id)
 	
 	var player_state_dict: Dictionary = player.save_state()
-	print(player_state_dict)
+	var inventory_data = inventory_system.save_data() if inventory_system else {}
 	
 	checkpoint_data[checkpoint_id] = {
 		"player_state": player_state_dict,
 		"stage_path": current_stage.scene_file_path,
 		"health": player.health,
-		"has_blade": player.has_blade
+		"has_blade": player.has_blade,
+		"inventory_data": inventory_data
 	}
-	
-	print(checkpoint_data)
 	
 	print("✅ Checkpoint saved:", checkpoint_id)
 	
@@ -127,7 +140,12 @@ func respawn_at_checkpoint() -> void:
 		player.load_state(checkpoint_info.get("player_state", {}))
 		player.health = checkpoint_info.get("health", player.max_health)
 		player.has_blade = checkpoint_info.get("has_blade", false)
-
+		
+		# Khôi phục inventory
+		if checkpoint_info.has("inventory_data") and inventory_system:
+			inventory_system.load_data(checkpoint_info["inventory_data"])
+			print("👜 Inventory loaded from checkpoint")
+		
 		if player.has_blade:
 			player.collected_blade()
 
@@ -150,6 +168,7 @@ func load_checkpoint_data() -> void:
 	current_checkpoint_id = save_data.get("checkpoint_id", "")
 	var player_data = save_data.get("player", {})
 	var stage_path = save_data.get("stage_path", "")
+	var inventory_data = save_data.get("inventory_data", {})
 
 	if not current_checkpoint_id.is_empty():
 		checkpoint_data[current_checkpoint_id] = player_data
@@ -159,6 +178,11 @@ func load_checkpoint_data() -> void:
 			change_stage(stage_path)
 		else:
 			print("✅ Checkpoint loaded but no stage path found.")
+		
+		# Khôi phục inventory ngoài scene load
+		if inventory_data and inventory_system:
+			inventory_system.load_data(inventory_data)
+			print("👜 Inventory loaded from save_data")
 	else:
 		print("✅ Checkpoint data loaded, but no active checkpoint.")
 
@@ -181,3 +205,13 @@ func collect_blade() -> void:
 
 	if player:
 		player.collected_blade()
+
+func collect_wand() -> void:
+	if has_wand:
+		return
+		
+	has_wand = true
+	
+	if player:
+		player.collected_wand()
+	

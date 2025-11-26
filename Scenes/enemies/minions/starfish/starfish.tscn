@@ -26,6 +26,8 @@
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="14_yw546"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="15_xe046"]
 [ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="26_ot2et"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://Scripts/area_component/hit_area_2d.gd" id="14_yw546"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://Scripts/area_component/hurt_area_2d.gd" id="15_xe046"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ji8a0"]
 animations = [{

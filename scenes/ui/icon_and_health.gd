@@ -6,45 +6,72 @@ extends HBoxContainer
 @export var happy_icon: Texture2D
 @export var neutral_icon: Texture2D
 @export var sad_icon: Texture2D
-
-@onready var health_label: Label = $PlayerHealthPanelContainer/MarginContainer/VBoxContainer/TextureProgressBar/Label
-
-@onready var healthbar: TextureProgressBar = $PlayerHealthPanelContainer/MarginContainer/VBoxContainer/TextureProgressBar
-
-var mood_timer: SceneTreeTimer
 @export var hurt_icon: Texture2D
+
+# Health UI
+@onready var healthbar: TextureProgressBar = $PlayerBarsPanelContainer/MarginContainer/VBoxContainer/HealthProgressBar
+@onready var health_label: Label = $PlayerBarsPanelContainer/MarginContainer/VBoxContainer/HealthProgressBar/Label
+
+# Mana UI
+@onready var mana_label: Label = $PlayerBarsPanelContainer/MarginContainer/VBoxContainer/ManaProgressBar/Label
+@onready var manabar: TextureProgressBar = $PlayerBarsPanelContainer/MarginContainer/VBoxContainer/ManaProgressBar
+
+var hurt_Timer: float = 0
+var previous_health: int = 0
 
 
 func _ready() -> void:
-	player.health_changed.connect(_update)
-	_update()
+	previous_health = player.health
+	player.health_changed.connect(_on_health_change)
+	player.hurt.connect(_show_hurt_icon)
+	player.mana_changed.connect(_update_mana)
+	await  player._ready()
+	_on_health_change()
+	_update_mana()
 
-func _update() -> void:
-	var hp_percent := float(player.health) / float(player.max_health) * 100.0
 
-	# Update health bar + label
+func _on_health_change() -> void:
+	_update_health()
+	_set_mood_icon()
+
+# -----------------------------
+# HEALTH UPDATE
+# -----------------------------
+func _update_health() -> void:
+	var hp_percent := get_health_percentage()
+
+	# update UI
 	healthbar.value = hp_percent
+
 	health_label.text = str(player.health) + "/" + str(player.max_health)
 
-	# Show hurt icon
+
+func get_health_percentage() -> float:
+	return float(player.health) / float(player.max_health) * 100.0
+
+func _show_hurt_icon() -> void:
 	cur_icon.texture = hurt_icon
 
-	# If a previous timer exists, stop it
-	if mood_timer:
-		mood_timer.timeout.disconnect(_on_mood_timer_timeout)  # safe disconnect
-		mood_timer = null
+	await get_tree().create_timer(0.5).timeout
+	cur_icon.texture = null
+	_set_mood_icon()
 
-	# Start a new timer
-	mood_timer = get_tree().create_timer(0.5)
-	mood_timer.timeout.connect(_on_mood_timer_timeout.bind(hp_percent))
-
-func _on_mood_timer_timeout(hp_percent: float) -> void:
-	_set_mood_icon(hp_percent)
-
-func _set_mood_icon(hp_percent: float) -> void:
+func _set_mood_icon() -> void:
+	if cur_icon.texture == hurt_icon: return
+	var hp_percent = get_health_percentage()
 	if hp_percent < 25.0:
 		cur_icon.texture = sad_icon
 	elif hp_percent < 75.0:
 		cur_icon.texture = neutral_icon
 	else:
 		cur_icon.texture = happy_icon
+
+
+# -----------------------------
+# MANA UPDATE
+# -----------------------------
+func _update_mana() -> void:
+	var mana_percent := float(player.mana) / float(player.max_mana) * 100.0
+
+	manabar.value = mana_percent
+	mana_label.text = str(player.mana) + "/" + str(player.max_mana)

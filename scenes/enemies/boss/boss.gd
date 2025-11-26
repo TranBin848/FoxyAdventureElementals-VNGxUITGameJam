@@ -14,9 +14,13 @@ extends EnemyCharacter
 @export var skill_cd: float = 10
 @export var spin_velocity = 300
 
+@export var attack_sfx: AudioStream = null
+@export var hurt_sfx: AudioStream = null
+
 var is_stunned: bool = false
 var fired_claw: Node2D = null
 var boss_zone: Area2D = null
+var is_fighting: bool = false
 
 var skills = {
 	0: "spin",
@@ -53,6 +57,7 @@ func use_skill() -> void:
 	pass
 
 func fire_claw() -> void:
+	AudioPlayer.play_sound_once(attack_sfx)
 	var claw = claw_factory.create()
 	claw.start_pos = claw_factory.global_position
 	claw.global_position = claw_factory.global_position
@@ -69,6 +74,8 @@ func retrieve_claw() -> void:
 func take_damage(damage: int) -> void:
 	super.take_damage(damage)
 	
+	AudioPlayer.play_sound_once(hurt_sfx)
+	
 	flash_corountine()
 	var health_percent = (float(health) / max_health) * 100
 	health_bar.value = health_percent
@@ -81,6 +88,7 @@ func flash_corountine() -> void:
 
 func start_fight() -> void:
 	health_bar.show()
+	is_fighting = true
 
 func handle_dead() -> void:
 	hurt_box.disabled = true
