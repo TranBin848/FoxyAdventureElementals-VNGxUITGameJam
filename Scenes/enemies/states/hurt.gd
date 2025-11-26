@@ -11,3 +11,4 @@ func _enter() -> void:
 func _update( _delta ):
 	if update_timer(_delta):
 		change_state(fsm.previous_state)
+	super._update(_delta)
