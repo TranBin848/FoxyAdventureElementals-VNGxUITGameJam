@@ -1,17 +1,27 @@
-[gd_scene load_steps=17 format=3 uid="uid://u0fxijnn4sx"]
+[gd_scene load_steps=23 format=3 uid="uid://u0fxijnn4sx"]
 
-[ext_resource type="Script" uid="uid://2xjq81uyo1vl" path="res://scenes/enemies/minions/mushroom/mushroom.gd" id="1_sl7hc"]
+[ext_resource type="Script" uid="uid://2xjq81uyo1vl" path="res://Scenes/enemies/minions/mushroom/mushroom.gd" id="1_sl7hc"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://Scenes/enemies/paritcles/metal_particle.tscn" id="2_02d7m"]
 [ext_resource type="Shader" uid="uid://doovon2v0i5dx" path="res://assets/shader/outer_outline.gdshader" id="2_o68j7"]
 [ext_resource type="Texture2D" uid="uid://dnauvp8oyye3y" path="res://assets/enemy/mushroom/mushroom_hit_01.png" id="2_vad1n"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="3_bq6vc"]
 [ext_resource type="Texture2D" uid="uid://0at7gcwwkdrb" path="res://assets/enemy/mushroom/mushroom_hit_02.png" id="3_p52hk"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="4_hjpn5"]
 [ext_resource type="Texture2D" uid="uid://cumo4bfr0rcpt" path="res://assets/enemy/mushroom/mushroom_hit_03.png" id="4_t0f5o"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="5_0dcl5"]
 [ext_resource type="Texture2D" uid="uid://6o0ryerh3t3f" path="res://assets/enemy/mushroom/mushroom_01.png" id="5_8xtti"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="6_ark0v"]
 [ext_resource type="Texture2D" uid="uid://dh2yf13qglxxf" path="res://assets/enemy/mushroom/mushroom_02.png" id="6_pqg2d"]
 [ext_resource type="Texture2D" uid="uid://b6dn5oietc0js" path="res://assets/enemy/mushroom/mushroom_03.png" id="7_wy1pw"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_m6me8"]
-[ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://scenes/enemies/states/moving.gd" id="8_sl7hc"]
-[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="10_dxuq7"]
-[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="10_pkus5"]
+[ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://Scenes/enemies/states/moving.gd" id="8_sl7hc"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="10_dxuq7"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="10_pkus5"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="13_16htk"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://Scripts/area_component/hurt_area_2d.gd" id="8_m6me8"]
+[ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://Scenes/enemies/states/moving.gd" id="8_sl7hc"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="10_dxuq7"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="10_pkus5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0y1l"]
 radius = 12.0
@@ -20,6 +30,7 @@ height = 26.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16htk"]
 shader = ExtResource("2_o68j7")
 shader_parameter/line_color = Color(1, 0.32288, 0.0992486, 1)
+shader_parameter/line_opacity = 1.0
 shader_parameter/line_thickness = 1.0
 shader_parameter/glow_opacity = 0.75
 shader_parameter/glow_thickness = 1.0
@@ -68,11 +79,33 @@ radius = 13.0
 height = 28.0
 
 [node name="Mushroom" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 8
 script = ExtResource("1_sl7hc")
 shader_path = "uid://doovon2v0i5dx"
 movement_range = 100.0
+max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Metal" parent="Particles" instance=ExtResource("2_02d7m")]
+position = Vector2(0, -26)
+emitting = false
+
+[node name="Wood" parent="Particles" instance=ExtResource("3_bq6vc")]
+position = Vector2(0, -15)
+
+[node name="Earth" parent="Particles" instance=ExtResource("4_hjpn5")]
+position = Vector2(0, 10)
+emitting = false
+
+[node name="Water" parent="Particles" instance=ExtResource("5_0dcl5")]
+emitting = false
+
+[node name="Fire" parent="Particles" instance=ExtResource("6_ark0v")]
+position = Vector2(0, 5)
+emitting = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -89,11 +122,11 @@ frame_progress = 1.0
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(12, 0)
-target_position = Vector2(8, 0)
+target_position = Vector2(10, 0)
 
 [node name="DownRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(13, 0)
-target_position = Vector2(0, 18)
+target_position = Vector2(0, 22)
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
 collision_layer = 16
@@ -114,3 +147,13 @@ script = ExtResource("10_dxuq7")
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("10_pkus5")
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
+[node name="EnemyHealthBar" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("13_16htk")]
+offset_left = -24.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = -12.0
+enemy = NodePath("..")

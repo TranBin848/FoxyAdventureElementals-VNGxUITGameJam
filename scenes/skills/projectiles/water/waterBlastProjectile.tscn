@@ -1,6 +1,6 @@
 [gd_scene load_steps=40 format=3 uid="uid://bjoka5qf226x3"]
 
-[ext_resource type="Script" uid="uid://bjcril723jsyp" path="res://scenes/skills/projectiles/water/water_blast_projectile.gd" id="1_uj2b8"]
+[ext_resource type="Script" uid="uid://bjcril723jsyp" path="res://Scenes/skills/projectiles/water/water_blast_projectile.gd" id="1_uj2b8"]
 [ext_resource type="Texture2D" uid="uid://dv83qp4x037b6" path="res://assets/skills/water/Water Ball - Spritesheet/WaterBall - Impact.png" id="3_uj2b8"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="4_vxufk"]
 [ext_resource type="Texture2D" uid="uid://dj80dcybhxkbr" path="res://assets/skills/water/Water Ball - Spritesheet/WaterBall - Startup and Infinite.png" id="63_b1ncv"]
@@ -189,7 +189,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"WaterBlast",
-"speed": 12.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -238,8 +238,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_dvq6e")
 }],
 "loop": false,
-"name": &"WaterBlast_Explosion",
-"speed": 20.0
+"name": &"WaterBlast_End",
+"speed": 18.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uj2b8"]
@@ -254,8 +254,7 @@ script = ExtResource("1_uj2b8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"WaterBlast_Explosion"
-frame_progress = 1.0
+animation = &"WaterBlast_End"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

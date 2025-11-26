@@ -1,18 +1,43 @@
 class_name EnemyCharacter
 extends BaseCharacter
 
-@export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
-	ElementsEnum.Elements.METAL: Color.LIGHT_GRAY,
-	ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
-	ElementsEnum.Elements.WATER: Color.AQUA,
-	ElementsEnum.Elements.FIRE: Color("ff5219"),
-	ElementsEnum.Elements.EARTH: Color("d36f00")
+@onready var damage_number_origin = $DamageNumbersOrigin
+#@export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
+	#ElementsEnum.Elements.METAL: Color("f0f0f0"),
+	#ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
+	#ElementsEnum.Elements.WATER: Color.AQUA,
+	#ElementsEnum.Elements.FIRE: Color("ff5219"),
+	#ElementsEnum.Elements.EARTH: Color("d36f00")
+#}
+#@export var elements_particle : Dictionary[ElementsEnum.Elements, String] = {
+	#ElementsEnum.Elements.METAL: "Metal",
+	#ElementsEnum.Elements.WOOD: "Wood",
+	#ElementsEnum.Elements.WATER: "Water",
+	#ElementsEnum.Elements.FIRE: "Fire",
+	#ElementsEnum.Elements.EARTH: "Earth"
+#}
+# 0: None, 1: Fire, 2: Water, 3: Earth, 4: Metal, 5: Wood
+@export var elements_color : Dictionary[int, Color] = {
+	4: Color("f0f0f0"),
+	5: Color.LIME_GREEN,
+	2: Color.AQUA,
+	1: Color("ff5219"),
+	3: Color("d36f00"),
+	0: Color.BLACK
+}
+@export var elements_particle : Dictionary[ElementsEnum.Elements, String] = {
+	4: "Metal",
+	5: "Wood",
+	2: "Water",
+	1: "Fire",
+	3: "Earth",
+	0: "Fire"
 }
 
 # Shader that will be used for outlining the enemy based on its element
 @export_file("*.gdshader") var shader_path
-# Element of the enemy
-@export var element: ElementsEnum.Elements
+## Element of the enemy
+#@export var element: ElementsEnum.Elements
 # Damage deal damage when player touch (HP)
 @export var spike: float
 # Detect player within this range (radius in pixel)
@@ -37,14 +62,17 @@ var right_detect_ray: RayCast2D
 # Player reference
 var found_player: Player = null
 
-# Hit Area
-var hit_area: HitArea2D = null
+# Spike Hit Area
+var spike_hit_area: HitArea2D = null
+
 
 # Material to change outline
 var shader_material: Material
 
 # Enemy can only move in a range around this position
 var start_position: Vector2
+
+var current_particle: GPUParticles2D
 
 func _ready() -> void:
 	super._ready()
@@ -54,6 +82,7 @@ func _ready() -> void:
 	_init_hit_area()
 	_init_material()
 	_init_start_position()
+	_init_particle()
 
 # -- Initialize start position
 func _init_start_position():
@@ -67,7 +96,7 @@ func _init_material():
 	if my_shader != null:
 		shader_material.shader = my_shader
 	
-	var outline_color = elements_color[element]
+	var outline_color = elements_color[elemental_type]
 	if outline_color == null: return
 	shader_material.set("shader_parameter/line_color", outline_color)
 	pass
@@ -96,8 +125,10 @@ func _init_ray_cast():
 func _init_detect_player_raycast():
 	if has_node("Direction/LeftDetectRayCast2D"):
 		left_detect_ray = $Direction/LeftDetectRayCast2D
+		left_detect_ray.target_position = Vector2(-sight, 0)
 	if has_node("Direction/RightDetectRayCast2D"):
 		right_detect_ray = $Direction/RightDetectRayCast2D
+		right_detect_ray.target_position = Vector2(sight, 0)
 
 
 # --- Initialize hurt area
@@ -109,10 +140,27 @@ func _init_hurt_area():
 
 # --- Initialize hit area
 func _init_hit_area():
-	if has_node("Direction/HitArea2D"):
-		hit_area = $Direction/HitArea2D
-		hit_area.damage = spike
+	if has_node("Direction/SpikeHitArea2D"):
+		spike_hit_area = $Direction/SpikeHitArea2D
+		spike_hit_area.damage = spike
 
+func _init_particle():
+	if has_node("Particles"):
+		var particle_holder = $Particles
+		if particle_holder.get_child_count() == 0:
+			return
+		var particles: Array = particle_holder.get_children()
+		for particle in particles:
+			if particle is GPUParticles2D:
+				var particle_name: String = particle.name
+				if particle_name == elements_particle[elemental_type]:
+					if current_particle != null:
+						current_particle.emitting = false
+					current_particle = particle
+					if current_particle != null:
+						current_particle.emitting = true
+	print(current_particle)
+	pass
 
 # --- Check if touching wall
 func is_touch_wall() -> bool:
@@ -174,9 +222,12 @@ func _on_player_not_in_sight() -> void:
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
-	#print(elemental_type)
-	#print(_elemental_type)
-	#print(modified_damage)
+	print(_elemental_type)
+	print(elemental_type)
+	print(_damage)
+	print(modified_damage)
+	var is_critical = modified_damage > _damage
+	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 
@@ -188,7 +239,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	# Định nghĩa quan hệ khắc (lợi thế)
 	# Fire (1) > Earth (2), Earth (2) > Water (3), Water (3) > Fire (1)
 	var advantage_table = {
-		1: [2],  # Fire khắc Earth
+		1: [5],  # Fire khắc Wood
 		2: [3],  # Earth khắc Water
 		3: [1]   # Water khắc Fire
 	}
@@ -196,7 +247,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	# Định nghĩa quan hệ sinh (bị khắc)
 	var weakness_table = {
 		1: [3],  # Fire bị Water khắc
-		2: [1],  # Earth bị Fire khắc
+		5: [1],  # Wood bị Fire khắc
 		3: [2]   # Water bị Earth khắc
 	}
 	
@@ -242,35 +293,39 @@ func _take_damage_from_dir(_damage_dir: Vector2, _damage: float):
 # -- Disable collision, enemy will no longer has collision with player
 func disable_collision():
 	collision_layer = 0
-	if hit_area != null and hit_area.has_node("CollisionShape2D"):
-		hit_area.get_node("CollisionShape2D").disabled = true
+	if spike_hit_area != null and spike_hit_area.has_node("CollisionShape2D"):
+		spike_hit_area.get_node("CollisionShape2D").disabled = true
 
-# Enemy bị hút vào lốc xoáy
-func enter_tornado(tornado_pos: Vector2) -> void:
+# Enemy bị hút vào vùng nổ
+func enter_skill(tornado_pos: Vector2) -> void:
+	# 1. Thiết lập trạng thái
 	is_movable = false
-	stop_move() # Dừng mọi chuyển động hiện tại
 	velocity = Vector2.ZERO
 
-	# Bắt đầu hiệu ứng "bay lên"
-	var tween := get_tree().create_tween()
-	tween.tween_property(self, "global_position", tornado_pos + Vector2(0, -30), 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_callback(Callable(self, "_on_reach_tornado_top"))
+	# 3. Bắt đầu hiệu ứng "bay lên"
+	var target_pos = tornado_pos + Vector2(0, -30)
+	var duration = 0.5 
 	
+	var tween := get_tree().create_tween()
+	
+	tween.tween_property(
+		self, 
+		"global_position", 
+		target_pos, 
+		duration
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	
+	tween.tween_callback(Callable(self, "_on_reach_tornado_top"))
 
-
-# Callback khi chạm đỉnh lốc xoáy
-func _on_reach_tornado_top() -> void:
-	# Có thể lắc nhẹ, hoặc xoay tròn quanh tâm
-	if animated_sprite:
-		animated_sprite.rotation_degrees = 0
-	print("Enemy reached top of tornado")
-
-
-# Khi rời khỏi lốc xoáy (được gọi bởi tornado projectile khi kết thúc)
-func exit_tornado() -> void:
+# Khi rời khỏi
+func exit_skill() -> void:
+	# Khôi phục khả năng di chuyển
 	is_movable = true
 	velocity = Vector2.ZERO
-	# (Tuỳ chọn) rơi xuống đất sau khi thoát
-	var tween := get_tree().create_tween()
-	tween.tween_property(self, "global_position:y", global_position.y + 60, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	
+func apply_knockback(from_pos: Vector2, force: float):
+	var dir = (global_position - from_pos).normalized()
+	velocity = dir * force
+	ignore_gravity = true
+	await get_tree().create_timer(0.25).timeout
+	ignore_gravity = false

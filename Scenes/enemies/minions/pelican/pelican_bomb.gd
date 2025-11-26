@@ -1,10 +1,13 @@
-extends RigidBody2D
+extends EnemyCharacter
 
-func _on_body_entered(body: Node) -> void:
+func _ready() -> void:
+	change_animation("default")
+	super._ready()
+
+
+func _on_spike_hit_area_2d_area_entered(area: Area2D) -> void:
 	queue_free()
-	pass
 
 
-func _on_hit_area_2d_hitted(area: Variant) -> void:
+func _on_spike_hit_area_2d_body_entered(body: Node2D) -> void:
 	queue_free()
-	pass

@@ -3,7 +3,7 @@ extends PlayerState
 func _enter() -> void:
 	#Change animation to attack
 	obj.change_animation("attack")
-	timer = 0.2
+	timer = 0.5
 	obj.velocity.x = 0
 
 func _update(delta: float) -> void:

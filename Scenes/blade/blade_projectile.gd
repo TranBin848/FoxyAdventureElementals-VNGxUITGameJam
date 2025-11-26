@@ -1,8 +1,19 @@
 extends RigidBody2D
 
 @export var blade_scene: PackedScene
+@export var flying_sfx: AudioStream = null
 @export var rotation_speed: float = 10
 var direction: float = 1
+
+func _ready():
+	var player = AudioStreamPlayer2D.new()
+	add_child(player)
+
+	# Set which audio bus this player uses
+	player.bus = "SFX"
+	player.stream = flying_sfx
+	player.play()
+	pass
 
 func _physics_process(delta: float) -> void:
 	rotation += rotation_speed * delta * direction

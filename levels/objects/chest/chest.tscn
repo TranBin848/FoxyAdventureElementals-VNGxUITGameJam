@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=3 uid="uid://plkay1dhhsoh"]
+
+[ext_resource type="Script" uid="uid://cs8wx3enui401" path="res://levels/objects/chest/chest.gd" id="1_4ahkj"]
+[ext_resource type="AudioStream" uid="uid://cgy3knqajl7xu" path="res://assets/sounds/Big Egg collect 1.wav" id="2_2b5gf"]
+[ext_resource type="Texture2D" uid="uid://bidl5brkimhxo" path="res://assets/items/chest/chest_close_01.png" id="2_2u810"]
+[ext_resource type="Texture2D" uid="uid://bjcqjfm23puad" path="res://assets/items/chest/chest_close_02.png" id="3_attkn"]
+[ext_resource type="Texture2D" uid="uid://dqrogefu4p788" path="res://assets/items/chest/chest_close_03.png" id="4_yqtcl"]
+[ext_resource type="Texture2D" uid="uid://btnwd6wmuxmda" path="res://assets/items/chest/chest_open_01.png" id="5_fvglp"]
+[ext_resource type="Texture2D" uid="uid://dkn0i1fahffwr" path="res://assets/items/chest/chest_open_02.png" id="6_1rp4i"]
+[ext_resource type="Texture2D" uid="uid://br8hwwry0gxvd" path="res://assets/items/chest/chest_open_03.png" id="7_6mai0"]
+[ext_resource type="Texture2D" uid="uid://b67b2vn864ieo" path="res://assets/items/chest/chest_open_04.png" id="8_bi4wm"]
+[ext_resource type="Texture2D" uid="uid://bwcclik4ny1ry" path="res://assets/items/chest/chest_open_05.png" id="9_vthut"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dynor"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2u810")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_attkn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yqtcl")
+}],
+"loop": true,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_fvglp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1rp4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6mai0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bi4wm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vthut")
+}],
+"loop": false,
+"name": &"open",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ahkj"]
+size = Vector2(34, 27)
+
+[node name="Chest" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_4ahkj")
+consumed_sfx = ExtResource("2_2b5gf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_dynor")
+animation = &"close"
+frame_progress = 0.768257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_4ahkj")

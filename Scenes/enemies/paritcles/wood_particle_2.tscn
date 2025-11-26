@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccyir4td0f0yc"]
+
+[ext_resource type="Texture2D" uid="uid://fh55uj656f7c" path="res://assets/particles/leaves_2.png" id="1_6die5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jq685"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_6die5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.500753), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jq685"]
+curve = SubResource("Curve_6die5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b5v6l"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(30, 15, 1)
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+alpha_curve = SubResource("CurveTexture_jq685")
+anim_speed_max = 1.0
+
+[node name="Wood" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_jq685")
+amount = 10
+texture = ExtResource("1_6die5")
+process_material = SubResource("ParticleProcessMaterial_b5v6l")

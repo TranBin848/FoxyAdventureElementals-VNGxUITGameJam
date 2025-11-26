@@ -8,15 +8,15 @@ func _ready() -> void:
 		hit_area.elemental_type = elemental_type
 
 func _on_hit_area_2d_hitted(area: Variant) -> void:
-	if $AnimatedSprite2D.animation != "WaterBlast_Explosion":
-		$AnimatedSprite2D.play("WaterBlast_Explosion")
+	if $AnimatedSprite2D.animation != "WaterBlast_End":
+		$AnimatedSprite2D.play("WaterBlast_End")
 		set_physics_process(false)
 		$AnimatedSprite2D.connect("animation_finished", Callable(self, "_on_animation_finished"), CONNECT_ONE_SHOT)
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if $AnimatedSprite2D.animation != "WaterBlast_Explosion":
-		$AnimatedSprite2D.play("WaterBlast_Explosion")
+	if $AnimatedSprite2D.animation != "WaterBlast_End":
+		$AnimatedSprite2D.play("WaterBlast_End")
 		set_physics_process(false)
 		$AnimatedSprite2D.connect("animation_finished", Callable(self, "_on_animation_finished"), CONNECT_ONE_SHOT)
 

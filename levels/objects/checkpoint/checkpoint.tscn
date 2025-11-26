@@ -1,0 +1,77 @@
+[gd_scene load_steps=15 format=3 uid="uid://cf4iwith0d7ne"]
+
+[ext_resource type="Script" uid="uid://bxrl65n7f8v7o" path="res://levels/objects/checkpoint/checkpoint.gd" id="1_4j5vx"]
+[ext_resource type="Texture2D" uid="uid://su1n1v38j582" path="res://assets/island/objects/ship_helm/ship_helm_turn_01.png" id="1_asopd"]
+[ext_resource type="Texture2D" uid="uid://dijnwuyponiw8" path="res://assets/island/objects/ship_helm/ship_helm_turn_02.png" id="2_4j5vx"]
+[ext_resource type="AudioStream" uid="uid://cgy3knqajl7xu" path="res://assets/sounds/Big Egg collect 1.wav" id="2_rvv5d"]
+[ext_resource type="Texture2D" uid="uid://bjxj1x8l1ied6" path="res://assets/island/objects/ship_helm/ship_helm_turn_03.png" id="3_rvv5d"]
+[ext_resource type="Texture2D" uid="uid://d1gwlvjdltjsy" path="res://assets/island/objects/ship_helm/ship_helm_turn_04.png" id="4_1k53v"]
+[ext_resource type="Texture2D" uid="uid://dwm2wacw065mq" path="res://assets/island/objects/ship_helm/ship_helm_idle_01.png" id="5_agtsq"]
+[ext_resource type="Texture2D" uid="uid://cldret0gra1m8" path="res://assets/island/objects/ship_helm/ship_helm_idle_02.png" id="6_0ewbv"]
+[ext_resource type="Texture2D" uid="uid://bgaken46ch6pe" path="res://assets/island/objects/ship_helm/ship_helm_idle_03.png" id="7_trdnb"]
+[ext_resource type="Texture2D" uid="uid://b78xidmjbijyc" path="res://assets/island/objects/ship_helm/ship_helm_idle_04.png" id="8_2cl54"]
+[ext_resource type="Texture2D" uid="uid://boajflamof2f" path="res://assets/island/objects/ship_helm/ship_helm_idle_05.png" id="9_icg73"]
+[ext_resource type="Texture2D" uid="uid://c3o0tc8tfthga" path="res://assets/island/objects/ship_helm/ship_helm_idle_06.png" id="10_ri2xa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_asopd"]
+size = Vector2(29, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4jqng"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_asopd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4j5vx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rvv5d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1k53v")
+}],
+"loop": true,
+"name": &"active",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_agtsq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0ewbv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_trdnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2cl54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_icg73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ri2xa")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Checkpoint" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_4j5vx")
+activate_sfx = ExtResource("2_rvv5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_asopd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4jqng")
+animation = &"active"
+autoplay = "idle"
+frame_progress = 0.921037
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,13 +1,14 @@
 extends Area2D
 
 @export var guide_text: String = ""   # Text có thể nhập trong inspector
+@export var enter_sfx: AudioStream = null
+@export var exit_sfx: AudioStream = null
 
 @onready var label = $RichTextLabel
 
 var shown := false
 
 func _ready():
-	print(guide_text)
 	var clean_text = guide_text.replace("\\n", "\n")
 
 	label.text = clean_text
@@ -24,12 +25,14 @@ func _ready():
 func _on_body_entered(body):
 	if body.name == "Player" and not shown:
 		shown = true
+		AudioPlayer.play_sound_once(enter_sfx)
 		show_text()
 
 
 func _on_body_exited(body):
 	if body.name == "Player":
 		shown = false
+		AudioPlayer.play_sound_once(exit_sfx)
 		hide_text()
 
 

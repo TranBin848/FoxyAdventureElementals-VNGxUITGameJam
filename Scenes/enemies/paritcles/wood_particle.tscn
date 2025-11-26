@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7befci0qfbmy"]
+
+[ext_resource type="Texture2D" uid="uid://c7b04sin5r2ov" path="res://assets/particles/leaves.png" id="1_v64ib"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mlgto"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_06sls"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpyp0"]
+curve = SubResource("Curve_06sls")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0u8n4"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 20.0
+emission_ring_cone_angle = 90.0
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+spread = 0.0
+initial_velocity_min = -30.0
+initial_velocity_max = 30.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 20, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+alpha_curve = SubResource("CurveTexture_fpyp0")
+anim_offset_max = 1.0
+
+[node name="Wood" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_mlgto")
+emitting = false
+amount = 20
+texture = ExtResource("1_v64ib")
+process_material = SubResource("ParticleProcessMaterial_0u8n4")
