@@ -22,6 +22,8 @@ func _on_body_entered(body: Node2D) -> void:
 		player = body
 		CameraTransition.transition_camera2D(camera_2d, 2)
 	if boss:
+		if boss.is_fighting:
+			return
 		boss.start_fight()
 		BackgroundMusic.stream = boss_bgm
 		BackgroundMusic.play()

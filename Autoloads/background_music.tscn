@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cb6h26vlbppav"]
+[gd_scene load_steps=3 format=3 uid="uid://cb6h26vlbppav"]
 
-[ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_vn113"]
+[ext_resource type="AudioStream" uid="uid://biet84xtl0iq5" path="res://assets/sounds/sweden_c418.mp3" id="1_vn113"]
+[ext_resource type="AudioStream" uid="uid://dd5or7txvnl76" path="res://assets/sounds/28646__gim-audio__forest-ambience-danish.wav" id="2_810yv"]
 
-[node name="BackgroundMusic" type="AudioStreamPlayer2D"]
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
 stream = ExtResource("1_vn113")
+volume_db = -10.0
 autoplay = true
 bus = &"Music"
+parameters/looping = false
+
+[node name="AmbiancePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_810yv")
+volume_db = -10.0
+autoplay = true
+bus = &"SFX"

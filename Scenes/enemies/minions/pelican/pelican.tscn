@@ -1,21 +1,43 @@
-[gd_scene load_steps=16 format=3 uid="uid://b55wlvp8e3emi"]
+[gd_scene load_steps=27 format=3 uid="uid://b55wlvp8e3emi"]
 
-[ext_resource type="Script" uid="uid://did28knq268sk" path="res://scenes/enemies/minions/pelican/pelican.gd" id="1_ktqmc"]
+[ext_resource type="Script" uid="uid://did28knq268sk" path="res://Scenes/enemies/minions/pelican/pelican.gd" id="1_ktqmc"]
 [ext_resource type="Texture2D" uid="uid://dm54orux73pxu" path="res://assets/enemy/pelican/pelican_atk_01.png" id="2_adoyw"]
 [ext_resource type="Texture2D" uid="uid://by2b7tavl86iu" path="res://assets/enemy/pelican/pelican_01.png" id="2_dvi3v"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://Scenes/enemies/paritcles/metal_particle.tscn" id="2_qwma1"]
 [ext_resource type="Texture2D" uid="uid://d306h85v33c88" path="res://assets/enemy/pelican/pelican_atk_02.png" id="3_34k3o"]
 [ext_resource type="Texture2D" uid="uid://p7brpsmpjjpe" path="res://assets/enemy/pelican/pelican_02.png" id="3_vr5qo"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="3_wa382"]
 [ext_resource type="Texture2D" uid="uid://c2h5d72yhi400" path="res://assets/enemy/pelican/pelican_atk_03.png" id="4_kbikv"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="4_wpn33"]
 [ext_resource type="Texture2D" uid="uid://dkfubffp38yud" path="res://assets/enemy/pelican/pelican_03.png" id="4_y5g72"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="5_5lwol"]
 [ext_resource type="Texture2D" uid="uid://btchudadw108i" path="res://assets/enemy/pelican/pelican_04.png" id="5_6tny8"]
-[ext_resource type="Script" uid="uid://bpsldgg0c0iav" path="res://scenes/enemies/minions/pelican/states/moving.gd" id="6_dvi3v"]
-[ext_resource type="Script" uid="uid://cufl3p0vdicln" path="res://scenes/enemies/minions/pelican/states/leave.gd" id="7_vr5qo"]
-[ext_resource type="Script" uid="uid://bog5fjackwlfe" path="res://scenes/enemies/minions/pelican/drop_bomb.gd" id="7_y5g72"]
+[ext_resource type="Script" uid="uid://bpsldgg0c0iav" path="res://Scenes/enemies/minions/pelican/states/moving.gd" id="6_dvi3v"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="6_ovw27"]
+[ext_resource type="Texture2D" uid="uid://ce3twrfpcugbt" path="res://assets/enemy/pelican/pelican_hurt.png" id="7_bvgja"]
+[ext_resource type="Script" uid="uid://cufl3p0vdicln" path="res://Scenes/enemies/minions/pelican/states/leave.gd" id="7_vr5qo"]
+[ext_resource type="Script" uid="uid://bog5fjackwlfe" path="res://Scenes/enemies/minions/pelican/drop_bomb.gd" id="7_y5g72"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="9_34k3o"]
-[ext_resource type="PackedScene" uid="uid://ywndjg6kc5hy" path="res://scenes/enemies/minions/pelican/pelican_bomb.tscn" id="10_kbikv"]
+[ext_resource type="PackedScene" uid="uid://ywndjg6kc5hy" path="res://Scenes/enemies/minions/pelican/pelican_bomb.tscn" id="10_kbikv"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="17_24neh"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="19_5lwol"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="19_wa382"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="20_ovw27"]
+[ext_resource type="Script" uid="uid://cufl3p0vdicln" path="res://Scenes/enemies/minions/pelican/states/leave.gd" id="7_vr5qo"]
+[ext_resource type="Script" uid="uid://bog5fjackwlfe" path="res://Scenes/enemies/minions/pelican/drop_bomb.gd" id="7_y5g72"]
+[ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://Scripts/node2d_factory.gd" id="9_34k3o"]
+[ext_resource type="PackedScene" uid="uid://ywndjg6kc5hy" path="res://Scenes/enemies/minions/pelican/pelican_bomb.tscn" id="10_kbikv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y02p1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_bvgja")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_adoyw")
@@ -38,6 +60,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_adoyw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bvgja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_adoyw")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_dvi3v")
 }, {
 "duration": 1.0,
@@ -54,6 +90,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xswid"]
+radius = 20.025
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_adoyw"]
 radius = 17.0
 height = 34.0
@@ -62,18 +101,38 @@ height = 34.0
 collision_layer = 8
 script = ExtResource("1_ktqmc")
 drop_bomb_angle = 120.0
-drop_bomb_force = 400.0
+drop_bomb_force = 300.0
 shader_path = "uid://doovon2v0i5dx"
-element = 3
+spike = 1.0
+movement_range = 200.0
+max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Metal" parent="Particles" instance=ExtResource("2_qwma1")]
+position = Vector2(0, -26)
+emitting = false
+
+[node name="Wood" parent="Particles" instance=ExtResource("3_wa382")]
+position = Vector2(0, -15)
+
+[node name="Earth" parent="Particles" instance=ExtResource("4_wpn33")]
+position = Vector2(0, 10)
+emitting = false
+
+[node name="Water" parent="Particles" instance=ExtResource("5_5lwol")]
+emitting = false
+
+[node name="Fire" parent="Particles" instance=ExtResource("6_ovw27")]
+position = Vector2(0, 5)
+emitting = false
 
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_y02p1")
-animation = &"drop_bomb"
-frame = 2
-frame_progress = 0.283754
+animation = &"dead"
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(17, 0)
@@ -89,6 +148,14 @@ product_packed_scene = ExtResource("10_kbikv")
 target_container_name = &"PelicanBombs"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+script = ExtResource("17_24neh")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+shape = SubResource("CircleShape2D_xswid")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_adoyw")
 
@@ -102,3 +169,19 @@ script = ExtResource("7_y5g72")
 
 [node name="Leave" type="Node" parent="States"]
 script = ExtResource("7_vr5qo")
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("19_5lwol")
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("20_ovw27")
+
+[node name="EnemyHealthBar" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("19_wa382")]
+offset_left = -24.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = -12.0
+enemy = NodePath("..")
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)

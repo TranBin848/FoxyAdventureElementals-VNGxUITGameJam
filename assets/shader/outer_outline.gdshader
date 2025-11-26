@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 uniform vec4 line_color : source_color = vec4(1.0);
+uniform float line_opacity : hint_range(0, 1) = 1.0;
 uniform float line_thickness : hint_range(0, 10) = 1.0;
 uniform float glow_opacity : hint_range(0, 1) = 0.75;
 uniform float glow_thickness : hint_range(0, 10) = 1.0;
@@ -25,13 +26,13 @@ void fragment() {
 
 		for (int i = 0; i < OFFSETS.length(); i++) {
 			//outline += texture(TEXTURE, UV + size * OFFSETS[i]).a;
-			if (texture(TEXTURE, UV + line_pixel_distance * OFFSETS[i]).a == 1.0f){
-				outline = 1.0;
+			if (texture(TEXTURE, UV + line_pixel_distance * OFFSETS[i]).a != 0.0f){
+				outline = line_opacity;
 			}
 		}
 		if (outline != 1.0){
 			for (int i = 0; i < OFFSETS.length(); i++) {
-				if(texture(TEXTURE, UV + glow_pixel_distance * OFFSETS[i]).a == 1.0f){
+				if(texture(TEXTURE, UV + glow_pixel_distance * OFFSETS[i]).a != 0.0f){
 					outline = glow_opacity;
 				}
 			}

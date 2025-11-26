@@ -1,16 +1,25 @@
-[gd_scene load_steps=16 format=3 uid="uid://dd7umy7lqfimd"]
+[gd_scene load_steps=22 format=3 uid="uid://dd7umy7lqfimd"]
 
-[ext_resource type="Script" uid="uid://dxje7ds7lbspm" path="res://scenes/enemies/minions/crab/crab.gd" id="1_4p1sk"]
+[ext_resource type="Script" uid="uid://dxje7ds7lbspm" path="res://Scenes/enemies/minions/crab/crab.gd" id="1_4p1sk"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://Scenes/enemies/paritcles/metal_particle.tscn" id="2_2qm7m"]
 [ext_resource type="Texture2D" uid="uid://cic78p2ro7out" path="res://assets/enemy/crab/crab_hit_01.png" id="2_4p1sk"]
-[ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://scenes/enemies/states/moving.gd" id="2_tccyh"]
-[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="3_280wf"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="2_clpyl"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="2_gvprn"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="2_oeh51"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="2_oirif"]
+[ext_resource type="Texture2D" uid="uid://cic78p2ro7out" path="res://assets/enemy/crab/crab_hit_01.png" id="2_4p1sk"]
+[ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://Scenes/enemies/states/moving.gd" id="2_tccyh"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="3_280wf"]
 [ext_resource type="Texture2D" uid="uid://2utfw8mnjxfa" path="res://assets/enemy/crab/crab_hit_02.png" id="3_clpyl"]
-[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="4_gw7ur"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="4_gw7ur"]
 [ext_resource type="Texture2D" uid="uid://plut0bvriiy0" path="res://assets/enemy/crab/crab_01.png" id="4_l1170"]
 [ext_resource type="Texture2D" uid="uid://hvmpun86fh2b" path="res://assets/enemy/crab/crab_02.png" id="5_oirif"]
 [ext_resource type="Texture2D" uid="uid://h5y5vqxjhhvh" path="res://assets/enemy/crab/crab_03.png" id="6_gvprn"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="7_oeh51"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_2qm7m"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="13_l1170"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://Scripts/area_component/hit_area_2d.gd" id="7_oeh51"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://Scripts/area_component/hurt_area_2d.gd" id="8_2qm7m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c52ow"]
 animations = [{
@@ -67,18 +76,38 @@ movement_range = 200.0
 max_health = 15
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Metal" parent="Particles" instance=ExtResource("2_2qm7m")]
+position = Vector2(0, -26)
+emitting = false
+
+[node name="Wood" parent="Particles" instance=ExtResource("2_oeh51")]
+position = Vector2(0, -15)
+
+[node name="Earth" parent="Particles" instance=ExtResource("2_gvprn")]
+position = Vector2(0, 10)
+emitting = false
+
+[node name="Water" parent="Particles" instance=ExtResource("2_oirif")]
+emitting = false
+
+[node name="Fire" parent="Particles" instance=ExtResource("2_clpyl")]
+position = Vector2(0, 5)
+emitting = false
+
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_c52ow")
 animation = &"moving"
 
-[node name="HitArea2D" type="Area2D" parent="Direction"]
+[node name="SpikeHitArea2D" type="Area2D" parent="Direction"]
 collision_mask = 4
 script = ExtResource("7_oeh51")
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HitArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/SpikeHitArea2D"]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_clfg5")
 
@@ -116,3 +145,10 @@ script = ExtResource("4_gw7ur")
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]
 position = Vector2(0, -17)
+
+[node name="EnemyHealthBar" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("13_l1170")]
+offset_left = -24.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = -12.0
+enemy = NodePath("..")
