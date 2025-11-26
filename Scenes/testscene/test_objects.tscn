@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="27_wmjqa"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="28_u6lr2"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="29_7eyp3"]
-[ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="29_7x1wm"]
+[ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder_rne/boulder.tscn" id="29_7x1wm"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="30_7eyp3"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
