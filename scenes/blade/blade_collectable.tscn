@@ -1,0 +1,90 @@
+[gd_scene load_steps=15 format=3 uid="uid://c1hph2plir0qc"]
+
+[ext_resource type="Texture2D" uid="uid://d0s8rm2fj4wef" path="res://assets/foxy/blade/blade_anim_1.png" id="1_vlr3n"]
+[ext_resource type="Script" uid="uid://c2ontfkxki7ms" path="res://scenes/blade/blade_collectable.gd" id="1_y0t1o"]
+[ext_resource type="Texture2D" uid="uid://bfgelm7h8ouvo" path="res://assets/foxy/blade/blade_anim_2.png" id="2_y0t1o"]
+[ext_resource type="Texture2D" uid="uid://cpb4wgmvkk3w2" path="res://assets/foxy/blade/blade_anim_3.png" id="3_4ln2y"]
+[ext_resource type="Texture2D" uid="uid://bnm1ol1ugbdsv" path="res://assets/foxy/blade/blade_anim_4.png" id="4_h1gsu"]
+[ext_resource type="Texture2D" uid="uid://yv4h8w5hpcyx" path="res://assets/foxy/blade/blade_anim_5.png" id="5_ksrg6"]
+[ext_resource type="Texture2D" uid="uid://b0vj30ng1nbql" path="res://assets/foxy/blade/blade_target_1.png" id="6_61c1b"]
+[ext_resource type="Texture2D" uid="uid://bkip8smslh06" path="res://assets/foxy/blade/blade_target_2.png" id="7_eacb3"]
+[ext_resource type="Texture2D" uid="uid://d2rh0qqgmaqir" path="res://assets/foxy/blade/blade_target_3.png" id="8_4actv"]
+[ext_resource type="Texture2D" uid="uid://baucskhqdceas" path="res://assets/foxy/blade/blade_target_4.png" id="9_ddflp"]
+[ext_resource type="Texture2D" uid="uid://bng34woae2g8q" path="res://assets/foxy/blade/blade_throw_1.png" id="10_1u2f7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_836ip"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vlr3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_y0t1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4ln2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_h1gsu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ksrg6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_61c1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_eacb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4actv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ddflp")
+}],
+"loop": true,
+"name": &"target",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_1u2f7")
+}],
+"loop": true,
+"name": &"throw",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elrge"]
+size = Vector2(17, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0yh0"]
+size = Vector2(20, 18)
+
+[node name="BladeCollectable" type="RigidBody2D"]
+collision_layer = 32
+lock_rotation = true
+script = ExtResource("1_y0t1o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_836ip")
+autoplay = "default"
+frame_progress = 0.621338
+
+[node name="CollectableArea2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableArea2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_elrge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p0yh0")
+
+[connection signal="body_entered" from="CollectableArea2D" to="." method="_on_body_entered"]

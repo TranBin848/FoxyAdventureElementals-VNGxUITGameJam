@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxu3dosyig3i8"]
+
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_1bpm1"]
+[ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="1_d402b"]
+[ext_resource type="Script" uid="uid://dmbpxi55j21as" path="res://scenes/ui/settings_popup.gd" id="1_yjfti"]
+[ext_resource type="FontFile" uid="uid://bf742t4mxgd7l" path="res://assets/fonts/big_font.fnt" id="2_yjfti"]
+[ext_resource type="Texture2D" uid="uid://bvstiwpyblmnv" path="res://assets/ui/close_button.png" id="3_1bpm1"]
+[ext_resource type="Texture2D" uid="uid://bmcu8k7wl5pke" path="res://assets/ui/on_button.png" id="4_h7ats"]
+[ext_resource type="Texture2D" uid="uid://c25m38u7k6gou" path="res://assets/ui/off_button.png" id="5_kqam1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rodm"]
+font = ExtResource("2_yjfti")
+font_size = 80
+
+[node name="SettingsPopup" type="MarginContainer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1bpm1")
+script = ExtResource("1_yjfti")
+
+[node name="OverlayColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.0352941, 0.54902, 0.870588, 0.694118)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(610, 420)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_d402b")
+patch_margin_left = 96
+patch_margin_top = 96
+patch_margin_right = 96
+patch_margin_bottom = 96
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -104.0
+offset_right = 176.0
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MUSIC
+"
+label_settings = SubResource("LabelSettings_6rodm")
+
+[node name="Label2" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = 24.0
+offset_right = 176.0
+offset_bottom = 267.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SOUND
+"
+label_settings = SubResource("LabelSettings_6rodm")
+
+[node name="CloseTextureButton" type="TextureButton" parent="NinePatchRect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_1bpm1")
+stretch_mode = 0
+
+[node name="MusicCheckButton" type="CheckButton" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 98.0
+offset_right = 541.0
+offset_bottom = 184.0
+theme_override_icons/checked = ExtResource("4_h7ats")
+theme_override_icons/unchecked = ExtResource("5_kqam1")
+
+[node name="SoundCheckButton" type="CheckButton" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 226.0
+offset_right = 541.0
+offset_bottom = 312.0
+theme_override_icons/checked = ExtResource("4_h7ats")
+theme_override_icons/unchecked = ExtResource("5_kqam1")
+
+[connection signal="gui_input" from="OverlayColorRect" to="." method="_on_overlay_color_rect_gui_input"]
+[connection signal="toggled" from="NinePatchRect/MusicCheckButton" to="." method="_on_music_check_button_toggled"]
+[connection signal="toggled" from="NinePatchRect/SoundCheckButton" to="." method="_on_sound_check_button_toggled"]

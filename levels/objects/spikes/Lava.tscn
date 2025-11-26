@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://y73cfviopk7u"]
 
 [ext_resource type="Texture2D" uid="uid://16bkllgm6lhs" path="res://assets/island/objects/spikes/Lava.png" id="1_t5bd8"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts_rne/area_component/hit_area_2d.gd" id="2_wwa2d"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_wwa2d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tv64v"]
 size = Vector2(16, 14.75)
