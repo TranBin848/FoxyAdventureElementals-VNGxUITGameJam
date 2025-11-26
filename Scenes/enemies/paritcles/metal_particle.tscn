@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://2n5igjmuko3r"]
+
+[ext_resource type="Texture2D" uid="uid://bu7kggiw0wfub" path="res://assets/particles/cog_wheel.png" id="1_yydmv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uyg18"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_0t3tx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.501818, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0210844), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tdpo8"]
+curve = SubResource("Curve_0t3tx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t36ow"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 40.0
+spread = 0.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+scale_min = 0.1
+scale_max = 0.75
+alpha_curve = SubResource("CurveTexture_tdpo8")
+anim_offset_max = 1.0
+
+[node name="Metal" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_uyg18")
+amount = 4
+texture = ExtResource("1_yydmv")
+process_material = SubResource("ParticleProcessMaterial_t36ow")

@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://byw2ygd56wauh"]
+
+[ext_resource type="Texture2D" uid="uid://dsgiscf3x4gji" path="res://assets/ui/enemy_health_bar.png" id="1_aqofh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3u1a"]
+atlas = ExtResource("1_aqofh")
+region = Rect2(0, 0, 96, 8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d3r0d"]
+texture = SubResource("AtlasTexture_w3u1a")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67n8t"]
+atlas = ExtResource("1_aqofh")
+region = Rect2(2, 12, 92, 4)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iok5l"]
+texture = SubResource("AtlasTexture_67n8t")
+
+[resource]
+NormalHealthBar/base_type = &"ProgressBar"
+NormalHealthBar/styles/background = SubResource("StyleBoxTexture_d3r0d")
+NormalHealthBar/styles/fill = SubResource("StyleBoxTexture_iok5l")

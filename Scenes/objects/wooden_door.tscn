@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://c15o6qkwmcw44"]
+
+[ext_resource type="Script" uid="uid://bv66gsd8bng6x" path="res://Scenes/objects/wooden_door_root.gd" id="1_iv1jh"]
+[ext_resource type="Texture2D" uid="uid://gxdcobbhkb2i" path="res://assets/object/door/door-close.png" id="1_qqt27"]
+[ext_resource type="Script" uid="uid://daml8sil46tjy" path="res://Scenes/objects/wooden_door.gd" id="1_uxcgv"]
+[ext_resource type="Texture2D" uid="uid://dmev22qkblll0" path="res://assets/object/door/door-open.png" id="2_uxcgv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iv1jh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qqt27")
+}],
+"loop": true,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uxcgv")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkcoi"]
+size = Vector2(3, 32)
+
+[node name="WoodenDoor" type="Node2D"]
+script = ExtResource("1_iv1jh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iv1jh")
+animation = &"close"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+script = ExtResource("1_uxcgv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-6.5, 0)
+shape = SubResource("RectangleShape2D_kkcoi")

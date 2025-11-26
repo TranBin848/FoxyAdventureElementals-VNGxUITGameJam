@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bu243mknusv0a"]
 
-[ext_resource type="Script" uid="uid://cabedch21gycd" path="res://scenes/skills/projectiles/fire/fire_shot_projectile.gd" id="1_uhoxj"]
+[ext_resource type="Script" uid="uid://cabedch21gycd" path="res://Scenes/skills/projectiles/fire/fire_shot_projectile.gd" id="1_uhoxj"]
 [ext_resource type="Texture2D" uid="uid://b4q2gs3lihqub" path="res://assets/skills/fire/Fireshot/Firebolt SpriteSheet.png" id="2_ht11m"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="63_o3ne1"]
 

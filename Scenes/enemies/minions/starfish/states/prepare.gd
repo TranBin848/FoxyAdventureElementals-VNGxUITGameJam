@@ -1,5 +1,5 @@
 extends EnemyState
-@export var prepare_time: float = 1
+@export var prepare_time: float = 0.25
 
 func _enter() -> void:
 	obj.velocity.x = 0
@@ -20,6 +20,8 @@ func _update( _delta ):
 		return
 	
 	var direction: Vector2 = obj.found_player.position - obj.position
+	print(obj.found_player.position)
+	print(obj.position)
 	obj.change_direction(sign(direction.x))
 	
 	if update_timer(_delta):

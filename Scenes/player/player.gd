@@ -7,6 +7,7 @@ var is_invulnerable: bool = false
 var invulnerable_timer: float = 0
 const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
+var saved_collision_layer: int
 
 @export var has_blade: bool = false
 @export var has_wand: bool = false
@@ -21,6 +22,9 @@ var blade_hit_area: Area2D
 @onready var blade_factory: Node2DFactory = $Direction/BladeFactory
 @onready var jump_fx_factory: Node2DFactory = $Direction/JumpFXFactory
 @onready var skill_factory: Node2DFactory = $Direction/SkillFactory
+@onready var hurt_particle: CPUParticles2D = $Direction/HurtFXFactory
+
+@onready var hurt_area: HurtArea2D = $Direction/HurtArea2D
 
 @export var push_strength = 100.0
 
@@ -36,6 +40,9 @@ var blade_hit_area: Area2D
 @export var hurt_sfx: AudioStream = null
 @export var attack_sfx: AudioStream = null
 @export var throw_sfx: AudioStream = null
+@export var walk_sfx: AudioStream = null
+
+@onready var walk_sfx_player: AudioStreamPlayer2D = null
 
 #Movement
 var last_dir: float = 0.0
@@ -58,7 +65,7 @@ signal skill_collected(skill_resource_class)
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Idle)
-	GameManager.player = self	
+	GameManager.player = self
 	extra_sprites.append(silhouette_normal_sprite)
 	silhouette_blade_sprite.hide()
 	silhouette_wand_sprite.hide()
@@ -67,6 +74,10 @@ func _ready() -> void:
 		collected_blade()
 	
 	camera_2d.make_current()
+	
+	walk_sfx_player = AudioStreamPlayer2D.new()
+	walk_sfx_player.stream = walk_sfx
+	add_child(walk_sfx_player)
 
 # ================================================================
 # === SKILL SYSTEM ===============================================
@@ -374,9 +385,12 @@ func _physics_process(delta: float) -> void:
 	debuglabel.text = str(fsm.current_state.name)
 			
 func handle_invulnerable(delta) -> void:
-	if (invulnerable_timer > 0):
+	if invulnerable_timer > 0:
 		invulnerable_timer -= delta
 	else:
+		if is_invulnerable:
+			# Restore collision layer when invulnerability ends
+			hurt_area.collision_layer = saved_collision_layer
 		is_invulnerable = false
 	if is_invulnerable:
 		invulnerable_flicker(delta)
@@ -399,6 +413,13 @@ func cast_skill(skill_name: String) -> void:
 func set_invulnerable() -> void:
 	is_invulnerable = true
 	invulnerable_timer = invulnerable_duration
+	# Save current layer and disable player's collision layer
+	saved_collision_layer = hurt_area.collision_layer
+	hurt_area.collision_layer = 0  # Temporarily disable collision layer
+	
+func _process(delta: float) -> void:
+	if (fsm.current_state != fsm.states.run):
+		walk_sfx_player.stop()
 
 func is_char_invulnerable() -> bool:
 	return is_invulnerable
@@ -417,6 +438,7 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 	#health_changed.emit()
+	hurt_particle.emitting = true
 
 func save_state() -> Dictionary:
 	return {
@@ -554,6 +576,14 @@ func get_closest_target() -> Node2D:
 # === END DETECTION AREA SIGNALS =================================
 # ================================================================
 
+# Thêm biến để lưu multiplier
+var speed_multiplier: float = 1.0
+
+# Phương thức để thay đổi multiplier
+func set_speed_multiplier(multiplier: float) -> void:
+	speed_multiplier = multiplier
+
+# Cập nhật logic di chuyển
 
 # === SWAP WEAPON SYSTEM =================================
 func collected_wand() -> void:
@@ -667,22 +697,16 @@ func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	extra_sprites.append(new_silhouette)
 	new_silhouette.show()
 func _update_movement(delta: float) -> void:
-	#if is_on_floor() or is_on_wall():
-		#reset_jump()
-		#reset_dashes()
-		
-	velocity.y += gravity*delta
-	
+	velocity.y += gravity * delta
+
 	if fsm.current_state == fsm.states.wallcling:
 		velocity.y = clamp(velocity.y, -INF, wall_slide_speed)
 	else:
 		velocity.y = clamp(velocity.y, -INF, max_fall_speed)
-	
+
 	if is_dashing:
 		velocity.y = 0
 
-	#print(velocity)
-	#print(global_position)
 	move_and_slide()
 	pass
 
