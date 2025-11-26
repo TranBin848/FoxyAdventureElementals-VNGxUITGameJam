@@ -41,7 +41,7 @@
 [ext_resource type="Script" uid="uid://obmi03ksefk2" path="res://scenes/skills/scripts/wood/WoodShot.gd" id="41_mk7g3"]
 [ext_resource type="Script" uid="uid://n0h5gosjpnrv" path="res://scenes/skills/scripts/wood/HealOverTime.gd" id="42_82kae"]
 [ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="43_ah671"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="43_nyqcx"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="43_nyqcx"]
 [ext_resource type="PackedScene" uid="uid://bh4o4646vlfjr" path="res://levels/objects/wand_collectable.tscn" id="45_tn3ix"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="46_0ob0i"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="47_mk7g3"]

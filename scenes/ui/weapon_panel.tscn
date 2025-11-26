@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bfs6srlf24660"]
 
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="1_vylg8"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_vylg8"]
 [ext_resource type="Script" uid="uid://3g6bxla31rwi" path="res://scenes/ui/weapon_panel.gd" id="2_r2mpm"]
 
 [node name="WeaponPanel" type="PanelContainer"]
