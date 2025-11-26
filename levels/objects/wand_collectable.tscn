@@ -14,16 +14,20 @@ collision_layer = 32
 script = ExtResource("1_1u54g")
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
 texture = ExtResource("1_aeed6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.35, 0.35)
 shape = SubResource("CircleShape2D_aeed6")
 
 [node name="CollectableArea2D" type="Area2D" parent="."]
+scale = Vector2(0.35, 0.35)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableArea2D"]
+scale = Vector2(0.35, 0.35)
 shape = SubResource("CircleShape2D_1u54g")
 
 [connection signal="body_entered" from="CollectableArea2D" to="." method="_on_collectable_area_2d_body_entered"]
