@@ -9,8 +9,8 @@ const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
 var saved_collision_layer: int
 
-@export var has_blade: bool = false
-@export var has_wand: bool = false
+@export var has_blade: bool = true
+@export var has_wand: bool = true
 var is_equipped_blade: bool = false    #Đang cầm Blade?
 var is_equipped_wand: bool = false     # Đang cầm Wand?
 signal weapon_swapped(equipped_weapon_type: String)
@@ -404,7 +404,10 @@ func invulnerable_flicker(delta) -> void:
 		animated_sprite.modulate.a = 1/(animated_sprite.modulate.a/(0.4*0.7))
 
 func can_attack() -> bool:
-	return has_blade or has_wand
+	return is_equipped_blade or is_equipped_wand
+
+func can_throw() -> bool:
+	return has_blade
 
 func cast_skill(skill_name: String) -> void:
 	if fsm.current_state != fsm.states.castspell:
@@ -603,6 +606,8 @@ func throw_blade() -> void:
 	
 func throwed_blade() -> void:
 	has_blade = false
+	is_equipped_blade = false
+	weapon_swapped.emit("normal")
 	set_animated_sprite($Direction/AnimatedSprite2D)
 	
 	# Quản lý sprite silhouette:
