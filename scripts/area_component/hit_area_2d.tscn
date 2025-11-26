@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbjbo6gtyss6f"]
-
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="1_32xet"]
-
-[node name="HitArea2d" type="Area2D"]
-script = ExtResource("1_32xet")

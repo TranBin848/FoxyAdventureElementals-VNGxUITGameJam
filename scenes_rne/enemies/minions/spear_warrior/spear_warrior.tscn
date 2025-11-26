@@ -1,0 +1,230 @@
+[gd_scene load_steps=33 format=3 uid="uid://b35vjjohukg22"]
+
+[ext_resource type="Script" uid="uid://b586ix60tpkyt" path="res://scenes_rne/enemies/minions/spear_warrior/spear_warrior.gd" id="1_nmrfe"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes_rne/enemies/ui/enemy_health_bar.tscn" id="2_67m24"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes_rne/enemies/paritcles/metal_particle.tscn" id="2_hhlv2"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes_rne/enemies/paritcles/wood_particle.tscn" id="3_4oyw7"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes_rne/enemies/paritcles/dirt_particle.tscn" id="4_1ilut"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes_rne/enemies/paritcles/water_particle.tscn" id="5_pkd16"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes_rne/enemies/paritcles/fire_particle.tscn" id="6_ipcoo"]
+[ext_resource type="Texture2D" uid="uid://bibbggt5jgslb" path="res://assets/spear/spear/spear_10.png" id="9_u4c4y"]
+[ext_resource type="Texture2D" uid="uid://b6g0qbxr2udas" path="res://assets/spear/spear/spear_11.png" id="10_nmrfe"]
+[ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="11_asimf"]
+[ext_resource type="Texture2D" uid="uid://caowq13ojm6jm" path="res://assets/spear/spear/spear_17.png" id="12_huggj"]
+[ext_resource type="Texture2D" uid="uid://cmubbgmbagioo" path="res://assets/spear/spear/spear_18.png" id="13_2fwu8"]
+[ext_resource type="Texture2D" uid="uid://dgxjo251sgofk" path="res://assets/spear/spear/spear_5.png" id="15_awyxo"]
+[ext_resource type="Texture2D" uid="uid://c7u3dylmg8ul5" path="res://assets/spear/spear/spear_6.png" id="16_yxdmg"]
+[ext_resource type="Texture2D" uid="uid://btsnuv21btrn7" path="res://assets/spear/spear/spear_7.png" id="17_fopfn"]
+[ext_resource type="Texture2D" uid="uid://xbqwktplxir1" path="res://assets/spear/spear/spear_8.png" id="18_3lrjo"]
+[ext_resource type="Texture2D" uid="uid://msqmxa6pfab3" path="res://assets/spear/spear/spear_13.png" id="19_vu5q8"]
+[ext_resource type="Texture2D" uid="uid://dykghmg88arcl" path="res://assets/spear/spear/spear_14.png" id="20_fj7ns"]
+[ext_resource type="Texture2D" uid="uid://63a7n5kmt405" path="res://assets/spear/spear/spear_15.png" id="21_e1rgo"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts_rne/area_component/hurt_area_2d.gd" id="22_2fwu8"]
+[ext_resource type="Script" uid="uid://c6a7nn5btn3hk" path="res://scenes_rne/enemies/minions/spear_warrior/states/idle.gd" id="22_asimf"]
+[ext_resource type="Texture2D" uid="uid://cr0xgcau0x5hn" path="res://assets/spear/spear/spear_16.png" id="22_qqttw"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts_rne/area_component/hit_area_2d.gd" id="22_ri6fp"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes_rne/enemies/states/hurt.gd" id="22_u4c4y"]
+[ext_resource type="Script" uid="uid://ye5ltbp62i0r" path="res://scenes_rne/enemies/minions/spear_warrior/states/prepare.gd" id="23_asimf"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes_rne/enemies/states/dead.gd" id="23_nmrfe"]
+[ext_resource type="Script" uid="uid://o58wwfpbjusr" path="res://scenes_rne/enemies/minions/spear_warrior/states/attack.gd" id="24_huggj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_72rcn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_nmrfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_asimf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nmrfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u4c4y")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_huggj")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2fwu8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_huggj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_2fwu8")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_awyxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yxdmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_fopfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_3lrjo")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_vu5q8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_fj7ns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_e1rgo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_qqttw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u4c4y")
+}],
+"loop": true,
+"name": &"prepare",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ri6fp"]
+size = Vector2(11, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxdmg"]
+size = Vector2(13, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fwu8"]
+size = Vector2(30.25, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awyxo"]
+size = Vector2(46, 34)
+
+[node name="SpearWarrior" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_nmrfe")
+shader_path = "uid://doovon2v0i5dx"
+spike = 1.0
+sight = 200.0
+attack_speed = 200.0
+max_health = 10
+metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Metal" parent="Particles" instance=ExtResource("2_hhlv2")]
+position = Vector2(0, -26)
+emitting = false
+
+[node name="Wood" parent="Particles" instance=ExtResource("3_4oyw7")]
+position = Vector2(0, -15)
+
+[node name="Earth" parent="Particles" instance=ExtResource("4_1ilut")]
+position = Vector2(0, 10)
+emitting = false
+
+[node name="Water" parent="Particles" instance=ExtResource("5_pkd16")]
+emitting = false
+
+[node name="Fire" parent="Particles" instance=ExtResource("6_ipcoo")]
+position = Vector2(0, 5)
+emitting = false
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+sprite_frames = SubResource("SpriteFrames_72rcn")
+animation = &"dead"
+
+[node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
+target_position = Vector2(139, 0)
+collision_mask = 2
+
+[node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
+target_position = Vector2(-48, 0)
+collision_mask = 2
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+script = ExtResource("22_2fwu8")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+position = Vector2(-20.5, -0.5)
+shape = SubResource("RectangleShape2D_ri6fp")
+
+[node name="SpearHitArea2D" type="Area2D" parent="Direction"]
+position = Vector2(6, 10)
+collision_mask = 4
+script = ExtResource("22_ri6fp")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/SpearHitArea2D"]
+shape = SubResource("RectangleShape2D_yxdmg")
+disabled = true
+
+[node name="SpikeHitArea2D" type="Area2D" parent="Direction"]
+position = Vector2(-43, -37)
+collision_mask = 4
+script = ExtResource("22_ri6fp")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/SpikeHitArea2D"]
+position = Vector2(42.875, 37.5)
+shape = SubResource("RectangleShape2D_2fwu8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_awyxo")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("22_asimf")
+bounce_back_velocity = 0.0
+
+[node name="Prepare" type="Node" parent="States"]
+script = ExtResource("23_asimf")
+bounce_back_velocity = 0.0
+
+[node name="Attack" type="Node" parent="States"]
+script = ExtResource("24_huggj")
+attack_frames = 4
+bounce_back_velocity = 0.0
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("22_u4c4y")
+bounce_back_velocity = 0.0
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("23_nmrfe")
+bounce_back_velocity = 0.0
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
+[node name="EnemyHealthBar" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("2_67m24")]
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 72.0
+offset_bottom = -20.0
+enemy = NodePath("..")

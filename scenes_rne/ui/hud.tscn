@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp5uk1uk53vpn"]
+
+[ext_resource type="Texture2D" uid="uid://b74y28dnye20" path="res://assets/ui/settings_button.png" id="1_0mwgc"]
+[ext_resource type="Script" uid="uid://6hgjfrvyk0cp" path="res://scenes_rne/ui/hud.gd" id="1_hqnrr"]
+
+[node name="HUD" type="MarginContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+script = ExtResource("1_hqnrr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SettingsTextureButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("1_0mwgc")
+stretch_mode = 0

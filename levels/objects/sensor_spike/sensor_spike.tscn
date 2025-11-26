@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://b6urbbuhgc0x7"]
 
 [ext_resource type="Script" uid="uid://bftyknoekpha1" path="res://levels/objects/sensor_spike/sensor_spike.gd" id="1_010a2"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_k0fdc"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts_rne/area_component/hit_area_2d.gd" id="2_k0fdc"]
 [ext_resource type="Texture2D" uid="uid://b61bxu56bvwt3" path="res://assets/island/objects/sensor_spike/Spike_B.png" id="2_muqwb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4oxu"]

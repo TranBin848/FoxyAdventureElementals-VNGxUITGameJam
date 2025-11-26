@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdl75m23fhutt"]
+
+[ext_resource type="Texture2D" uid="uid://ctosdrmqgke0f" path="res://assets/skills/icons_skill/48x48/skill_icons1.png" id="1_s35po"]
+[ext_resource type="Script" uid="uid://dtsmbq3vxwwmy" path="res://scenes_rne/skills/base/skill_drop/SkillDrop.gd" id="1_wlvaj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wlvaj"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wbnqd"]
+radius = 116.039
+
+[node name="SkillDrop" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_wlvaj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wlvaj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_s35po")
+
+[node name="DetectionPlayerArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionPlayerArea2D"]
+shape = SubResource("CircleShape2D_wbnqd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="DetectionPlayerArea2D" to="." method="_on_detection_player_area_2d_body_entered"]
+[connection signal="body_exited" from="DetectionPlayerArea2D" to="." method="_on_detection_player_area_2d_body_exited"]

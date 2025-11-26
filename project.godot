@@ -17,15 +17,15 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/autoload/game_manager.gd"
-SaveSystem="*res://scripts/autoload/save_system.gd"
-ElementsEnum="*res://scripts/elements.gd"
+GameManager="*res://scripts_rne/autoload/game_manager.gd"
+SaveSystem="*res://scripts_rne/autoload/save_system.gd"
+ElementsEnum="*res://scripts_rne/elements.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
-FadeLayer="*res://scenes/ui/fade_layer.tscn"
-DamageNumbers="*res://scripts/autoload/damage_numbers.gd"
-CameraTransition="*res://autoloads_rne/camera_transition.tscn"
-BackgroundMusic="*res://autoloads_rne/background_music.tscn"
-AudioPlayer="*res://autoloads_rne/audio_player.gd"
+FadeLayer="*res://scenes_rne/ui/fade_layer.tscn"
+DamageNumbers="*res://scripts_rne/autoload/damage_numbers.gd"
+CameraTransition="*res://autoloads/camera_transition.tscn"
+BackgroundMusic="*res://autoloads/background_music.tscn"
+AudioPlayer="*res://autoloads/audio_player.gd"
 
 [dialogic]
 

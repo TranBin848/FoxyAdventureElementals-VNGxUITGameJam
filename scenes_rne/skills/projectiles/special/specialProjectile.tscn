@@ -1,0 +1,149 @@
+[gd_scene load_steps=22 format=3 uid="uid://irdk5qssi3vg"]
+
+[ext_resource type="Script" uid="uid://5btdwob525wm" path="res://scenes_rne/skills/projectiles/projectileBase.gd" id="1_3uur6"]
+[ext_resource type="Texture2D" uid="uid://dj80dcybhxkbr" path="res://assets/skills/water/Water Ball - Spritesheet/WaterBall - Startup and Infinite.png" id="63_3uur6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vf08"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbq13"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2sh1"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vv3p"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p86ne"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta3k2"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arwbe"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apfmt"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqanu"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0uugc"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nfq4"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(256, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqcor"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u10jb"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwwbv"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apvca"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ertp"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei2kc"]
+atlas = ExtResource("63_3uur6")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vf08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbq13")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2sh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vv3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p86ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta3k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arwbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apfmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqanu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0uugc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nfq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqcor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u10jb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwwbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apvca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ertp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei2kc")
+}],
+"loop": true,
+"name": &"WaterBlast",
+"speed": 30.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gp0ck"]
+radius = 19.0263
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_3uur6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tbddh")
+animation = &"WaterBlast"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gp0ck")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

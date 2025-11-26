@@ -1,0 +1,107 @@
+[gd_scene load_steps=24 format=3 uid="uid://c7oakmoqeoa5i"]
+
+[ext_resource type="Script" uid="uid://bwcwbd68abn2j" path="res://scenes_rne/fx/animated_fx.gd" id="1_w80cl"]
+[ext_resource type="Texture2D" uid="uid://de22uag16alld" path="res://assets/fx/explosion/blastwave1.png" id="2_aajkh"]
+[ext_resource type="Texture2D" uid="uid://cnb7mo2lxovcb" path="res://assets/fx/explosion/blastwave2.png" id="3_6tf8v"]
+[ext_resource type="Texture2D" uid="uid://cshcerp60ig5j" path="res://assets/fx/explosion/blastwave3.png" id="4_gmoov"]
+[ext_resource type="Texture2D" uid="uid://j2axppimc27r" path="res://assets/fx/explosion/blastwave4.png" id="5_wy0r1"]
+[ext_resource type="Texture2D" uid="uid://c58n8fdjs80t2" path="res://assets/fx/explosion/blastwave5.png" id="6_aqtp2"]
+[ext_resource type="Texture2D" uid="uid://blrt5718jj8of" path="res://assets/fx/explosion/blastwave6.png" id="7_3o6ma"]
+[ext_resource type="Texture2D" uid="uid://c4ha2jj2n8d2j" path="res://assets/fx/explosion/blastwave7.png" id="8_q10ks"]
+[ext_resource type="Texture2D" uid="uid://g6udj11ekm1g" path="res://assets/fx/explosion/blastwave8.png" id="9_loha7"]
+[ext_resource type="Texture2D" uid="uid://x3vlypgunuws" path="res://assets/fx/explosion/blastwave9.png" id="10_l0bmv"]
+[ext_resource type="Texture2D" uid="uid://dll85h5voxvh3" path="res://assets/fx/explosion/blastwave10.png" id="11_p1qsb"]
+[ext_resource type="Texture2D" uid="uid://m1srshfxw3w6" path="res://assets/fx/explosion/blastwave11.png" id="12_slrur"]
+[ext_resource type="Texture2D" uid="uid://bv6jxux20ia2g" path="res://assets/fx/explosion/blastwave12.png" id="13_vxce8"]
+[ext_resource type="Texture2D" uid="uid://bq5nhqnkte7eq" path="res://assets/fx/explosion/blastwave13.png" id="14_p5wmj"]
+[ext_resource type="Texture2D" uid="uid://dgl13u4lna040" path="res://assets/fx/explosion/blastwave14.png" id="15_pb2ox"]
+[ext_resource type="Texture2D" uid="uid://bulb0n4weqdb3" path="res://assets/fx/explosion/blastwave15.png" id="16_dweu1"]
+[ext_resource type="Texture2D" uid="uid://btkw4cn43en25" path="res://assets/fx/explosion/blastwave16.png" id="17_km5o4"]
+[ext_resource type="Texture2D" uid="uid://cmadtkfeyjwxx" path="res://assets/fx/explosion/blastwave17.png" id="18_eo1ka"]
+[ext_resource type="Texture2D" uid="uid://b4bepudftf2ol" path="res://assets/fx/explosion/blastwave18.png" id="19_6wlda"]
+[ext_resource type="Texture2D" uid="uid://be3ufelwbucer" path="res://assets/fx/explosion/blastwave19.png" id="20_6skag"]
+[ext_resource type="Texture2D" uid="uid://4kalecsx5s3t" path="res://assets/fx/explosion/blastwave20.png" id="21_l5vx4"]
+[ext_resource type="Texture2D" uid="uid://osnu4fpopbbu" path="res://assets/fx/explosion/blastwave21.png" id="22_s1ham"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ipm8a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aajkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6tf8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gmoov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wy0r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_aqtp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3o6ma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_q10ks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_loha7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l0bmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_p1qsb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_slrur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_vxce8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_p5wmj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pb2ox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_dweu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_km5o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_eo1ka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_6wlda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_6skag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_l5vx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_s1ham")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="explosionFX" type="Node2D"]
+script = ExtResource("1_w80cl")
+life_time = 0.5
+
+[node name="Blastwave2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 5.96046e-08)
+scale = Vector2(1, 0.1875)
+sprite_frames = SubResource("SpriteFrames_ipm8a")
+autoplay = "default"
+frame = 20
+frame_progress = 1.0
