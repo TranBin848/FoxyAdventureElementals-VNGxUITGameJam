@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://5nj0c207ldgc" path="res://levels/objects/tree/tree_1.tscn" id="3_8tsl1"]
 [ext_resource type="Texture2D" uid="uid://hgtbpriwasmr" path="res://assets/terrain_plus/Other Tiles1.png" id="3_8x0gd"]
 [ext_resource type="Texture2D" uid="uid://u2air8500ab1" path="res://assets/terrain_plus/Pine Trees.png" id="3_b4b0w"]
-[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/VariantOfSpike/spike.tscn" id="3_n4nvx"]
+[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/spike.tscn" id="3_n4nvx"]
 [ext_resource type="Texture2D" uid="uid://crrvkejlerpq5" path="res://assets/terrain_plus/BG Dirt2.png" id="3_wapvn"]
 [ext_resource type="PackedScene" uid="uid://dvs3j65i3c27e" path="res://levels/objects/tree/tree_2.tscn" id="4_8x0gd"]
 [ext_resource type="Texture2D" uid="uid://clilecwvvs5g4" path="res://assets/terrain_plus/Decor.png" id="4_gecsc"]

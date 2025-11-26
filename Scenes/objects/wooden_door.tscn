@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://c15o6qkwmcw44"]
 
-[ext_resource type="Script" uid="uid://bv66gsd8bng6x" path="res://Scenes/objects/wooden_door_root.gd" id="1_iv1jh"]
+[ext_resource type="Script" uid="uid://bv66gsd8bng6x" path="res://scenes/objects/wooden_door_root.gd" id="1_iv1jh"]
 [ext_resource type="Texture2D" uid="uid://gxdcobbhkb2i" path="res://assets/object/door/door-close.png" id="1_qqt27"]
-[ext_resource type="Script" uid="uid://daml8sil46tjy" path="res://Scenes/objects/wooden_door.gd" id="1_uxcgv"]
+[ext_resource type="Script" uid="uid://daml8sil46tjy" path="res://scenes/objects/wooden_door.gd" id="1_uxcgv"]
 [ext_resource type="Texture2D" uid="uid://dmev22qkblll0" path="res://assets/object/door/door-open.png" id="2_uxcgv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iv1jh"]

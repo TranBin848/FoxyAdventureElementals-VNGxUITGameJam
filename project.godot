@@ -23,9 +23,9 @@ ElementsEnum="*res://scripts/elements.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 FadeLayer="*res://scenes/ui/fade_layer.tscn"
 DamageNumbers="*res://scripts/autoload/damage_numbers.gd"
-CameraTransition="*res://Autoloads/camera_transition.tscn"
-BackgroundMusic="*res://Autoloads/background_music.tscn"
-AudioPlayer="*res://Autoloads/audio_player.gd"
+CameraTransition="*res://autoloads/camera_transition.tscn"
+BackgroundMusic="*res://autoloads/background_music.tscn"
+AudioPlayer="*res://autoloads/audio_player.gd"
 
 [dialogic]
 

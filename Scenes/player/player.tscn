@@ -57,7 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://btcp2mst3e6vw" path="res://assets/foxy/fox_hat_wand/fox_attack_3.png" id="41_bysbl"]
 [ext_resource type="Script" uid="uid://di3w8xw7t025o" path="res://scenes/player/states/jump.gd" id="41_gswnw"]
 [ext_resource type="Texture2D" uid="uid://nhfj6hi2shfk" path="res://assets/foxy/fox_hat_wand/fox_attack_4.png" id="42_2wy34"]
-[ext_resource type="PackedScene" uid="uid://dy04qa0qn7d0r" path="res://scenes/FX/ghost.tscn" id="42_5xbmr"]
+[ext_resource type="PackedScene" uid="uid://dy04qa0qn7d0r" path="res://scenes/fx/ghost.tscn" id="42_5xbmr"]
 [ext_resource type="Script" uid="uid://caxtbpdyga1ay" path="res://scenes/player/states/fall.gd" id="42_xcnuv"]
 [ext_resource type="Script" uid="uid://d3tdm7uhl16p7" path="res://scenes/player/states/attack.gd" id="43_niom3"]
 [ext_resource type="Texture2D" uid="uid://dt7xim2i85pbx" path="res://assets/foxy/fox_hat_wand/fox_attack_5.png" id="43_ymths"]
@@ -88,7 +88,7 @@
 [ext_resource type="Texture2D" uid="uid://bqykhn7xwriyi" path="res://assets/foxy/fox_hat_wand/fox_walk_3.png" id="57_ws0t6"]
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
 [ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://Resources/UI/game_ui_theme.tres" id="63_gmu8b"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="63_gmu8b"]
 [ext_resource type="AudioStream" uid="uid://celbmeo4au546" path="res://assets/sounds/gong.mp3" id="65_2yv6k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
