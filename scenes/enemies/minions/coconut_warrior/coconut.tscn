@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://r7tfrorsfck0"]
+
+[ext_resource type="Script" uid="uid://eop3ure2ua2c" path="res://scenes/enemies/minions/coconut_warrior/coconut.gd" id="1_g5g73"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_xgu7y"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_khxos"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_m2me4"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_dotvn"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_yu3m2"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="7_6rao5"]
+[ext_resource type="Texture2D" uid="uid://ljup3gpysk1e" path="res://assets/enemy/coconut_warrior/coconut.png" id="8_g5g73"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uf2w5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_caqfb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_g5g73")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6j17m"]
+radius = 9.0
+
+[node name="Coconut" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_g5g73")
+metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Metal" parent="Particles" instance=ExtResource("2_xgu7y")]
+position = Vector2(0, -26)
+emitting = false
+
+[node name="Wood" parent="Particles" instance=ExtResource("3_khxos")]
+position = Vector2(0, -15)
+
+[node name="Earth" parent="Particles" instance=ExtResource("4_m2me4")]
+position = Vector2(0, 10)
+emitting = false
+
+[node name="Water" parent="Particles" instance=ExtResource("5_dotvn")]
+emitting = false
+
+[node name="Fire" parent="Particles" instance=ExtResource("6_yu3m2")]
+position = Vector2(0, 5)
+emitting = false
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="SpikeHitArea2D" type="Area2D" parent="Direction"]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("7_6rao5")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/SpikeHitArea2D"]
+shape = SubResource("CircleShape2D_uf2w5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+sprite_frames = SubResource("SpriteFrames_caqfb")
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6j17m")
+
+[connection signal="area_entered" from="Direction/SpikeHitArea2D" to="." method="_on_spike_hit_area_2d_area_entered"]
+[connection signal="body_entered" from="Direction/SpikeHitArea2D" to="." method="_on_spike_hit_area_2d_body_entered"]
