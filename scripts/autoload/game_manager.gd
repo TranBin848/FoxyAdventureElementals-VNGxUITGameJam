@@ -173,7 +173,7 @@ func load_checkpoint_data() -> void:
 
 		if not stage_path.is_empty():
 			print("🗺️ Loading checkpoint scene:", stage_path)
-			change_stage(stage_path)
+			#change_stage(stage_path)
 		else:
 			print("✅ Checkpoint loaded but no stage path found.")
 		
