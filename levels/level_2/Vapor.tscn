@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgt2q1tvy7tm"]
+
+[ext_resource type="Texture2D" uid="uid://bj34astvr3b3j" path="res://assets/island/objects/voper_effect/SmokeForm.png" id="1_838ew"]
+
+[sub_resource type="Curve" id="Curve_28tl1"]
+_data = [Vector2(0.00156495, 0.0264807), 0.0, 0.0, 0, 0, Vector2(0.749609, 0.659453), 0.851515, 0.851515, 0, 0, Vector2(1, 0.751993), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Vapor" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.0196078)
+amount = 1000
+texture = ExtResource("1_838ew")
+lifetime = 1.5
+speed_scale = 0.25
+explosiveness = 0.25
+randomness = 0.5
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 32.0
+gravity = Vector2(0, -100)
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_28tl1")
