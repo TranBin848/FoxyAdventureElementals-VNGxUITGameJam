@@ -1,35 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvf8uqbc214c3"]
+[gd_scene load_steps=3 format=3 uid="uid://bvf8uqbc214c3"]
 
 [ext_resource type="PackedScene" uid="uid://ceb23m3y0l0fh" path="res://scenes/ui/skill_button_skill_tree.tscn" id="1_eiof6"]
+[ext_resource type="Script" uid="uid://bdn1n66kv8ps0" path="res://scenes/ui/skill_tree/skill_tree.gd" id="1_lvhuv"]
 
-[node name="SkillTree" type="Control"]
+[node name="SkillTreeButtonGroup" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -638.0
-offset_top = -359.0
-offset_right = -638.0
-offset_bottom = -359.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+script = ExtResource("1_lvhuv")
+metadata/_edit_use_anchors_ = true
 
 [node name="SkillButton_SkillTree" parent="." instance=ExtResource("1_eiof6")]
 layout_mode = 0
-offset_left = 155.0
-offset_top = 56.0
-offset_right = 195.0
-offset_bottom = 96.0
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -600.0
+offset_bottom = -320.0
 
 [node name="SkillButton_SkillTree" parent="SkillButton_SkillTree" instance=ExtResource("1_eiof6")]
 layout_mode = 0
@@ -66,3 +59,5 @@ offset_top = 105.6
 offset_right = 131.52
 offset_bottom = 145.6
 disabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]

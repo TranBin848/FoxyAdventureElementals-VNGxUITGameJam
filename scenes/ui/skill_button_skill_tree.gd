@@ -1,12 +1,12 @@
 extends TextureButton
-class_name SkillNode
+class_name SkillButtonNode
 
 @onready var panel: Panel = $Panel
 @onready var label: Label = $MarginContainer/Label
 @onready var line_2d: Line2D = $Line2D
 
 func _ready() -> void:
-	if get_parent() is SkillNode:
+	if get_parent() is SkillButtonNode:
 		line_2d.add_point(global_position + size/2)
 		line_2d.add_point(get_parent().global_position + size/2)
 
@@ -25,5 +25,5 @@ func _on_pressed() -> void:
 	var skills = get_children()
 	
 	for skill in skills:
-		if skill is SkillNode and level == 3:
+		if skill is SkillButtonNode and level == 3:
 			skill.disabled = false

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcupn8lintl77"]
+
+[ext_resource type="PackedScene" uid="uid://bvf8uqbc214c3" path="res://scenes/ui/skill_tree.tscn" id="32_q2d52"]
+
+[node name="SkillTreeRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SkillTreeButtonGroup" parent="." instance=ExtResource("32_q2d52")]
+z_index = 1
+layout_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+show_behind_parent = true
+custom_minimum_size = Vector2(3200, 1800)
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
