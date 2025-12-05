@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://bk25mnb7lmoy0"]
+
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_5tho6"]
+[ext_resource type="PackedScene" uid="uid://cngeatewj4pjb" path="res://scenes/skills/area/water/waterSpikeArea.tscn" id="1_jydya"]
+[ext_resource type="Texture2D" uid="uid://drfxaeoa23xwx" path="res://assets/skills/icons_skill/48x48/skill_icons19.png" id="2_ogmik"]
+
+[resource]
+script = ExtResource("1_5tho6")
+name = "Water Spike"
+element = "Water"
+cooldown = 3.5
+duration = 1.5
+texture = ExtResource("2_ogmik")
+animation_name = ""
+area_scene = ExtResource("1_jydya")
+speed = 0.0
+damage = 2
+mana = 20
+type = "area"
+max_stack = 99
+metadata/_custom_type_script = "uid://4fu7i05ai1gp"

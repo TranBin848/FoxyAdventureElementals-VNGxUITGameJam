@@ -8,9 +8,14 @@ var dragging := false
 var last_mouse_pos := Vector2.ZERO
 
 @onready var camera: Camera2D = $Camera2D
+@onready var info_panel: SkillInfoPanel = $"../CanvasLayer_SkillPanel/SkillInfoPanel"
 
 func _input(event: InputEvent) -> void:
 	# --- ZOOM ---
+	# Nếu panel mở → KHÔNG ZOOM, KHÔNG DRAG
+	if info_panel.visible:
+		return
+	
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:

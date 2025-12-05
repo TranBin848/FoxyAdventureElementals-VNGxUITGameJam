@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvf8uqbc214c3"]
+[gd_scene load_steps=4 format=3 uid="uid://bvf8uqbc214c3"]
 
 [ext_resource type="PackedScene" uid="uid://ceb23m3y0l0fh" path="res://scenes/ui/skill_button_skill_tree.tscn" id="1_eiof6"]
 [ext_resource type="Script" uid="uid://bdn1n66kv8ps0" path="res://scenes/ui/skill_tree/skill_tree.gd" id="1_lvhuv"]
+[ext_resource type="Resource" uid="uid://buqpvp30f6xfo" path="res://scenes/skills/scripts/fire/FireExplosion.tres" id="3_6rj6t"]
 
 [node name="SkillTreeButtonGroup" type="Control"]
 layout_mode = 3
@@ -17,47 +18,23 @@ size_flags_vertical = 4
 script = ExtResource("1_lvhuv")
 metadata/_edit_use_anchors_ = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="SkillButton_SkillTree" parent="." instance=ExtResource("1_eiof6")]
 layout_mode = 0
-offset_left = -640.0
-offset_top = -360.0
-offset_right = -600.0
-offset_bottom = -320.0
 
 [node name="SkillButton_SkillTree" parent="SkillButton_SkillTree" instance=ExtResource("1_eiof6")]
 layout_mode = 0
-offset_top = 137.6
-offset_bottom = 177.6
-disabled = true
-
-[node name="SkillButton_SkillTree2" parent="SkillButton_SkillTree" instance=ExtResource("1_eiof6")]
-layout_mode = 0
-offset_left = 156.0
-offset_top = 133.6
-offset_right = 196.0
-offset_bottom = 173.6
-disabled = true
+offset_left = 111.2
+offset_top = 92.0
+offset_right = 151.2
+offset_bottom = 132.0
+skill = ExtResource("3_6rj6t")
 
 [node name="SkillButton_SkillTree3" parent="SkillButton_SkillTree" instance=ExtResource("1_eiof6")]
 layout_mode = 0
-offset_left = 338.4
-offset_top = 133.6
-offset_right = 378.4
-offset_bottom = 173.6
-disabled = true
-
-[node name="SkillButton_SkillTree" parent="SkillButton_SkillTree/SkillButton_SkillTree3" instance=ExtResource("1_eiof6")]
-layout_mode = 0
-offset_top = 105.6
-offset_bottom = 145.6
-disabled = true
-
-[node name="SkillButton_SkillTree2" parent="SkillButton_SkillTree/SkillButton_SkillTree3" instance=ExtResource("1_eiof6")]
-layout_mode = 0
-offset_left = 91.52
-offset_top = 105.6
-offset_right = 131.52
-offset_bottom = 145.6
-disabled = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
+offset_left = -96.8
+offset_top = 92.0
+offset_right = -56.8
+offset_bottom = 132.0
+skill = ExtResource("3_6rj6t")
