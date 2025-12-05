@@ -1,0 +1,362 @@
+[gd_scene load_steps=45 format=3 uid="uid://d0ig8xrtjp2v1"]
+
+[ext_resource type="Script" uid="uid://ckyw4uljyk87h" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.gd" id="1_ognfm"]
+[ext_resource type="Texture2D" uid="uid://b5kffli05vjsc" path="res://assets/war_lord/war_lord_turtle19.png" id="2_ednji"]
+[ext_resource type="Texture2D" uid="uid://c2e2k5ap4ve0t" path="res://assets/war_lord/war_lord_turtle1.png" id="2_ekg5y"]
+[ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="2_m5be7"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_ej2x1"]
+[ext_resource type="Texture2D" uid="uid://dtpvkf4cp6iei" path="res://assets/war_lord/war_lord_turtle2.png" id="3_fofvp"]
+[ext_resource type="Texture2D" uid="uid://pxq4wkdir77h" path="res://assets/war_lord/war_lord_turtle3.png" id="4_rf43r"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="4_ujkgd"]
+[ext_resource type="Texture2D" uid="uid://ceq20x5266adx" path="res://assets/war_lord/war_lord_turtle4.png" id="5_c1x40"]
+[ext_resource type="Texture2D" uid="uid://cyiojfg47liwe" path="res://assets/war_lord/war_lord_turtle13.png" id="5_rtqf5"]
+[ext_resource type="Texture2D" uid="uid://cpfrqhotwwkih" path="res://assets/war_lord/war_lord_turtle14.png" id="6_e3bfs"]
+[ext_resource type="Texture2D" uid="uid://cq34h255rjrfm" path="res://assets/war_lord/war_lord_turtle5.png" id="6_rtqf5"]
+[ext_resource type="Texture2D" uid="uid://c834prlca5sx4" path="res://assets/war_lord/war_lord_turtle21.png" id="7_c1ruk"]
+[ext_resource type="Texture2D" uid="uid://cwarwxl2ax1mi" path="res://assets/war_lord/war_lord_turtle6.png" id="7_e3bfs"]
+[ext_resource type="Texture2D" uid="uid://bq0p4a2pn6ffw" path="res://assets/war_lord/war_lord_turtle15.png" id="7_f8orq"]
+[ext_resource type="Texture2D" uid="uid://40ka1tofy5ty" path="res://assets/war_lord/war_lord_turtle16.png" id="8_33b4w"]
+[ext_resource type="Texture2D" uid="uid://cxe7xre34ertq" path="res://assets/war_lord/war_lord_turtle22.png" id="8_oivag"]
+[ext_resource type="Texture2D" uid="uid://c7a0mkebkxtxg" path="res://assets/war_lord/war_lord_turtle28.png" id="9_sndxc"]
+[ext_resource type="Texture2D" uid="uid://b3okrayp6kwks" path="res://assets/war_lord/war_lord_turtle23.png" id="9_x3ps4"]
+[ext_resource type="Texture2D" uid="uid://c6al165m7dv8n" path="res://assets/war_lord/war_lord_turtle10.png" id="11_p6kkm"]
+[ext_resource type="Texture2D" uid="uid://crr2631uf6pjm" path="res://assets/war_lord/war_lord_turtle11.png" id="12_upwld"]
+[ext_resource type="Texture2D" uid="uid://b2xq4d1vy5b4k" path="res://assets/war_lord/war_lord_turtle12.png" id="13_aws5q"]
+[ext_resource type="Texture2D" uid="uid://b4rw72iosmwx0" path="res://assets/war_lord/war_lord_turtle24.png" id="16_uo5mv"]
+[ext_resource type="Texture2D" uid="uid://dyypg1gvcum2p" path="res://assets/war_lord/war_lord_turtle25.png" id="17_ekg5y"]
+[ext_resource type="Texture2D" uid="uid://dbf6eyi4mfbei" path="res://assets/war_lord/war_lord_turtle17.png" id="18_ednji"]
+[ext_resource type="Texture2D" uid="uid://bsspee7igfk7m" path="res://assets/war_lord/war_lord_turtle26.png" id="18_fofvp"]
+[ext_resource type="Texture2D" uid="uid://bojjgfkceu2r4" path="res://assets/war_lord/war_lord_turtle18.png" id="19_3foqi"]
+[ext_resource type="Texture2D" uid="uid://e3oiygvcpwga" path="res://assets/war_lord/war_lord_turtle27.png" id="19_rf43r"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="25_fofvp"]
+[ext_resource type="PackedScene" uid="uid://b7jf636aeqd4g" path="res://scenes/enemies/war_lord_turtle/warlord_bullet.tscn" id="26_uwb07"]
+[ext_resource type="Script" uid="uid://bx2w7hsx146xm" path="res://scenes/enemies/war_lord_turtle/inactive.gd" id="28_e3bfs"]
+[ext_resource type="Script" uid="uid://cus5ulega6e6b" path="res://scenes/enemies/war_lord_turtle/idle.gd" id="29_04uyp"]
+[ext_resource type="Script" uid="uid://bp1gcvke7o4qu" path="res://scenes/enemies/war_lord_turtle/shoot_left.gd" id="30_uwb07"]
+[ext_resource type="Script" uid="uid://dtc3hwo0l1m83" path="res://scenes/enemies/war_lord_turtle/shoot_right.gd" id="31_ednji"]
+[ext_resource type="Script" uid="uid://dunkcwr0j1xul" path="res://scenes/enemies/war_lord_turtle/rotate_l_2r.gd" id="32_3foqi"]
+[ext_resource type="Script" uid="uid://dncrdd7n1y5bs" path="res://scenes/enemies/war_lord_turtle/rotate_r_2l.gd" id="33_ayec0"]
+[ext_resource type="Script" uid="uid://0jadxa52mx62" path="res://scenes/enemies/war_lord_turtle/launch_rocket.gd" id="34_cjcse"]
+[ext_resource type="Script" uid="uid://5fit00te6c5u" path="res://scenes/enemies/war_lord_turtle/stun.gd" id="35_f8pc6"]
+[ext_resource type="Script" uid="uid://f2c5h7xv5rvh" path="res://scenes/enemies/war_lord_turtle/hurt.gd" id="36_hnfci"]
+[ext_resource type="Script" uid="uid://crhlo3of68gvb" path="res://scenes/enemies/war_lord_turtle/dead.gd" id="37_3ub61"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m5be7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ednji")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ekg5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fofvp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fofvp")
+}],
+"loop": true,
+"name": &"inactive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_p6kkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_upwld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_aws5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rtqf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_e3bfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f8orq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_33b4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_sndxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_e3bfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f8orq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_33b4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ednji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_aws5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_upwld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_p6kkm")
+}],
+"loop": false,
+"name": &"launchRocket",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_p6kkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_upwld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_aws5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_3foqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ednji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c1ruk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_oivag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_x3ps4")
+}],
+"loop": false,
+"name": &"rotateL2R",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_x3ps4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_oivag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c1ruk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ednji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_3foqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_aws5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_upwld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_p6kkm")
+}],
+"loop": false,
+"name": &"rotateR2L",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ekg5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fofvp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rf43r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c1x40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rtqf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e3bfs")
+}],
+"loop": false,
+"name": &"shootLeft",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_x3ps4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_uo5mv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ekg5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_fofvp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_rf43r")
+}],
+"loop": true,
+"name": &"shootRight",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7upca"]
+radius = 36.0555
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fq64g"]
+radius = 36.0555
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7mo6a"]
+radius = 31.0161
+
+[node name="WarLordTurtle" type="CharacterBody2D"]
+script = ExtResource("1_ognfm")
+metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+sprite_frames = SubResource("SpriteFrames_m5be7")
+animation = &"shootRight"
+
+[node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(45, 0)
+target_position = Vector2(20, 0)
+
+[node name="DownRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(45, 0)
+target_position = Vector2(0, 40)
+
+[node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
+target_position = Vector2(-200, 0)
+collision_mask = 2
+
+[node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
+target_position = Vector2(200, 0)
+collision_mask = 2
+
+[node name="RocketFactory" type="Marker2D" parent="Direction"]
+position = Vector2(61, 0)
+script = ExtResource("2_m5be7")
+product_packed_scene = ExtResource("26_uwb07")
+metadata/_custom_type_script = "uid://b2o007yxvk7qa"
+
+[node name="BulletFactory" type="Marker2D" parent="Direction"]
+position = Vector2(61, 0)
+script = ExtResource("2_m5be7")
+product_packed_scene = ExtResource("26_uwb07")
+metadata/_custom_type_script = "uid://b2o007yxvk7qa"
+
+[node name="HitArea2D" type="Area2D" parent="Direction"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_ej2x1")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HitArea2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_7upca")
+debug_color = Color(0.575242, 0.0792793, 0, 0.42)
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("4_ujkgd")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_fq64g")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_7mo6a")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(25, -14)
+
+[node name="States" type="Node" parent="."]
+
+[node name="Inactive" type="Node" parent="States"]
+script = ExtResource("28_e3bfs")
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("29_04uyp")
+
+[node name="ShootLeft" type="Node" parent="States"]
+script = ExtResource("30_uwb07")
+
+[node name="ShootRight" type="Node" parent="States"]
+script = ExtResource("31_ednji")
+
+[node name="RotateL2R" type="Node" parent="States"]
+script = ExtResource("32_3foqi")
+
+[node name="RotateR2L" type="Node" parent="States"]
+script = ExtResource("33_ayec0")
+
+[node name="LaunchRocket" type="Node" parent="States"]
+script = ExtResource("34_cjcse")
+
+[node name="Stun" type="Node" parent="States"]
+script = ExtResource("35_f8pc6")
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("36_hnfci")
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("37_3ub61")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -25.0
+offset_top = -48.0
+offset_right = 24.0
+offset_bottom = -25.0
+text = "debug"
+
+[node name="Bullet" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("25_fofvp")
+theme_override_constants/margin_top = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Control"]
+visible = false
+custom_minimum_size = Vector2(500, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 100.0
+
+[connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]

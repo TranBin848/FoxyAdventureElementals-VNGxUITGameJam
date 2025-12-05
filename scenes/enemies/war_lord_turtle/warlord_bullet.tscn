@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7jf636aeqd4g"]
+
+[ext_resource type="Texture2D" uid="uid://c6ns5rtic040v" path="res://assets/war_lord_bullet/bullet_cannon.png" id="1_dafil"]
+[ext_resource type="Script" uid="uid://dyxuadu7ka83i" path="res://scenes/enemies/war_lord_turtle/warlord_bullet.gd" id="1_sl4su"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_sl4su"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u447q"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q4tih"]
+
+[node name="WarlordBullet" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_sl4su")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u447q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dafil")
+
+[node name="HitArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_sl4su")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+shape = SubResource("CircleShape2D_q4tih")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="HitArea2D" to="." method="_on_hit_area_2d_body_entered"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]
