@@ -1,11 +1,14 @@
 extends HBoxContainer
 
 var slots: Array
-var skills: Array = [FireShot, FireShot]
+var skills: Array = []
 var available_skills: Array = []
 
 func _ready() -> void:
 	slots = get_children()
+
+	refresh_from_stack()
+	
 	var player = get_tree().get_first_node_in_group("player")
 	for i in get_child_count():
 		slots[i].change_key = str(i + 1)
@@ -18,6 +21,7 @@ func _ready() -> void:
 
 func _on_skill_collected(skill_resource_class: Script):
 	var new_skill_instance = skill_resource_class.new()
+	SkillStackManager.add_stack(new_skill_instance.name, 1)
 	
 	#1. KIỂM TRA NÂNG CẤP (UPGRADE)
 	for slot in slots:
@@ -34,6 +38,8 @@ func _on_skill_collected(skill_resource_class: Script):
 				
 				#Cập nhật lại UI (cooldown bar, vv) nếu cần
 				existing_skill.apply_to_button(slot)
+				
+				
 				
 				print("✨ Skill '%s' UPGRADED to level %d!" % [existing_skill.name, existing_skill.current_stack])
 				return # Thoát vì đã nâng cấp thành công
@@ -61,3 +67,34 @@ func _on_skill_collected(skill_resource_class: Script):
 			
 	
 	print("⚠️ Không có slot trống để chứa Skill mới!")
+
+func refresh_from_stack() -> void:
+	if SkillStackManager.stack_table.is_empty():
+		return
+
+	for slot in slots:
+		slot.skill = null
+		slot.disabled = true
+		slot.time_label.text = ""
+		slot.set_process(false)
+
+	var index := 0
+
+	for skill_name in SkillStackManager.stack_table.keys():
+		if index >= slots.size():
+			break
+
+		# Tạo instance skill từ tên
+		var db = SkillDatabase.new()
+		var skill_resource = db.get_skill_by_name(skill_name)
+		if skill_resource == null:
+			continue
+
+		var instance = skill_resource.new()
+		instance.current_stack = SkillStackManager.stack_table[skill_name]
+
+		slots[index].skill = instance
+		instance.apply_to_button(slots[index])
+
+		slots[index].disabled = false
+		index += 1

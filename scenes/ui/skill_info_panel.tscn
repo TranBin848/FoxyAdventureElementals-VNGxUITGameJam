@@ -70,3 +70,35 @@ scale = Vector2(0.95, 0.95)
 stream = ExtResource("3_vmfbp")
 autoplay = true
 loop = true
+
+[node name="UpgradeButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -65.0
+offset_right = 170.0
+offset_bottom = -41.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_tcvtn")
+text = "UPGRADE"
+
+[node name="UnlockButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -65.0
+offset_right = -20.0
+offset_bottom = -41.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_tcvtn")
+text = "UNLOCK"
+
+[connection signal="pressed" from="UpgradeButton" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="UnlockButton" to="." method="_on_unlock_button_pressed"]

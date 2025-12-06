@@ -29,6 +29,7 @@ offset_left = 111.2
 offset_top = 92.0
 offset_right = 151.2
 offset_bottom = 132.0
+disabled = true
 skill = ExtResource("3_6rj6t")
 
 [node name="SkillButton_SkillTree3" parent="SkillButton_SkillTree" instance=ExtResource("1_eiof6")]
@@ -37,4 +38,5 @@ offset_left = -96.8
 offset_top = 92.0
 offset_right = -56.8
 offset_bottom = 132.0
+disabled = true
 skill = ExtResource("3_6rj6t")
