@@ -619,7 +619,6 @@ func collected_blade() -> void:
 func throw_blade() -> void:
 	var blade = blade_factory.create() as RigidBody2D
 	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
-	blade.direction = direction
 	blade.apply_impulse(throw_velocity)
 	throwed_blade()
 	

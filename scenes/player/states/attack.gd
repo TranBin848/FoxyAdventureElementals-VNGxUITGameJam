@@ -11,8 +11,8 @@ func _enter() -> void:
 	
 	#add fx
 	var slash_fx = obj.slash_fx_factory.create() as Node2D
-	slash_fx.scale.x = -obj.direction
-	
+	slash_fx.position = Vector2.ZERO
+
 	await obj.animated_sprite.animation_finished
 	change_state(fsm.previous_state)
 

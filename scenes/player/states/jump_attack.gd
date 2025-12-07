@@ -5,14 +5,13 @@ func _enter() -> void:
 	#Change animation to attack
 	obj.change_animation("jump attack")
 	AudioPlayer.play_sound_once(obj.attack_sfx)
-	#timer = 0.2
-	obj.velocity.x = 0
+
 	#Enable collision shape of hit area
 	obj.get_node("Direction/HitArea2D/CollisionShape2D").disabled = false
 	
 	#add fx
 	var slash_fx = obj.slash_fx_factory.create() as Node2D
-	slash_fx.scale.x = -obj.direction
+	slash_fx.position = Vector2.ZERO
 	
 	await obj.animated_sprite.animation_finished
 	change_state(fsm.previous_state)

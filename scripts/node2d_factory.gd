@@ -24,7 +24,7 @@ func _ready() -> void:
 	if container == null:
 		container = Node.new()
 		container.name = target_container_name
-		parent_node.add_child.call_deferred(container)
+		parent_node.call_deferred("add_child", container)
 
 func create(_product_packed_scene := product_packed_scene) -> Node2D:
 	if _product_packed_scene == null:

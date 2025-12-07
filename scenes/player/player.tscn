@@ -584,15 +584,18 @@ frame_progress = 0.273016
 position = Vector2(9, -14)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("38_hyqqp")
-target_container_name = &"Blade"
+target_container_name = &"BladeProjectile"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="JumpFXFactory" type="Marker2D" parent="Direction"]
 position = Vector2(0, -8)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("37_k00gf")
-target_container_name = &"Jump"
+target_container_name = &"JumpFX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
+
+[node name="SlashFX" type="Node2D" parent="Direction"]
+position = Vector2(24, -23)
 
 [node name="SlashFXFactory" type="Marker2D" parent="Direction"]
 position = Vector2(24, -23)
@@ -714,14 +717,6 @@ script = ExtResource("55_w8qe1")
 [node name="Dash" type="Node" parent="States"]
 script = ExtResource("56_hdvrm")
 
-[node name="Blade" type="Node" parent="."]
-
-[node name="Jump" type="Node" parent="."]
-
-[node name="GhostFX" type="Node" parent="."]
-
-[node name="WalkFX" type="Node" parent="."]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
@@ -757,7 +752,6 @@ layout_mode = 2
 player = NodePath("../../..")
 
 [node name="debuglabel" type="Label" parent="."]
-visible = false
 offset_left = -25.0
 offset_top = -65.0
 offset_right = 24.0
