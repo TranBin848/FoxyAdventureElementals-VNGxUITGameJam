@@ -53,3 +53,6 @@ func _spawn_ghost() -> void:
 	ghost.modulate = obj.animated_sprite.modulate
 	ghost.rotation = obj.animated_sprite.rotation
 	ghost.offset = obj.animated_sprite.offset
+
+func  take_damage(direction: Variant, damage: int = 1) -> void:
+	pass
