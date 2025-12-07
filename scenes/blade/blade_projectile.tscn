@@ -1,0 +1,102 @@
+[gd_scene load_steps=18 format=3 uid="uid://cs0qvp0xeh0tn"]
+
+[ext_resource type="Script" uid="uid://w8tgxlewnrq8" path="res://scenes/blade/blade_projectile.gd" id="1_ndoma"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="2_hyln0"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_k5v1g"]
+[ext_resource type="Texture2D" uid="uid://d0s8rm2fj4wef" path="res://assets/foxy/blade/blade_anim_1.png" id="2_ndoma"]
+[ext_resource type="AudioStream" uid="uid://bdqlg3r45gegn" path="res://assets/sounds/20_orc_special_atk.mp3" id="3_gc68j"]
+[ext_resource type="Texture2D" uid="uid://bfgelm7h8ouvo" path="res://assets/foxy/blade/blade_anim_2.png" id="3_k5v1g"]
+[ext_resource type="Texture2D" uid="uid://cpb4wgmvkk3w2" path="res://assets/foxy/blade/blade_anim_3.png" id="4_hyln0"]
+[ext_resource type="Texture2D" uid="uid://bnm1ol1ugbdsv" path="res://assets/foxy/blade/blade_anim_4.png" id="5_e38us"]
+[ext_resource type="Texture2D" uid="uid://yv4h8w5hpcyx" path="res://assets/foxy/blade/blade_anim_5.png" id="6_qqfg6"]
+[ext_resource type="Texture2D" uid="uid://b0vj30ng1nbql" path="res://assets/foxy/blade/blade_target_1.png" id="7_85er0"]
+[ext_resource type="Texture2D" uid="uid://bkip8smslh06" path="res://assets/foxy/blade/blade_target_2.png" id="8_ygoy6"]
+[ext_resource type="Texture2D" uid="uid://d2rh0qqgmaqir" path="res://assets/foxy/blade/blade_target_3.png" id="9_30vlq"]
+[ext_resource type="Texture2D" uid="uid://baucskhqdceas" path="res://assets/foxy/blade/blade_target_4.png" id="10_c0pef"]
+[ext_resource type="Texture2D" uid="uid://bng34woae2g8q" path="res://assets/foxy/blade/blade_throw_1.png" id="11_b8d6b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyln0"]
+size = Vector2(16, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elrge"]
+size = Vector2(14, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_836ip"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ndoma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_k5v1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hyln0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_e38us")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qqfg6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_85er0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ygoy6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_30vlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c0pef")
+}],
+"loop": true,
+"name": &"target",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_b8d6b")
+}],
+"loop": true,
+"name": &"throw",
+"speed": 5.0
+}]
+
+[node name="BladeProjectile" type="RigidBody2D"]
+collision_layer = 32
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_ndoma")
+blade_scene = ExtResource("2_hyln0")
+flying_sfx = ExtResource("3_gc68j")
+
+[node name="HitArea2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("2_k5v1g")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_hyln0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_elrge")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_836ip")
+animation = &"throw"
+autoplay = "throw"
+frame_progress = 0.814208
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

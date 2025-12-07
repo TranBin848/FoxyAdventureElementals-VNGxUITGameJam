@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0wjm5snbaj64"]
+
+[ext_resource type="TileSet" uid="uid://diu0hppw030pf" path="res://assets/island/TileSets/SwampSet.tres" id="1_kmhk6"]
+
+[node name="TestTileMap" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_kmhk6")

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BTL_Godot"
-run/main_scene="uid://8qflg27g53dv"
+run/main_scene="uid://dhghajv3v5q1v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,9 +23,9 @@ ElementsEnum="*res://scripts/elements.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 FadeLayer="*res://scenes/ui/fade_layer.tscn"
 DamageNumbers="*res://scripts/autoload/damage_numbers.gd"
-CameraTransition="*res://Autoloads/camera_transition.tscn"
-BackgroundMusic="*res://Autoloads/background_music.tscn"
-AudioPlayer="*res://Autoloads/audio_player.gd"
+CameraTransition="*res://autoloads/camera_transition.tscn"
+BackgroundMusic="*res://autoloads/background_music.tscn"
+AudioPlayer="*res://autoloads/audio_player.gd"
 
 [dialogic]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cqoavximieiqo" path="res://scenes/ui/skill_bar.gd" id="1_30qg4"]
 [ext_resource type="PackedScene" uid="uid://cbop0r31m7elf" path="res://scenes/ui/spell_button.tscn" id="1_gxe63"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/UI/game_ui_theme.tres" id="1_ygi26"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_ygi26"]
 
 [node name="SkillBar" type="HBoxContainer"]
 anchors_preset = 8
