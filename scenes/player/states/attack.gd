@@ -1,6 +1,5 @@
 extends PlayerState
 
-
 func _enter() -> void:
 	#Change animation to attack
 	obj.change_animation("attack")
@@ -9,12 +8,13 @@ func _enter() -> void:
 	obj.velocity.x = 0
 	#Enable collision shape of hit area
 	obj.get_node("Direction/HitArea2D/CollisionShape2D").disabled = false
-
+	var slash_fx = obj.slash_fx_factory.create() as Node2D
+	slash_fx.scale.x = -obj.direction
 
 func _exit() -> void:
 	#Disable collision shape of hit area
 	obj.get_node("Direction/HitArea2D/CollisionShape2D").disabled = true
-
+	obj.start_atk_cd()
 
 func _update(delta: float) -> void:
 	#If attack is finished change to previous state

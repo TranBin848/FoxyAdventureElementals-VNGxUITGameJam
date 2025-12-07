@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=106 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -90,6 +90,7 @@
 [ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
 [ext_resource type="AudioStream" uid="uid://celbmeo4au546" path="res://assets/sounds/gong.mp3" id="65_2yv6k"]
+[ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://scenes/fx/slash_fx.tscn" id="67_31ki0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -215,7 +216,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -509,6 +510,7 @@ collision_layer = 2
 collision_mask = 9
 safe_margin = 0.1
 script = ExtResource("1_wodsf")
+atk_cd = 0.3
 jump_sfx = ExtResource("2_vb1ce")
 hurt_sfx = ExtResource("3_bywm7")
 attack_sfx = ExtResource("4_bywm7")
@@ -539,7 +541,7 @@ z_index = 199
 material = SubResource("ShaderMaterial_vb1ce")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="SilhouetteWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
@@ -552,6 +554,7 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+visible = false
 material = SubResource("ShaderMaterial_am21h")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
@@ -562,8 +565,10 @@ visible = false
 material = SubResource("ShaderMaterial_1scxs")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="WandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
@@ -587,6 +592,13 @@ position = Vector2(0, -8)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("37_k00gf")
 target_container_name = &"Jump"
+metadata/_custom_type_script = "uid://b2o007yxvk7qa"
+
+[node name="SlashFXFactory" type="Marker2D" parent="Direction"]
+position = Vector2(24, -23)
+script = ExtResource("37_iwuka")
+product_packed_scene = ExtResource("67_31ki0")
+target_container_name = &"SlashFX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="WalkFXFactory" type="Marker2D" parent="Direction"]
@@ -619,7 +631,6 @@ position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_niom3")
 
 [node name="HitArea2D" type="Area2D" parent="Direction"]
-visible = false
 collision_mask = 16
 script = ExtResource("17_ioxgp")
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
