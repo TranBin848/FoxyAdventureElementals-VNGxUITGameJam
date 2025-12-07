@@ -11,7 +11,6 @@ func _enter() -> void:
 
 func _update(delta: float) -> void:
 	super._update(delta)
-	print(action_timer)
 	if action_timer > 0:
 		action_timer -= delta
 		if action_timer <= 0:

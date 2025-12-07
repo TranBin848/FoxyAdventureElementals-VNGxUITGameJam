@@ -13,12 +13,10 @@ func _update(_delta: float) -> void:
 	
 func shoot_and_rotate() -> void:
 	await get_tree().create_timer(wait_time).timeout
-	# Bắn 2 phát, mỗi phát cách 0.25s
 	for i in 2:
 		obj.fire()
 		await get_tree().create_timer(wait_time).timeout
 
-	# Quay rồi đổi state
 	obj.change_animation("rotateL2R")
 	await $"../../Direction/AnimatedSprite2D".animation_finished
 	fsm.change_state(fsm.states.shootright)

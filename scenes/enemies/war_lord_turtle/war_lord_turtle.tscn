@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://d0ig8xrtjp2v1"]
+[gd_scene load_steps=46 format=3 uid="uid://d0ig8xrtjp2v1"]
 
 [ext_resource type="Script" uid="uid://ckyw4uljyk87h" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.gd" id="1_ognfm"]
 [ext_resource type="Texture2D" uid="uid://b5kffli05vjsc" path="res://assets/war_lord/war_lord_turtle19.png" id="2_ednji"]
@@ -29,7 +29,8 @@
 [ext_resource type="Texture2D" uid="uid://bojjgfkceu2r4" path="res://assets/war_lord/war_lord_turtle18.png" id="19_3foqi"]
 [ext_resource type="Texture2D" uid="uid://e3oiygvcpwga" path="res://assets/war_lord/war_lord_turtle27.png" id="19_rf43r"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="25_fofvp"]
-[ext_resource type="PackedScene" uid="uid://b7jf636aeqd4g" path="res://scenes/enemies/war_lord_turtle/warlord_bullet.tscn" id="26_uwb07"]
+[ext_resource type="PackedScene" uid="uid://b7jf636aeqd4g" path="res://scenes/enemies/war_lord_turtle/warlord_bullets/warlord_bullet.tscn" id="26_uwb07"]
+[ext_resource type="PackedScene" uid="uid://ceytbrfc5vmnn" path="res://scenes/enemies/war_lord_turtle/warlord_bullets/warlord_rocket.tscn" id="27_3foqi"]
 [ext_resource type="Script" uid="uid://bx2w7hsx146xm" path="res://scenes/enemies/war_lord_turtle/inactive.gd" id="28_e3bfs"]
 [ext_resource type="Script" uid="uid://cus5ulega6e6b" path="res://scenes/enemies/war_lord_turtle/idle.gd" id="29_04uyp"]
 [ext_resource type="Script" uid="uid://bp1gcvke7o4qu" path="res://scenes/enemies/war_lord_turtle/shoot_left.gd" id="30_uwb07"]
@@ -118,7 +119,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"launchRocket",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -233,13 +234,16 @@ radius = 31.0161
 
 [node name="WarLordTurtle" type="CharacterBody2D"]
 script = ExtResource("1_ognfm")
+sight = 500.0
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_m5be7")
-animation = &"shootRight"
+animation = &"launchRocket"
+frame = 14
+frame_progress = 1.0
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)
@@ -250,17 +254,21 @@ position = Vector2(45, 0)
 target_position = Vector2(0, 40)
 
 [node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
-target_position = Vector2(-200, 0)
+position = Vector2(0, 12)
+scale = Vector2(1, 10)
+target_position = Vector2(-500, 0)
 collision_mask = 2
 
 [node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
-target_position = Vector2(200, 0)
+position = Vector2(0, 12)
+scale = Vector2(1, 10)
+target_position = Vector2(500, 0)
 collision_mask = 2
 
 [node name="RocketFactory" type="Marker2D" parent="Direction"]
 position = Vector2(61, 0)
 script = ExtResource("2_m5be7")
-product_packed_scene = ExtResource("26_uwb07")
+product_packed_scene = ExtResource("27_3foqi")
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="BulletFactory" type="Marker2D" parent="Direction"]
@@ -358,5 +366,19 @@ custom_minimum_size = Vector2(500, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 value = 100.0
+
+[node name="RocketTargets" type="Node2D" parent="."]
+
+[node name="Target 1" type="Node2D" parent="RocketTargets"]
+position = Vector2(-100, -364)
+
+[node name="Target 2" type="Node2D" parent="RocketTargets"]
+position = Vector2(-200, -364)
+
+[node name="Target 3" type="Node2D" parent="RocketTargets"]
+position = Vector2(100, -364)
+
+[node name="Target 4" type="Node2D" parent="RocketTargets"]
+position = Vector2(200, -364)
 
 [connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]

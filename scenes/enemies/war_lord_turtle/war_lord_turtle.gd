@@ -36,14 +36,30 @@ func fire() -> void:
 	
 	if self.found_player != null:
 		player_pos = self.found_player.global_position
+	#else :
+		#player_pos = global_position
 		
 	if is_facing_left == true:
 		bullet.fire(get_fire_poss(), player_pos, atk_angle, -1)
 	else:
 		bullet.fire(get_fire_poss(), player_pos,atk_angle, 1)
 
+
+func get_targets() -> Array[Vector2]:
+	var pts: Array[Vector2] = []
+	for c in $"RocketTargets".get_children():
+		if c is Node2D:
+			pts.append(c.global_position)
+	return pts
+
 func launch() -> void:
-	pass
+	var targets = get_targets()
+	if targets.is_empty():
+		return
+	
+	for i in range(targets.size()):
+		var rocket := rocket_factory.create() as WarLordRocket
+		rocket.launch(targets[i])
 
 func get_fire_poss() -> Vector2:
 	if is_facing_left:
