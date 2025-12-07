@@ -93,14 +93,10 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 		for slot in skill_bar.slots:
 			if slot.skill == skill_to_use:
 				
-				print("Stack trước khi dùng: %d" % skill_to_use.current_stack)
+				var skill_current_stack = SkillStackManager.get_stack(skill_to_use.name)
 			
 				# KIỂM TRA HỦY BỎ - Cần phải dùng LẦN NÀY (Stack == 1)
-				if skill_to_use.current_stack == 1:
-					
-					# Trừ Stack về 0 (để logic nội bộ đúng)
-					skill_to_use.current_stack -= 1 
-					
+				if skill_current_stack == 1:
 					# Thực hiện logic HỦY BỎ
 					slot.skill = null
 					
@@ -114,13 +110,11 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 					print("☠️ Skill '%s' consumed and removed from slot!" % skill_to_use.name)
 				
 				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
-				elif skill_to_use.current_stack > 1:
-					
-					skill_to_use.current_stack -= 1
-					print("✨ Skill '%s' còn lại: %d" % [skill_to_use.name, skill_to_use.current_stack])
-					
+				elif skill_current_stack > 1:
 					# Cập nhật UI ngay lập tức (giữ nguyên)
 					slot.update_stack_ui()
+				
+				SkillStackManager.remove_stack(skill_to_use.name, 1)
 				
 				return # Thoát sau khi xử lý Stack
 

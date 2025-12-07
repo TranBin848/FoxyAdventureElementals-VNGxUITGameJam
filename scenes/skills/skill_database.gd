@@ -7,8 +7,8 @@ var all_skills = {
 		"Water Ball": WaterBall,
 		"Water Spike": WaterSpike, 
 		"Tornado": Tornado,
-		"WoodShot": WoodShot,
-		"HealOverTime": HealOverTime
+		"Wood Shot": WoodShot,
+		"Heal Over Time": HealOverTime
 	}
 func get_skill_by_name(name: String) -> Script:
 	if name in all_skills:

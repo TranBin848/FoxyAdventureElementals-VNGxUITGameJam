@@ -1,19 +1,42 @@
 extends Node
 
-var stack_table := {} # { "Fireball": 2, "IceShot": 3 }
+var table := {} # { "Fireball": { "stack": 2, "level": 1 } }
 
 func add_stack(skill_name: String, amount: int):
-	if not stack_table.has(skill_name):
-		stack_table[skill_name] = 0
+	if not table.has(skill_name):
+		table[skill_name] = { "stack": 0, "level": 1 }
 
-	stack_table[skill_name] += amount
-	emit_signal("stack_changed", skill_name, stack_table[skill_name])
+	table[skill_name].stack += amount
+	emit_signal("stack_changed", skill_name, table[skill_name].stack)
+	
+func remove_stack(skill_name: String, amount: int = 1):
+	if not table.has(skill_name): return
 
+	table[skill_name].stack = max(0, table[skill_name].stack - amount)
+	emit_signal("stack_changed", skill_name, table[skill_name].stack)
+
+func set_level(skill_name: String, new_level: int):
+	if not table.has(skill_name):
+		table[skill_name] = { "stack": 0, "level": new_level }
+	else:
+		table[skill_name].level = new_level
+
+	emit_signal("level_changed", skill_name, new_level)
+
+func get_stack(skill_name: String) -> int:
+	return table.get(skill_name, {}).get("stack", 0)
+
+func get_level(skill_name: String) -> int:
+	return table.get(skill_name, {}).get("level", 1)
+
+# SAVE / LOAD
 func save_data() -> Dictionary:
-	return stack_table.duplicate(true)
+	return table.duplicate(true)
 
 func load_data(data: Dictionary) -> void:
-	stack_table = data.duplicate(true)
-	emit_signal("stack_changed", "", -1) # báo SkillTree refresh toàn bộ
+	table = data.duplicate(true)
+	emit_signal("stack_changed", "", -1)
+	emit_signal("level_changed", "", -1)
 
 signal stack_changed(skill_name, new_value)
+signal level_changed(skill_name, new_level)

@@ -7,7 +7,10 @@ var current_skill: SkillButtonNode = null   # skill đang được xem
 
 func _ready():
 	_connect_all_skill_buttons(group)
-
+	
+	# làm mới cây từ dữ liệu stack
+	_refresh_tree_from_stack()
+	
 	
 func _connect_all_skill_buttons(node):
 	for child in node.get_children():
@@ -26,3 +29,13 @@ func _on_skill_selected(skill: SkillButtonNode):
 	# Nếu bấm skill mới → MỞ PANEL
 	current_skill = skill
 	info_panel.show_skill(skill)
+
+func _refresh_tree_from_stack():
+	for btn in group.get_children():
+		_refresh_recursive(btn)
+
+func _refresh_recursive(node):
+	if node is SkillButtonNode:
+		node.set_skill()
+	for c in node.get_children():
+		_refresh_recursive(c)

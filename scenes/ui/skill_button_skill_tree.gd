@@ -2,7 +2,8 @@ extends TextureButton
 class_name SkillButtonNode
 
 @onready var panel: Panel = $Panel
-@onready var label: Label = $MarginContainer/Label
+@onready var level_label: Label = $MarginContainer/LevelLabel
+@onready var stack_label: Label = $MarginContainer/StackLabel
 @onready var line_2d: Line2D = $Line2D
 @export var skill: Skill
 
@@ -25,22 +26,13 @@ func _ready() -> void:
 		
 	set_skill()
 	SkillStackManager.stack_changed.connect(_on_stack_changed)
+	
 var level : int = 0:
 	set(value):
 		level = value
-		label.text = str(level) + "/3"
+		level_label.text = str(level) + "/3"
 
 func _on_pressed() -> void:
-	#level = min(level + 1, 3)
-	#panel.show_behind_parent = true
-	#
-	#line_2d.default_color = Color(1,1,0.247)
-#
-	#for skill in get_children():
-		#if skill is SkillButtonNode and level == 3:
-			#skill.disabled = false
-
-	# Phát tín hiệu để UI bên phải xử lý
 	emit_signal("skill_selected", self)
 
 func set_skill():
