@@ -53,7 +53,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 10.0
+"speed": 20.0
 }]
 
 [node name="SlashFX" type="Node2D"]
