@@ -17,5 +17,4 @@ speed = 250.0
 damage = 2
 mana = 5
 type = "multi_shoot"
-max_stack = 99
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

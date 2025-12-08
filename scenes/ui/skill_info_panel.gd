@@ -40,7 +40,7 @@ func get_stat_text(sk: Skill) -> String:
 
 	# --- Header line ---
 	var element_text := "%s%s[/color]" % [elem_color, sk.element]
-	lines.append("Stats:                        " + element_text)
+	lines.append("Stats:                       " + element_text)
 
 	# --- Các stats ---
 	if sk.damage > 0:
@@ -94,6 +94,8 @@ func _on_unlock_button_pressed() -> void:
 		return
 
 	if btn.level >= btn.require_stack_unlock:
+		SkillStackManager.remove_stack(btn.skill.name, btn.require_stack_upgrade)
+		SkillStackManager.set_level(btn.skill.name, btn.level + 1)
 		btn.unlocked = true
 		btn.disabled = false
 		
@@ -110,8 +112,8 @@ func _on_upgrade_button_pressed() -> void:
 		return
 
 	if btn.level >= btn.require_stack_upgrade and btn.level < 3:
-		btn.level += 1
-		level_label.text = "Level: %d" % btn.level
+		SkillStackManager.remove_stack(btn.skill.name, btn.require_stack_upgrade)
+		SkillStackManager.set_level(btn.skill.name, btn.level + 1)
 		if btn.level == 3:
 			_unlock_children(btn)
 	

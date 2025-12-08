@@ -40,6 +40,11 @@ vertical_alignment = 2
 [node name="StackLabel" type="Label" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_amt1m")
+theme_override_font_sizes/font_size = 8
+text = "99"
+horizontal_alignment = 2
 
 [node name="Line2D" type="Line2D" parent="."]
 top_level = true

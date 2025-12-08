@@ -10,7 +10,7 @@ var flicker_timer := 0.0
 var saved_collision_layer: int
 
 @export var has_blade: bool = false
-@export var has_wand: bool = true
+@export var has_wand: bool = false
 var is_equipped_blade: bool = false    #Đang cầm Blade?
 var is_equipped_wand: bool = false     # Đang cầm Wand?
 signal weapon_swapped(equipped_weapon_type: String)
@@ -54,6 +54,7 @@ var last_dir: float = 0.0
 @export var is_dashing: bool = false
 @export var dash_cd: float = 5.0
 var can_dash: bool = true
+var can_move: bool = true
 
 #Debug
 @onready var debuglabel: Label = $debuglabel
@@ -78,10 +79,19 @@ func _ready() -> void:
 	walk_sfx_player = AudioStreamPlayer2D.new()
 	walk_sfx_player.stream = walk_sfx
 	add_child(walk_sfx_player)
-
+	
+	Dialogic.timeline_started.connect(_on_dialog_started)
+	Dialogic.timeline_ended.connect(_on_dialog_ended)
+	
 # ================================================================
 # === SKILL SYSTEM ===============================================
 # ================================================================
+
+func _on_dialog_started():
+	can_move = false
+
+func _on_dialog_ended():
+	can_move = true
 
 func _check_and_use_skill_stack(skill_to_use: Skill):
 	#1. Tìm Skill đó trong SkillBar
@@ -401,7 +411,7 @@ func can_attack() -> bool:
 	return is_equipped_blade or is_equipped_wand
 
 func can_throw() -> bool:
-	return has_blade
+	return has_blade && is_equipped_blade
 
 func cast_skill(skill_name: String) -> void:
 	if fsm.current_state != fsm.states.castspell:
@@ -592,6 +602,8 @@ func collected_blade() -> void:
 	_equip_blade_from_swap()
 	
 func throw_blade() -> void:
+	if is_equipped_wand:
+		return
 	var blade = blade_factory.create() as RigidBody2D
 	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
 	blade.direction = direction
@@ -601,7 +613,7 @@ func throw_blade() -> void:
 func throwed_blade() -> void:
 	has_blade = false
 	is_equipped_blade = false
-	weapon_swapped.emit("normal")
+	
 	set_animated_sprite($Direction/AnimatedSprite2D)
 	
 	# Quản lý sprite silhouette:
@@ -696,6 +708,10 @@ func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	extra_sprites.append(new_silhouette)
 	new_silhouette.show()
 func _update_movement(delta: float) -> void:
+	if not can_move:
+		velocity = Vector2.ZERO
+		return
+	
 	velocity.y += gravity * delta
 
 	if fsm.current_state == fsm.states.wallcling:
