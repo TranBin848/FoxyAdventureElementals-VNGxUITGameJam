@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=63 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_4/level_4.gd" id="1_pyrf2"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="4_5qnna"]
@@ -44,6 +44,7 @@
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="43_nyqcx"]
 [ext_resource type="PackedScene" uid="uid://bh4o4646vlfjr" path="res://levels/objects/wand_collectable.tscn" id="45_tn3ix"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="46_0ob0i"]
+[ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="47_g4e08"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="47_mk7g3"]
 [ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="48_82kae"]
 
@@ -2833,3 +2834,7 @@ offset_right = -15.0
 offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="Door" parent="." instance=ExtResource("47_g4e08")]
+position = Vector2(314, 69)
+target_stage = "uid://wopr13pq4dnf"

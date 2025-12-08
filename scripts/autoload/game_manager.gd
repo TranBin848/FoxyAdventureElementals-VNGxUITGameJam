@@ -23,7 +23,7 @@ var logger: Logger = ConsoleLogger.new()
 
 func _ready() -> void:
 	# Load checkpoint khi mở game
-	#load_checkpoint_data()
+	load_checkpoint_data()
 	# Theo dõi thay đổi scene để tự khôi phục trạng thái
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
 	
@@ -52,6 +52,10 @@ func _on_scene_changed() -> void:
 		if checkpoint_info.has("inventory_data") and inventory_system:
 			inventory_system.load_data(checkpoint_info["inventory_data"])
 			print("👜 Inventory đã được khôi phục từ checkpoint")
+		
+		if checkpoint_info.has("skill_stack"):
+			SkillStackManager.load_data(checkpoint_info["skill_stack"])
+			print("✨ Skill stack đã được khôi phục: ", checkpoint_info["skill_stack"])
 		
 		if player.has_blade:
 			player.collected_blade()
@@ -100,10 +104,9 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	
 	checkpoint_data[checkpoint_id] = {
 		"player_state": player_state_dict,
-		"stage_path": current_stage.scene_file_path,
 		"health": player.health,
 		"has_blade": player.has_blade,
-		"inventory_data": inventory_data
+		"inventory_data": inventory_data,
 	}
 	
 	print("✅ Checkpoint saved:", checkpoint_id)
@@ -112,7 +115,8 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	SaveSystem.save_checkpoint_data(
 		checkpoint_id,
 		checkpoint_data[checkpoint_id],
-		current_stage.scene_file_path
+		current_stage.scene_file_path,
+		SkillStackManager.save_data(),
 	)
 
 
@@ -167,9 +171,11 @@ func load_checkpoint_data() -> void:
 	if save_data.is_empty():
 		print("⚠️ No checkpoint file found.")
 		return
-
+	else:
+		print(save_data)
 	current_checkpoint_id = save_data.get("checkpoint_id", "")
 	var player_data = save_data.get("player", {})
+	var skill_stack = save_data.get("skill_stack", {})
 	var stage_path = save_data.get("stage_path", "")
 	var inventory_data = save_data.get("inventory_data", {})
 
@@ -186,9 +192,13 @@ func load_checkpoint_data() -> void:
 		if inventory_data and inventory_system:
 			inventory_system.load_data(inventory_data)
 			print("👜 Inventory loaded from save_data")
+		
+		SkillStackManager.load_data(skill_stack)
+		
 	else:
 		print("✅ Checkpoint data loaded, but no active checkpoint.")
-
+	
+	
 
 func clear_checkpoint_data() -> void:
 	current_checkpoint_id = ""
