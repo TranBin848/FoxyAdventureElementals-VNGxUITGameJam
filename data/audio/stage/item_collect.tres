@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://cxkh1m1bbekbk"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_ctd6m"]
+[ext_resource type="AudioStream" uid="uid://d4eta46rumfw5" path="res://assets/sounds/Fruit collect 1.wav" id="2_3q5g5"]
+
+[resource]
+script = ExtResource("1_ctd6m")
+clip_id = "item_collect"
+stream = ExtResource("2_3q5g5")
+volume_db = 0.0
+randomize_pitch = true
+pitch_min = 0.8
+pitch_max = 1.2
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

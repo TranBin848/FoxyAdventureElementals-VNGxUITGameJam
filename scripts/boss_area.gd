@@ -2,8 +2,8 @@ extends Area2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @export var boss: KingCrab = null #make sure boss zone alway have a boss
-@export var boss_bgm: AudioStream = null
-@export var normal_bgm: AudioStream = BackgroundMusic.stream
+@export var previous_music_id: String = ""
+@export var boss_music_id: String = ""
 var player: Player = null
 
 func _ready() -> void:
@@ -14,8 +14,8 @@ func _on_boss_dead() -> void:
 		CameraTransition.transition_camera2D(player.camera_2d, 2)
 		player.camera_2d
 	collision.disabled = true
-	BackgroundMusic.stream = normal_bgm
-	BackgroundMusic.play
+	AudioManager.play_music("music_victory")
+	AudioManager.play_next_music(previous_music_id)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -25,6 +25,6 @@ func _on_body_entered(body: Node2D) -> void:
 		if boss.is_fighting:
 			return
 		boss.start_fight()
-		BackgroundMusic.stream = boss_bgm
-		BackgroundMusic.play()
+		previous_music_id = AudioManager.get_current_music_id()
+		AudioManager.play_music(boss_music_id)
 	#boss.fsm.chan

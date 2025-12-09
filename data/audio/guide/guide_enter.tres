@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://c8yp5mb1qojbf"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_tsu8c"]
+[ext_resource type="AudioStream" uid="uid://ddj58l1v507ji" path="res://assets/sounds/Text 1.wav" id="2_c1pgr"]
+
+[resource]
+script = ExtResource("1_tsu8c")
+clip_id = "guide_enter"
+stream = ExtResource("2_c1pgr")
+volume_db = 0.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

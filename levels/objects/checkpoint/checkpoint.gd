@@ -43,7 +43,7 @@ func activate() -> void:
 
 	animated_sprite_2d.play("active")
 	
-	AudioPlayer.play_sound_once(activate_sfx)
+	AudioManager.play_sound("checkpoint_activate")
 
 
 func activate_visual_only() -> void:
