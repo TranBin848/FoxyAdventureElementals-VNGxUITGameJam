@@ -1,6 +1,6 @@
 extends WarLordState
 
-@export var cd_skill: float = 5.0
+@export var cd_skill: float = 3.0
 var action_timer: float = 0.0
 
 

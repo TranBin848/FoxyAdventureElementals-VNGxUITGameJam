@@ -5,11 +5,10 @@ func _enter() -> void:
 	timer = 0
 	
 func _update(_delta: float) -> void:
-	print("is inactive")
-	
 	if obj.found_player != null:
-		obj.change_animation("idle")
+		#obj.change_animation("idle")
 		#await $"../../Direction/AnimatedSprite2D".animation_finished
+		obj.start_fight()
 		change_state(fsm.states.idle)
 		pass
 	

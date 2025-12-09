@@ -1,12 +1,8 @@
 extends WarLordState
 
 func _enter():
-	obj.change_animation("hurt")
-	timer = 0.2
-
-func _update( delta: float):
-	if update_timer(delta):
-		if obj.health <= 0:
-			change_state(fsm.states.dead)
-		else:
-			change_state(fsm.states.run)
+	obj.handle_dead()
+	obj.change_animation("die")
+	Engine.time_scale = 0.2
+	await $"../../Direction/AnimatedSprite2D".animation_finished
+	Engine.time_scale = 1.0

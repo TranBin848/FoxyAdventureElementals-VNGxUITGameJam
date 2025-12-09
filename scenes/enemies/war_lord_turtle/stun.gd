@@ -1,13 +1,17 @@
 extends WarLordState
 
-func _enter() -> void:
-	obj.change_animation("inactive")
-	timer = 0
+@export var stun_time: float = 5.0
+var action_timer: float = 0.0
 
-func _update(_delta: float) -> void:
-	if obj.found_player != null:
-		#obj.change_animation("stand up")
-		#await $"../../Direction/AnimatedSprite2D".animation_finished
-		fsm.change_state(fsm.states.idle)
-		pass
+func _enter() -> void:
+	obj.change_animation("stun")
+	timer = 0
+	action_timer = stun_time
+
+func _update(delta: float) -> void:
+	super._update(delta)
+	if action_timer > 0:
+		action_timer -= delta
+		if action_timer <= 0:
+			change_state(fsm.states.idle)
 	

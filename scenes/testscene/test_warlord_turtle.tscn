@@ -161,7 +161,7 @@ tile_set = ExtResource("2_ig17x")
 collision_visibility_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("3_dvw2y")]
-position = Vector2(385, 226)
+position = Vector2(3, 77)
 collision_mask = 73
 platform_floor_layers = 4294967231
 

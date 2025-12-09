@@ -20,4 +20,4 @@ func shoot_and_rotate() -> void:
 	# Quay rồi đổi state
 	obj.change_animation("rotateR2L")
 	await $"../../Direction/AnimatedSprite2D".animation_finished
-	fsm.change_state(fsm.states.idle)
+	fsm.change_state(fsm.states.stun)
