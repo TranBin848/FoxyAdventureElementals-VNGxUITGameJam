@@ -1,4 +1,4 @@
-extends Control
+extends Camera2D
 
 var zoom_minimum := Vector2(0.5, 0.5)
 var zoom_maximum := Vector2(2.5, 2.5)
@@ -7,20 +7,18 @@ var zoom_speed := 0.2
 var dragging := false
 var last_mouse_pos := Vector2.ZERO
 
-@onready var camera: Camera2D = $SubViewportContainer/SubViewport/SkillCamera2D
-
-#onready var camera: Camera2D = $SkillCamera2D
-@onready var info_panel: SkillInfoPanel = $"../CanvasLayer_SkillPanel/SkillInfoPanel"
+@onready var camera: Camera2D = $"."
 #@onready var info_panel: SkillInfoPanel
 
 #func _ready() -> void:
 	#camera.make_current()
 
 func _input(event: InputEvent) -> void:
+	return
 	# --- ZOOM ---
 	# Nếu panel mở → KHÔNG ZOOM, KHÔNG DRAG
-	if info_panel.visible:
-		return
+	#if info_panel.visible:
+		#return
 	
 	if event is InputEventMouseButton:
 		if event.is_pressed():	

@@ -20,9 +20,8 @@ func _ready() -> void:
 		var parent_btn: SkillButtonNode = get_parent()
 		parent_btn.children.append(self)
 		
-		line_2d.add_point(global_position + size/2)
-		line_2d.add_point(get_parent().global_position + size/2)
-		line_2d.z_index = 0	
+		line_2d.add_point(global_position + size/2 - Vector2(4,4))
+		line_2d.add_point(get_parent().global_position + size/2 - Vector2(4,4))
 		
 	SkillStackManager.stack_changed.connect(_on_stack_changed)
 	SkillStackManager.level_changed.connect(_on_level_changed)

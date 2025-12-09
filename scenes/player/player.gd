@@ -739,24 +739,28 @@ func dash() -> void:
 func _input(event):
 	if event.is_action_pressed("ui_skilltree"):
 		var root = skill_tree_ui.get_node("ColorRect/SkillTreeRoot")
-		#get_tree().paused = !get_tree().paused 
+		var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/SkillCamera2D")
+		get_tree().paused = !get_tree().paused 
 		if (skill_tree_ui.visible == false):
 			skill_tree_ui.visible = true
 			if not root:
 				return
-			var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/SkillCamera2D")
+			
 			_show_skill_tree_layers(root)
 			# Khóa camera player để nó không giành lại quyền
 			if GameManager.player:
 				GameManager.player.camera_2d.enabled = false
 			if skill_camera:
 				skill_camera.make_current()
+				#skill_camera.enabled = true
 				print("📷 Đã chuyển sang camera UI SkillTree.")
 
 			print("🌳 Skill Tree opened.")
 		else:
 			skill_tree_ui.visible = false
 			_hide_skill_tree_layers(root)
+			if skill_camera:
+				skill_camera.enabled = false
 			# trả camera cho player
 			if GameManager.player:
 				if GameManager.player:

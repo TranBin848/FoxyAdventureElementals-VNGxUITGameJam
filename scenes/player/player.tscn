@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=109 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dkorinp0d14hs" path="res://assets/sounds/10_human_special_atk_1.mp3" id="4_bywm7"]
 [ext_resource type="AudioStream" uid="uid://w3f6ctedkxva" path="res://assets/sounds/27_sword_miss_1.wav" id="5_0sg1o"]
 [ext_resource type="AudioStream" uid="uid://ghtor7tdlfgh" path="res://assets/sounds/41575__erdie__steps-on-grass07.ogg" id="6_a3gso"]
+[ext_resource type="Script" uid="uid://bi602yodcmwe0" path="res://scenes/player/camera_2d_test.gd" id="7_31ki0"]
 [ext_resource type="Texture2D" uid="uid://m4di78taixns" path="res://assets/foxy/fox_hat/fox_defeat_1.png" id="8_4b1ex"]
 [ext_resource type="Texture2D" uid="uid://b6jgthsrynctr" path="res://assets/foxy/fox_hat/fox_defeat_2.png" id="9_v8cnd"]
 [ext_resource type="Texture2D" uid="uid://fii540ugfj5n" path="res://assets/foxy/fox_hat/fox_defeat_3.png" id="10_wuxn4"]
@@ -91,6 +92,8 @@
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
 [ext_resource type="AudioStream" uid="uid://celbmeo4au546" path="res://assets/sounds/gong.mp3" id="65_2yv6k"]
 [ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://scenes/testscene/skill_tree_root.tscn" id="91_pq1ih"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="93_hf5gj"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="94_avmva"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -526,6 +529,7 @@ elemental_type = 1
 process_priority = 1
 position = Vector2(1, -40)
 zoom = Vector2(2, 2)
+script = ExtResource("7_31ki0")
 
 [node name="Direction" type="Node2D" parent="."]
 
@@ -761,6 +765,7 @@ vertical_alignment = 1
 [node name="SkillTreeUI" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 10
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="SkillTreeUI"]
 anchors_preset = 15
@@ -768,13 +773,44 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.194349, 0.194349, 0.194349, 1)
 
 [node name="SkillTreeRoot" parent="SkillTreeUI/ColorRect" instance=ExtResource("91_pq1ih")]
 offset_left = 640.0
 offset_top = 360.0
 offset_right = 640.0
 offset_bottom = 360.0
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -49.0
+offset_right = 332.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("93_hf5gj")
+theme_override_font_sizes/font_size = 16
+text = "Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_top = 16.0
+offset_right = 158.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("94_avmva")
+theme_override_font_sizes/font_size = 24
+text = "SKILL TREE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]
 [connection signal="body_entered" from="Direction/DetectionArea2D" to="." method="_on_detection_area_2d_body_entered"]
