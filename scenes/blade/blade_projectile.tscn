@@ -77,6 +77,8 @@ max_contacts_reported = 1
 script = ExtResource("1_ndoma")
 blade_scene = ExtResource("2_hyln0")
 flying_sfx = ExtResource("3_gc68j")
+time_to_max_gravity = 3.0
+max_gravity_scale = 0.5
 
 [node name="HitArea2D" type="Area2D" parent="."]
 collision_layer = 32
