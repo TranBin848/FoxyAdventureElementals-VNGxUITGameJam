@@ -22,6 +22,7 @@ func _ready() -> void:
 		
 		line_2d.add_point(global_position + size/2)
 		line_2d.add_point(get_parent().global_position + size/2)
+		line_2d.z_index = 0	
 		
 	SkillStackManager.stack_changed.connect(_on_stack_changed)
 	SkillStackManager.level_changed.connect(_on_level_changed)

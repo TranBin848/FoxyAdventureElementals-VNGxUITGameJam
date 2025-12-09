@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=106 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -90,6 +90,7 @@
 [ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
 [ext_resource type="AudioStream" uid="uid://celbmeo4au546" path="res://assets/sounds/gong.mp3" id="65_2yv6k"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://scenes/testscene/skill_tree_root.tscn" id="91_pq1ih"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -505,6 +506,7 @@ radius = 7.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
+process_mode = 3
 collision_layer = 2
 collision_mask = 9
 safe_margin = 0.1
@@ -521,6 +523,7 @@ max_health = 5
 elemental_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_priority = 1
 position = Vector2(1, -40)
 zoom = Vector2(2, 2)
 
@@ -754,6 +757,24 @@ offset_bottom = -42.0
 text = "debug"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.194349, 0.194349, 0.194349, 1)
+
+[node name="SkillTreeRoot" parent="SkillTreeUI/ColorRect" instance=ExtResource("91_pq1ih")]
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 360.0
 
 [connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]
 [connection signal="body_entered" from="Direction/DetectionArea2D" to="." method="_on_detection_area_2d_body_entered"]

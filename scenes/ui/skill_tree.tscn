@@ -58,7 +58,8 @@ size_flags_vertical = 4
 script = ExtResource("1_lvhuv")
 metadata/_edit_use_anchors_ = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="SkillCamera2D" type="Camera2D" parent="."]
+process_priority = 2
 
 [node name="SkillLine1" type="Line2D" parent="."]
 position = Vector2(112, -201)
@@ -211,6 +212,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("8_87c80")
 
 [node name="IconElement" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

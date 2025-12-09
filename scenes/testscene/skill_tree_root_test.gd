@@ -1,7 +1,7 @@
 extends Control
 
-@onready var info_panel: SkillInfoPanel = $CanvasLayer_SkillPanel/SkillInfoPanel
 @onready var group: Control = $SkillTreeButtonGroup
+@onready var info_panel: SkillInfoPanel = $"../CanvasLayer_SkillPanel/SkillInfoPanel"
 
 var current_skill: SkillButtonNode = null   # skill đang được xem
 
@@ -11,8 +11,6 @@ func _ready():
 	
 	# làm mới cây từ dữ liệu stack
 	_refresh_tree_from_stack()
-	
-	group.info_panel = info_panel
 	
 	
 func _connect_all_skill_buttons(node):

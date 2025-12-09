@@ -5,7 +5,6 @@ const SAVE_FILE: String = "user://checkpoint_save.dat"
 
 # 🔹 Lưu dữ liệu checkpoint: gồm player, checkpoint_id, stage_path
 func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_stack: Dictionary) -> void:
-	print(player_data)
 	var save_data := {
 		"checkpoint_id": checkpoint_id,
 		"player": player_data,

@@ -7,17 +7,21 @@ var zoom_speed := 0.2
 var dragging := false
 var last_mouse_pos := Vector2.ZERO
 
-@onready var camera: Camera2D = $Camera2D
+@onready var camera: Camera2D = $SkillCamera2D
 @onready var info_panel: SkillInfoPanel = $"../CanvasLayer_SkillPanel/SkillInfoPanel"
+#@onready var info_panel: SkillInfoPanel
+
+#func _ready() -> void:
+	#camera.make_current()
 
 func _input(event: InputEvent) -> void:
 	# --- ZOOM ---
 	# Nếu panel mở → KHÔNG ZOOM, KHÔNG DRAG
-	if info_panel.visible:
-		return
+	#if info_panel.visible:
+		#return
 	
 	if event is InputEventMouseButton:
-		if event.is_pressed():
+		if event.is_pressed():	
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				_apply_zoom(-zoom_speed)
 

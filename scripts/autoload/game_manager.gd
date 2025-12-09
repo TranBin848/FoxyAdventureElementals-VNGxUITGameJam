@@ -23,7 +23,7 @@ var logger: Logger = ConsoleLogger.new()
 
 func _ready() -> void:
 	# Load checkpoint khi mở game
-	load_checkpoint_data()
+	#load_checkpoint_data()
 	# Theo dõi thay đổi scene để tự khôi phục trạng thái
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
 	
@@ -228,3 +228,54 @@ func collect_wand() -> void:
 	if player:
 		player.collected_wand()
 	
+#func open_skill_tree():
+	#if not current_stage:
+		#print("⚠️ Không có stage hiện tại.")
+		#return
+#
+	#var root = current_stage.find_child("SkillTreeRoot", true, false)
+	#if not root:
+		#print("⚠️ Không tìm thấy SkillTreeRoot.")
+		#return
+#
+	#_show_skill_tree_layers(root)
+	#
+	## Khóa camera player để nó không giành lại quyền
+	#if GameManager.player:
+		#GameManager.player.camera_2d.enabled = false
+#
+	## camera trong SkillTreeButtonGroup
+	#var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/Camera2D")
+	#
+	#if skill_camera:
+		#skill_camera.make_current()
+		#print("📷 Đã chuyển sang camera UI SkillTree.")
+#
+	#print("🌳 Skill Tree opened.")
+#
+#
+#func close_skill_tree():
+	#var root = current_stage.find_child("SkillTreeRoot", true, false)
+	#_hide_skill_tree_layers(root)
+	#
+	## trả camera cho player
+	#if GameManager.player:
+		#if GameManager.player:
+			#GameManager.player.camera_2d.enabled = true
+			#GameManager.player.camera_2d.make_current()
+			#print("📷 Đã trả lại camera cho player.")
+#
+	#print("🌳 Skill Tree closed.")
+#
+#func _show_skill_tree_layers(root: Node):
+	#root.visible = true
+	#for child in root.get_children():
+		#if child is CanvasLayer:
+			#child.visible = true
+#
+#
+#func _hide_skill_tree_layers(root: Node):
+	#root.visible = false
+	#for child in root.get_children():
+		#if child is CanvasLayer:
+			#child.visible = false
