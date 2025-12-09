@@ -3,7 +3,7 @@ extends PlayerState
 func _enter() -> void:
 	#Change animation to jump
 	obj.change_animation("jump")
-	AudioPlayer.play_sound_once(obj.jump_sfx)
+	AudioManager.play_sound("player_jump")
 	timer = 0.3
 	obj.velocity.x = obj.movement_speed * obj.direction
 

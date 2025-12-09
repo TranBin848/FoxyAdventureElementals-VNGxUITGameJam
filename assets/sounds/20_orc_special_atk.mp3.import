@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/20_orc_special_atk.mp3-fbf0f47592c3ac0b2d32f5
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0
