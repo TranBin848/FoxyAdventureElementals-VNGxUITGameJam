@@ -54,6 +54,7 @@ var last_dir: float = 0.0
 @export var is_dashing: bool = false
 @export var dash_cd: float = 5.0
 var can_dash: bool = true
+var can_move: bool = true
 
 #Debug
 @onready var debuglabel: Label = $debuglabel
@@ -78,10 +79,19 @@ func _ready() -> void:
 	walk_sfx_player = AudioStreamPlayer2D.new()
 	walk_sfx_player.stream = walk_sfx
 	add_child(walk_sfx_player)
-
+	
+	Dialogic.timeline_started.connect(_on_dialog_started)
+	Dialogic.timeline_ended.connect(_on_dialog_ended)
+	
 # ================================================================
 # === SKILL SYSTEM ===============================================
 # ================================================================
+
+func _on_dialog_started():
+	can_move = false
+
+func _on_dialog_ended():
+	can_move = true
 
 func _check_and_use_skill_stack(skill_to_use: Skill):
 	#1. Tìm Skill đó trong SkillBar
@@ -93,14 +103,10 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 		for slot in skill_bar.slots:
 			if slot.skill == skill_to_use:
 				
-				print("Stack trước khi dùng: %d" % skill_to_use.current_stack)
+				var skill_current_stack = SkillStackManager.get_stack(skill_to_use.name)
 			
 				# KIỂM TRA HỦY BỎ - Cần phải dùng LẦN NÀY (Stack == 1)
-				if skill_to_use.current_stack == 1:
-					
-					# Trừ Stack về 0 (để logic nội bộ đúng)
-					skill_to_use.current_stack -= 1 
-					
+				if skill_current_stack == 1:
 					# Thực hiện logic HỦY BỎ
 					slot.skill = null
 					
@@ -114,13 +120,11 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 					print("☠️ Skill '%s' consumed and removed from slot!" % skill_to_use.name)
 				
 				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
-				elif skill_to_use.current_stack > 1:
-					
-					skill_to_use.current_stack -= 1
-					print("✨ Skill '%s' còn lại: %d" % [skill_to_use.name, skill_to_use.current_stack])
-					
+				elif skill_current_stack > 1:
 					# Cập nhật UI ngay lập tức (giữ nguyên)
 					slot.update_stack_ui()
+				
+				SkillStackManager.remove_stack(skill_to_use.name, 1)
 				
 				return # Thoát sau khi xử lý Stack
 
@@ -407,7 +411,7 @@ func can_attack() -> bool:
 	return is_equipped_blade or is_equipped_wand
 
 func can_throw() -> bool:
-	return has_blade
+	return has_blade && is_equipped_blade
 
 func cast_skill(skill_name: String) -> void:
 	if fsm.current_state != fsm.states.castspell:
@@ -598,6 +602,8 @@ func collected_blade() -> void:
 	_equip_blade_from_swap()
 	
 func throw_blade() -> void:
+	if is_equipped_wand:
+		return
 	var blade = blade_factory.create() as RigidBody2D
 	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
 	blade.direction = direction
@@ -607,7 +613,7 @@ func throw_blade() -> void:
 func throwed_blade() -> void:
 	has_blade = false
 	is_equipped_blade = false
-	weapon_swapped.emit("normal")
+	
 	set_animated_sprite($Direction/AnimatedSprite2D)
 	
 	# Quản lý sprite silhouette:
@@ -702,6 +708,10 @@ func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	extra_sprites.append(new_silhouette)
 	new_silhouette.show()
 func _update_movement(delta: float) -> void:
+	if not can_move:
+		velocity = Vector2.ZERO
+		return
+	
 	velocity.y += gravity * delta
 
 	if fsm.current_state == fsm.states.wallcling:

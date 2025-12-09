@@ -283,8 +283,8 @@ scale = Vector2(27, 18)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("27_qv7h7")
-boss = NodePath("Boss")
 boss_bgm = ExtResource("28_wo2fk")
+boss = NodePath("Boss")
 
 [node name="Boss" parent="Bosszone" instance=ExtResource("28_smwot")]
 position = Vector2(-2.74074, 4.5)

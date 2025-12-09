@@ -107,7 +107,7 @@ func change_direction(new_direction: int) -> void:
 
 # Get the name of the current animation
 func get_animation_name() -> String:
-	return current_animation.name
+	return _next_animated_sprite.name
 
 func set_animated_sprite(new_animated_sprite: AnimatedSprite2D) -> void:
 	_next_animated_sprite = new_animated_sprite
