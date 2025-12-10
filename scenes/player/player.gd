@@ -11,7 +11,7 @@ var flicker_timer := 0.0
 var saved_collision_layer: int
 
 @export var has_blade: bool = false
-@export var has_wand: bool = false
+@export var has_wand: bool = true
 var is_equipped_blade: bool = false    #Đang cầm Blade?
 var is_equipped_wand: bool = false     # Đang cầm Wand?
 signal weapon_swapped(equipped_weapon_type: String)

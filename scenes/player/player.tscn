@@ -91,7 +91,7 @@
 [ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
 [ext_resource type="AudioStream" uid="uid://celbmeo4au546" path="res://assets/sounds/gong.mp3" id="65_2yv6k"]
-[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://scenes/testscene/skill_tree_root.tscn" id="91_pq1ih"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="91_pq1ih"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="93_hf5gj"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="94_avmva"]
 
@@ -719,6 +719,7 @@ script = ExtResource("56_hdvrm")
 [node name="WalkFX" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
 visible = false

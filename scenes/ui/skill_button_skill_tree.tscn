@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://dyms886k12vqv" path="res://scenes/skills/scripts/fire/FireShot.tres" id="3_x5qsn"]
 
 [node name="SkillButton_SkillTree" type="TextureButton"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(1.25, 1.25)

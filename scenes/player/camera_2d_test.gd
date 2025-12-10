@@ -1,7 +1,7 @@
 extends Camera2D
 
 var zoom_minimum := Vector2(0.5, 0.5)
-var zoom_maximum := Vector2(2.5, 2.5)
+var zoom_maximum := Vector2(3.5, 3.5)
 var zoom_speed := 0.2
 
 var dragging := false
@@ -14,7 +14,8 @@ var last_mouse_pos := Vector2.ZERO
 	#camera.make_current()
 
 func _input(event: InputEvent) -> void:
-	return
+	#Uncomment to enable this to ZOOM MAP
+	#return
 	# --- ZOOM ---
 	# Nếu panel mở → KHÔNG ZOOM, KHÔNG DRAG
 	#if info_panel.visible:

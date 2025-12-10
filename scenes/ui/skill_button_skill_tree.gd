@@ -10,6 +10,8 @@ class_name SkillButtonNode
 @export var require_stack_unlock := 1
 @export var require_stack_upgrade := 1
 
+@export var video_stream: VideoStream = null
+
 var unlocked: bool = false
 var children: Array[SkillButtonNode] = []
 

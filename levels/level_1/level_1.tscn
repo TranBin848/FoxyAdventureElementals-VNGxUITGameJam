@@ -94,7 +94,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.179859
+shader_parameter/y_zoom = 1.1
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -207,7 +207,7 @@ position = Vector2(5280, -440)
 target_stage = "uid://wopr13pq4dnf"
 
 [node name="Player" parent="." instance=ExtResource("18_gukcl")]
-position = Vector2(-1152, 419)
+position = Vector2(511, 164)
 collision_mask = 73
 platform_floor_layers = 4294967231
 max_health = 1000
@@ -478,6 +478,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("44_81g5i")]
+visible = false
 offset_bottom = 100.0
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
@@ -499,6 +500,7 @@ text = "Enemy Out of Range"
 horizontal_alignment = 1
 
 [node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("46_sycnp")]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -521,7 +523,7 @@ boss = NodePath("Boss")
 boss_bgm = ExtResource("48_pj2vu")
 
 [node name="Boss" parent="Bosszone" instance=ExtResource("49_mvtf2")]
-position = Vector2(-2.74074, 4.5)
+position = Vector2(-0.629629, -2.05556)
 scale = Vector2(0.037037, 0.0555556)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bosszone"]
