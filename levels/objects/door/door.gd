@@ -19,6 +19,7 @@ func _on_interactive_area_2d_interacted() -> void:
 func open_door_and_transition() -> void:
 	if sprite.sprite_frames.has_animation("opening"):
 		sprite.play("opening")
+		AudioManager.play_sound("door_open")
 		await sprite.animation_finished
 
 	# 🔹 2. Fade màn hình tối dần
@@ -45,3 +46,4 @@ func open_door_and_transition() -> void:
 	# 🔹 5. Đóng cửa lại (nếu có animation “close”)
 	if sprite.sprite_frames.has_animation("closing"):
 		sprite.play("closing")
+		AudioManager.play_sound("door_close")

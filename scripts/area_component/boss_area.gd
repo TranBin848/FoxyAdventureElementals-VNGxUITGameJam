@@ -1,9 +1,7 @@
-extends Area2D
+extends AmbienceArea2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @export var boss: KingCrab = null #make sure boss zone alway have a boss
-@export var previous_music_id: String = ""
-@export var boss_music_id: String = ""
 var player: Player = null
 
 func _ready() -> void:
@@ -26,5 +24,5 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		boss.start_fight()
 		previous_music_id = AudioManager.get_current_music_id()
-		AudioManager.play_music(boss_music_id)
+		AudioManager.play_music(ambience_music_id)
 	#boss.fsm.chan
