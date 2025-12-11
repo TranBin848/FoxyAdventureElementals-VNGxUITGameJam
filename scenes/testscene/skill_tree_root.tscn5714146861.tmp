@@ -9,9 +9,14 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_qg1b1")
 
-[node name="SkillTreeButtonGroup" parent="." instance=ExtResource("2_e052t")]
+[node name="CanvasLayerSkillButton" type="CanvasLayer" parent="."]
+
+[node name="SkillTreeButtonGroup" parent="CanvasLayerSkillButton" instance=ExtResource("2_e052t")]
 z_index = 1
-layout_mode = 1
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -640.0
+offset_bottom = -360.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -10
@@ -23,8 +28,6 @@ offset_left = -640.0
 offset_top = -360.0
 offset_right = 640.0
 offset_bottom = 360.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2
 
 [node name="CanvasLayer_SkillPanel" type="CanvasLayer" parent="."]

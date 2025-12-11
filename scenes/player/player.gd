@@ -1,6 +1,7 @@
 class_name Player
 extends BaseCharacter
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var skill_tree_ui: CanvasLayer = $SkillTreeUI
 
 @export var invulnerable_duration: float = 2
 var is_invulnerable: bool = false
@@ -10,7 +11,7 @@ var flicker_timer := 0.0
 var saved_collision_layer: int
 
 @export var has_blade: bool = false
-@export var has_wand: bool = false
+@export var has_wand: bool = true
 var is_equipped_blade: bool = false    #Đang cầm Blade?
 var is_equipped_wand: bool = false     # Đang cầm Wand?
 signal weapon_swapped(equipped_weapon_type: String)
@@ -716,3 +717,51 @@ func dash() -> void:
 	can_dash = false
 	await get_tree().create_timer(dash_cd).timeout
 	can_dash = true
+
+#Update UI
+func _input(event):
+	if event.is_action_pressed("ui_skilltree"):
+		var root = skill_tree_ui.get_node("ColorRect/SkillTreeRoot")
+		var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/SkillCamera2D")
+		get_tree().paused = !get_tree().paused 
+		if (skill_tree_ui.visible == false):
+			skill_tree_ui.visible = true
+			if not root:
+				return
+			
+			_show_skill_tree_layers(root)
+			# Khóa camera player để nó không giành lại quyền
+			if GameManager.player:
+				GameManager.player.camera_2d.enabled = false
+			if skill_camera:
+				skill_camera.make_current()
+				#skill_camera.enabled = true
+				print("📷 Đã chuyển sang camera UI SkillTree.")
+
+			print("🌳 Skill Tree opened.")
+		else:
+			skill_tree_ui.visible = false
+			_hide_skill_tree_layers(root)
+			if skill_camera:
+				skill_camera.enabled = false
+			# trả camera cho player
+			if GameManager.player:
+				if GameManager.player:
+					GameManager.player.camera_2d.enabled = true
+					GameManager.player.camera_2d.make_current()
+					print("📷 Đã trả lại camera cho player.")
+
+			print("🌳 Skill Tree closed.")
+		
+
+func _show_skill_tree_layers(root: Node):
+	#root.visible = true
+	for child in root.get_children():
+		if child is CanvasLayer:
+			child.visible = true
+
+func _hide_skill_tree_layers(root: Node):
+	#root.visible = false
+	for child in root.get_children():
+		if child is CanvasLayer:
+			child.visible = false

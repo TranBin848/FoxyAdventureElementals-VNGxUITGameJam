@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_1m040"]
 [ext_resource type="Script" uid="uid://pjpf80xw2waa" path="res://scenes/ui/skill_info_panel.gd" id="1_4pcvp"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_tcvtn"]
-[ext_resource type="VideoStream" uid="uid://kmkdegivqrkk" path="res://assets/skills/fire/FireShot.ogv" id="3_vmfbp"]
+[ext_resource type="VideoStream" uid="uid://d0eux0ncbfs4n" path="res://assets/skills/fire/FireExplosion.ogv" id="4_1m040"]
 
 [node name="SkillInfoPanel" type="Panel"]
 anchors_preset = 6
@@ -61,13 +61,13 @@ text = "Stat"
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 39.0
-offset_top = 60.0
-offset_right = -15.0
-offset_bottom = 300.0
+offset_left = 51.0
+offset_top = 59.0
+offset_right = -49.0
+offset_bottom = 299.0
 grow_horizontal = 2
-scale = Vector2(0.95, 0.95)
-stream = ExtResource("3_vmfbp")
+stream = ExtResource("4_1m040")
+volume_db = -80.0
 autoplay = true
 loop = true
 

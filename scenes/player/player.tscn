@@ -499,6 +499,7 @@ radius = 7.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
+process_mode = 3
 collision_layer = 2
 collision_mask = 9
 safe_margin = 0.1
@@ -510,8 +511,10 @@ max_health = 5
 elemental_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_priority = 1
 position = Vector2(1, -40)
 zoom = Vector2(2, 2)
+script = ExtResource("7_31ki0")
 
 [node name="Direction" type="Node2D" parent="."]
 
@@ -701,6 +704,7 @@ script = ExtResource("56_hdvrm")
 [node name="WalkFX" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
 visible = false
@@ -740,6 +744,56 @@ offset_top = -65.0
 offset_right = 24.0
 offset_bottom = -42.0
 text = "debug"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTreeRoot" parent="SkillTreeUI/ColorRect" instance=ExtResource("91_pq1ih")]
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -49.0
+offset_right = 332.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("93_hf5gj")
+theme_override_font_sizes/font_size = 16
+text = "Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_top = 16.0
+offset_right = 158.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("94_avmva")
+theme_override_font_sizes/font_size = 24
+text = "SKILL TREE"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -6,6 +6,7 @@ class_name SkillInfoPanel
 @onready var stat_label: RichTextLabel = $Stat
 @onready var upgrade_btn: Button = $UpgradeButton
 @onready var unlock_btn: Button = $UnlockButton
+@onready var video_player: VideoStreamPlayer = $VideoStreamPlayer
 
 var current_button: SkillButtonNode
 
@@ -21,6 +22,13 @@ func show_skill(btn: SkillButtonNode):
 	
 	current_button = btn
 	_update_buttons()
+	
+	if btn.video_stream:
+		video_player.stream = btn.video_stream
+		video_player.play()
+	else:
+		video_player.stream = null
+		video_player.stop()
 	
 func get_stat_text(sk: Skill) -> String:
 	var lines: Array[String] = []

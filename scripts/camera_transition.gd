@@ -8,7 +8,7 @@ func _ready():
 	if camera2D == null:
 		push_error("Camera2D node not found!")
 		return
-
+	
 
 func transition_camera2D(to: Camera2D, duration := 1.0, from: Camera2D = get_viewport().get_camera_2d()) -> void:
 	if transitioning:

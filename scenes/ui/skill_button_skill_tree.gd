@@ -10,6 +10,8 @@ class_name SkillButtonNode
 @export var require_stack_unlock := 1
 @export var require_stack_upgrade := 1
 
+@export var video_stream: VideoStream = null
+
 var unlocked: bool = false
 var children: Array[SkillButtonNode] = []
 
@@ -20,8 +22,8 @@ func _ready() -> void:
 		var parent_btn: SkillButtonNode = get_parent()
 		parent_btn.children.append(self)
 		
-		line_2d.add_point(global_position + size/2)
-		line_2d.add_point(get_parent().global_position + size/2)
+		line_2d.add_point(global_position + size/2 - Vector2(4,4))
+		line_2d.add_point(get_parent().global_position + size/2 - Vector2(4,4))
 		
 	SkillStackManager.stack_changed.connect(_on_stack_changed)
 	SkillStackManager.level_changed.connect(_on_level_changed)

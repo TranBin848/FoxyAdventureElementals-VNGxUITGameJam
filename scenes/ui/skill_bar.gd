@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 var slots: Array
-var skills: Array = []
+var skills: Array = [HealOverTime]
 var available_skills: Array = []
 
 func _ready() -> void:
