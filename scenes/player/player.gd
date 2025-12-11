@@ -36,15 +36,6 @@ var blade_hit_area: Area2D
 @onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
 @onready var silhouette_wand_sprite: AnimatedSprite2D = $Direction/SilhouetteWandAnimatedSprite2D
 
-#Sound SF
-@export var jump_sfx: AudioStream = null
-@export var hurt_sfx: AudioStream = null
-@export var attack_sfx: AudioStream = null
-@export var throw_sfx: AudioStream = null
-@export var walk_sfx: AudioStream = null
-
-@onready var walk_sfx_player: AudioStreamPlayer2D = null
-
 #Movement
 var last_dir: float = 0.0
 @export var wall_slide_speed: float = 50.0
@@ -76,10 +67,6 @@ func _ready() -> void:
 		collected_blade()
 	
 	camera_2d.make_current()
-	
-	walk_sfx_player = AudioStreamPlayer2D.new()
-	walk_sfx_player.stream = walk_sfx
-	add_child(walk_sfx_player)
 	
 	Dialogic.timeline_started.connect(_on_dialog_started)
 	Dialogic.timeline_ended.connect(_on_dialog_ended)
@@ -424,10 +411,6 @@ func set_invulnerable() -> void:
 	# Save current layer and disable player's collision layer
 	saved_collision_layer = hurt_area.collision_layer
 	hurt_area.collision_layer = 0  # Temporarily disable collision layer
-	
-func _process(delta: float) -> void:
-	if (fsm.current_state != fsm.states.run):
-		walk_sfx_player.stop()
 
 func is_char_invulnerable() -> bool:
 	return is_invulnerable

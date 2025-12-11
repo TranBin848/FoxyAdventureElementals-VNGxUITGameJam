@@ -1,17 +1,11 @@
-[gd_scene load_steps=109 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=99 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
 [ext_resource type="Shader" uid="uid://hxfbyuvi3j8m" path="res://shaders/player_shader/silhouetter.gdshader" id="2_ahqnk"]
-[ext_resource type="AudioStream" uid="uid://irnmtldt0n5y" path="res://assets/sounds/jump.mp3" id="2_vb1ce"]
-[ext_resource type="AudioStream" uid="uid://pai50qaua43d" path="res://assets/sounds/Hit damage 1.wav" id="3_bywm7"]
 [ext_resource type="Texture2D" uid="uid://bkabwrpxdc7cc" path="res://assets/foxy/fox_hat_blade/fox_atk_2.png" id="3_j4nxn"]
 [ext_resource type="Texture2D" uid="uid://byd3g4nnxwfcq" path="res://assets/foxy/fox_hat_blade/fox_atk_3.png" id="4_28m0y"]
-[ext_resource type="AudioStream" uid="uid://dkorinp0d14hs" path="res://assets/sounds/10_human_special_atk_1.mp3" id="4_bywm7"]
-[ext_resource type="AudioStream" uid="uid://w3f6ctedkxva" path="res://assets/sounds/27_sword_miss_1.wav" id="5_0sg1o"]
-[ext_resource type="AudioStream" uid="uid://ghtor7tdlfgh" path="res://assets/sounds/41575__erdie__steps-on-grass07.ogg" id="6_a3gso"]
-[ext_resource type="Script" uid="uid://bi602yodcmwe0" path="res://scenes/player/camera_2d_test.gd" id="7_31ki0"]
 [ext_resource type="Texture2D" uid="uid://m4di78taixns" path="res://assets/foxy/fox_hat/fox_defeat_1.png" id="8_4b1ex"]
 [ext_resource type="Texture2D" uid="uid://b6jgthsrynctr" path="res://assets/foxy/fox_hat/fox_defeat_2.png" id="9_v8cnd"]
 [ext_resource type="Texture2D" uid="uid://fii540ugfj5n" path="res://assets/foxy/fox_hat/fox_defeat_3.png" id="10_wuxn4"]
@@ -90,10 +84,6 @@
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
 [ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
-[ext_resource type="AudioStream" uid="uid://celbmeo4au546" path="res://assets/sounds/gong.mp3" id="65_2yv6k"]
-[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="91_pq1ih"]
-[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="93_hf5gj"]
-[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="94_avmva"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -514,11 +504,6 @@ collision_layer = 2
 collision_mask = 9
 safe_margin = 0.1
 script = ExtResource("1_wodsf")
-jump_sfx = ExtResource("2_vb1ce")
-hurt_sfx = ExtResource("3_bywm7")
-attack_sfx = ExtResource("4_bywm7")
-throw_sfx = ExtResource("5_0sg1o")
-walk_sfx = ExtResource("6_a3gso")
 max_fall_speed = 500.0
 dash_dist = 100.0
 dash_cd = 0.5
@@ -740,7 +725,6 @@ expand_mode = 3
 
 [node name="DeathUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("57_uygh0")]
 visible = false
-defeat_sfx = ExtResource("65_2yv6k")
 player = NodePath("../..")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]

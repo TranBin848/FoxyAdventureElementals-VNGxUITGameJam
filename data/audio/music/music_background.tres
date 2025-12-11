@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://dl73tv8t4y5qd"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_vxh7i"]
+[ext_resource type="AudioStream" uid="uid://biet84xtl0iq5" path="res://assets/sounds/sweden_c418.mp3" id="2_fjy33"]
+
+[resource]
+script = ExtResource("1_vxh7i")
+clip_id = "music_background"
+stream = ExtResource("2_fjy33")
+volume_db = 0.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

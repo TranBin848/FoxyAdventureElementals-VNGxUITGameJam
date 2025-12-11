@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://co6bg4ieci1eg"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_a4g16"]
+[ext_resource type="AudioStream" uid="uid://dkorinp0d14hs" path="res://assets/sounds/10_human_special_atk_1.mp3" id="2_2tou1"]
+
+[resource]
+script = ExtResource("1_a4g16")
+clip_id = "player_attack"
+stream = ExtResource("2_2tou1")
+volume_db = 0.0
+randomize_pitch = true
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"
