@@ -43,23 +43,51 @@ func fire() -> void:
 		bullet.fire(get_fire_poss(), player_pos,atk_angle, 1)
 
 
-func get_targets() -> Array[Vector2]:
-	var pts: Array[Vector2] = []
-	for c in $"RocketTargets".get_children():
-		if c is Node2D:
-			pts.append(c.global_position)
-	return pts
+var targets: Array[Vector2] = [
+	Vector2(100, -600),
+	Vector2(-100, -600),
+	
+	Vector2(200, -600),
+	Vector2(-200, -600),
+	
+	Vector2(300, -600),
+	Vector2(-300, -600)
+]
+var firePoint: Array[Vector2] = [
+	Vector2(30, -35),
+	Vector2(-30, -35)
+]
 
 func launch() -> void:
-	var targets = get_targets()
-	if targets.is_empty():
+	if targets.is_empty() or firePoint.is_empty():
 		return
 	alert_coroutine()
+
+	var anim: AnimatedSprite2D = $"Direction/AnimatedSprite2D" 
+	if anim == null:
+		push_error("AnimatedSprite2D WRONG PATH !")
+		return
+
 	for i in range(targets.size()):
+		if i % 2 == 0:
+			change_animation("launchRocket")
+			anim.frame = 0
+			anim.play()
+			await get_tree().process_frame
+			await get_tree().create_timer(0.1).timeout #hold for match anim
+
 		var rocket := rocket_factory.create() as WarLordRocket
-		rocket.launch(targets[i])
-		if (i + 1) % 2 == 0 and i < targets.size() - 1:
-			await get_tree().create_timer(0.5).timeout
+		rocket.launch(global_position + firePoint[i % firePoint.size()], targets[i])
+
+		if i  % 2 == 1:
+			await anim.animation_finished
+
+	change_animation("rotate2Front")
+	anim.frame = 0
+	anim.play()
+	await get_tree().process_frame
+	await anim.animation_finished
+	fsm.change_state(fsm.states.stun)
 
 func get_fire_poss() -> Vector2:
 	if is_facing_left:

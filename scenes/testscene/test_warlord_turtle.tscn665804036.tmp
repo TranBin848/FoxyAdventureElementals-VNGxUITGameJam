@@ -279,4 +279,4 @@ position = Vector2(155, 206)
 [node name="ProductsContainer" type="Node2D" parent="."]
 
 [node name="WarLordTurtle" parent="." instance=ExtResource("29_uhv28")]
-position = Vector2(458, 185)
+position = Vector2(450, 185)

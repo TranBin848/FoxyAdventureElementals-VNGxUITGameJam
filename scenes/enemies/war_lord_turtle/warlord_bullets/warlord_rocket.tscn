@@ -13,19 +13,21 @@ radius = 7.0
 height = 26.0
 
 [node name="WarlordRocket" type="RigidBody2D"]
-gravity_scale = 0.25
+collision_layer = 0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_0bvwl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
 texture = ExtResource("2_0bvwl")
-flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0wafy")
 
 [node name="HitArea2D" type="Area2D" parent="."]
+rotation = 1.5708
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("3_fs8uv")

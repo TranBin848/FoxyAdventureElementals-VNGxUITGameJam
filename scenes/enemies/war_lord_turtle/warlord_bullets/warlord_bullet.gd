@@ -1,6 +1,7 @@
 class_name WarLordBullet
 extends RigidBody2D
 
+@export var explode_sfx: AudioStream = null
 @export var gravity := 980.0
 @export var angle := -45.0
 
@@ -24,32 +25,34 @@ func compute_initial_velocity(p0: Vector2, p1: Vector2, angle_deg: float, g: flo
 
 
 func _on_hit_area_2d_hitted(_area: Variant) -> void:
-	_on_body_entered(_area)
+	explode()
 
 
 func _on_body_entered(_body: Node) -> void:
 	if has_exploded:
 		return
-	
 	has_exploded = true
 	wait_and_explode()
 
 
 func wait_and_explode() -> void:
-	# 1.75s bình thường
-	await get_tree().create_timer(1.75).timeout
+	
+	await get_tree().create_timer(2.5).timeout
+	await blink_warning(1.0)
+	explode()
 
-	# 0.25s cuối: nhấp nháy đỏ
-	await blink_warning(0.25)
-
-	# Tạo particle nổ
+func explode() -> void:
 	var e = preload("res://scenes/enemies/war_lord_turtle/warlord_bullets/explosion_particle.tscn").instantiate()
+	
 	e.global_position = global_position
 	e.one_shot = true
 	get_tree().current_scene.add_child(e)
-
+	
+	var area = preload("res://scenes/enemies/war_lord_turtle/warlord_bullets/ExplosionArea.tscn").instantiate()
+	area.global_position = global_position
+	get_tree().current_scene.add_child(area)
+	AudioPlayer.play_sound_once(explode_sfx)
 	queue_free()
-
 
 func blink_warning(duration: float) -> void:
 	if not sprite:
