@@ -13,6 +13,7 @@ func _enter() -> void:
 	
 	# Set dash animation
 	obj.change_animation("jump")
+	AudioManager.play_sound("player_dash")
 	
 	obj.dash()
 

@@ -53,6 +53,10 @@ func _on_scene_changed() -> void:
 			inventory_system.load_data(checkpoint_info["inventory_data"])
 			print("👜 Inventory đã được khôi phục từ checkpoint")
 		
+		if checkpoint_info.has("skill_stack"):
+			SkillStackManager.load_data(checkpoint_info["skill_stack"])
+			print("✨ Skill stack đã được khôi phục: ", checkpoint_info["skill_stack"])
+		
 		if player.has_blade:
 			player.collected_blade()
 
@@ -100,10 +104,9 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	
 	checkpoint_data[checkpoint_id] = {
 		"player_state": player_state_dict,
-		"stage_path": current_stage.scene_file_path,
 		"health": player.health,
 		"has_blade": player.has_blade,
-		"inventory_data": inventory_data
+		"inventory_data": inventory_data,
 	}
 	
 	print("✅ Checkpoint saved:", checkpoint_id)
@@ -112,7 +115,8 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	SaveSystem.save_checkpoint_data(
 		checkpoint_id,
 		checkpoint_data[checkpoint_id],
-		current_stage.scene_file_path
+		current_stage.scene_file_path,
+		SkillStackManager.save_data(),
 	)
 
 
@@ -167,9 +171,11 @@ func load_checkpoint_data() -> void:
 	if save_data.is_empty():
 		print("⚠️ No checkpoint file found.")
 		return
-
+	else:
+		print(save_data)
 	current_checkpoint_id = save_data.get("checkpoint_id", "")
 	var player_data = save_data.get("player", {})
+	var skill_stack = save_data.get("skill_stack", {})
 	var stage_path = save_data.get("stage_path", "")
 	var inventory_data = save_data.get("inventory_data", {})
 
@@ -186,9 +192,13 @@ func load_checkpoint_data() -> void:
 		if inventory_data and inventory_system:
 			inventory_system.load_data(inventory_data)
 			print("👜 Inventory loaded from save_data")
+		
+		SkillStackManager.load_data(skill_stack)
+		
 	else:
 		print("✅ Checkpoint data loaded, but no active checkpoint.")
-
+	
+	
 
 func clear_checkpoint_data() -> void:
 	current_checkpoint_id = ""
@@ -218,3 +228,54 @@ func collect_wand() -> void:
 	if player:
 		player.collected_wand()
 	
+#func open_skill_tree():
+	#if not current_stage:
+		#print("⚠️ Không có stage hiện tại.")
+		#return
+#
+	#var root = current_stage.find_child("SkillTreeRoot", true, false)
+	#if not root:
+		#print("⚠️ Không tìm thấy SkillTreeRoot.")
+		#return
+#
+	#_show_skill_tree_layers(root)
+	#
+	## Khóa camera player để nó không giành lại quyền
+	#if GameManager.player:
+		#GameManager.player.camera_2d.enabled = false
+#
+	## camera trong SkillTreeButtonGroup
+	#var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/Camera2D")
+	#
+	#if skill_camera:
+		#skill_camera.make_current()
+		#print("📷 Đã chuyển sang camera UI SkillTree.")
+#
+	#print("🌳 Skill Tree opened.")
+#
+#
+#func close_skill_tree():
+	#var root = current_stage.find_child("SkillTreeRoot", true, false)
+	#_hide_skill_tree_layers(root)
+	#
+	## trả camera cho player
+	#if GameManager.player:
+		#if GameManager.player:
+			#GameManager.player.camera_2d.enabled = true
+			#GameManager.player.camera_2d.make_current()
+			#print("📷 Đã trả lại camera cho player.")
+#
+	#print("🌳 Skill Tree closed.")
+#
+#func _show_skill_tree_layers(root: Node):
+	#root.visible = true
+	#for child in root.get_children():
+		#if child is CanvasLayer:
+			#child.visible = true
+#
+#
+#func _hide_skill_tree_layers(root: Node):
+	#root.visible = false
+	#for child in root.get_children():
+		#if child is CanvasLayer:
+			#child.visible = false

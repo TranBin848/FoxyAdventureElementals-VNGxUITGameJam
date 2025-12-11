@@ -1,7 +1,6 @@
 extends InteractiveArea2D
 
 @export var coin_reward: int = 5
-@export var consumed_sfx: AudioStream = null
 
 @onready var coin = preload("res://levels/objects/coin/coin.tscn")
 
@@ -28,7 +27,7 @@ func open_chest():
 	is_opened = true
 	GameManager.inventory_system.use_key()
 	animated_sprite.play("open")
-	AudioPlayer.play_sound_once(consumed_sfx)
+	AudioManager.play_sound("chest_open")
 	await animated_sprite.animation_finished
 	
 	for n in coin_reward:

@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcupn8lintl77"]
+
+[ext_resource type="Script" uid="uid://c613v451tucd0" path="res://scenes/ui/skill_tree/skill_tree_root.gd" id="1_r363v"]
+[ext_resource type="PackedScene" uid="uid://c24hsf56rny2a" path="res://scenes/ui/skill_tree1.tscn" id="2_l5itb"]
+[ext_resource type="PackedScene" uid="uid://sgxxofrggjed" path="res://scenes/ui/skill_info_panel.tscn" id="3_chxqf"]
+
+[node name="SkillTreeRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_r363v")
+
+[node name="SkillTreeButtonGroup" parent="." instance=ExtResource("2_l5itb")]
+layout_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -10
+visible = false
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+modulate = Color(0.937255, 1, 1, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(3200, 1800)
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="CanvasLayer_SkillPanel" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="SkillInfoPanel" parent="CanvasLayer_SkillPanel" instance=ExtResource("3_chxqf")]
+visible = false
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 820.0
+offset_top = 52.0
+offset_right = 1280.0
+offset_bottom = 668.0
+grow_horizontal = 1
+grow_vertical = 1

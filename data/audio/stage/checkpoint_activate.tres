@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://c557ffk4oq0fd"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_e5x4g"]
+[ext_resource type="AudioStream" uid="uid://bsr00u4v2ajis" path="res://assets/sounds/DOORWood_Door Wood Cheap Op Creak_PSE_BR-C_yQPnj.wav" id="2_3ruqc"]
+
+[resource]
+script = ExtResource("1_e5x4g")
+clip_id = "checkpoint_activate"
+stream = ExtResource("2_3ruqc")
+volume_db = 0.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

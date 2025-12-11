@@ -4,12 +4,12 @@ extends Node
 const SAVE_FILE: String = "user://checkpoint_save.dat"
 
 # 🔹 Lưu dữ liệu checkpoint: gồm player, checkpoint_id, stage_path
-func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String) -> void:
-	print(player_data)
+func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_stack: Dictionary) -> void:
 	var save_data := {
 		"checkpoint_id": checkpoint_id,
 		"player": player_data,
-		"stage_path": stage_path
+		"stage_path": stage_path,
+		"skill_stack": skill_stack
 	}
 
 	var file := FileAccess.open(SAVE_FILE, FileAccess.WRITE)

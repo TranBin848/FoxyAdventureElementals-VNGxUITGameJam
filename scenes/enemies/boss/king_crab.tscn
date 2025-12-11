@@ -238,7 +238,6 @@ attack_sfx = ExtResource("2_2e0iw")
 hurt_sfx = ExtResource("2_idosi")
 spike = 1.0
 sight = 200.0
-max_health = 30
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Direction" type="Node2D" parent="."]

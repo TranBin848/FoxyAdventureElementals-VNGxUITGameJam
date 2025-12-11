@@ -4,13 +4,8 @@
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
 [ext_resource type="Shader" uid="uid://hxfbyuvi3j8m" path="res://shaders/player_shader/silhouetter.gdshader" id="2_ahqnk"]
-[ext_resource type="AudioStream" uid="uid://irnmtldt0n5y" path="res://assets/sounds/jump.mp3" id="2_vb1ce"]
-[ext_resource type="AudioStream" uid="uid://pai50qaua43d" path="res://assets/sounds/Hit damage 1.wav" id="3_bywm7"]
 [ext_resource type="Texture2D" uid="uid://bkabwrpxdc7cc" path="res://assets/foxy/fox_hat_blade/fox_atk_2.png" id="3_j4nxn"]
 [ext_resource type="Texture2D" uid="uid://byd3g4nnxwfcq" path="res://assets/foxy/fox_hat_blade/fox_atk_3.png" id="4_28m0y"]
-[ext_resource type="AudioStream" uid="uid://dkorinp0d14hs" path="res://assets/sounds/10_human_special_atk_1.mp3" id="4_bywm7"]
-[ext_resource type="AudioStream" uid="uid://w3f6ctedkxva" path="res://assets/sounds/27_sword_miss_1.wav" id="5_0sg1o"]
-[ext_resource type="AudioStream" uid="uid://ghtor7tdlfgh" path="res://assets/sounds/41575__erdie__steps-on-grass07.ogg" id="6_a3gso"]
 [ext_resource type="Texture2D" uid="uid://m4di78taixns" path="res://assets/foxy/fox_hat/fox_defeat_1.png" id="8_4b1ex"]
 [ext_resource type="Texture2D" uid="uid://b6jgthsrynctr" path="res://assets/foxy/fox_hat/fox_defeat_2.png" id="9_v8cnd"]
 [ext_resource type="Texture2D" uid="uid://fii540ugfj5n" path="res://assets/foxy/fox_hat/fox_defeat_3.png" id="10_wuxn4"]
@@ -506,6 +501,7 @@ radius = 7.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
+process_mode = 3
 collision_layer = 2
 collision_mask = 9
 safe_margin = 0.1
@@ -523,8 +519,10 @@ max_health = 5
 elemental_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_priority = 1
 position = Vector2(1, -40)
 zoom = Vector2(2, 2)
+script = ExtResource("7_31ki0")
 
 [node name="Direction" type="Node2D" parent="."]
 
@@ -718,6 +716,7 @@ script = ExtResource("55_w8qe1")
 script = ExtResource("56_hdvrm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
 visible = false
@@ -738,7 +737,6 @@ expand_mode = 3
 
 [node name="DeathUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("57_uygh0")]
 visible = false
-defeat_sfx = ExtResource("65_2yv6k")
 player = NodePath("../..")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
@@ -757,6 +755,56 @@ offset_top = -65.0
 offset_right = 24.0
 offset_bottom = -42.0
 text = "debug"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTreeRoot" parent="SkillTreeUI/ColorRect" instance=ExtResource("91_pq1ih")]
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -49.0
+offset_right = 332.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("93_hf5gj")
+theme_override_font_sizes/font_size = 16
+text = "Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_top = 16.0
+offset_right = 158.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("94_avmva")
+theme_override_font_sizes/font_size = 24
+text = "SKILL TREE"
 horizontal_alignment = 1
 vertical_alignment = 1
 

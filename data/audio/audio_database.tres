@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="AudioDatabase" load_steps=22 format=3 uid="uid://c1ope6ptf8yny"]
+
+[ext_resource type="Script" uid="uid://ovmtn36802i6" path="res://scripts/audio/audio_database.gd" id="1_nw313"]
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_x0dso"]
+[ext_resource type="Resource" uid="uid://cawwg43oiwhm2" path="res://data/audio/music/music_boss.tres" id="2_g1k8g"]
+[ext_resource type="Resource" uid="uid://dl73tv8t4y5qd" path="res://data/audio/music/music_background.tres" id="3_ykssl"]
+[ext_resource type="Resource" uid="uid://co6bg4ieci1eg" path="res://data/audio/player/player_attack.tres" id="4_cw7wr"]
+[ext_resource type="Resource" uid="uid://pxesxgv5nytx" path="res://data/audio/music/music_defeat.tres" id="4_p1l5c"]
+[ext_resource type="Resource" uid="uid://d3abv2ixvrjo3" path="res://data/audio/player/player_jump.tres" id="5_374as"]
+[ext_resource type="Resource" uid="uid://dcx63jononj5v" path="res://data/audio/music/music_victory.tres" id="5_g7dcs"]
+[ext_resource type="Resource" uid="uid://dbur58hd81ne4" path="res://data/audio/player/player_hurt.tres" id="6_mjplr"]
+[ext_resource type="Resource" uid="uid://cmx27tqr17kwc" path="res://data/audio/player/player_walk.tres" id="7_5g16o"]
+[ext_resource type="Resource" uid="uid://dp8ywxqoytj4i" path="res://data/audio/player/player_throw.tres" id="8_ykssl"]
+[ext_resource type="Resource" uid="uid://jehl8t6dtt8p" path="res://data/audio/player/player_dash.tres" id="9_cw7wr"]
+[ext_resource type="Resource" uid="uid://bumobts1t3r5e" path="res://data/audio/guide/guide_exit.tres" id="12_6cm5n"]
+[ext_resource type="Resource" uid="uid://c8yp5mb1qojbf" path="res://data/audio/guide/guide_enter.tres" id="13_exqm0"]
+[ext_resource type="Resource" uid="uid://c557ffk4oq0fd" path="res://data/audio/stage/checkpoint_activate.tres" id="14_exqm0"]
+[ext_resource type="Resource" uid="uid://cb5dvho6xvyfv" path="res://data/audio/boss/boss_hurt.tres" id="15_b71d2"]
+[ext_resource type="Resource" uid="uid://c584t170hgnev" path="res://data/audio/boss/boss_attack.tres" id="16_4m8v6"]
+[ext_resource type="Resource" uid="uid://cxkh1m1bbekbk" path="res://data/audio/stage/item_collect.tres" id="17_owoq2"]
+[ext_resource type="Resource" uid="uid://co4fq04ryxlaa" path="res://data/audio/stage/chest_open.tres" id="18_1ae7c"]
+[ext_resource type="Resource" uid="uid://cj8y1tca7218x" path="res://data/audio/ambience/ambience_forest.tres" id="19_p1l5c"]
+[ext_resource type="Resource" uid="uid://cgob5ircpevik" path="res://data/audio/ambience/ambience_rainforest.tres" id="20_g7dcs"]
+
+[resource]
+script = ExtResource("1_nw313")
+clips = Array[ExtResource("1_x0dso")]([ExtResource("2_g1k8g"), ExtResource("3_ykssl"), ExtResource("4_p1l5c"), ExtResource("5_g7dcs"), ExtResource("4_cw7wr"), ExtResource("5_374as"), ExtResource("6_mjplr"), ExtResource("7_5g16o"), ExtResource("8_ykssl"), ExtResource("9_cw7wr"), ExtResource("12_6cm5n"), ExtResource("13_exqm0"), ExtResource("14_exqm0"), ExtResource("15_b71d2"), ExtResource("16_4m8v6"), ExtResource("17_owoq2"), ExtResource("18_1ae7c"), ExtResource("19_p1l5c"), ExtResource("20_g7dcs")])
+metadata/_custom_type_script = "uid://ovmtn36802i6"
