@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=101 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -84,6 +84,7 @@
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
 [ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
+[ext_resource type="AudioStream" uid="uid://celbmeo4au546" path="res://assets/sounds/gong.mp3" id="65_2yv6k"]
 [ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://scenes/fx/slash_fx.tscn" id="67_31ki0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
@@ -727,6 +728,7 @@ expand_mode = 3
 
 [node name="DeathUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("57_uygh0")]
 visible = false
+defeat_sfx = ExtResource("65_2yv6k")
 player = NodePath("../..")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]

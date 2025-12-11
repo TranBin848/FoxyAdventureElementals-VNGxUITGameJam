@@ -74,11 +74,6 @@ func _ready() -> void:
 		collected_blade()
 	
 	camera_2d.make_current()
-	
-	walk_sfx_player = AudioStreamPlayer2D.new()
-	walk_sfx_player.stream = walk_sfx
-	add_child.call_deferred(walk_sfx_player)
-	
 
 	Dialogic.timeline_started.connect(_on_dialog_started)
 	Dialogic.timeline_ended.connect(_on_dialog_ended)

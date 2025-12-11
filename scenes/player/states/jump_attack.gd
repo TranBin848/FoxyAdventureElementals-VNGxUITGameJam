@@ -4,7 +4,7 @@ extends PlayerState
 func _enter() -> void:
 	#Change animation to attack
 	obj.change_animation("jump attack")
-	AudioPlayer.play_sound_once(obj.attack_sfx)
+	AudioManager.play_sound("player_attack")
 
 	#Enable collision shape of hit area
 	obj.get_node("Direction/HitArea2D/CollisionShape2D").disabled = false
