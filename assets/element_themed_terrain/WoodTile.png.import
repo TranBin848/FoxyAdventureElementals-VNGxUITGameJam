@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnq40fitqyi7e"
-path="res://.godot/imported/Wood.png-2ffa26a741f7c9067666acfb6528c8e9.ctex"
+uid="uid://cis1f5g6gkekl"
+path="res://.godot/imported/WoodTile.png-fc529432613397f4de8feabc1340cf3e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/element_themed_terrain/Wood.png"
-dest_files=["res://.godot/imported/Wood.png-2ffa26a741f7c9067666acfb6528c8e9.ctex"]
+source_file="res://assets/element_themed_terrain/WoodTile.png"
+dest_files=["res://.godot/imported/WoodTile.png-fc529432613397f4de8feabc1340cf3e.ctex"]
 
 [params]
 
