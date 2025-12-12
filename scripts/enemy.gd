@@ -143,6 +143,7 @@ func _init_hit_area():
 	if has_node("Direction/SpikeHitArea2D"):
 		spike_hit_area = $Direction/SpikeHitArea2D
 		spike_hit_area.damage = spike
+		spike_hit_area.elemental_type = elemental_type
 
 func _init_particle():
 	if has_node("Particles"):
@@ -226,51 +227,74 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	print(elemental_type)
 	print(_damage)
 	print(modified_damage)
-	var is_critical = modified_damage > _damage
+	#var is_critical = modified_damage > _damage
+	var is_critical = (check_element(elemental_type, _elemental_type) == -1)
+	print(is_critical)
 	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
-	# Nếu tấn công không có nguyên tố, dùng damage gốc
-	if attacker_element == 0:
-		return base_damage
+	## Nếu tấn công không có nguyên tố, dùng damage gốc
+	#if attacker_element == 0:
+		#return base_damage
+	#
+	## Định nghĩa quan hệ khắc (lợi thế)
+	## Fire (1) > Earth (2), Earth (2) > Water (3), Water (3) > Fire (1)
+	#var advantage_table = {
+		#1: [5],  # Fire khắc Wood
+		#2: [3],  # Earth khắc Water
+		#3: [1]   # Water khắc Fire
+	#}
+	#
+	## Định nghĩa quan hệ sinh (bị khắc)
+	#var weakness_table = {
+		#1: [3],  # Fire bị Water khắc
+		#5: [1],  # Wood bị Fire khắc
+		#3: [2]   # Water bị Earth khắc
+	#}
+	#
+	## Kiểm tra lợi thế (tấn công khắc phòng thủ)
+	#if attacker_element in advantage_table and elemental_type in advantage_table[attacker_element]:
+		#return base_damage * 1.25  # +25% damage
+	#
+	## Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)
+	#if attacker_element in weakness_table and elemental_type in weakness_table[attacker_element]:
+		#return base_damage * 0.75  # -25% damage
 	
-	# Định nghĩa quan hệ khắc (lợi thế)
-	# Fire (1) > Earth (2), Earth (2) > Water (3), Water (3) > Fire (1)
-	var advantage_table = {
-		1: [5],  # Fire khắc Wood
-		2: [3],  # Earth khắc Water
-		3: [1]   # Water khắc Fire
-	}
-	
-	# Định nghĩa quan hệ sinh (bị khắc)
-	var weakness_table = {
-		1: [3],  # Fire bị Water khắc
-		5: [1],  # Wood bị Fire khắc
-		3: [2]   # Water bị Earth khắc
-	}
-	
-	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
-	if attacker_element in advantage_table and elemental_type in advantage_table[attacker_element]:
-		return base_damage * 1.25  # +25% damage
-	
-	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)
-	if attacker_element in weakness_table and elemental_type in weakness_table[attacker_element]:
-		return base_damage * 0.75  # -25% damage
+	var check_element = check_element(elemental_type, attacker_element)
+	match check_element:
+		# Bị khắc
+		-1: return base_damage * 1.25
+		# Không sinh khắc
+		0: return base_damage
+		# Khắc nguyên tố đối thủ
+		1: return base_damage * 0.75
 	
 	return base_damage
 
-func handle_elemental_damage(elemental_type: int) -> void:
-	match elemental_type:
-		0:  # None
-			pass
-		1:  # Fire - burn status
-			apply_fire_effect()
-		2:  # Earth - slow status
-			apply_earth_effect()
-		3:  # Water - freeze status
-			apply_water_effect()
+# 0: Không sinh khắc, 1: khắc, -1: bị khắc
+func check_element(elemental_type_1: int, elemental_type_2: int) -> int:
+	# Kiểm tra khắc
+	if (elemental_type_1 in advantage_table and elemental_type_2 in advantage_table[elemental_type_1]):
+		return 1
+	# Kiểm tra bị khắc
+	if (elemental_type_2 in advantage_table and elemental_type_1 in advantage_table[elemental_type_2]):
+		return -1
+	# Không sinh khắc
+	return 0
+
+func handle_elemental_damage(attacker_element: int) -> void:
+	if check_element(attacker_element, elemental_type) == 1:
+		match attacker_element:
+			0:  # None
+				pass
+			1:  # Fire - burn status
+				apply_fire_effect()
+			2:  # Earth - slow status
+				apply_earth_effect()
+			3:  # Water - freeze status
+				apply_water_effect()
 
 func apply_fire_effect() -> void:
 	# Có thể thêm hiệu ứng lửa (burn status, animation, etc)

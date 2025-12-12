@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://dos8jgdamucqc"]
+[gd_scene load_steps=43 format=4 uid="uid://dos8jgdamucqc"]
 
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_ihf7f"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="2_u14bh"]
@@ -26,14 +26,15 @@
 [ext_resource type="Texture2D" uid="uid://dt1od2hyke60g" path="res://assets/island/back_palm_trees/back_palm_tree_regular_02.png" id="24_svi4d"]
 [ext_resource type="Texture2D" uid="uid://frimagh5yfit" path="res://assets/island/back_palm_trees/back_palm_tree_regular_03.png" id="25_26871"]
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="26_tyiai"]
-[ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="27_rbsa4"]
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="28_oi0ud"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="29_tyosl"]
-[ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="30_qi78p"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="31_cw110"]
-[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://Scenes/enemies/spawner/spawner.tscn" id="32_u14bh"]
-[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://Scenes/enemies/minions/mushroom/mushroom.tscn" id="33_mcrro"]
+[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://Scenes/enemies/spawner/spawner.tscn" id="31_lij6g"]
+[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://Scenes/enemies/minions/mushroom/mushroom.tscn" id="32_a3442"]
+[ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://Scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="33_a3442"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="34_lij6g"]
+[ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://Scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="35_a3442"]
+[ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://Scenes/enemies/minions/starfish/starfish.tscn" id="36_iyi8e"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
 script/source = "extends Node2D
@@ -269,33 +270,28 @@ sprite_frames = SubResource("SpriteFrames_et5yk")
 autoplay = "default"
 frame_progress = 0.914773
 
-[node name="InteractablePlatform2" type="Node2D" parent="."]
-position = Vector2(609, 218)
-
-[node name="Path" parent="InteractablePlatform2" instance=ExtResource("27_rbsa4")]
-
 [node name="Boulder" parent="." instance=ExtResource("28_oi0ud")]
 position = Vector2(88, 230)
 
 [node name="Spike" parent="." instance=ExtResource("29_tyosl")]
 position = Vector2(180, 237)
 
-[node name="Saw" type="Node2D" parent="."]
-position = Vector2(777, 166)
-
-[node name="Path" parent="Saw" instance=ExtResource("30_qi78p")]
+[node name="Spawner" parent="." instance=ExtResource("31_lij6g")]
+position = Vector2(1293, 68)
+enemy_to_spawn = Array[PackedScene]([ExtResource("32_a3442"), ExtResource("33_a3442")])
+elemental_type = 1
 
 [node name="Platform" type="Node2D" parent="."]
 
 [node name="Platform2" parent="Platform" instance=ExtResource("31_cw110")]
-position = Vector2(1024, 150)
-
-[node name="Spawner" parent="." instance=ExtResource("32_u14bh")]
-position = Vector2(463, 157)
-enemy_to_spawn = ExtResource("33_mcrro")
-spawn_interval = 5.0
-max_health = 100
-elemental_type = 4
+position = Vector2(601, 119)
 
 [node name="BladeCollectable" parent="." instance=ExtResource("34_lij6g")]
 position = Vector2(516, 235)
+
+[node name="SpearWarrior" parent="." instance=ExtResource("35_a3442")]
+position = Vector2(1251, 100)
+max_health = 50
+
+[node name="Starfish" parent="." instance=ExtResource("36_iyi8e")]
+position = Vector2(691, 226)

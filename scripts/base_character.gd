@@ -22,6 +22,13 @@ signal health_changed
 signal died
 signal mana_changed
 
+# Quản lý sinh / khắc
+@export var advantage_table = {
+	1: [5],  # Fire khắc Wood
+	2: [3],  # Earth khắc Water
+	3: [1]   # Water khắc Fire
+}
+
 
 @export var skill_to_drop: Script = null      
 @export var skill_icon_path: String = ""      

@@ -1,6 +1,6 @@
 extends EnemyCharacter
 
-@export var enemy_to_spawn: PackedScene
+@export var enemy_to_spawn: Array[PackedScene]
 @export var enemy_per_spawn: int = 1
 @export var spawn_interval: float = 3.0
 @export var spawn_min_distance: float = 2
@@ -31,7 +31,7 @@ func _init_animated_sprite() -> void:
 	pass
 
 func spawn_enemy() -> bool:
-	if enemy_to_spawn == null: 
+	if enemy_to_spawn == null or enemy_to_spawn.size() == 0: 
 		print("Please assign an enemy for the spawner")
 		return true
 	if health <= 0: return false
@@ -42,7 +42,8 @@ func spawn_enemy() -> bool:
 		if random_side == 0:
 			random_distance = randf_range(-spawn_max_distance, -spawn_min_distance)
 		else: random_distance = randf_range(spawn_min_distance, spawn_max_distance)
-		var enemy = enemy_to_spawn.instantiate()
+		var random_index: int = randi_range(0, enemy_to_spawn.size() - 1)
+		var enemy = enemy_to_spawn[random_index].instantiate()
 		get_tree().root.add_child(enemy)
 		if enemy is EnemyCharacter: 
 			(enemy as EnemyCharacter).position.x = position.x + random_distance
