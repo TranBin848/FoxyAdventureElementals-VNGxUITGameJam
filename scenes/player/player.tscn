@@ -515,7 +515,6 @@ zoom = Vector2(2, 2)
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="SilhouetteSprite2D" type="AnimatedSprite2D" parent="Direction"]
-light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_ahqnk")
 position = Vector2(0, -15)
@@ -524,7 +523,6 @@ animation = &"attack"
 
 [node name="SilhouetteBladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
-light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_vb1ce")
 position = Vector2(0, -15)
@@ -534,7 +532,6 @@ autoplay = "idle"
 
 [node name="SilhouetteWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
-light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_ej2d6")
 position = Vector2(0, -15)
@@ -544,7 +541,6 @@ autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
-light_mask = 0
 material = SubResource("ShaderMaterial_am21h")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
@@ -552,7 +548,6 @@ animation = &"attack"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
-light_mask = 0
 material = SubResource("ShaderMaterial_1scxs")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
@@ -563,7 +558,6 @@ frame_progress = 1.0
 
 [node name="WandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
-light_mask = 0
 material = SubResource("ShaderMaterial_4b1ex")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_0y4ya")
