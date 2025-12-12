@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=96 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -6,7 +6,6 @@
 [ext_resource type="Shader" uid="uid://hxfbyuvi3j8m" path="res://shaders/player_shader/silhouetter.gdshader" id="2_ahqnk"]
 [ext_resource type="Texture2D" uid="uid://bkabwrpxdc7cc" path="res://assets/foxy/fox_hat_blade/fox_atk_2.png" id="3_j4nxn"]
 [ext_resource type="Texture2D" uid="uid://byd3g4nnxwfcq" path="res://assets/foxy/fox_hat_blade/fox_atk_3.png" id="4_28m0y"]
-[ext_resource type="Script" uid="uid://bi602yodcmwe0" path="res://scenes/player/camera_2d_test.gd" id="7_31ki0"]
 [ext_resource type="Texture2D" uid="uid://m4di78taixns" path="res://assets/foxy/fox_hat/fox_defeat_1.png" id="8_4b1ex"]
 [ext_resource type="Texture2D" uid="uid://b6jgthsrynctr" path="res://assets/foxy/fox_hat/fox_defeat_2.png" id="9_v8cnd"]
 [ext_resource type="Texture2D" uid="uid://fii540ugfj5n" path="res://assets/foxy/fox_hat/fox_defeat_3.png" id="10_wuxn4"]
@@ -72,23 +71,16 @@
 [ext_resource type="Texture2D" uid="uid://bmp31uas81s76" path="res://assets/foxy/fox_hat_wand/fox_idle_1.png" id="52_31ki0"]
 [ext_resource type="Texture2D" uid="uid://cnv7qbobh8kv3" path="res://assets/foxy/fox_hat_wand/fox_idle_2.png" id="53_hf5gj"]
 [ext_resource type="Texture2D" uid="uid://b1graa382sjmt" path="res://assets/foxy/fox_hat_wand/fox_jump_1.png" id="54_avmva"]
-[ext_resource type="Script" uid="uid://cxnby176o2lfo" path="res://scenes/ui/heart_container.gd" id="54_ln3h3"]
 [ext_resource type="Script" uid="uid://bj844sdvrx8tj" path="res://scenes/player/states/wallcling.gd" id="54_t1aof"]
 [ext_resource type="Texture2D" uid="uid://csjbkp3ft1g0w" path="res://assets/foxy/fox_hat_wand/fox_walk_1.png" id="55_0ioy2"]
 [ext_resource type="Texture2D" uid="uid://cq40il32pklvp" path="res://assets/ui/Hearts/PNG/basic/heart.png" id="55_uygh0"]
 [ext_resource type="Script" uid="uid://c0cdtrjscwk6k" path="res://scenes/player/states/wall_jump.gd" id="55_w8qe1"]
 [ext_resource type="Script" uid="uid://df4tai7suuyna" path="res://scenes/player/states/dash.gd" id="56_hdvrm"]
-[ext_resource type="Texture2D" uid="uid://dacc2rubl3io4" path="res://assets/ui/Hearts/PNG/basic/background.png" id="56_t1aof"]
 [ext_resource type="Texture2D" uid="uid://tsq6bto77a2v" path="res://assets/foxy/fox_hat_wand/fox_walk_2.png" id="56_vlhku"]
 [ext_resource type="PackedScene" uid="uid://cpadeikbdhgul" path="res://scenes/ui/death_ui.tscn" id="57_uygh0"]
 [ext_resource type="Texture2D" uid="uid://bqykhn7xwriyi" path="res://assets/foxy/fox_hat_wand/fox_walk_3.png" id="57_ws0t6"]
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
-[ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
 [ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://scenes/fx/slash_fx.tscn" id="67_31ki0"]
-[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="91_pq1ih"]
-[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="93_hf5gj"]
-[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="94_avmva"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -504,6 +496,7 @@ radius = 7.0
 height = 28.0
 
 [node name="Player" type="CharacterBody2D"]
+light_mask = 0
 collision_layer = 2
 collision_mask = 9
 safe_margin = 0.1
@@ -522,6 +515,7 @@ zoom = Vector2(2, 2)
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="SilhouetteSprite2D" type="AnimatedSprite2D" parent="Direction"]
+light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_ahqnk")
 position = Vector2(0, -15)
@@ -530,6 +524,7 @@ animation = &"attack"
 
 [node name="SilhouetteBladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_vb1ce")
 position = Vector2(0, -15)
@@ -539,6 +534,7 @@ autoplay = "idle"
 
 [node name="SilhouetteWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_ej2d6")
 position = Vector2(0, -15)
@@ -548,6 +544,7 @@ autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 material = SubResource("ShaderMaterial_am21h")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
@@ -555,6 +552,7 @@ animation = &"attack"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 material = SubResource("ShaderMaterial_1scxs")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
@@ -565,6 +563,7 @@ frame_progress = 1.0
 
 [node name="WandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 material = SubResource("ShaderMaterial_4b1ex")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_0y4ya")
@@ -712,36 +711,9 @@ script = ExtResource("56_hdvrm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
-visible = false
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 70.0
-grow_horizontal = 2
-mouse_filter = 2
-script = ExtResource("54_ln3h3")
-player = NodePath("../..")
-heart_full = ExtResource("55_uygh0")
-heart_empty = ExtResource("56_t1aof")
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HeartContainer"]
-layout_mode = 2
-texture = ExtResource("55_uygh0")
-expand_mode = 3
-
 [node name="DeathUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("57_uygh0")]
 visible = false
 player = NodePath("../..")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-theme = ExtResource("63_gmu8b")
-
-[node name="icon_and_health" parent="CanvasLayer/MarginContainer" node_paths=PackedStringArray("player") instance=ExtResource("63_7072n")]
-layout_mode = 2
-player = NodePath("../../..")
 
 [node name="debuglabel" type="Label" parent="."]
 offset_left = -25.0

@@ -13,7 +13,7 @@ func _update(_delta: float):
 	#player is not allowed to perform action at the 
 	#start of wall jump
 	if update_timer(_delta):
-		change_state(fsm.states.jump)
+		change_state(fsm.states.fall)
 	
 	control_dash()
 	

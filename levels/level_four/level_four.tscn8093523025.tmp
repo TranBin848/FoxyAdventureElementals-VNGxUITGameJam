@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_4/level_4.gd" id="1_n8468"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
 [ext_resource type="TileSet" uid="uid://bui3wquutm1yg" path="res://levels/level_four/level_four.tres" id="3_rjkgb"]
-[ext_resource type="Script" uid="uid://cf2qpoi4sp7fg" path="res://levels/level_four/light_source.gd" id="3_t21h0"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="4_0odlo"]
 [ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/sea_horse.tscn" id="7_5mfhe"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="8_f8hbo"]
@@ -15,12 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://bm7glj3finew5" path="res://assets/terrain_plus/background4a.png" id="16_s6hm0"]
 [ext_resource type="Texture2D" uid="uid://ch2rf6wnkg6el" path="res://assets/terrain_plus/background4b.png" id="17_t21h0"]
 [ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="20_87ux8"]
-[ext_resource type="PackedScene" uid="uid://dqljb5wlfa6ao" path="res://scenes/ui/occluded_vision_view.tscn" id="21_s6hm0"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="22_0odlo"]
 [ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="23_iqjrd"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="24_rjkgb"]
 [ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="25_iqjrd"]
-[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="28_t21h0"]
+[ext_resource type="Shader" uid="uid://doa0n2dv713b8" path="res://levels/level_four/level_four.gdshader" id="26_rjkgb"]
+[ext_resource type="Script" uid="uid://b4g64pqqkelde" path="res://levels/level_four/occluded_vision_controller.gd" id="27_s6hm0"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="28_w8t0s"]
 [ext_resource type="PackedScene" uid="uid://bh4o4646vlfjr" path="res://levels/objects/wand_collectable.tscn" id="41_ltskv"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="42_3fy2r"]
@@ -56,6 +55,12 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s6hm0"]
+shader = ExtResource("26_rjkgb")
+shader_parameter/player_uv = Vector2(0, 0)
+shader_parameter/ratio = 0.0
+shader_parameter/radius = 0.2
+
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_n8468")
 
@@ -63,7 +68,7 @@ script = ExtResource("1_n8468")
 position = Vector2(1006, 1068)
 max_health = 1000
 
-[node name="PointLight2D" type="PointLight2D" parent="Player" groups=["light_source"]]
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
 position = Vector2(0, -8)
 color = Color(1, 1, 0.901961, 1)
 energy = 2.0
@@ -72,7 +77,6 @@ shadow_filter = 2
 shadow_filter_smooth = 2.0
 texture = SubResource("GradientTexture2D_rjkgb")
 texture_scale = 8.0
-script = ExtResource("3_t21h0")
 
 [node name="TileMap" type="TileMapLayer" parent="."]
 self_modulate = Color(0.65834, 0.65834, 0.65834, 1)
@@ -225,8 +229,6 @@ texture = ExtResource("16_s6hm0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="OccludedVisionView" parent="CanvasLayer" instance=ExtResource("21_s6hm0")]
-
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -274,4 +276,13 @@ offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("28_t21h0")]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+material = SubResource("ShaderMaterial_s6hm0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("27_s6hm0")
+player = NodePath("../../Player")

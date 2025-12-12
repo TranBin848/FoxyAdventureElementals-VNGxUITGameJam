@@ -740,11 +740,12 @@ func dash() -> void:
 func _input(event):
 	if event.is_action_pressed("ui_skilltree"):
 		var root = skill_tree_ui.get_node("ColorRect/SkillTreeRoot")
-		var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/SkillCamera2D")
-		get_tree().paused = !get_tree().paused 
+		var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/SubViewportContainer/SubViewport/SkillCamera2D")
+		get_tree().paused = !get_tree().paused
 		if (skill_tree_ui.visible == false):
 			skill_tree_ui.visible = true
 			if not root:
+				print("oke")
 				return
 			
 			_show_skill_tree_layers(root)
@@ -755,6 +756,8 @@ func _input(event):
 				skill_camera.make_current()
 				#skill_camera.enabled = true
 				print("📷 Đã chuyển sang camera UI SkillTree.")
+			else:
+				print("No Cam")
 
 			print("🌳 Skill Tree opened.")
 		else:
@@ -770,6 +773,7 @@ func _input(event):
 					print("📷 Đã trả lại camera cho player.")
 
 			print("🌳 Skill Tree closed.")
+		print("input")
 		
 
 func _show_skill_tree_layers(root: Node):
