@@ -1,6 +1,7 @@
 extends Node
 
 var table := {} # { "Fireball": { "stack": 2, "level": 1 } }
+var skillbar:= []
 
 func add_stack(skill_name: String, amount: int):
 	if not table.has(skill_name):
@@ -33,10 +34,14 @@ func get_level(skill_name: String) -> int:
 func save_data() -> Dictionary:
 	return table.duplicate(true)
 
-func load_data(data: Dictionary) -> void:
+func load_data(data: Dictionary, skillbardata: Array = []) -> void:
 	table = data.duplicate(true)
+	skillbar = skillbardata.duplicate(true)
 	emit_signal("stack_changed", "", -1)
 	emit_signal("level_changed", "", -1)
+
+func get_skill_bar_data() -> Array:
+	return skillbar
 
 signal stack_changed(skill_name, new_value)
 signal level_changed(skill_name, new_level)

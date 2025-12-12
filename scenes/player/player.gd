@@ -109,10 +109,11 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 				
 				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
 				elif skill_current_stack > 1:
+					SkillStackManager.remove_stack(skill_to_use.name, 1)
 					# Cập nhật UI ngay lập tức (giữ nguyên)
 					slot.update_stack_ui()
 				
-				SkillStackManager.remove_stack(skill_to_use.name, 1)
+				
 				
 				return # Thoát sau khi xử lý Stack
 

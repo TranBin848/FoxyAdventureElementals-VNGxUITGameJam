@@ -1,13 +1,15 @@
 extends HBoxContainer
+class_name SkillBar
 
 var slots: Array
-var skills: Array = [HealOverTime]
+var skills: Array = []
 var available_skills: Array = []
 
 func _ready() -> void:
+	#refresh_from_stack()
 	slots = get_children()
-
-	refresh_from_stack()
+	
+	load_data(SkillStackManager.get_skill_bar_data())
 	
 	var player = get_tree().get_first_node_in_group("player")
 	for i in get_child_count():
@@ -81,3 +83,34 @@ func refresh_from_stack() -> void:
 
 			slots[index].disabled = false
 			index += 1
+
+####SAVE LOAD SYSTEM
+func save_data() -> Array:
+	var result := []
+	for slot in slots:
+		if slot.skill:
+			result.append(slot.skill.name) # lưu theo tên skill
+		else:
+			result.append(null)
+	return result
+	
+func load_data(data: Array) -> void:
+	slots = get_children()
+	if data.size() != slots.size():
+		return
+
+	for i in range(slots.size()):
+		var skill_name = data[i]
+		if skill_name == null:
+			continue
+
+		# load skill instance
+		var db = SkillDatabase.new()
+		var skill_script = db.get_skill_by_name(skill_name)
+		if skill_script:
+			var instance = skill_script.new()
+			slots[i].skill = instance
+			slots[i].skill.apply_to_button(slots[i])
+			slots[i].disabled = false
+			slots[i].time_label.text = ""
+			slots[i].set_process(false)

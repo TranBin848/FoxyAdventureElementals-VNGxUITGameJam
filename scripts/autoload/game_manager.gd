@@ -4,6 +4,7 @@ extends Node
 var target_portal_name: String = ""
 var current_stage: Node = null
 var player: Player = null
+var skill_bar: SkillBar = null
 
 # --- Checkpoint system ---
 var current_checkpoint_id: String = ""
@@ -23,7 +24,7 @@ var logger: Logger = ConsoleLogger.new()
 
 func _ready() -> void:
 	# Load checkpoint khi mở game
-	#load_checkpoint_data()
+	load_checkpoint_data()
 	# Theo dõi thay đổi scene để tự khôi phục trạng thái
 	get_tree().connect("current_scene_changed", Callable(self, "_on_scene_changed"))
 	
@@ -35,6 +36,7 @@ func _ready() -> void:
 func _on_scene_changed() -> void:
 	current_stage = get_tree().current_scene
 	player = current_stage.find_child("Player", true, false)
+	skill_bar = current_stage.find_child("SkillBar", true, false)
 	
 	if not player:
 		print("⚠️ Không tìm thấy Player trong scene mới.")
@@ -54,8 +56,8 @@ func _on_scene_changed() -> void:
 			print("👜 Inventory đã được khôi phục từ checkpoint")
 		
 		if checkpoint_info.has("skill_stack"):
-			SkillStackManager.load_data(checkpoint_info["skill_stack"])
-			print("✨ Skill stack đã được khôi phục: ", checkpoint_info["skill_stack"])
+			SkillStackManager.load_data(checkpoint_info["skill_stack"], checkpoint_info["skill_bar"])
+			print("✨ Skill stack đã được khôi phục: ", checkpoint_info["skill_stack"], checkpoint_info["skill_bar"])
 		
 		if player.has_blade:
 			player.collected_blade()
@@ -109,6 +111,10 @@ func save_checkpoint(checkpoint_id: String) -> void:
 		"inventory_data": inventory_data,
 	}
 	
+	var skillbarroot = current_stage.find_child("SkillBarUI", true, false)
+	var skill_bar = skillbarroot.get_node("MarginContainer/SkillBar")
+	var skill_bar_data = skill_bar.save_data() if skill_bar else []
+	
 	print("✅ Checkpoint saved:", checkpoint_id)
 	
 	# Ghi xuống file thật
@@ -117,6 +123,7 @@ func save_checkpoint(checkpoint_id: String) -> void:
 		checkpoint_data[checkpoint_id],
 		current_stage.scene_file_path,
 		SkillStackManager.save_data(),
+		skill_bar_data
 	)
 
 
@@ -178,7 +185,9 @@ func load_checkpoint_data() -> void:
 	var skill_stack = save_data.get("skill_stack", {})
 	var stage_path = save_data.get("stage_path", "")
 	var inventory_data = save_data.get("inventory_data", {})
-
+	var skill_bar_data = save_data.get("skill_bar", [])	
+	print(skill_bar_data)
+	
 	if not current_checkpoint_id.is_empty():
 		checkpoint_data[current_checkpoint_id] = player_data
 
@@ -193,7 +202,13 @@ func load_checkpoint_data() -> void:
 			inventory_system.load_data(inventory_data)
 			print("👜 Inventory loaded from save_data")
 		
-		SkillStackManager.load_data(skill_stack)
+		SkillStackManager.load_data(skill_stack, skill_bar_data)
+		
+		#if skill_bar_data.size() > 0:
+			#var skillbarroot = current_stage.find_child("SkillBarUI", true, false)
+			#var skill_bar = skillbarroot.get_node("MarginContainer/SkillBar")
+			#if skill_bar:
+				#skill_bar.load_data(skill_bar_data)
 		
 	else:
 		print("✅ Checkpoint data loaded, but no active checkpoint.")
