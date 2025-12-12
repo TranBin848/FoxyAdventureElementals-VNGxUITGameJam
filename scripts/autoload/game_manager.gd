@@ -48,6 +48,7 @@ func _on_scene_changed() -> void:
 		var checkpoint_info = checkpoint_data[current_checkpoint_id]
 		player.health = checkpoint_info.get("health", player.max_health)
 		player.has_blade = checkpoint_info.get("has_blade", false)
+		player.has_wand = checkpoint_info.get("has_wand", false)
 		player.load_state(checkpoint_info.get("player_state", {}))
 
 		# Khôi phục inventory nếu có
@@ -61,7 +62,8 @@ func _on_scene_changed() -> void:
 		
 		if player.has_blade:
 			player.collected_blade()
-
+	
+		
 		print("✅ Player đã được khôi phục từ checkpoint:", current_checkpoint_id)
 	else:
 		print("ℹ️ Không có dữ liệu checkpoint cho scene này.")
@@ -108,6 +110,7 @@ func save_checkpoint(checkpoint_id: String) -> void:
 		"player_state": player_state_dict,
 		"health": player.health,
 		"has_blade": player.has_blade,
+		"has_wand": player.has_wand,
 		"inventory_data": inventory_data,
 	}
 	
@@ -154,6 +157,7 @@ func respawn_at_checkpoint() -> void:
 		player.load_state(checkpoint_info.get("player_state", {}))
 		player.health = checkpoint_info.get("health", player.max_health)
 		player.has_blade = checkpoint_info.get("has_blade", false)
+		player.has_wand = checkpoint_info.get("has_wand", false)
 		
 		# Khôi phục inventory
 		if checkpoint_info.has("inventory_data") and inventory_system:

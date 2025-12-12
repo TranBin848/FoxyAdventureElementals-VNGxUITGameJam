@@ -237,7 +237,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 		return base_damage
 	
 	# Định nghĩa quan hệ khắc (lợi thế)
-	# Fire (1) > Earth (2), Earth (2) > Water (3), Water (3) > Fire (1)
+	# Fire (1) > Earth (2), Water (2) > Water (3), Water (3) > Fire (1)
 	var advantage_table = {
 		1: [5],  # Fire khắc Wood
 		2: [3],  # Earth khắc Water
