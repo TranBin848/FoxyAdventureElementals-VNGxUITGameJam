@@ -3,6 +3,7 @@ extends BaseCharacter
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var skill_tree_ui: CanvasLayer = $SkillTreeUI
 
+#Invulnerable Logic Parameters
 @export var invulnerable_duration: float = 2
 var is_invulnerable: bool = false
 var invulnerable_timer: float = 0
@@ -10,11 +11,16 @@ const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
 var saved_collision_layer: int
 
+#Attack Logic Parameter
+@export var atk_cd: float = 1 #Time between attack
+var is_able_attack: bool = true 
+
 @export var has_blade: bool = false
 @export var has_wand: bool = true
 var is_equipped_blade: bool = false    #Đang cầm Blade?
 var is_equipped_wand: bool = false     # Đang cầm Wand?
 signal weapon_swapped(equipped_weapon_type: String)
+
 
 var blade_hit_area: Area2D
 @export var blade_throw_speed: float = 300
@@ -24,6 +30,7 @@ var blade_hit_area: Area2D
 @onready var jump_fx_factory: Node2DFactory = $Direction/JumpFXFactory
 @onready var skill_factory: Node2DFactory = $Direction/SkillFactory
 @onready var hurt_particle: CPUParticles2D = $Direction/HurtFXFactory
+@onready var slash_fx_factory: Node2DFactory = $Direction/SlashFXFactory
 
 @onready var hurt_area: HurtArea2D = $Direction/HurtArea2D
 
@@ -40,13 +47,15 @@ var blade_hit_area: Area2D
 var last_dir: float = 0.0
 @export var wall_slide_speed: float = 50.0
 @export var max_fall_speed: float = 100.0
+var can_move: bool = true
 
+#dash
 @export var dash_speed_mul: float = 5.0
 @export var dash_dist: float = 200.0
-@export var is_dashing: bool = false
 @export var dash_cd: float = 5.0
+var is_dashing: bool = false
 var can_dash: bool = true
-var can_move: bool = true
+
 
 #Debug
 @onready var debuglabel: Label = $debuglabel
@@ -67,7 +76,7 @@ func _ready() -> void:
 		collected_blade()
 	
 	camera_2d.make_current()
-	
+
 	Dialogic.timeline_started.connect(_on_dialog_started)
 	Dialogic.timeline_ended.connect(_on_dialog_ended)
 	
@@ -389,8 +398,19 @@ func invulnerable_flicker(delta) -> void:
 		flicker_timer = 0.0
 		animated_sprite.modulate.a = 1/(animated_sprite.modulate.a/(0.4*0.7))
 
+func start_atk_cd() -> void:
+	is_able_attack = false
+	await get_tree().create_timer(atk_cd).timeout
+	is_able_attack = true
+
 func can_attack() -> bool:
-	return is_equipped_blade or is_equipped_wand
+	if not is_able_attack:
+		return false
+	
+	if not (is_equipped_blade or is_equipped_wand):
+		return false
+	
+	return true
 
 func can_throw() -> bool:
 	return has_blade && is_equipped_blade
@@ -584,7 +604,6 @@ func throw_blade() -> void:
 		return
 	var blade = blade_factory.create() as RigidBody2D
 	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
-	blade.direction = direction
 	blade.apply_impulse(throw_velocity)
 	throwed_blade()
 	
@@ -686,6 +705,7 @@ func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	# 2. Thêm sprite silhouette MỚI và hiện nó
 	extra_sprites.append(new_silhouette)
 	new_silhouette.show()
+
 func _update_movement(delta: float) -> void:
 	if not can_move:
 		velocity = Vector2.ZERO
@@ -732,6 +752,8 @@ func _input(event):
 				skill_camera.make_current()
 				#skill_camera.enabled = true
 				print("📷 Đã chuyển sang camera UI SkillTree.")
+			else:
+				print("No Cam")
 
 			print("🌳 Skill Tree opened.")
 		else:	
@@ -747,6 +769,7 @@ func _input(event):
 					print("📷 Đã trả lại camera cho player.")
 
 			print("🌳 Skill Tree closed.")
+		print("input")
 		
 
 func _show_skill_tree_layers(root: Node):

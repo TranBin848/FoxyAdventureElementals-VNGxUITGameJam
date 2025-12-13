@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform int elemental_type : hint_range(0, 3) = 0;
 uniform vec2 border_threshold = vec2(0.01, 0.01);
