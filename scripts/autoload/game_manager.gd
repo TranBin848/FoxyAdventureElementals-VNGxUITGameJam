@@ -38,6 +38,7 @@ func _on_scene_changed() -> void:
 	player = current_stage.find_child("Player", true, false)
 	skill_bar = current_stage.find_child("SkillBar", true, false)
 	
+	
 	if not player:
 		print("⚠️ Không tìm thấy Player trong scene mới.")
 		return
