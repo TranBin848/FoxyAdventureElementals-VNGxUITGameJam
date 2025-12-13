@@ -93,7 +93,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.0
+shader_parameter/y_zoom = 0.751315
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -161,41 +161,38 @@ hoithoai = "guide_elemental"
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("10_xsvho")]
 position = Vector2(631, 151)
-elemental_type = 2
+elemental_type = 3
 skill_to_drop = ExtResource("11_u7q62")
 skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("10_xsvho")]
 position = Vector2(2165, -489)
-elemental_type = 5
 skill_to_drop = ExtResource("12_033ub")
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
 position = Vector2(3097, -107)
 scale = Vector2(1.02679, 0.975904)
-elemental_type = 2
+elemental_type = 3
 skill_to_drop = ExtResource("11_u7q62")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
 position = Vector2(3017, 173)
-elemental_type = 2
 skill_to_drop = ExtResource("13_uptk2")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(1721, -400)
-elemental_type = 5
+elemental_type = 2
 skill_to_drop = ExtResource("15_2t2ib")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(2823, -364)
-elemental_type = 5
 skill_to_drop = ExtResource("12_033ub")
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(2624, -364)
-elemental_type = 5
+elemental_type = 2
 skill_to_drop = ExtResource("15_2t2ib")
 
 [node name="Boat" parent="." instance=ExtResource("16_plcgd")]
@@ -355,22 +352,6 @@ guide_text = "F to interact"
 [node name="GuideTrigger6" parent="." instance=ExtResource("31_dy5lu")]
 position = Vector2(3631, 9)
 guide_text = "F to interact"
-
-[node name="GuideTrigger7" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(-881, 418)
-guide_text = "Checkpoint saved"
-
-[node name="GuideTrigger8" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(1699, 123)
-guide_text = "Checkpoint saved"
-
-[node name="GuideTrigger9" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(2446, -356)
-guide_text = "Checkpoint saved"
-
-[node name="GuideTrigger10" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(4401, -426)
-guide_text = "Checkpoint saved"
 
 [node name="Checkpoint1" parent="." instance=ExtResource("32_g2wda")]
 position = Vector2(-885, 403)

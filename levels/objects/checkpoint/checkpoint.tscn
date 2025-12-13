@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cf4iwith0d7ne"]
+[gd_scene load_steps=14 format=3 uid="uid://cf4iwith0d7ne"]
 
 [ext_resource type="Script" uid="uid://bxrl65n7f8v7o" path="res://levels/objects/checkpoint/checkpoint.gd" id="1_4j5vx"]
 [ext_resource type="Texture2D" uid="uid://su1n1v38j582" path="res://assets/island/objects/ship_helm/ship_helm_turn_01.png" id="1_asopd"]
 [ext_resource type="Texture2D" uid="uid://dijnwuyponiw8" path="res://assets/island/objects/ship_helm/ship_helm_turn_02.png" id="2_4j5vx"]
-[ext_resource type="AudioStream" uid="uid://cgy3knqajl7xu" path="res://assets/sounds/Big Egg collect 1.wav" id="2_rvv5d"]
 [ext_resource type="Texture2D" uid="uid://bjxj1x8l1ied6" path="res://assets/island/objects/ship_helm/ship_helm_turn_03.png" id="3_rvv5d"]
 [ext_resource type="Texture2D" uid="uid://d1gwlvjdltjsy" path="res://assets/island/objects/ship_helm/ship_helm_turn_04.png" id="4_1k53v"]
 [ext_resource type="Texture2D" uid="uid://dwm2wacw065mq" path="res://assets/island/objects/ship_helm/ship_helm_idle_01.png" id="5_agtsq"]
@@ -62,7 +61,6 @@ animations = [{
 [node name="Checkpoint" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_4j5vx")
-activate_sfx = ExtResource("2_rvv5d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 1)
@@ -73,5 +71,18 @@ sprite_frames = SubResource("SpriteFrames_4jqng")
 animation = &"active"
 autoplay = "idle"
 frame_progress = 0.921037
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -40.0
+offset_right = 82.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Checkpoint activated"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
