@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="BTL_Godot"
+config/name="MajorProject"
 run/main_scene="uid://wopr13pq4dnf"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=36 format=3 uid="uid://bm5rl67k65q3o"]
+[gd_resource type="TileSet" load_steps=42 format=3 uid="uid://bm5rl67k65q3o"]
 
 [ext_resource type="Texture2D" uid="uid://cis1f5g6gkekl" path="res://assets/element_themed_terrain/WoodTile.png" id="2_rekh6"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="3_uh2ju"]
@@ -6,10 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="5_3n2dd"]
 [ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="6_xk6vd"]
 [ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/spike.tscn" id="7_lxd22"]
-[ext_resource type="PackedScene" uid="uid://cpkjgg6d8yonu" path="res://scenes/objects/pressure_plate.tscn" id="8_m7mqw"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="9_4xs1m"]
-[ext_resource type="PackedScene" uid="uid://c15o6qkwmcw44" path="res://scenes/objects/wooden_door.tscn" id="10_poqtw"]
-[ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand.tscn" id="11_pct2e"]
+[ext_resource type="PackedScene" uid="uid://c15o6qkwmcw44" path="res://scenes/objects/wooden_door/wooden_door.tscn" id="10_poqtw"]
+[ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="11_pct2e"]
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="12_oeoy3"]
 [ext_resource type="Texture2D" uid="uid://gt1xm70ewpul" path="res://levels/level_4/MyFloorTile1.png" id="13_5e8yb"]
 [ext_resource type="Texture2D" uid="uid://u2air8500ab1" path="res://assets/terrain_plus/Pine Trees.png" id="15_tlj5e"]
@@ -193,11 +192,287 @@ texture_region_size = Vector2i(32, 32)
 2:5/0/terrains_peering_bit/top_left_corner = 6
 2:5/0/terrains_peering_bit/top_side = 6
 
+[sub_resource type="GDScript" id="GDScript_tn3ix"]
+script/source = "extends Node2D
+class_name PressurePlateRoot
+
+# Export parameter để link với door trong editor
+@export var connected_door: WoodenDoorRoot = null
+@export var connected_doors: Array[WoodenDoorRoot] = []
+
+# Get child components
+@onready var area: Area2D = $Area2D
+
+# Internal state
+var is_activated: bool = false
+var bodies_on_plate: Array[Node2D] = []
+
+# Signals
+signal plate_activated
+signal plate_deactivated
+
+func _ready():
+	# Connect Area2D signals from child
+	if area:
+		area.body_entered.connect(_on_body_entered)
+		area.body_exited.connect(_on_body_exited)
+		
+		# Setup collision detection
+		area.monitoring = true
+		area.monitorable = true
+		area.collision_mask = 0b11111111  # Monitor all layers
+	
+	print(\"PressurePlateRoot ready - connected to \", connected_doors.size(), \" doors\")
+	
+	# Validate connected doors
+	if connected_door != null and connected_door not in connected_doors:
+		connected_doors.append(connected_door)
+
+func _on_body_entered(body: Node2D):
+	# Check if it's a valid body (Player, enemies, etc.)
+	if body is Player or body is CharacterBody2D or body.is_in_group(\"activatable\"):
+		if body not in bodies_on_plate:
+			bodies_on_plate.append(body)
+			print(\"Added body to plate: \", body.name)
+			
+		# Activate plate if not already active
+		if not is_activated:
+			_activate_plate()
+
+func _on_body_exited(body: Node2D):
+	print(\"Body exited pressure plate: \", body, \" | Type: \", body.get_class())
+	
+	if body in bodies_on_plate:
+		bodies_on_plate.erase(body)
+		print(\"Removed body from plate: \", body.name)
+		
+		# Deactivate if no bodies left
+		if bodies_on_plate.is_empty() and is_activated:
+			_deactivate_plate()
+
+func _activate_plate():
+	if is_activated:
+		return
+		
+	is_activated = true
+	print(\"Pressure plate ACTIVATED\")
+	
+	# Visual feedback
+	_update_visual()
+	
+	# Open connected doors
+	for door in connected_doors:
+		if is_instance_valid(door):
+			door.open_door()
+	
+	# Emit signal for other systems
+	plate_activated.emit()
+
+func _deactivate_plate():
+	if not is_activated:
+		return
+		
+	is_activated = false
+	print(\"Pressure plate DEACTIVATED\")
+	
+	# Visual feedback
+	_update_visual()
+	
+	# Close connected doors after 3 second delay
+	await get_tree().create_timer(3.0).timeout
+	for door in connected_doors:
+		if is_instance_valid(door):
+			door.close_door()
+	
+	# Emit signal for other systems
+	plate_deactivated.emit()
+
+func _update_visual():
+	# Get AnimatedSprite2D and play animations directly
+	var animated_sprite = $AnimatedSprite2D as AnimatedSprite2D
+	if animated_sprite:
+		if is_activated:
+			animated_sprite.play(\"pressed\")
+		else:
+			animated_sprite.play(\"unpressed\")
+	else:	
+		print(\"AnimatedSprite2D not found at AnimatedSprite2D\")
+
+# Method để manually connect door từ code (nếu cần)
+func connect_door(door: WoodenDoorRoot):
+	if door and door not in connected_doors:
+		connected_doors.append(door)
+		print(\"Connected door: \", door.name)
+
+func disconnect_door(door: WoodenDoorRoot):
+	if door in connected_doors:
+		connected_doors.erase(door)
+		print(\"Disconnected door: \", door.name)
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pyrf2"]
+load_path = "res://.godot/imported/pressure-plate-pressed.png-b612865ef1ecad0da79e0da527e5b6f8.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g4e08"]
+load_path = "res://.godot/imported/pressure-plate.png-19cb5f3be13f6b3fdbb08a6dadb0c029.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ratse"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_pyrf2")
+}],
+"loop": true,
+"name": &"pressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_g4e08")
+}],
+"loop": true,
+"name": &"unpressed",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_0ob0i"]
+script/source = "extends Area2D
+class_name PressurePlate
+
+# Export parameter để link với door trong editor
+@export var connected_door: WoodenDoor = null
+@export var connected_doors: Array[WoodenDoor] = []
+
+# Signals
+signal plate_activated
+signal plate_deactivated
+
+# Internal state
+var is_activated: bool = false
+var bodies_on_plate: Array[Node2D] = []
+
+# Visual feedback
+@onready var sprite: AnimatedSprite2D = $\"../AnimatedSprite2D\"
+
+func _ready():
+	# Connect Area2D signals
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
+	
+	# Setup collision detection
+	monitoring = true
+	monitorable = true
+	collision_mask = 0b11111111  # Monitor all layers
+	
+	print(\"PressurePlate ready - connected to \", connected_doors.size(), \" doors\")
+	
+	# Validate connected doors
+	if connected_door != null and connected_door not in connected_doors:
+		connected_doors.append(connected_door)
+
+func _on_body_entered(body: Node2D):
+	# Check if it's a valid body (Player, enemies, etc.)
+	if body is Player or body is CharacterBody2D or body.is_in_group(\"activatable\"):
+		if body not in bodies_on_plate:
+			bodies_on_plate.append(body)
+			print(\"Added body to plate: \", body.name)
+			
+		# Activate plate if not already active
+		if not is_activated:
+			_activate_plate()
+
+func _on_body_exited(body: Node2D):
+	print(\"Body exited pressure plate: \", body, \" | Type: \", body.get_class())
+	
+	if body in bodies_on_plate:
+		bodies_on_plate.erase(body)
+		print(\"Removed body from plate: \", body.name)
+		
+		# Deactivate if no bodies left
+		if bodies_on_plate.is_empty() and is_activated:
+			_deactivate_plate()
+
+func _activate_plate():
+	if is_activated:
+		return
+		
+	is_activated = true
+	print(\"Pressure plate ACTIVATED\")
+	
+	# Visual feedback
+	_update_visual()
+	
+	# Open connected doors
+	for door in connected_doors:
+		if is_instance_valid(door):
+			door.open_door()
+	
+	# Emit signal for other systems
+	plate_activated.emit()
+
+func _deactivate_plate():
+	if not is_activated:
+		return
+		
+	is_activated = false
+	print(\"Pressure plate DEACTIVATED\")
+	
+	# Visual feedback
+	_update_visual()
+	
+	# Close connected doors after 3 second delay
+	await get_tree().create_timer(3.0).timeout
+	for door in connected_doors:
+		if is_instance_valid(door):
+			door.close_door()
+	
+	# Emit signal for other systems
+	plate_deactivated.emit()
+
+func _update_visual():
+	# Get AnimatedSprite2D using relative path from Area2D
+	var animated_sprite = $AnimatedSprite2D as AnimatedSprite2D
+	if animated_sprite:
+		if is_activated:
+			animated_sprite.play(\"pressed\")
+		else:
+			animated_sprite.play(\"idle\")
+	else:
+		print(\"AnimatedSprite2D not found as child of Area2D\")
+
+# Method để manually connect door từ code (nếu cần)
+func connect_door(door: WoodenDoor):
+	if door and door not in connected_doors:
+		connected_doors.append(door)
+		print(\"Connected door: \", door.name)
+
+func disconnect_door(door: WoodenDoor):
+	if door in connected_doors:
+		connected_doors.erase(door)
+		print(\"Disconnected door: \", door.name)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_017wu"]
+size = Vector2(32, 3)
+
+[sub_resource type="PackedScene" id="PackedScene_mk7g3"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("PressurePlate", "Node2D", "position", "script", "AnimatedSprite2D", "AnimatedSprite2D", "sprite_frames", "animation", "Area2D", "Area2D", "script", "CollisionShape2D", "CollisionShape2D", "position", "shape"),
+"node_count": 4,
+"node_paths": [NodePath("."), NodePath("."), NodePath("./Area2D")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 1073741824, 0, 5, 4, -1, 2, 6, 2, 7, 3, 0, 1073741825, 0, 9, 8, -1, 1, 10, 4, 0, 1073741826, 0, 12, 11, -1, 2, 13, 5, 14, 6, 0),
+"variants": [Vector2(0, 8), SubResource("GDScript_tn3ix"), SubResource("SpriteFrames_ratse"), &"unpressed", SubResource("GDScript_0ob0i"), Vector2(0, 6.5), SubResource("RectangleShape2D_017wu")],
+"version": 3
+}
+
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_n4nvx"]
 resource_name = "object"
 scenes/1/scene = ExtResource("3_uh2ju")
 scenes/2/scene = ExtResource("7_lxd22")
-scenes/3/scene = ExtResource("8_m7mqw")
+scenes/3/scene = SubResource("PackedScene_mk7g3")
 scenes/4/scene = ExtResource("9_4xs1m")
 scenes/6/scene = ExtResource("10_poqtw")
 scenes/7/scene = ExtResource("11_pct2e")
