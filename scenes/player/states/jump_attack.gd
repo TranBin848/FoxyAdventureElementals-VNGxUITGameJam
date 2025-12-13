@@ -13,8 +13,15 @@ func _enter() -> void:
 	var slash_fx = obj.slash_fx_factory.create() as Node2D
 	slash_fx.position = Vector2.ZERO
 	
+	print(obj.animated_sprite.name)
 	await obj.animated_sprite.animation_finished
-	change_state(fsm.previous_state)
+	call_deferred("change_state", fsm.previous_state)
+	#change_state()
+	
+func _process(delta: float) -> void:
+	#stop moving if landed mid jump attack animation
+	if obj.is_on_floor():
+		obj.velocity.x = 0
 
 func _exit() -> void:
 	#Disable collision shape of hit area

@@ -393,6 +393,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("39_ej2d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_fvjb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_bysbl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_2wy34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_ymths")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_3p0jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_7nf13")
+}],
+"loop": false,
+"name": &"jump attack",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("55_0ioy2")
 }, {
 "duration": 1.0,
@@ -551,20 +577,16 @@ visible = false
 material = SubResource("ShaderMaterial_1scxs")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"attack"
+animation = &"jump attack"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
 
 [node name="WandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
 material = SubResource("ShaderMaterial_4b1ex")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_0y4ya")
-animation = &"attack"
+animation = &"jump attack"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.273016
 
 [node name="BladeFactory" type="Marker2D" parent="Direction"]
 position = Vector2(9, -14)

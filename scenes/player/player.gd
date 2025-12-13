@@ -47,13 +47,15 @@ var blade_hit_area: Area2D
 var last_dir: float = 0.0
 @export var wall_slide_speed: float = 50.0
 @export var max_fall_speed: float = 100.0
+var can_move: bool = true
 
+#dash
 @export var dash_speed_mul: float = 5.0
 @export var dash_dist: float = 200.0
-@export var is_dashing: bool = false
 @export var dash_cd: float = 5.0
+var is_dashing: bool = false
 var can_dash: bool = true
-var can_move: bool = true
+
 
 #Debug
 @onready var debuglabel: Label = $debuglabel
