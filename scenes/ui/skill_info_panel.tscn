@@ -69,7 +69,7 @@ offset_bottom = -31.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 theme_override_font_sizes/font_size = 8
-text = "Need 3 stacks"
+text = "Need 10 stacks"
 
 [node name="StackToUnlock" type="Label" parent="."]
 layout_mode = 1
@@ -83,7 +83,7 @@ offset_bottom = -31.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 theme_override_font_sizes/font_size = 8
-text = "Need 3 stacks"
+text = "Need 5 stacks"
 
 [node name="Stack" type="Label" parent="."]
 layout_mode = 1

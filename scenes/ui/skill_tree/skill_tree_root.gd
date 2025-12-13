@@ -1,7 +1,7 @@
 extends Control
 
 @onready var info_panel: SkillInfoPanel = $CanvasLayer_SkillPanel/SkillInfoPanel
-@onready var skill_bar: SkillBar = $CanvasLayer_SkillPanel/SkillBar
+@onready var skill_bar: SkillBarSkillTree = $CanvasLayer_SkillPanel/SkillBar
 @onready var group: Control = $SkillTreeButtonGroup
 
 var current_skill: SkillButtonNode = null   # skill đang được xem

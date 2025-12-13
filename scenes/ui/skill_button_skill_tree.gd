@@ -7,8 +7,8 @@ class_name SkillButtonNode
 @onready var line_2d: Line2D = $Line2D
 
 @export var skill: Skill
-@export var require_stack_unlock := 3
-@export var require_stack_upgrade := 3
+@export var require_stack_unlock := 5
+@export var require_stack_upgrade := 10
 
 @export var video_stream: VideoStream = null
 

@@ -63,7 +63,7 @@ func set_skill_in_bar(slot_index: int, skill_name: String) -> void:
 		return
 
 	skillbar[slot_index] = skill_name
-	emit_signal("skillbar_changed", slot_index, skill_name)
+	#emit_signal("skillbar_changed", slot_index, skill_name)
 
 func clear_skill_in_bar(slot_index: int) -> void:
 	if slot_index < 0 or slot_index >= skillbar.size():
@@ -84,6 +84,16 @@ func unequip_skill(skill_name: String) -> void:
 		return
 	skillbar[index] = null
 	emit_signal("skillbar_changed", index, "")
+
+func equip_skill(slot_index: int, skill_name: String) -> void:
+	if slot_index < 0 or slot_index >= skillbar.size():
+		return
+
+	if not table.has(skill_name):
+		return
+
+	skillbar[slot_index] = skill_name
+	emit_signal("skillbar_changed", slot_index, skill_name)
 
 signal stack_changed(skill_name, new_value)
 signal level_changed(skill_name, new_level)

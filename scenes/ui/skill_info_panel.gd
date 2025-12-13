@@ -202,7 +202,7 @@ func _on_equip_button_pressed() -> void:
 		var bar = SkillStackManager.get_skill_bar_data()
 		for i in range(bar.size()):
 			if bar[i] == null:
-				SkillStackManager.set_skill_in_bar(i, skill_name)
+				SkillStackManager.equip_skill(i, skill_name)
 				_show_error_text("Equipped to slot %d." % (i + 1))
 				_update_buttons()
 				return
