@@ -33,6 +33,7 @@ layer = 11
 
 [node name="SkillInfoPanel" parent="CanvasLayer_SkillPanel" instance=ExtResource("3_chxqf")]
 visible = false
+self_modulate = Color(0, 0, 0, 0.960784)
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0

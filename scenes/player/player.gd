@@ -603,6 +603,7 @@ func throwed_blade() -> void:
 	extra_sprites.append(silhouette_normal_sprite)
 	silhouette_normal_sprite.show()
 	
+	weapon_swapped.emit("normal")
 # ====== WEAPON SWAP LOGIC ======
 func swap_weapon() -> void:
 	#Nếu không sở hữu bất kỳ vũ khí nào, không làm gì
@@ -715,7 +716,7 @@ func dash() -> void:
 #Update UI
 func _input(event):
 	if event.is_action_pressed("ui_skilltree"):
-		var root = skill_tree_ui.get_node("ColorRect/SkillTreeRoot")
+		var root = skill_tree_ui.get_node("SkillTreeRoot")
 		var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/SkillCamera2D")
 		get_tree().paused = !get_tree().paused 
 		if (skill_tree_ui.visible == false):

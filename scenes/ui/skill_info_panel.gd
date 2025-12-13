@@ -100,9 +100,9 @@ func _update_buttons():
 	
 	var index = SkillStackManager.find_skill_in_bar(btn.skill.name)
 	if index != -1:
-		equip_button.text = "Unequip"
+		equip_button.text = "UNEQUIP"
 	else:
-		equip_button.text = "Equip"
+		equip_button.text = "EQUIP"
 
 func _on_unlock_button_pressed() -> void:
 	var btn = current_button

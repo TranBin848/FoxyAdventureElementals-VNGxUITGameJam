@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=104 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -85,6 +85,7 @@
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
 [ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
+[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="86_5miun"]
 [ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="91_pq1ih"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="93_hf5gj"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="94_avmva"]
@@ -756,26 +757,41 @@ process_mode = 3
 layer = 10
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="SkillTreeUI"]
+[node name="Background" type="TextureRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1472.0
+offset_bottom = 816.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.465121, 0.468751)
+texture = ExtResource("86_5miun")
+
+[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
+modulate = Color(1, 1, 1, 0.764706)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="SkillTreeRoot" parent="SkillTreeUI/ColorRect" instance=ExtResource("91_pq1ih")]
-offset_left = 640.0
-offset_top = 360.0
-offset_right = 640.0
-offset_bottom = 360.0
+[node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("91_pq1ih")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="InstructionLabel" type="Label" parent="SkillTreeUI/ColorRect"]
-layout_mode = 1
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -70.0
+offset_top = -88.0
 offset_right = 360.0
 offset_bottom = -16.0
 grow_vertical = 0
@@ -786,8 +802,7 @@ text = "Tab to open/close skill tree
 Mouse wheel: Zoom in/out
 Hold left mouse: Drag"
 
-[node name="TitleLabel" type="Label" parent="SkillTreeUI/ColorRect"]
-layout_mode = 1
+[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 332.0
