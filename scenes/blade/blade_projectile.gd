@@ -22,9 +22,9 @@ func _ready():
 	# 2. Setup Gravity Transition
 	gravity_scale = 0.0 # Start with no gravity (floating straight)
 	
+	await get_tree().create_timer(0.5).timeout
 	# Create a tween to transition gravity_scale to max_gravity_scale over time_to_max_gravity
-	var tween = create_tween()
-	tween.tween_property(self, "gravity_scale", max_gravity_scale, time_to_max_gravity).set_trans(Tween.TRANS_LINEAR)
+	gravity_scale = max_gravity_scale
 
 func _physics_process(delta: float) -> void:
 	rotation += rotation_speed * delta * direction
