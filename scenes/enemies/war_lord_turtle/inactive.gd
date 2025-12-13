@@ -1,14 +1,26 @@
 extends WarLordState
 
+var activated := false
+
 func _enter() -> void:
 	obj.change_animation("inactive")
-	timer = 0
-	
-func _update(_delta: float) -> void:
-	if obj.found_player != null:
+	obj.elemental_type = obj.phase_order[obj.current_phase_index]
+	obj.apply_element()
+	activated = false
+
+
+func _update(delta: float) -> void:
+	if obj.found_player == null:
+		return
+	if not activated:
+		activated = true
+		timer = 1.5
 		obj.change_animation("standUp")
-		await $"../../Direction/AnimatedSprite2D".animation_finished
+		$"../../GPUParticles2D".show()
+		$"../../Particles".hide()
+		return
+	if update_timer(delta):
+		$"../../GPUParticles2D".hide()
+		$"../../Particles".show()
 		obj.start_fight()
 		change_state(fsm.states.idle)
-		pass
-	

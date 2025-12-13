@@ -1,17 +1,17 @@
 extends WarLordState
 
 @export var stun_time: float = 5.0
-var action_timer: float = 0.0
 
 func _enter() -> void:
 	obj.change_animation("stun")
-	timer = 0
-	action_timer = stun_time
+	timer = stun_time
+	obj.is_attacking = false
+	if obj.has_delay_state:
+		obj.has_delay_state = false
+		take_damage(0)
 
 func _update(delta: float) -> void:
 	super._update(delta)
-	if action_timer > 0:
-		action_timer -= delta
-		if action_timer <= 0:
-			change_state(fsm.states.idle)
+	if update_timer(delta):
+		change_state(fsm.states.idle)
 	

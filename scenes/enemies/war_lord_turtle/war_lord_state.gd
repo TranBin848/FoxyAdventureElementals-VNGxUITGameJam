@@ -19,13 +19,17 @@ func take_damage(direction: Variant, damage: int = 1) -> void:
 	obj.take_damage(damage)
 	#obj.velocity.x = bounce_back_velocity * direction.x
 	if obj.health <= 0:
+		if obj.is_facing_left == false:
+			obj.scale.x = -1
 		change_state(fsm.states.dead)
 
 var current_skill = 0
 var total_skill = 2
 
 func handle_attack() -> void:
+	obj.is_attacking = true
 	current_skill = (current_skill +1 ) % total_skill
+	current_skill = 1
 	if(current_skill == 0):
 		change_state(fsm.states.shootleft)
 	else:

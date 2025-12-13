@@ -26,7 +26,7 @@ void fragment() {
 		{
     		// pixel gốc
     		COLOR = col;
-			
+
 		}
     }
 

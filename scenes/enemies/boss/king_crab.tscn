@@ -306,7 +306,6 @@ position = Vector2(25, -14)
 
 [node name="Walk" type="Node" parent="States"]
 script = ExtResource("32_3jl1k")
-bounce_back_velocity = null
 
 [node name="Spin" type="Node" parent="States"]
 script = ExtResource("33_fh3hm")

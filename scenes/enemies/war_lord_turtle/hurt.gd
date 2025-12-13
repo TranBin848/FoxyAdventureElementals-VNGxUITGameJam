@@ -9,4 +9,5 @@ func _update( delta: float):
 		if obj.health <= 0:
 			change_state(fsm.states.dead)
 		else:
-			change_state(fsm.states.run)
+			obj.phase_check()
+			change_state(fsm.states.idle)

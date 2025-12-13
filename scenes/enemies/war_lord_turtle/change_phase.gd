@@ -11,4 +11,3 @@ func _update(delta: float) -> void:
 	super._update(delta)
 	if update_timer(delta):
 		handle_attack()
-	
