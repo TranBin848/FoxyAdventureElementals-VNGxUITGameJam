@@ -1,6 +1,7 @@
-[gd_scene load_steps=43 format=3 uid="uid://bmqknea8bh0ev"]
+[gd_scene load_steps=46 format=3 uid="uid://bmqknea8bh0ev"]
 
 [ext_resource type="Texture2D" uid="uid://x0wewx23js2a" path="res://assets/terrain_plus/Animated Sprites/Campfire sheet.png" id="1_sxqdn"]
+[ext_resource type="Script" uid="uid://v2g78x4akfgj" path="res://scripts/light/flickering_light.gd" id="2_g2bal"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2bal"]
 atlas = ExtResource("1_sxqdn")
@@ -290,7 +291,41 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_rjkgb"]
+offsets = PackedFloat32Array(0.293413, 0.748503)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s6hm0"]
+gradient = SubResource("Gradient_rjkgb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="CampFire" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ks1tb")
 autoplay = "default"
-frame_progress = 0.621785
+frame_progress = 0.202935
+
+[node name="LightSource" type="Node2D" parent="."]
+
+[node name="AreaPointLight2D" type="PointLight2D" parent="LightSource"]
+position = Vector2(3, -17)
+color = Color(0.782505, 0.322668, 0, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 2.0
+texture = SubResource("GradientTexture2D_s6hm0")
+texture_scale = 5.0
+script = ExtResource("2_g2bal")
+size_variation = 0.2
+
+[node name="ShadowCastPointLight2D" type="PointLight2D" parent="LightSource"]
+position = Vector2(3, -17)
+color = Color(0.784314, 0.321569, 0, 1)
+energy = 0.5
+shadow_filter = 2
+shadow_filter_smooth = 2.0
+texture = SubResource("GradientTexture2D_s6hm0")
+texture_scale = 5.0
+script = ExtResource("2_g2bal")
+energy_variation = 0.1
