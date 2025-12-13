@@ -81,6 +81,12 @@
 [ext_resource type="Texture2D" uid="uid://bqykhn7xwriyi" path="res://assets/foxy/fox_hat_wand/fox_walk_3.png" id="57_ws0t6"]
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
 [ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://scenes/fx/slash_fx.tscn" id="67_31ki0"]
+[ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="63_7072n"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="63_gmu8b"]
+[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="86_5miun"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="91_pq1ih"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="93_hf5gj"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="94_avmva"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
 shader = ExtResource("2_ahqnk")
@@ -738,6 +744,68 @@ offset_right = 24.0
 offset_bottom = -42.0
 text = "debug"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+x[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+
+[node name="Background" type="TextureRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1472.0
+offset_bottom = 816.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.465121, 0.468751)
+texture = ExtResource("86_5miun")
+
+[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
+modulate = Color(1, 1, 1, 0.764706)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("91_pq1ih")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 360.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("93_hf5gj")
+theme_override_font_sizes/font_size = 16
+text = "Tab to open/close skill tree
+Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 332.0
+offset_bottom = 65.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("94_avmva")
+theme_override_font_sizes/font_size = 32
+text = "SKILL TREE"
 vertical_alignment = 1
 
 [connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]

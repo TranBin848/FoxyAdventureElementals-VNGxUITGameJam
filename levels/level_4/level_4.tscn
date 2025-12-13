@@ -2796,7 +2796,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("43_nyqcx")
 
-[node name="SkillBar" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_ah671")]
+[node name="SkillBarUI" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_ah671")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8

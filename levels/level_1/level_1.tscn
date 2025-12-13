@@ -93,7 +93,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.4641
+shader_parameter/y_zoom = 0.179859
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -341,7 +341,7 @@ position = Vector2(-23, 310)
 guide_text = "Take the blade \\n C to attack, X to throw"
 
 [node name="GuideTrigger3-1" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(203, 248)
+position = Vector2(203, 259)
 guide_text = "V to change the weapon"
 
 [node name="GuideTrigger4" parent="." instance=ExtResource("31_dy5lu")]
@@ -349,7 +349,7 @@ position = Vector2(-326, 310)
 guide_text = "Huh hah Huh hah"
 
 [node name="GuideTrigger5" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(4720, -440)
+position = Vector2(4828, -434)
 guide_text = "F to interact"
 
 [node name="GuideTrigger6" parent="." instance=ExtResource("31_dy5lu")]
@@ -357,19 +357,19 @@ position = Vector2(3631, 9)
 guide_text = "F to interact"
 
 [node name="GuideTrigger7" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(-881, 418)
+position = Vector2(-881, 439)
 guide_text = "Checkpoint saved"
 
 [node name="GuideTrigger8" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(1699, 123)
+position = Vector2(1699, 151)
 guide_text = "Checkpoint saved"
 
 [node name="GuideTrigger9" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(2446, -356)
+position = Vector2(2446, -329)
 guide_text = "Checkpoint saved"
 
 [node name="GuideTrigger10" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(4401, -426)
+position = Vector2(4514, -393)
 guide_text = "Checkpoint saved"
 
 [node name="Checkpoint1" parent="." instance=ExtResource("32_g2wda")]
@@ -471,13 +471,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("42_m18vu")
 
-[node name="SkillBar" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_0uo32")]
+[node name="SkillBarUI" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_0uo32")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("44_81g5i")]
-visible = false
 offset_bottom = 100.0
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
@@ -499,7 +498,6 @@ text = "Enemy Out of Range"
 horizontal_alignment = 1
 
 [node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("46_sycnp")]
-visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

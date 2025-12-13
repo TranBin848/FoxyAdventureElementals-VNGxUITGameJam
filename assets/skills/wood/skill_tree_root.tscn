@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcupn8lintl77"]
+[gd_scene load_steps=6 format=3 uid="uid://bcupn8lintl77"]
 
 [ext_resource type="Script" uid="uid://c613v451tucd0" path="res://scenes/ui/skill_tree/skill_tree_root.gd" id="1_r363v"]
 [ext_resource type="PackedScene" uid="uid://c24hsf56rny2a" path="res://scenes/ui/skill_tree1.tscn" id="2_l5itb"]
 [ext_resource type="PackedScene" uid="uid://sgxxofrggjed" path="res://scenes/ui/skill_info_panel.tscn" id="3_chxqf"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="4_l5itb"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="5_chxqf"]
 
 [node name="SkillTreeRoot" type="Control"]
 layout_mode = 3
@@ -31,14 +33,45 @@ layer = 11
 
 [node name="SkillInfoPanel" parent="CanvasLayer_SkillPanel" instance=ExtResource("3_chxqf")]
 visible = false
+self_modulate = Color(0, 0, 0, 0.960784)
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 820.0
-offset_top = 52.0
+offset_top = 40.0
 offset_right = 1280.0
-offset_bottom = 668.0
+offset_bottom = 680.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="NotiLabel" type="Label" parent="CanvasLayer_SkillPanel"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -175.5
+offset_top = -112.0
+offset_right = 175.5
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_l5itb")
+theme_override_font_sizes/font_size = 16
+text = "Enemy Out of Range"
+horizontal_alignment = 1
+
+[node name="SkillBar" parent="CanvasLayer_SkillPanel" instance=ExtResource("5_chxqf")]
+visible = false
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = -80.0
+offset_right = 112.0
+offset_bottom = -40.0
+grow_vertical = 0

@@ -1,10 +1,11 @@
 extends Node
 
 var table := {} # { "Fireball": { "stack": 2, "level": 1 } }
+var skillbar:= [null, null, null, null, null]
 
 func add_stack(skill_name: String, amount: int):
 	if not table.has(skill_name):
-		table[skill_name] = { "stack": 0, "level": 1 }
+		table[skill_name] = { "stack": 0, "level": 1, "unlocked": false}
 
 	table[skill_name].stack += amount
 	emit_signal("stack_changed", skill_name, table[skill_name].stack)
@@ -23,20 +24,78 @@ func set_level(skill_name: String, new_level: int):
 
 	emit_signal("level_changed", skill_name, new_level)
 
+func set_unlocked(skill_name: String):
+	if not table.has(skill_name): return
+	else:
+		table[skill_name].unlocked = true
+	
+	emit_signal("unlocked_changed", true)
 func get_stack(skill_name: String) -> int:
 	return table.get(skill_name, {}).get("stack", 0)
 
 func get_level(skill_name: String) -> int:
 	return table.get(skill_name, {}).get("level", 1)
 
+func get_unlocked(skill_name: String) -> int:
+	return table.get(skill_name, {}).get("unlocked", false)
+
 # SAVE / LOAD
 func save_data() -> Dictionary:
 	return table.duplicate(true)
 
-func load_data(data: Dictionary) -> void:
+func save_skillbar_data() -> Array:
+	return skillbar.duplicate(true)
+
+func load_data(data: Dictionary, skillbardata: Array = []) -> void:
 	table = data.duplicate(true)
+	skillbar = skillbardata.duplicate(true)
 	emit_signal("stack_changed", "", -1)
 	emit_signal("level_changed", "", -1)
 
+func get_skill_bar_data() -> Array:
+	return skillbar.duplicate(true)
+
+func set_skill_in_bar(slot_index: int, skill_name: String) -> void:
+	if slot_index < 0 or slot_index >= skillbar.size():
+		return
+
+	if not table.has(skill_name):
+		return
+
+	skillbar[slot_index] = skill_name
+	#emit_signal("skillbar_changed", slot_index, skill_name)
+
+func clear_skill_in_bar(slot_index: int) -> void:
+	if slot_index < 0 or slot_index >= skillbar.size():
+		return
+
+	skillbar[slot_index] = null
+	emit_signal("skillbar_changed", slot_index, "")
+
+func find_skill_in_bar(skill_name: String) -> int:
+	for i in range(skillbar.size()):
+		if skillbar[i] == skill_name:
+			return i
+	return -1
+
+func unequip_skill(skill_name: String) -> void:
+	var index = find_skill_in_bar(skill_name)
+	if index == -1:
+		return
+	skillbar[index] = null
+	emit_signal("skillbar_changed", index, "")
+
+func equip_skill(slot_index: int, skill_name: String) -> void:
+	if slot_index < 0 or slot_index >= skillbar.size():
+		return
+
+	if not table.has(skill_name):
+		return
+
+	skillbar[slot_index] = skill_name
+	emit_signal("skillbar_changed", slot_index, skill_name)
+
 signal stack_changed(skill_name, new_value)
 signal level_changed(skill_name, new_level)
+signal unlocked_changed(skill_name, new_unlocked)
+signal skillbar_changed(slot_index: int, skill_name)

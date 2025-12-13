@@ -76,6 +76,7 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 canvas_item_default_texture_filter = 0
@@ -176,7 +177,6 @@ default_color = Color(0, 0, 0, 1)
 gradient = SubResource("Gradient_c5x22")
 
 [node name="FireShot" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4casc")]
-visible = true
 offset_left = 625.0
 offset_top = 161.0
 offset_right = 665.0
@@ -185,7 +185,6 @@ scale = Vector2(0.75, 0.75)
 video_stream = ExtResource("3_4casc")
 
 [node name="FireExplosion" parent="SubViewportContainer/SubViewport/FireShot" instance=ExtResource("2_4casc")]
-visible = true
 layout_mode = 0
 offset_left = -85.3334
 offset_top = -85.3334
@@ -196,7 +195,6 @@ skill = ExtResource("3_itx8d")
 video_stream = ExtResource("5_itx8d")
 
 [node name="WoodShot" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4casc")]
-visible = true
 offset_left = 441.0
 offset_top = 280.0
 offset_right = 481.0
@@ -206,7 +204,6 @@ skill = ExtResource("4_v0x7f")
 video_stream = ExtResource("7_wqp3i")
 
 [node name="Heal Over Time" parent="SubViewportContainer/SubViewport/WoodShot" instance=ExtResource("2_4casc")]
-visible = true
 layout_mode = 0
 offset_left = -86.6667
 offset_top = -85.3333
@@ -217,7 +214,6 @@ skill = ExtResource("5_ph0o5")
 video_stream = ExtResource("9_wqp3i")
 
 [node name="WaterBlast" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4casc")]
-visible = true
 offset_left = 473.0
 offset_top = 488.0
 offset_right = 513.0
@@ -227,7 +223,6 @@ skill = ExtResource("6_dvmm8")
 video_stream = ExtResource("9_v0x7f")
 
 [node name="WaterTornado" parent="SubViewportContainer/SubViewport/WaterBlast" instance=ExtResource("2_4casc")]
-visible = true
 layout_mode = 0
 offset_left = -74.6667
 offset_top = 96.0
@@ -238,7 +233,6 @@ skill = ExtResource("7_fxybv")
 video_stream = ExtResource("11_ph0o5")
 
 [node name="WaterSpike" parent="SubViewportContainer/SubViewport/WaterBlast" instance=ExtResource("2_4casc")]
-visible = true
 layout_mode = 0
 offset_left = 74.6667
 offset_top = 96.0
