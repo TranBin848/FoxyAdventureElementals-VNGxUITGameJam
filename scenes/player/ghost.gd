@@ -8,6 +8,3 @@ func ghosting() -> void:
 	tween.tween_property(self, "self_modulate", Color(1, 1, 1, 0), 0.5)
 	await  tween.finished
 	queue_free()
-
-func _process(delta: float) -> void:
-	print("oke")

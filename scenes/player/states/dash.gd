@@ -29,6 +29,7 @@ func _update(delta: float) -> void:
 	if dist >= obj.dash_dist or obj.is_on_wall():
 		obj.velocity.x = 0
 		obj.is_dashing = false
+		
 
 	# Transition when dash ends
 	if not obj.is_dashing:

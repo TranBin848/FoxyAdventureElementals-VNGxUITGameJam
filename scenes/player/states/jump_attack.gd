@@ -18,7 +18,7 @@ func _enter() -> void:
 	call_deferred("change_state", fsm.previous_state)
 	#change_state()
 	
-func _process(delta: float) -> void:
+func _update(delta: float) -> void:
 	#stop moving if landed mid jump attack animation
 	if obj.is_on_floor():
 		obj.velocity.x = 0

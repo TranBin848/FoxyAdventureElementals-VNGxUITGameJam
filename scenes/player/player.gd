@@ -747,7 +747,6 @@ func _input(event):
 		if (skill_tree_ui.visible == false):
 			skill_tree_ui.visible = true
 			if not root:
-				print("oke")
 				return
 			
 			_show_skill_tree_layers(root)
