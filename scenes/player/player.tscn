@@ -775,30 +775,28 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -49.0
-offset_right = 332.0
+offset_top = -70.0
+offset_right = 360.0
+offset_bottom = -16.0
 grow_vertical = 0
+theme_override_constants/line_spacing = 12
 theme_override_fonts/font = ExtResource("93_hf5gj")
 theme_override_font_sizes/font_size = 16
-text = "Mouse wheel: Zoom in/out
+text = "Tab to open/close skill tree
+Mouse wheel: Zoom in/out
 Hold left mouse: Drag"
 
 [node name="TitleLabel" type="Label" parent="SkillTreeUI/ColorRect"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -158.0
+offset_left = 16.0
 offset_top = 16.0
-offset_right = 158.0
+offset_right = 332.0
 offset_bottom = 65.0
-grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("94_avmva")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "SKILL TREE"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="hurt" from="Direction/HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]

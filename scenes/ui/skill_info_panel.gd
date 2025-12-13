@@ -9,8 +9,10 @@ const ERROR_DISPLAY_TIME: float = 2.0
 @onready var stack_label: Label = $Stack
 @onready var upgrade_btn: Button = $UpgradeButton
 @onready var unlock_btn: Button = $UnlockButton
+@onready var equip_button: Button = $EquipButton
 @onready var video_player: VideoStreamPlayer = $VideoStreamPlayer
-@onready var alert_label: Label = $"../ErrorLabel"
+@onready var alert_label: Label = $"../NotiLabel"
+@onready var skillbar: PanelContainer = $"../skillbar"
 
 var current_button: SkillButtonNode
 
@@ -90,16 +92,17 @@ func _update_buttons():
 	else:
 		unlock_btn.disabled = false
 	# ----- UPGRADE -----
-	if not btn.unlocked:
+	if not btn.unlocked or btn.level >= 3:
 		# Chưa mở khóa → không được nâng cấp
 		upgrade_btn.disabled = true
 	else:
-		# Đã mở khóa → check đủ điều kiện nâng cấp chưa
-		if btn.level < 3:
-			upgrade_btn.disabled = false
-		else:
-			upgrade_btn.disabled = true
-
+		upgrade_btn.disabled = false
+	
+	var index = SkillStackManager.find_skill_in_bar(btn.skill.name)
+	if index != -1:
+		equip_button.text = "Unequip"
+	else:
+		equip_button.text = "Equip"
 
 func _on_unlock_button_pressed() -> void:
 	var btn = current_button
@@ -115,7 +118,8 @@ func _on_unlock_button_pressed() -> void:
 		_show_error_text("Unlock successfully.")
 		#if btn.level == 3:
 			#_unlock_children(btn)
-		
+	else:
+		_show_error_text("Not enough stacks.")	
 	_update_buttons()
 
 
@@ -131,7 +135,13 @@ func _on_upgrade_button_pressed() -> void:
 		#if btn.level == 3:
 			#_unlock_children(btn)
 		_show_error_text("Upgrade successfully.")
+	
+	else:
+		_show_error_text("Not enough stacks.")	
+	
 	_update_buttons()
+
+
 
 func _unlock_children(parent: SkillButtonNode) -> void:
 	for child in parent.children:
@@ -170,3 +180,33 @@ func _show_error_text(message: String) -> void:
 	
 	# Sau khi fade xong, đảm bảo label.visible = false
 	tween.tween_callback(Callable(alert_label, "set_visible").bind(false))
+
+
+func _on_equip_button_pressed() -> void:
+	if current_button == null:
+		return
+
+	var skill_name = current_button.skill.name
+	var index = SkillStackManager.find_skill_in_bar(skill_name)
+
+	# ----- ĐÃ EQUIP → UNEQUIP -----
+	if index != -1:
+		SkillStackManager.unequip_skill(skill_name)
+		_show_error_text("Unequipped.")
+		_update_buttons()
+		return
+
+	# ----- CHƯA EQUIP → EQUIP -----
+	var skill_unlock = SkillStackManager.get_unlocked(skill_name)
+	if skill_unlock:
+		var bar = SkillStackManager.get_skill_bar_data()
+		for i in range(bar.size()):
+			if bar[i] == null:
+				SkillStackManager.set_skill_in_bar(i, skill_name)
+				_show_error_text("Equipped to slot %d." % (i + 1))
+				_update_buttons()
+				return
+	else:
+		_show_error_text("Skill not unlocked.")
+		return
+	_show_error_text("Skill bar is full!")

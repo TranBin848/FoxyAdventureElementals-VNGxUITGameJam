@@ -126,7 +126,8 @@ func save_checkpoint(checkpoint_id: String) -> void:
 		checkpoint_data[checkpoint_id],
 		current_stage.scene_file_path,
 		SkillStackManager.save_data(),
-		skill_bar_data
+		SkillStackManager.save_skillbar_data()
+		#skill_bar_data
 	)
 
 

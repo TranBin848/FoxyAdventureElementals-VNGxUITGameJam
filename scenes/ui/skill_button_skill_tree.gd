@@ -50,7 +50,6 @@ func set_skill():
 	
 	level = SkillStackManager.get_level(skill.name)
 	stack = SkillStackManager.get_stack(skill.name)
-	
 	unlocked = SkillStackManager.get_unlocked(skill.name)
 	
 	if unlocked:

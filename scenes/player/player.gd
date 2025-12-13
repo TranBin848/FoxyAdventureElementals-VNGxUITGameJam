@@ -88,31 +88,24 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 	if skillbar_root:
 		skill_bar = skillbar_root.get_node("MarginContainer/SkillBar")
 	if skill_bar:
-		for slot in skill_bar.slots:
+		for i in range(skill_bar.slots.size()):
+			var slot = skill_bar.slots[i]
 			if slot.skill == skill_to_use:
 				
 				var skill_current_stack = SkillStackManager.get_stack(skill_to_use.name)
-			
+				var skill_current_unlocked = SkillStackManager.get_unlocked(skill_to_use.name)
+				
+				if skill_current_unlocked:
+					return
+				
 				# KIỂM TRA HỦY BỎ - Cần phải dùng LẦN NÀY (Stack == 1)
-				if skill_current_stack == 1:
-					# Thực hiện logic HỦY BỎ
-					slot.skill = null
-					
-					# Reset UI Slot (giữ nguyên)
-					slot.texture_normal = null
-					slot.time_label.text = ""
-					slot.disabled = true
-					# Thêm dòng này để cập nhật UI stack thành trống nếu cần
-					slot.update_stack_ui() 
-					
-					print("☠️ Skill '%s' consumed and removed from slot!" % skill_to_use.name)
+				if skill_current_stack == 1:					
+					SkillStackManager.clear_skill_in_bar(i)
 				
 				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
 				elif skill_current_stack > 1:
 					SkillStackManager.remove_stack(skill_to_use.name, 1)
-					# Cập nhật UI ngay lập tức (giữ nguyên)
 					slot.update_stack_ui()
-				
 				
 				
 				return # Thoát sau khi xử lý Stack
@@ -740,7 +733,7 @@ func _input(event):
 				print("📷 Đã chuyển sang camera UI SkillTree.")
 
 			print("🌳 Skill Tree opened.")
-		else:
+		else:	
 			skill_tree_ui.visible = false
 			_hide_skill_tree_layers(root)
 			if skill_camera:

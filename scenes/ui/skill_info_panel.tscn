@@ -69,7 +69,7 @@ offset_bottom = -31.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 theme_override_font_sizes/font_size = 8
-text = "Need 3 stack"
+text = "Need 3 stacks"
 
 [node name="StackToUnlock" type="Label" parent="."]
 layout_mode = 1
@@ -83,7 +83,7 @@ offset_bottom = -31.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 theme_override_font_sizes/font_size = 8
-text = "Need 3 stack"
+text = "Need 3 stacks"
 
 [node name="Stack" type="Label" parent="."]
 layout_mode = 1
@@ -159,4 +159,4 @@ text = "EQUIP"
 
 [connection signal="pressed" from="UpgradeButton" to="." method="_on_upgrade_button_pressed"]
 [connection signal="pressed" from="UnlockButton" to="." method="_on_unlock_button_pressed"]
-[connection signal="pressed" from="EquipButton" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="EquipButton" to="." method="_on_equip_button_pressed"]
