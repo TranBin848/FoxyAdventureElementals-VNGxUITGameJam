@@ -10,7 +10,7 @@ func _enter() -> void:
 
 
 func _update(delta: float) -> void:
-	if obj.found_player == null:
+	if obj.is_fighting == false:
 		return
 	if not activated:
 		activated = true

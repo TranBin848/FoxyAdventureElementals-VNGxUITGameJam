@@ -14,10 +14,14 @@ extends EnemyCharacter
 @onready var label: Label = $Label
 
 
-@export var attack_sfx: AudioStream = null
+@export var launch_sfx: AudioStream = null
+@export var shoot_sfx: AudioStream = null
 @export var hurt_sfx: AudioStream = null
+@export var defeated_sfx: AudioStream = null
 
+var boss_zone: Area2D = null
 
+var is_fighting = false
 var is_facing_left = true
 var is_attacking = false
 var has_delay_state = false
@@ -34,7 +38,7 @@ func _ready() -> void:
 func fire() -> void:
 	var bullet := bullet_factory.create() as WarLordBullet
 	var player_pos: Vector2 = Vector2.ZERO
-	
+	AudioPlayer.play_sound_once(shoot_sfx)
 	if self.found_player != null:
 		player_pos = self.found_player.global_position
 	#else :
@@ -50,11 +54,11 @@ var targets: Array[Vector2] = [
 	Vector2(100, -600),
 	Vector2(-100, -600),
 	
-	Vector2(200, -600),
-	Vector2(-200, -600),
+	Vector2(150, -600),
+	Vector2(-150, -600),
 	
-	Vector2(300, -600),
-	Vector2(-300, -600)
+	Vector2(200, -600),
+	Vector2(-200, -600)
 ]
 var fire_point: Array[Vector2] = [
 	Vector2(30, -35),
@@ -68,6 +72,7 @@ func launch(index: int) -> void:
 
 	var rocket := rocket_factory.create() as WarLordRocket
 	rocket.launch(global_position + fire_point[index % fire_point.size()], targets[index])
+	AudioPlayer.play_sound_once(launch_sfx)
 	
 func get_fire_poss() -> Vector2:
 	if is_facing_left:
@@ -115,6 +120,7 @@ func alert_coroutine() -> void:
 
 func start_fight() -> void:
 	health_bar.show()
+	is_fighting = true
 
 func change_phase() -> void:
 	elemental_type = phase_order[current_phase_index]
@@ -132,6 +138,9 @@ func handle_dead() -> void:
 	velocity.x = 0
 	health_bar.hide()
 	$Particles.hide()
+	$GPUParticles2D.hide()
+	if boss_zone:
+		boss_zone._on_boss_dead()
 
 func get_animation_node() -> Node:
 	return anim

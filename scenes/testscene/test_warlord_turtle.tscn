@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://oav5k3qi1mc"]
+[gd_scene load_steps=37 format=4 uid="uid://oav5k3qi1mc"]
 
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_mqctd"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="2_ig17x"]
@@ -27,8 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://frimagh5yfit" path="res://assets/island/back_palm_trees/back_palm_tree_regular_03.png" id="25_8ivcx"]
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="26_4n8ox"]
 [ext_resource type="PackedScene" uid="uid://dfg7ew4joocvp" path="res://scenes/ui/healh_bar.tscn" id="27_uv1yj"]
-[ext_resource type="PackedScene" uid="uid://d0ig8xrtjp2v1" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.tscn" id="29_uhv28"]
-[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="30_h17kd"]
+[ext_resource type="PackedScene" uid="uid://dhu0ol466opfw" path="res://scenes/enemies/war_lord_turtle/BossArea/warlord_turtle_bossfight.tscn" id="29_uhv28"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="31_ncy64"]
 
 [sub_resource type="GDScript" id="GDScript_wo2fk"]
@@ -279,7 +278,5 @@ position = Vector2(155, 206)
 
 [node name="ProductsContainer" type="Node2D" parent="."]
 
-[node name="WarLordTurtle" parent="." instance=ExtResource("29_uhv28")]
-position = Vector2(458, 185)
-
-[node name="Mushroom" parent="." instance=ExtResource("30_h17kd")]
+[node name="BossArea2D" parent="." instance=ExtResource("29_uhv28")]
+position = Vector2(771, 188)

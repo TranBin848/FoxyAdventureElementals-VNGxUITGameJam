@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceytbrfc5vmnn"]
+[gd_scene load_steps=7 format=3 uid="uid://ceytbrfc5vmnn"]
 
 [ext_resource type="Script" uid="uid://b0m7tx8g34ck6" path="res://scenes/enemies/war_lord_turtle/warlord_bullets/warlord_rocket.gd" id="1_0bvwl"]
 [ext_resource type="Texture2D" uid="uid://c50e4ugwpgibi" path="res://assets/war_lord_bullet/bullet_rocket.png" id="2_0bvwl"]
+[ext_resource type="AudioStream" uid="uid://c3cs284oa0spv" path="res://assets/sounds/explode_8bits.wav" id="2_xsp74"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_fs8uv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wafy"]
@@ -17,6 +18,7 @@ collision_layer = 0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_0bvwl")
+explode_sfx = ExtResource("2_xsp74")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

@@ -29,7 +29,6 @@ var total_skill = 2
 func handle_attack() -> void:
 	obj.is_attacking = true
 	current_skill = (current_skill +1 ) % total_skill
-	current_skill = 1
 	if(current_skill == 0):
 		change_state(fsm.states.shootleft)
 	else:

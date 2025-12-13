@@ -1,15 +1,19 @@
-[gd_scene load_steps=81 format=3 uid="uid://d0ig8xrtjp2v1"]
+[gd_scene load_steps=85 format=3 uid="uid://d0ig8xrtjp2v1"]
 
 [ext_resource type="Script" uid="uid://ckyw4uljyk87h" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.gd" id="1_ognfm"]
+[ext_resource type="AudioStream" uid="uid://bc4cr2fa6egln" path="res://assets/sounds/warlord_launch.wav" id="2_6tra1"]
 [ext_resource type="Texture2D" uid="uid://b5kffli05vjsc" path="res://assets/war_lord/war_lord_turtle19.png" id="2_e3bfs"]
+[ext_resource type="AudioStream" uid="uid://cqjjykrihfn8r" path="res://assets/sounds/Boss hit 1.wav" id="2_evh1h"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="2_m5be7"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_nvpmh"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_4lnpy"]
+[ext_resource type="AudioStream" uid="uid://bmxh5wicdwxiu" path="res://assets/sounds/warlord_fire.wav" id="3_8k08r"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_ej2x1"]
 [ext_resource type="Texture2D" uid="uid://c2e2k5ap4ve0t" path="res://assets/war_lord/war_lord_turtle1.png" id="3_f8orq"]
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_8ue3s"]
 [ext_resource type="Texture2D" uid="uid://doy7jae5djq4y" path="res://assets/war_lord/war_lord_turtle7.png" id="4_33b4w"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="4_ujkgd"]
+[ext_resource type="AudioStream" uid="uid://5f2eq77hop1w" path="res://assets/sounds/warlord_defeated.wav" id="5_8k08r"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_mev8q"]
 [ext_resource type="Texture2D" uid="uid://cly0eb13wjtcl" path="res://assets/war_lord/war_lord_turtle8.png" id="5_sndxc"]
 [ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_c3xu6"]
@@ -154,7 +158,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"die",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -405,6 +409,10 @@ radius = 31.0161
 
 [node name="WarLordTurtle" type="CharacterBody2D"]
 script = ExtResource("1_ognfm")
+launch_sfx = ExtResource("2_6tra1")
+shoot_sfx = ExtResource("3_8k08r")
+hurt_sfx = ExtResource("2_evh1h")
+defeated_sfx = ExtResource("5_8k08r")
 shader_path = "uid://doovon2v0i5dx"
 sight = 300.0
 metadata/_custom_type_script = "uid://s4xx82espxdt"
@@ -437,7 +445,7 @@ emitting = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_ayec0")
-animation = &"launchRocket"
+animation = &"die"
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)
@@ -563,36 +571,36 @@ position = Vector2(-150, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("44_f8pc6")
 
-[node name="Target 2" type="Node2D" parent="RocketTargets"]
-position = Vector2(150, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 2"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("44_f8pc6")
-
 [node name="Target 3" type="Node2D" parent="RocketTargets"]
-position = Vector2(-275, 0)
+position = Vector2(-210, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 3"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("44_f8pc6")
 
-[node name="Target 4" type="Node2D" parent="RocketTargets"]
-position = Vector2(275, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 4"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("44_f8pc6")
-
 [node name="Target 5" type="Node2D" parent="RocketTargets"]
-position = Vector2(-400, 0)
+position = Vector2(-270, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 5"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("44_f8pc6")
 
+[node name="Target 2" type="Node2D" parent="RocketTargets"]
+position = Vector2(270, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 2"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 4" type="Node2D" parent="RocketTargets"]
+position = Vector2(210, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 4"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
 [node name="Target 6" type="Node2D" parent="RocketTargets"]
-position = Vector2(400, 0)
+position = Vector2(150, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 6"]
 scale = Vector2(0.5, 0.5)

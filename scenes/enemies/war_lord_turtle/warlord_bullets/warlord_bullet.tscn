@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7jf636aeqd4g"]
+[gd_scene load_steps=8 format=3 uid="uid://b7jf636aeqd4g"]
 
 [ext_resource type="Texture2D" uid="uid://c6ns5rtic040v" path="res://assets/war_lord_bullet/bullet_cannon.png" id="1_dafil"]
 [ext_resource type="Script" uid="uid://dyxuadu7ka83i" path="res://scenes/enemies/war_lord_turtle/warlord_bullets/warlord_bullet.gd" id="1_sl4su"]
+[ext_resource type="AudioStream" uid="uid://c3cs284oa0spv" path="res://assets/sounds/explode_8bits.wav" id="2_otb67"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_sl4su"]
+[ext_resource type="AudioStream" uid="uid://buvold8esp717" path="res://assets/sounds/bomb_ticking.wav" id="3_sc6t2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u447q"]
 
@@ -13,6 +15,8 @@ collision_layer = 0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_sl4su")
+explode_sfx = ExtResource("2_otb67")
+bomb_ticking_sfx = ExtResource("3_sc6t2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_dafil")

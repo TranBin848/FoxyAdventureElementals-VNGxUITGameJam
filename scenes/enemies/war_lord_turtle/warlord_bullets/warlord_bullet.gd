@@ -2,6 +2,7 @@ class_name WarLordBullet
 extends RigidBody2D
 
 @export var explode_sfx: AudioStream = null
+@export var bomb_ticking_sfx: AudioStream = null
 @export var gravity := 980.0
 @export var angle := -45.0
 
@@ -34,13 +35,31 @@ func _on_body_entered(_body: Node) -> void:
 	has_exploded = true
 	wait_and_explode()
 
-
+func _process(delta: float) -> void:
+	pass
 func wait_and_explode() -> void:
 	
-	await get_tree().create_timer(2.5).timeout
-	await blink_warning(1.0)
+	await get_tree().create_timer(1.5).timeout
+	await blink_warning(0.5)
 	explode()
 
+func blink_warning(duration: float) -> void:
+	if not sprite:
+		return
+
+	var t := 0.0
+	var interval := 0.05  # tốc độ nhấp nháy
+
+	while t < duration:
+		# bật đỏ
+		AudioPlayer.play_sound_once(bomb_ticking_sfx)
+		sprite.modulate = Color(100, 0, 0)
+		await get_tree().create_timer(interval).timeout
+		# tắt đỏ → trắng
+		sprite.modulate = Color(1, 1, 1)
+		await get_tree().create_timer(interval).timeout
+
+		t += interval * 2
 func explode() -> void:
 	var e = preload("res://scenes/enemies/war_lord_turtle/warlord_bullets/explosion_particle.tscn").instantiate()
 	
@@ -53,21 +72,3 @@ func explode() -> void:
 	get_tree().current_scene.add_child(area)
 	AudioPlayer.play_sound_once(explode_sfx)
 	queue_free()
-
-func blink_warning(duration: float) -> void:
-	if not sprite:
-		return
-
-	var t := 0.0
-	var interval := 0.05  # tốc độ nhấp nháy
-
-	while t < duration:
-		# bật đỏ
-		sprite.modulate = Color(100, 0, 0)
-		await get_tree().create_timer(interval).timeout
-
-		# tắt đỏ → trắng
-		sprite.modulate = Color(1, 1, 1)
-		await get_tree().create_timer(interval).timeout
-
-		t += interval * 2
