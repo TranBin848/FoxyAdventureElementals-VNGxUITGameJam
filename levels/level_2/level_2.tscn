@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=4 uid="uid://mi7aisiyn7id"]
+
+[ext_resource type="Script" uid="uid://3f5aio4w34bg" path="res://levels/level_2/level_2.gd" id="1_618ip"]
+[ext_resource type="TileSet" uid="uid://7m2suus5flmq" path="res://levels/level_2/level_2.tres" id="1_jniqj"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_618ip"]
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_618ip")
+
+[node name="TerrainTileMap" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAHAAEABAACAAIAAAAHAAAABAACAAEAAAAHAP//BAACAAAAAAAGAAEABAABAAIAAAAGAAAABAABAAEAAAAGAP//BAABAAAAAAAFAAEABAABAAIAAAAFAAAABAABAAEAAAAFAP//BAABAAAAAAAEAAEABAABAAIAAAAEAAAABAABAAEAAAAEAP//BAABAAAAAAADAAEABAABAAIAAAADAAAABAABAAEAAAADAP//BAABAAAAAAACAAEABAABAAIAAAACAAAABAABAAEAAAACAP//BAABAAAAAAABAAEABAABAAIAAAABAAAABAABAAEAAAABAP//BAABAAAAAAAAAAEABAABAAIAAAAAAAAABAABAAEAAAAAAP//BAABAAAAAAD//wEABAAAAAIAAAD//wAABAAAAAEAAAD/////BAAAAAAAAAA=")
+tile_set = ExtResource("1_jniqj")
+
+[node name="Player" parent="." instance=ExtResource("2_618ip")]
+position = Vector2(-19, -51)

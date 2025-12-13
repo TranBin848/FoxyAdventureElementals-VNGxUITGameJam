@@ -1,20 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://clv23qmtscnof"]
 
 [ext_resource type="Texture2D" uid="uid://dajbe00rioo4e" path="res://assets/object/quicksand/quicksand.png" id="1_gs2h1"]
-[ext_resource type="Script" uid="uid://cyu0qpw7f87pw" path="res://scenes/objects/quicksand/quicksand.gd" id="1_ymks7"]
+[ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="1_psf7j"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymks7"]
-size = Vector2(50, 9)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_toj85"]
+size = Vector2(50, 8)
 
-[node name="Quicksand" type="Node2D"]
-position = Vector2(0, 8)
+[node name="Quicksand" type="Area2D"]
+script = ExtResource("1_psf7j")
+metadata/_custom_type_script = "uid://0qvd447gmgon"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gs2h1")
 
-[node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("1_ymks7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_ymks7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_toj85")
