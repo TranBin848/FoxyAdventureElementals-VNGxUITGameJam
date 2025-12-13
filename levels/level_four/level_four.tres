@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=89 format=3 uid="uid://bui3wquutm1yg"]
+[gd_resource type="TileSet" load_steps=91 format=3 uid="uid://bui3wquutm1yg"]
 
 [ext_resource type="Texture2D" uid="uid://bnmuiut4rgvqk" path="res://assets/terrain_plus/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="1_4sxbq"]
 [ext_resource type="Texture2D" uid="uid://ca4mpbifj2vre" path="res://assets/terrain_plus/Floor Tiles2.png" id="2_pt7g2"]
@@ -3189,6 +3189,12 @@ scenes/2/scene = ExtResource("21_rfw6v")
 scenes/3/scene = ExtResource("22_m02u4")
 scenes/4/scene = ExtResource("23_pv4lr")
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rvism"]
+polygon = PackedVector2Array(-13.5816, -14.0198, 16, -16, 16, 14.0198, -11.8292, 11.0406)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rqn3j"]
+polygon = PackedVector2Array(-13.5816, -14.0198, 16, -16, 16, 14.0198, -11.8292, 11.0406)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8x0gd"]
 texture = ExtResource("24_tt5w7")
 texture_region_size = Vector2i(32, 32)
@@ -3299,6 +3305,7 @@ texture_region_size = Vector2i(32, 32)
 9:8/0 = 0
 6:9/size_in_atlas = Vector2i(3, 1)
 6:9/0 = 0
+6:9/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rqn3j")
 7:8/0 = 0
 5:10/size_in_atlas = Vector2i(3, 1)
 5:10/0 = 0
@@ -3325,6 +3332,7 @@ texture_region_size = Vector2i(32, 32)
 1:8/0 = 0
 3:8/size_in_atlas = Vector2i(3, 2)
 3:8/0 = 0
+3:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rvism")
 2:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n4nvx"]

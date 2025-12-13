@@ -11,7 +11,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="LightSource" type="Node2D"]
 
-[node name="AreaPointLight2D" type="PointLight2D" parent="."]
+[node name="ShadowCastPointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(3, -17)
 energy = 0.5
 shadow_enabled = true
@@ -20,7 +20,7 @@ shadow_filter_smooth = 2.0
 texture = SubResource("GradientTexture2D_s6hm0")
 texture_scale = 5.0
 
-[node name="ShadowCastPointLight2D" type="PointLight2D" parent="."]
+[node name="AreaPointLight2D" type="PointLight2D" parent="."]
 position = Vector2(3, -17)
 energy = 0.5
 shadow_filter = 2
