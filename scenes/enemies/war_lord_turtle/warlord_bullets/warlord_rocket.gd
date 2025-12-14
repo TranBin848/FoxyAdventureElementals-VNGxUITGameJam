@@ -27,5 +27,5 @@ func spawn_explosion(pos):
 	var area = preload("res://scenes/enemies/war_lord_turtle/warlord_bullets/ExplosionArea.tscn").instantiate()
 	area.global_position = global_position
 	get_tree().current_scene.add_child(area)
-	AudioPlayer.play_sound_once(explode_sfx)
+	AudioManager.play_sound("war_lord_bomb_explode")
 	queue_free()

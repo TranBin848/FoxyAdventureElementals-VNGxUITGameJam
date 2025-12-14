@@ -1,7 +1,7 @@
 extends AmbienceArea2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
-@export var boss: KingCrab = null #make sure boss zone alway have a boss
+@export var boss: EnemyCharacter = null #make sure boss zone alway have a boss
 var player: Player = null
 
 func _ready() -> void:

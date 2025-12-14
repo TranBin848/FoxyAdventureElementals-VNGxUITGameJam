@@ -1,8 +1,6 @@
 class_name WarLordBullet
 extends RigidBody2D
 
-@export var explode_sfx: AudioStream = null
-@export var bomb_ticking_sfx: AudioStream = null
 @export var gravity := 980.0
 @export var angle := -45.0
 
@@ -52,7 +50,7 @@ func blink_warning(duration: float) -> void:
 
 	while t < duration:
 		# bật đỏ
-		AudioPlayer.play_sound_once(bomb_ticking_sfx)
+		AudioManager.play_sound("war_lord_bomb_ticking")
 		sprite.modulate = Color(100, 0, 0)
 		await get_tree().create_timer(interval).timeout
 		# tắt đỏ → trắng
@@ -70,5 +68,5 @@ func explode() -> void:
 	var area = preload("res://scenes/enemies/war_lord_turtle/warlord_bullets/ExplosionArea.tscn").instantiate()
 	area.global_position = global_position
 	get_tree().current_scene.add_child(area)
-	AudioPlayer.play_sound_once(explode_sfx)
+	AudioManager.play_sound("war_lord_bomb_explode")
 	queue_free()

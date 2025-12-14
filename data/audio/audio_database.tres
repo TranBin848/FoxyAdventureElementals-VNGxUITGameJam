@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AudioDatabase" load_steps=23 format=3 uid="uid://c1ope6ptf8yny"]
+[gd_resource type="Resource" script_class="AudioDatabase" load_steps=27 format=3 uid="uid://c1ope6ptf8yny"]
 
 [ext_resource type="Script" uid="uid://ovmtn36802i6" path="res://scripts/audio/audio_database.gd" id="1_nw313"]
 [ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_x0dso"]
@@ -22,8 +22,12 @@
 [ext_resource type="Resource" uid="uid://cj8y1tca7218x" path="res://data/audio/ambience/ambience_forest.tres" id="19_p1l5c"]
 [ext_resource type="Resource" uid="uid://cgob5ircpevik" path="res://data/audio/ambience/ambience_rainforest.tres" id="20_g7dcs"]
 [ext_resource type="Resource" uid="uid://dic1g16gimkr2" path="res://data/audio/stage/door_open.tres" id="21_la71c"]
+[ext_resource type="Resource" uid="uid://cynofjbx4iamv" path="res://data/audio/boss/war_lord_turtle/war_lord_hurt.tres" id="22_02cuq"]
+[ext_resource type="Resource" uid="uid://dvg56i4gcymp6" path="res://data/audio/boss/war_lord_turtle/war_lord_shoot.tres" id="23_lwt6v"]
+[ext_resource type="Resource" uid="uid://ig83f23mtpkc" path="res://data/audio/boss/war_lord_turtle/war_lord_defeat.tres" id="24_hmft1"]
+[ext_resource type="Resource" uid="uid://c3df3jtoplbkr" path="res://data/audio/boss/war_lord_turtle/war_lord_launch.tres" id="25_r350v"]
 
 [resource]
 script = ExtResource("1_nw313")
-clips = Array[ExtResource("1_x0dso")]([ExtResource("2_g1k8g"), ExtResource("3_ykssl"), ExtResource("4_p1l5c"), ExtResource("5_g7dcs"), ExtResource("4_cw7wr"), ExtResource("5_374as"), ExtResource("6_mjplr"), ExtResource("7_5g16o"), ExtResource("8_ykssl"), ExtResource("9_cw7wr"), ExtResource("12_6cm5n"), ExtResource("13_exqm0"), ExtResource("14_exqm0"), ExtResource("15_b71d2"), ExtResource("16_4m8v6"), ExtResource("17_owoq2"), ExtResource("18_1ae7c"), ExtResource("19_p1l5c"), ExtResource("20_g7dcs"), ExtResource("21_la71c"), null])
+clips = Array[ExtResource("1_x0dso")]([ExtResource("2_g1k8g"), ExtResource("3_ykssl"), ExtResource("4_p1l5c"), ExtResource("5_g7dcs"), ExtResource("4_cw7wr"), ExtResource("5_374as"), ExtResource("6_mjplr"), ExtResource("7_5g16o"), ExtResource("8_ykssl"), ExtResource("9_cw7wr"), ExtResource("12_6cm5n"), ExtResource("13_exqm0"), ExtResource("14_exqm0"), ExtResource("15_b71d2"), ExtResource("16_4m8v6"), ExtResource("17_owoq2"), ExtResource("18_1ae7c"), ExtResource("19_p1l5c"), ExtResource("20_g7dcs"), ExtResource("21_la71c"), ExtResource("22_02cuq"), ExtResource("23_lwt6v"), ExtResource("24_hmft1"), ExtResource("25_r350v")])
 metadata/_custom_type_script = "uid://ovmtn36802i6"

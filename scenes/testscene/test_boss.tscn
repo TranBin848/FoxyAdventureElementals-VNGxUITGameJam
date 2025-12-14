@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://crx2puwrf8kap"]
+[gd_scene load_steps=39 format=4 uid="uid://crx2puwrf8kap"]
 
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_8uaw3"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_h5p3k"]
@@ -28,7 +28,6 @@
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_meh6h"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="27_qv7h7"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="28_smwot"]
-[ext_resource type="AudioStream" uid="uid://dxm63t53brxfa" path="res://assets/sounds/boss_fight.ogg" id="28_wo2fk"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="29_ol1w0"]
 [ext_resource type="PackedScene" uid="uid://dfg7ew4joocvp" path="res://scenes/ui/healh_bar.tscn" id="31_crrga"]
 
@@ -284,7 +283,6 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("27_qv7h7")
 boss = NodePath("Boss")
-boss_bgm = ExtResource("28_wo2fk")
 
 [node name="Boss" parent="Bosszone" instance=ExtResource("28_smwot")]
 position = Vector2(-2.74074, 4.5)

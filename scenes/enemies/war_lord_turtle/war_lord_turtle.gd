@@ -13,12 +13,6 @@ extends EnemyCharacter
 @onready var health_bar: ProgressBar = $UI/Control/ProgressBar
 @onready var label: Label = $Label
 
-
-@export var launch_sfx: AudioStream = null
-@export var shoot_sfx: AudioStream = null
-@export var hurt_sfx: AudioStream = null
-@export var defeated_sfx: AudioStream = null
-
 var boss_zone: Area2D = null
 
 var is_fighting = false
@@ -38,7 +32,7 @@ func _ready() -> void:
 func fire() -> void:
 	var bullet := bullet_factory.create() as WarLordBullet
 	var player_pos: Vector2 = Vector2.ZERO
-	AudioPlayer.play_sound_once(shoot_sfx)
+	AudioManager.play_sound("war_lord_shoot")
 	if self.found_player != null:
 		player_pos = self.found_player.global_position
 	#else :
@@ -72,7 +66,7 @@ func launch(index: int) -> void:
 
 	var rocket := rocket_factory.create() as WarLordRocket
 	rocket.launch(global_position + fire_point[index % fire_point.size()], targets[index])
-	AudioPlayer.play_sound_once(launch_sfx)
+	AudioManager.play_sound("war_lord_launch")
 	
 func get_fire_poss() -> Vector2:
 	if is_facing_left:
@@ -83,7 +77,7 @@ func get_fire_poss() -> Vector2:
 func take_damage(damage: int) -> void:
 	super.take_damage(damage)
 	
-	AudioPlayer.play_sound_once(hurt_sfx)
+	AudioManager.play_sound("war_lord_hurt")
 	
 	flash_corountine()
 	var health_percent = (float(health) / max_health) * 100

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://c3df3jtoplbkr"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_wofkk"]
+[ext_resource type="AudioStream" uid="uid://bc4cr2fa6egln" path="res://assets/sounds/warlord_launch.wav" id="2_e2gql"]
+
+[resource]
+script = ExtResource("1_wofkk")
+clip_id = "war_lord_launch"
+stream = ExtResource("2_e2gql")
+volume_db = 0.0
+randomize_pitch = true
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"
