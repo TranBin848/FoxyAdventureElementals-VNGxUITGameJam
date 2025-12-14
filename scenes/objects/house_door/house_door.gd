@@ -7,8 +7,7 @@ var logger: Logger = ConsoleLogger.new()
 
 func _ready():
 	animated_sprite.play("close")
-	#collision_shape.disabled = false
-	logger.log("Hello im a w door")
+	collision_shape.disabled = false
 
 func open_door():
 	animated_sprite.play("open")

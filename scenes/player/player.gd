@@ -586,6 +586,9 @@ var speed_multiplier: float = 1.0
 func set_speed_multiplier(multiplier: float) -> void:
 	speed_multiplier = multiplier
 
+func set_jump_multiplier(multiplier: float) -> void:
+	jump_multiplier = multiplier
+
 # Cập nhật logic di chuyển
 
 # === SWAP WEAPON SYSTEM =================================

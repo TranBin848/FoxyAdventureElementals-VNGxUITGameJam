@@ -27,6 +27,7 @@ signal mana_changed
 @export var skill_icon_path: String = ""      
 
 var jump_speed: float = 400.0
+var jump_multiplier: float = 1.0
 var fsm: FSM = null
 var current_animation = null
 var animated_sprite: AnimatedSprite2D = null
@@ -84,7 +85,7 @@ func turn_right() -> void:
 	_next_direction = 1
 
 func jump() -> void:
-	velocity.y = -jump_speed
+	velocity.y = -jump_speed * jump_multiplier
 
 func stop_move() -> void:
 	velocity.x = 0

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=42 format=3 uid="uid://bm5rl67k65q3o"]
+[gd_resource type="TileSet" load_steps=41 format=3 uid="uid://bm5rl67k65q3o"]
 
 [ext_resource type="Texture2D" uid="uid://cis1f5g6gkekl" path="res://assets/element_themed_terrain/WoodTile.png" id="2_rekh6"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="3_uh2ju"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="6_xk6vd"]
 [ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/spike.tscn" id="7_lxd22"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="9_4xs1m"]
-[ext_resource type="PackedScene" uid="uid://c15o6qkwmcw44" path="res://scenes/objects/wooden_door/wooden_door.tscn" id="10_poqtw"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="11_pct2e"]
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="12_oeoy3"]
 [ext_resource type="Texture2D" uid="uid://gt1xm70ewpul" path="res://levels/level_4/MyFloorTile1.png" id="13_5e8yb"]
@@ -474,7 +473,6 @@ scenes/1/scene = ExtResource("3_uh2ju")
 scenes/2/scene = ExtResource("7_lxd22")
 scenes/3/scene = SubResource("PackedScene_mk7g3")
 scenes/4/scene = ExtResource("9_4xs1m")
-scenes/6/scene = ExtResource("10_poqtw")
 scenes/7/scene = ExtResource("11_pct2e")
 scenes/8/scene = ExtResource("12_oeoy3")
 scenes/10/scene = ExtResource("4_blm7e")
