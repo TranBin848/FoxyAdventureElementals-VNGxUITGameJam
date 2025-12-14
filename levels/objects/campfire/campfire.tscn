@@ -1,5 +1,3 @@
-[gd_scene load_steps=44 format=3 uid="uid://bmqknea8bh0ev"]
-
 [ext_resource type="Texture2D" uid="uid://x0wewx23js2a" path="res://assets/terrain_plus/Animated Sprites/Campfire sheet.png" id="1_sxqdn"]
 [ext_resource type="AudioStream" uid="uid://dfv8niucs75pj" path="res://assets/sounds/65795__juskiddink__bonfire.wav" id="2_g2bal"]
 [gd_scene load_steps=46 format=3 uid="uid://bmqknea8bh0ev"]
