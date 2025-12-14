@@ -57,7 +57,7 @@ func open_chest():
 		coin_instance.global_position = global_position + Vector2(0, -20)
 		coin_instance._gravity = 980
 		coin_instance.velocity = Vector2(
-			randf_range(-50, 50), 
+			randf_range(-50, 50),
 			randf_range(-150, -80)
 		)
 		

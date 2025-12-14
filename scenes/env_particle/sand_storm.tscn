@@ -1,4 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://crhikmylhv4ty"]
+[gd_scene load_steps=12 format=3 uid="uid://crhikmylhv4ty"]
+
+[ext_resource type="Script" uid="uid://csi2rn712vsua" path="res://scenes/env_particle/sand_storm.gd" id="1_vt8gy"]
 
 [sub_resource type="Gradient" id="Gradient_32rye"]
 offsets = PackedFloat32Array(0, 0.530769, 1)
@@ -45,6 +47,9 @@ scale_max = 1.8
 color_ramp = SubResource("GradientTexture1D_8al0x")
 color_initial_ramp = SubResource("GradientTexture1D_32rye")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vt8gy"]
+size = Vector2(2000, 400)
+
 [node name="SandStormParticle" type="GPUParticles2D"]
 amount = 100
 texture = SubResource("GradientTexture2D_x2nkm")
@@ -55,3 +60,12 @@ visibility_rect = Rect2(-350, -200, 2000, 400)
 trail_enabled = true
 trail_lifetime = 0.6
 process_material = SubResource("ParticleProcessMaterial_ummkf")
+script = ExtResource("1_vt8gy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(650, 0)
+shape = SubResource("RectangleShape2D_vt8gy")
