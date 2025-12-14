@@ -1,8 +1,8 @@
 [gd_scene load_steps=40 format=4 uid="uid://dsxvyoo4n54nc"]
 
-[ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_4/level_4.gd" id="1_n8468"]
+[ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_n8468"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
-[ext_resource type="TileSet" uid="uid://bui3wquutm1yg" path="res://levels/level_four/level_four.tres" id="3_rjkgb"]
+[ext_resource type="TileSet" uid="uid://bui3wquutm1yg" path="res://levels/level_4/level_4.tres" id="3_rjkgb"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="4_0odlo"]
 [ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/sea_horse.tscn" id="7_5mfhe"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="8_f8hbo"]

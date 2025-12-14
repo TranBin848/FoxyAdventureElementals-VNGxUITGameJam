@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ephbvmyidgwe"
-path="res://.godot/imported/MyFloorTile2.png-bba620568051f395a51788c2dd710b23.ctex"
+path="res://.godot/imported/MyFloorTile2.png-4a8ab6e2c3f63b93a2de338d6b0264bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/level_four/MyFloorTile2.png"
-dest_files=["res://.godot/imported/MyFloorTile2.png-bba620568051f395a51788c2dd710b23.ctex"]
+source_file="res://levels/level_4/MyFloorTile2.png"
+dest_files=["res://.godot/imported/MyFloorTile2.png-4a8ab6e2c3f63b93a2de338d6b0264bc.ctex"]
 
 [params]
 
