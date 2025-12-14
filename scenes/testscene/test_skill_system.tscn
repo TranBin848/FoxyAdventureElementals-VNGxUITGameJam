@@ -149,6 +149,7 @@ tile_set = ExtResource("1_g2lgl")
 
 [node name="Player" parent="." instance=ExtResource("2_njnvt")]
 position = Vector2(317, 211)
+has_wand = true
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 

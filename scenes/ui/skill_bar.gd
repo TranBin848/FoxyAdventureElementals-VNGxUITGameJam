@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 var slots: Array
-var skills: Array = []
+var skills: Array = [StunShot, Earthquake, ThunderStrike]
 var available_skills: Array = []
 
 func _ready() -> void:

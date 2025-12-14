@@ -497,7 +497,6 @@ scale = Vector2(27, 18)
 boss = NodePath("Boss")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossZoneArea2D"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_6onc1")
 debug_color = Color(0.988235, 0, 0.290196, 0)
 

@@ -303,6 +303,12 @@ func enter_skill(tornado_pos: Vector2) -> void:
 	
 	tween.tween_callback(Callable(self, "_on_reach_tornado_top"))
 
+# Enemy bị hút vào vùng nổ
+func enter_stun(tornado_pos: Vector2) -> void:
+	# 1. Thiết lập trạng thái
+	is_movable = false
+	velocity = Vector2.ZERO
+
 # Khi rời khỏi
 func exit_skill() -> void:
 	# Khôi phục khả năng di chuyển
