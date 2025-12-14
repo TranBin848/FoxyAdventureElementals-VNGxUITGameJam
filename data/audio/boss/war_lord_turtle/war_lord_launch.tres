@@ -7,7 +7,7 @@
 script = ExtResource("1_wofkk")
 clip_id = "war_lord_launch"
 stream = ExtResource("2_e2gql")
-volume_db = 0.0
+volume_db = -10.0
 randomize_pitch = true
 pitch_min = 0.9
 pitch_max = 1.1

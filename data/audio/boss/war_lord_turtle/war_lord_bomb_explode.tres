@@ -7,7 +7,7 @@
 script = ExtResource("1_c3vxi")
 clip_id = "war_lord_bomb_explode"
 stream = ExtResource("2_b1vp5")
-volume_db = 0.0
+volume_db = -10.0
 randomize_pitch = false
 pitch_min = 0.9
 pitch_max = 1.1
