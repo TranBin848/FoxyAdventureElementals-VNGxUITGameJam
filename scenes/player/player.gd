@@ -2,6 +2,7 @@ class_name Player
 extends BaseCharacter
 @onready var camera_2d: Camera2D = $Camera2D
 
+#Invulnerable Logic Parameters
 @export var invulnerable_duration: float = 2
 var is_invulnerable: bool = false
 var invulnerable_timer: float = 0
@@ -9,11 +10,16 @@ const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
 var saved_collision_layer: int
 
+#Attack Logic Parameter
+@export var atk_cd: float = 1 #Time between attack
+var is_able_attack: bool = true 
+
 @export var has_blade: bool = false
-@export var has_wand: bool = false
+@export var has_wand: bool = true
 var is_equipped_blade: bool = false    #Đang cầm Blade?
 var is_equipped_wand: bool = false     # Đang cầm Wand?
 signal weapon_swapped(equipped_weapon_type: String)
+
 
 var blade_hit_area: Area2D
 @export var blade_throw_speed: float = 300
@@ -23,6 +29,7 @@ var blade_hit_area: Area2D
 @onready var jump_fx_factory: Node2DFactory = $Direction/JumpFXFactory
 @onready var skill_factory: Node2DFactory = $Direction/SkillFactory
 @onready var hurt_particle: CPUParticles2D = $Direction/HurtFXFactory
+@onready var slash_fx_factory: Node2DFactory = $Direction/SlashFXFactory
 
 @onready var hurt_area: HurtArea2D = $Direction/HurtArea2D
 
@@ -35,25 +42,19 @@ var blade_hit_area: Area2D
 @onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
 @onready var silhouette_wand_sprite: AnimatedSprite2D = $Direction/SilhouetteWandAnimatedSprite2D
 
-#Sound SF
-@export var jump_sfx: AudioStream = null
-@export var hurt_sfx: AudioStream = null
-@export var attack_sfx: AudioStream = null
-@export var throw_sfx: AudioStream = null
-@export var walk_sfx: AudioStream = null
-
-@onready var walk_sfx_player: AudioStreamPlayer2D = null
-
 #Movement
 var last_dir: float = 0.0
 @export var wall_slide_speed: float = 50.0
 @export var max_fall_speed: float = 100.0
+var can_move: bool = true
 
+#dash
 @export var dash_speed_mul: float = 5.0
 @export var dash_dist: float = 200.0
-@export var is_dashing: bool = false
 @export var dash_cd: float = 5.0
+var is_dashing: bool = false
 var can_dash: bool = true
+
 
 #Debug
 @onready var debuglabel: Label = $debuglabel
@@ -74,14 +75,19 @@ func _ready() -> void:
 		collected_blade()
 	
 	camera_2d.make_current()
-	
-	walk_sfx_player = AudioStreamPlayer2D.new()
-	walk_sfx_player.stream = walk_sfx
-	add_child(walk_sfx_player)
 
+	Dialogic.timeline_started.connect(_on_dialog_started)
+	Dialogic.timeline_ended.connect(_on_dialog_ended)
+	
 # ================================================================
 # === SKILL SYSTEM ===============================================
 # ================================================================
+
+func _on_dialog_started():
+	can_move = false
+
+func _on_dialog_ended():
+	can_move = true
 
 func _check_and_use_skill_stack(skill_to_use: Skill):
 	#1. Tìm Skill đó trong SkillBar
@@ -90,37 +96,25 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 	if skillbar_root:
 		skill_bar = skillbar_root.get_node("MarginContainer/SkillBar")
 	if skill_bar:
-		for slot in skill_bar.slots:
+		for i in range(skill_bar.slots.size()):
+			var slot = skill_bar.slots[i]
 			if slot.skill == skill_to_use:
 				
-				print("Stack trước khi dùng: %d" % skill_to_use.current_stack)
-			
+				var skill_current_stack = SkillStackManager.get_stack(skill_to_use.name)
+				var skill_current_unlocked = SkillStackManager.get_unlocked(skill_to_use.name)
+				
+				if skill_current_unlocked:
+					return
+				
 				# KIỂM TRA HỦY BỎ - Cần phải dùng LẦN NÀY (Stack == 1)
-				if skill_to_use.current_stack == 1:
-					
-					# Trừ Stack về 0 (để logic nội bộ đúng)
-					skill_to_use.current_stack -= 1 
-					
-					# Thực hiện logic HỦY BỎ
-					slot.skill = null
-					
-					# Reset UI Slot (giữ nguyên)
-					slot.texture_normal = null
-					slot.time_label.text = ""
-					slot.disabled = true
-					# Thêm dòng này để cập nhật UI stack thành trống nếu cần
-					slot.update_stack_ui() 
-					
-					print("☠️ Skill '%s' consumed and removed from slot!" % skill_to_use.name)
+				if skill_current_stack == 1:					
+					SkillStackManager.clear_skill_in_bar(i)
 				
 				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
-				elif skill_to_use.current_stack > 1:
-					
-					skill_to_use.current_stack -= 1
-					print("✨ Skill '%s' còn lại: %d" % [skill_to_use.name, skill_to_use.current_stack])
-					
-					# Cập nhật UI ngay lập tức (giữ nguyên)
+				elif skill_current_stack > 1:
+					SkillStackManager.remove_stack(skill_to_use.name, 1)
 					slot.update_stack_ui()
+				
 				
 				return # Thoát sau khi xử lý Stack
 
@@ -403,11 +397,22 @@ func invulnerable_flicker(delta) -> void:
 		flicker_timer = 0.0
 		animated_sprite.modulate.a = 1/(animated_sprite.modulate.a/(0.4*0.7))
 
+func start_atk_cd() -> void:
+	is_able_attack = false
+	await get_tree().create_timer(atk_cd).timeout
+	is_able_attack = true
+
 func can_attack() -> bool:
-	return is_equipped_blade or is_equipped_wand
+	if not is_able_attack:
+		return false
+	
+	if not (is_equipped_blade or is_equipped_wand):
+		return false
+	
+	return true
 
 func can_throw() -> bool:
-	return has_blade
+	return has_blade && is_equipped_blade
 
 func cast_skill(skill_name: String) -> void:
 	if fsm.current_state != fsm.states.castspell:
@@ -419,10 +424,6 @@ func set_invulnerable() -> void:
 	# Save current layer and disable player's collision layer
 	saved_collision_layer = hurt_area.collision_layer
 	hurt_area.collision_layer = 0  # Temporarily disable collision layer
-	
-func _process(delta: float) -> void:
-	if (fsm.current_state != fsm.states.run):
-		walk_sfx_player.stop()
 
 func is_char_invulnerable() -> bool:
 	return is_invulnerable
@@ -601,16 +602,17 @@ func collected_blade() -> void:
 	_equip_blade_from_swap()
 	
 func throw_blade() -> void:
+	if is_equipped_wand:
+		return
 	var blade = blade_factory.create() as RigidBody2D
 	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
-	blade.direction = direction
 	blade.apply_impulse(throw_velocity)
 	throwed_blade()
 	
 func throwed_blade() -> void:
 	has_blade = false
 	is_equipped_blade = false
-	weapon_swapped.emit("normal")
+	
 	set_animated_sprite($Direction/AnimatedSprite2D)
 	
 	# Quản lý sprite silhouette:
@@ -622,6 +624,7 @@ func throwed_blade() -> void:
 	extra_sprites.append(silhouette_normal_sprite)
 	silhouette_normal_sprite.show()
 	
+	weapon_swapped.emit("normal")
 # ====== WEAPON SWAP LOGIC ======
 func swap_weapon() -> void:
 	#Nếu không sở hữu bất kỳ vũ khí nào, không làm gì
@@ -704,7 +707,12 @@ func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	# 2. Thêm sprite silhouette MỚI và hiện nó
 	extra_sprites.append(new_silhouette)
 	new_silhouette.show()
+
 func _update_movement(delta: float) -> void:
+	if not can_move:
+		velocity = Vector2.ZERO
+		return
+	
 	velocity.y += gravity * delta
 
 	if fsm.current_state == fsm.states.wallcling:

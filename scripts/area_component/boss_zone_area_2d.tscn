@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2nu6ncphw78a"]
+
+[ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="1_1tj7f"]
+
+[node name="BossZoneArea2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_1tj7f")
+ambience_music_id = "music_boss"
+fade_in = 1.5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

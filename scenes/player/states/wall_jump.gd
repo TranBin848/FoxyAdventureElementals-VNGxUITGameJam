@@ -3,7 +3,7 @@ extends PlayerState
 func _enter() -> void:
 	#Change animation to jump
 	obj.change_animation("jump")
-	AudioPlayer.play_sound_once(obj.jump_sfx)
+	AudioManager.play_sound("player_jump")
 	timer = 0.3
 	obj.velocity.x = obj.movement_speed * obj.direction
 
@@ -13,7 +13,7 @@ func _update(_delta: float):
 	#player is not allowed to perform action at the 
 	#start of wall jump
 	if update_timer(_delta):
-		change_state(fsm.states.jump)
+		change_state(fsm.states.fall)
 	
 	control_dash()
 	

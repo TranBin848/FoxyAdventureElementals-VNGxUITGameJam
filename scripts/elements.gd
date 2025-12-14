@@ -1,2 +1,2 @@
 extends Node
-enum Elements {METAL, WOOD, WATER, FIRE, EARTH}
+enum Elements {NONE, METAL, WOOD, WATER, FIRE, EARTH}

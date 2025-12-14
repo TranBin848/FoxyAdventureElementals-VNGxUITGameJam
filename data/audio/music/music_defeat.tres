@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://pxesxgv5nytx"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_ql20t"]
+[ext_resource type="AudioStream" uid="uid://celbmeo4au546" path="res://assets/sounds/gong.mp3" id="2_v53p2"]
+
+[resource]
+script = ExtResource("1_ql20t")
+clip_id = "music_defeat"
+stream = ExtResource("2_v53p2")
+volume_db = -10.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

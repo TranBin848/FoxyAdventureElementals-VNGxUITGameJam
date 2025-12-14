@@ -14,9 +14,6 @@ extends EnemyCharacter
 @export var skill_cd: float = 10
 @export var spin_velocity = 300
 
-@export var attack_sfx: AudioStream = null
-@export var hurt_sfx: AudioStream = null
-
 var is_stunned: bool = false
 var fired_claw: Node2D = null
 var boss_zone: Area2D = null
@@ -57,7 +54,7 @@ func use_skill() -> void:
 	pass
 
 func fire_claw() -> void:
-	AudioPlayer.play_sound_once(attack_sfx)
+	AudioManager.play_sound("boss_attack")
 	var claw = claw_factory.create()
 	claw.start_pos = claw_factory.global_position
 	claw.global_position = claw_factory.global_position
@@ -74,7 +71,7 @@ func retrieve_claw() -> void:
 func take_damage(damage: int) -> void:
 	super.take_damage(damage)
 	
-	AudioPlayer.play_sound_once(hurt_sfx)
+	AudioManager.play_sound("boss_hurt")
 	
 	flash_corountine()
 	var health_percent = (float(health) / max_health) * 100

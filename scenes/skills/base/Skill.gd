@@ -16,12 +16,9 @@ class_name Skill
 @export var mana: int = 1.0
 
 @export var type: String = "single_shot" 
-# có thể là: "single_shot", "multi_shot", "radial", "melee", "buff"
+# có thể là: "single_shot", "multi_shot", "radial", "area", "buff"
 
-@export var max_stack: int = 99 #Cấp độ/Stack tối đa
-var current_stack: int = 1      #Cấp độ/Stack hiện tại
-
-# 11122Thêm trường mã hóa element để tiện xử lý logic
+#Thêm trường mã hóa element để tiện xử lý logic
 # 0: None, 1: Fire, 2: Water, 3: Earth, 4: Metal, 5: Wood
 var elemental_type: int:
 	get:

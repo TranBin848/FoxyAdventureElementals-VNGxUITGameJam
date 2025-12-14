@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PowerupDecoratorData" load_steps=2 format=3 uid="uid://dd8wa830k6b0r"]
+
+[ext_resource type="Script" uid="uid://bi224x34bsap8" path="res://scripts/powerup/powerup_decorator_data.gd" id="1_aypht"]
+
+[resource]
+script = ExtResource("1_aypht")
+id = "blade"
+display_name = "Blade"
+description = ""
+priority = 0
+duration = -1.0
+speed_multiplier = 1.0
+jump_multiplier = 1.0
+damage_multiplier = 1.0
+health_bonus = 0
+grants_blade_attack = true
+sprite_override = "BladeAnimatedSprite2D"
+color_modulate = Color(1, 1, 1, 1)
+conflicts_with = Array[String]([])
+replaces = Array[String]([])
+can_stack = true
+custom_properties = {}
+metadata/_custom_type_script = "uid://bi224x34bsap8"

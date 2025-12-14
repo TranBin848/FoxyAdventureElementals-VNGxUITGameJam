@@ -43,6 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="45_pyrf2"]
 [ext_resource type="PackedScene" uid="uid://bh4o4646vlfjr" path="res://levels/objects/wand_collectable.tscn" id="45_tn3ix"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="46_0ob0i"]
+[ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="47_g4e08"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="47_mk7g3"]
 [ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="48_82kae"]
 
@@ -3063,6 +3064,7 @@ position = Vector2(3721, 318)
 
 [node name="Crab" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(600, -13)
+elemental_type = 4
 skill_to_drop = ExtResource("35_tn3ix")
 skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons3.png"
 
@@ -3221,7 +3223,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("43_nyqcx")
 
-[node name="SkillBar" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_ah671")]
+[node name="SkillBarUI" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_ah671")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
