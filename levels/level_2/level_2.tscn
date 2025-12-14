@@ -330,9 +330,6 @@ position = Vector2(2993, 499)
 [node name="Crab7" parent="." instance=ExtResource("23_vdtjt")]
 position = Vector2(5011, 499)
 
-[node name="Saw6" parent="." instance=ExtResource("24_nouef")]
-position = Vector2(21219, -798)
-
 [node name="Saw3" parent="." instance=ExtResource("24_nouef")]
 position = Vector2(7169, -266)
 curve = SubResource("Curve2D_s4b5i")
