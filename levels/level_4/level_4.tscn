@@ -107,12 +107,6 @@ motion_mirroring = Vector2(640, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource("14_2nx6g")
 
-[node name="Chest" parent="." instance=ExtResource("15_hth0v")]
-position = Vector2(1013, 688)
-
-[node name="Chest2" parent="." instance=ExtResource("15_hth0v")]
-position = Vector2(1065, 689)
-
 [node name="ChestKey" parent="." instance=ExtResource("16_oppti")]
 position = Vector2(971, 690)
 
@@ -127,3 +121,9 @@ position = Vector2(253, 761)
 
 [node name="Quicksand3" parent="." instance=ExtResource("9_oppti")]
 position = Vector2(303, 761)
+
+[node name="Chest" parent="." instance=ExtResource("15_hth0v")]
+position = Vector2(848, 688)
+
+[node name="Chest2" parent="." instance=ExtResource("15_hth0v")]
+position = Vector2(806, 688)

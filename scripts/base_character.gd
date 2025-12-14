@@ -14,14 +14,13 @@ var direction: int = 1
 @export var attack_damage: int = 1
 @export var max_health: int = 100
 @export var max_mana: int = 1000
-@export var elemental_type: int = 0 #0: none, 1: fire, 2: earth, 3: water
+@export var elemental_type: int = 0 # 0: none, 1: fire, 2: earth, 3: water
 var health: int = max_health
 var mana: int = max_mana
 signal hurt
 signal health_changed
 signal died
 signal mana_changed
-
 
 @export var skill_to_drop: Script = null      
 @export var skill_icon_path: String = ""      
