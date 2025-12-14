@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="9_4xs1m"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="11_pct2e"]
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="12_oeoy3"]
-[ext_resource type="Texture2D" uid="uid://gt1xm70ewpul" path="res://levels/level_4/MyFloorTile1.png" id="13_5e8yb"]
+[ext_resource type="Texture2D" uid="uid://gt1xm70ewpul" path="res://levels/level_2/MyFloorTile1.png" id="13_5e8yb"]
 [ext_resource type="Texture2D" uid="uid://u2air8500ab1" path="res://assets/terrain_plus/Pine Trees.png" id="15_tlj5e"]
 [ext_resource type="Texture2D" uid="uid://cueic4gs16ffs" path="res://assets/element_themed_terrain/EarthTile.png" id="15_upobi"]
 [ext_resource type="Texture2D" uid="uid://co7h0jbb2emd4" path="res://assets/element_themed_terrain/FireTile.png" id="16_64hjr"]
