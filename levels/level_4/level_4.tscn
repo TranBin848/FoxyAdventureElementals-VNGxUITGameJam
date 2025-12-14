@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=28 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_4/level_4.gd" id="1_pyrf2"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="4_5qnna"]
@@ -17,6 +17,52 @@
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="47_mk7g3"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_4/level_4.tres" id="48_0ob0i"]
 [ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="48_82kae"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oppti"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_gsaxp"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.504132, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_32rye"]
+curve = SubResource("Curve_gsaxp")
+
+[sub_resource type="Gradient" id="Gradient_x2nkm"]
+colors = PackedColorArray(1, 1, 1, 0.0784314, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8al0x"]
+gradient = SubResource("Gradient_x2nkm")
+
+[sub_resource type="Curve" id="Curve_vron0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_dtj5h"]
+_limits = [0.0, 30.0, 0.0, 1.0]
+_data = [Vector2(0, 15.1685), 0.0, 50.9831, 0, 0, Vector2(1, 30), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ummkf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_cxcrb"]
+curve_x = SubResource("Curve_vron0")
+curve_y = SubResource("Curve_dtj5h")
+curve_z = SubResource("Curve_ummkf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q5wwa"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -200, 0)
+emission_shape = 3
+emission_box_extents = Vector3(350, 1, 1)
+gravity = Vector3(0, 3000, 0)
+scale_min = 0.2
+scale_curve = SubResource("CurveXYZTexture_cxcrb")
+color_initial_ramp = SubResource("GradientTexture1D_8al0x")
+alpha_curve = SubResource("CurveTexture_32rye")
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_pyrf2")
@@ -127,3 +173,12 @@ position = Vector2(848, 688)
 
 [node name="Chest2" parent="." instance=ExtResource("15_hth0v")]
 position = Vector2(806, 688)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_oppti")
+position = Vector2(288, 576)
+amount = 1000
+lifetime = 0.5
+preprocess = 0.5
+visibility_rect = Rect2(-350, -200, 700, 400)
+process_material = SubResource("ParticleProcessMaterial_q5wwa")
