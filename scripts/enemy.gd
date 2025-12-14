@@ -160,7 +160,6 @@ func _init_particle():
 					current_particle = particle
 					if current_particle != null:
 						current_particle.emitting = true
-	print(current_particle)
 	pass
 
 # --- Check if touching wall
@@ -223,16 +222,15 @@ func _on_player_not_in_sight() -> void:
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
-	print(_elemental_type)
-	print(elemental_type)
-	print(_damage)
-	print(modified_damage)
+	#print(_elemental_type)
+	#print(elemental_type)
+	#print(_damage)
+	#print(modified_damage)
 	#var is_critical = modified_damage > _damage
-	var is_critical = (check_element(elemental_type, _elemental_type) == -1)
-	print(is_critical)
+	var is_critical = (check_element(_elemental_type, elemental_type) == -1)
 	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
-	fsm.current_state.take_damage(_direction, modified_damage)
-	handle_elemental_damage(_elemental_type)
+	if (fsm.current_state != null): fsm.current_state.take_damage(_direction, modified_damage)
+	if is_critical: handle_elemental_damage(_elemental_type)
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	## Nếu tấn công không có nguyên tố, dùng damage gốc
@@ -262,25 +260,24 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	#if attacker_element in weakness_table and elemental_type in weakness_table[attacker_element]:
 		#return base_damage * 0.75  # -25% damage
 	
-	var check_element = check_element(elemental_type, attacker_element)
+	var check_element = check_element(attacker_element, elemental_type)
 	match check_element:
 		# Bị khắc
 		-1: return base_damage * 1.25
 		# Không sinh khắc
 		0: return base_damage
-		# Khắc nguyên tố đối thủ
+		# Được sinh
 		1: return base_damage * 0.75
 	
 	return base_damage
 
-# 0: Không sinh khắc, 1: khắc, -1: bị khắc
 func check_element(elemental_type_1: int, elemental_type_2: int) -> int:
-	# Kiểm tra khắc
-	if (elemental_type_1 in advantage_table and elemental_type_2 in advantage_table[elemental_type_1]):
-		return 1
-	# Kiểm tra bị khắc
-	if (elemental_type_2 in advantage_table and elemental_type_1 in advantage_table[elemental_type_2]):
+	# 1 khắc 2
+	if (elemental_type_1 in restraint_table and elemental_type_2 in restraint_table[elemental_type_1]):
 		return -1
+	# 1 sinh 2
+	if (elemental_type_1 in creation_table and elemental_type_2 in creation_table[elemental_type_1]):
+		return 1
 	# Không sinh khắc
 	return 0
 
@@ -290,22 +287,37 @@ func handle_elemental_damage(attacker_element: int) -> void:
 			0:  # None
 				pass
 			1:  # Fire - burn status
-				apply_fire_effect()
+				apply_burn_effect()
 			2:  # Earth - slow status
-				apply_earth_effect()
+				apply_stun_effect()
 			3:  # Water - freeze status
-				apply_water_effect()
+				apply_freeze_effect()
+			4: 	# Metal - weakness
+				apply_weakness_effect()
+			5:  # Wood - poison
+				apply_poison_effect()
 
-func apply_fire_effect() -> void:
+func apply_burn_effect() -> void:
 	# Có thể thêm hiệu ứng lửa (burn status, animation, etc)
+	print("Burn")
 	pass
 
-func apply_earth_effect() -> void:
+func apply_freeze_effect() -> void:
 	# Có thể thêm hiệu ứng đất (slow, knockback, etc)
+	print("Freeze")
 	pass
 
-func apply_water_effect() -> void:
+func apply_stun_effect() -> void:
 	# Có thể thêm hiệu ứng nước (freeze, slow, etc)
+	print("Stunned")
+	pass
+
+func apply_poison_effect() -> void:
+	print("Poisoned")
+	pass
+	
+func apply_weakness_effect() -> void:
+	print("Weakness")
 	pass
 
 

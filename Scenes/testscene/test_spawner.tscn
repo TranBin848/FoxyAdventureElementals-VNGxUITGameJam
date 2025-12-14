@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://dos8jgdamucqc"]
+[gd_scene load_steps=40 format=4 uid="uid://dos8jgdamucqc"]
 
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_ihf7f"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="2_u14bh"]
@@ -29,12 +29,9 @@
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="28_oi0ud"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="29_tyosl"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="31_cw110"]
-[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://Scenes/enemies/spawner/spawner.tscn" id="31_lij6g"]
-[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://Scenes/enemies/minions/mushroom/mushroom.tscn" id="32_a3442"]
-[ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://Scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="33_a3442"]
+[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://Scenes/enemies/minions/seahorse/sea_horse.tscn" id="32_u14bh"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="34_lij6g"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://Scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="35_a3442"]
-[ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://Scenes/enemies/minions/starfish/starfish.tscn" id="36_iyi8e"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
 script/source = "extends Node2D
@@ -276,11 +273,6 @@ position = Vector2(88, 230)
 [node name="Spike" parent="." instance=ExtResource("29_tyosl")]
 position = Vector2(180, 237)
 
-[node name="Spawner" parent="." instance=ExtResource("31_lij6g")]
-position = Vector2(1293, 68)
-enemy_to_spawn = Array[PackedScene]([ExtResource("32_a3442"), ExtResource("33_a3442")])
-elemental_type = 1
-
 [node name="Platform" type="Node2D" parent="."]
 
 [node name="Platform2" parent="Platform" instance=ExtResource("31_cw110")]
@@ -293,5 +285,7 @@ position = Vector2(516, 235)
 position = Vector2(1251, 100)
 max_health = 50
 
-[node name="Starfish" parent="." instance=ExtResource("36_iyi8e")]
-position = Vector2(691, 226)
+[node name="SeaHorse" parent="." instance=ExtResource("32_u14bh")]
+position = Vector2(858, 239)
+scale = Vector2(0.62, 0.62)
+elemental_type = 2

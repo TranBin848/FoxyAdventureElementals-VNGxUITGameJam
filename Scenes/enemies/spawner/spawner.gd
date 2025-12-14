@@ -12,6 +12,9 @@ func _ready() -> void:
 	super._ready()
 	_init_animated_sprite()
 	fsm = FSM.new(self, $States, $States/Idle)
+	
+func _process(delta: float) -> void:
+	spawn_timer -= delta
 
 func _init_animated_sprite() -> void:
 	if has_node("Direction/AnimatedSprites"):
@@ -60,7 +63,7 @@ func reset_spawn_timer() -> void:
 	spawn_timer = spawn_interval
 	
 func update_spawn_timer(delta: float) -> bool:
-	spawn_timer -= delta
+	#spawn_timer -= delta
 	if (spawn_timer <= 0):
 		return true
 	return false
