@@ -4,7 +4,6 @@ var velocity = Vector2.ZERO
 var _gravity = 0
 
 @export var coin_amount: int = 1
-@export var consumed_sfx: AudioStream = null
 
 @onready var ground_ray = $RayCast2D
 
@@ -41,7 +40,7 @@ func _physics_process(delta):
 func collect_coin():
 	GameManager.inventory_system.add_coin(1)
 	$Coin.play("consumed")
-	AudioPlayer.play_sound_once(consumed_sfx)
+	AudioManager.play_sound("item_collect")
 	$Coin.animation_finished.connect(queue_free)
 
 func _on_interaction_available() -> void:

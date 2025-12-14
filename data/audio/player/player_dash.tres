@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://jehl8t6dtt8p"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_cpx7y"]
+[ext_resource type="AudioStream" uid="uid://s8yu0fwvsyu8" path="res://assets/sounds/15_human_dash_1.wav" id="2_wghpp"]
+
+[resource]
+script = ExtResource("1_cpx7y")
+clip_id = "player_dash"
+stream = ExtResource("2_wghpp")
+volume_db = 0.0
+randomize_pitch = true
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

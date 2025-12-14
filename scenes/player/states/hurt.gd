@@ -3,7 +3,7 @@ extends PlayerState
 
 func _enter():
 	obj.change_animation("hurt")
-	AudioPlayer.play_sound_once(obj.hurt_sfx)
+	AudioManager.play_sound("player_hurt")
 	obj.velocity.y = -250
 	timer = 0.5
 

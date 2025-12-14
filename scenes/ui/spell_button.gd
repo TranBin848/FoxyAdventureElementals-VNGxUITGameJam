@@ -9,7 +9,7 @@ const ERROR_DISPLAY_TIME: float = 1.0
 @onready var mana: Label = $Mana
 @onready var timer: Timer = $Timer
 
-var alert_label: Label = null # ⬅️ Khai báo biến thành viên thường
+var alert_label: Label = null 
 
 var skill: Skill = null
 var _change_key: String = ""	
@@ -33,6 +33,16 @@ func _ready() -> void:
 		cooldown.max_value = timer.wait_time
 	set_process(false)
 	alert_label = get_tree().root.find_child("ErrorLabel", true, false) as Label
+	#SkillStackManager.connect("stack_changed", Callable(self, "_on_stack_changed"))
+	
+	_update_all()
+#func _on_stack_changed(name, new_stack):
+	#if name == skill.name:
+		#stack_label.text = str(new_stack)
+
+func _update_all():
+	pass
+
 func _process(_delta: float) -> void:
 	if timer.is_stopped():
 		return
@@ -93,9 +103,11 @@ func _show_error_text(message: String) -> void:
 	tween.tween_callback(Callable(alert_label, "set_visible").bind(false))
 
 func update_stack_ui():
-	if skill == null or skill.current_stack < 1:
+	if skill == null:
 		stack_label.visible = false
-	else:
-		stack_label.visible = true
-		#Hiển thị Stack hiện tại (ví dụ: "Lv 2" hoặc "x2")
-		stack_label.text = "x" + str(skill.current_stack)
+		return
+		
+	var skill_current_stack = SkillStackManager.get_stack(skill.name)
+	stack_label.visible = true
+	stack_label.text = "x" + str(skill_current_stack)
+	#stack_label.text = "x" + str(skill.current_stack)

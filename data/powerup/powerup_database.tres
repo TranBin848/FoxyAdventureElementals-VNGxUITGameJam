@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerupDatabase" load_steps=4 format=3 uid="uid://cmphf2hr4nilr"]
+
+[ext_resource type="Script" uid="uid://bi224x34bsap8" path="res://scripts/powerup/powerup_decorator_data.gd" id="1_a0jlh"]
+[ext_resource type="Script" uid="uid://o0rruy8og28w" path="res://scripts/powerup/powerup_database.gd" id="1_mt8vk"]
+[ext_resource type="Resource" uid="uid://e43vprubrirw" path="res://data/powerup/blade.tres" id="2_a0jlh"]
+
+[resource]
+script = ExtResource("1_mt8vk")
+powerups = Array[ExtResource("1_a0jlh")]([ExtResource("2_a0jlh")])
+metadata/_custom_type_script = "uid://o0rruy8og28w"
