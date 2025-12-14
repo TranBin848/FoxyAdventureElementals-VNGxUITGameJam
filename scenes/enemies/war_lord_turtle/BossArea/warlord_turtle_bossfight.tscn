@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhu0ol466opfw"]
+
+[ext_resource type="Script" uid="uid://ctkh38frl142f" path="res://scenes/enemies/war_lord_turtle/BossArea/boss_area.gd" id="1_oijec"]
+[ext_resource type="PackedScene" uid="uid://d0ig8xrtjp2v1" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.tscn" id="2_4r62j"]
+[ext_resource type="AudioStream" uid="uid://dxm63t53brxfa" path="res://assets/sounds/Three Red Hearts - Save the City.ogg" id="2_atynl"]
+[ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="3_4623r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_atynl"]
+size = Vector2(596, 351)
+
+[node name="BossArea2D" type="Area2D" node_paths=PackedStringArray("boss")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_oijec")
+boss = NodePath("WarLordTurtle")
+boss_bgm = ExtResource("2_atynl")
+normal_bgm = ExtResource("3_4623r")
+
+[node name="WarLordTurtle" parent="." instance=ExtResource("2_4r62j")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -98.5)
+shape = SubResource("RectangleShape2D_atynl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -100)
+zoom = Vector2(2, 2)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
