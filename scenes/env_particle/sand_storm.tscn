@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://crhikmylhv4ty"]
+
+[sub_resource type="Gradient" id="Gradient_32rye"]
+offsets = PackedFloat32Array(0, 0.530769, 1)
+colors = PackedColorArray(0.54902, 0.215686, 0, 0.341176, 0.54902, 0.215686, 0, 1, 0.54902, 0.215686, 0, 0.408014)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x2nkm"]
+gradient = SubResource("Gradient_32rye")
+width = 1
+height = 32
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_gsaxp"]
+colors = PackedColorArray(1, 1, 1, 0.0941176, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_32rye"]
+gradient = SubResource("Gradient_gsaxp")
+
+[sub_resource type="Gradient" id="Gradient_x2nkm"]
+offsets = PackedFloat32Array(0, 0.518519, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.522124)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8al0x"]
+gradient = SubResource("Gradient_x2nkm")
+
+[sub_resource type="Curve" id="Curve_vron0"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.14876, 137.079), 0.0, 0.0, 0, 0, Vector2(0.198347, -33.7079), 0.0, 0.0, 0, 0, Vector2(0.35124, 137.079), 0.0, 0.0, 0, 0, Vector2(0.450413, -33.7079), 0.0, 0.0, 0, 0, Vector2(0.599174, 137.079), 0.0, 0.0, 0, 0, Vector2(0.698347, -33.7079), 0.0, 0.0, 0, 0, Vector2(0.85124, 137.079), 0.0, 0.0, 0, 0, Vector2(0.950413, -33.7079), 0.0, 0.0, 0, 0, Vector2(1, 38.2023), 0.0, 0.0, 0, 0]
+point_count = 10
+
+[sub_resource type="CurveTexture" id="CurveTexture_dtj5h"]
+curve = SubResource("Curve_vron0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ummkf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 200, 1)
+gravity = Vector3(200, 20, 0)
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 6.0
+tangential_accel_curve = SubResource("CurveTexture_dtj5h")
+damping_max = 100.0
+scale_min = 1.5
+scale_max = 1.8
+color_ramp = SubResource("GradientTexture1D_8al0x")
+color_initial_ramp = SubResource("GradientTexture1D_32rye")
+
+[node name="SandStormParticle" type="GPUParticles2D"]
+amount = 100
+texture = SubResource("GradientTexture2D_x2nkm")
+lifetime = 5.0
+preprocess = 2.0
+randomness = 1.0
+visibility_rect = Rect2(-350, -200, 2000, 400)
+trail_enabled = true
+trail_lifetime = 0.6
+process_material = SubResource("ParticleProcessMaterial_ummkf")
