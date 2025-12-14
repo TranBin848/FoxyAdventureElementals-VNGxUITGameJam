@@ -153,7 +153,6 @@ visible = false
 position = Vector2(-290, 633)
 
 [node name="RainParticle" parent="." instance=ExtResource("18_gsaxp")]
-visible = false
 position = Vector2(935, 599)
 
 [node name="Mushroom" parent="." instance=ExtResource("20_x2nkm")]
