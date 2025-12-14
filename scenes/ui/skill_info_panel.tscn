@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_1m040"]
 [ext_resource type="Script" uid="uid://pjpf80xw2waa" path="res://scenes/ui/skill_info_panel.gd" id="1_4pcvp"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_tcvtn"]
-[ext_resource type="VideoStream" uid="uid://kmkdegivqrkk" path="res://assets/skills/fire/FireShot.ogv" id="3_vmfbp"]
+[ext_resource type="VideoStream" uid="uid://d0eux0ncbfs4n" path="res://assets/skills/fire/FireExplosion.ogv" id="4_1m040"]
 
 [node name="SkillInfoPanel" type="Panel"]
 anchors_preset = 6
@@ -50,24 +50,66 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 22.0
 offset_top = 4.0
-offset_right = 376.0
-offset_bottom = 224.0
+offset_right = 436.0
+offset_bottom = 208.0
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("1_tcvtn")
 bbcode_enabled = true
 text = "Stat"
 
+[node name="StackToUpgrade" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = -47.0
+offset_right = 173.0
+offset_bottom = -31.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_tcvtn")
+theme_override_font_sizes/font_size = 8
+text = "Need 10 stacks"
+
+[node name="StackToUnlock" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 317.0
+offset_top = -47.0
+offset_right = 447.0
+offset_bottom = -31.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_tcvtn")
+theme_override_font_sizes/font_size = 8
+text = "Need 5 stacks"
+
+[node name="Stack" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = -112.0
+offset_right = 151.0
+offset_bottom = -96.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_tcvtn")
+theme_override_font_sizes/font_size = 16
+text = "Stack: 10"
+
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 39.0
-offset_top = 60.0
-offset_right = -15.0
-offset_bottom = 300.0
+offset_left = 51.0
+offset_top = 59.0
+offset_right = -49.0
+offset_bottom = 299.0
 grow_horizontal = 2
-scale = Vector2(0.95, 0.95)
-stream = ExtResource("3_vmfbp")
+stream = ExtResource("4_1m040")
+volume_db = -80.0
 autoplay = true
 loop = true
 
@@ -77,9 +119,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -65.0
+offset_top = -80.0
 offset_right = 170.0
-offset_bottom = -41.0
+offset_bottom = -56.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 text = "UPGRADE"
@@ -92,13 +134,29 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -170.0
-offset_top = -65.0
+offset_top = -80.0
 offset_right = -20.0
-offset_bottom = -41.0
+offset_bottom = -56.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 text = "UNLOCK"
 
+[node name="EquipButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -30.0
+offset_right = 70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_tcvtn")
+text = "EQUIP"
+
 [connection signal="pressed" from="UpgradeButton" to="." method="_on_upgrade_button_pressed"]
 [connection signal="pressed" from="UnlockButton" to="." method="_on_unlock_button_pressed"]
+[connection signal="pressed" from="EquipButton" to="." method="_on_equip_button_pressed"]

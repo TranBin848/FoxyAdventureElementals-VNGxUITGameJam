@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://odigrilu4tx1"]
+
+[ext_resource type="Script" uid="uid://c613v451tucd0" path="res://scenes/ui/skill_tree/skill_tree_root.gd" id="1_kcigv"]
+[ext_resource type="PackedScene" uid="uid://bvf8uqbc214c3" path="res://scenes/ui/skill_tree0.tscn" id="2_j3aj8"]
+
+[node name="SkillTreeRootTest" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_kcigv")
+
+[node name="SkillTreeButtonGroup" parent="." instance=ExtResource("2_j3aj8")]
+z_index = 1
+layout_mode = 1
