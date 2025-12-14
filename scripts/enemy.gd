@@ -2,36 +2,22 @@ class_name EnemyCharacter
 extends BaseCharacter
 
 @onready var damage_number_origin = $DamageNumbersOrigin
-#@export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
-	#ElementsEnum.Elements.METAL: Color("f0f0f0"),
-	#ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
-	#ElementsEnum.Elements.WATER: Color.AQUA,
-	#ElementsEnum.Elements.FIRE: Color("ff5219"),
-	#ElementsEnum.Elements.EARTH: Color("d36f00")
-#}
-#@export var elements_particle : Dictionary[ElementsEnum.Elements, String] = {
-	#ElementsEnum.Elements.METAL: "Metal",
-	#ElementsEnum.Elements.WOOD: "Wood",
-	#ElementsEnum.Elements.WATER: "Water",
-	#ElementsEnum.Elements.FIRE: "Fire",
-	#ElementsEnum.Elements.EARTH: "Earth"
-#}
 # 0: None, 1: Fire, 2: Water, 3: Earth, 4: Metal, 5: Wood
-@export var elements_color : Dictionary[int, Color] = {
-	4: Color("f0f0f0"),
-	5: Color.LIME_GREEN,
-	2: Color.AQUA,
-	1: Color("ff5219"),
-	3: Color("d36f00"),
-	0: Color.BLACK
+@export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
+	ElementsEnum.Elements.METAL: Color("f0f0f0"),
+	ElementsEnum.Elements.WOOD: Color.LIME_GREEN,
+	ElementsEnum.Elements.WATER: Color.AQUA,
+	ElementsEnum.Elements.FIRE: Color("ff5219"),
+	ElementsEnum.Elements.EARTH: Color("d36f00"),
+	ElementsEnum.Elements.NONE: Color.BLACK
 }
 @export var elements_particle : Dictionary[ElementsEnum.Elements, String] = {
-	4: "Metal",
-	5: "Wood",
-	2: "Water",
-	1: "Fire",
-	3: "Earth",
-	0: "Fire"
+	ElementsEnum.Elements.METAL: "Metal",
+	ElementsEnum.Elements.WOOD: "Wood",
+	ElementsEnum.Elements.WATER: "Water",
+	ElementsEnum.Elements.FIRE: "Fire",
+	ElementsEnum.Elements.EARTH: "Earth",
+	ElementsEnum.Elements.NONE: "None"
 }
 
 # Shader that will be used for outlining the enemy based on its element
@@ -316,6 +302,12 @@ func enter_skill(tornado_pos: Vector2) -> void:
 	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	
 	tween.tween_callback(Callable(self, "_on_reach_tornado_top"))
+
+# Enemy bị hút vào vùng nổ
+func enter_stun(tornado_pos: Vector2) -> void:
+	# 1. Thiết lập trạng thái
+	is_movable = false
+	velocity = Vector2.ZERO
 
 # Khi rời khỏi
 func exit_skill() -> void:

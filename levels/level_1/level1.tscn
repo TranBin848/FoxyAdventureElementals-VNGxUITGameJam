@@ -154,41 +154,34 @@ hoithoai = "guide_elemental"
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(631, 151)
-elemental_type = 3
 skill_to_drop = ExtResource("10_m7n46")
 skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("8_xoq1q")]
 position = Vector2(2165, -489)
-elemental_type = 5
 skill_to_drop = ExtResource("12_wpna4")
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("8_xoq1q")]
 z_index = 0
 position = Vector2(3097, -107)
 scale = Vector2(1.02679, 0.975904)
-elemental_type = 3
 skill_to_drop = ExtResource("10_m7n46")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("8_xoq1q")]
 z_index = 0
 position = Vector2(3017, 173)
-elemental_type = 3
 skill_to_drop = ExtResource("13_uabgq")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(1721, -400)
-elemental_type = 5
 skill_to_drop = ExtResource("15_420sh")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2823, -364)
-elemental_type = 5
 skill_to_drop = ExtResource("12_wpna4")
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("10_f06vl")]
 position = Vector2(2624, -364)
-elemental_type = 5
 skill_to_drop = ExtResource("15_420sh")
 
 [node name="Boat" parent="." instance=ExtResource("25_4iddc")]

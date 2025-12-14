@@ -2640,6 +2640,7 @@ position = Vector2(3721, 318)
 
 [node name="Crab" parent="Enemies" instance=ExtResource("32_wsco1")]
 position = Vector2(600, -13)
+elemental_type = 4
 skill_to_drop = ExtResource("35_tn3ix")
 skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons3.png"
 

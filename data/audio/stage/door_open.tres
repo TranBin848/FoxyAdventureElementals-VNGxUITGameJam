@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://dic1g16gimkr2"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_n6m3f"]
+[ext_resource type="AudioStream" uid="uid://bwf7lfbkdqwqe" path="res://assets/sounds/Door_open.wav" id="2_1pt8d"]
+
+[resource]
+script = ExtResource("1_n6m3f")
+clip_id = "door_open"
+stream = ExtResource("2_1pt8d")
+volume_db = 0.0
+randomize_pitch = true
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

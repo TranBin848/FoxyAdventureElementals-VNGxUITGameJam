@@ -532,7 +532,6 @@ max_fall_speed = 500.0
 dash_dist = 100.0
 dash_cd = 0.5
 max_health = 5
-elemental_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -40)
