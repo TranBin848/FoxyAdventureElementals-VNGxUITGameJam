@@ -27,6 +27,8 @@ animations = [{
 size = Vector2(30, 18)
 
 [node name="Lever" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_fokg1")
 metadata/_custom_type_script = "uid://0qvd447gmgon"
 

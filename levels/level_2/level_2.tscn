@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=42 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -121,6 +121,12 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve2D" id="Curve2D_uuidd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 236, -147)
+}
+point_count = 2
+
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_ppf8r")
 
@@ -204,7 +210,7 @@ target_door = "EntryDoor"
 position = Vector2(-552, 805)
 
 [node name="Player" parent="." instance=ExtResource("14_km4sl")]
-position = Vector2(18456, -1610)
+position = Vector2(18179, -1709)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0
@@ -504,3 +510,7 @@ curve = SubResource("Curve2D_km4sl")
 [node name="Platform9" parent="." instance=ExtResource("25_t8ul1")]
 position = Vector2(11692, -344)
 curve = SubResource("Curve2D_oaqh1")
+
+[node name="Platform3" parent="." instance=ExtResource("25_t8ul1")]
+position = Vector2(-352, 419)
+curve = SubResource("Curve2D_uuidd")
