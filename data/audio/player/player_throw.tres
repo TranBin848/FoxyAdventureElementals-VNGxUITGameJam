@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://dp8ywxqoytj4i"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_hsbcq"]
+[ext_resource type="AudioStream" uid="uid://w3f6ctedkxva" path="res://assets/sounds/27_sword_miss_1.wav" id="2_w4rfs"]
+
+[resource]
+script = ExtResource("1_hsbcq")
+clip_id = "player_throw"
+stream = ExtResource("2_w4rfs")
+volume_db = 0.0
+randomize_pitch = true
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

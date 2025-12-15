@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://ig83f23mtpkc"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_elkj4"]
+[ext_resource type="AudioStream" uid="uid://5f2eq77hop1w" path="res://assets/sounds/warlord_defeated.wav" id="2_fj1it"]
+
+[resource]
+script = ExtResource("1_elkj4")
+clip_id = "war_lord_defeat"
+stream = ExtResource("2_fj1it")
+volume_db = -10.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

@@ -5,6 +5,7 @@ var aim_timer: float = 0.2
 func _enter() -> void:
 	#Change animation to attack
 	obj.change_animation("attack")
+	AudioManager.play_sound("player_throw")
 	timer = 0.15
 	obj.velocity.x = 0
 

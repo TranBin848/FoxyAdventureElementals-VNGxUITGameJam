@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0gxe3bh60m7y"]
+
+[ext_resource type="Texture2D" uid="uid://c1vauefgriwxe" path="res://assets/particles/blank.png" id="1_el87c"]
+
+[sub_resource type="Curve" id="Curve_utvqu"]
+_data = [Vector2(0, 1), 0.0, 1.26447e-06, 0, 0, Vector2(0.826599, 0.566934), -1.76434, -1.76434, 0, 0, Vector2(1, 0), -4.81463, 0.0, 0, 0]
+point_count = 3
+
+[node name="GPUParticles2D" type="CPUParticles2D"]
+amount = 100
+texture = ExtResource("1_el87c")
+lifetime = 0.5
+speed_scale = 5.0
+emission_shape = 2
+emission_sphere_radius = 35.0
+direction = Vector2(0, 1)
+spread = 100.0
+gravity = Vector2(0, -1000)
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+linear_accel_max = 50.0
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_utvqu")
+color = Color(1, 1, 0.027451, 1)
+hue_variation_max = 1.0

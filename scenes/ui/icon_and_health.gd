@@ -19,13 +19,19 @@ extends HBoxContainer
 var hurt_Timer: float = 0
 var previous_health: int = 0
 
-
 func _ready() -> void:
+	call_deferred("_setup")
+
+
+func _setup() -> void:
+	if player == null:
+		player = get_tree().get_first_node_in_group("player")
+
 	previous_health = player.health
 	player.health_changed.connect(_on_health_change)
 	player.hurt.connect(_show_hurt_icon)
 	player.mana_changed.connect(_update_mana)
-	await  player._ready()
+
 	_on_health_change()
 	_update_mana()
 

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://d3abv2ixvrjo3"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_4rc7k"]
+[ext_resource type="AudioStream" uid="uid://tvj7cbu0nk3i" path="res://assets/sounds/12_human_jump_1.wav" id="2_4rc7k"]
+
+[resource]
+script = ExtResource("1_4rc7k")
+clip_id = "player_jump"
+stream = ExtResource("2_4rc7k")
+volume_db = 0.0
+randomize_pitch = true
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

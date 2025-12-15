@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=62 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -46,8 +46,11 @@
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="44_81g5i"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_xwrc7"]
 [ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="46_sycnp"]
-[ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/boss_area.gd" id="47_o1f2s"]
-[ext_resource type="AudioStream" uid="uid://dxm63t53brxfa" path="res://assets/sounds/Three Red Hearts - Save the City.ogg" id="48_pj2vu"]
+[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="47_4idv8"]
+[ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="47_fdo7j"]
+[ext_resource type="PackedScene" uid="uid://c2nu6ncphw78a" path="res://scripts/area_component/boss_zone_area_2d.tscn" id="47_rflqb"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="48_fdo7j"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="49_5oe72"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="49_mvtf2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mjh6"]
@@ -99,6 +102,7 @@ shader_parameter/y_zoom = 1.0
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6onc1"]
+size = Vector2(496, 240.5)
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_jq5vq")
@@ -162,52 +166,50 @@ hoithoai = "guide_elemental"
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("10_xsvho")]
 position = Vector2(631, 151)
-elemental_type = 2
+elemental_type = 3
 skill_to_drop = ExtResource("11_u7q62")
 skill_icon_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("10_xsvho")]
 position = Vector2(2165, -489)
-elemental_type = 5
 skill_to_drop = ExtResource("12_033ub")
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
 position = Vector2(3097, -107)
 scale = Vector2(1.02679, 0.975904)
-elemental_type = 2
+elemental_type = 3
 skill_to_drop = ExtResource("11_u7q62")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
 position = Vector2(3017, 173)
-elemental_type = 2
 skill_to_drop = ExtResource("13_uptk2")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(1721, -400)
-elemental_type = 5
+elemental_type = 2
 skill_to_drop = ExtResource("15_2t2ib")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(2823, -364)
-elemental_type = 5
 skill_to_drop = ExtResource("12_033ub")
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(2624, -364)
-elemental_type = 5
+elemental_type = 2
 skill_to_drop = ExtResource("15_2t2ib")
 
 [node name="Boat" parent="." instance=ExtResource("16_plcgd")]
 position = Vector2(-1859, 443)
 
-[node name="Door" parent="." instance=ExtResource("17_v3xwt")]
+[node name="ExitDoor" parent="." instance=ExtResource("17_v3xwt")]
 position = Vector2(5280, -440)
 target_stage = "uid://wopr13pq4dnf"
+target_door = "EntryDoor"
 
 [node name="Player" parent="." instance=ExtResource("18_gukcl")]
-position = Vector2(-1864, 433)
+position = Vector2(5175, -430)
 collision_mask = 73
 platform_floor_layers = 4294967231
 max_health = 1000
@@ -222,7 +224,7 @@ position = Vector2(2264, -187)
 stream = ExtResource("19_13ste")
 volume_db = 10.0
 autoplay = true
-max_distance = 300.0
+max_distance = 400.0
 bus = &"SFX"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -341,37 +343,17 @@ guide_text = "F to interact"
 position = Vector2(-23, 310)
 guide_text = "Take the blade \\n C to attack, X to throw"
 
-[node name="GuideTrigger3-1" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(203, 248)
-guide_text = "V to change the weapon"
-
 [node name="GuideTrigger4" parent="." instance=ExtResource("31_dy5lu")]
 position = Vector2(-326, 310)
 guide_text = "Huh hah Huh hah"
 
 [node name="GuideTrigger5" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(4720, -440)
+position = Vector2(4828, -434)
 guide_text = "F to interact"
 
 [node name="GuideTrigger6" parent="." instance=ExtResource("31_dy5lu")]
 position = Vector2(3631, 9)
 guide_text = "F to interact"
-
-[node name="GuideTrigger7" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(-881, 418)
-guide_text = "Checkpoint saved"
-
-[node name="GuideTrigger8" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(1699, 123)
-guide_text = "Checkpoint saved"
-
-[node name="GuideTrigger9" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(2446, -356)
-guide_text = "Checkpoint saved"
-
-[node name="GuideTrigger10" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(4401, -426)
-guide_text = "Checkpoint saved"
 
 [node name="Checkpoint1" parent="." instance=ExtResource("32_g2wda")]
 position = Vector2(-885, 403)
@@ -472,7 +454,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("42_m18vu")
 
-[node name="SkillBar" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_0uo32")]
+[node name="SkillBarUI" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_0uo32")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -511,24 +493,74 @@ offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Bosszone" type="Area2D" parent="." node_paths=PackedStringArray("boss")]
+[node name="BossZoneArea2D" parent="." node_paths=PackedStringArray("boss") instance=ExtResource("47_rflqb")]
 position = Vector2(5176, -527)
-scale = Vector2(27, 18)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("47_o1f2s")
-boss_bgm = ExtResource("48_pj2vu")
 boss = NodePath("Boss")
 
-[node name="Boss" parent="Bosszone" instance=ExtResource("49_mvtf2")]
-position = Vector2(-2.74074, 4.5)
-scale = Vector2(0.037037, 0.0555556)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bosszone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossZoneArea2D"]
 shape = SubResource("RectangleShape2D_6onc1")
 debug_color = Color(0.988235, 0, 0.290196, 0)
 
-[node name="Camera2D" type="Camera2D" parent="Bosszone"]
-zoom = Vector2(2, 2)
+[node name="Boss" parent="BossZoneArea2D" instance=ExtResource("49_mvtf2")]
+position = Vector2(-114, 18)
 
-[connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]
+[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+script = ExtResource("47_fdo7j")
+
+[node name="Background" type="TextureRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.05176e-05
+offset_right = 1472.0
+offset_bottom = 816.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.465121, 0.468751)
+texture = ExtResource("47_4idv8")
+
+[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
+modulate = Color(1, 1, 1, 0.764706)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("48_fdo7j")]
+offset_left = 640.0
+offset_top = 384.0
+offset_right = 640.0
+offset_bottom = 384.0
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 360.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("45_xwrc7")
+theme_override_font_sizes/font_size = 16
+text = "Tab to open/close skill tree
+Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 332.0
+offset_bottom = 65.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("49_5oe72")
+theme_override_font_sizes/font_size = 32
+text = "SKILL TREE"
+vertical_alignment = 1

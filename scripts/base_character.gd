@@ -14,7 +14,7 @@ var direction: int = 1
 @export var attack_damage: int = 1
 @export var max_health: int = 100
 @export var max_mana: int = 1000
-@export var elemental_type: int = 0 #0: none, 1: fire, 2: earth, 3: water
+@export var elemental_type = ElementsEnum.Elements.NONE
 var health: int = max_health
 var mana: int = max_mana
 signal hurt
@@ -42,11 +42,11 @@ signal mana_changed
 	5: [1]
 }
 
-
 @export var skill_to_drop: Script = null      
 @export var skill_icon_path: String = ""      
 
 var jump_speed: float = 400.0
+var jump_multiplier: float = 1.0
 var fsm: FSM = null
 var current_animation = null
 var animated_sprite: AnimatedSprite2D = null
@@ -104,7 +104,7 @@ func turn_right() -> void:
 	_next_direction = 1
 
 func jump() -> void:
-	velocity.y = -jump_speed
+	velocity.y = -jump_speed * jump_multiplier
 
 func stop_move() -> void:
 	velocity.x = 0

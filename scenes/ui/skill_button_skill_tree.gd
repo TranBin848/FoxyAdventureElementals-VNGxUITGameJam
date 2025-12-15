@@ -7,10 +7,11 @@ class_name SkillButtonNode
 @onready var line_2d: Line2D = $Line2D
 
 @export var skill: Skill
-@export var require_stack_unlock := 1
-@export var require_stack_upgrade := 1
+@export var require_stack_unlock := 5
+@export var require_stack_upgrade := 10
 
-var unlocked: bool = false
+@export var video_stream: VideoStream = null
+
 var children: Array[SkillButtonNode] = []
 
 signal skill_selected(skill)
@@ -20,11 +21,12 @@ func _ready() -> void:
 		var parent_btn: SkillButtonNode = get_parent()
 		parent_btn.children.append(self)
 		
-		line_2d.add_point(global_position + size/2)
-		line_2d.add_point(get_parent().global_position + size/2)
+		line_2d.add_point(global_position + size/2 - Vector2(4,4))
+		line_2d.add_point(get_parent().global_position + size/2 - Vector2(4,4))
 		
 	SkillStackManager.stack_changed.connect(_on_stack_changed)
 	SkillStackManager.level_changed.connect(_on_level_changed)
+	#SkillStackManager.level_changed.connect(_on_unlocked_changed)
 	
 var level : int = 0:
 	set(value):
@@ -32,6 +34,8 @@ var level : int = 0:
 		level_label.text = str(level) + "/3"
 
 var stack: int = 0
+
+var unlocked: bool = false
 
 func _on_pressed() -> void:
 	emit_signal("skill_selected", self)
@@ -46,32 +50,28 @@ func set_skill():
 	
 	level = SkillStackManager.get_level(skill.name)
 	stack = SkillStackManager.get_stack(skill.name)
+	unlocked = SkillStackManager.get_unlocked(skill.name)
 	
-	if level > 1:
-		unlocked = true
+	if unlocked:
 		disabled = false
-	
+		panel.show_behind_parent = true	
+		
 	stack_label.text = str(stack)
 	
 	# Đặt tooltip hoặc tên nếu cần
 	tooltip_text = skill.name
 	
-	#if not unlocked:
-		#disabled = true
-		#modulate = Color(0.5,0.5,0.5)
-
+	for child in children:
+		var skillchildunlocked = SkillStackManager.get_unlocked(child.skill.name)
+		if skillchildunlocked:
+			_highlight_line(child)
+			
 func _on_stack_changed(skill_name: String, new_stack: int):
 	if skill == null or skill_name != skill.name:
 		return
 
 	stack = new_stack
 	stack_label.text = str(stack)
-
-	## Nếu chưa unlock → check unlock bằng stack
-	#if not unlocked and stack >= require_stack_unlock:
-		#unlocked = true
-		#disabled = false
-		#modulate = Color(1,1,1)
 
 # ───────────────────────────────────────────
 # CẬP NHẬT LEVEL
@@ -88,12 +88,14 @@ func _on_level_changed(skill_name: String, new_level: int):
 	
 func _unlock_children():
 	for child in children:
-		if not child.unlocked:
-			child.unlocked = true
+		var skillchildunlocked = SkillStackManager.get_unlocked(child.skill.name)
+		if not skillchildunlocked:
+			#SkillStackManager.set_unlocked(child.skill.name)
+			#child.unlocked = true
 			child.disabled = false
-			child.modulate = Color(1,1,1)
+			child.panel.show_behind_parent = true	
 			_highlight_line(child)
-
+	
 func _highlight_line(child: SkillButtonNode):
 	var line = child.line_2d
 	line.default_color = Color(1,1,0.3)
