@@ -1,5 +1,5 @@
 extends EnemyState
-@export var prepare_time: float = 2
+@export var prepare_time: float = 0.4
 
 func _enter() -> void:
 	obj.change_animation("prepare")
@@ -16,3 +16,5 @@ func _update(_delta: float) -> void:
 		if (update_timer(_delta)):
 			change_state(fsm.states.attack)
 			
+func _exit() -> void:
+	obj.reset_turn_around_delay_timer()

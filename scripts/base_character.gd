@@ -21,6 +21,26 @@ signal hurt
 signal health_changed
 signal died
 signal mana_changed
+# Tương khắc
+@export var restraint_table = {
+	1: [4],  # Hỏa khắc Kim
+	2: [1],  # Thủy khắc hỏa
+	3: [2],  # Thổ khắc Thủy
+	4: [5],  # Kim khắc Mộc
+	5: [3]   # Mộc khắc Thổ
+	#1: [5],  # Fire khắc Wood
+	#2: [3],  # Earth khắc Water
+	#3: [1]   # Water khắc Fire
+}
+
+# Tương sinh
+@export var creation_table = {
+	1: [3],
+	2: [5],
+	3: [4],
+	4: [2],
+	5: [1]
+}
 
 @export var skill_to_drop: Script = null      
 @export var skill_icon_path: String = ""      

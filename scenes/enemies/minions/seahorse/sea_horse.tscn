@@ -1,15 +1,15 @@
 [gd_scene load_steps=26 format=3 uid="uid://d2xnvvob5vkgl"]
 
-[ext_resource type="Script" uid="uid://coijve31u764s" path="res://scenes/enemies/minions/seahorse/sea_horse.gd" id="1_07c8w"]
-[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_llfpg"]
-[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_07c8w"]
-[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_y1cc5"]
-[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_ymkxy"]
-[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_ks11g"]
+[ext_resource type="Script" uid="uid://coijve31u764s" path="res://Scenes/enemies/minions/seahorse/sea_horse.gd" id="1_07c8w"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://Scenes/enemies/paritcles/metal_particle.tscn" id="2_llfpg"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="3_07c8w"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="4_y1cc5"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="5_ymkxy"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="6_ks11g"]
 [ext_resource type="Texture2D" uid="uid://dkgt8epv1kd3w" path="res://assets/enemy/seahorse/seahorse_idle1.png" id="7_35i8l"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="7_y1cc5"]
 [ext_resource type="Texture2D" uid="uid://cxksvsu0htlcs" path="res://assets/enemy/seahorse/seahorse_idle2.png" id="8_jtak6"]
-[ext_resource type="PackedScene" uid="uid://vx762t1kdt2" path="res://scenes/enemies/minions/seahorse/seahorse_ball.tscn" id="8_ks11g"]
+[ext_resource type="PackedScene" uid="uid://vx762t1kdt2" path="res://Scenes/enemies/minions/seahorse/seahorse_ball.tscn" id="8_ks11g"]
 [ext_resource type="Texture2D" uid="uid://vlqdodtbqo6h" path="res://assets/enemy/seahorse/seahorse_idle3.png" id="9_f564q"]
 [ext_resource type="Texture2D" uid="uid://dhstoorkbnds8" path="res://assets/enemy/seahorse/seahorse_hurt.png" id="9_jeti8"]
 [ext_resource type="Texture2D" uid="uid://cc5rft3vrnolu" path="res://assets/enemy/seahorse/seahorse_shoot1.png" id="10_jeti8"]
@@ -17,11 +17,11 @@
 [ext_resource type="Texture2D" uid="uid://c8biyawb43wkx" path="res://assets/enemy/seahorse/seahorse_shoot3.png" id="12_tn0nq"]
 [ext_resource type="Texture2D" uid="uid://cn2queicgk1ee" path="res://assets/enemy/seahorse/seahorse_shoot4.png" id="13_5ymwk"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="14_y1cc5"]
-[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="15_ymkxy"]
-[ext_resource type="Script" uid="uid://dswnf2khxd1gm" path="res://scenes/enemies/minions/seahorse/states/idle.gd" id="18_35i8l"]
-[ext_resource type="Script" uid="uid://beptebjk18ahn" path="res://scenes/enemies/minions/seahorse/states/shoot.gd" id="19_35i8l"]
-[ext_resource type="Script" uid="uid://6ee0gwv8hog1" path="res://scenes/enemies/minions/seahorse/states/hurt.gd" id="20_jtak6"]
-[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="21_f564q"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="15_ymkxy"]
+[ext_resource type="Script" uid="uid://dswnf2khxd1gm" path="res://Scenes/enemies/minions/seahorse/states/idle.gd" id="18_35i8l"]
+[ext_resource type="Script" uid="uid://beptebjk18ahn" path="res://Scenes/enemies/minions/seahorse/states/shoot.gd" id="19_35i8l"]
+[ext_resource type="Script" uid="uid://6ee0gwv8hog1" path="res://Scenes/enemies/minions/seahorse/states/hurt.gd" id="20_jtak6"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="21_f564q"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kavnn"]
 animations = [{
@@ -91,6 +91,7 @@ radius = 15.0
 height = 50.0
 
 [node name="SeaHorse" type="CharacterBody2D"]
+collision_layer = 8
 script = ExtResource("1_07c8w")
 shader_path = "uid://doovon2v0i5dx"
 sight = 200.0
@@ -121,7 +122,7 @@ emitting = false
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="BallFactory" type="Marker2D" parent="Direction"]
-position = Vector2(24, -6)
+position = Vector2(40, -6)
 script = ExtResource("7_y1cc5")
 product_packed_scene = ExtResource("8_ks11g")
 target_container_name = &"SeahorseBalls"
