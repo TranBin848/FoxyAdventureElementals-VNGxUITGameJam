@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://c6635vu0ttwxf"]
 
-[ext_resource type="Theme" uid="uid://byw2ygd56wauh" path="res://scenes/enemies/ui/enemy_ui_theme.tres" id="1_bqnho"]
+[ext_resource type="Theme" uid="uid://byw2ygd56wauh" path="res://Scenes/enemies/ui/enemy_ui_theme.tres" id="1_bqnho"]
 [ext_resource type="Texture2D" uid="uid://dsgiscf3x4gji" path="res://assets/ui/enemy_health_bar.png" id="2_t8dnb"]
-[ext_resource type="Script" uid="uid://5djte7c1gpol" path="res://scenes/enemies/ui/enemy_health_bar.gd" id="3_t8dnb"]
+[ext_resource type="Script" uid="uid://5djte7c1gpol" path="res://Scenes/enemies/ui/enemy_health_bar.gd" id="3_t8dnb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sg3a4"]
 atlas = ExtResource("2_t8dnb")
