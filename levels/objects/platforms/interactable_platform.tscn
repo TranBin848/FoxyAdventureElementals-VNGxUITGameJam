@@ -70,7 +70,7 @@ _data = {
 &"return": SubResource("Animation_geurb")
 }
 
-[node name="Platform" type="Path2D"]
+[node name="Platform2" type="Path2D"]
 curve = SubResource("Curve2D_1f3o5")
 script = ExtResource("1_ca30f")
 
