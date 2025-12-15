@@ -3,31 +3,44 @@ extends RigidBody2D
 @export var blade_scene: PackedScene
 @export var flying_sfx: AudioStream = null
 @export var rotation_speed: float = 10
+
+@export_group("Gravity Settings")
+@export var time_to_max_gravity: float = 1.5 ## How long (t) to reach full gravity
+@export var max_gravity_scale: float = 1.0 ## The final gravity strength (1.0 is normal gravity)
+
 var direction: float = 1
+var dropped: bool = false
 
 func _ready():
+	# 1. Setup Audio
 	var player = AudioStreamPlayer2D.new()
 	add_child(player)
-
-	# Set which audio bus this player uses
 	player.bus = "SFX"
 	player.stream = flying_sfx
 	player.play()
-	pass
+	
+	# 2. Setup Gravity Transition
+	gravity_scale = 0.0 # Start with no gravity (floating straight)
+	
+	await get_tree().create_timer(0.5).timeout
+	# Create a tween to transition gravity_scale to max_gravity_scale over time_to_max_gravity
+	gravity_scale = max_gravity_scale
 
 func _physics_process(delta: float) -> void:
 	rotation += rotation_speed * delta * direction
 	
 func _on_body_entered(_body: Node) -> void:
+	if dropped:
+		return
 	drop_blade()
-	#print("enterbody:" + _body.name)
 
 func _on_hit_area_2d_hitted(area: Variant) -> void:
-	#print("enterarea:" + area.name)
+	if dropped:
+		return
 	drop_blade()
 	
 func drop_blade() -> void:
-	#print("drop")
+	dropped = true
 	var blade = blade_scene.instantiate()
 	blade.global_position = global_position
 	get_tree().current_scene.add_child(blade)

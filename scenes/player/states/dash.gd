@@ -13,6 +13,7 @@ func _enter() -> void:
 	
 	# Set dash animation
 	obj.change_animation("jump")
+	AudioManager.play_sound("player_dash")
 	
 	obj.dash()
 
@@ -28,6 +29,7 @@ func _update(delta: float) -> void:
 	if dist >= obj.dash_dist or obj.is_on_wall():
 		obj.velocity.x = 0
 		obj.is_dashing = false
+		
 
 	# Transition when dash ends
 	if not obj.is_dashing:
@@ -53,3 +55,6 @@ func _spawn_ghost() -> void:
 	ghost.modulate = obj.animated_sprite.modulate
 	ghost.rotation = obj.animated_sprite.rotation
 	ghost.offset = obj.animated_sprite.offset
+
+func  take_damage(direction: Variant, damage: int = 1) -> void:
+	pass

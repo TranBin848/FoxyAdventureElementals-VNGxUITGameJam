@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d28vgb0lxesvt"]
 
 [ext_resource type="Texture2D" uid="uid://core2vqk0dvnj" path="res://assets/terrain_plus/ELR_SpringlLeaf.png" id="1_05vur"]
-[ext_resource type="Material" uid="uid://buq6c66nqu62e" path="res://shaders/leaf.tres" id="2_la32b"]
+[ext_resource type="Material" uid="uid://blahf67ivqcqi" path="res://shaders/leaf.tres" id="2_la32b"]
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
 texture = ExtResource("1_05vur")

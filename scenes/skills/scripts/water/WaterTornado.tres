@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_el8u2")
-name = "Water Tornado"
+name = "Tornado"
 element = "Water"
 cooldown = 5.0
 duration = 0.0
@@ -17,5 +17,4 @@ speed = 180.0
 damage = 2
 mana = 40
 type = "single_shot"
-max_stack = 99
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

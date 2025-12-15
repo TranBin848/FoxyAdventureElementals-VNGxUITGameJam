@@ -1,3 +1,4 @@
+do GameManager.open_skill_tree()
 foxy:…Ư… đầu mình… đau quá…  
 foxy:Mình… đang ở đâu thế này?
 
@@ -28,3 +29,4 @@ Dù sao cũng phải có lý do khiến tôi tỉnh dậy ở nơi này.
 
 npc_villager:Vậy thì hãy cẩn trọng, chàng cáo trẻ.  
 Nếu muốn bắt đầu khám phá, thử đi về phía quảng trường trung tâm — nơi đó vẫn còn vài người có thể giúp cậu.
+#do GameManager.close_skill_tree()

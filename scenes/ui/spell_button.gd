@@ -9,7 +9,7 @@ const ERROR_DISPLAY_TIME: float = 1.0
 @onready var mana: Label = $Mana
 @onready var timer: Timer = $Timer
 
-var alert_label: Label = null # ⬅️ Khai báo biến thành viên thường
+var alert_label: Label = null 
 
 var skill: Skill = null
 var _change_key: String = ""	
