@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
 [ext_resource type="TileSet" uid="uid://bui3wquutm1yg" path="res://levels/level_4/level_4.tres" id="3_rjkgb"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="4_0odlo"]
-[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/sea_horse.tscn" id="7_5mfhe"]
+[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="7_5mfhe"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="7_401k1"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="8_f8hbo"]
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="9_s3y0x"]

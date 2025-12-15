@@ -1,30 +1,30 @@
 [gd_scene load_steps=30 format=3 uid="uid://c74auvuhbghse"]
 
-[ext_resource type="Script" uid="uid://bb2so4xk7mo5k" path="res://Scenes/enemies/minions/starfish/starfish.gd" id="1_wfme5"]
+[ext_resource type="Script" uid="uid://bb2so4xk7mo5k" path="res://scenes/enemies/minions/starfish/starfish.gd" id="1_wfme5"]
 [ext_resource type="Texture2D" uid="uid://btkb5krxhe0bd" path="res://assets/enemy/starfish/starfish_hit_01.png" id="2_ffnw0"]
-[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://Scenes/enemies/paritcles/metal_particle.tscn" id="2_jhkca"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_jhkca"]
 [ext_resource type="Texture2D" uid="uid://b5xyfam3762xo" path="res://assets/enemy/starfish/starfish_01.png" id="2_wfme5"]
 [ext_resource type="Texture2D" uid="uid://b4js2ae34xwqk" path="res://assets/enemy/starfish/starfish_02.png" id="3_1he1w"]
 [ext_resource type="Texture2D" uid="uid://btlfx8p2dgirm" path="res://assets/enemy/starfish/starfish_hit_02.png" id="3_l1cs0"]
-[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="3_ot2et"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_ot2et"]
 [ext_resource type="Texture2D" uid="uid://ismdacnnh32c" path="res://assets/enemy/starfish/starfish_03.png" id="4_5oess"]
-[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="4_o38c5"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_o38c5"]
 [ext_resource type="Texture2D" uid="uid://dbb5rkld2dgvx" path="res://assets/enemy/starfish/exclamation_mark.png" id="5_mdsml"]
-[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="5_xgvsc"]
-[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="6_lmt3n"]
-[ext_resource type="Script" uid="uid://b8hrao6bn2upj" path="res://Scenes/enemies/minions/starfish/states/moving.gd" id="6_mdsml"]
-[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="7_i1h07"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_xgvsc"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_lmt3n"]
+[ext_resource type="Script" uid="uid://b8hrao6bn2upj" path="res://scenes/enemies/minions/starfish/states/moving.gd" id="6_mdsml"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="7_i1h07"]
 [ext_resource type="Texture2D" uid="uid://cr6oxbr1yc3y1" path="res://assets/enemy/starfish/starfish_atk_01.png" id="7_yw546"]
-[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="8_1tmur"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="8_1tmur"]
 [ext_resource type="Texture2D" uid="uid://b4nikxxvm0wtv" path="res://assets/enemy/starfish/starfish_atk_02.png" id="8_xe046"]
-[ext_resource type="Script" uid="uid://g2o4xs0g83j4" path="res://Scenes/enemies/minions/starfish/states/prepare.gd" id="9_1tmur"]
+[ext_resource type="Script" uid="uid://g2o4xs0g83j4" path="res://scenes/enemies/minions/starfish/states/prepare.gd" id="9_1tmur"]
 [ext_resource type="Texture2D" uid="uid://devvfqkfk4c32" path="res://assets/enemy/starfish/starfish_atk_03.png" id="9_06q5j"]
-[ext_resource type="Script" uid="uid://i4jv2rwvl6u8" path="res://Scenes/enemies/minions/starfish/states/roll.gd" id="10_56ovt"]
+[ext_resource type="Script" uid="uid://i4jv2rwvl6u8" path="res://scenes/enemies/minions/starfish/states/roll.gd" id="10_56ovt"]
 [ext_resource type="Texture2D" uid="uid://dw71rasxvd57m" path="res://assets/enemy/starfish/starfish_atk_04.png" id="10_yw3rq"]
 [ext_resource type="Texture2D" uid="uid://h0oumqkqx32d" path="res://assets/enemy/starfish/starfish_atk_05.png" id="11_ffn74"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="14_yw546"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="15_xe046"]
-[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="26_ot2et"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="26_ot2et"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ji8a0"]
 animations = [{
@@ -136,9 +136,7 @@ emitting = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_ji8a0")
-animation = &"roll"
-frame = 3
-frame_progress = 1.0
+animation = &"moving"
 
 [node name="DetectedPlayerIcon" type="Sprite2D" parent="Direction"]
 visible = false
