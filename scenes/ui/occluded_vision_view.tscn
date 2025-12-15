@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqljb5wlfa6ao"]
 
-[ext_resource type="Shader" uid="uid://doa0n2dv713b8" path="res://levels/level_four/occluded_vision_shadder.gdshader" id="1_ps8qf"]
-[ext_resource type="Script" uid="uid://b4g64pqqkelde" path="res://levels/level_four/occluded_vision_controller.gd" id="2_asbn7"]
+[ext_resource type="Shader" uid="uid://doa0n2dv713b8" path="res://levels/level_4/occluded_vision_shadder.gdshader" id="1_ps8qf"]
+[ext_resource type="Script" uid="uid://b4g64pqqkelde" path="res://levels/level_4/occluded_vision_controller.gd" id="2_asbn7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s6hm0"]
 shader = ExtResource("1_ps8qf")

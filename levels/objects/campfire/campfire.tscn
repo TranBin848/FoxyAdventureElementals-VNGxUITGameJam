@@ -1,7 +1,8 @@
-[gd_scene load_steps=46 format=3 uid="uid://bmqknea8bh0ev"]
+[gd_scene load_steps=47 format=3 uid="uid://bmqknea8bh0ev"]
 
 [ext_resource type="Texture2D" uid="uid://x0wewx23js2a" path="res://assets/terrain_plus/Animated Sprites/Campfire sheet.png" id="1_sxqdn"]
 [ext_resource type="Script" uid="uid://v2g78x4akfgj" path="res://scripts/light/flickering_light.gd" id="2_g2bal"]
+[ext_resource type="AudioStream" uid="uid://dfv8niucs75pj" path="res://assets/sounds/65795__juskiddink__bonfire.wav" id="2_ndnc0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2bal"]
 atlas = ExtResource("1_sxqdn")
@@ -303,7 +304,12 @@ fill_from = Vector2(0.5, 0.5)
 [node name="CampFire" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ks1tb")
 autoplay = "default"
-frame_progress = 0.202935
+frame_progress = 0.621785
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ndnc0")
+autoplay = true
+max_distance = 300.0
 
 [node name="LightSource" type="Node2D" parent="."]
 

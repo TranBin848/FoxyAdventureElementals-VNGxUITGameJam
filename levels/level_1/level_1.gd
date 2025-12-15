@@ -12,7 +12,7 @@ func _ready() -> void:
 		GameManager.respawn_at_checkpoint()
 	if AudioManager:
 		AudioManager.play_music("music_background")
-		AudioManager.play_ambience("ambience_forest")
+		AudioManager.play_ambience("ambience_forest", -10)
 	GameManager.logger.log("Hi Im global logger, Im from level 1")
 	my_logger.log("Hi Im script-level logger, Im from level 1")
 	

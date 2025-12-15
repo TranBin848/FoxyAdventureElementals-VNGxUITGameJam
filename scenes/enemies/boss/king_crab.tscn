@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://ge1upmdjfbsf" path="res://assets/king_crab/King_Crab_30.png" id="31_mlv1l"]
 [ext_resource type="Script" uid="uid://fghv33c31uqo" path="res://scenes/enemies/boss/moving.gd" id="32_3jl1k"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="32_e0g6l"]
-[ext_resource type="Texture2D" uid="uid://dbdtkoapescgw" path="res://assets/King_Crab/King_Crab_33.png" id="32_w2egv"]
+[ext_resource type="Texture2D" uid="uid://dbdtkoapescgw" path="res://assets/king_crab/King_Crab_33.png" id="32_w2egv"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="32_xr7g7"]
 [ext_resource type="Script" uid="uid://epiedpy5442a" path="res://scenes/enemies/boss/FireClaw.gd" id="33_bpmbe"]
 [ext_resource type="Script" uid="uid://cs8woms85hknp" path="res://scenes/enemies/boss/spin.gd" id="33_fh3hm"]
@@ -241,9 +241,8 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_4c0df")
-animation = &"die"
-frame = 4
-frame_progress = 1.0
+animation = &"stun"
+frame_progress = 0.868214
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)

@@ -1,5 +1,5 @@
 extends ProjectileBase
-class_name FireExplosionProjectile
+class_name StunBeam
 
 # --- Explosion Config ---
 @export var start_scale: Vector2 = Vector2.ONE

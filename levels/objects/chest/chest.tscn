@@ -64,5 +64,5 @@ animation = &"close"
 frame_progress = 0.768257
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_4ahkj")

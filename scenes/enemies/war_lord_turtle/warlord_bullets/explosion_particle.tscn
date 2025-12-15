@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b15xjkegxyxwk"]
+
+[ext_resource type="Texture2D" uid="uid://dyfi1nu1fi6rr" path="res://assets/war_lord_bullet/bullet_rocket_particle.png" id="1_5x241"]
+
+[sub_resource type="Curve" id="Curve_5x241"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -238.652), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wh241"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.512195, 0.573034), -2.24579, -2.24579, 0, 0, Vector2(0.979675, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="ExplosionParticle" type="CPUParticles2D"]
+amount = 20
+texture = ExtResource("1_5x241")
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+angular_velocity_max = 200.0
+angular_velocity_curve = SubResource("Curve_5x241")
+scale_amount_curve = SubResource("Curve_wh241")

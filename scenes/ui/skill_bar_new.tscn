@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cbop0r31m7elf" path="res://scenes/ui/spell_button.tscn" id="3_jhbmx"]
 
 [node name="skillbar" type="PanelContainer"]
-offset_right = 228.0
-offset_bottom = 40.0
+offset_right = 248.296
+offset_bottom = 72.0
 theme = ExtResource("1_nor56")
 theme_type_variation = &"DarkWoodPanel"
 

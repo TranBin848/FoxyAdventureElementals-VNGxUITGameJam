@@ -15,7 +15,7 @@ var last_mouse_pos := Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
 	#Uncomment to enable this to ZOOM MAP
-	#return
+	return
 	# --- ZOOM ---
 	# Nếu panel mở → KHÔNG ZOOM, KHÔNG DRAG
 	#if info_panel.visible:

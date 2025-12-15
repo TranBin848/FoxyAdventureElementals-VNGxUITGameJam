@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="BTL_Godot"
-run/main_scene="uid://dhghajv3v5q1v"
+config/name="FoxyAdventureElementals"
+run/main_scene="uid://wopr13pq4dnf"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://cfd3jimal6hs0"
 
 [autoload]
 
@@ -23,8 +27,6 @@ ElementsEnum="*res://scripts/elements.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 FadeLayer="*res://scenes/ui/fade_layer.tscn"
 DamageNumbers="*res://scripts/autoload/damage_numbers.gd"
-BackgroundMusic="*res://autoloads/background_music.tscn"
-AudioPlayer="*res://autoloads/audio_player.gd"
 SkillStackManager="*res://scripts/autoload/skill_stack_manager.gd"
 CameraTransition="*res://autoloads/camera_transition.tscn"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
@@ -172,6 +174,5 @@ ui_skilltree={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/size/viewport_height=270

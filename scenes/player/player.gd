@@ -1,7 +1,6 @@
 class_name Player
 extends BaseCharacter
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var skill_tree_ui: CanvasLayer = $SkillTreeUI
 
 #Invulnerable Logic Parameters
 @export var invulnerable_duration: float = 2
@@ -97,31 +96,25 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 	if skillbar_root:
 		skill_bar = skillbar_root.get_node("MarginContainer/SkillBar")
 	if skill_bar:
-		for slot in skill_bar.slots:
+		for i in range(skill_bar.slots.size()):
+			var slot = skill_bar.slots[i]
 			if slot.skill == skill_to_use:
 				
 				var skill_current_stack = SkillStackManager.get_stack(skill_to_use.name)
-			
+				var skill_current_unlocked = SkillStackManager.get_unlocked(skill_to_use.name)
+				
+				if skill_current_unlocked:
+					return
+				
 				# KIỂM TRA HỦY BỎ - Cần phải dùng LẦN NÀY (Stack == 1)
-				if skill_current_stack == 1:
-					# Thực hiện logic HỦY BỎ
-					slot.skill = null
-					
-					# Reset UI Slot (giữ nguyên)
-					slot.texture_normal = null
-					slot.time_label.text = ""
-					slot.disabled = true
-					# Thêm dòng này để cập nhật UI stack thành trống nếu cần
-					slot.update_stack_ui() 
-					
-					print("☠️ Skill '%s' consumed and removed from slot!" % skill_to_use.name)
+				if skill_current_stack == 1:					
+					SkillStackManager.clear_skill_in_bar(i)
 				
 				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
 				elif skill_current_stack > 1:
-					# Cập nhật UI ngay lập tức (giữ nguyên)
+					SkillStackManager.remove_stack(skill_to_use.name, 1)
 					slot.update_stack_ui()
 				
-				SkillStackManager.remove_stack(skill_to_use.name, 1)
 				
 				return # Thoát sau khi xử lý Stack
 
@@ -594,6 +587,9 @@ var speed_multiplier: float = 1.0
 func set_speed_multiplier(multiplier: float) -> void:
 	speed_multiplier = multiplier
 
+func set_jump_multiplier(multiplier: float) -> void:
+	jump_multiplier = multiplier
+
 # Cập nhật logic di chuyển
 
 # === SWAP WEAPON SYSTEM =================================
@@ -628,6 +624,7 @@ func throwed_blade() -> void:
 	extra_sprites.append(silhouette_normal_sprite)
 	silhouette_normal_sprite.show()
 	
+	weapon_swapped.emit("normal")
 # ====== WEAPON SWAP LOGIC ======
 func swap_weapon() -> void:
 	#Nếu không sở hữu bất kỳ vũ khí nào, không làm gì
@@ -737,54 +734,3 @@ func dash() -> void:
 	can_dash = false
 	await get_tree().create_timer(dash_cd).timeout
 	can_dash = true
-
-#Update UI
-func _input(event):
-	if event.is_action_pressed("ui_skilltree"):
-		var root = skill_tree_ui.get_node("ColorRect/SkillTreeRoot")
-		var skill_camera: Camera2D = root.get_node("SkillTreeButtonGroup/SubViewportContainer/SubViewport/SkillCamera2D")
-		get_tree().paused = !get_tree().paused
-		if (skill_tree_ui.visible == false):
-			skill_tree_ui.visible = true
-			if not root:
-				return
-			
-			_show_skill_tree_layers(root)
-			# Khóa camera player để nó không giành lại quyền
-			if GameManager.player:
-				GameManager.player.camera_2d.enabled = false
-			if skill_camera:
-				skill_camera.make_current()
-				#skill_camera.enabled = true
-				print("📷 Đã chuyển sang camera UI SkillTree.")
-			else:
-				print("No Cam")
-
-			print("🌳 Skill Tree opened.")
-		else:
-			skill_tree_ui.visible = false
-			_hide_skill_tree_layers(root)
-			if skill_camera:
-				skill_camera.enabled = false
-			# trả camera cho player
-			if GameManager.player:
-				if GameManager.player:
-					GameManager.player.camera_2d.enabled = true
-					GameManager.player.camera_2d.make_current()
-					print("📷 Đã trả lại camera cho player.")
-
-			print("🌳 Skill Tree closed.")
-		print("input")
-		
-
-func _show_skill_tree_layers(root: Node):
-	#root.visible = true
-	for child in root.get_children():
-		if child is CanvasLayer:
-			child.visible = true
-
-func _hide_skill_tree_layers(root: Node):
-	#root.visible = false
-	for child in root.get_children():
-		if child is CanvasLayer:
-			child.visible = false
