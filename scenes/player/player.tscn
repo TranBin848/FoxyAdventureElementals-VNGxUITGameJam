@@ -531,7 +531,6 @@ atk_cd = 0.15
 max_fall_speed = 500.0
 dash_dist = 100.0
 dash_cd = 0.5
-max_health = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -40)

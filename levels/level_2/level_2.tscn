@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=43 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -18,18 +18,13 @@
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="17_sm3vb"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="18_pqi81"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="19_1txof"]
+[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="20_ppf8r"]
 [ext_resource type="PackedScene" uid="uid://crhikmylhv4ty" path="res://scenes/env_particle/sand_storm.tscn" id="20_pvqwi"]
 [ext_resource type="PackedScene" uid="uid://dlo5gf1o05dgq" path="res://scenes/env_particle/rain.tscn" id="21_fl6bb"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="22_1h50e"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="23_vdtjt"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="24_nouef"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="25_t8ul1"]
-
-[sub_resource type="Curve2D" id="Curve2D_xpuws"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 764)
-}
-point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_ppf8r"]
 _data = {
@@ -76,6 +71,12 @@ point_count = 2
 [sub_resource type="Curve2D" id="Curve2D_4x2cg"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 4, 61, 0, 0, 0, 0, -355, 61)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_xpuws"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 764)
 }
 point_count = 2
 
@@ -137,14 +138,106 @@ tile_set = ExtResource("2_s4b5i")
 [node name="BladeCollectable" parent="." instance=ExtResource("3_qfhyh")]
 position = Vector2(511, 759)
 
+[node name="Lever" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
+position = Vector2(1287, 624)
+linked_door = NodePath("../HouseDoor")
+
+[node name="HouseDoor" parent="." instance=ExtResource("12_bkbve")]
+position = Vector2(1328, 608)
+
+[node name="ExitDoor" parent="." instance=ExtResource("15_oaqh1")]
+position = Vector2(18640, -1626)
+target_stage = "uid://beaf2cwec5xlr"
+target_door = "EntryDoor"
+
+[node name="EntryDoor" parent="." instance=ExtResource("15_oaqh1")]
+position = Vector2(-552, 805)
+
+[node name="Player" parent="." instance=ExtResource("14_km4sl")]
+position = Vector2(-245, 779)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_scale = 2.0
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0)
+motion_mirroring = Vector2(625, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(314, 225.5)
+scale = Vector2(0.978125, 1.25278)
+texture = ExtResource("16_xpuws")
+
+[node name="ChestKey" parent="." instance=ExtResource("17_sm3vb")]
+position = Vector2(971, 690)
+
+[node name="ChestKey2" parent="." instance=ExtResource("17_sm3vb")]
+position = Vector2(946, 690)
+
+[node name="Quicksand" parent="." instance=ExtResource("18_pqi81")]
+position = Vector2(353, 761)
+
+[node name="Quicksand2" parent="." instance=ExtResource("18_pqi81")]
+position = Vector2(253, 761)
+
+[node name="Quicksand3" parent="." instance=ExtResource("18_pqi81")]
+position = Vector2(303, 761)
+
+[node name="Chest" parent="." instance=ExtResource("19_1txof")]
+position = Vector2(848, 688)
+
+[node name="Chest2" parent="." instance=ExtResource("19_1txof")]
+position = Vector2(806, 688)
+
+[node name="SandStormParticle" parent="." instance=ExtResource("20_pvqwi")]
+position = Vector2(-290, 633)
+
+[node name="RainParticle" parent="." instance=ExtResource("21_fl6bb")]
+visible = false
+position = Vector2(935, 599)
+
+[node name="ObjectTileMap" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AADx//j/CgAAAAAABAAvABMACgAAAAAABAB8APv/CgAAAAAABAB9APv/CgAAAAAABADCAB8ACgAAAAAABAAFAfn/CgAAAAAABAAcAQAACgAAAAAABABcAdX/CgAAAAAABABeAdX/CgAAAAAABAAEArj/CgAAAAAABADVAPP/CgAAAAAABADv/w4ACgAAAAAACAA3APf/CgAAAAAACAB9AOf/CgAAAAAACAB8AOf/CgAAAAAACAAwABMACgAAAAAACADzAPP/CgAAAAAACAAnAQoACgAAAAAACAAbAfL/CgAAAAAACAAfAfH/CgAAAAAACAA=")
+tile_set = ExtResource("2_s4b5i")
+
+[node name="HouseDoor2" parent="." instance=ExtResource("12_bkbve")]
+position = Vector2(-272, -256)
+
+[node name="Lever2" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
+position = Vector2(-464, -464)
+linked_door = NodePath("../HouseDoor2")
+
+[node name="HouseDoor3" parent="." instance=ExtResource("12_bkbve")]
+position = Vector2(10992, -1376)
+
+[node name="HouseDoor4" parent="." instance=ExtResource("12_bkbve")]
+position = Vector2(11440, -1376)
+
+[node name="Lever3" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
+position = Vector2(11216, -1680)
+linked_door = NodePath("../HouseDoor3")
+
+[node name="Lever4" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
+position = Vector2(11184, -1360)
+linked_door = NodePath("../HouseDoor4")
+
+[node name="Lever5" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
+position = Vector2(7120, -559)
+linked_door = NodePath("../HouseDoor5")
+
+[node name="HouseDoor5" parent="." instance=ExtResource("12_bkbve")]
+position = Vector2(6447, 992)
+
+[node name="Platform" parent="." instance=ExtResource("25_t8ul1")]
+position = Vector2(11564, -1336)
+curve = SubResource("Curve2D_ppf8r")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -32.0
-offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_6fwx2")
@@ -188,329 +281,240 @@ offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Lever" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
-position = Vector2(1287, 624)
-linked_door = NodePath("../HouseDoor")
+[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("20_ppf8r")]
 
-[node name="Pelican6" parent="." instance=ExtResource("9_qsvqe")]
-position = Vector2(-45, 194)
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="Starfish17" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(1344, -16)
+[node name="Mushroom14" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(15035, -1580)
 
-[node name="HouseDoor" parent="." instance=ExtResource("12_bkbve")]
-position = Vector2(1328, 608)
+[node name="Crab18" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(15211, -1709)
 
-[node name="ExitDoor" parent="." instance=ExtResource("15_oaqh1")]
-position = Vector2(18640, -1626)
-target_stage = "uid://beaf2cwec5xlr"
-target_door = "EntryDoor"
+[node name="Crab19" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(15479, -1869)
 
-[node name="EntryDoor" parent="." instance=ExtResource("15_oaqh1")]
-position = Vector2(-552, 805)
+[node name="Starfish16" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(15708, -1935)
 
-[node name="Player" parent="." instance=ExtResource("14_km4sl")]
-position = Vector2(18179, -1709)
+[node name="Starfish4" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(8531, 241)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-follow_viewport_scale = 2.0
+[node name="Starfish5" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(8193, 241)
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.001, 0)
-motion_mirroring = Vector2(625, 0)
+[node name="Starfish6" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(7855, 241)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(314, 225.5)
-scale = Vector2(0.978125, 1.25278)
-texture = ExtResource("16_xpuws")
+[node name="Crab8" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(7983, 50)
 
-[node name="ChestKey" parent="." instance=ExtResource("17_sm3vb")]
-position = Vector2(971, 690)
+[node name="Crab9" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(7648, 51)
 
-[node name="ChestKey2" parent="." instance=ExtResource("17_sm3vb")]
-position = Vector2(946, 690)
+[node name="Mushroom5" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(7762, -140)
 
-[node name="Quicksand" parent="." instance=ExtResource("18_pqi81")]
-position = Vector2(353, 761)
+[node name="Mushroom6" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(7917, -268)
 
-[node name="Quicksand2" parent="." instance=ExtResource("18_pqi81")]
-position = Vector2(253, 761)
+[node name="Crab10" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(8247, -269)
 
-[node name="Quicksand3" parent="." instance=ExtResource("18_pqi81")]
-position = Vector2(303, 761)
+[node name="Crab11" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(8015, -77)
 
-[node name="Chest" parent="." instance=ExtResource("19_1txof")]
-position = Vector2(848, 688)
+[node name="Starfish7" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(8672, -79)
 
-[node name="Chest2" parent="." instance=ExtResource("19_1txof")]
-position = Vector2(806, 688)
+[node name="Starfish8" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(8109, -463)
 
-[node name="SandStormParticle" parent="." instance=ExtResource("20_pvqwi")]
-process_mode = 4
-position = Vector2(-290, 633)
+[node name="Mushroom7" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(8387, 52)
 
-[node name="RainParticle" parent="." instance=ExtResource("21_fl6bb")]
-visible = false
-position = Vector2(935, 599)
+[node name="Mushroom8" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(9273, -332)
 
-[node name="Mushroom" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(-594, 468)
+[node name="Crab12" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(9499, 114)
 
-[node name="Mushroom2" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(-301, 468)
+[node name="Crab13" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(9311, 339)
 
-[node name="Crab" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(-24, 307)
+[node name="Crab14" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(9247, 179)
 
-[node name="Starfish" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(688, 145)
+[node name="Starfish9" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(9219, -175)
 
-[node name="Crab2" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(87, -77)
+[node name="Starfish10" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(8997, -303)
 
-[node name="Mushroom3" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(-487, -236)
+[node name="Starfish11" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(9003, -431)
 
-[node name="ObjectTileMap" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AADx//j/CgAAAAAABAAvABMACgAAAAAABAB8APv/CgAAAAAABAB9APv/CgAAAAAABADCAB8ACgAAAAAABAAFAfn/CgAAAAAABAAcAQAACgAAAAAABABcAdX/CgAAAAAABABeAdX/CgAAAAAABAAEArj/CgAAAAAABADVAPP/CgAAAAAABADv/w4ACgAAAAAACAA3APf/CgAAAAAACAB9AOf/CgAAAAAACAB8AOf/CgAAAAAACAAwABMACgAAAAAACADzAPP/CgAAAAAACAAnAQoACgAAAAAACAAbAfL/CgAAAAAACAAfAfH/CgAAAAAACAA=")
-tile_set = ExtResource("2_s4b5i")
+[node name="Mushroom9" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(8602, -427)
 
-[node name="HouseDoor2" parent="." instance=ExtResource("12_bkbve")]
-position = Vector2(-272, -256)
+[node name="Pelican2" parent="Enemies" instance=ExtResource("9_qsvqe")]
+position = Vector2(3411, 236)
 
-[node name="Lever2" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
-position = Vector2(-464, -464)
-linked_door = NodePath("../HouseDoor2")
+[node name="Pelican3" parent="Enemies" instance=ExtResource("9_qsvqe")]
+position = Vector2(4395, 236)
 
-[node name="Saw" parent="." instance=ExtResource("24_nouef")]
-position = Vector2(1657, -289)
-curve = SubResource("Curve2D_xpuws")
+[node name="Pelican4" parent="Enemies" instance=ExtResource("9_qsvqe")]
+position = Vector2(3867, 284)
 
-[node name="Mushroom4" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(633, -364)
+[node name="Crab15" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(12459, -749)
 
-[node name="Starfish2" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(982, -431)
+[node name="Starfish12" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(12938, -1006)
 
-[node name="Starfish3" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(1253, -495)
+[node name="Crab16" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(12640, -1005)
 
-[node name="Pelican" parent="." instance=ExtResource("9_qsvqe")]
-position = Vector2(1082, -681)
+[node name="Mushroom10" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(12514, -1196)
 
-[node name="Crab3" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(1469, -525)
+[node name="Mushroom11" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(12002, -1196)
 
-[node name="HouseDoor3" parent="." instance=ExtResource("12_bkbve")]
-position = Vector2(10992, -1376)
+[node name="Mushroom12" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(12257, -1196)
 
-[node name="HouseDoor4" parent="." instance=ExtResource("12_bkbve")]
-position = Vector2(11440, -1376)
+[node name="Starfish13" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(13230, -431)
 
-[node name="Lever3" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
-position = Vector2(11216, -1680)
-linked_door = NodePath("../HouseDoor3")
+[node name="Starfish14" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(12845, -431)
 
-[node name="Lever4" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
-position = Vector2(11184, -1360)
-linked_door = NodePath("../HouseDoor4")
+[node name="Crab17" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(12493, -429)
 
-[node name="Lever5" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
-position = Vector2(7120, -559)
-linked_door = NodePath("../HouseDoor5")
+[node name="Mushroom13" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(13726, -748)
 
-[node name="HouseDoor5" parent="." instance=ExtResource("12_bkbve")]
-position = Vector2(6447, 992)
+[node name="Pelican5" parent="Enemies" instance=ExtResource("9_qsvqe")]
+position = Vector2(13202, -710)
 
-[node name="Platform" parent="." instance=ExtResource("25_t8ul1")]
-position = Vector2(11564, -1336)
-curve = SubResource("Curve2D_ppf8r")
+[node name="Starfish15" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(14179, -655)
 
-[node name="Crab4" parent="." instance=ExtResource("23_vdtjt")]
+[node name="Crab4" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(2039, 115)
 
-[node name="Crab5" parent="." instance=ExtResource("23_vdtjt")]
+[node name="Crab5" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(2426, -13)
 
-[node name="Crab6" parent="." instance=ExtResource("23_vdtjt")]
+[node name="Crab6" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(2993, 499)
 
-[node name="Crab7" parent="." instance=ExtResource("23_vdtjt")]
+[node name="Crab7" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(5011, 499)
 
-[node name="Saw3" parent="." instance=ExtResource("24_nouef")]
+[node name="Saw3" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(7169, -266)
 curve = SubResource("Curve2D_s4b5i")
 
-[node name="Saw4" parent="." instance=ExtResource("24_nouef")]
+[node name="Saw4" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(7073, -265)
 curve = SubResource("Curve2D_qfhyh")
 
-[node name="Saw5" parent="." instance=ExtResource("24_nouef")]
+[node name="Saw5" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(6975, -266)
 curve = SubResource("Curve2D_6fwx2")
 
-[node name="Saw7" parent="." instance=ExtResource("24_nouef")]
+[node name="Saw7" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(6881, -266)
 curve = SubResource("Curve2D_ulcqf")
 
-[node name="Saw8" parent="." instance=ExtResource("24_nouef")]
+[node name="Saw8" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(6785, -266)
 curve = SubResource("Curve2D_rdvgg")
 
-[node name="Saw9" parent="." instance=ExtResource("24_nouef")]
+[node name="Saw9" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(6689, -266)
 curve = SubResource("Curve2D_c0166")
 
-[node name="Saw2" parent="." instance=ExtResource("24_nouef")]
+[node name="Saw2" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(9083, 178)
 curve = SubResource("Curve2D_4x2cg")
 
-[node name="Starfish4" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(8531, 241)
+[node name="Pelican6" parent="Enemies" instance=ExtResource("9_qsvqe")]
+position = Vector2(-45, 194)
 
-[node name="Starfish5" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(8193, 241)
+[node name="Starfish17" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(1344, -16)
 
-[node name="Starfish6" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(7855, 241)
+[node name="Mushroom" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(-594, 468)
 
-[node name="Crab8" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(7983, 50)
+[node name="Mushroom2" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(-301, 468)
 
-[node name="Crab9" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(7648, 51)
+[node name="Crab" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(-24, 307)
 
-[node name="Mushroom5" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(7762, -140)
+[node name="Starfish" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(688, 145)
 
-[node name="Mushroom6" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(7917, -268)
+[node name="Crab2" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(87, -77)
 
-[node name="Crab10" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(8247, -269)
+[node name="Mushroom3" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(-487, -236)
 
-[node name="Crab11" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(8015, -77)
+[node name="Saw" parent="Enemies" instance=ExtResource("24_nouef")]
+position = Vector2(1657, -289)
+curve = SubResource("Curve2D_xpuws")
 
-[node name="Starfish7" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(8672, -79)
+[node name="Mushroom4" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(633, -364)
 
-[node name="Starfish8" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(8109, -463)
+[node name="Starfish2" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(982, -431)
 
-[node name="Mushroom7" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(8387, 52)
+[node name="Starfish3" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(1253, -495)
 
-[node name="Mushroom8" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(9273, -332)
+[node name="Pelican" parent="Enemies" instance=ExtResource("9_qsvqe")]
+position = Vector2(1082, -681)
 
-[node name="Crab12" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(9499, 114)
+[node name="Crab3" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(1469, -525)
 
-[node name="Crab13" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(9311, 339)
+[node name="Platforms" type="Node2D" parent="."]
 
-[node name="Crab14" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(9247, 179)
-
-[node name="Starfish9" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(9219, -175)
-
-[node name="Starfish10" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(8997, -303)
-
-[node name="Starfish11" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(9003, -431)
-
-[node name="Mushroom9" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(8602, -427)
-
-[node name="Pelican2" parent="." instance=ExtResource("9_qsvqe")]
-position = Vector2(3411, 236)
-
-[node name="Pelican3" parent="." instance=ExtResource("9_qsvqe")]
-position = Vector2(4395, 236)
-
-[node name="Pelican4" parent="." instance=ExtResource("9_qsvqe")]
-position = Vector2(3867, 284)
-
-[node name="Crab15" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(12459, -749)
-
-[node name="Starfish12" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(12938, -1006)
-
-[node name="Crab16" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(12640, -1005)
-
-[node name="Mushroom10" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(12514, -1196)
-
-[node name="Mushroom11" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(12002, -1196)
-
-[node name="Mushroom12" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(12257, -1196)
-
-[node name="Starfish13" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(13230, -431)
-
-[node name="Starfish14" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(12845, -431)
-
-[node name="Crab17" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(12493, -429)
-
-[node name="Mushroom13" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(13726, -748)
-
-[node name="Pelican5" parent="." instance=ExtResource("9_qsvqe")]
-position = Vector2(13202, -710)
-
-[node name="Starfish15" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(14179, -655)
-
-[node name="Platform2" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform2" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(14674, -628)
 curve = SubResource("Curve2D_qsvqe")
 
-[node name="Mushroom14" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(15035, -1580)
-
-[node name="Crab18" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(15211, -1709)
-
-[node name="Crab19" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(15479, -1869)
-
-[node name="Starfish16" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(15708, -1935)
-
-[node name="Platform4" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform4" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(9608, -302)
 curve = SubResource("Curve2D_r7wcl")
 
-[node name="Platform5" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform5" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(10154, -312)
 curve = SubResource("Curve2D_gsja5")
 
-[node name="Platform6" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform6" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(10987, -569)
 curve = SubResource("Curve2D_bkbve")
 
-[node name="Platform7" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform7" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(9932, -1016)
 curve = SubResource("Curve2D_ihnwd")
 
-[node name="Platform8" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform8" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(10699, -1592)
 curve = SubResource("Curve2D_km4sl")
 
-[node name="Platform9" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform9" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(11692, -344)
 curve = SubResource("Curve2D_oaqh1")
 
-[node name="Platform3" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform3" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(-352, 419)
 curve = SubResource("Curve2D_uuidd")
