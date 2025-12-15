@@ -1,6 +1,7 @@
 extends EnemyCharacter
 
 @export var enemy_to_spawn: Array[PackedScene]
+@export var skill_drops: Array[Script]
 @export var enemy_per_spawn: int = 1
 @export var spawn_interval: float = 3.0
 @export var spawn_min_distance: float = 2
@@ -52,12 +53,15 @@ func spawn_enemy() -> bool:
 			(enemy as EnemyCharacter).position.x = position.x + random_distance
 			(enemy as EnemyCharacter).position.y = position.y
 			(enemy as EnemyCharacter).elemental_type = elemental_type
+			if skill_drops != null and skill_drops.size() > 0:
+				(enemy as EnemyCharacter).skill_to_drop = skill_drops[randi_range(0, skill_drops.size() - 1)]
 			(enemy as EnemyCharacter)._ready()
 		health-=1
 		health_changed.emit()
-		if health <= 0: return false
+		if health <= 0: return false			
+
+	reset_spawn_timer()
 	return true
-	pass
 
 func reset_spawn_timer() -> void:
 	spawn_timer = spawn_interval

@@ -38,7 +38,6 @@ func take_damage(direction: Variant, damage: int = 1) -> void:
 	pass
 
 func _drop_skill_item():
-	print("drop skill")
 	if obj.skill_to_drop and SKILL_DROP_SCENE:
 		var skill_drop = SKILL_DROP_SCENE.instantiate() as SkillDrop
 		
@@ -53,4 +52,4 @@ func _drop_skill_item():
 			# 3. Thêm vào Scene
 			get_tree().current_scene.add_child(skill_drop)
 			
-			# print("✅ Enemy dropped skill:", skill_name)
+			#print("✅ Enemy dropped skill:", skill_name)
