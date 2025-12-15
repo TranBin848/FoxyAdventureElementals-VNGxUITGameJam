@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=41 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="10_r7wcl"]
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="11_gsja5"]
 [ext_resource type="PackedScene" uid="uid://bf2uetkx1otc6" path="res://scenes/objects/house_door/house_door.tscn" id="12_bkbve"]
-[ext_resource type="PackedScene" uid="uid://bh4o4646vlfjr" path="res://levels/objects/wand_collectable.tscn" id="13_ihnwd"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="14_km4sl"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="15_oaqh1"]
 [ext_resource type="Texture2D" uid="uid://xyf33vrykcne" path="res://assets/island/background/sandria-small.png" id="16_xpuws"]
@@ -196,14 +195,16 @@ position = Vector2(1344, -16)
 [node name="HouseDoor" parent="." instance=ExtResource("12_bkbve")]
 position = Vector2(1328, 608)
 
-[node name="WandCollectable" parent="." instance=ExtResource("13_ihnwd")]
-position = Vector2(337, 751)
+[node name="ExitDoor" parent="." instance=ExtResource("15_oaqh1")]
+position = Vector2(18640, -1626)
+target_stage = "uid://beaf2cwec5xlr"
+target_door = "EntryDoor"
+
+[node name="EntryDoor" parent="." instance=ExtResource("15_oaqh1")]
+position = Vector2(-552, 805)
 
 [node name="Player" parent="." instance=ExtResource("14_km4sl")]
-position = Vector2(307, 313)
-
-[node name="Door" parent="." instance=ExtResource("15_oaqh1")]
-position = Vector2(18640, -1626)
+position = Vector2(18456, -1610)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0
@@ -239,6 +240,7 @@ position = Vector2(848, 688)
 position = Vector2(806, 688)
 
 [node name="SandStormParticle" parent="." instance=ExtResource("20_pvqwi")]
+process_mode = 4
 position = Vector2(-290, 633)
 
 [node name="RainParticle" parent="." instance=ExtResource("21_fl6bb")]

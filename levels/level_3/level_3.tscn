@@ -1,7 +1,7 @@
 [gd_scene load_steps=50 format=4 uid="uid://beaf2cwec5xlr"]
 
-[ext_resource type="Script" uid="uid://wdfjgyhrjowc" path="res://levels/level_3_bossCrab/level_3_bossCrab.gd" id="1_b7gic"]
-[ext_resource type="TileSet" uid="uid://b8xtiyc1j22cq" path="res://levels/level_1/level1.tres" id="2_4c4sg"]
+[ext_resource type="Script" uid="uid://wdfjgyhrjowc" path="res://levels/level_3/level_3.gd" id="1_b7gic"]
+[ext_resource type="TileSet" uid="uid://yxir4yavpav2" path="res://levels/level_1/level_1.tres" id="2_4c4sg"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="3_omsu6"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="4_06aei"]
 [ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="5_1j7or"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bx81r144ln5ox" path="res://assets/terrain_plus/cloud4.png" id="13_p6th0"]
 [ext_resource type="Texture2D" uid="uid://cgi6nqgna4gq" path="res://assets/terrain_plus/cloud5.png" id="14_vhg0r"]
 [ext_resource type="Texture2D" uid="uid://bsw3whmd1myg4" path="res://assets/terrain_plus/cloud6.png" id="15_lte88"]
-[ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/Boulder/boulder.tscn" id="16_pxubh"]
+[ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="16_pxubh"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="17_dv3bi"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="18_4c4sg"]
 [ext_resource type="Texture2D" uid="uid://bn23ps3jhu4ru" path="res://assets/island/objects/moving_platform/moving_platform.png" id="18_06aei"]
@@ -173,7 +173,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.148644
+shader_parameter/y_zoom = 0.318631
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -209,22 +209,23 @@ collision_enabled = false
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("3_omsu6")]
-element = 4
 
 [node name="Crab" parent="Enemies" instance=ExtResource("4_06aei")]
-element = 4
 
 [node name="Pelican" parent="Enemies" instance=ExtResource("5_1j7or")]
-element = 4
 
 [node name="Starfish" parent="Enemies" instance=ExtResource("6_32j6t")]
 
-[node name="Door" parent="." instance=ExtResource("7_1gf37")]
+[node name="ExitDoor" parent="." instance=ExtResource("7_1gf37")]
 position = Vector2(12479, -507)
-target_stage = "uid://c47jft3el2tid"
+target_stage = "uid://dsxvyoo4n54nc"
+target_door = "EntryDoor"
+
+[node name="EntryDoor" parent="." instance=ExtResource("7_1gf37")]
+position = Vector2(2602, -123)
 
 [node name="Player" parent="." instance=ExtResource("8_q4xca")]
-position = Vector2(6226, -822)
+position = Vector2(12418, -514)
 collision_mask = 73
 platform_floor_layers = 4294967231
 

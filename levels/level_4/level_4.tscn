@@ -1,10 +1,11 @@
-[gd_scene load_steps=40 format=4 uid="uid://dsxvyoo4n54nc"]
+[gd_scene load_steps=41 format=4 uid="uid://dsxvyoo4n54nc"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_n8468"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
 [ext_resource type="TileSet" uid="uid://bui3wquutm1yg" path="res://levels/level_4/level_4.tres" id="3_rjkgb"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="4_0odlo"]
 [ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/sea_horse.tscn" id="7_5mfhe"]
+[ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="7_401k1"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="8_f8hbo"]
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="9_s3y0x"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="11_s6hm0"]
@@ -154,8 +155,10 @@ position = Vector2(0, 300)
 scale = Vector2(2, 2)
 texture = ExtResource("16_s6hm0")
 
+[node name="EntryDoor" parent="." instance=ExtResource("7_401k1")]
+position = Vector2(-12, 5)
+
 [node name="Player" parent="." instance=ExtResource("2_tu7ib")]
-z_index = -5
 position = Vector2(8, -20)
 has_wand = false
 max_health = 1000

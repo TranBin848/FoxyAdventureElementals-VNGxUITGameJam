@@ -97,7 +97,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.263331
+shader_parameter/y_zoom = 1.61051
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -203,12 +203,13 @@ skill_to_drop = ExtResource("15_2t2ib")
 [node name="Boat" parent="." instance=ExtResource("16_plcgd")]
 position = Vector2(-1859, 443)
 
-[node name="Door" parent="." instance=ExtResource("17_v3xwt")]
+[node name="ExitDoor" parent="." instance=ExtResource("17_v3xwt")]
 position = Vector2(5280, -440)
 target_stage = "uid://wopr13pq4dnf"
+target_door = "EntryDoor"
 
 [node name="Player" parent="." instance=ExtResource("18_gukcl")]
-position = Vector2(511, 164)
+position = Vector2(5175, -430)
 collision_mask = 73
 platform_floor_layers = 4294967231
 max_health = 1000
@@ -501,6 +502,7 @@ shape = SubResource("RectangleShape2D_6onc1")
 debug_color = Color(0.988235, 0, 0.290196, 0)
 
 [node name="Boss" parent="BossZoneArea2D" instance=ExtResource("49_mvtf2")]
+position = Vector2(-114, 18)
 
 [node name="SkillTreeUI" type="CanvasLayer" parent="."]
 process_mode = 3

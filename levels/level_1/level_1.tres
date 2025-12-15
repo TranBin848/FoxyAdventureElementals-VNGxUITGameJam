@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=25 format=3 uid="uid://yxir4yavpav2"]
+[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://yxir4yavpav2"]
 
 [ext_resource type="Texture2D" uid="uid://bnmuiut4rgvqk" path="res://assets/terrain_plus/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="1_wapvn"]
 [ext_resource type="Texture2D" uid="uid://dk85vjjkah550" path="res://assets/terrain_plus/Floor Tiles1.png" id="2_gecsc"]
@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://crrvkejlerpq5" path="res://assets/terrain_plus/BG Dirt2.png" id="3_wapvn"]
 [ext_resource type="PackedScene" uid="uid://dvs3j65i3c27e" path="res://levels/objects/tree/tree_2.tscn" id="4_8x0gd"]
 [ext_resource type="Texture2D" uid="uid://clilecwvvs5g4" path="res://assets/terrain_plus/Decor.png" id="4_gecsc"]
-[ext_resource type="PackedScene" uid="uid://bgt2q1tvy7tm" path="res://levels/level_3_bossCrab/Vapor.tscn" id="5_axnr2"]
-[ext_resource type="PackedScene" uid="uid://cu6qwa63uqk5c" path="res://levels/level_3_bossCrab/HorizontalVapor.tscn" id="6_twmtw"]
+[ext_resource type="PackedScene" uid="uid://bgt2q1tvy7tm" path="res://levels/level_3/Vapor.tscn" id="5_axnr2"]
+[ext_resource type="PackedScene" uid="uid://cu6qwa63uqk5c" path="res://levels/level_3/HorizontalVapor.tscn" id="6_twmtw"]
 [ext_resource type="Texture2D" uid="uid://ca4mpbifj2vre" path="res://assets/terrain_plus/Floor Tiles2.png" id="6_w87ud"]
 [ext_resource type="PackedScene" uid="uid://drpcvsgtydoih" path="res://levels/objects/tree/tree_3.tscn" id="10_3syhl"]
 [ext_resource type="PackedScene" uid="uid://2ao4jldohksr" path="res://levels/objects/tree/tree_4.tscn" id="11_t2hmq"]
