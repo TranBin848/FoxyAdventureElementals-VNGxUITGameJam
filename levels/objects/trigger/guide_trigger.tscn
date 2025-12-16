@@ -32,8 +32,7 @@ theme_override_constants/line_separation = 6
 theme_override_fonts/normal_font = ExtResource("2_v85d0")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "dfadfadf
-adfadf"
+text = "1112442111"
 horizontal_alignment = 1
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

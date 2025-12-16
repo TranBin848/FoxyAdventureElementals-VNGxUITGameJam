@@ -43,7 +43,9 @@ stream_0/stream = ExtResource("2_6p0im")
 stream_1/stream = ExtResource("3_3m44m")
 
 [node name="Water" type="GPUParticles2D"]
+process_mode = 4
 material = SubResource("CanvasItemMaterial_50u0f")
+emitting = false
 amount = 3
 texture = ExtResource("1_ojf5w")
 process_material = SubResource("ParticleProcessMaterial_kvfmh")

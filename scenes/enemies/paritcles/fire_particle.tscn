@@ -33,8 +33,10 @@ color_ramp = SubResource("GradientTexture1D_gpqr6")
 anim_speed_max = 1.0
 
 [node name="Fire" type="GPUParticles2D"]
+process_mode = 4
 material = SubResource("CanvasItemMaterial_1k26f")
 position = Vector2(1, 0)
+emitting = false
 amount = 1
 texture = ExtResource("1_1k26f")
 process_material = SubResource("ParticleProcessMaterial_gpqr6")

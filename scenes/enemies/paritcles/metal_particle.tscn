@@ -33,7 +33,9 @@ alpha_curve = SubResource("CurveTexture_tdpo8")
 anim_offset_max = 1.0
 
 [node name="Metal" type="GPUParticles2D"]
+process_mode = 4
 material = SubResource("CanvasItemMaterial_uyg18")
+emitting = false
 amount = 1
 texture = ExtResource("1_yydmv")
 process_material = SubResource("ParticleProcessMaterial_t36ow")

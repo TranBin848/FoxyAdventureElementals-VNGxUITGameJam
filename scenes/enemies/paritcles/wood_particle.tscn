@@ -39,6 +39,7 @@ alpha_curve = SubResource("CurveTexture_fpyp0")
 anim_offset_max = 1.0
 
 [node name="Wood" type="GPUParticles2D"]
+process_mode = 4
 material = SubResource("CanvasItemMaterial_mlgto")
 emitting = false
 amount = 20
