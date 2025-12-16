@@ -39,12 +39,6 @@
 [ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="38_sm3vb"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="39_pqi81"]
 
-[sub_resource type="Curve2D" id="Curve2D_ppf8r"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 279, 161)
-}
-point_count = 2
-
 [sub_resource type="Curve2D" id="Curve2D_s4b5i"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 489)
@@ -92,6 +86,12 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 764)
 }
 point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_sm3vb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, -123, 91, 0, 0, 0, 0, 1, 155, 0, 0, 0, 0, -123, 236, 0, 0, 0, 0, 1, 301, 0, 0, 0, 0, -120, 350, 0, 0, 0, 0, 0, 454, 0, 0, 0, 0, -122, 515, 0, 0, 0, 0, 1, 579)
+}
+point_count = 9
 
 [sub_resource type="Curve2D" id="Curve2D_qsvqe"]
 _data = {
@@ -147,12 +147,6 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_sm3vb"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, -123, 91, 0, 0, 0, 0, 1, 155, 0, 0, 0, 0, -123, 236, 0, 0, 0, 0, 1, 301, 0, 0, 0, 0, -120, 350, 0, 0, 0, 0, 0, 454, 0, 0, 0, 0, -122, 515, 0, 0, 0, 0, 1, 579)
-}
-point_count = 9
-
 [sub_resource type="Curve2D" id="Curve2D_pvqwi"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 243, 161)
@@ -162,6 +156,12 @@ point_count = 2
 [sub_resource type="Curve2D" id="Curve2D_fl6bb"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 194, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ppf8r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 279, 161)
 }
 point_count = 2
 
@@ -234,10 +234,6 @@ linked_door = NodePath("../HouseDoor5")
 
 [node name="HouseDoor5" parent="." instance=ExtResource("12_bkbve")]
 position = Vector2(6447, 992)
-
-[node name="Platform" parent="." instance=ExtResource("25_t8ul1")]
-position = Vector2(11564, -1336)
-curve = SubResource("Curve2D_ppf8r")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -554,6 +550,238 @@ position = Vector2(5016, 489)
 elemental_type = 5
 skill_to_drop = ExtResource("27_xpuws")
 
+[node name="CoconutWarrior4" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(-205, 809)
+elemental_type = 5
+skill_to_drop = ExtResource("27_xpuws")
+
+[node name="Crab4" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(93, 755)
+elemental_type = 5
+skill_to_drop = ExtResource("27_xpuws")
+
+[node name="SpearWarrior3" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(-582, 462)
+elemental_type = 5
+skill_to_drop = ExtResource("27_xpuws")
+
+[node name="Mushroom3" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(448, 757)
+elemental_type = 5
+skill_to_drop = ExtResource("27_xpuws")
+
+[node name="Crab6" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(790, 691)
+elemental_type = 5
+skill_to_drop = ExtResource("27_xpuws")
+
+[node name="CoconutWarrior5" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(1094, 681)
+elemental_type = 5
+skill_to_drop = ExtResource("27_xpuws")
+
+[node name="CoconutWarrior6" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(2987, 489)
+elemental_type = 5
+skill_to_drop = ExtResource("27_xpuws")
+
+[node name="Turtle" parent="Enemies" instance=ExtResource("28_6fwx2")]
+position = Vector2(5815, 368)
+elemental_type = 4
+skill_to_drop = ExtResource("24_km4sl")
+
+[node name="Turtle2" parent="Enemies" instance=ExtResource("28_6fwx2")]
+position = Vector2(6740, 240)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="Turtle3" parent="Enemies" instance=ExtResource("28_6fwx2")]
+position = Vector2(7070, 240)
+elemental_type = 4
+skill_to_drop = ExtResource("25_oaqh1")
+
+[node name="SpearWarrior4" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(6745, -82)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="SpearWarrior5" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(6937, -82)
+elemental_type = 4
+skill_to_drop = ExtResource("24_km4sl")
+
+[node name="SpearWarrior6" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(7129, -82)
+elemental_type = 4
+skill_to_drop = ExtResource("24_km4sl")
+
+[node name="CoconutWarrior7" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(7764, -151)
+elemental_type = 4
+skill_to_drop = ExtResource("25_oaqh1")
+
+[node name="CoconutWarrior8" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(8503, 233)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="CoconutWarrior9" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(8674, -87)
+elemental_type = 4
+skill_to_drop = ExtResource("24_km4sl")
+
+[node name="CoconutWarrior10" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(8097, -471)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="Turtle4" parent="Enemies" instance=ExtResource("28_6fwx2")]
+position = Vector2(7718, -400)
+elemental_type = 4
+skill_to_drop = ExtResource("24_km4sl")
+
+[node name="Turtle5" parent="Enemies" instance=ExtResource("28_6fwx2")]
+position = Vector2(9316, 336)
+elemental_type = 4
+skill_to_drop = ExtResource("24_km4sl")
+
+[node name="SpearWarrior7" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(8946, -434)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="SpearWarrior8" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(8790, -306)
+elemental_type = 4
+skill_to_drop = ExtResource("24_km4sl")
+
+[node name="SpearWarrior9" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(7936, -274)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="SeaHorse" parent="Enemies" instance=ExtResource("28_rdvgg")]
+position = Vector2(9778, -347)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="Turtle6" parent="Enemies" instance=ExtResource("28_6fwx2")]
+position = Vector2(6476, 1008)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="Pelican7" parent="Enemies" instance=ExtResource("9_qsvqe")]
+position = Vector2(6132, 214)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="Saw6" parent="Enemies" instance=ExtResource("24_nouef")]
+position = Vector2(6601, 379)
+curve = SubResource("Curve2D_sm3vb")
+
+[node name="Pelican8" parent="Enemies" instance=ExtResource("9_qsvqe")]
+position = Vector2(5682, 184)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="CoconutWarrior11" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(6298, 1001)
+elemental_type = 4
+skill_to_drop = ExtResource("23_ihnwd")
+
+[node name="Crab7" parent="Enemies" instance=ExtResource("23_vdtjt")]
+position = Vector2(6144, 403)
+elemental_type = 4
+skill_to_drop = ExtResource("24_km4sl")
+
+[node name="CoconutWarrior12" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(10501, -599)
+elemental_type = 1
+skill_to_drop = ExtResource("21_gsja5")
+
+[node name="CoconutWarrior13" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(10765, -599)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="Starfish4" parent="Enemies" instance=ExtResource("10_r7wcl")]
+position = Vector2(11217, -367)
+elemental_type = 1
+skill_to_drop = ExtResource("21_gsja5")
+
+[node name="SeaHorse2" parent="Enemies" instance=ExtResource("28_rdvgg")]
+position = Vector2(11526, -379)
+elemental_type = 1
+skill_to_drop = ExtResource("21_gsja5")
+
+[node name="SeaHorse3" parent="Enemies" instance=ExtResource("28_rdvgg")]
+position = Vector2(11847, -827)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="SpearWarrior10" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(10053, -1042)
+elemental_type = 1
+skill_to_drop = ExtResource("21_gsja5")
+
+[node name="Mushroom6" parent="Enemies" instance=ExtResource("22_1h50e")]
+position = Vector2(10393, -1036)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="SpearWarrior11" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(10573, -1618)
+elemental_type = 1
+skill_to_drop = ExtResource("21_gsja5")
+
+[node name="Turtle7" parent="Enemies" instance=ExtResource("28_6fwx2")]
+position = Vector2(11050, -1360)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="Turtle8" parent="Enemies" instance=ExtResource("28_6fwx2")]
+position = Vector2(11362, -1360)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="CoconutWarrior14" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(12547, -1207)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="CoconutWarrior15" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(12618, -1019)
+
+[node name="SeaHorse4" parent="Enemies" instance=ExtResource("28_rdvgg")]
+position = Vector2(12618, -1019)
+elemental_type = 1
+skill_to_drop = ExtResource("21_gsja5")
+
+[node name="SeaHorse5" parent="Enemies" instance=ExtResource("28_rdvgg")]
+position = Vector2(12511, -443)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="SpearWarrior12" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(14227, -658)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
+[node name="CoconutWarrior16" parent="Enemies" instance=ExtResource("28_ulcqf")]
+position = Vector2(13651, -759)
+elemental_type = 1
+skill_to_drop = ExtResource("21_gsja5")
+
+[node name="SeaHorse6" parent="Enemies" instance=ExtResource("28_rdvgg")]
+position = Vector2(15348, -1723)
+elemental_type = 1
+skill_to_drop = ExtResource("21_gsja5")
+
+[node name="SpearWarrior13" parent="Enemies" instance=ExtResource("27_6fwx2")]
+position = Vector2(16114, -1938)
+elemental_type = 1
+skill_to_drop = ExtResource("29_ulcqf")
+
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("25_t8ul1")]
@@ -584,314 +812,106 @@ curve = SubResource("Curve2D_km4sl")
 position = Vector2(11692, -344)
 curve = SubResource("Curve2D_oaqh1")
 
-[node name="CoconutWarrior" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(-205, 809)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
-
-[node name="Crab" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(93, 755)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
-
-[node name="Spawner" parent="." instance=ExtResource("25_ppf8r")]
-process_mode = 4
-position = Vector2(4002, 373)
-enemy_to_spawn = Array[PackedScene]([ExtResource("28_ulcqf"), ExtResource("23_vdtjt"), ExtResource("28_6fwx2")])
-skill_drops = Array[Script]([ExtResource("27_xpuws")])
-enemy_per_spawn = 2
-spawn_interval = 5.0
-elemental_type = 5
-
-[node name="SpearWarrior" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(-582, 462)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
-
-[node name="Mushroom" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(448, 757)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
-
-[node name="Crab2" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(790, 691)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
-
-[node name="CoconutWarrior2" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(1094, 681)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
-
-[node name="Platform2" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform3" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(1745, 648)
 curve = SubResource("Curve2D_pqi81")
 
-[node name="Platform3" parent="." instance=ExtResource("25_t8ul1")]
+[node name="Platform10" parent="Platforms" instance=ExtResource("25_t8ul1")]
 position = Vector2(2699, 8)
 curve = SubResource("Curve2D_1txof")
 
-[node name="CoconutWarrior3" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(2987, 489)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
+[node name="Platform11" parent="Platforms" instance=ExtResource("25_t8ul1")]
+position = Vector2(5318, 232)
+curve = SubResource("Curve2D_pvqwi")
 
-[node name="Turtle" parent="." instance=ExtResource("28_6fwx2")]
-position = Vector2(5815, 368)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
+[node name="Platform12" parent="Platforms" instance=ExtResource("25_t8ul1")]
+position = Vector2(7284, 264)
+curve = SubResource("Curve2D_fl6bb")
 
-[node name="Turtle2" parent="." instance=ExtResource("28_6fwx2")]
-position = Vector2(6740, 240)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
+[node name="Platform" parent="Platforms" instance=ExtResource("25_t8ul1")]
+position = Vector2(11564, -1336)
+curve = SubResource("Curve2D_ppf8r")
 
-[node name="Turtle3" parent="." instance=ExtResource("28_6fwx2")]
-position = Vector2(7070, 240)
-elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
+[node name="InteractableObjects" type="Node2D" parent="."]
 
-[node name="SpearWarrior2" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(6745, -82)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="SpearWarrior3" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(6937, -82)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
-
-[node name="SpearWarrior4" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(7129, -82)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
-
-[node name="CoconutWarrior4" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(7764, -151)
-elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
-
-[node name="CoconutWarrior5" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(8503, 233)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="CoconutWarrior6" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(8674, -87)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
-
-[node name="CoconutWarrior7" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(8097, -471)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="Turtle4" parent="." instance=ExtResource("28_6fwx2")]
-position = Vector2(7718, -400)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
-
-[node name="Turtle5" parent="." instance=ExtResource("28_6fwx2")]
-position = Vector2(9316, 336)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
-
-[node name="SpearWarrior5" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(8946, -434)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="SpearWarrior6" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(8790, -306)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
-
-[node name="SpearWarrior7" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(7936, -274)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="SeaHorse" parent="." instance=ExtResource("28_rdvgg")]
-position = Vector2(9778, -347)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="Turtle6" parent="." instance=ExtResource("28_6fwx2")]
-position = Vector2(6476, 1008)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="Pelican2" parent="." instance=ExtResource("9_qsvqe")]
-position = Vector2(6132, 214)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="Saw" parent="." instance=ExtResource("24_nouef")]
-position = Vector2(6601, 379)
-curve = SubResource("Curve2D_sm3vb")
-
-[node name="Pelican" parent="." instance=ExtResource("9_qsvqe")]
-position = Vector2(5682, 184)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="CoconutWarrior8" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(6298, 1001)
-elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
-
-[node name="Crab3" parent="." instance=ExtResource("23_vdtjt")]
-position = Vector2(6144, 403)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
-
-[node name="CoconutWarrior9" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(10501, -599)
-elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
-
-[node name="CoconutWarrior10" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(10765, -599)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="Starfish" parent="." instance=ExtResource("10_r7wcl")]
-position = Vector2(11217, -367)
-elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
-
-[node name="SeaHorse2" parent="." instance=ExtResource("28_rdvgg")]
-position = Vector2(11526, -379)
-elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
-
-[node name="SeaHorse3" parent="." instance=ExtResource("28_rdvgg")]
-position = Vector2(11847, -827)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="SpearWarrior8" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(10053, -1042)
-elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
-
-[node name="Mushroom6" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(10393, -1036)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="SpearWarrior9" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(10573, -1618)
-elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
-
-[node name="Turtle7" parent="." instance=ExtResource("28_6fwx2")]
-position = Vector2(11050, -1360)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="Turtle8" parent="." instance=ExtResource("28_6fwx2")]
-position = Vector2(11362, -1360)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="CoconutWarrior11" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(12547, -1207)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="CoconutWarrior12" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(12618, -1019)
-
-[node name="SeaHorse4" parent="." instance=ExtResource("28_rdvgg")]
-position = Vector2(12618, -1019)
-elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
-
-[node name="SeaHorse5" parent="." instance=ExtResource("28_rdvgg")]
-position = Vector2(12511, -443)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="SpearWarrior10" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(14227, -658)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="CoconutWarrior13" parent="." instance=ExtResource("28_ulcqf")]
-position = Vector2(13651, -759)
-elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
-
-[node name="SeaHorse6" parent="." instance=ExtResource("28_rdvgg")]
-position = Vector2(15348, -1723)
-elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
-
-[node name="SpearWarrior11" parent="." instance=ExtResource("27_6fwx2")]
-position = Vector2(16114, -1938)
-elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
-
-[node name="Spawner2" parent="." instance=ExtResource("25_ppf8r")]
-process_mode = 4
-position = Vector2(17532, -776)
-enemy_to_spawn = Array[PackedScene]([ExtResource("28_rdvgg"), ExtResource("28_ulcqf"), ExtResource("10_r7wcl"), ExtResource("23_vdtjt")])
-skill_drops = Array[Script]([ExtResource("21_gsja5"), ExtResource("29_ulcqf")])
-enemy_per_spawn = 2
-spawn_interval = 5.0
-elemental_type = 1
-
-[node name="Quicksand" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3518, 505)
 
-[node name="Quicksand2" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand2" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3587, 505)
 
-[node name="Quicksand3" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand3" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3646, 505)
 
-[node name="Quicksand4" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand4" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3710, 505)
 
-[node name="Quicksand5" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand5" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3777, 505)
 
-[node name="Quicksand6" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand6" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3845, 505)
 
-[node name="Quicksand7" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand7" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3928, 505)
 
-[node name="Quicksand8" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand8" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3993, 505)
 
-[node name="Quicksand9" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand9" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4059, 505)
 
-[node name="Quicksand10" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand10" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4114, 505)
 
-[node name="Quicksand11" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand11" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4178, 505)
 
-[node name="Quicksand12" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand12" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4243, 505)
 
-[node name="Quicksand13" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand13" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4310, 505)
 
-[node name="Quicksand14" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand14" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4377, 505)
 
-[node name="Quicksand15" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand15" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4441, 505)
 
-[node name="Quicksand16" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand16" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4503, 505)
 
-[node name="Quicksand17" parent="." instance=ExtResource("18_pqi81")]
+[node name="Quicksand17" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3461, 505)
+
+[node name="Checkpoint" parent="InteractableObjects" instance=ExtResource("38_km4sl")]
+position = Vector2(336, -80)
+checkpoint_id = "1"
+
+[node name="Checkpoint2" parent="InteractableObjects" instance=ExtResource("38_km4sl")]
+position = Vector2(1652, 624)
+checkpoint_id = "2"
+
+[node name="Checkpoint3" parent="InteractableObjects" instance=ExtResource("38_km4sl")]
+position = Vector2(5662, 368)
+checkpoint_id = "3"
+
+[node name="Checkpoint4" parent="InteractableObjects" instance=ExtResource("38_km4sl")]
+position = Vector2(8225, -80)
+checkpoint_id = "4"
+
+[node name="Checkpoint5" parent="InteractableObjects" instance=ExtResource("38_km4sl")]
+position = Vector2(9840, -336)
+checkpoint_id = "5"
+
+[node name="Checkpoint6" parent="InteractableObjects" instance=ExtResource("38_km4sl")]
+position = Vector2(11942, -1200)
+checkpoint_id = "6"
+
+[node name="Checkpoint7" parent="InteractableObjects" instance=ExtResource("38_km4sl")]
+position = Vector2(14816, -1584)
+checkpoint_id = "7"
 
 [node name="TileMaps" type="Node2D" parent="."]
 
@@ -967,38 +987,22 @@ theme_override_font_sizes/font_size = 32
 text = "SKILL TREE"
 vertical_alignment = 1
 
-[node name="Checkpoint" parent="." instance=ExtResource("38_km4sl")]
-position = Vector2(336, -80)
-checkpoint_id = "1"
+[node name="Spawners" type="Node2D" parent="."]
 
-[node name="Checkpoint2" parent="." instance=ExtResource("38_km4sl")]
-position = Vector2(1652, 624)
-checkpoint_id = "2"
+[node name="Spawner2" parent="Spawners" instance=ExtResource("25_ppf8r")]
+process_mode = 4
+position = Vector2(17532, -776)
+enemy_to_spawn = Array[PackedScene]([ExtResource("28_rdvgg"), ExtResource("28_ulcqf"), ExtResource("10_r7wcl"), ExtResource("23_vdtjt")])
+skill_drops = Array[Script]([ExtResource("21_gsja5"), ExtResource("29_ulcqf")])
+enemy_per_spawn = 2
+spawn_interval = 5.0
+elemental_type = 1
 
-[node name="Platform4" parent="." instance=ExtResource("25_t8ul1")]
-position = Vector2(5318, 232)
-curve = SubResource("Curve2D_pvqwi")
-
-[node name="Platform5" parent="." instance=ExtResource("25_t8ul1")]
-position = Vector2(7284, 264)
-curve = SubResource("Curve2D_fl6bb")
-
-[node name="Checkpoint3" parent="." instance=ExtResource("38_km4sl")]
-position = Vector2(5662, 368)
-checkpoint_id = "3"
-
-[node name="Checkpoint4" parent="." instance=ExtResource("38_km4sl")]
-position = Vector2(8225, -80)
-checkpoint_id = "4"
-
-[node name="Checkpoint5" parent="." instance=ExtResource("38_km4sl")]
-position = Vector2(9840, -336)
-checkpoint_id = "5"
-
-[node name="Checkpoint6" parent="." instance=ExtResource("38_km4sl")]
-position = Vector2(11942, -1200)
-checkpoint_id = "6"
-
-[node name="Checkpoint7" parent="." instance=ExtResource("38_km4sl")]
-position = Vector2(14816, -1584)
-checkpoint_id = "7"
+[node name="Spawner" parent="Spawners" instance=ExtResource("25_ppf8r")]
+process_mode = 4
+position = Vector2(4002, 373)
+enemy_to_spawn = Array[PackedScene]([ExtResource("28_ulcqf"), ExtResource("23_vdtjt"), ExtResource("28_6fwx2")])
+skill_drops = Array[Script]([ExtResource("27_xpuws")])
+enemy_per_spawn = 2
+spawn_interval = 5.0
+elemental_type = 5
