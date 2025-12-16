@@ -360,6 +360,8 @@ script = ExtResource("10_dxuq7")
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("17_02d7m")
+despawn_time = null
+bounce_back_velocity = null
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]
 position = Vector2(0, -17)

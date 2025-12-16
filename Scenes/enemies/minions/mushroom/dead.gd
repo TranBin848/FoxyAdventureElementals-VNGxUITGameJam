@@ -1,4 +1,4 @@
-extends "res://Scenes/enemies/states/dead.gd"
+extends EnemyStateDead
 
 func _enter() -> void:
 	obj.change_animation("dead")
@@ -7,4 +7,4 @@ func _enter() -> void:
 	timer = despawn_time
 	get_shader_values()
 	if(obj.level == obj.max_level and obj.number_of_skill_drop > 0): _drop_skill_item()
-	#obj.split()
+	obj.split()
