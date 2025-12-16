@@ -52,4 +52,4 @@ func _drop_skill_item():
 			# 3. Thêm vào Scene
 			get_tree().current_scene.add_child(skill_drop)
 			
-			# print("✅ Enemy dropped skill:", skill_name)
+			#print("✅ Enemy dropped skill:", skill_name)

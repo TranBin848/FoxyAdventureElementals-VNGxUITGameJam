@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://plkay1dhhsoh"]
+[gd_scene load_steps=12 format=3 uid="uid://plkay1dhhsoh"]
 
 [ext_resource type="Script" uid="uid://cs8wx3enui401" path="res://levels/objects/chest/chest.gd" id="1_4ahkj"]
-[ext_resource type="AudioStream" uid="uid://cgy3knqajl7xu" path="res://assets/sounds/Big Egg collect 1.wav" id="2_2b5gf"]
 [ext_resource type="Texture2D" uid="uid://bidl5brkimhxo" path="res://assets/items/chest/chest_close_01.png" id="2_2u810"]
 [ext_resource type="Texture2D" uid="uid://bjcqjfm23puad" path="res://assets/items/chest/chest_close_02.png" id="3_attkn"]
 [ext_resource type="Texture2D" uid="uid://dqrogefu4p788" path="res://assets/items/chest/chest_close_03.png" id="4_yqtcl"]
@@ -55,7 +54,6 @@ size = Vector2(34, 27)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_4ahkj")
-consumed_sfx = ExtResource("2_2b5gf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)

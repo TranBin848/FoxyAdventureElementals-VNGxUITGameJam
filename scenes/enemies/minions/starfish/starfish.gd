@@ -1,5 +1,6 @@
 extends EnemyCharacter
 
+@export var roll_time: float = 2
 var detected_player_icon: Sprite2D
 
 func _ready() -> void:

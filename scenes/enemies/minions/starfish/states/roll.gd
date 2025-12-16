@@ -10,6 +10,7 @@ func _enter() -> void:
 	obj.change_animation("roll")
 	start_speed = obj.movement_speed
 	obj.movement_speed = obj.movement_speed * roll_speed_ratio
+	timer = obj.roll_time
 	pass
 
 func _exit() -> void:
@@ -20,8 +21,10 @@ func _exit() -> void:
 
 func _update( _delta ):	
 	control_moving()
-	if obj.found_player == null:
+	if update_timer(_delta):
 		change_state(fsm.states.moving)
+	#if obj.found_player == null:
+		#change_state(fsm.states.moving)
 	pass
 
 func control_moving() -> bool:
@@ -32,5 +35,5 @@ func control_moving() -> bool:
 		change_state(fsm.states.moving)
 	return false
 
-func _on_hit_area_2d_area_entered(area: Area2D):
-	change_state(fsm.states.prepare)
+#func _on_hit_area_2d_area_entered(area: Area2D):
+	#change_state(fsm.states.prepare)

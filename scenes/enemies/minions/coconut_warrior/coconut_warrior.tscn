@@ -95,6 +95,7 @@ collision_layer = 8
 script = ExtResource("1_g34j8")
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
+sight = 100.0
 movement_range = 200.0
 attack_speed = 500.0
 max_health = 10
@@ -143,6 +144,14 @@ metadata/_custom_type_script = "uid://csu2b21cwchqw"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_rvjx7")
+
+[node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(11, 15)
+target_position = Vector2(28, 0)
+
+[node name="DownRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(12, 15)
+target_position = Vector2(0, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
