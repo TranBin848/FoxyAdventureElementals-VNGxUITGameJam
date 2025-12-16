@@ -8,6 +8,9 @@ func _enter_tree() -> void:
 	GameManager.current_stage = self
 	
 func _ready() -> void:
+	# Reset the flag when entering/respawning in the level
+	has_killed_player = false
+	
 	if not GameManager.respawn_at_portal():
 		GameManager.respawn_at_checkpoint()
 	if AudioManager:
@@ -23,4 +26,4 @@ func _process(delta: float) -> void:
 		has_killed_player = true
 		# Call take_damage through the FSM state to properly handle death transition
 		if player.fsm and player.fsm.current_state:
-			player.fsm.current_state.take_damage(Vector2.DOWN, player.max_health + 1)
+			player.fsm.current_state.take_damage(Vector2.DOWN, 99999)

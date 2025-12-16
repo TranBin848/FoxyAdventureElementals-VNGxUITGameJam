@@ -189,6 +189,7 @@ position = Vector2(-552, 805)
 [node name="Player" parent="." instance=ExtResource("14_km4sl")]
 position = Vector2(-482, 828)
 has_blade = true
+max_health = 1000
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0
