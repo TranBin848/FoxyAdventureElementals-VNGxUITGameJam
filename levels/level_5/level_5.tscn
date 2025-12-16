@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://bm5rl67k65q3o" path="res://levels/level_5/level_5.tres" id="2_v5f3f"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="3_pu5fg"]
 
-[node name="Level5" type="Node2D"]
+[node name="Stage" type="Node2D"]
 script = ExtResource("1_74p41")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -13,3 +13,7 @@ tile_set = ExtResource("2_v5f3f")
 
 [node name="Player" parent="." instance=ExtResource("3_pu5fg")]
 position = Vector2(475, -66)
+
+[node name="FX" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]

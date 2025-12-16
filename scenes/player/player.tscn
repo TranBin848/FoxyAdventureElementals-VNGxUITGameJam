@@ -589,14 +589,14 @@ autoplay = "idle"
 position = Vector2(9, -14)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("38_hyqqp")
-target_container_name = &"BladeProjectile"
+target_container_name = &"Projectiles"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="JumpFXFactory" type="Marker2D" parent="Direction"]
 position = Vector2(0, -8)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("37_k00gf")
-target_container_name = &"JumpFX"
+target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="SlashFX" type="Node2D" parent="Direction"]
@@ -606,21 +606,21 @@ position = Vector2(24, -23)
 position = Vector2(24, -23)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("67_31ki0")
-target_container_name = &"SlashFX"
+target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="WalkFXFactory" type="Marker2D" parent="Direction"]
 position = Vector2(-8, -2)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("38_48wxx")
-target_container_name = &"WalkFX"
+target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="GhostFXFactory" type="Marker2D" parent="Direction"]
 position = Vector2(0, -15)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("42_5xbmr")
-target_container_name = &"GhostFX"
+target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="SkillFactory" type="Marker2D" parent="Direction"]

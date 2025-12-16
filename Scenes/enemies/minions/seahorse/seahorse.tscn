@@ -125,7 +125,7 @@ emitting = false
 position = Vector2(40, -6)
 script = ExtResource("7_y1cc5")
 product_packed_scene = ExtResource("8_ks11g")
-target_container_name = &"SeahorseBalls"
+target_container_name = &"Projectiles"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]

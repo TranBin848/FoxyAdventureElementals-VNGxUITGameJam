@@ -165,7 +165,7 @@ _data = {
 }
 point_count = 2
 
-[node name="Stage3" type="Node2D"]
+[node name="Stage" type="Node2D"]
 script = ExtResource("1_ppf8r")
 
 [node name="BladeCollectable" parent="." instance=ExtResource("3_qfhyh")]
@@ -1006,3 +1006,7 @@ skill_drops = Array[Script]([ExtResource("27_xpuws")])
 enemy_per_spawn = 2
 spawn_interval = 5.0
 elemental_type = 5
+
+[node name="FX" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]
