@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://dsxvyoo4n54nc"]
+[gd_scene load_steps=45 format=4 uid="uid://dsxvyoo4n54nc"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_n8468"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="31_36jj7"]
 [ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="32_otmpl"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="33_ac2k2"]
+[ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="34_36jj7"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="42_3fy2r"]
 [ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="43_uyyvu"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="44_ot27n"]
@@ -448,3 +449,7 @@ size_flags_vertical = 8
 [node name="FX" type="Node2D" parent="."]
 
 [node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="." instance=ExtResource("34_36jj7")]
+position = Vector2(78, 16)
+checkpoint_id = "999"

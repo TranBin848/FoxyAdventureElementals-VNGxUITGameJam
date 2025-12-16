@@ -1008,3 +1008,7 @@ elemental_type = 5
 [node name="FX" type="Node2D" parent="."]
 
 [node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="." instance=ExtResource("38_km4sl")]
+position = Vector2(-473, 816)
+checkpoint_id = "999"
