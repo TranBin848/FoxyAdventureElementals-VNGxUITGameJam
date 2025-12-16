@@ -309,57 +309,6 @@ position = Vector2(5620, 516)
 [node name="Starfish3" parent="Enemies" instance=ExtResource("24_rjkgb")]
 position = Vector2(6311, 494)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("42_3fy2r")
-
-[node name="SkillBar" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_uyyvu")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("44_ot27n")]
-offset_bottom = 100.0
-
-[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -122.0
-offset_top = -104.0
-offset_right = 122.0
-offset_bottom = -88.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("45_2si7y")
-text = "Enemy Out of Range"
-horizontal_alignment = 1
-
-[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("46_hi8w3")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -111.0
-offset_right = -15.0
-offset_bottom = -15.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("28_t21h0")]
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(4357, -14)
 energy = 2.0
@@ -434,3 +383,64 @@ theme_override_fonts/font = ExtResource("33_ac2k2")
 theme_override_font_sizes/font_size = 32
 text = "SKILL TREE"
 vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("42_3fy2r")
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("44_ot27n")]
+offset_bottom = 100.0
+
+[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -104.0
+offset_right = 122.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("45_2si7y")
+text = "Enemy Out of Range"
+horizontal_alignment = 1
+
+[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("46_hi8w3")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -111.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("28_t21h0")]
+
+[node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("43_uyyvu")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -78.0
+offset_right = 117.296
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8

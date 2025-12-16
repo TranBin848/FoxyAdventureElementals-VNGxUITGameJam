@@ -248,11 +248,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_6fwx2")
 
-[node name="SkillBar" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("5_ulcqf")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("6_rdvgg")]
 offset_bottom = 100.0
 
@@ -288,6 +283,21 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("20_ppf8r")]
+
+[node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("5_ulcqf")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -78.0
+offset_right = 117.296
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [node name="Enemies" type="Node2D" parent="."]
 
