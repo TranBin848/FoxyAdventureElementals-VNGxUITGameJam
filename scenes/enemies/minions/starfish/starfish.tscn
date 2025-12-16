@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c74auvuhbghse"]
+[gd_scene load_steps=30 format=3 uid="uid://c74auvuhbghse"]
 
 [ext_resource type="Script" uid="uid://bb2so4xk7mo5k" path="res://scenes/enemies/minions/starfish/starfish.gd" id="1_wfme5"]
 [ext_resource type="Texture2D" uid="uid://btkb5krxhe0bd" path="res://assets/enemy/starfish/starfish_hit_01.png" id="2_ffnw0"]
@@ -22,7 +22,6 @@
 [ext_resource type="Script" uid="uid://i4jv2rwvl6u8" path="res://scenes/enemies/minions/starfish/states/roll.gd" id="10_56ovt"]
 [ext_resource type="Texture2D" uid="uid://dw71rasxvd57m" path="res://assets/enemy/starfish/starfish_atk_04.png" id="10_yw3rq"]
 [ext_resource type="Texture2D" uid="uid://h0oumqkqx32d" path="res://assets/enemy/starfish/starfish_atk_05.png" id="11_ffn74"]
-[ext_resource type="Texture2D" uid="uid://oapb6eisegnx" path="res://assets/enemy/starfish/starfish_atk_06.png" id="12_jhkca"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="14_yw546"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="15_xe046"]
 [ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="26_ot2et"]
@@ -65,15 +64,15 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_wfme5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yw546")
 }],
 "loop": true,
 "name": &"prepare",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_yw546")
-}, {
 "duration": 1.0,
 "texture": ExtResource("8_xe046")
 }, {
@@ -85,9 +84,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_ffn74")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_jhkca")
 }],
 "loop": true,
 "name": &"roll",
@@ -140,7 +136,7 @@ emitting = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_ji8a0")
-animation = &"hurt"
+animation = &"moving"
 
 [node name="DetectedPlayerIcon" type="Sprite2D" parent="Direction"]
 visible = false
@@ -176,6 +172,7 @@ target_position = Vector2(139, 0)
 collision_mask = 2
 
 [node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
+enabled = false
 target_position = Vector2(-48, 0)
 collision_mask = 2
 

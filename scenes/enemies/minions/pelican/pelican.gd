@@ -3,7 +3,7 @@ extends EnemyCharacter
 @export var drop_bomb_interval: float = 2
 @export var leave_time: float = 10
 @export var fly_force: float = 200
-@export var drop_bomb_angle: float = 100
+@export var drop_bomb_angle: float = 0
 @export var drop_bomb_force: float = 350
 
 var ground_ray_cast: RayCast2D

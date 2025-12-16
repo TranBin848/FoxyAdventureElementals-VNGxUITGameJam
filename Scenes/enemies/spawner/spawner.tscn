@@ -1,0 +1,502 @@
+[gd_scene load_steps=53 format=3 uid="uid://eam3ft7648pk"]
+
+[ext_resource type="Script" uid="uid://dfm8mev0b22np" path="res://scenes/enemies/spawner/spawner.gd" id="1_j8wy5"]
+[ext_resource type="Texture2D" uid="uid://bnrcrc2grwxk7" path="res://assets/enemy/spawner/spawner_dead7.png" id="2_5xtu1"]
+[ext_resource type="Texture2D" uid="uid://22y845kqhg2w" path="res://assets/enemy/spawner/water_spawner_1.png" id="2_fb8vx"]
+[ext_resource type="Texture2D" uid="uid://7b6nyukuagxx" path="res://assets/enemy/spawner/fire_spawner_1.png" id="2_h4u0x"]
+[ext_resource type="Texture2D" uid="uid://dyxlw5q0orp4s" path="res://assets/enemy/spawner/fire_spawner_2.png" id="3_byqah"]
+[ext_resource type="Texture2D" uid="uid://deg1p6yhnnd7x" path="res://assets/enemy/spawner/water_spawner_2.png" id="3_ol6jv"]
+[ext_resource type="Texture2D" uid="uid://dvkvsndp6lxqw" path="res://assets/enemy/spawner/spawner_dead8.png" id="3_syi26"]
+[ext_resource type="Texture2D" uid="uid://bucer6e0sn4mk" path="res://assets/enemy/spawner/water_spawner_3.png" id="4_10aka"]
+[ext_resource type="Texture2D" uid="uid://xuib46l5tfcg" path="res://assets/enemy/spawner/fire_spawner_3.png" id="4_us22v"]
+[ext_resource type="Texture2D" uid="uid://hl3qr72vpat" path="res://assets/enemy/spawner/spawner_dead9.png" id="4_v8qbo"]
+[ext_resource type="Texture2D" uid="uid://dv5pgepcors2k" path="res://assets/enemy/spawner/fire_spawner_4.png" id="5_btyp5"]
+[ext_resource type="Texture2D" uid="uid://dd36uu6xoukhf" path="res://assets/enemy/spawner/water_spawner_4.png" id="5_gfyr7"]
+[ext_resource type="Texture2D" uid="uid://crmb6k0whlllw" path="res://assets/enemy/spawner/spawner_dead10.png" id="5_q67ao"]
+[ext_resource type="Texture2D" uid="uid://cu7rskgheqwqi" path="res://assets/enemy/spawner/fire_spawner_5.png" id="6_44tu7"]
+[ext_resource type="Texture2D" uid="uid://dfng1mh3fkb2o" path="res://assets/enemy/spawner/water_spawner_5.png" id="6_bfnaq"]
+[ext_resource type="Texture2D" uid="uid://bn1ljdw0db4qt" path="res://assets/enemy/spawner/spawner_dead11.png" id="6_deekk"]
+[ext_resource type="Texture2D" uid="uid://b045wwrcjwupt" path="res://assets/enemy/spawner/water_spawner_6.png" id="7_fapcy"]
+[ext_resource type="Texture2D" uid="uid://2mnlhen3u53g" path="res://assets/enemy/spawner/fire_spawner_6.png" id="7_idvbn"]
+[ext_resource type="Texture2D" uid="uid://d4k2o27o022hf" path="res://assets/enemy/spawner/spawner_dead12.png" id="7_vm5qj"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="8_1t3h5"]
+[ext_resource type="Texture2D" uid="uid://dyhqagqw2be5d" path="res://assets/enemy/spawner/spawner_dead14.png" id="8_10n51"]
+[ext_resource type="Texture2D" uid="uid://p36qrm0r05em" path="res://assets/enemy/spawner/spawner_hurt.png" id="10_vm5qj"]
+[ext_resource type="Texture2D" uid="uid://du5v4fxvlfdo1" path="res://assets/enemy/spawner/wood_spawner_1.png" id="14_5jg0x"]
+[ext_resource type="Texture2D" uid="uid://dqjh2u7ik1vho" path="res://assets/enemy/spawner/wood_spawner_2.png" id="15_5xtu1"]
+[ext_resource type="Texture2D" uid="uid://cmq00vx8hcc5u" path="res://assets/enemy/spawner/wood_spawner_3.png" id="16_syi26"]
+[ext_resource type="Texture2D" uid="uid://dy5e2m6m0g30n" path="res://assets/enemy/spawner/wood_spawner_4.png" id="17_v8qbo"]
+[ext_resource type="Texture2D" uid="uid://cymy3qjyklgj6" path="res://assets/enemy/spawner/wood_spawner_5.png" id="18_q67ao"]
+[ext_resource type="Texture2D" uid="uid://b7jsl1x2e8gf2" path="res://assets/enemy/spawner/wood_spawner_6.png" id="19_deekk"]
+[ext_resource type="Texture2D" uid="uid://chefkmdb83fbr" path="res://assets/enemy/spawner/metal_spawner_1.png" id="20_vm5qj"]
+[ext_resource type="Texture2D" uid="uid://v0j41wiitvyh" path="res://assets/enemy/spawner/metal_spawner_2.png" id="21_10n51"]
+[ext_resource type="Texture2D" uid="uid://deumgbukhc3gs" path="res://assets/enemy/spawner/metal_spawner_3.png" id="22_b57hv"]
+[ext_resource type="Texture2D" uid="uid://d1uunut3bky0j" path="res://assets/enemy/spawner/metal_spawner_4.png" id="23_8c3y3"]
+[ext_resource type="Texture2D" uid="uid://cb6cocthnbi76" path="res://assets/enemy/spawner/metal_spawner_5.png" id="24_yuu4n"]
+[ext_resource type="Texture2D" uid="uid://plcq5rlvmsh5" path="res://assets/enemy/spawner/metal_spawner_6.png" id="25_p5p7e"]
+[ext_resource type="Texture2D" uid="uid://4ehnxgw888y4" path="res://assets/enemy/spawner/earth_spawner_1.png" id="26_c4g1o"]
+[ext_resource type="Texture2D" uid="uid://welxhamfrwn1" path="res://assets/enemy/spawner/earth_spawner_2.png" id="27_eebsl"]
+[ext_resource type="Texture2D" uid="uid://cxrsebd2od3o7" path="res://assets/enemy/spawner/earth_spawner_3.png" id="28_kscr1"]
+[ext_resource type="Texture2D" uid="uid://p5pbg8xy4un7" path="res://assets/enemy/spawner/earth_spawner_4.png" id="29_fmc0a"]
+[ext_resource type="Texture2D" uid="uid://bpxdl5xu854df" path="res://assets/enemy/spawner/earth_spawner_5.png" id="30_vnhym"]
+[ext_resource type="Texture2D" uid="uid://tk0iwacf3kf4" path="res://assets/enemy/spawner/earth_spawner_6.png" id="31_qlnli"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="39_deekk"]
+[ext_resource type="Script" uid="uid://c48clrolbcwpc" path="res://scenes/enemies/spawner/idle.gd" id="40_b57hv"]
+[ext_resource type="Script" uid="uid://rf0ag50mstqj" path="res://scenes/enemies/spawner/spawn.gd" id="41_q67ao"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="42_deekk"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="43_vm5qj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_54d3e"]
+radius = 17.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqg84"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5xtu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_syi26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v8qbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q67ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_deekk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_10n51")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h4u0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_h4u0x")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h4u0x")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h4u0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_byqah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_us22v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_btyp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_44tu7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_idvbn")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ukju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5xtu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_syi26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v8qbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q67ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_deekk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_10n51")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fb8vx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fb8vx")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fb8vx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fb8vx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ol6jv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_10aka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gfyr7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bfnaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fapcy")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pvn4v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5xtu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_syi26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v8qbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q67ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_deekk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_10n51")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_5jg0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5jg0x")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_5jg0x")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_5jg0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5xtu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_syi26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_v8qbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_q67ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_deekk")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r76oc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5xtu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_syi26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v8qbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q67ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_deekk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_10n51")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_vm5qj")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_vm5qj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_10n51")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_b57hv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_8c3y3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_yuu4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_p5p7e")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ageci"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5xtu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_syi26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v8qbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q67ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_deekk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_10n51")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_c4g1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vm5qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_c4g1o")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_c4g1o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_c4g1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_eebsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_kscr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_fmc0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_vnhym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_qlnli")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vm5qj"]
+radius = 19.0
+
+[node name="Spawner" type="CharacterBody2D"]
+script = ExtResource("1_j8wy5")
+spawn_min_distance = 40.0
+spawn_max_distance = 60.0
+shader_path = ""
+movement_speed = 0.0
+gravity = 0.0
+max_health = 10
+metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_54d3e")
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="AnimatedSprites" type="Node2D" parent="Direction"]
+
+[node name="Fire" type="AnimatedSprite2D" parent="Direction/AnimatedSprites"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_qqg84")
+animation = &"hurt"
+
+[node name="Water" type="AnimatedSprite2D" parent="Direction/AnimatedSprites"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_2ukju")
+animation = &"hurt"
+
+[node name="Wood" type="AnimatedSprite2D" parent="Direction/AnimatedSprites"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_pvn4v")
+animation = &"hurt"
+
+[node name="Metal" type="AnimatedSprite2D" parent="Direction/AnimatedSprites"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_r76oc")
+animation = &"hurt"
+
+[node name="Earth" type="AnimatedSprite2D" parent="Direction/AnimatedSprites"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_ageci")
+animation = &"hurt"
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+script = ExtResource("39_deekk")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+shape = SubResource("CircleShape2D_vm5qj")
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -17)
+
+[node name="EnemyHealthBar" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("8_1t3h5")]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 72.0
+offset_bottom = -24.0
+enemy = NodePath("..")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("40_b57hv")
+bounce_back_velocity = 0.0
+
+[node name="Spawn" type="Node" parent="States"]
+script = ExtResource("41_q67ao")
+bounce_back_velocity = 0.0
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("42_deekk")
+hurt_bounce_velocity = 0.0
+bounce_back_velocity = 0.0
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("43_vm5qj")
+bounce_back_velocity = 0.0

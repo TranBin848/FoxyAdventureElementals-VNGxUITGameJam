@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8g2lvqqmy58c"]
+[gd_scene load_steps=3 format=3 uid="uid://d34eybd8u2spy"]
 
 [ext_resource type="Texture2D" uid="uid://core2vqk0dvnj" path="res://assets/terrain_plus/ELR_SpringlLeaf.png" id="1_p7i5d"]
 [ext_resource type="Material" uid="uid://blahf67ivqcqi" path="res://shaders/leaf.tres" id="2_45vjx"]

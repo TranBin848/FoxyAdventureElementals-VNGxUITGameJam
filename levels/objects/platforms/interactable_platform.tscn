@@ -6,7 +6,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_1f3o5"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 252, -12)
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 237, 0)
 }
 point_count = 2
 
@@ -70,7 +70,7 @@ _data = {
 &"return": SubResource("Animation_geurb")
 }
 
-[node name="Platform" type="Path2D"]
+[node name="Platform2" type="Path2D"]
 curve = SubResource("Curve2D_1f3o5")
 script = ExtResource("1_ca30f")
 

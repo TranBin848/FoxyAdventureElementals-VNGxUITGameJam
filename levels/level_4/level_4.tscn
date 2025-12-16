@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
 [ext_resource type="TileSet" uid="uid://bui3wquutm1yg" path="res://levels/level_4/level_4.tres" id="3_rjkgb"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="4_0odlo"]
-[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/sea_horse.tscn" id="7_5mfhe"]
+[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="7_5mfhe"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="7_401k1"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="8_f8hbo"]
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="9_s3y0x"]
@@ -369,3 +369,64 @@ texture = ExtResource("28_otr1q")
 [node name="BladeTarget3" type="Sprite2D" parent="."]
 position = Vector2(7232, 1055)
 texture = ExtResource("29_sumgr")
+
+[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+script = ExtResource("31_36jj7")
+
+[node name="Background" type="TextureRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.05176e-05
+offset_right = 1472.0
+offset_bottom = 816.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.465121, 0.468751)
+texture = ExtResource("32_otmpl")
+
+[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
+modulate = Color(1, 1, 1, 0.764706)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("33_ac2k2")]
+offset_left = 640.0
+offset_top = 384.0
+offset_right = 640.0
+offset_bottom = 384.0
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 360.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("45_2si7y")
+theme_override_font_sizes/font_size = 16
+text = "Tab to open/close skill tree
+Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 332.0
+offset_bottom = 65.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("34_2xhx5")
+theme_override_font_sizes/font_size = 32
+text = "SKILL TREE"
+vertical_alignment = 1

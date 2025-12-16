@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=4 uid="uid://cwc6v22ae0jom"]
+
+[ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="1_n4t5d"]
+[ext_resource type="Script" uid="uid://dsygwke67f56e" path="res://scenes/objects/house_door/house_door.gd" id="2_f08av"]
+[ext_resource type="Texture2D" uid="uid://gxdcobbhkb2i" path="res://assets/object/door/door-close.png" id="3_bgo8e"]
+[ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="3_f08av"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="4_bgo8e"]
+[ext_resource type="Texture2D" uid="uid://dbw2h0pnml03g" path="res://assets/object/door/door-open.png" id="4_rdnou"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55hu4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bgo8e")
+}],
+"loop": false,
+"name": &"close",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_rdnou")
+}],
+"loop": false,
+"name": &"open",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ab70p"]
+size = Vector2(7, 64)
+
+[node name="Test" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAABAAAAAQAAAABAAAABAABAAQAAAACAAAABAABAAQAAAADAAAABAABAAQAAAAEAAAABAABAAQAAAAFAAAABAABAAQAAAAGAAAABAABAAQAAAAHAAAABAABAAQAAAAIAAAABAABAAQAAAAJAAAABAABAAQAAAAKAAAABAABAAQAAAALAAAABAABAAQAAAAMAAAABAABAAQAAAANAAAABAABAAQAAAAOAAAABAABAAQAAAAPAAAABAABAAQAAAAQAAAABAABAAQAAAARAAAABAABAAQAAAASAAAABAABAAQAAAATAAAABAABAAQAAAAUAAAABAABAAQAAAAVAAAABAABAAQAAAAWAAAABAACAAQAAAA=")
+tile_set = ExtResource("1_n4t5d")
+
+[node name="HouseDoor" type="Node2D" parent="."]
+position = Vector2(80, -32)
+script = ExtResource("2_f08av")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HouseDoor"]
+sprite_frames = SubResource("SpriteFrames_55hu4")
+animation = &"close"
+autoplay = "close"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="HouseDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseDoor/StaticBody2D"]
+position = Vector2(-12.5, 0)
+shape = SubResource("RectangleShape2D_ab70p")
+
+[node name="HouseDoor2" type="Node2D" parent="."]
+position = Vector2(109, -32)
+script = ExtResource("2_f08av")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HouseDoor2"]
+sprite_frames = SubResource("SpriteFrames_55hu4")
+animation = &"close"
+autoplay = "close"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="HouseDoor2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseDoor2/StaticBody2D"]
+position = Vector2(-12.5, 0)
+shape = SubResource("RectangleShape2D_ab70p")
+
+[node name="Lever" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("3_f08av")]
+position = Vector2(132, -16)
+linked_door = NodePath("../HouseDoor2")
+
+[node name="Lever2" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("3_f08av")]
+position = Vector2(172, -16)
+linked_door = NodePath("../HouseDoor")
+
+[node name="Player" parent="." instance=ExtResource("4_bgo8e")]
+position = Vector2(225, 1)
