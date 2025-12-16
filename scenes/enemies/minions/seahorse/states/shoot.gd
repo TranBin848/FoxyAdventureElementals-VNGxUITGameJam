@@ -9,7 +9,7 @@ func _enter() -> void:
 
 func _update( _delta ):
 	if (update_timer((_delta))):
-		print(obj.ball_counter)
+		#print(obj.ball_counter)
 		if obj.ball_counter == obj.ball_count:
 			obj.ball_counter = 0
 			obj.start_cool_down()

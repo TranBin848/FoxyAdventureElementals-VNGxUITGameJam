@@ -3,7 +3,7 @@ extends EnemyState
 
 func control_moving() -> bool:
 	obj.velocity.x = obj.movement_speed * obj.direction
-	print(_should_turn_around())
+	#print(_should_turn_around())
 	if _should_turn_around():
 		obj.turn_around()
 	return false

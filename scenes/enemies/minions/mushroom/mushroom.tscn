@@ -300,6 +300,7 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 [node name="Metal" parent="Particles" instance=ExtResource("2_02d7m")]
 position = Vector2(0, -26)
 emitting = false
+amount = 1
 
 [node name="Wood" parent="Particles" instance=ExtResource("3_bq6vc")]
 position = Vector2(0, -15)
@@ -307,6 +308,7 @@ position = Vector2(0, -15)
 [node name="Earth" parent="Particles" instance=ExtResource("4_hjpn5")]
 position = Vector2(0, 10)
 emitting = false
+amount = 1
 
 [node name="Water" parent="Particles" instance=ExtResource("5_0dcl5")]
 emitting = false
@@ -314,6 +316,7 @@ emitting = false
 [node name="Fire" parent="Particles" instance=ExtResource("6_ark0v")]
 position = Vector2(0, 5)
 emitting = false
+amount = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -397,11 +400,13 @@ frame_progress = 0.00579501
 visible = false
 position = Vector2(0, 6)
 emitting = false
+amount = 1
 
 [node name="Posion" parent="Effects" instance=ExtResource("6_ark0v")]
 visible = false
 modulate = Color(1, 1, 1, 0.458824)
 material = SubResource("CanvasItemMaterial_ert7p")
 position = Vector2(0, 6)
+amount = 1
 texture = ExtResource("22_ark0v")
 process_material = SubResource("ParticleProcessMaterial_o7hv3")

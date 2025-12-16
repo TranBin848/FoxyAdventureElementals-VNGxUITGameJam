@@ -21,5 +21,6 @@ anim_speed_max = 1.0
 
 [node name="Earth" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_7hrw8")
+amount = 1
 texture = ExtResource("1_vgj3j")
 process_material = SubResource("ParticleProcessMaterial_g05f2")

@@ -34,10 +34,10 @@ func throw() -> void:
 	pass
 
 func calculate_angle(p0: Vector2, p1: Vector2, v: float, g: float) -> float:
-	print(p0)
-	print(p1)
-	print(v)
-	print(g)
+	#print(p0)
+	#print(p1)
+	#print(v)
+	#print(g)
 	var deltaX = p1.x - p0.x
 	var deltaY = p1.y - p0.y
 	

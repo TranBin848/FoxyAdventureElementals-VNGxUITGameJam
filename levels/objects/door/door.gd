@@ -29,8 +29,8 @@ func open_door_and_transition() -> void:
 	# 🔹 3. Xử lý dịch chuyển hoặc đổi scene
 	var stage_path_real = ProjectSettings.globalize_path(target_stage)
 	stage_path_real = ProjectSettings.localize_path(stage_path_real)
-	print(GameManager.current_stage.scene_file_path)
-	print(stage_path_real)
+	# print(GameManager.current_stage.scene_file_path)
+	# print(stage_path_real)
 	if GameManager.current_stage.scene_file_path == stage_path_real:
 		# Nếu cùng stage → chỉ di chuyển player
 		var door_node = GameManager.current_stage.find_child(target_door)

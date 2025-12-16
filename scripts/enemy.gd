@@ -151,8 +151,7 @@ func _init_particle():
 # --- Check if touching wall
 func is_touch_wall() -> bool:
 	return front_ray_cast != null and front_ray_cast.is_colliding()
-
-
+	
 # --- Check if can fall
 func is_can_fall() -> bool:
 	return down_ray_cast != null and not down_ray_cast.is_colliding()
