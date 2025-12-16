@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=56 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://dlo5gf1o05dgq" path="res://scenes/env_particle/rain.tscn" id="21_fl6bb"]
 [ext_resource type="Script" uid="uid://cgj2on3wrpmw2" path="res://scenes/skills/scripts/metal/ThunderStrike.gd" id="21_gsja5"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="22_1h50e"]
-[ext_resource type="Script" uid="uid://epiedpy5442a" path="res://scenes/enemies/boss/FireClaw.gd" id="22_bkbve"]
 [ext_resource type="Script" uid="uid://cf7o1kqvk2msb" path="res://scenes/skills/scripts/fire/FireExplosion.gd" id="23_ihnwd"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="23_vdtjt"]
 [ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://scenes/skills/scripts/fire/FireShot.gd" id="24_km4sl"]
@@ -35,6 +34,10 @@
 [ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="28_rdvgg"]
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="28_ulcqf"]
 [ext_resource type="Script" uid="uid://d25a8kytk1gnd" path="res://scenes/skills/scripts/metal/StunShot.gd" id="29_ulcqf"]
+[ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="36_oaqh1"]
+[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="37_xpuws"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="38_sm3vb"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="39_pqi81"]
 
 [sub_resource type="Curve2D" id="Curve2D_ppf8r"]
 _data = {
@@ -160,7 +163,7 @@ target_door = "EntryDoor"
 position = Vector2(-552, 805)
 
 [node name="Player" parent="." instance=ExtResource("14_km4sl")]
-position = Vector2(9932, -389)
+position = Vector2(-482, 828)
 has_blade = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -285,7 +288,7 @@ skill_to_drop = ExtResource("21_gsja5")
 [node name="Starfish5" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(8193, 241)
 elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="Starfish6" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(7855, 241)
@@ -295,7 +298,7 @@ skill_to_drop = ExtResource("23_ihnwd")
 [node name="Crab8" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(7983, 50)
 elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Crab9" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(7648, 51)
@@ -324,7 +327,7 @@ skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="Crab12" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(9499, 114)
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Crab14" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(9247, 179)
@@ -334,7 +337,7 @@ skill_to_drop = ExtResource("25_oaqh1")
 [node name="Starfish9" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(9219, -175)
 elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Starfish10" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(8997, -303)
@@ -344,7 +347,7 @@ skill_to_drop = ExtResource("25_oaqh1")
 [node name="Mushroom9" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(8602, -427)
 elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Pelican2" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(3411, 236)
@@ -613,7 +616,7 @@ skill_to_drop = ExtResource("23_ihnwd")
 [node name="Turtle3" parent="." instance=ExtResource("28_6fwx2")]
 position = Vector2(7070, 240)
 elemental_type = 4
-skill_to_drop = ExtResource("27_xpuws")
+skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="SpearWarrior2" parent="." instance=ExtResource("27_6fwx2")]
 position = Vector2(6745, -82)
@@ -627,25 +630,6 @@ skill_to_drop = ExtResource("24_km4sl")
 
 [node name="SpearWarrior4" parent="." instance=ExtResource("27_6fwx2")]
 position = Vector2(7129, -82)
-elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
-
-[node name="Mushroom2" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(6639, 52)
-elemental_type = 4
-
-[node name="Mushroom3" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(7216, 52)
-elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
-
-[node name="Mushroom4" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(6832, -236)
-elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
-
-[node name="Mushroom5" parent="." instance=ExtResource("22_1h50e")]
-position = Vector2(7024, -236)
 elemental_type = 4
 skill_to_drop = ExtResource("24_km4sl")
 
@@ -682,7 +666,7 @@ skill_to_drop = ExtResource("24_km4sl")
 [node name="SpearWarrior5" parent="." instance=ExtResource("27_6fwx2")]
 position = Vector2(8946, -434)
 elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="SpearWarrior6" parent="." instance=ExtResource("27_6fwx2")]
 position = Vector2(8790, -306)
@@ -692,7 +676,7 @@ skill_to_drop = ExtResource("24_km4sl")
 [node name="SpearWarrior7" parent="." instance=ExtResource("27_6fwx2")]
 position = Vector2(7936, -274)
 elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="SeaHorse" parent="." instance=ExtResource("28_rdvgg")]
 position = Vector2(9778, -347)
@@ -702,7 +686,7 @@ skill_to_drop = ExtResource("29_ulcqf")
 [node name="Turtle6" parent="." instance=ExtResource("28_6fwx2")]
 position = Vector2(6476, 1008)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
+skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Pelican2" parent="." instance=ExtResource("9_qsvqe")]
 position = Vector2(6132, 214)
@@ -716,7 +700,7 @@ curve = SubResource("Curve2D_sm3vb")
 [node name="Pelican" parent="." instance=ExtResource("9_qsvqe")]
 position = Vector2(5682, 184)
 elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="CoconutWarrior8" parent="." instance=ExtResource("28_ulcqf")]
 position = Vector2(6298, 1001)
@@ -726,7 +710,7 @@ skill_to_drop = ExtResource("23_ihnwd")
 [node name="Crab3" parent="." instance=ExtResource("23_vdtjt")]
 position = Vector2(6144, 403)
 elemental_type = 4
-skill_to_drop = ExtResource("22_bkbve")
+skill_to_drop = ExtResource("24_km4sl")
 
 [node name="CoconutWarrior9" parent="." instance=ExtResource("28_ulcqf")]
 position = Vector2(10501, -599)
@@ -888,3 +872,64 @@ tile_set = ExtResource("2_s4b5i")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMaps"]
 tile_set = ExtResource("2_s4b5i")
+
+[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+script = ExtResource("36_oaqh1")
+
+[node name="Background" type="TextureRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.05176e-05
+offset_right = 1472.0
+offset_bottom = 816.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.465121, 0.468751)
+texture = ExtResource("37_xpuws")
+
+[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
+modulate = Color(1, 1, 1, 0.764706)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("38_sm3vb")]
+offset_left = 640.0
+offset_top = 384.0
+offset_right = 640.0
+offset_bottom = 384.0
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 360.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("7_c0166")
+theme_override_font_sizes/font_size = 16
+text = "Tab to open/close skill tree
+Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 332.0
+offset_bottom = 65.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("39_pqi81")
+theme_override_font_sizes/font_size = 32
+text = "SKILL TREE"
+vertical_alignment = 1

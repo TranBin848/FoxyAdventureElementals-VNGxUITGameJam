@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cf4iwith0d7ne"]
+[gd_scene load_steps=15 format=3 uid="uid://cf4iwith0d7ne"]
 
 [ext_resource type="Script" uid="uid://bxrl65n7f8v7o" path="res://levels/objects/checkpoint/checkpoint.gd" id="1_4j5vx"]
 [ext_resource type="Texture2D" uid="uid://su1n1v38j582" path="res://assets/island/objects/ship_helm/ship_helm_turn_01.png" id="1_asopd"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b78xidmjbijyc" path="res://assets/island/objects/ship_helm/ship_helm_idle_04.png" id="8_2cl54"]
 [ext_resource type="Texture2D" uid="uid://boajflamof2f" path="res://assets/island/objects/ship_helm/ship_helm_idle_05.png" id="9_icg73"]
 [ext_resource type="Texture2D" uid="uid://c3o0tc8tfthga" path="res://assets/island/objects/ship_helm/ship_helm_idle_06.png" id="10_ri2xa"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="12_rvv5d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asopd"]
 size = Vector2(29, 30)
@@ -78,11 +79,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -82.0
-offset_top = -40.0
-offset_right = 82.0
+offset_left = -63.0
+offset_top = -31.0
+offset_right = 101.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("12_rvv5d")
+theme_override_font_sizes/normal_font_size = 8
 text = "Checkpoint activated"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
