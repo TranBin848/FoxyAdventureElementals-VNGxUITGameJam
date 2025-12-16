@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=60 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="18_pqi81"]
 [ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="20_ppf8r"]
 [ext_resource type="PackedScene" uid="uid://crhikmylhv4ty" path="res://scenes/env_particle/sand_storm.tscn" id="20_pvqwi"]
-[ext_resource type="PackedScene" uid="uid://dlo5gf1o05dgq" path="res://scenes/env_particle/rain.tscn" id="21_fl6bb"]
 [ext_resource type="Script" uid="uid://cgj2on3wrpmw2" path="res://scenes/skills/scripts/metal/ThunderStrike.gd" id="21_gsja5"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="22_1h50e"]
 [ext_resource type="Script" uid="uid://cf7o1kqvk2msb" path="res://scenes/skills/scripts/fire/FireExplosion.gd" id="23_ihnwd"]
@@ -36,6 +35,7 @@
 [ext_resource type="Script" uid="uid://d25a8kytk1gnd" path="res://scenes/skills/scripts/metal/StunShot.gd" id="29_ulcqf"]
 [ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="36_oaqh1"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="37_xpuws"]
+[ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="38_km4sl"]
 [ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="38_sm3vb"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="39_pqi81"]
 
@@ -135,11 +135,35 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve2D" id="Curve2D_pqi81"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 855, -1)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_1txof"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, -67, 395)
+}
+point_count = 2
+
 [sub_resource type="Curve2D" id="Curve2D_sm3vb"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 50, 0, 0, 0, 0, -123, 91, 0, 0, 0, 0, 1, 155, 0, 0, 0, 0, -123, 236, 0, 0, 0, 0, 1, 301, 0, 0, 0, 0, -120, 350, 0, 0, 0, 0, 0, 454, 0, 0, 0, 0, -122, 515, 0, 0, 0, 0, 1, 579)
 }
 point_count = 9
+
+[sub_resource type="Curve2D" id="Curve2D_pvqwi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 243, 161)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_fl6bb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 194, 0)
+}
+point_count = 2
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_ppf8r")
@@ -181,10 +205,6 @@ texture = ExtResource("16_xpuws")
 [node name="SandStormParticle" parent="." instance=ExtResource("20_pvqwi")]
 visible = false
 position = Vector2(-290, 633)
-
-[node name="RainParticle" parent="." instance=ExtResource("21_fl6bb")]
-visible = false
-position = Vector2(935, 599)
 
 [node name="HouseDoor2" parent="." instance=ExtResource("12_bkbve")]
 position = Vector2(-272, -256)
@@ -594,9 +614,11 @@ skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Platform2" parent="." instance=ExtResource("25_t8ul1")]
 position = Vector2(1745, 648)
+curve = SubResource("Curve2D_pqi81")
 
 [node name="Platform3" parent="." instance=ExtResource("25_t8ul1")]
 position = Vector2(2699, 8)
+curve = SubResource("Curve2D_1txof")
 
 [node name="CoconutWarrior3" parent="." instance=ExtResource("28_ulcqf")]
 position = Vector2(2987, 489)
@@ -933,3 +955,19 @@ theme_override_fonts/font = ExtResource("39_pqi81")
 theme_override_font_sizes/font_size = 32
 text = "SKILL TREE"
 vertical_alignment = 1
+
+[node name="Checkpoint" parent="." instance=ExtResource("38_km4sl")]
+position = Vector2(336, -80)
+checkpoint_id = "1"
+
+[node name="Checkpoint2" parent="." instance=ExtResource("38_km4sl")]
+position = Vector2(1652, 624)
+checkpoint_id = "2"
+
+[node name="Platform4" parent="." instance=ExtResource("25_t8ul1")]
+position = Vector2(5318, 232)
+curve = SubResource("Curve2D_pvqwi")
+
+[node name="Platform5" parent="." instance=ExtResource("25_t8ul1")]
+position = Vector2(7284, 264)
+curve = SubResource("Curve2D_fl6bb")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://beaf2cwec5xlr"]
+[gd_scene load_steps=59 format=4 uid="uid://beaf2cwec5xlr"]
 
 [ext_resource type="Script" uid="uid://wdfjgyhrjowc" path="res://levels/level_3/level_3.gd" id="1_b7gic"]
 [ext_resource type="TileSet" uid="uid://yxir4yavpav2" path="res://levels/level_1/level_1.tres" id="2_4c4sg"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="8_3dcxb"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="8_q4xca"]
 [ext_resource type="Script" uid="uid://b82lj4mrhdgs1" path="res://levels/level_1/scripts/parallax_layer_small_cloud.gd" id="9_6wqy8"]
-[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/sea_horse.tscn" id="9_gsac8"]
+[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="9_gsac8"]
 [ext_resource type="Texture2D" uid="uid://d2lmketl0r6ot" path="res://assets/terrain_plus/cloud1.png" id="10_4x0n5"]
 [ext_resource type="Texture2D" uid="uid://entd33irjxkk" path="res://assets/terrain_plus/cloud2.png" id="11_r66o7"]
 [ext_resource type="Texture2D" uid="uid://dgw41jsn5uaup" path="res://assets/terrain_plus/cloud3.png" id="12_tesgh"]
@@ -31,7 +31,11 @@
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="23_rmb4t"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="24_chb26"]
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="32_vjcd7"]
+[ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="33_8xvdf"]
 [ext_resource type="PackedScene" uid="uid://bf2uetkx1otc6" path="res://scenes/objects/house_door/house_door.tscn" id="33_q7qyy"]
+[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="34_lfhbv"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="35_2p3mc"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="36_i8vga"]
 
 [sub_resource type="Curve2D" id="Curve2D_omsu6"]
 _data = {
@@ -181,11 +185,13 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.0839054
+shader_parameter/y_zoom = 0.101526
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vjcd7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7yk7"]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_b7gic")
@@ -609,6 +615,67 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounder"]
 position = Vector2(14.5, 225.5)
 shape = SubResource("RectangleShape2D_n7yk7")
+
+[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+script = ExtResource("33_8xvdf")
+
+[node name="Background" type="TextureRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.05176e-05
+offset_right = 1472.0
+offset_bottom = 816.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.465121, 0.468751)
+texture = ExtResource("34_lfhbv")
+
+[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
+modulate = Color(1, 1, 1, 0.764706)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("35_2p3mc")]
+offset_left = 640.0
+offset_top = 384.0
+offset_right = 640.0
+offset_bottom = 384.0
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 360.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("23_rmb4t")
+theme_override_font_sizes/font_size = 16
+text = "Tab to open/close skill tree
+Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 332.0
+offset_bottom = 65.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("36_i8vga")
+theme_override_font_sizes/font_size = 32
+text = "SKILL TREE"
+vertical_alignment = 1
 
 [connection signal="interacted" from="Object/Platform6/PathFollow2D/InteractiveArea2D" to="Object/Platform6" method="_on_interactive_area_2d_interacted"]
 [connection signal="interacted" from="Object/Platform8/PathFollow2D/InteractiveArea2D" to="Object/Platform8" method="_on_interactive_area_2d_interacted"]
