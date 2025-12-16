@@ -264,7 +264,7 @@ collision_mask = 2
 position = Vector2(61, 0)
 script = ExtResource("32_e0g6l")
 product_packed_scene = ExtResource("33_lbx4o")
-target_container_name = &"Claw"
+target_container_name = &"Projectiles"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="HitArea2D" type="Area2D" parent="Direction"]

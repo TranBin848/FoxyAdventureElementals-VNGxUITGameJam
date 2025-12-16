@@ -89,7 +89,7 @@ fill = 2
 fill_from = Vector2(0.5, 1)
 fill_to = Vector2(0.497738, 0.175214)
 
-[node name="Stage3" type="Node2D"]
+[node name="Stage" type="Node2D"]
 script = ExtResource("1_n8468")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
@@ -444,3 +444,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
+
+[node name="FX" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]

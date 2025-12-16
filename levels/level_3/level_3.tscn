@@ -203,7 +203,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.0630394
+shader_parameter/y_zoom = 1.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -211,7 +211,7 @@ shader_parameter/y_zoom = 0.0630394
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2s1pb"]
 
-[node name="Stage3" type="Node2D"]
+[node name="Stage" type="Node2D"]
 script = ExtResource("1_b7gic")
 
 [node name="Front" type="TileMapLayer" parent="."]
@@ -776,6 +776,10 @@ theme_override_fonts/font = ExtResource("49_qt2nh")
 theme_override_font_sizes/font_size = 32
 text = "SKILL TREE"
 vertical_alignment = 1
+
+[node name="FX" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]
 
 [connection signal="interacted" from="Object/Platform6/PathFollow2D/InteractiveArea2D" to="Object/Platform6" method="_on_interactive_area_2d_interacted"]
 [connection signal="interacted" from="Object/Platform8/PathFollow2D/InteractiveArea2D" to="Object/Platform8" method="_on_interactive_area_2d_interacted"]

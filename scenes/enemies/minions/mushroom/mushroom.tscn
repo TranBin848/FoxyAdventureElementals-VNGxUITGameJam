@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="10_dxuq7"]
 [ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="13_16htk"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="15_bq6vc"]
-[ext_resource type="Script" path="res://Scenes/enemies/minions/mushroom/dead.gd" id="17_02d7m"]
+[ext_resource type="Script" uid="uid://d6klvw0tpn6m" path="res://scenes/enemies/minions/mushroom/dead.gd" id="17_02d7m"]
 [ext_resource type="Texture2D" uid="uid://cy1tvw34onwxx" path="res://assets/enemy/effects/freeze.png" id="20_ark0v"]
 [ext_resource type="Texture2D" uid="uid://bl66efvg2uxgs" path="res://assets/enemy/effects/stunned.png" id="21_ert7p"]
 [ext_resource type="Texture2D" uid="uid://b8oer0ibyd3ld" path="res://assets/enemy/effects/poison.png" id="22_ark0v"]
