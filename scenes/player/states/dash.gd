@@ -14,7 +14,7 @@ func _enter() -> void:
 	# Set dash animation
 	obj.change_animation("jump")
 	AudioManager.play_sound("player_dash")
-	
+	obj.set_collision_mask_value(4, false)
 	obj.dash()
 
 func _update(delta: float) -> void:
@@ -40,6 +40,7 @@ func _update(delta: float) -> void:
 
 func _exit() -> void:
 	obj.is_dashing = false
+	obj.set_collision_mask_value(4, true)
 
 func _spawn_ghost() -> void:
 	var ghost := ghost_fx_factory.create() as Sprite2D
