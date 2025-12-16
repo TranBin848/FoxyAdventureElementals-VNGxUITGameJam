@@ -971,3 +971,23 @@ curve = SubResource("Curve2D_pvqwi")
 [node name="Platform5" parent="." instance=ExtResource("25_t8ul1")]
 position = Vector2(7284, 264)
 curve = SubResource("Curve2D_fl6bb")
+
+[node name="Checkpoint3" parent="." instance=ExtResource("38_km4sl")]
+position = Vector2(5662, 368)
+checkpoint_id = "3"
+
+[node name="Checkpoint4" parent="." instance=ExtResource("38_km4sl")]
+position = Vector2(8225, -80)
+checkpoint_id = "4"
+
+[node name="Checkpoint5" parent="." instance=ExtResource("38_km4sl")]
+position = Vector2(9840, -336)
+checkpoint_id = "5"
+
+[node name="Checkpoint6" parent="." instance=ExtResource("38_km4sl")]
+position = Vector2(11942, -1200)
+checkpoint_id = "6"
+
+[node name="Checkpoint7" parent="." instance=ExtResource("38_km4sl")]
+position = Vector2(14816, -1584)
+checkpoint_id = "7"
