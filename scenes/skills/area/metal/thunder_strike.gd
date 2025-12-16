@@ -15,7 +15,7 @@ func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter) -> voi
 func _on_startup_animation_finished(skill: Skill):
 	# Gọi lại logic của lớp cơ sở: dừng startup, bật main animation, bật HitArea2D
 	super._on_startup_animation_finished(skill)
-	await get_tree().create_timer(0.15).timeout
+	#await get_tree().create_timer(0.15).timeout
 	# 🎯 2. Gây hiệu ứng Stun
 	if targetenemy and is_instance_valid(targetenemy):
 		targetenemy.exit_skill()

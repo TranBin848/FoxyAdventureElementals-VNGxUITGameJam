@@ -296,14 +296,16 @@ position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_tbddh")
 animation = &"WaterSpike"
 autoplay = "WaterSpike"
-frame = 8
-frame_progress = 0.585
+frame = 16
+frame_progress = 1.0
 
 [node name="StartupAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 15)
 sprite_frames = SubResource("SpriteFrames_2y23c")
 animation = &"startup"
 autoplay = "startup"
+frame = 19
+frame_progress = 1.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

@@ -1,153 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://dtygsbfpy3r7i"]
+[gd_scene load_steps=11 format=3 uid="uid://dtygsbfpy3r7i"]
 
-[ext_resource type="Script" uid="uid://b4hpwvhtqcvm" path="res://scenes/skills/area/metal/thunder.gd" id="1_agpdt"]
+[ext_resource type="Script" uid="uid://b4hpwvhtqcvm" path="res://scenes/skills/area/metal/thunder_strike.gd" id="1_agpdt"]
 [ext_resource type="Texture2D" uid="uid://bhm50qwr2xhri" path="res://assets/skills/metal/Thunder/Thunderstrike w blur.png" id="2_4o8rp"]
+[ext_resource type="Texture2D" uid="uid://bplw6ih3je446" path="res://assets/fx/explosion/explosion.png" id="3_4o8rp"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_jmicw"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xa0ms"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hoqxt"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_40j3a"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tqoum"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_26ogi"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kjy8c"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xrvep"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mhdog"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uo3q6"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(512, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3lry3"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(576, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hlpqw"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(640, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kkj56"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(704, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yk7o7"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(768, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xa0ms")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hoqxt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_40j3a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tqoum")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_26ogi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kjy8c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xrvep")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mhdog")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uo3q6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3lry3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hlpqw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kkj56")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yk7o7")
-}],
-"loop": false,
-"name": &"ThunderStrike",
-"speed": 15.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t267p"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(768, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7fh7i"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(704, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y55uk"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(768, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ix587"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(640, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q8b4x"]
-atlas = ExtResource("2_4o8rp")
-region = Rect2(704, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2y23c"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t267p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7fh7i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y55uk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ix587")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y55uk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q8b4x")
-}],
-"loop": false,
-"name": &"startup",
-"speed": 8.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gp0ck"]
 radius = 19.0263
@@ -155,26 +11,159 @@ radius = 19.0263
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnhec"]
 size = Vector2(36, 77)
 
+[sub_resource type="Animation" id="Animation_4o8rp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skill:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitArea2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FX:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [21]
+}
+
+[sub_resource type="Animation" id="Animation_agpdt"]
+length = 1.5
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skill:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0667, 0.1333, 0.200067, 0.266667, 0.3333, 0.4, 0.466667, 0.533333, 0.6, 0.666667, 0.733333, 0.8, 0.866667, 0.933333, 1, 1.06667, 1.13333, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 7.01108e-05, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 11, 10, 11, 10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitArea2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FX:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.733333, 0.75, 0.766667, 0.783333, 0.8, 0.816667, 0.833333, 0.85, 0.866667, 0.883333, 0.9, 0.916667, 0.933333, 0.95, 0.966667, 0.983333, 1, 1.01667, 1.03333, 1.05, 1.06667, 1.08333, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [21, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jmicw"]
+_data = {
+&"RESET": SubResource("Animation_4o8rp"),
+&"ThunderStrike": SubResource("Animation_agpdt")
+}
+
+[sub_resource type="GDScript" id="GDScript_cgdje"]
+script/source = "@tool
+extends AnimationPlayer
+
+# --- CONFIGURATION ---
+@export var sprite_node: Sprite2D
+@export var anim_name: String = \"Skill_A\"
+@export var start_frame: int = 0
+@export var frame_count: int = 10 # How many frames to add
+@export var fps: float = 15.0     # Speed of animation
+
+# Click this checkbox in Inspector to run the script
+@export var generate_keys: bool = false : set = _on_generate
+
+func _on_generate(value):
+	if value == false: return # Prevents running when unchecking
+	
+	if not sprite_node:
+		printerr(\"❌ Please assign a Sprite2D node first!\")
+		generate_keys = false # Reset checkbox
+		return
+
+	# 1. Get or Create Animation
+	var library: AnimationLibrary
+	if has_animation_library(\"\"):
+		library = get_animation_library(\"\")
+	else:
+		library = AnimationLibrary.new()
+		add_animation_library(\"\", library)
+	
+	var anim: Animation
+	if library.has_animation(anim_name):
+		anim = library.get_animation(anim_name)
+		print(\"⚠️ Updating existing animation: \" + anim_name)
+	else:
+		anim = Animation.new()
+		library.add_animation(anim_name, anim)
+		print(\"✅ Created new animation: \" + anim_name)
+
+	# 2. Setup Animation Settings
+	var step = 1.0 / fps
+	anim.loop_mode = Animation.LOOP_NONE
+	anim.length = step * frame_count
+	anim.step = step
+
+	# 3. Find or Create the Track for \"frame\"
+	# The path to the property is \"NodeName:frame\"
+	var track_path = str(sprite_node.name) + \":frame\"
+	var track_idx = anim.find_track(track_path, Animation.TYPE_VALUE)
+
+	if track_idx == -1:
+		track_idx = anim.add_track(Animation.TYPE_VALUE)
+		anim.track_set_path(track_idx, track_path)
+	
+	# 4. Insert Keys Loop
+	for i in range(frame_count):
+		var time = i * step
+		var frame_value = start_frame + i
+		anim.track_insert_key(track_idx, time, frame_value)
+
+	print(\"🎉 Generated %d keys for '%s'!\" % [frame_count, anim_name])
+	generate_keys = false # Reset checkbox
+"
+
 [node name="ThunderStrike" type="Area2D"]
 collision_layer = 32
 collision_mask = 8
 script = ExtResource("1_agpdt")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-24, 0)
-sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"ThunderStrike"
-autoplay = "ThunderStrike"
-frame = 12
-frame_progress = 1.0
-
-[node name="StartupAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -24)
-sprite_frames = SubResource("SpriteFrames_2y23c")
-animation = &"startup"
-autoplay = "startup"
-frame = 5
-frame_progress = 1.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -184,10 +173,34 @@ shape = SubResource("CircleShape2D_gp0ck")
 [node name="HitArea2D" type="Area2D" parent="."]
 position = Vector2(0, -23)
 collision_mask = 16
+monitoring = false
 script = ExtResource("3_jmicw")
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 shape = SubResource("RectangleShape2D_wnhec")
+
+[node name="FX" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, 12.5)
+scale = Vector2(1.25, 0.21875)
+texture = ExtResource("3_4o8rp")
+hframes = 22
+frame = 21
+
+[node name="Skill" type="Sprite2D" parent="."]
+texture = ExtResource("2_4o8rp")
+offset = Vector2(0, -12)
+hframes = 13
+frame = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite_node")]
+libraries = {
+&"": SubResource("AnimationLibrary_jmicw")
+}
+script = SubResource("GDScript_cgdje")
+sprite_node = NodePath("../FX")
+anim_name = "ThunderStrike"
+frame_count = 22
+fps = 60.0
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

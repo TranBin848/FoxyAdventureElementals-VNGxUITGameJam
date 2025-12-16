@@ -6,12 +6,13 @@
 
 [resource]
 script = ExtResource("2_fa0to")
-name = "ThunderStrike"
+name = "Thunder Strike"
 element = "Metal"
 cooldown = 3.5
-duration = 1.0
+duration = 1.5
+hit_delay = 0.25
 texture = ExtResource("3_w3cnl")
-animation_name = "ThunderStrike"
+animation_name = ""
 area_scene = ExtResource("1_w5i07")
 speed = 250.0
 damage = 10
