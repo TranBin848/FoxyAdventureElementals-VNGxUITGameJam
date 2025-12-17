@@ -20,7 +20,6 @@ anim_speed_min = 0.5
 anim_speed_max = 1.0
 
 [node name="Earth" type="GPUParticles2D"]
-process_mode = 4
 material = SubResource("CanvasItemMaterial_7hrw8")
 emitting = false
 amount = 1

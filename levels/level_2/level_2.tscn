@@ -508,7 +508,8 @@ elemental_type = 5
 skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Pelican" parent="Enemies" instance=ExtResource("9_qsvqe")]
-position = Vector2(1082, -681)
+position = Vector2(2910, 326)
+elemental_type = 5
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(1469, -525)
@@ -835,34 +836,19 @@ curve = SubResource("Curve2D_ppf8r")
 [node name="InteractableObjects" type="Node2D" parent="."]
 
 [node name="Quicksand" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(3518, 505)
+position = Vector2(3526, 505)
 
 [node name="Quicksand2" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(3587, 505)
 
 [node name="Quicksand3" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(3646, 505)
+position = Vector2(3662, 505)
 
 [node name="Quicksand4" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(3710, 505)
+position = Vector2(3726, 505)
 
 [node name="Quicksand5" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(3777, 505)
-
-[node name="Quicksand6" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(3845, 505)
-
-[node name="Quicksand7" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(3928, 505)
-
-[node name="Quicksand8" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(3993, 505)
-
-[node name="Quicksand9" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(4059, 505)
-
-[node name="Quicksand10" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
-position = Vector2(4114, 505)
+position = Vector2(3801, 505)
 
 [node name="Quicksand11" parent="InteractableObjects" instance=ExtResource("18_pqi81")]
 position = Vector2(4178, 505)
@@ -920,11 +906,16 @@ tile_map_data = PackedByteArray("AADx/xoABAABAAAAAADw/xsABAABAAEAAADw/xwABAABAAE
 tile_set = ExtResource("2_s4b5i")
 
 [node name="ObjectTileMap" type="TileMapLayer" parent="TileMaps"]
-tile_map_data = PackedByteArray("AADx//j/CgAAAAAABAAvABMACgAAAAAABAB8APv/CgAAAAAABAB9APv/CgAAAAAABADCAB8ACgAAAAAABAAFAfn/CgAAAAAABAAcAQAACgAAAAAABABcAdX/CgAAAAAABABeAdX/CgAAAAAABAAEArj/CgAAAAAABADVAPP/CgAAAAAABADv/w4ACgAAAAAACAA3APf/CgAAAAAACAB9AOf/CgAAAAAACAB8AOf/CgAAAAAACAAwABMACgAAAAAACADzAPP/CgAAAAAACAAnAQoACgAAAAAACAAbAfL/CgAAAAAACAAfAfH/CgAAAAAACAB0Aeb/CgAAAAAACAAcAun/CAAJAAgAAAAcAur/CAAJAAkAAAAgAun/CAAJAAgAAAAgAur/CAAJAAkAAAAjAun/CAAJAAgAAAAjAur/CAAJAAkAAAAoAun/CAAJAAgAAAAoAur/CAAJAAkAAAApAun/CAAJAAgAAAApAur/CAAJAAkAAAAtAun/CAAJAAgAAAAtAur/CAAJAAkAAAAUAtr/CAAGAAcAAAATAtT/CAAHAAUAAAAVAt//CAAHAAUAAAAWAuP/CAAIAAUAAAAXAub/CAAIAAUAAAAYAuj/CAAHAAUAAAAZAun/CAAHAAUAAAAvAun/CAAIAAUAAAAwAuj/CAAHAAUAAAAxAub/CAAHAAUAAAAyAuP/CAAIAAUAAAAzAt//CAAIAAUAAAA0Atr/CAAHAAUAAAA1AtT/CAAHAAUAAAA=")
+tile_map_data = PackedByteArray("AADx//j/CgAAAAAABAAvABMACgAAAAAABAB8APv/CgAAAAAABAB9APv/CgAAAAAABADCAB8ACgAAAAAABAAFAfn/CgAAAAAABAAcAQAACgAAAAAABABcAdX/CgAAAAAABABeAdX/CgAAAAAABAAEArj/CgAAAAAABADVAPP/CgAAAAAABADv/w4ACgAAAAAACAA3APf/CgAAAAAACAB9AOf/CgAAAAAACAB8AOf/CgAAAAAACAAwABMACgAAAAAACADzAPP/CgAAAAAACAAnAQoACgAAAAAACAAbAfL/CgAAAAAACAAfAfH/CgAAAAAACAB0Aeb/CgAAAAAACAAgAur/CgAAAAAAAQAjAur/CgAAAAAAAQAtAur/CgAAAAAAAQAbAur/CgAAAAAAAQAcAur/CgAAAAAAAQAdAur/CgAAAAAAAQAfAur/CgAAAAAAAQAhAur/CgAAAAAAAQAkAur/CgAAAAAAAQAlAur/CgAAAAAAAQAnAur/CgAAAAAAAQAoAur/CgAAAAAAAQApAur/CgAAAAAAAQArAur/CgAAAAAAAQAsAur/CgAAAAAAAQA7Asz/CAAJAAgAAAA7As3/CAAJAAkAAAA/As3/CAAHAAcAAABAAs3/CAAHAAcAAABBAs3/CAAHAAYAAABCAs3/CAAJAAkAAABCAsz/CAAJAAgAAAA=")
 tile_set = ExtResource("2_s4b5i")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="TileMaps"]
+[node name="DecorTileMap" type="TileMapLayer" parent="TileMaps"]
+z_index = -1
+tile_map_data = PackedByteArray("AAAbAur/CAACAA8AAAAcAur/CAAAAA8AAAAaAur/CAAAAA8AAAAdAur/CAACAA8AAAAfAur/CAAAAA8AAAAgAur/CAADAA8AAAAiAur/CAACAA8AAAAjAur/CAAAAA8AAAAkAur/CAADAA8AAAAmAur/CAADAA8AAAAnAur/CAAAAA8AAAAoAur/CAAAAA8AAAApAur/CAACAA8AAAArAur/CAADAA8AAAAsAur/CAACAA8AAAAtAur/CAAAAA8AAAAwAuj/CAAHAAUAAAAxAub/CAAGAAcAAAAvAun/CAAIAAUAAAAyAuP/CAAIAAUAAAAzAt//CAAIAAUAAAA0Atr/CAAHAAUAAAA1AtT/CAAGAAcAAAAZAun/CAAHAAUAAAAYAuj/CAAGAAcAAAAXAub/CAAIAAUAAAAWAuP/CAAIAAUAAAAVAt//CAAHAAUAAAAUAtr/CAAGAAcAAAATAtT/CAAHAAUAAAA=")
 tile_set = ExtResource("2_s4b5i")
+
+[node name="SandStormParticle" parent="TileMaps" instance=ExtResource("20_pvqwi")]
+position = Vector2(-291, 631)
 
 [node name="SkillTreeUI" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -994,7 +985,7 @@ position = Vector2(17532, -776)
 enemy_to_spawn = Array[PackedScene]([ExtResource("28_rdvgg"), ExtResource("28_ulcqf"), ExtResource("10_r7wcl"), ExtResource("23_vdtjt")])
 skill_drops = Array[Script]([ExtResource("21_gsja5"), ExtResource("29_ulcqf")])
 enemy_per_spawn = 2
-spawn_interval = 5.0
+spawn_interval = 15.0
 elemental_type = 1
 
 [node name="Spawner" parent="Spawners" instance=ExtResource("25_ppf8r")]
@@ -1002,7 +993,7 @@ position = Vector2(4002, 373)
 enemy_to_spawn = Array[PackedScene]([ExtResource("28_ulcqf"), ExtResource("23_vdtjt"), ExtResource("28_6fwx2")])
 skill_drops = Array[Script]([ExtResource("27_xpuws")])
 enemy_per_spawn = 2
-spawn_interval = 5.0
+spawn_interval = 15.0
 elemental_type = 5
 
 [node name="FX" type="Node2D" parent="."]
