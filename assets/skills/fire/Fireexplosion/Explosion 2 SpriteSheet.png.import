@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cld72nn514rmh"
-path="res://.godot/imported/Explosion 2 SpriteSheet.png-bfca06bbb708a48ea4e298fb0efbc5d5.ctex"
+path="res://.godot/imported/Explosion 2 SpriteSheet.png-34e7d50e0f10e9bda4e36cc91d9151ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/skills/fire/FireExplosion/Explosion 2 SpriteSheet.png"
-dest_files=["res://.godot/imported/Explosion 2 SpriteSheet.png-bfca06bbb708a48ea4e298fb0efbc5d5.ctex"]
+source_file="res://assets/skills/fire/Fireexplosion/Explosion 2 SpriteSheet.png"
+dest_files=["res://.godot/imported/Explosion 2 SpriteSheet.png-34e7d50e0f10e9bda4e36cc91d9151ee.ctex"]
 
 [params]
 
