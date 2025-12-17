@@ -46,6 +46,10 @@ func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direct
 func _enable_hitbox() -> void:
 	if has_node("HitArea2D"):
 		$HitArea2D.set_deferred("monitoring", true)
+		
+func _disable_hitbox() -> void:
+	if has_node("HitArea2D"):
+		$HitArea2D.set_deferred("monitoring", false)
 
 # Called by method track when startup completes
 func _on_startup_complete() -> void:

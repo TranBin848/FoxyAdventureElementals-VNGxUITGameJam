@@ -18,3 +18,4 @@ func _on_startup_complete() -> void:
 func _apply_stun_effect() -> void:
 	if targetenemy and is_instance_valid(targetenemy):
 		targetenemy.exit_skill()
+	_disable_hitbox()
