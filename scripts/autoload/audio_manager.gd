@@ -187,22 +187,26 @@ func play_ambience(ambience_id: String, volume_db: float = 0.0, fade_in: float =
 		return
 	
 	current_ambience_id = ambience_id
+	
 	# Stop current ambience if playing
 	if ambience_player.playing:
-		stop_ambience(fade_in)
+		stop_ambience(0.0)  # Immediate stop, no fade
+		await get_tree().process_frame  # Wait one frame
 	
 	ambience_player.stream = audio_clip.stream
-	ambience_player.volume_db = audio_clip.volume_db + volume_db
-	ambience_player.play()
 	
 	if fade_in > 0.0:
-		var start_vol = 0.0  # Silent
-		var target_vol = db_to_linear(audio_clip.volume_db + volume_db)
+		# Start silent and fade in
+		ambience_player.volume_db = -80.0
+		ambience_player.play()
+		
+		var target_vol = audio_clip.volume_db + volume_db
 		var tween = create_tween()
-		tween.tween_method(
-			func(t): ambience_player.volume_db = linear_to_db(lerp(start_vol, target_vol, t)),
-			0.0, 1.0, fade_in
-		)
+		tween.tween_property(ambience_player, "volume_db", target_vol, fade_in)
+	else:
+		# Play immediately at target volume
+		ambience_player.volume_db = audio_clip.volume_db + volume_db
+		ambience_player.play()
 
 ## Stop ambience
 func stop_ambience(fade_out: float = 0.0) -> void:

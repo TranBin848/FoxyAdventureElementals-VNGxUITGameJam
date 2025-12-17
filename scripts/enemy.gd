@@ -140,6 +140,7 @@ func _init_hit_area():
 func _init_particle():
 	if has_node("Particles"):
 		var particle_holder = $Particles
+
 		if particle_holder.get_child_count() == 0:
 			return
 		var particles: Array = particle_holder.get_children()
@@ -152,7 +153,49 @@ func _init_particle():
 					current_particle = particle
 					if current_particle != null:
 						current_particle.emitting = true
+						# Set up particle audio
+						_setup_particle_audio()
+
 	pass
+
+func _setup_particle_audio():
+	if not AudioManager or not AudioManager.audio_database:
+		return
+	
+	var audio_id: String = ""
+	
+	match elemental_type:
+		ElementsEnum.Elements.NONE:
+			audio_id = "particle_none"
+		ElementsEnum.Elements.METAL:
+			audio_id = "particle_metal"
+		ElementsEnum.Elements.WOOD:
+			audio_id = "particle_wood"
+		ElementsEnum.Elements.WATER:
+			audio_id = "particle_water"
+		ElementsEnum.Elements.FIRE:
+			audio_id = "particle_fire"
+		ElementsEnum.Elements.EARTH:
+			audio_id = "particle_earth"
+	
+	if audio_id == "":
+		return
+	
+	var particle_sfx: AudioStreamPlayer2D = null
+	if current_particle.has_node("AudioStreamPlayer2D"):
+		particle_sfx = current_particle.get_node("AudioStreamPlayer2D")
+	else:
+		particle_sfx = AudioStreamPlayer2D.new()
+		current_particle.add_child(particle_sfx)
+	
+	var audio_clip = AudioManager.audio_database.get_clip(audio_id)
+	if audio_clip and audio_clip.stream:
+		particle_sfx.stream = audio_clip.stream
+		particle_sfx.volume_db = audio_clip.volume_db
+		particle_sfx.autoplay = true
+		particle_sfx.max_distance = 300
+		particle_sfx.play()
+
 
 func _init_culling() -> void:
 	# Try to find existing notifier
@@ -172,12 +215,28 @@ func _init_culling() -> void:
 		viewport_size * 3  # Size: 3x viewport (1 left + 1 center + 1 right)
 	)
 	
+	# Defer viewport size calculation until in tree
+	if is_inside_tree():
+		_setup_culling_rect()
+	else:
+		# Wait until ready to set up the rect
+		call_deferred("_setup_culling_rect")
+
+func _setup_culling_rect() -> void:
+	if not visibility_notifier:
+		return
+	
+	# Now safe to get viewport size
+	var viewport_size = get_viewport_rect().size
+	
+	# Extend the rect to 2x viewport size (1 viewport in each direction)
+	var extended_rect = Rect2(
+		-viewport_size,  # Offset: 1 viewport left and up
+		viewport_size * 3  # Size: 3x viewport (1 left + 1 center + 1 right)
+	)
+	
 	visibility_notifier.rect = extended_rect
 	
-	# Connect signals
-	visibility_notifier.screen_entered.connect(_on_screen_entered)
-	visibility_notifier.screen_exited.connect(_on_screen_exited)
-
 func _on_screen_exited() -> void:
 	is_on_screen = false
 	
