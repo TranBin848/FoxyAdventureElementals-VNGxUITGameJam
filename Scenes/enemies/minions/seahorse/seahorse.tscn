@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://d2xnvvob5vkgl"]
 
-[ext_resource type="Script" uid="uid://coijve31u764s" path="res://scenes/enemies/minions/seahorse/seahorse.gd" id="1_07c8w"]
+[ext_resource type="Script" path="res://scenes/enemies/minions/seahorse/seahorse.gd" id="1_07c8w"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_llfpg"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_07c8w"]
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_y1cc5"]

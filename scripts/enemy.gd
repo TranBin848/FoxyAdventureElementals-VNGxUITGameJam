@@ -2,6 +2,7 @@ class_name EnemyCharacter
 extends BaseCharacter
 
 @onready var damage_number_origin = $DamageNumbersOrigin
+@onready var visibility_notifier: VisibleOnScreenNotifier2D = null
 # 0: None, 1: Fire, 2: Water, 3: Earth, 4: Metal, 5: Wood
 @export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
 	ElementsEnum.Elements.METAL: Color("f0f0f0"),
@@ -37,6 +38,10 @@ extends BaseCharacter
 # Enemy's attack speed (pixel/second)
 @export var attack_speed: float
 
+# Culling state
+var is_on_screen: bool = true
+var was_ever_on_screen: bool = false
+
 # Raycast check wall and fall
 var front_ray_cast: RayCast2D
 var down_ray_cast: RayCast2D
@@ -62,6 +67,7 @@ var current_particle: GPUParticles2D
 
 func _ready() -> void:
 	super._ready()
+	_init_culling()
 	_init_ray_cast()
 	_init_detect_player_raycast()
 	_init_hurt_area()
@@ -148,6 +154,77 @@ func _init_particle():
 						current_particle.emitting = true
 	pass
 
+func _init_culling() -> void:
+	# Try to find existing notifier
+	if has_node("VisibleOnScreenNotifier2D"):
+		visibility_notifier = $VisibleOnScreenNotifier2D
+	else:
+		# Create notifier programmatically
+		visibility_notifier = VisibleOnScreenNotifier2D.new()
+		add_child(visibility_notifier)
+		
+	# Get viewport size to extend culling area
+	var viewport_size = get_viewport_rect().size
+	
+	# Extend the rect to 2x viewport size (1 viewport in each direction)
+	var extended_rect = Rect2(
+		-viewport_size,  # Offset: 1 viewport left and up
+		viewport_size * 3  # Size: 3x viewport (1 left + 1 center + 1 right)
+	)
+	
+	visibility_notifier.rect = extended_rect
+	
+	# Connect signals
+	visibility_notifier.screen_entered.connect(_on_screen_entered)
+	visibility_notifier.screen_exited.connect(_on_screen_exited)
+
+func _on_screen_exited() -> void:
+	is_on_screen = false
+	
+	if was_ever_on_screen:
+		set_physics_process(false)
+		set_process(false)
+		
+		# Disable raycasts
+		if front_ray_cast:
+			front_ray_cast.enabled = false
+		if down_ray_cast:
+			down_ray_cast.enabled = false
+		if left_detect_ray:
+			left_detect_ray.enabled = false
+		if right_detect_ray:
+			right_detect_ray.enabled = false
+		
+		if animated_sprite:
+			animated_sprite.pause()
+		
+		if current_particle:
+			current_particle.emitting = false
+		
+		found_player = null
+
+func _on_screen_entered() -> void:
+	is_on_screen = true
+	was_ever_on_screen = true
+	set_physics_process(true)
+	set_process(true)
+	
+	# Re-enable raycasts
+	if front_ray_cast:
+		front_ray_cast.enabled = true
+	if down_ray_cast:
+		down_ray_cast.enabled = true
+	if left_detect_ray:
+		left_detect_ray.enabled = true
+	if right_detect_ray:
+		right_detect_ray.enabled = true
+	
+	if animated_sprite:
+		animated_sprite.play()
+	
+	if current_particle:
+		current_particle.emitting = true
+
 # --- Check if touching wall
 func is_touch_wall() -> bool:
 	return front_ray_cast != null and front_ray_cast.is_colliding()
@@ -159,6 +236,10 @@ func is_can_fall() -> bool:
 
 # --- Called every frame (or physics frame)
 func _physics_process(delta: float) -> void:
+	# Skip processing if off-screen (safety check)
+	if not is_on_screen and was_ever_on_screen:
+		return
+
 	super._physics_process(delta)
 	_check_player_in_sight()
 
