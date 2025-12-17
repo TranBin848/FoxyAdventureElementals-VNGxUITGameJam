@@ -10,7 +10,7 @@ var all_skills = {
 		"Wood Shot": WoodShot,
 		"Heal Over Time": HealOverTime,
 		"Stun Shot": StunShot,
-		"Thunder Strike": ThunderStrike,
+		"Thunder Strike": Thunderbolt,
 		"Earthquake": Earthquake
 	}
 func get_skill_by_name(name: String) -> Script:

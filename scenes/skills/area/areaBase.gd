@@ -6,15 +6,27 @@ var targetenemy: EnemyCharacter
 var damage: int
 var elemental_type: int
 var duration: float
+var direction: Vector2
 var targets_in_area: Array = [] 
 var timer: Timer
 
-func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter) -> void:
+func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direction: Vector2  = Vector2.RIGHT) -> void:
 	self.damage = skill.damage
 	self.elemental_type = skill.elemental_type
 	self.duration = skill.duration
+	self.direction = direction
 	self.global_position = caster_position
+	
 	targetenemy = enemy
+	
+	# Determine casting direction
+	var direction_to_enemy = (enemy.global_position - caster_position).normalized()
+	var is_facing_right = direction_to_enemy.x > 0
+	
+	# Flip sprite based on direction
+	var sprite = get_node_or_null("Sprite2D")
+	if sprite:
+		sprite.flip_h = not is_facing_right  # Flip if facing left
 	
 	var hit_area: HitArea2D = null
 	if has_node("HitArea2D"):
@@ -27,15 +39,7 @@ func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter) -> voi
 	if not anim_player:
 		return
 
-	# Play the appropriate animation based on whether startup exists
-	var anim_name = skill.animation_name
-	if skill.has_startup and anim_player.has_animation(anim_name + "_startup"):
-		anim_player.play(anim_name + "_startup")
-	else:
-		anim_player.play(anim_name)
-		if hit_area:
-			hit_area.set_deferred("monitoring", true)
-	
+	anim_player.play(skill.animation_name)
 	_setup_duration_timer()
 
 # Called by method track in animation
