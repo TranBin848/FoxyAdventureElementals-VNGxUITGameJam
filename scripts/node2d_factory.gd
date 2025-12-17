@@ -6,9 +6,8 @@ signal created(product)
 @export var product_packed_scene: PackedScene
 @export var target_container_name: StringName = "ProductsContainer"
 
-# REMOVED: Don't store container reference
-# var container: Node = null  # ← This causes memory leak!
 var parent_node: Node = null
+var container: Node = null  # Store reference after initialization
 
 func _ready() -> void:
 	parent_node = find_parent("Stage")
@@ -16,21 +15,23 @@ func _ready() -> void:
 	if parent_node == null:
 		parent_node = get_tree().current_scene
 	
-	# Get or create container but don't store it
-	var container = parent_node.find_child(target_container_name)
+	# Wait one frame to ensure parent is ready
+	await get_tree().process_frame
+	
+	# Get or create container synchronously
+	container = parent_node.find_child(target_container_name, true, false)
 	if container == null:
 		container = Node.new()
 		container.name = target_container_name
-		parent_node.call_deferred("add_child", container)
+		parent_node.add_child(container)  # Immediate, not deferred!
 
 func create(_product_packed_scene := product_packed_scene) -> Node2D:
 	if _product_packed_scene == null:
 		push_warning("Node2DFactory: No PackedScene assigned.")
 		return null
 	
-	# Find container each time instead of storing reference
-	var container = parent_node.find_child(target_container_name)
-	if container == null:
+	# Use stored reference instead of searching
+	if container == null or not is_instance_valid(container):
 		push_warning("Node2DFactory: Container not initialized.")
 		return null
 	
