@@ -36,21 +36,17 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Metal" parent="Particles" instance=ExtResource("2_rbohg")]
 position = Vector2(0, -26)
-emitting = false
 
 [node name="Wood" parent="Particles" instance=ExtResource("3_dihkp")]
 position = Vector2(0, -15)
 
 [node name="Earth" parent="Particles" instance=ExtResource("4_4mga2")]
 position = Vector2(0, 10)
-emitting = false
 
 [node name="Water" parent="Particles" instance=ExtResource("5_ng6ua")]
-emitting = false
 
 [node name="Fire" parent="Particles" instance=ExtResource("6_foq0j")]
 position = Vector2(0, 5)
-emitting = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1ud2m")

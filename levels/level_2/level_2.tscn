@@ -996,9 +996,9 @@ enemy_per_spawn = 2
 spawn_interval = 15.0
 elemental_type = 5
 
-[node name="FX" type="Node2D" parent="."]
+[node name="FX" type="Node" parent="."]
 
-[node name="Projectiles" type="Node2D" parent="."]
+[node name="Projectiles" type="Node" parent="."]
 
 [node name="Checkpoint" parent="." instance=ExtResource("38_km4sl")]
 position = Vector2(-473, 816)
