@@ -8,6 +8,7 @@ signal created(product)
 
 var parent_node: Node = null
 var container: Node = null  # Store reference after initialization
+var _is_ready: bool = false
 
 func _ready() -> void:
 	parent_node = find_parent("Stage")
@@ -24,10 +25,17 @@ func _ready() -> void:
 		container = Node.new()
 		container.name = target_container_name
 		parent_node.add_child(container)  # Immediate, not deferred!
+	
+	_is_ready = true
 
 func create(_product_packed_scene := product_packed_scene) -> Node2D:
 	if _product_packed_scene == null:
 		push_warning("Node2DFactory: No PackedScene assigned.")
+		return null
+	
+	# Ensure initialization is complete
+	if not _is_ready:
+		push_warning("Node2DFactory: Factory not ready yet.")
 		return null
 	
 	# Use stored reference instead of searching
