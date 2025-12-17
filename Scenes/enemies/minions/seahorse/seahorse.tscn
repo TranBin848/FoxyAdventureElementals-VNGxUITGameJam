@@ -103,21 +103,17 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Metal" parent="Particles" instance=ExtResource("2_llfpg")]
 position = Vector2(0, -26)
-emitting = false
 
 [node name="Wood" parent="Particles" instance=ExtResource("3_07c8w")]
 position = Vector2(0, -15)
 
 [node name="Earth" parent="Particles" instance=ExtResource("4_y1cc5")]
 position = Vector2(0, 10)
-emitting = false
 
 [node name="Water" parent="Particles" instance=ExtResource("5_ymkxy")]
-emitting = false
 
 [node name="Fire" parent="Particles" instance=ExtResource("6_ks11g")]
 position = Vector2(0, 5)
-emitting = false
 
 [node name="Direction" type="Node2D" parent="."]
 

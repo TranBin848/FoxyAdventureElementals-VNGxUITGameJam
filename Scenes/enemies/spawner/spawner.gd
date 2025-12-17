@@ -48,7 +48,7 @@ func spawn_enemy() -> bool:
 		else: random_distance = randf_range(spawn_min_distance, spawn_max_distance)
 		var random_index: int = randi_range(0, enemy_to_spawn.size() - 1)
 		var enemy = enemy_to_spawn[random_index].instantiate()
-		get_tree().root.add_child(enemy)
+		GameManager.current_stage.find_child("Enemies").add_child(enemy)
 		if enemy is EnemyCharacter: 
 			(enemy as EnemyCharacter).position.x = position.x + random_distance
 			(enemy as EnemyCharacter).position.y = position.y

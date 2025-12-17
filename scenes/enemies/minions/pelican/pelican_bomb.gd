@@ -1,6 +1,6 @@
 extends EnemyCharacter
 
-@export var lifetime: float = 10.0  # Auto-cleanup after 10 seconds
+@export var lifetime: float = 3.0  # Auto-cleanup after 10 seconds
 
 func _ready() -> void:
 	change_animation("default")
@@ -12,6 +12,7 @@ func _ready() -> void:
 		timer.timeout.connect(_on_lifetime_expired)
 
 func _on_lifetime_expired() -> void:
+	print("hahaha")
 	if is_instance_valid(self):
 		queue_free()
 
