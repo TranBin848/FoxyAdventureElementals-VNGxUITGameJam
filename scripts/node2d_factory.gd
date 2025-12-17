@@ -20,6 +20,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	
 	# Get or create container synchronously
+	# find_child(name, recursive=true, owned=false) to search all children
 	container = parent_node.find_child(target_container_name, true, false)
 	if container == null:
 		container = Node.new()

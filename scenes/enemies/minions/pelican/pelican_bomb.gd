@@ -7,7 +7,9 @@ func _ready() -> void:
 	super._ready()
 	
 	# Auto-cleanup after lifetime expires
-	get_tree().create_timer(lifetime, true).timeout.connect(_on_lifetime_expired)
+	var timer = get_tree().create_timer(lifetime, true)
+	if timer:
+		timer.timeout.connect(_on_lifetime_expired)
 
 func _on_lifetime_expired() -> void:
 	if is_instance_valid(self):
