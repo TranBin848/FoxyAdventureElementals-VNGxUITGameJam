@@ -982,7 +982,7 @@ vertical_alignment = 1
 
 [node name="Spawner2" parent="Spawners" instance=ExtResource("25_ppf8r")]
 position = Vector2(17532, -776)
-enemy_to_spawn = Array[PackedScene]([ExtResource("28_rdvgg"), ExtResource("28_ulcqf"), ExtResource("10_r7wcl"), ExtResource("23_vdtjt")])
+enemy_to_spawn = Array[PackedScene]([ExtResource("10_r7wcl"), ExtResource("23_vdtjt"), ExtResource("22_1h50e")])
 skill_drops = Array[Script]([ExtResource("21_gsja5"), ExtResource("29_ulcqf")])
 enemy_per_spawn = 2
 spawn_interval = 15.0
@@ -990,7 +990,7 @@ elemental_type = 1
 
 [node name="Spawner" parent="Spawners" instance=ExtResource("25_ppf8r")]
 position = Vector2(4002, 373)
-enemy_to_spawn = Array[PackedScene]([ExtResource("28_ulcqf"), ExtResource("23_vdtjt"), ExtResource("28_6fwx2")])
+enemy_to_spawn = Array[PackedScene]([ExtResource("23_vdtjt"), ExtResource("10_r7wcl"), ExtResource("27_6fwx2")])
 skill_drops = Array[Script]([ExtResource("27_xpuws")])
 enemy_per_spawn = 2
 spawn_interval = 15.0
