@@ -165,7 +165,7 @@ _data = {
 }
 point_count = 2
 
-[node name="Stage" type="Node2D"]
+[node name="Stage2" type="Node2D"]
 script = ExtResource("1_ppf8r")
 
 [node name="BladeCollectable" parent="." instance=ExtResource("3_qfhyh")]
