@@ -10,6 +10,7 @@ name = "Fire Shot"
 element = "Fire"
 cooldown = 1.0
 duration = 0.0
+hit_delay = 0.0
 texture = ExtResource("3_vod6y")
 animation_name = "FireShot"
 projectile_scene = ExtResource("1_ymexm")

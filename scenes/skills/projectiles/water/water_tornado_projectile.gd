@@ -1,18 +1,19 @@
 extends ProjectileBase
 class_name WaterTornadoProjectile
 
-@export var tornado_duration: float = 3.0 # <-- THỜI GIAN LỐC XOÁY TỒN TẠI
-@export var knockback_force: float = 300.0 # Lực đẩy văng kẻ địch ra sau khi hút
+@export var tornado_duration: float = 3.0
+@export var knockback_force: float = 300.0
+@export var knockback_upward_bias: float = 0.2  # Slight upward lift
 @onready var explosion_area: Area2D = $ExplosionArea	
 @export var explosion_anim: String = "WaterTornado_End"
 
 @onready var duration_timer: Timer = Timer.new()
 # --- State ---
 var exploding: bool = false
-var ending: bool = false # Cờ báo hiệu đang chạy animation kết thúc
+var ending: bool = false
+var tornado_center: Vector2  # Store tornado center position
 
 func _ready() -> void:
-	# 1. Khởi tạo Timer và kết nối tín hiệu
 	duration_timer.one_shot = true
 	duration_timer.wait_time = tornado_duration
 	duration_timer.timeout.connect(_start_ending_sequence)
@@ -24,38 +25,31 @@ func _physics_process(delta: float) -> void:
 	
 	super._physics_process(delta)
 	
-# --- Bắt đầu quá trình kết thúc (SAU KHI HẾT THỜI GIAN) ---
 func _start_ending_sequence() -> void:
 	if ending:
 		return
 		
 	ending = true
+	tornado_center = global_position  # Store center before ending
 	
-	# Dừng Timer để tránh việc kích hoạt lại
 	duration_timer.stop()
-	# Dừng di chuyển và logic vật lý của ProjectileBase
 	set_physics_process(false) 
 	
-	# Chơi animation kết thúc
 	$AnimatedSprite2D.play(explosion_anim)
 	
-	# Kết nối hàm dọn dẹp vào animation kết thúc
 	$AnimatedSprite2D.connect(
 		"animation_finished",
 		Callable(self, "_on_animation_finished"),
 		CONNECT_ONE_SHOT
 	)
 
-# Callback khi có va chạm với enemy
 func _on_hit_area_2d_hitted(area: Variant) -> void:
 	_trigger_explosion()
 		
 
 func _on_body_entered(body: Node2D) -> void:
 	if $AnimatedSprite2D.animation != "WaterTornado_End":
-		# Nếu đụng vật tĩnh, ta bắt đầu animation kết thúc ngay lập tức (không đợi 3s)
 		_start_ending_sequence() 
-		# Dòng set_physics_process(false) đã được chuyển vào _start_ending_sequence()
 
 
 func _trigger_explosion() -> void:
@@ -63,37 +57,41 @@ func _trigger_explosion() -> void:
 		return
 	
 	exploding = true
+	tornado_center = global_position  # Store initial position
 	
 	duration_timer.start()
 	
-	# Tìm tất cả Enemy trong bán kính vụ nổ
 	var overlaps = explosion_area.get_overlapping_bodies()
 	print(overlaps)
 	for b in overlaps:
 		if b is EnemyCharacter:
 			affected_enemies.append(b)
-			b.enter_skill(global_position)   # hút vào tâm
+			b.enter_skill(tornado_center)
 
 
 func _on_animation_finished() -> void:
 	for e in affected_enemies:
-		if e and e.is_inside_tree():
+		if e and is_instance_valid(e) and e.is_inside_tree():
 			e.exit_skill()
 
-			# Đẩy enemy văng ra
-			e.apply_knockback(global_position, knockback_force)
+			# Calculate radial knockback from tornado center
+			var direction = (e.global_position - tornado_center).normalized()
+			
+			# Create knockback vector with upward spiral effect
+			var knockback_vector = Vector2(
+				direction.x * knockback_force,
+				(direction.y * knockback_force) - (knockback_force * knockback_upward_bias)
+			)
+			
+			e.apply_knockback(knockback_vector)
+	
 	queue_free()
 
-	
-
 func _on_explosion_area_body_entered(body: Node2D) -> void:
-	# 1. Nếu lốc xoáy đã kết thúc, không làm gì cả
 	if ending:
 		return
 		
-	# 2. Xử lý Va Chạm với Enemy (HÚT KẺ ĐỊCH VÀO)
 	if exploding and body is EnemyCharacter:
-		# KIỂM TRA: Nếu Enemy chưa có trong danh sách
 		if not affected_enemies.has(body):
 			affected_enemies.append(body)
-			body.enter_skill(global_position) # hút vào tâm
+			body.enter_skill(tornado_center)  # Use stored center position

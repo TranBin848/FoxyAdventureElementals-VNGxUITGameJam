@@ -9,10 +9,13 @@ class_name StunBeam
 @export var scale_ease := Tween.EASE_OUT
 @export var explosion_anim: String = "FireExplosion_End"
 @onready var explosion_area: Area2D = $ExplosionArea	
-@export var knockback_force: float = 300.0 # Lực đẩy văng kẻ địch ra sau khi hút
+@export var knockback_force: float = 300.0
 @export var vertical_offset: float = -20.0
+@export var knockback_upward_bias: float = 0.3  # Add slight upward lift
+
 # --- State ---
 var exploding: bool = false
+var explosion_center: Vector2  # Store explosion position
 
 
 func _on_hit_area_2d_hitted(area: Variant) -> void:
@@ -28,24 +31,23 @@ func _trigger_explosion() -> void:
 		return
 	
 	exploding = true
-	#set_physics_process(false)
+	explosion_center = global_position  # Store center position
 	
-	# Tìm tất cả Enemy trong bán kính vụ nổ
+	# Find all enemies in explosion radius
 	var overlaps = explosion_area.get_overlapping_bodies()
 	print(overlaps)
 	for b in overlaps:
 		if b is EnemyCharacter:
 			affected_enemies.append(b)
-			b.enter_skill(global_position)   # hút vào tâm
+			b.enter_skill(explosion_center)  # Pull to center
 	
 	# Reset scale + play animation
 	$AnimatedSprite2D.scale = start_scale
 	$AnimatedSprite2D.play(explosion_anim)
 	
-	# LƯU VỊ TRÍ GỐC của Sprite để phục vụ cho Tween
 	var initial_sprite_pos_y = $AnimatedSprite2D.position.y 
 	
-	# Explosion scale tween (giữ nguyên)
+	# Explosion scale tween
 	var tween := create_tween()
 	tween.tween_property(
 		$AnimatedSprite2D,
@@ -54,15 +56,15 @@ func _trigger_explosion() -> void:
 		scale_duration
 	).set_trans(scale_trans).set_ease(scale_ease)
 
-	# <-- THÊM TWEEN DỊCH CHUYỂN VỊ TRÍ Y
+	# Position Y tween
 	tween.tween_property(
 		$AnimatedSprite2D,
 		"position:y",
-		initial_sprite_pos_y + vertical_offset, # Dịch chuyển Y lên trên
+		initial_sprite_pos_y + vertical_offset,
 		scale_duration
 	).set_trans(scale_trans).set_ease(scale_ease).set_delay(0.0)
 	
-	# Cleanup (giữ nguyên)
+	# Cleanup
 	$AnimatedSprite2D.connect(
 		"animation_finished",
 		Callable(self, "_on_animation_finished"),
@@ -75,15 +77,23 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	super._physics_process(delta)
-	
 	rotation = 0
 
 
 func _on_animation_finished() -> void:
 	for e in affected_enemies:
-		if e and e.is_inside_tree():
+		if e and is_instance_valid(e) and e.is_inside_tree():
 			e.exit_skill()
 
-			# Đẩy enemy văng ra
-			e.apply_knockback(global_position, knockback_force)
+			# Calculate radial knockback direction
+			var direction = (e.global_position - explosion_center).normalized()
+			
+			# Create knockback vector with upward component
+			var knockback_vector = Vector2(
+				direction.x * knockback_force,
+				direction.y * knockback_force - (knockback_force * knockback_upward_bias)
+			)
+			
+			e.apply_knockback(knockback_vector)
+	
 	queue_free()
