@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=97 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://cx3p62gjf57ep" path="res://assets/foxy/fox_hat_blade/fox_defeat_2.png" id="20_niom3"]
 [ext_resource type="Texture2D" uid="uid://cbaa3uxgjfwo6" path="res://assets/foxy/fox_hat_blade/fox_cling_1.png" id="21_hir57"]
 [ext_resource type="Texture2D" uid="uid://blvo22k8hckk0" path="res://assets/foxy/fox_hat_blade/fox_defeat_3.png" id="21_ttakn"]
+[ext_resource type="Texture2D" uid="uid://2j5ksjww4suq" path="res://assets/foxy/fox_hat_blade/fox_cling_2.png" id="21_vkc6f"]
 [ext_resource type="Texture2D" uid="uid://8u26ji11yaua" path="res://assets/foxy/fox_hat/fox_walk_4.png" id="21_vlhku"]
 [ext_resource type="Texture2D" uid="uid://bv5er34emc8g1" path="res://assets/foxy/fox_hat_blade/fox_jump_2.png" id="22_rw8a5"]
 [ext_resource type="Script" uid="uid://21al21syvgln" path="res://scenes/player/states/dead.gd" id="22_yj68g"]
@@ -211,6 +212,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("21_hir57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_vkc6f")
 }],
 "loop": true,
 "name": &"cling",
@@ -550,7 +554,7 @@ z_index = 199
 material = SubResource("ShaderMaterial_vb1ce")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"attack"
+animation = &"cling"
 autoplay = "idle"
 
 [node name="SilhouetteWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]

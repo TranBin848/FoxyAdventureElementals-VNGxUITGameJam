@@ -13,7 +13,6 @@ func _ready() -> void:
 		timer.timeout.connect(_on_lifetime_expired)
 
 func _on_lifetime_expired() -> void:
-	print("hahaha")
 	if is_instance_valid(self):
 		queue_free()
 

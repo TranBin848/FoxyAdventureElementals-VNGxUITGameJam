@@ -26,6 +26,6 @@ anim_speed_max = 1.0
 
 [node name="Wood" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_jq685")
-amount = 10
+amount = 5
 texture = ExtResource("1_6die5")
 process_material = SubResource("ParticleProcessMaterial_b5v6l")

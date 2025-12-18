@@ -129,7 +129,7 @@ func cast_spell(skill: Skill) -> String:
 	if not skill:
 		return "Skill invalid"
 	
-	print(mana)
+	#print(mana)
 	if(mana - skill.mana < 0): 
 		return "Not Enough Mana"
 	

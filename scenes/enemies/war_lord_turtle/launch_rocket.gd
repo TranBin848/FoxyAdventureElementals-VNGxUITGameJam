@@ -27,7 +27,7 @@ func _update(delta: float) -> void:
 			_phase_launch(delta)
 		2:
 			_phase_rotate2front(delta)
-	print(phase)
+	#print(phase)
 
 func _phase_rotate2back(delta: float) -> void:
 	if update_timer(delta):

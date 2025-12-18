@@ -4,7 +4,7 @@ extends TextureProgressBar
 
 func _ready() -> void:
 	if (enemy != null):
-		print("enemy is not null")
+		#print("enemy is not null")
 		enemy.health_changed.connect(progress_changed)
 	
 func progress_changed() -> void:
