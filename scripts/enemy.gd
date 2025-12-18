@@ -241,48 +241,54 @@ func _on_screen_exited() -> void:
 	is_on_screen = false
 	
 	if was_ever_on_screen:
-		set_physics_process(false)
-		set_process(false)
+		# Disable all processing
+		process_mode = Node.PROCESS_MODE_DISABLED
 		
-		# Disable raycasts
-		if front_ray_cast:
-			front_ray_cast.enabled = false
-		if down_ray_cast:
-			down_ray_cast.enabled = false
-		if left_detect_ray:
-			left_detect_ray.enabled = false
-		if right_detect_ray:
-			right_detect_ray.enabled = false
+		# Disable raycasts (they don't process when node is disabled anyway, but explicit is better)
+		_set_raycasts_enabled(false)
 		
+		# Pause visual effects
 		if animated_sprite:
 			animated_sprite.pause()
 		
 		if current_particle:
 			current_particle.emitting = false
+			# Stop particle audio if exists
+			if current_particle.has_node("AudioStreamPlayer2D"):
+				current_particle.get_node("AudioStreamPlayer2D").stop()
 		
 		found_player = null
 
 func _on_screen_entered() -> void:
 	is_on_screen = true
 	was_ever_on_screen = true
-	set_physics_process(true)
-	set_process(true)
+	
+	# Re-enable processing
+	process_mode = Node.PROCESS_MODE_INHERIT
 	
 	# Re-enable raycasts
-	if front_ray_cast:
-		front_ray_cast.enabled = true
-	if down_ray_cast:
-		down_ray_cast.enabled = true
-	if left_detect_ray:
-		left_detect_ray.enabled = true
-	if right_detect_ray:
-		right_detect_ray.enabled = true
+	_set_raycasts_enabled(true)
 	
+	# Resume visual effects
 	if animated_sprite:
 		animated_sprite.play()
 	
 	if current_particle:
 		current_particle.emitting = true
+		# Resume particle audio if exists
+		if current_particle.has_node("AudioStreamPlayer2D"):
+			current_particle.get_node("AudioStreamPlayer2D").play()
+
+# Helper function to reduce code duplication
+func _set_raycasts_enabled(enabled: bool) -> void:
+	if front_ray_cast:
+		front_ray_cast.enabled = enabled
+	if down_ray_cast:
+		down_ray_cast.enabled = enabled
+	if left_detect_ray:
+		left_detect_ray.enabled = enabled
+	if right_detect_ray:
+		right_detect_ray.enabled = enabled
 
 # --- Check if touching wall
 func is_touch_wall() -> bool:

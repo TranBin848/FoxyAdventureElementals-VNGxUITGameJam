@@ -7,7 +7,7 @@
 script = ExtResource("1_vxh7i")
 clip_id = "music_background"
 stream = ExtResource("2_fjy33")
-volume_db = 0.0
+volume_db = -10.0
 randomize_pitch = false
 pitch_min = 0.9
 pitch_max = 1.1
