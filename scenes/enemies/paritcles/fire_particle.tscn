@@ -34,6 +34,6 @@ anim_speed_max = 1.0
 [node name="Fire" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_1k26f")
 emitting = false
-amount = 1
+amount = 4
 texture = ExtResource("1_1k26f")
 process_material = SubResource("ParticleProcessMaterial_gpqr6")

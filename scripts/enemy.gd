@@ -80,6 +80,9 @@ func _ready() -> void:
 	_init_material()
 	_init_start_position()
 	_init_particle()
+	
+	# Connect to global particle quality signal
+	SettingsManager.particle_quality_changed.connect(_on_particle_quality_changed)
 
 # -- Initialize start position
 func _init_start_position():
@@ -145,9 +148,9 @@ func _init_hit_area():
 func _init_particle():
 	if has_node("Particles"):
 		var particle_holder = $Particles
-
 		if particle_holder.get_child_count() == 0:
 			return
+			
 		var particles: Array = particle_holder.get_children()
 		for particle in particles:
 			if particle is GPUParticles2D:
@@ -157,11 +160,26 @@ func _init_particle():
 						current_particle.emitting = false
 					current_particle = particle
 					if current_particle != null:
+						# Apply initial quality setting
+						_apply_particle_quality()
 						current_particle.emitting = true
-						# Set up particle audio
 						_setup_particle_audio()
 
-	pass
+func _apply_particle_quality() -> void:
+	if current_particle == null:
+		return
+	
+	var ratio = SettingsManager.get_particle_ratio()
+	current_particle.amount_ratio = ratio
+	
+	# Optionally disable emitting entirely for OFF quality
+	if SettingsManager.particle_quality == SettingsManager.ParticleQuality.OFF:
+		current_particle.emitting = false
+	elif not current_particle.emitting:
+		current_particle.emitting = true
+
+func _on_particle_quality_changed(_quality: int) -> void:
+	_apply_particle_quality()
 
 func _setup_particle_audio():
 	if not AudioManager or not AudioManager.audio_database:
