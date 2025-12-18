@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://bhb73wsv0b8qg"]
 
-[ext_resource type="Script" uid="uid://ckgt8njm4ymtt" path="res://scenes/skills/projectiles/earth/earthquake_projectile.gd" id="1_h1gyn"]
+[ext_resource type="Script" uid="uid://ckgt8njm4ymtt" path="res://Scenes/skills/projectiles/earth/earthquake_projectile.gd" id="1_h1gyn"]
 [ext_resource type="Texture2D" uid="uid://c1fthml3sdr33" path="res://assets/skills/earth/Earth Bump.png" id="2_5nw6t"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="19_x20ww"]
 
@@ -118,6 +118,8 @@ position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_tbddh")
 animation = &"Earthquake"
 autoplay = "Earthquake"
+frame = 5
+frame_progress = 0.416545
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -126,12 +128,11 @@ position = Vector2(3.75, -0.5)
 shape = SubResource("RectangleShape2D_uhoxj")
 
 [node name="HitArea2d" parent="." instance=ExtResource("19_x20ww")]
-position = Vector2(0, -7)
+position = Vector2(1, 2)
 collision_layer = 32
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
-position = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_tnvla")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
