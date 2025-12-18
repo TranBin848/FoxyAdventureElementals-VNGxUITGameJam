@@ -2,7 +2,7 @@ extends HBoxContainer
 class_name SkillBarSkillTree
 
 var slots: Array
-var skills: Array = []
+var skills: Array = [Thunderbolt, WaterSpike]
 #var available_skills: Array = []
 
 func _ready() -> void:

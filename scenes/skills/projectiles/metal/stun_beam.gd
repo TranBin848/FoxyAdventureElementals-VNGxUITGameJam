@@ -11,9 +11,12 @@ class_name StunBeamProjectile
 @onready var stun_area: Area2D = $StunArea	
 @export var knockback_force: float = 300.0
 @export var vertical_offset: float = -20.0
+@export var knockback_upward_bias: float = 0.3  # Add upward lift
 @export var stun_duration_sec: float = 1.5
+
 # --- State ---
 var exploding: bool = false
+var stun_center: Vector2  # Store stun center position
 
 
 func _ready() -> void:
@@ -35,20 +38,21 @@ func _trigger_stun() -> void:
 		return
 	
 	exploding = true
+	stun_center = global_position  # Store center position
 	set_physics_process(false)  # Stop movement when triggered
 	
-	# Tìm tất cả Enemy trong bán kính vụ nổ
+	# Find all enemies in stun radius
 	if stun_area:
 		var overlaps = stun_area.get_overlapping_bodies()
 		for b in overlaps:
 			if b is EnemyCharacter:
 				affected_enemies.append(b)
-				# Áp dụng trạng thái stun: khóa di chuyển và đổi animation nếu có
+				# Apply stun state: lock movement and change animation
 				b.is_movable = false
 				if b.animated_sprite and b.animated_sprite.animation.contains("stun"):
 					b.animated_sprite.play("stun")
-				# Hút vào tâm
-				b.enter_skill(global_position)
+				# Pull to center
+				b.enter_skill(stun_center)
 	
 	# Reset scale + play animation
 	if has_node("AnimatedSprite2D"):
@@ -56,7 +60,6 @@ func _trigger_stun() -> void:
 		sprite.scale = start_scale
 		sprite.play(stun_anim)
 		
-		# LƯU VỊ TRÍ GỐC của Sprite
 		var initial_sprite_pos_y = sprite.position.y 
 		
 		# Stun scale tween
@@ -68,7 +71,7 @@ func _trigger_stun() -> void:
 			scale_duration
 		).set_trans(scale_trans).set_ease(scale_ease)
 
-		# TWEEN DỊCH CHUYỂN VỊ TRÍ Y
+		# Position Y tween
 		tween.tween_property(
 			sprite,
 			"position:y",
@@ -87,20 +90,30 @@ func _physics_process(delta: float) -> void:
 
 func _on_animation_finished() -> void:
 	for e in affected_enemies:
-		if e and e.is_inside_tree():
+		if e and is_instance_valid(e) and e.is_inside_tree():
 			e.exit_skill()
-			# Đẩy enemy văng ra
-			e.apply_knockback(global_position, knockback_force)
-			# Kết thúc stun sau thời gian định sẵn
+			
+			# Calculate radial knockback direction
+			var direction = (e.global_position - stun_center).normalized()
+			
+			# Create knockback vector with upward component
+			var knockback_vector = Vector2(
+				direction.x * knockback_force,
+				(direction.y * knockback_force) - (knockback_force * knockback_upward_bias)
+			)
+			
+			e.apply_knockback_vector(knockback_vector)
+			
+			# End stun after duration
 			_call_deferred_end_stun(e)
+	
 	queue_free()
 
-
 func _call_deferred_end_stun(enemy: EnemyCharacter) -> void:
-	# Tạo timer kết thúc stun độc lập cho từng enemy
+	# Create independent timer for each enemy's stun end
 	await get_tree().create_timer(stun_duration_sec).timeout
-	if enemy and enemy.is_inside_tree():
+	if enemy and is_instance_valid(enemy) and enemy.is_inside_tree():
 		enemy.is_movable = true
-		# Trả animation về bình thường nếu đang ở "stun"
+		# Return to normal animation if currently stunned
 		if enemy.animated_sprite and enemy.animated_sprite.animation == "stun":
 			enemy.change_animation("idle")

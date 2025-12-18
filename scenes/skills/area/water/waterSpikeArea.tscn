@@ -1,284 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://cngeatewj4pjb"]
+[gd_scene load_steps=11 format=3 uid="uid://cngeatewj4pjb"]
 
 [ext_resource type="Script" uid="uid://clb6s57bfued6" path="res://scenes/skills/area/water/water_spike.gd" id="1_2y23c"]
 [ext_resource type="Texture2D" uid="uid://cucp2lw6434d4" path="res://assets/skills/water/Water Spike/Water Spike 01 - SpriteSheet.png" id="2_3m6ur"]
 [ext_resource type="Texture2D" uid="uid://df7r3xcswk3di" path="res://assets/skills/water/Water Spike/Water StartUp 1 SpriteSheet(30fps).png" id="3_3m6ur"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_686kg"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v015f"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(0, 0, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dc6vs"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(64, 0, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oakpy"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(128, 0, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s871t"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(192, 0, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u57u6"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(256, 0, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5f4nv"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(0, 80, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hss2f"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(64, 80, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6c8sv"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(128, 80, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4sgyi"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(192, 80, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_txjs8"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(256, 80, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xsxr3"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(0, 160, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_owb6b"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(64, 160, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l7nf5"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(128, 160, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wtdhq"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(192, 160, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ymkbf"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(256, 160, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qflou"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(0, 240, 64, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qmyky"]
-atlas = ExtResource("2_3m6ur")
-region = Rect2(64, 240, 64, 80)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v015f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dc6vs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oakpy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s871t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u57u6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5f4nv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hss2f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6c8sv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4sgyi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_txjs8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xsxr3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_owb6b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l7nf5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wtdhq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ymkbf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qflou")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qmyky")
-}],
-"loop": false,
-"name": &"WaterSpike",
-"speed": 10.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_686kg"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 0, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ivafh"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 16, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u4qsw"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 32, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_itk6q"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 48, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u2lmf"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 64, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x8k1d"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 80, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d3d3c"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 96, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s6l48"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 112, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_37ddc"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 128, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_67qi6"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 144, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_45j04"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 160, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sa6th"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 176, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e7pul"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 192, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c5ubg"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 208, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1yrvr"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 224, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m4n78"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 240, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2afi8"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 256, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mqo45"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 272, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_14v0v"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 288, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pmody"]
-atlas = ExtResource("3_3m6ur")
-region = Rect2(0, 304, 64, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2y23c"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_686kg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ivafh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u4qsw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_itk6q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u2lmf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x8k1d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d3d3c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s6l48")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_37ddc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_67qi6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_45j04")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sa6th")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e7pul")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c5ubg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1yrvr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m4n78")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2afi8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mqo45")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_14v0v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pmody")
-}],
-"loop": false,
-"name": &"startup",
-"speed": 30.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gp0ck"]
 radius = 19.0263
@@ -286,24 +11,158 @@ radius = 19.0263
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnhec"]
 size = Vector2(36, 77)
 
+[sub_resource type="Animation" id="Animation_686kg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skill:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FX:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+
+[sub_resource type="Animation" id="Animation_3m6ur"]
+resource_name = "WaterSpike"
+length = 2.6667
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FX:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skill:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [17, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6666, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_startup_complete"
+}, {
+"args": [],
+"method": &"_apply_knockback_effect"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_686kg"]
+_data = {
+&"RESET": SubResource("Animation_686kg"),
+&"WaterSpike": SubResource("Animation_3m6ur")
+}
+
+[sub_resource type="GDScript" id="GDScript_ivafh"]
+script/source = "@tool
+extends AnimationPlayer
+
+# --- CONFIGURATION ---
+@export var sprite_node: Sprite2D
+@export var anim_name: String = \"Skill_A\"
+@export var start_frame: int = 0
+@export var frame_count: int = 10 # How many frames to add
+@export var fps: float = 15.0     # Speed of animation
+
+# Click this checkbox in Inspector to run the script
+@export var generate_keys: bool = false : set = _on_generate
+
+func _on_generate(value):
+	if value == false: return # Prevents running when unchecking
+	
+	if not sprite_node:
+		printerr(\"❌ Please assign a Sprite2D node first!\")
+		generate_keys = false # Reset checkbox
+		return
+
+	# 1. Get or Create Animation
+	var library: AnimationLibrary
+	if has_animation_library(\"\"):
+		library = get_animation_library(\"\")
+	else:
+		library = AnimationLibrary.new()
+		add_animation_library(\"\", library)
+	
+	var anim: Animation
+	if library.has_animation(anim_name):
+		anim = library.get_animation(anim_name)
+		print(\"⚠️ Updating existing animation: \" + anim_name)
+	else:
+		anim = Animation.new()
+		library.add_animation(anim_name, anim)
+		print(\"✅ Created new animation: \" + anim_name)
+
+	# 2. Setup Animation Settings
+	var step = 1.0 / fps
+	anim.loop_mode = Animation.LOOP_NONE
+	anim.length = step * frame_count
+	anim.step = step
+
+	# 3. Find or Create the Track for \"frame\"
+	# The path to the property is \"NodeName:frame\"
+	var track_path = str(sprite_node.name) + \":frame\"
+	var track_idx = anim.find_track(track_path, Animation.TYPE_VALUE)
+
+	if track_idx == -1:
+		track_idx = anim.add_track(Animation.TYPE_VALUE)
+		anim.track_set_path(track_idx, track_path)
+	
+	# 4. Insert Keys Loop
+	for i in range(frame_count):
+		var time = i * step
+		var frame_value = start_frame + i
+		anim.track_insert_key(track_idx, time, frame_value)
+
+	print(\"🎉 Generated %d keys for '%s'!\" % [frame_count, anim_name])
+	generate_keys = false # Reset checkbox
+"
+
 [node name="WaterSpikeArea" type="Area2D"]
 collision_layer = 32
 collision_mask = 8
 script = ExtResource("1_2y23c")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -24)
-sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"WaterSpike"
-autoplay = "WaterSpike"
-frame = 8
-frame_progress = 0.585
-
-[node name="StartupAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 15)
-sprite_frames = SubResource("SpriteFrames_2y23c")
-animation = &"startup"
-autoplay = "startup"
+[node name="FX" type="Sprite2D" parent="."]
+position = Vector2(-2, 15)
+texture = ExtResource("3_3m6ur")
+vframes = 21
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -313,10 +172,28 @@ shape = SubResource("CircleShape2D_gp0ck")
 [node name="HitArea2D" type="Area2D" parent="."]
 position = Vector2(0, -23)
 collision_mask = 16
+monitoring = false
 script = ExtResource("3_686kg")
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 shape = SubResource("RectangleShape2D_wnhec")
+
+[node name="Skill" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("2_3m6ur")
+hframes = 5
+vframes = 4
+frame = 17
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite_node")]
+libraries = {
+&"": SubResource("AnimationLibrary_686kg")
+}
+script = SubResource("GDScript_ivafh")
+sprite_node = NodePath("../Skill")
+anim_name = "WaterSpike"
+frame_count = 18
+fps = 10.0
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

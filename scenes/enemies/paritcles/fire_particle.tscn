@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://sa7niutr8ffa"]
+[gd_scene load_steps=8 format=3 uid="uid://sa7niutr8ffa"]
 
 [ext_resource type="Texture2D" uid="uid://d1kjnpeurwl3m" path="res://assets/particles/fire.png" id="1_1k26f"]
-[ext_resource type="AudioStream" uid="uid://dfv8niucs75pj" path="res://assets/sounds/65795__juskiddink__bonfire.wav" id="2_k2wx1"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1k26f"]
 particles_animation = true
@@ -34,13 +33,7 @@ anim_speed_max = 1.0
 
 [node name="Fire" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_1k26f")
-position = Vector2(1, 0)
 emitting = false
 amount = 1
 texture = ExtResource("1_1k26f")
 process_material = SubResource("ParticleProcessMaterial_gpqr6")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_k2wx1")
-autoplay = true
-max_distance = 200.0

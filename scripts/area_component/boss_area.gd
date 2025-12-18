@@ -1,7 +1,9 @@
-extends AmbienceArea2D
+extends Area2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @export var boss: EnemyCharacter = null #make sure boss zone alway have a boss
+@export var boss_music_id: String = ""
+var previous_music_id
 var player: Player = null
 
 func _ready() -> void:
@@ -12,8 +14,8 @@ func _on_boss_dead() -> void:
 		CameraTransition.transition_camera2D(player.camera_2d, 2)
 		player.camera_2d
 	collision.disabled = true
-	AudioManager.play_music("music_victory")
-	AudioManager.play_next_music(previous_music_id)
+	AudioManager.play_music("music_victory", 0, 2)
+	AudioManager.play_next_music(previous_music_id, 0, 2)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -24,5 +26,5 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		boss.start_fight()
 		previous_music_id = AudioManager.get_current_music_id()
-		AudioManager.play_music(ambience_music_id)
+		AudioManager.play_music(boss_music_id, 0, 2)
 	#boss.fsm.chan
