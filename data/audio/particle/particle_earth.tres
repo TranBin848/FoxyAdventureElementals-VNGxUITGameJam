@@ -7,7 +7,7 @@
 script = ExtResource("1_1f7mo")
 clip_id = "particle_earth"
 stream = ExtResource("2_jmq54")
-volume_db = 0.0
+volume_db = -10.0
 randomize_pitch = true
 pitch_min = 0.9
 pitch_max = 1.1

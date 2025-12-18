@@ -3,6 +3,11 @@ extends BaseCharacter
 
 @onready var damage_number_origin = $DamageNumbersOrigin
 @onready var visibility_notifier: VisibleOnScreenNotifier2D = null
+
+@export var particle_audio_interval: float = 1.0  # Seconds between audio plays
+
+var particle_audio_timer: Timer = null
+
 # 0: None, 1: Fire, 2: Water, 3: Earth, 4: Metal, 5: Wood
 @export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
 	ElementsEnum.Elements.METAL: Color("f0f0f0"),
@@ -192,10 +197,33 @@ func _setup_particle_audio():
 	if audio_clip and audio_clip.stream:
 		particle_sfx.stream = audio_clip.stream
 		particle_sfx.volume_db = audio_clip.volume_db
-		particle_sfx.autoplay = true
 		particle_sfx.max_distance = 300
-		particle_sfx.play()
+		particle_sfx.autoplay = false
+		
+		# Setup timer
+		_start_particle_audio_timer(particle_sfx)
 
+func _start_particle_audio_timer(audio_player: AudioStreamPlayer2D) -> void:
+	# Clean up existing timer if any
+	if particle_audio_timer:
+		particle_audio_timer.stop()
+		particle_audio_timer.queue_free()
+	
+	# Create new timer
+	particle_audio_timer = Timer.new()
+	particle_audio_timer.name = "ParticleAudioTimer"
+	add_child(particle_audio_timer)
+	particle_audio_timer.wait_time = particle_audio_interval
+	particle_audio_timer.one_shot = false
+	particle_audio_timer.timeout.connect(_on_particle_audio_timer_timeout.bind(audio_player))
+	particle_audio_timer.start()
+	
+	# Play immediately
+	audio_player.play()
+
+func _on_particle_audio_timer_timeout(audio_player: AudioStreamPlayer2D) -> void:
+	if audio_player and is_instance_valid(audio_player) and is_on_screen:
+		audio_player.play()
 
 func _init_culling() -> void:
 	# Try to find existing notifier
@@ -479,7 +507,7 @@ func enter_tornado(tornado_pos: Vector2) -> void:
 	).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
 	
 # Enemy bị hút vào vùng nổ
-func enter_stun(tornado_pos: Vector2) -> void:
+func enter_stun(stun_pos: Vector2) -> void:
 	# 1. Thiết lập trạng thái
 	is_movable = false
 	velocity = Vector2.ZERO
