@@ -35,6 +35,6 @@ anim_offset_max = 1.0
 [node name="Metal" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_uyg18")
 emitting = false
-amount = 1
+amount = 4
 texture = ExtResource("1_yydmv")
 process_material = SubResource("ParticleProcessMaterial_t36ow")

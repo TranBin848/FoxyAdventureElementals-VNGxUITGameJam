@@ -2,7 +2,6 @@ class_name EnemyCharacter
 extends BaseCharacter
 
 @onready var damage_number_origin = $DamageNumbersOrigin
-@onready var visibility_notifier: VisibleOnScreenNotifier2D = null
 
 @export var particle_audio_interval: float = 1.0  # Seconds between audio plays
 
@@ -43,10 +42,6 @@ var particle_audio_timer: Timer = null
 # Enemy's attack speed (pixel/second)
 @export var attack_speed: float
 
-# Culling state
-var is_on_screen: bool = true
-var was_ever_on_screen: bool = false
-
 # Raycast check wall and fall
 var front_ray_cast: RayCast2D
 var down_ray_cast: RayCast2D
@@ -80,6 +75,13 @@ func _ready() -> void:
 	_init_material()
 	_init_start_position()
 	_init_particle()
+	
+	# Connect to global particle quality signal (check if not already connected)
+	if not SettingsManager.particle_quality_changed.is_connected(_on_particle_quality_changed):
+		SettingsManager.particle_quality_changed.connect(_on_particle_quality_changed)
+	
+	# Use global interval value
+	particle_audio_interval = SettingsManager.particle_audio_interval
 
 # -- Initialize start position
 func _init_start_position():
@@ -145,9 +147,9 @@ func _init_hit_area():
 func _init_particle():
 	if has_node("Particles"):
 		var particle_holder = $Particles
-
 		if particle_holder.get_child_count() == 0:
 			return
+			
 		var particles: Array = particle_holder.get_children()
 		for particle in particles:
 			if particle is GPUParticles2D:
@@ -157,11 +159,26 @@ func _init_particle():
 						current_particle.emitting = false
 					current_particle = particle
 					if current_particle != null:
+						# Apply initial quality setting
+						_apply_particle_quality()
 						current_particle.emitting = true
-						# Set up particle audio
 						_setup_particle_audio()
 
-	pass
+func _apply_particle_quality() -> void:
+	if current_particle == null:
+		return
+	
+	var ratio = SettingsManager.get_particle_ratio()
+	current_particle.amount_ratio = ratio
+	
+	# Optionally disable emitting entirely for OFF quality
+	if SettingsManager.particle_quality == SettingsManager.ParticleQuality.OFF:
+		current_particle.emitting = false
+	elif not current_particle.emitting:
+		current_particle.emitting = true
+
+func _on_particle_quality_changed(_quality: int) -> void:
+	_apply_particle_quality()
 
 func _setup_particle_audio():
 	if not AudioManager or not AudioManager.audio_database:
@@ -222,101 +239,31 @@ func _start_particle_audio_timer(audio_player: AudioStreamPlayer2D) -> void:
 	audio_player.play()
 
 func _on_particle_audio_timer_timeout(audio_player: AudioStreamPlayer2D) -> void:
-	if audio_player and is_instance_valid(audio_player) and is_on_screen:
+	if audio_player and is_instance_valid(audio_player):
 		audio_player.play()
 
 func _init_culling() -> void:
-	# Try to find existing notifier
-	if has_node("VisibleOnScreenNotifier2D"):
-		visibility_notifier = $VisibleOnScreenNotifier2D
-	else:
-		# Create notifier programmatically
-		visibility_notifier = VisibleOnScreenNotifier2D.new()
-		add_child(visibility_notifier)
-		
+	# Create enabler programmatically
+	var enabler = VisibleOnScreenEnabler2D.new()
+	add_child(enabler)
+	
 	# Get viewport size to extend culling area
-	var viewport_size = get_viewport_rect().size
-	
-	# Extend the rect to 2x viewport size (1 viewport in each direction)
-	var extended_rect = Rect2(
-		-viewport_size,  # Offset: 1 viewport left and up
-		viewport_size * 3  # Size: 3x viewport (1 left + 1 center + 1 right)
-	)
-	
-	# Defer viewport size calculation until in tree
 	if is_inside_tree():
-		_setup_culling_rect()
+		_setup_culling_rect(enabler)
 	else:
-		# Wait until ready to set up the rect
-		call_deferred("_setup_culling_rect")
+		call_deferred("_setup_culling_rect", enabler)
 
-func _setup_culling_rect() -> void:
-	if not visibility_notifier:
-		return
-	
-	# Now safe to get viewport size
+func _setup_culling_rect(enabler: VisibleOnScreenEnabler2D) -> void:
 	var viewport_size = get_viewport_rect().size
 	
-	# Extend the rect to 2x viewport size (1 viewport in each direction)
+	# Extend the rect to 2x viewport size
 	var extended_rect = Rect2(
-		-viewport_size,  # Offset: 1 viewport left and up
-		viewport_size * 3  # Size: 3x viewport (1 left + 1 center + 1 right)
+		-viewport_size,
+		viewport_size * 3
 	)
 	
-	visibility_notifier.rect = extended_rect
-	
-func _on_screen_exited() -> void:
-	is_on_screen = false
-	
-	if was_ever_on_screen:
-		# Disable all processing
-		process_mode = Node.PROCESS_MODE_DISABLED
-		
-		# Disable raycasts (they don't process when node is disabled anyway, but explicit is better)
-		_set_raycasts_enabled(false)
-		
-		# Pause visual effects
-		if animated_sprite:
-			animated_sprite.pause()
-		
-		if current_particle:
-			current_particle.emitting = false
-			# Stop particle audio if exists
-			if current_particle.has_node("AudioStreamPlayer2D"):
-				current_particle.get_node("AudioStreamPlayer2D").stop()
-		
-		found_player = null
-
-func _on_screen_entered() -> void:
-	is_on_screen = true
-	was_ever_on_screen = true
-	
-	# Re-enable processing
-	process_mode = Node.PROCESS_MODE_INHERIT
-	
-	# Re-enable raycasts
-	_set_raycasts_enabled(true)
-	
-	# Resume visual effects
-	if animated_sprite:
-		animated_sprite.play()
-	
-	if current_particle:
-		current_particle.emitting = true
-		# Resume particle audio if exists
-		if current_particle.has_node("AudioStreamPlayer2D"):
-			current_particle.get_node("AudioStreamPlayer2D").play()
-
-# Helper function to reduce code duplication
-func _set_raycasts_enabled(enabled: bool) -> void:
-	if front_ray_cast:
-		front_ray_cast.enabled = enabled
-	if down_ray_cast:
-		down_ray_cast.enabled = enabled
-	if left_detect_ray:
-		left_detect_ray.enabled = enabled
-	if right_detect_ray:
-		right_detect_ray.enabled = enabled
+	enabler.rect = extended_rect
+	enabler.enable_mode = VisibleOnScreenEnabler2D.ENABLE_MODE_INHERIT
 
 # --- Check if touching wall
 func is_touch_wall() -> bool:
@@ -329,10 +276,6 @@ func is_can_fall() -> bool:
 
 # --- Called every frame (or physics frame)
 func _physics_process(delta: float) -> void:
-	# Skip processing if off-screen (safety check)
-	if not is_on_screen and was_ever_on_screen:
-		return
-
 	super._physics_process(delta)
 	_check_player_in_sight()
 
