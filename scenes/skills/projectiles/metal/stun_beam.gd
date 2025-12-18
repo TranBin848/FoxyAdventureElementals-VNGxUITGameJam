@@ -11,48 +11,33 @@ class_name StunBeamProjectile
 @onready var stun_area: Area2D = $StunArea	
 @export var knockback_force: float = 300.0
 @export var vertical_offset: float = -20.0
-@export var knockback_upward_bias: float = 0.3  # Add upward lift
-@export var stun_duration_sec: float = 1.5
+@export var knockback_upward_bias: float = 0.3
 
 # --- State ---
 var exploding: bool = false
-var stun_center: Vector2  # Store stun center position
-
+var stun_center: Vector2
 
 func _ready() -> void:
-	# Connect animation finished for guaranteed despawn
+	_trigger_stun()
+	
 	if has_node("AnimatedSprite2D"):
 		get_node("AnimatedSprite2D").animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
-
-
-func _on_hit_area_2d_hitted(area: Variant) -> void:
-	_trigger_stun()
-
-
-func _on_body_entered(body: Node2D) -> void:
-	_trigger_stun()
-
 
 func _trigger_stun() -> void:
 	if exploding:
 		return
 	
 	exploding = true
-	stun_center = global_position  # Store center position
-	set_physics_process(false)  # Stop movement when triggered
+	stun_center = global_position
+	set_physics_process(false)
 	
-	# Find all enemies in stun radius
+	# Find any additional enemies in stun area (in case they walked into range)
 	if stun_area:
 		var overlaps = stun_area.get_overlapping_bodies()
 		for b in overlaps:
-			if b is EnemyCharacter:
+			if b is EnemyCharacter and not affected_enemies.has(b):
 				affected_enemies.append(b)
-				# Apply stun state: lock movement and change animation
-				b.is_movable = false
-				if b.animated_sprite and b.animated_sprite.animation.contains("stun"):
-					b.animated_sprite.play("stun")
-				# Pull to center
-				b.enter_skill(stun_center)
+				b.enter_stun(stun_center)
 	
 	# Reset scale + play animation
 	if has_node("AnimatedSprite2D"):
@@ -79,7 +64,6 @@ func _trigger_stun() -> void:
 			scale_duration
 		).set_trans(scale_trans).set_ease(scale_ease).set_delay(0.0)
 
-
 func _physics_process(delta: float) -> void:
 	if exploding:
 		return
@@ -87,33 +71,45 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	rotation = 0
 
-
 func _on_animation_finished() -> void:
-	for e in affected_enemies:
-		if e and is_instance_valid(e) and e.is_inside_tree():
-			e.exit_skill()
-			
-			# Calculate radial knockback direction
-			var direction = (e.global_position - stun_center).normalized()
-			
-			# Create knockback vector with upward component
-			var knockback_vector = Vector2(
-				direction.x * knockback_force,
-				(direction.y * knockback_force) - (knockback_force * knockback_upward_bias)
-			)
-			
-			e.apply_knockback_vector(knockback_vector)
-			
-			# End stun after duration
-			_call_deferred_end_stun(e)
+	print("=== Animation Finished ===")
+	print("Total affected enemies: ", affected_enemies.size())
+	print("Affected enemies: ", affected_enemies)
 	
+	var processed_count = 0
+	for e in affected_enemies:
+		print("Checking enemy ", processed_count, ": ", e)
+		
+		if not e:
+			print("  -> Enemy is null")
+			continue
+		
+		if not is_instance_valid(e):
+			print("  -> Enemy is not valid")
+			continue
+		
+		if not e.is_inside_tree():
+			print("  -> Enemy is not in tree")
+			continue
+		
+		print("  -> Processing enemy: ", e.name, " at ", e.global_position)
+		
+		# Exit skill to restore movement
+		e.exit_skill()
+		processed_count += 1
+		print("  -> Called exit_skill (", processed_count, " total)")
+		
+		# Calculate radial knockback direction
+		var direction = (e.global_position - stun_center).normalized()
+		
+		var knockback_vector = Vector2(
+			direction.x * knockback_force,
+			(direction.y * knockback_force) - (knockback_force * knockback_upward_bias)
+		)
+		
+		e.apply_knockback(knockback_vector)
+		
+		print("  -> Applied knockback")
+	
+	print("Total processed: ", processed_count, " / ", affected_enemies.size())
 	queue_free()
-
-func _call_deferred_end_stun(enemy: EnemyCharacter) -> void:
-	# Create independent timer for each enemy's stun end
-	await get_tree().create_timer(stun_duration_sec).timeout
-	if enemy and is_instance_valid(enemy) and enemy.is_inside_tree():
-		enemy.is_movable = true
-		# Return to normal animation if currently stunned
-		if enemy.animated_sprite and enemy.animated_sprite.animation == "stun":
-			enemy.change_animation("idle")
