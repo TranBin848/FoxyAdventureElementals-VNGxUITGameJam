@@ -1,11 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://r7tfrorsfck0"]
+[gd_scene load_steps=7 format=3 uid="uid://r7tfrorsfck0"]
 
-[ext_resource type="Script" uid="uid://eop3ure2ua2c" path="res://scenes/enemies/minions/coconut_warrior/coconut.gd" id="1_g5g73"]
-[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_xgu7y"]
-[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_khxos"]
-[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_m2me4"]
-[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_dotvn"]
-[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_yu3m2"]
+[ext_resource type="Script" uid="uid://eop3ure2ua2c" path="res://Scenes/enemies/minions/coconut_warrior/coconut.gd" id="1_g5g73"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="7_6rao5"]
 [ext_resource type="Texture2D" uid="uid://ljup3gpysk1e" path="res://assets/enemy/coconut_warrior/coconut.png" id="8_g5g73"]
 
@@ -29,22 +24,6 @@ radius = 9.0
 collision_layer = 0
 script = ExtResource("1_g5g73")
 metadata/_custom_type_script = "uid://s4xx82espxdt"
-
-[node name="Particles" type="Node2D" parent="."]
-
-[node name="Metal" parent="Particles" instance=ExtResource("2_xgu7y")]
-position = Vector2(0, -26)
-
-[node name="Wood" parent="Particles" instance=ExtResource("3_khxos")]
-position = Vector2(0, -15)
-
-[node name="Earth" parent="Particles" instance=ExtResource("4_m2me4")]
-position = Vector2(0, 10)
-
-[node name="Water" parent="Particles" instance=ExtResource("5_dotvn")]
-
-[node name="Fire" parent="Particles" instance=ExtResource("6_yu3m2")]
-position = Vector2(0, 5)
 
 [node name="Direction" type="Node2D" parent="."]
 

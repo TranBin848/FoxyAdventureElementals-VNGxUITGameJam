@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxu3dosyig3i8"]
+[gd_scene load_steps=10 format=3 uid="uid://dxu3dosyig3i8"]
 
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_1bpm1"]
 [ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="1_d402b"]
-[ext_resource type="Script" uid="uid://dmbpxi55j21as" path="res://scenes/ui/settings_popup.gd" id="1_yjfti"]
+[ext_resource type="Script" uid="uid://dmbpxi55j21as" path="res://Scenes/ui/settings_popup.gd" id="1_yjfti"]
 [ext_resource type="FontFile" uid="uid://bf742t4mxgd7l" path="res://assets/fonts/big_font.fnt" id="2_yjfti"]
 [ext_resource type="Texture2D" uid="uid://bvstiwpyblmnv" path="res://assets/ui/close_button.png" id="3_1bpm1"]
 [ext_resource type="Texture2D" uid="uid://bmcu8k7wl5pke" path="res://assets/ui/on_button.png" id="4_h7ats"]
@@ -10,7 +10,11 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_6rodm"]
 font = ExtResource("2_yjfti")
-font_size = 80
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_rrlud"]
+font = ExtResource("2_yjfti")
+font_size = 20
 
 [node name="SettingsPopup" type="MarginContainer"]
 process_mode = 3
@@ -46,10 +50,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -224.0
-offset_top = -104.0
-offset_right = 176.0
-offset_bottom = 139.0
+offset_left = -244.0
+offset_top = -145.0
+offset_right = 156.0
+offset_bottom = 98.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "MUSIC
@@ -63,14 +67,29 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -224.0
-offset_top = 24.0
-offset_right = 176.0
-offset_bottom = 267.0
+offset_left = -243.0
+offset_top = -47.0
+offset_right = 157.0
+offset_bottom = 196.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "SOUND
-"
+text = "SFX"
+label_settings = SubResource("LabelSettings_6rodm")
+
+[node name="Label3" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = 51.0
+offset_right = 210.0
+offset_bottom = 294.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PARTICLES"
 label_settings = SubResource("LabelSettings_6rodm")
 
 [node name="CloseTextureButton" type="TextureButton" parent="NinePatchRect"]
@@ -87,22 +106,81 @@ stretch_mode = 0
 
 [node name="MusicCheckButton" type="CheckButton" parent="NinePatchRect"]
 layout_mode = 0
-offset_left = 457.0
-offset_top = 98.0
-offset_right = 541.0
-offset_bottom = 184.0
+offset_left = 444.0
+offset_top = 52.0
+offset_right = 528.0
+offset_bottom = 138.0
 theme_override_icons/checked = ExtResource("4_h7ats")
 theme_override_icons/unchecked = ExtResource("5_kqam1")
 
-[node name="SoundCheckButton" type="CheckButton" parent="NinePatchRect"]
+[node name="SFXCheckButton" type="CheckButton" parent="NinePatchRect"]
 layout_mode = 0
-offset_left = 457.0
-offset_top = 226.0
-offset_right = 541.0
-offset_bottom = 312.0
+offset_left = 445.0
+offset_top = 146.0
+offset_right = 529.0
+offset_bottom = 232.0
 theme_override_icons/checked = ExtResource("4_h7ats")
 theme_override_icons/unchecked = ExtResource("5_kqam1")
+
+[node name="ParticleSlider" type="HSlider" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 350.0
+offset_right = 508.0
+offset_bottom = 366.0
+max_value = 2.0
+rounded = true
+scrollable = false
+
+[node name="Off" type="Label" parent="NinePatchRect/ParticleSlider"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.5
+offset_top = 12.0
+offset_right = 215.5
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OFF"
+label_settings = SubResource("LabelSettings_rrlud")
+
+[node name="Low" type="Label" parent="NinePatchRect/ParticleSlider"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = 12.0
+offset_right = 425.5
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LOW"
+label_settings = SubResource("LabelSettings_rrlud")
+
+[node name="High" type="Label" parent="NinePatchRect/ParticleSlider"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 182.5
+offset_top = 12.0
+offset_right = 632.5
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "HIGH"
+label_settings = SubResource("LabelSettings_rrlud")
 
 [connection signal="gui_input" from="OverlayColorRect" to="." method="_on_overlay_color_rect_gui_input"]
 [connection signal="toggled" from="NinePatchRect/MusicCheckButton" to="." method="_on_music_check_button_toggled"]
-[connection signal="toggled" from="NinePatchRect/SoundCheckButton" to="." method="_on_sound_check_button_toggled"]
+[connection signal="toggled" from="NinePatchRect/SFXCheckButton" to="." method="_on_sound_check_button_toggled"]
+[connection signal="value_changed" from="NinePatchRect/ParticleSlider" to="." method="_on_particle_slider_value_changed"]

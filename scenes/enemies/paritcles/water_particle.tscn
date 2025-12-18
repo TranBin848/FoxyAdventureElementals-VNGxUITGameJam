@@ -36,7 +36,7 @@ anim_speed_max = 1.0
 [node name="Water" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_50u0f")
 emitting = false
-amount = 3
+amount = 4
 texture = ExtResource("1_ojf5w")
 process_material = SubResource("ParticleProcessMaterial_kvfmh")
 script = SubResource("GDScript_6p0im")

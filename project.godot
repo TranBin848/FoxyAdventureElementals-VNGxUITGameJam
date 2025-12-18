@@ -30,6 +30,7 @@ DamageNumbers="*res://scripts/autoload/damage_numbers.gd"
 SkillStackManager="*res://scripts/autoload/skill_stack_manager.gd"
 CameraTransition="*res://autoloads/camera_transition.tscn"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
+SettingsManager="*res://scripts/autoload/settings_manager.gd"
 
 [dialogic]
 

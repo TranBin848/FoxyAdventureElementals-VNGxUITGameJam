@@ -310,6 +310,7 @@ frame_progress = 0.621785
 stream = ExtResource("2_ndnc0")
 autoplay = true
 max_distance = 300.0
+bus = &"Ambience SFX"
 
 [node name="LightSource" type="Node2D" parent="."]
 
