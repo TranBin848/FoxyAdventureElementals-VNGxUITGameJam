@@ -7,6 +7,9 @@ signal audio_settings_changed()
 # Enums
 enum ParticleQuality { OFF = 0, LOW = 1, HIGH = 2 }
 
+#Variables
+@export var particle_audio_interval: float = 1.0  # Seconds between audio plays
+
 # Settings
 var particle_quality: int = ParticleQuality.HIGH:
 	set(value):
