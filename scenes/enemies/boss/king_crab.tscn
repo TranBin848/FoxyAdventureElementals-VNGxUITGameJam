@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bulkbnhholp3f"]
+[gd_scene load_steps=51 format=3 uid="uid://bulkbnhholp3f"]
 
 [ext_resource type="Script" uid="uid://7jstni61ay8x" path="res://scenes/enemies/boss/boss.gd" id="1_3jl1k"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/King_Crab/King_Crab_9.png" id="2_fh3hm"]
@@ -44,6 +44,7 @@
 [ext_resource type="Script" uid="uid://ch0s3e74g070t" path="res://scenes/enemies/boss/brake.gd" id="38_p2itk"]
 [ext_resource type="Script" uid="uid://op6pss6c2qh4" path="res://scenes/enemies/boss/retrieve_claw.gd" id="41_200mk"]
 [ext_resource type="Script" uid="uid://bmnx2xxwrq08j" path="res://scenes/enemies/boss/hurt.gd" id="44_5alav"]
+[ext_resource type="Script" uid="uid://df18ficl3bsol" path="res://scenes/enemies/boss/stand_up.gd" id="45_rxstk"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="45_vjhg0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
@@ -242,7 +243,6 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_4c0df")
 animation = &"stun"
-frame_progress = 0.868214
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)
@@ -323,8 +323,10 @@ script = ExtResource("41_200mk")
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("44_5alav")
 
+[node name="StandUp" type="Node" parent="States"]
+script = ExtResource("45_rxstk")
+
 [node name="Label" type="Label" parent="."]
-visible = false
 offset_left = -25.0
 offset_top = -48.0
 offset_right = 24.0

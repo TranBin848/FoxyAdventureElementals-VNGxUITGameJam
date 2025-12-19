@@ -138,6 +138,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("21_hir57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_vkc6f")
 }],
 "loop": true,
 "name": &"cling",
@@ -357,6 +360,17 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_hir57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_vkc6f")
+}],
+"loop": true,
+"name": &"cling",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -591,14 +605,14 @@ visible = false
 z_index = 199
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
-animation = &"attack"
+animation = &"cling"
 
 [node name="SilhouetteBladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
 z_index = 199
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"cling"
+animation = &"dead"
 autoplay = "idle"
 
 [node name="SilhouetteWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
@@ -612,20 +626,20 @@ autoplay = "idle"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
-animation = &"attack"
+animation = &"cling"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"jump attack"
+animation = &"cling"
 autoplay = "idle"
 
 [node name="WandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_0y4ya")
-animation = &"hurt"
+animation = &"cling"
 autoplay = "idle"
 
 [node name="FireballSprite2D" type="AnimatedSprite2D" parent="Direction"]
