@@ -18,7 +18,7 @@ func _init_coconut_factory() -> void:
 func throw() -> void:
 	if coconut_factory != null:
 		var angle = calculate_angle(position, position + Vector2(movement_range, 0), attack_speed, 980)
-		print((angle))
+		#print((angle))
 		for i in 2:
 			var coconut = coconut_factory.create()
 			if coconut != null:

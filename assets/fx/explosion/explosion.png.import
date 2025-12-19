@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gt1xm70ewpul"
-path="res://.godot/imported/MyFloorTile1.png-dd496d984c14ba06faba17c00ffc39d1.ctex"
+uid="uid://bplw6ih3je446"
+path="res://.godot/imported/explosion.png-c423a9d06b5df73fe8c413c48fc01327.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/level_2/MyFloorTile1.png"
-dest_files=["res://.godot/imported/MyFloorTile1.png-dd496d984c14ba06faba17c00ffc39d1.ctex"]
+source_file="res://assets/fx/explosion/explosion.png"
+dest_files=["res://.godot/imported/explosion.png-c423a9d06b5df73fe8c413c48fc01327.ctex"]
 
 [params]
 

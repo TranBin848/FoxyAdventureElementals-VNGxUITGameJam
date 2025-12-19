@@ -3,10 +3,11 @@ class_name Skill
 
 ## 🧙 Cấu trúc cơ bản cho mọi loại skill
 @export var name: String
-@export var element: String = "Fire" # Fire, Water, Earth, Metal, Wood
+@export var element: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 @export var cooldown: float = 1.0
 @export var duration: float = 1.0
-@export var texture: Texture2D
+@export var hit_delay: float = 0.0
+@export var texture_path: String
 @export var animation_name: String
 @export var projectile_scene: PackedScene = null
 @export var area_scene: PackedScene = null
@@ -16,6 +17,8 @@ class_name Skill
 @export var mana: int = 1.0
 
 @export var type: String = "single_shot" 
+
+var texture = load(texture_path)
 # có thể là: "single_shot", "multi_shot", "radial", "area", "buff"
 
 #Thêm trường mã hóa element để tiện xử lý logic
@@ -32,7 +35,7 @@ var elemental_type: int:
 
 func apply_to_button(button: TextureButton):
 	button.cooldown.max_value = cooldown
-	button.texture_normal = texture
+	button.texture_normal = load(texture_path)
 	button.timer.wait_time = cooldown
 	if button.has_method("update_stack_ui"):
 		#Hàm này chỉ tồn tại trong lớp SpellButton mở rộng

@@ -1,13 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://vx762t1kdt2"]
+[gd_scene load_steps=7 format=3 uid="uid://vx762t1kdt2"]
 
 [ext_resource type="Script" uid="uid://xnl4q457wubk" path="res://Scenes/enemies/minions/seahorse/seahorse_ball.gd" id="1_8v234"]
 [ext_resource type="Texture2D" uid="uid://cx6hnj7sdhslo" path="res://assets/enemy/seahorse/seahorse_ball.png" id="2_3u6l5"]
-[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://Scenes/enemies/paritcles/metal_particle.tscn" id="2_caqfb"]
-[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="3_6eoyw"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_p3lxm"]
-[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="4_xqeoy"]
-[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="5_aohft"]
-[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="6_b6e11"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uf2w5"]
 radius = 9.0
@@ -31,26 +26,6 @@ collision_layer = 0
 script = ExtResource("1_8v234")
 shader_path = "uid://doovon2v0i5dx"
 metadata/_custom_type_script = "uid://s4xx82espxdt"
-
-[node name="Particles" type="Node2D" parent="."]
-
-[node name="Metal" parent="Particles" instance=ExtResource("2_caqfb")]
-position = Vector2(0, -26)
-emitting = false
-
-[node name="Wood" parent="Particles" instance=ExtResource("3_6eoyw")]
-position = Vector2(0, -15)
-
-[node name="Earth" parent="Particles" instance=ExtResource("4_xqeoy")]
-position = Vector2(0, 10)
-emitting = false
-
-[node name="Water" parent="Particles" instance=ExtResource("5_aohft")]
-emitting = false
-
-[node name="Fire" parent="Particles" instance=ExtResource("6_b6e11")]
-position = Vector2(0, 5)
-emitting = false
 
 [node name="Direction" type="Node2D" parent="."]
 

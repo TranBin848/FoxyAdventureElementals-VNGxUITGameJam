@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drn1qchvakjs0"
-path="res://.godot/imported/MyFloorTile1.png-c59aaddd26c287381de7f6891815e4cb.ctex"
+uid="uid://2j5ksjww4suq"
+path="res://.godot/imported/fox_cling_2.png-b22f1be9168d168b42d5594680a72fc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/level_4/MyFloorTile1.png"
-dest_files=["res://.godot/imported/MyFloorTile1.png-c59aaddd26c287381de7f6891815e4cb.ctex"]
+source_file="res://assets/foxy/fox_hat_blade/fox_cling_2.png"
+dest_files=["res://.godot/imported/fox_cling_2.png-b22f1be9168d168b42d5594680a72fc0.ctex"]
 
 [params]
 

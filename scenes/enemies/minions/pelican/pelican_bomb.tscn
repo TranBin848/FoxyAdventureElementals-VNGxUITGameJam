@@ -1,13 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://ywndjg6kc5hy"]
+[gd_scene load_steps=7 format=3 uid="uid://ywndjg6kc5hy"]
 
 [ext_resource type="Texture2D" uid="uid://hxgavvljbom4" path="res://assets/enemy/pelican/pelican_bullet.png" id="1_lnl4l"]
-[ext_resource type="Script" uid="uid://cucrlcqyu4yhi" path="res://scenes/enemies/minions/pelican/pelican_bomb.gd" id="1_tent7"]
-[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_rbohg"]
+[ext_resource type="Script" uid="uid://cucrlcqyu4yhi" path="res://Scenes/enemies/minions/pelican/pelican_bomb.gd" id="1_tent7"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_tent7"]
-[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_dihkp"]
-[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_4mga2"]
-[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_ng6ua"]
-[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_foq0j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ud2m"]
 radius = 9.0
@@ -31,26 +26,6 @@ collision_layer = 0
 script = ExtResource("1_tent7")
 shader_path = "uid://doovon2v0i5dx"
 metadata/_custom_type_script = "uid://s4xx82espxdt"
-
-[node name="Particles" type="Node2D" parent="."]
-
-[node name="Metal" parent="Particles" instance=ExtResource("2_rbohg")]
-position = Vector2(0, -26)
-emitting = false
-
-[node name="Wood" parent="Particles" instance=ExtResource("3_dihkp")]
-position = Vector2(0, -15)
-
-[node name="Earth" parent="Particles" instance=ExtResource("4_4mga2")]
-position = Vector2(0, 10)
-emitting = false
-
-[node name="Water" parent="Particles" instance=ExtResource("5_ng6ua")]
-emitting = false
-
-[node name="Fire" parent="Particles" instance=ExtResource("6_foq0j")]
-position = Vector2(0, 5)
-emitting = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1ud2m")

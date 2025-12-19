@@ -2,6 +2,11 @@ class_name EnemyCharacter
 extends BaseCharacter
 
 @onready var damage_number_origin = $DamageNumbersOrigin
+
+@export var particle_audio_interval: float = 1.0  # Seconds between audio plays
+
+var particle_audio_timer: Timer = null
+
 # 0: None, 1: Fire, 2: Water, 3: Earth, 4: Metal, 5: Wood
 @export var elements_color : Dictionary[ElementsEnum.Elements, Color] = {
 	ElementsEnum.Elements.METAL: Color("f0f0f0"),
@@ -62,6 +67,7 @@ var current_particle: GPUParticles2D
 
 func _ready() -> void:
 	super._ready()
+	_init_culling()
 	_init_ray_cast()
 	_init_detect_player_raycast()
 	_init_hurt_area()
@@ -69,6 +75,13 @@ func _ready() -> void:
 	_init_material()
 	_init_start_position()
 	_init_particle()
+	
+	# Connect to global particle quality signal (check if not already connected)
+	if not SettingsManager.particle_quality_changed.is_connected(_on_particle_quality_changed):
+		SettingsManager.particle_quality_changed.connect(_on_particle_quality_changed)
+	
+	# Use global interval value
+	particle_audio_interval = SettingsManager.particle_audio_interval
 
 # -- Initialize start position
 func _init_start_position():
@@ -96,7 +109,7 @@ func _update_element_outline():
 
 
 func _check_changed_animation() -> void:
-	super._check_changed_animation()
+	super._handle_visual_updates()
 	_update_element_outline()
 
 # --- Initialize raycasts for wall/fall detection
@@ -136,6 +149,7 @@ func _init_particle():
 		var particle_holder = $Particles
 		if particle_holder.get_child_count() == 0:
 			return
+			
 		var particles: Array = particle_holder.get_children()
 		for particle in particles:
 			if particle is GPUParticles2D:
@@ -145,8 +159,111 @@ func _init_particle():
 						current_particle.emitting = false
 					current_particle = particle
 					if current_particle != null:
+						# Apply initial quality setting
+						_apply_particle_quality()
 						current_particle.emitting = true
-	pass
+						_setup_particle_audio()
+
+func _apply_particle_quality() -> void:
+	if current_particle == null:
+		return
+	
+	var ratio = SettingsManager.get_particle_ratio()
+	current_particle.amount_ratio = ratio
+	
+	# Optionally disable emitting entirely for OFF quality
+	if SettingsManager.particle_quality == SettingsManager.ParticleQuality.OFF:
+		current_particle.emitting = false
+	elif not current_particle.emitting:
+		current_particle.emitting = true
+
+func _on_particle_quality_changed(_quality: int) -> void:
+	_apply_particle_quality()
+
+func _setup_particle_audio():
+	if not AudioManager or not AudioManager.audio_database:
+		return
+	
+	var audio_id: String = ""
+	
+	match elemental_type:
+		ElementsEnum.Elements.NONE:
+			audio_id = "particle_none"
+		ElementsEnum.Elements.METAL:
+			audio_id = "particle_metal"
+		ElementsEnum.Elements.WOOD:
+			audio_id = "particle_wood"
+		ElementsEnum.Elements.WATER:
+			audio_id = "particle_water"
+		ElementsEnum.Elements.FIRE:
+			audio_id = "particle_fire"
+		ElementsEnum.Elements.EARTH:
+			audio_id = "particle_earth"
+	
+	if audio_id == "":
+		return
+	
+	var particle_sfx: AudioStreamPlayer2D = null
+	if current_particle.has_node("AudioStreamPlayer2D"):
+		particle_sfx = current_particle.get_node("AudioStreamPlayer2D")
+	else:
+		particle_sfx = AudioStreamPlayer2D.new()
+		current_particle.add_child(particle_sfx)
+	
+	var audio_clip = AudioManager.audio_database.get_clip(audio_id)
+	if audio_clip and audio_clip.stream:
+		particle_sfx.stream = audio_clip.stream
+		particle_sfx.volume_db = audio_clip.volume_db
+		particle_sfx.max_distance = 300
+		particle_sfx.autoplay = false
+		
+		# Setup timer
+		_start_particle_audio_timer(particle_sfx)
+
+func _start_particle_audio_timer(audio_player: AudioStreamPlayer2D) -> void:
+	# Clean up existing timer if any
+	if particle_audio_timer:
+		particle_audio_timer.stop()
+		particle_audio_timer.queue_free()
+	
+	# Create new timer
+	particle_audio_timer = Timer.new()
+	particle_audio_timer.name = "ParticleAudioTimer"
+	add_child(particle_audio_timer)
+	particle_audio_timer.wait_time = particle_audio_interval
+	particle_audio_timer.one_shot = false
+	particle_audio_timer.timeout.connect(_on_particle_audio_timer_timeout.bind(audio_player))
+	particle_audio_timer.start()
+	
+	# Play immediately
+	audio_player.play()
+
+func _on_particle_audio_timer_timeout(audio_player: AudioStreamPlayer2D) -> void:
+	if audio_player and is_instance_valid(audio_player):
+		audio_player.play()
+
+func _init_culling() -> void:
+	# Create enabler programmatically
+	var enabler = VisibleOnScreenEnabler2D.new()
+	add_child(enabler)
+	
+	# Get viewport size to extend culling area
+	if is_inside_tree():
+		_setup_culling_rect(enabler)
+	else:
+		call_deferred("_setup_culling_rect", enabler)
+
+func _setup_culling_rect(enabler: VisibleOnScreenEnabler2D) -> void:
+	var viewport_size = get_viewport_rect().size
+	
+	# Extend the rect to 2x viewport size
+	var extended_rect = Rect2(
+		-viewport_size,
+		viewport_size * 3
+	)
+	
+	enabler.rect = extended_rect
+	enabler.enable_mode = VisibleOnScreenEnabler2D.ENABLE_MODE_INHERIT
 
 # --- Check if touching wall
 func is_touch_wall() -> bool:
@@ -318,28 +435,22 @@ func disable_collision():
 		spike_hit_area.get_node("CollisionShape2D").disabled = true
 
 # Enemy bị hút vào vùng nổ
-func enter_skill(tornado_pos: Vector2) -> void:
-	# 1. Thiết lập trạng thái
-	is_movable = false
-	velocity = Vector2.ZERO
-
+func enter_tornado(tornado_pos: Vector2) -> void:
 	# 3. Bắt đầu hiệu ứng "bay lên"
 	var target_pos = tornado_pos + Vector2(0, -30)
-	var duration = 0.5 
+	var duration = 0.2
 	
 	var tween := get_tree().create_tween()
 	
 	tween.tween_property(
-		self, 
-		"global_position", 
-		target_pos, 
+		self,
+		"global_position",
+		target_pos,
 		duration
-	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
 	
-	tween.tween_callback(Callable(self, "_on_reach_tornado_top"))
-
 # Enemy bị hút vào vùng nổ
-func enter_stun(tornado_pos: Vector2) -> void:
+func enter_stun(stun_pos: Vector2) -> void:
 	# 1. Thiết lập trạng thái
 	is_movable = false
 	velocity = Vector2.ZERO
@@ -350,9 +461,8 @@ func exit_skill() -> void:
 	is_movable = true
 	velocity = Vector2.ZERO
 	
-func apply_knockback(from_pos: Vector2, force: float):
-	var dir = (global_position - from_pos).normalized()
-	velocity = dir * force
+func apply_knockback(knockback_vec: Vector2):
+	velocity = knockback_vec
 	ignore_gravity = true
 	await get_tree().create_timer(0.25).timeout
 	ignore_gravity = false

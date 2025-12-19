@@ -1,6 +1,6 @@
 extends EnemyCharacter
 
-@export var lifetime: float = 10.0  # Auto-cleanup after 10 seconds
+@export var lifetime: float = 3.0  # Auto-cleanup after 10 seconds
 
 func _ready() -> void:
 	change_animation("default")

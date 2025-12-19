@@ -9,21 +9,23 @@ func _enter() -> void:
 	throw_timer = throw_start_time
 	obj.change_animation("attack")
 	has_thrown = false
-	pass
 
-func _update( _delta ):
+func _update(_delta):
 	control_moving()
 	
-	if (update_timer(_delta)):
+	# Check if attack duration is complete
+	if update_timer(_delta):
 		change_state(fsm.states.moving)
 		return
 	
-	if (update_throw_timer(_delta) and not has_thrown):
+	# Execute throw at the correct timing
+	if update_throw_timer(_delta) and not has_thrown:
 		obj.throw()
 		has_thrown = true
 		obj.reset_attack_timer()
 
 func update_throw_timer(delta: float) -> bool:
 	throw_timer -= delta
-	if throw_timer <= 0: return true
+	if throw_timer <= 0: 
+		return true
 	return false

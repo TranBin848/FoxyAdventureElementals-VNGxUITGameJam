@@ -4,13 +4,15 @@ class_name SkillDatabase
 var all_skills = {
 		"Fire Explosion": FireExplosion, 
 		"Fire Shot": FireShot,
+		"Fire Ball": Fireball,
 		"Water Ball": WaterBall,
 		"Water Spike": WaterSpike, 
 		"Tornado": Tornado,
 		"Wood Shot": WoodShot,
 		"Heal Over Time": HealOverTime,
+		"Toxic Breath": ToxicBreath,
 		"Stun Shot": StunShot,
-		"Thunder Strike": ThunderStrike,
+		"Thunder Strike": Thunderbolt,
 		"Earthquake": Earthquake
 	}
 func get_skill_by_name(name: String) -> Script:
