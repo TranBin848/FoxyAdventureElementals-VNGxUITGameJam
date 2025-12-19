@@ -1,0 +1,144 @@
+[gd_scene load_steps=18 format=3 uid="uid://cld6jdeq2p8te"]
+
+[ext_resource type="Script" uid="uid://hm8175hnifxg" path="res://scenes/skills/projectiles/earth/comet_projectile.gd" id="1_casnx"]
+[ext_resource type="PackedScene" uid="uid://cld6jdeq2p8te" path="res://scenes/skills/projectiles/earth/comet_crater.tscn" id="2_ohy4f"]
+[ext_resource type="Texture2D" uid="uid://blwoyahqsw8vc" path="res://assets/skills/earth/Earth projectile Spritesheet .png" id="2_xy6jy"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="4_lgdea"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohy4f"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(0, 0, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgdea"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(48, 0, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4onyj"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(96, 0, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7ter"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(144, 0, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66ikn"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(192, 0, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n320i"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(240, 0, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_is6lf"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(0, 32, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uo4r"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(48, 32, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2rwf"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(96, 32, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ak5lg"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(144, 32, 43, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_johx5"]
+atlas = ExtResource("2_xy6jy")
+region = Rect2(192, 32, 43, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4onyj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohy4f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgdea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4onyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7ter")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66ikn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n320i")
+}],
+"loop": true,
+"name": &"Comet",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is6lf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1uo4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2rwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ak5lg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_johx5")
+}],
+"loop": false,
+"name": &"Comet_End",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66ikn"]
+size = Vector2(14, 6)
+
+[node name="CometProjectile" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_casnx")
+crater_scene = ExtResource("2_ohy4f")
+metadata/_custom_type_script = "uid://5btdwob525wm"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.651163, 0.651163)
+sprite_frames = SubResource("SpriteFrames_4onyj")
+animation = &"Comet"
+autoplay = "Comet"
+frame_progress = 0.93875
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_66ikn")
+
+[node name="HitArea2D" parent="." instance=ExtResource("4_lgdea")]
+collision_layer = 0
+collision_mask = 16
+elemental_type = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_66ikn")
+
+[node name="GroundHitArea2D" parent="." instance=ExtResource("4_lgdea")]
+collision_layer = 0
+damage = 0
+elemental_type = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundHitArea2D"]
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_66ikn")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(2, 0)
+target_position = Vector2(10, 0)
+
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_something"]
+[connection signal="hitted" from="GroundHitArea2D" to="." method="_on_ground_body_entered"]

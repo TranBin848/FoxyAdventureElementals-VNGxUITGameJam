@@ -66,6 +66,7 @@ size = Vector2(40, 24)
 [node name="Crab" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_4p1sk")
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0

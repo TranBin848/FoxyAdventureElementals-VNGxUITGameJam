@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://bi6xhg0h8erpa"]
 
-[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://Scenes/skills/base/Skill.gd" id="1_jeclb"]
-[ext_resource type="PackedScene" uid="uid://bbk5vp0ss60j5" path="res://Scenes/skills/projectiles/metal/stun_shot_projectile.tscn" id="1_lpdm1"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_jeclb"]
+[ext_resource type="PackedScene" uid="uid://bbk5vp0ss60j5" path="res://scenes/skills/projectiles/metal/stun_shot_projectile.tscn" id="1_lpdm1"]
 
 [resource]
 script = ExtResource("1_jeclb")

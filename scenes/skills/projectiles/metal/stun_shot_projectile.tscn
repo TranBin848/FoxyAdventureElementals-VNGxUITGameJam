@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://bbk5vp0ss60j5"]
 
-[ext_resource type="Script" uid="uid://b7u8638cjta7m" path="res://Scenes/skills/projectiles/metal/stun_shot_projectile.gd" id="1_w28rp"]
+[ext_resource type="Script" uid="uid://b7u8638cjta7m" path="res://scenes/skills/projectiles/metal/stun_shot_projectile.gd" id="1_w28rp"]
 [ext_resource type="Texture2D" uid="uid://bmd75knokqgjh" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact1.png" id="2_jw2g5"]
 [ext_resource type="Texture2D" uid="uid://bex6k1xhjjpso" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact2.png" id="3_8v08l"]
 [ext_resource type="Texture2D" uid="uid://bmkel1bjq823s" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact3.png" id="4_kgqm5"]
@@ -111,16 +111,16 @@ autoplay = "StunShot_Start"
 position = Vector2(3.75, -0.5)
 shape = SubResource("RectangleShape2D_uhoxj")
 
-[node name="HitArea2d" parent="." instance=ExtResource("19_t0g1f")]
+[node name="HitArea2D" parent="." instance=ExtResource("19_t0g1f")]
 position = Vector2(0, -7)
 collision_layer = 32
 collision_mask = 16
 elemental_type = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 position = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_tnvla")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

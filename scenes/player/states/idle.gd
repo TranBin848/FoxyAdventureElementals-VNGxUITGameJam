@@ -7,7 +7,8 @@ func _enter() -> void:
 
 func _update(_delta: float) -> void:
 	#Control jump
-	control_jump()
+	if !obj.is_in_burrow_state:
+		control_jump()
 	#Control moving
 	control_moving()
 	

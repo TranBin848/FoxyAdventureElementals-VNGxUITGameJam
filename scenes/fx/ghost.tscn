@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dy04qa0qn7d0r"]
 
 [ext_resource type="Texture2D" uid="uid://cwgjo8l0lmemi" path="res://assets/foxy/fox/fox_idle_1.png" id="1_xyxib"]
-[ext_resource type="Script" uid="uid://ctr7wpquyuxw2" path="res://Scenes/player/ghost.gd" id="2_i1hew"]
+[ext_resource type="Script" uid="uid://ctr7wpquyuxw2" path="res://scenes/player/ghost.gd" id="2_i1hew"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p4gax"]
 light_mode = 1

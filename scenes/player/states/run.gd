@@ -24,7 +24,8 @@ func _update(_delta: float):
 	control_throw_blade()
 	
 	#Control jump
-	control_jump()
+	if !obj.is_in_burrow_state:
+		control_jump()
 	
 	control_dash()
 	

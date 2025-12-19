@@ -1,0 +1,161 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2se2pnqiq8ba"]
+
+[ext_resource type="Script" uid="uid://b0co5l3fr8oad" path="res://scenes/skills/projectiles/wood/wooden_clone.gd" id="1_djjju"]
+[ext_resource type="Texture2D" uid="uid://b6k6x07jbps0a" path="res://assets/foxy/fox_hat_wand/fox_hit_1.png" id="2_h5unx"]
+[ext_resource type="Texture2D" uid="uid://cm8qbkbykjxrm" path="res://assets/foxy/fox_hat_wand/fox_hit_2.png" id="3_8mq2m"]
+[ext_resource type="Texture2D" uid="uid://0jmgtwuyojnn" path="res://assets/foxy/fox_hat_wand/fox_hit_3.png" id="4_h4stq"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="9_h5unx"]
+[ext_resource type="Texture2D" uid="uid://bmp31uas81s76" path="res://assets/foxy/fox_hat_wand/fox_idle_1.png" id="40_nmoso"]
+[ext_resource type="Texture2D" uid="uid://cnv7qbobh8kv3" path="res://assets/foxy/fox_hat_wand/fox_idle_2.png" id="41_4fstl"]
+
+[sub_resource type="GDScript" id="GDScript_djjju"]
+script/source = "extends CharacterBody2D
+class_name ClonePlayer
+
+@export var gravity: float = 700.0
+@export var max_fall_speed: float = 1000.0
+@export var max_health: int = 100
+
+@export var knockback_force: float = 250.0
+@export var knockback_upward: float = 200.0
+@export var knockback_duration: float = 0.2
+
+var health: int
+var _is_knockback: bool = false
+
+@onready var animated_sprite: AnimatedSprite2D = $Direction/AnimatedSprite2D
+@onready var hurt_area: Area2D = $Direction/HurtArea2D if has_node(\"Direction/HurtArea2D\") else null
+
+func _ready() -> void:
+	health = max_health
+	add_to_group(\"player_clone\")
+
+	# Broadcast to all enemies: aggro this clone
+	get_tree().call_group(\"enemies\", \"set_aggro_target\", self)
+
+	if animated_sprite and animated_sprite.sprite_frames.has_animation(\"idle\"):
+		animated_sprite.play(\"idle\")
+
+	if hurt_area and hurt_area.has_signal(\"hurt\"):
+		hurt_area.connect(\"hurt\", Callable(self, \"_on_hurt_area_2d_hurt\"))
+
+func _physics_process(delta: float) -> void:
+	# Apply gravity
+	if not _is_knockback:
+		# normal gravity
+		velocity.y = min(velocity.y + gravity * delta, max_fall_speed)
+	else:
+		# still apply gravity while knocked back
+		velocity.y = min(velocity.y + gravity * delta, max_fall_speed)
+	
+	move_and_slide()
+
+func _on_hurt_area_2d_hurt(hit_dir: Vector2, damage: float, _element_type: int) -> void:
+	_take_damage(int(damage), hit_dir)
+
+func _take_damage(amount: int, hit_dir: Vector2) -> void:
+	health = max(health - amount, 0)
+	
+	# Hurt animation
+	if animated_sprite and animated_sprite.sprite_frames.has_animation(\"hurt\"):
+		animated_sprite.play(\"hurt\")
+	
+	# Knockback (hit_dir goes from enemy -> clone, so push along it)
+	_apply_knockback(hit_dir)
+	
+	if health <= 0:
+		_die()
+
+func _apply_knockback(hit_dir: Vector2) -> void:
+	if hit_dir == Vector2.ZERO:
+		return
+	
+	_is_knockback = true
+	
+	# Direction away from the attacker
+	var dir := hit_dir.normalized()
+	
+	velocity.x = dir.x * knockback_force
+	velocity.y = -abs(knockback_upward)   # push upwards
+	
+	# End knockback after a short duration
+	await get_tree().create_timer(knockback_duration).timeout
+	# END KNOCKBACK
+	_is_knockback = false
+	velocity.x = 0.0          # stop horizontal push
+	
+	if animated_sprite and animated_sprite.sprite_frames.has_animation(\"idle\"):
+		animated_sprite.play(\"idle\")
+
+func _die() -> void:
+	# Tell all enemies to drop this clone as target
+	get_tree().call_group(\"enemies\", \"clear_aggro_target\", self)
+	queue_free()
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xvvsu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h5unx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8mq2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_h4stq")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_nmoso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_4fstl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mq2m"]
+size = Vector2(17, 28)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2aybr"]
+radius = 7.0
+height = 28.0
+
+[node name="WoodenClone" type="Area2D"]
+collision_layer = 132
+script = ExtResource("1_djjju")
+metadata/_custom_type_script = "uid://5btdwob525wm"
+
+[node name="CloneCharacter" type="CharacterBody2D" parent="."]
+collision_layer = 132
+script = SubResource("GDScript_djjju")
+metadata/_custom_type_script = "uid://w7xdmsdvf5vd"
+
+[node name="Direction" type="Node2D" parent="CloneCharacter"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CloneCharacter/Direction"]
+self_modulate = Color(0.674, 0.394, 0.394, 1)
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_xvvsu")
+animation = &"hurt"
+
+[node name="HurtArea2D" type="Area2D" parent="CloneCharacter/Direction"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("9_h5unx")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloneCharacter/Direction/HurtArea2D"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_8mq2m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CloneCharacter"]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_2aybr")

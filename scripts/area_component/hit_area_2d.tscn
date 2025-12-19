@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="1_32xet"]
 
-[node name="HitArea2d" type="Area2D"]
+[node name="HitArea2D" type="Area2D"]
 script = ExtResource("1_32xet")

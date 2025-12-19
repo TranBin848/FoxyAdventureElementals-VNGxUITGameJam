@@ -92,6 +92,7 @@ height = 28.0
 
 [node name="CoconutWarrior" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_g34j8")
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0

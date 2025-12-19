@@ -45,8 +45,8 @@ func set_skill():
 		return
 
 	# Cập nhật texture
-	if skill.texture:
-		texture_normal = skill.texture
+	if skill.texture_path:
+		texture_normal = load(skill.texture_path)
 	
 	level = SkillStackManager.get_level(skill.name)
 	stack = SkillStackManager.get_stack(skill.name)
