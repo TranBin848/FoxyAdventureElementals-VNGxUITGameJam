@@ -4,6 +4,7 @@ class_name SkillDatabase
 var all_skills = {
 		"Fire Explosion": FireExplosion, 
 		"Fire Shot": FireShot,
+		"Fire Ball": Fireball,
 		"Water Ball": WaterBall,
 		"Water Spike": WaterSpike, 
 		"Tornado": Tornado,

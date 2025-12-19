@@ -1,22 +1,22 @@
 [gd_scene load_steps=9 format=3 uid="uid://cuvpdf2y51pk5"]
 
-[ext_resource type="Script" uid="uid://cem4lyk4ksjeg" path="res://scenes/skills/buff/buffBase.gd" id="1_egmnd"]
-[ext_resource type="Texture2D" uid="uid://bg8dswmi4kqq1" path="res://assets/skills/wood/Green Effect and Bullet 16x16.png" id="2_eybwy"]
+[ext_resource type="Script" uid="uid://cem4lyk4ksjeg" path="res://Scenes/skills/buff/buffBase.gd" id="1_2i6oh"]
+[ext_resource type="Texture2D" uid="uid://bg8dswmi4kqq1" path="res://assets/skills/wood/Green Effect and Bullet 16x16.png" id="2_ck1d7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_egmnd"]
-atlas = ExtResource("2_eybwy")
+atlas = ExtResource("2_ck1d7")
 region = Rect2(224, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dnpkm"]
-atlas = ExtResource("2_eybwy")
+atlas = ExtResource("2_ck1d7")
 region = Rect2(240, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_asa7i"]
-atlas = ExtResource("2_eybwy")
+atlas = ExtResource("2_ck1d7")
 region = Rect2(256, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8yf5y"]
-atlas = ExtResource("2_eybwy")
+atlas = ExtResource("2_ck1d7")
 region = Rect2(272, 48, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
@@ -45,7 +45,7 @@ radius = 19.0263
 [node name="Projectile" type="Area2D"]
 z_index = 300
 collision_layer = 32
-script = ExtResource("1_egmnd")
+script = ExtResource("1_2i6oh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tbddh")

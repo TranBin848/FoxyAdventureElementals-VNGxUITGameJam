@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://dyms886k12vqv"]
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dyms886k12vqv"]
 
-[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_mkc6v"]
-[ext_resource type="PackedScene" uid="uid://bu243mknusv0a" path="res://scenes/skills/projectiles/fire/fireShotProjectile.tscn" id="1_ymexm"]
-[ext_resource type="Texture2D" uid="uid://dpj7rjmpsbi1m" path="res://assets/skills/icons_skill/48x48/skill_icons4.png" id="3_vod6y"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://Scenes/skills/base/Skill.gd" id="1_mkc6v"]
+[ext_resource type="PackedScene" uid="uid://bu243mknusv0a" path="res://Scenes/skills/projectiles/fire/fireShotProjectile.tscn" id="1_ymexm"]
 
 [resource]
 script = ExtResource("1_mkc6v")
 name = "Fire Shot"
-element = "Fire"
+element = 4
 cooldown = 1.0
 duration = 0.0
 hit_delay = 0.0
-texture = ExtResource("3_vod6y")
+texture_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
 animation_name = "FireShot"
 projectile_scene = ExtResource("1_ymexm")
 speed = 350.0

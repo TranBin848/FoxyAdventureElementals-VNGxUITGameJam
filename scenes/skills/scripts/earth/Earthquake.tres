@@ -1,18 +1,17 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://c1h5e81m8pg5d"]
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://c1h5e81m8pg5d"]
 
 [ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://Scenes/skills/base/Skill.gd" id="1_kcwmj"]
 [ext_resource type="PackedScene" uid="uid://bhb73wsv0b8qg" path="res://Scenes/skills/projectiles/earth/earthquake_projectile.tscn" id="1_wv36o"]
-[ext_resource type="Texture2D" uid="uid://clrxflx0vp4p3" path="res://assets/skills/icons_skill/48x48/skill_icons32.png" id="3_rnmqd"]
 
 [resource]
 script = ExtResource("1_kcwmj")
 name = "Earthquake"
-element = "Earth"
+element = 0
 cooldown = 2.5
 duration = 1.0
 hit_delay = 0.0
-texture = ExtResource("3_rnmqd")
-animation_name = ""
+texture_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
+animation_name = "Earthquake"
 projectile_scene = ExtResource("1_wv36o")
 speed = 400.0
 damage = 10

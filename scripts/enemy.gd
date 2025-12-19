@@ -109,7 +109,7 @@ func _update_element_outline():
 
 
 func _check_changed_animation() -> void:
-	super._check_changed_animation()
+	super._handle_visual_updates()
 	_update_element_outline()
 
 # --- Initialize raycasts for wall/fall detection

@@ -2,7 +2,7 @@ extends Area2D
 class_name HitArea2D
 
 @export var damage = 5
-@export var elemental_type: int = 0 #0: none, 1: fire, 2: earth, 3: water
+@export var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 signal hitted(area)
 
 func _init() -> void:
