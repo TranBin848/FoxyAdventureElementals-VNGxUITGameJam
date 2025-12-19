@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	if skill_cd_timer > 0:
 		skill_cd_timer -= delta
-	label.text = str(fsm.current_state)
+	label.text = str(fsm.current_state.name)
 
 func can_use_skill() -> bool:
 	if skill_cd_timer > 0:
