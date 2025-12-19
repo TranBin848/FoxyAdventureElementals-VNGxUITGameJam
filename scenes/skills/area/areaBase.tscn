@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dpbjbkgjmtxug"]
 
-[ext_resource type="Script" uid="uid://52fejgdsdbp7" path="res://scenes/skills/area/areaBase.gd" id="1_0gf5m"]
+[ext_resource type="Script" uid="uid://52fejgdsdbp7" path="res://Scenes/skills/area/areaBase.gd" id="1_0gf5m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
 animations = []

@@ -159,14 +159,19 @@ func cast_spell(skill: Skill) -> String:
 			_check_and_use_skill_stack(skill); return ""
 		"area": 
 			cast_skill(skill.animation_name)
-			if has_valid_target_in_range():
+			mana = max(0, mana - skill.mana); mana_changed.emit()
+
+			if skill.ground_targeted:
+				# Ground-targeted: cast at player position
+				_area_shot(skill, global_position, null)
+			elif has_valid_target_in_range():
 				var target = get_closest_target()
 				if is_instance_valid(target):
-					mana = max(0, mana - skill.mana); mana_changed.emit()
-					_area_shot(skill as Skill, target.global_position, target)
-					_check_and_use_skill_stack(skill); return ""
+					_area_shot(skill, target.global_position, target)
 			else:
 				return "Enemy Out of Range"
+
+			_check_and_use_skill_stack(skill); return ""
 		"buff":
 			cast_skill(skill.animation_name)
 			_apply_buff(skill)
@@ -217,9 +222,10 @@ func _area_shot(skill: Skill, target_position: Vector2, target_enemy: Node2D) ->
 	var area_node: Node = skill.area_scene.instantiate()
 	if not area_node: return
 	var area_effect = area_node as AreaBase
+	get_tree().current_scene.add_child(area_effect)
+	area_effect.global_position = target_position
 	if area_effect and area_effect.has_method("setup"):
 		area_effect.setup(skill, target_position, target_enemy)
-	get_tree().current_scene.add_child(area_effect)
 
 func _apply_buff(skill: Skill) -> void: 
 	if skill is Fireball: _apply_fireball_buff(skill.duration)

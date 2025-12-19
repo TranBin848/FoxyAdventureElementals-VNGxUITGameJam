@@ -7,6 +7,7 @@ class_name Skill
 @export var cooldown: float = 1.0
 @export var duration: float = 1.0
 @export var hit_delay: float = 0.0
+@export var ground_targeted: bool = false  # Set TRUE for CometRain
 @export var texture_path: String
 @export var animation_name: String
 @export var projectile_scene: PackedScene = null
@@ -18,7 +19,6 @@ class_name Skill
 
 @export var type: String = "single_shot" 
 
-var texture = load(texture_path)
 # có thể là: "single_shot", "multi_shot", "radial", "area", "buff"
 
 #Thêm trường mã hóa element để tiện xử lý logic
@@ -35,10 +35,15 @@ var elemental_type: int:
 
 func apply_to_button(button: TextureButton):
 	button.cooldown.max_value = cooldown
-	button.texture_normal = load(texture_path)
 	button.timer.wait_time = cooldown
+	
+	# SAFE texture load
+	if texture_path and texture_path.strip_edges() != "":
+		button.texture_normal = load(texture_path)
+	else:
+		button.texture_normal = null  # or preload("res://icon.svg")
+	
 	if button.has_method("update_stack_ui"):
-		#Hàm này chỉ tồn tại trong lớp SpellButton mở rộng
 		button.update_stack_ui()
 	
 func cast_spell(caster: Node2D):
