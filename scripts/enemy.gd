@@ -109,7 +109,7 @@ func _update_element_outline():
 
 
 func _check_changed_animation() -> void:
-	super._check_changed_animation()
+	super._handle_visual_updates()
 	_update_element_outline()
 
 # --- Initialize raycasts for wall/fall detection
@@ -415,8 +415,22 @@ func apply_stun_effect() -> void:
 	pass
 
 func apply_poison_effect() -> void:
-	print("Poisoned")
-	pass
+	var damage_per_tick: int = 2
+	var duration: float = 5.0
+	var interval: float = 1.0
+	var total_ticks: int = int(duration / interval)  # 5 ticks → 5 seconds
+	
+	for i in range(total_ticks):
+		# Nếu nhân vật chết giữa chừng thì dừng poison
+		if health <= 0:
+			break
+		
+		# Trừ máu, không cho xuống dưới 0
+		_on_hurt_area_2d_hurt(Vector2.ZERO, damage_per_tick, ElementsEnum.Elements.WOOD)
+		
+		await get_tree().create_timer(interval).timeout
+	
+	print("Poison ended")
 	
 func apply_weakness_effect() -> void:
 	print("Weakness")
