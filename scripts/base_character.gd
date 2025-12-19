@@ -17,7 +17,7 @@ var jump_multiplier: float = 1.0
 @export var attack_damage: int = 1
 @export var max_health: int = 100
 @export var max_mana: int = 1000
-@export var elemental_type = ElementsEnum.Elements.NONE
+@export var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 var health: int = max_health
 var mana: int = max_mana
 

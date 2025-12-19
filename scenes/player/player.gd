@@ -11,6 +11,10 @@ const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
 var saved_collision_layer: int
 
+# Add this near your other export variables
+@export var fireball_bounciness: float = 1.0
+@export var minimum_bounce_velocity: float = 300.0
+
 #Attack Logic
 @export var atk_cd: float = 1
 var is_able_attack: bool = true 
@@ -46,6 +50,7 @@ var blade_hit_area: Area2D
 @onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
 @onready var silhouette_wand_sprite: AnimatedSprite2D = $Direction/SilhouetteWandAnimatedSprite2D
 @onready var fireball_sprite: AnimatedSprite2D = $Direction/FireballSprite2D
+@onready var fireball_fx: AnimatedSprite2D = $Direction/FireballFXSprite2D
 
 #Movement
 var last_dir: float = 0.0
@@ -78,8 +83,14 @@ func _ready() -> void:
 	# Initial Visual Setup
 	if has_blade:
 		collected_blade()
+	elif has_wand:
+		collected_wand()
 	else:
 		_set_player_visuals(normal_sprite, silhouette_normal_sprite)
+		
+	# Connect the HitArea signal to our bounce logic
+	if fireball_hit_area:
+		fireball_hit_area.hitted.connect(_on_fireball_hit_enemy)
 	
 	camera_2d.make_current()
 	Dialogic.timeline_started.connect(_on_dialog_started)
@@ -312,22 +323,61 @@ func load_state(data: Dictionary) -> void:
 		if is_in_fireball_state: enter_fireball()
 		else: exit_fireball()
 
+# ================================================================
+# === ELEMENTAL LOGIC REFACTOR ===================================
+# ================================================================
+
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
-	if attacker_element == 0: return base_damage
-	var advantage_table = { 1: [2], 2: [3], 3: [1] }
-	var weakness_table = { 1: [3], 2: [1], 3: [2] }
-	if attacker_element in advantage_table and health in advantage_table[attacker_element]: return base_damage * 1.25 
-	if attacker_element in weakness_table and elemental_type in weakness_table[attacker_element]: return base_damage * 0.75 
+	if attacker_element == ElementsEnum.Elements.NONE: 
+		return base_damage
+		
+	# Cycle: Metal(1) > Wood(2) > Earth(5) > Water(3) > Fire(4) > Metal(1)
+	var advantages = {
+		ElementsEnum.Elements.METAL: [ElementsEnum.Elements.WOOD],
+		ElementsEnum.Elements.WOOD:  [ElementsEnum.Elements.EARTH],
+		ElementsEnum.Elements.EARTH: [ElementsEnum.Elements.WATER],
+		ElementsEnum.Elements.WATER: [ElementsEnum.Elements.FIRE],
+		ElementsEnum.Elements.FIRE:  [ElementsEnum.Elements.METAL]
+	}
+	
+	# Case 1: Attacker has advantage over Player (Super Effective) -> Take MORE damage
+	if advantages.has(attacker_element) and elemental_type in advantages[attacker_element]:
+		return base_damage * 1.5 
+		
+	# Case 2: Player has advantage over Attacker (Resist) -> Take LESS damage
+	if advantages.has(elemental_type) and attacker_element in advantages[elemental_type]:
+		return base_damage * 0.5 
+		
 	return base_damage
 
-func handle_elemental_damage(elemental_type: int) -> void:
-	match elemental_type:
-		1: apply_fire_effect()
-		2: apply_earth_effect()
-		3: apply_water_effect()
-func apply_fire_effect() -> void: pass
-func apply_earth_effect() -> void: pass
-func apply_water_effect() -> void: pass
+func handle_elemental_damage(incoming_element: int) -> void:
+	match incoming_element:
+		ElementsEnum.Elements.FIRE:  apply_fire_effect()
+		ElementsEnum.Elements.EARTH: apply_earth_effect()
+		ElementsEnum.Elements.WATER: apply_water_effect()
+		ElementsEnum.Elements.WOOD:  apply_wood_effect()
+		ElementsEnum.Elements.METAL: apply_metal_effect()
+
+# === Status Effect Stubs ===
+func apply_fire_effect() -> void: 
+	# Example: Burn DOT
+	pass
+
+func apply_earth_effect() -> void: 
+	# Example: Stun or Slow
+	pass
+
+func apply_water_effect() -> void: 
+	# Example: Knockback or Wet status
+	pass
+
+func apply_wood_effect() -> void:
+	# Example: Root/Bind or Poison
+	pass
+
+func apply_metal_effect() -> void:
+	# Example: Bleed or Armor Break
+	pass
 
 func _update_elemental_palette() -> void:
 	if not is_instance_valid(animated_sprite): return
@@ -337,6 +387,7 @@ func _update_elemental_palette() -> void:
 	var shader_mat = animated_sprite.material as ShaderMaterial
 	shader_mat.set_shader_parameter("elemental_type", elemental_type)
 	shader_mat.set_shader_parameter("glow_intensity", 1.5)
+	shader_mat.set_shader_parameter("is_fireball_state", is_in_fireball_state)
 
 # ================================================================
 # === TARGETING ==================================================
@@ -398,6 +449,8 @@ func _set_player_visuals(new_main_sprite: AnimatedSprite2D, new_silhouette: Anim
 	# 2. Tell BaseCharacter to swap the active sprite
 	# This will trigger the _check_changed_animation logic in BaseCharacter
 	set_animated_sprite(new_main_sprite)
+	
+	_update_elemental_palette()
 
 func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	# Hide all known extra sprites immediately
@@ -431,18 +484,21 @@ func _equip_blade_from_swap() -> void:
 	if is_in_fireball_state: is_equipped_blade = true; is_equipped_wand = false; weapon_swapped.emit("blade"); return
 	is_equipped_blade = true; is_equipped_wand = false
 	_set_player_visuals(blade_sprite, silhouette_blade_sprite)
+	_update_elemental_palette()
 	weapon_swapped.emit("blade")
 	
 func _equip_wand_from_swap() -> void:
 	if is_in_fireball_state: is_equipped_wand = true; is_equipped_blade = false; weapon_swapped.emit("wand"); return
 	is_equipped_wand = true; is_equipped_blade = false
 	_set_player_visuals(wand_sprite, silhouette_wand_sprite)
+	_update_elemental_palette()
 	weapon_swapped.emit("wand")
 	
 func _equip_normal_from_swap() -> void:
 	if is_in_fireball_state: is_equipped_blade = false; is_equipped_wand = false; weapon_swapped.emit("normal"); return
 	is_equipped_blade = false; is_equipped_wand = false
 	_set_player_visuals(normal_sprite, silhouette_normal_sprite)
+	_update_elemental_palette()
 	weapon_swapped.emit("normal")
 
 # ====== FIREBALL STATE (REFACTORED) ======
@@ -451,15 +507,23 @@ func enter_fireball() -> void:
 	is_in_fireball_state = true 
 	fireball_collision.disabled = false
 	speed_multiplier = 2.0
+	elemental_type = ElementsEnum.Elements.FIRE
+	_update_elemental_palette()
 	_set_player_visuals(fireball_sprite, null)
 	change_animation("Fireball")
+	fireball_fx.show()
+	fireball_fx.play()
 	hurt_area.monitorable = false;
 	fireball_hit_area.monitoring = true
 
 func exit_fireball() -> void:
-	is_in_fireball_state = false 
+	is_in_fireball_state = false
 	fireball_collision.disabled = true
 	speed_multiplier = 1.0
+	elemental_type = ElementsEnum.Elements.NONE
+	_update_elemental_palette()
+	fireball_fx.hide()
+	fireball_fx.stop()
 	fireball_hit_area.monitoring = false;
 	hurt_area.monitorable = true 
 	
@@ -469,11 +533,44 @@ func exit_fireball() -> void:
 
 func _update_movement(delta: float) -> void:
 	if not can_move: velocity = Vector2.ZERO; return
+	
 	velocity.y += gravity * delta
-	if fsm.current_state == fsm.states.wallcling: velocity.y = clamp(velocity.y, -INF, wall_slide_speed)
-	else: velocity.y = clamp(velocity.y, -INF, max_fall_speed)
+	
+	if fsm.current_state == fsm.states.wallcling: 
+		velocity.y = clamp(velocity.y, -INF, wall_slide_speed)
+	else: 
+		velocity.y = clamp(velocity.y, -INF, max_fall_speed)
+	
 	if is_dashing: velocity.y = 0
+	
+	# --- Perform Movement ---
 	move_and_slide()
+
+# This function runs whenever the Fireball HitArea touches a HurtArea
+func _on_fireball_hit_enemy(hurt_area: Area2D) -> void:
+	# Only bounce if we are actually in fireball mode
+	if not is_in_fireball_state: return
+	
+	# 1. Find the Enemy Node
+	# Usually the HurtArea is a child of the Enemy, so we get the parent
+	var enemy = hurt_area.get_parent() 
+	
+	if enemy:
+		_perform_bounce(enemy.global_position)
+
+func _perform_bounce(enemy_position: Vector2) -> void:
+	# 2. Calculate the "Surface Normal"
+	# Vector Math: (Destination - Source) = Direction Vector
+	# This gives us a vector pointing FROM the enemy TO the player
+	var normal_vector = (global_position - enemy_position).normalized()
+	
+	# 3. Apply the Bounce
+	# We use the existing velocity speed, or a minimum bounce speed (300)
+	# so you don't lose momentum if you hit them slowly.
+	var bounce_speed = max(velocity.length(), 300.0)
+	
+	# The bounce method reflects the velocity vector off the normal
+	velocity = velocity.bounce(normal_vector).normalized() * bounce_speed
 
 func dash() -> void:
 	velocity.x = movement_speed * dash_speed_mul * direction

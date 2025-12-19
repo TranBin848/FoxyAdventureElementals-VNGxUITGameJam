@@ -139,12 +139,6 @@ sprite_frames = SubResource("SpriteFrames_tbddh")
 animation = &"WoodShot"
 autoplay = "WoodShot"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
-position = Vector2(0, -4)
-sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"WoodShot"
-autoplay = "WoodShot"
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

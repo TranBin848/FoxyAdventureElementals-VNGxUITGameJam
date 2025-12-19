@@ -10,6 +10,7 @@ var all_skills = {
 		"Tornado": Tornado,
 		"Wood Shot": WoodShot,
 		"Heal Over Time": HealOverTime,
+		"Toxic Breath": ToxicBreath,
 		"Stun Shot": StunShot,
 		"Thunder Strike": Thunderbolt,
 		"Earthquake": Earthquake
