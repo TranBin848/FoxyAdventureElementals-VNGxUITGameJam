@@ -151,13 +151,13 @@ position = Vector2(3.75, -0.5)
 shape = SubResource("RectangleShape2D_w7bhr")
 disabled = true
 
-[node name="HitArea2d" parent="." instance=ExtResource("2_n5yf3")]
+[node name="HitArea2D" parent="." instance=ExtResource("2_n5yf3")]
 collision_layer = 32
 collision_mask = 16
 elemental_type = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_4lfir")
 
-[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

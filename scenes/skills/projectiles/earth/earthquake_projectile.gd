@@ -27,9 +27,9 @@ func _ready() -> void:
 	collision_mask = 1   # Can detect terrain (adjust to your terrain layer)
 	
 	# Disable the HitArea for enemy damage on the main projectile
-	if has_node("HitArea2d"):
-		get_node("HitArea2d").monitorable = false
-		get_node("HitArea2d").monitoring = false
+	if has_node("HitArea2D"):
+		get_node("HitArea2D").monitorable = false
+		get_node("HitArea2D").monitoring = false
 	
 	# Connect body_entered signal to detect terrain collision
 	if not body_entered.is_connected(_on_terrain_collision):
@@ -101,8 +101,8 @@ func _spawn_segment() -> void:
 				CONNECT_ONE_SHOT
 			)
 			
-		if has_node("HitArea2d"):
-			var hit = get_node("HitArea2d").duplicate()
+		if has_node("HitArea2D"):
+			var hit = get_node("HitArea2D").duplicate()
 			segment.add_child(hit)
 			hit.monitorable = true
 			hit.monitoring = true
