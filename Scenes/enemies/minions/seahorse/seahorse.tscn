@@ -92,6 +92,7 @@ height = 50.0
 
 [node name="SeaHorse" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_07c8w")
 shader_path = "uid://doovon2v0i5dx"
 sight = 200.0
@@ -139,11 +140,11 @@ shape = SubResource("CapsuleShape2D_ks11g")
 
 [node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
 target_position = Vector2(139, 0)
-collision_mask = 2
+collision_mask = 130
 
 [node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
 target_position = Vector2(-48, 0)
-collision_mask = 2
+collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)

@@ -113,6 +113,7 @@ size = Vector2(46, 34)
 
 [node name="SpearWarrior" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_nmrfe")
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
@@ -166,11 +167,11 @@ animation = &"prepare"
 
 [node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
 target_position = Vector2(139, 0)
-collision_mask = 2
+collision_mask = 130
 
 [node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
 target_position = Vector2(-48, 0)
-collision_mask = 2
+collision_mask = 130
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
 collision_layer = 16

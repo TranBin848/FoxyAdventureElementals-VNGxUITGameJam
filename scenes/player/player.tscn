@@ -622,7 +622,7 @@ autoplay = "idle"
 visible = false
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_0y4ya")
-animation = &"jump attack"
+animation = &"hurt"
 autoplay = "idle"
 
 [node name="FireballSprite2D" type="AnimatedSprite2D" parent="Direction"]

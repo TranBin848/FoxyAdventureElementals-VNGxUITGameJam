@@ -11,6 +11,10 @@ const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
 var saved_collision_layer: int
 
+#Invisible Logic
+var _invisible_timer: SceneTreeTimer = null
+var _is_invisible: bool = false
+
 # Add this near your other export variables
 @export var fireball_bounciness: float = 1.0
 @export var minimum_bounce_velocity: float = 300.0
@@ -137,6 +141,7 @@ func cast_spell(skill: Skill) -> String:
 	if not skill: return "Skill invalid"
 	if(mana - skill.mana < 0): return "Not Enough Mana"
 	if not is_equipped_wand: return "Require Wand"
+	_cancel_invisibility_if_active()
 		
 	await get_tree().create_timer(0.15).timeout
 	match skill.type:
@@ -273,9 +278,14 @@ func start_atk_cd() -> void:
 	is_able_attack = false
 	await get_tree().create_timer(atk_cd).timeout
 	is_able_attack = true
+	
+func _cancel_invisibility_if_active() -> void:
+	if _is_invisible:
+		_on_invisible_ended()
 
 func can_attack() -> bool:
 	if not is_able_attack: return false
+	_cancel_invisibility_if_active()
 	return is_equipped_blade or is_equipped_wand
 
 func can_throw() -> bool: return has_blade && is_equipped_blade
@@ -578,3 +588,46 @@ func dash() -> void:
 	is_dashing = true; can_dash = false
 	await get_tree().create_timer(dash_cd).timeout
 	can_dash = true
+
+# FUNC : INVISIBLE GAME STATE
+
+func go_invisible(duration: float) -> void:
+	if _invisible_timer:
+		_invisible_timer.disconnect("timeout", Callable(self, "_on_invisible_ended"))
+		_invisible_timer = null
+	
+	_is_invisible = true
+	
+	# Visual fade
+	if animated_sprite:
+		animated_sprite.modulate.a = 0.3
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.modulate.a = 0.3
+	
+	# Disable taking damage (no enemy hurt)
+	hurt_area.monitorable = false
+	
+	# Make sure player only collides with terrain (mask 1)
+	collision_layer = 0 << 1   # Layer 1: terrain
+	collision_mask  = 1 << 0   # Mask 1: environment only
+	
+	_invisible_timer = get_tree().create_timer(duration)
+	_invisible_timer.timeout.connect(_on_invisible_ended)
+
+func _on_invisible_ended() -> void:
+	_is_invisible = false
+	_invisible_timer = null
+	
+	# Restore visuals
+	if animated_sprite:
+		animated_sprite.modulate.a = 1.0
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.modulate.a = 1.0
+	
+	# Re‑enable damage detection
+	hurt_area.monitorable = true
+	
+	# Restore original collision setup (layer 2, mask 1)
+	collision_layer = 1 << 1   # player

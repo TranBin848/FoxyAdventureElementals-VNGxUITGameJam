@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bgh51tc6bjjdv"]
 
-[ext_resource type="Script" uid="uid://dwath8f2adcwr" path="res://scenes/enemies/boss/king_crab_claw.gd" id="1_f86bj"]
+[ext_resource type="Script" uid="uid://dwath8f2adcwr" path="res://Scenes/enemies/boss/king_crab_claw.gd" id="1_f86bj"]
 [ext_resource type="Texture2D" uid="uid://c8pfr7qop7p34" path="res://assets/King_Crab/King_Crab_31.png" id="1_shnkw"]
 [ext_resource type="Texture2D" uid="uid://dips13hykthwk" path="res://assets/King_Crab/King_Crab_32.png" id="2_f86bj"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_0durw"]
@@ -46,7 +46,7 @@ shape = SubResource("CircleShape2D_wrbwa")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 8
+collision_mask = 136
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(9, -3)

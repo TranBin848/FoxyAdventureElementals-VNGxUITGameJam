@@ -288,6 +288,7 @@ anim_speed_max = 1.0
 [node name="Mushroom" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_sl7hc")
 shader_path = "uid://doovon2v0i5dx"
 sight = 100.0

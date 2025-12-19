@@ -1,13 +1,13 @@
 [gd_scene load_steps=27 format=3 uid="uid://dglmldw2eudyb"]
 
-[ext_resource type="Script" uid="uid://bd8mo0mygqnii" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.gd" id="1_g34j8"]
-[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_xwc4j"]
-[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_27qoa"]
-[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_g34j8"]
-[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_ily67"]
-[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_venbl"]
+[ext_resource type="Script" uid="uid://bd8mo0mygqnii" path="res://Scenes/enemies/minions/coconut_warrior/coconut_warrior.gd" id="1_g34j8"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://Scenes/enemies/paritcles/metal_particle.tscn" id="2_xwc4j"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="3_27qoa"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="4_g34j8"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="5_ily67"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="6_venbl"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="7_3ufwa"]
-[ext_resource type="PackedScene" uid="uid://r7tfrorsfck0" path="res://scenes/enemies/minions/coconut_warrior/coconut.tscn" id="8_g34j8"]
+[ext_resource type="PackedScene" uid="uid://r7tfrorsfck0" path="res://Scenes/enemies/minions/coconut_warrior/coconut.tscn" id="8_g34j8"]
 [ext_resource type="Texture2D" uid="uid://hw3cbneos1d5" path="res://assets/enemy/coconut_warrior/coconut_warrior_attack1.png" id="9_jkbpv"]
 [ext_resource type="Texture2D" uid="uid://ddub5n6e573rg" path="res://assets/enemy/coconut_warrior/coconut_warrior_attack2.png" id="10_hrhag"]
 [ext_resource type="Texture2D" uid="uid://bmrpko2rr5lp4" path="res://assets/enemy/coconut_warrior/coconut_warrior_attack3.png" id="11_8p5pg"]
@@ -18,11 +18,11 @@
 [ext_resource type="Texture2D" uid="uid://c0dew6fnqxnhp" path="res://assets/enemy/coconut_warrior/coconut_warrior_moving3.png" id="15_i17t5"]
 [ext_resource type="Texture2D" uid="uid://lq2lm4wj07o4" path="res://assets/enemy/coconut_warrior/coconut_warrior_moving4.png" id="16_a65j3"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="17_reide"]
-[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="18_27qoa"]
-[ext_resource type="Script" uid="uid://c8pcg1f7oyrux" path="res://scenes/enemies/minions/coconut_warrior/states/moving.gd" id="20_ily67"]
-[ext_resource type="Script" uid="uid://vceglgefccco" path="res://scenes/enemies/minions/coconut_warrior/states/attack.gd" id="21_venbl"]
-[ext_resource type="Script" uid="uid://c1fjajaaylggd" path="res://scenes/enemies/minions/coconut_warrior/states/hurt.gd" id="22_1gu4w"]
-[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="22_3ufwa"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="18_27qoa"]
+[ext_resource type="Script" uid="uid://c8pcg1f7oyrux" path="res://Scenes/enemies/minions/coconut_warrior/states/moving.gd" id="20_ily67"]
+[ext_resource type="Script" uid="uid://vceglgefccco" path="res://Scenes/enemies/minions/coconut_warrior/states/attack.gd" id="21_venbl"]
+[ext_resource type="Script" uid="uid://c1fjajaaylggd" path="res://Scenes/enemies/minions/coconut_warrior/states/hurt.gd" id="22_1gu4w"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="22_3ufwa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e33os"]
 animations = [{
@@ -92,6 +92,7 @@ height = 28.0
 
 [node name="CoconutWarrior" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_g34j8")
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0

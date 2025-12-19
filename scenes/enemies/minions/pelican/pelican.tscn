@@ -95,6 +95,7 @@ height = 34.0
 
 [node name="Pelican" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_ktqmc")
 drop_bomb_angle = 90.0
 drop_bomb_force = 300.0
