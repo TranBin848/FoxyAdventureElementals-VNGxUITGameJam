@@ -25,6 +25,7 @@ var is_able_attack: bool = true
 @export var has_blade: bool = false
 @export var has_wand: bool = true
 var is_in_fireball_state: bool = false
+var is_in_burrow_state: bool = false
 var is_equipped_blade: bool = false   
 var is_equipped_wand: bool = false    
 signal weapon_swapped(equipped_weapon_type: String)
@@ -39,10 +40,13 @@ var blade_hit_area: Area2D
 @onready var skill_factory: Node2DFactory = $Direction/SkillFactory
 @onready var hurt_particle: CPUParticles2D = $Direction/HurtFXFactory
 @onready var slash_fx_factory: Node2DFactory = $Direction/SlashFXFactory
+@onready var surface_fx_factory: Node2DFactory = $Direction/SurfaceFXFactory
 
 @onready var hurt_area: HurtArea2D = $Direction/HurtArea2D
 @onready var fireball_hit_area: HitArea2D = $Direction/FireballHitArea2D
+@onready var default_collision: CollisionShape2D = $CollisionShape2D
 @onready var fireball_collision: CollisionShape2D = $FireballShape2D
+@onready var burrow_collision: CollisionShape2D = $BurrowShape2D
 
 @export var push_strength = 100.0
 
@@ -141,6 +145,7 @@ func cast_spell(skill: Skill) -> String:
 	if not skill: return "Skill invalid"
 	if(mana - skill.mana < 0): return "Not Enough Mana"
 	if not is_equipped_wand: return "Require Wand"
+	if is_in_burrow_state: return "Is In Burrow"
 	_cancel_invisibility_if_active()
 		
 	await get_tree().create_timer(0.15).timeout
@@ -229,6 +234,7 @@ func _area_shot(skill: Skill, target_position: Vector2, target_enemy: Node2D) ->
 
 func _apply_buff(skill: Skill) -> void: 
 	if skill is Fireball: _apply_fireball_buff(skill.duration)
+	elif skill is Burrow: _apply_burrow_buff(skill.duration)
 	elif skill is HealOverTime: _apply_heal_over_time(skill.heal_per_tick, skill.duration, skill.tick_interval)
 
 func _apply_fireball_buff(duration: float) -> void:
@@ -309,7 +315,10 @@ func is_char_invulnerable() -> bool: return is_invulnerable
 
 func jump() -> void:
 	super.jump()
-	jump_fx_factory.create() as Node2D
+	if !is_in_burrow_state:
+		jump_fx_factory.create() as Node2D
+	else:
+		surface_fx_factory.create() as Node2D
 
 func wall_jump() -> void:
 	turn_around()
@@ -320,7 +329,6 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 	hurt_particle.emitting = true
-
 # ================================================================
 # === SAVE/LOAD & ELEMENTS =======================================
 # ================================================================
@@ -637,3 +645,65 @@ func _on_invisible_ended() -> void:
 	
 	# Restore original collision setup (layer 2, mask 1)
 	collision_layer = 1 << 1   # player
+
+# BURROW LOGIC
+
+func _apply_burrow_buff(duration: float) -> void:
+	# 1. State & Stats
+	is_in_burrow_state = true
+	speed_multiplier = 1.25
+	is_able_attack = false
+	
+	# 2. Disable Collision Layer 2 (Player Body Layer) / Hurtbox
+	hurt_area.call_deferred("set_monitorable", false)
+	
+	# Disable the standing collision shape
+	if default_collision: default_collision.set_deferred("disabled", true)
+	if burrow_collision: burrow_collision.set_deferred("disabled", false)
+
+	# 3. Handle Visuals
+	if animated_sprite:
+		animated_sprite.hide()
+	
+	# Ensure the silhouette remains visible
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.show()
+			s.modulate.a = 0.5 
+			
+	# --- Wait for Duration ---
+	await get_tree().create_timer(duration).timeout
+	
+	# 4. Revert Visuals
+	if animated_sprite:
+		animated_sprite.show()
+	
+	# 5. Revert State & Stats
+	jump() # Apply Vertical Force
+	
+	# --- NEW LOGIC: Push horizontally towards active collision ---
+	# We apply an immediate impulse on X axis based on direction.
+	# You can adjust '400.0' to change how far they fly forward.
+	velocity.x = 400.0 * direction 
+	# -------------------------------------------------------------
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	is_in_burrow_state = false
+	speed_multiplier = 1.0
+	is_able_attack = true
+	
+	# 6. Revert Collision Layer
+	# Set monitorable back to TRUE so player can take damage again
+	hurt_area.call_deferred("set_monitorable", true)
+		
+	# Reset silhouette opacity
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.modulate.a = 1.0
+
+	# Re-enable standing collision
+	if default_collision: default_collision.set_deferred("disabled", false)
+	
+	# Disable BOTH burrow collisions
+	if burrow_collision: burrow_collision.set_deferred("disabled", true)

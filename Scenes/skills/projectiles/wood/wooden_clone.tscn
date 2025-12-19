@@ -141,7 +141,7 @@ metadata/_custom_type_script = "uid://w7xdmsdvf5vd"
 [node name="Direction" type="Node2D" parent="CloneCharacter"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CloneCharacter/Direction"]
-self_modulate = Color(0.337255, 0.196078, 0.196078, 1)
+self_modulate = Color(0.674, 0.394, 0.394, 1)
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_xvvsu")
 animation = &"hurt"

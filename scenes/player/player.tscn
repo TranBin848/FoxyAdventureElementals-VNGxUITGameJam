@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=107 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://Scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://Scenes/player/player.gd" id="1_wodsf"]
@@ -81,6 +81,7 @@
 [ext_resource type="Texture2D" uid="uid://bqykhn7xwriyi" path="res://assets/foxy/fox_hat_wand/fox_walk_3.png" id="57_ws0t6"]
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
 [ext_resource type="Texture2D" uid="uid://bnxmtrxr3ke7q" path="res://assets/skills/fire/Fireball/Fire Effect and Bullet 16x16.png" id="60_gs7hn"]
+[ext_resource type="PackedScene" uid="uid://b33nvdvnniecl" path="res://Scenes/skills/projectiles/earth/comet_crater.tscn" id="66_gs7hn"]
 [ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://Scenes/fx/slash_fx.tscn" id="67_31ki0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lwhcj"]
@@ -565,6 +566,9 @@ point_count = 3
 radius = 7.0
 height = 28.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwhcj"]
+size = Vector2(5.5, 3)
+
 [node name="Player" type="CharacterBody2D"]
 light_mask = 0
 material = SubResource("ShaderMaterial_lwhcj")
@@ -606,7 +610,6 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
-visible = false
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"attack"
@@ -688,6 +691,13 @@ position = Vector2(37, -12)
 script = ExtResource("37_iwuka")
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
+[node name="SurfaceFXFactory" type="Marker2D" parent="Direction"]
+position = Vector2(0, -37)
+script = ExtResource("37_iwuka")
+product_packed_scene = ExtResource("66_gs7hn")
+target_container_name = &"FX"
+metadata/_custom_type_script = "uid://b2o007yxvk7qa"
+
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
 visible = false
 collision_layer = 4
@@ -757,6 +767,11 @@ shape = SubResource("CapsuleShape2D_genst")
 [node name="FireballShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ru3bc")
+disabled = true
+
+[node name="BurrowShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -39)
+shape = SubResource("RectangleShape2D_lwhcj")
 disabled = true
 
 [node name="States" type="Node" parent="."]

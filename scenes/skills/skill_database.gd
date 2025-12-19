@@ -15,7 +15,8 @@ var all_skills = {
 		"Stun Shot": StunShot,
 		"Thunder Strike": Thunderbolt,
 		"Earthquake": Earthquake,
-		"Comet Rain": CometRain
+		"Comet Rain": CometRain,
+		"Burrow": Burrow
 	}
 func get_skill_by_name(name: String) -> Script:
 	if name in all_skills:

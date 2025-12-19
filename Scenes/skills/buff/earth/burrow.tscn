@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://cnhjct6qvq77d"]
+
+[ext_resource type="Script" uid="uid://cem4lyk4ksjeg" path="res://Scenes/skills/buff/buffBase.gd" id="1_rdu3k"]
+[ext_resource type="Texture2D" uid="uid://bnxmtrxr3ke7q" path="res://assets/skills/fire/Fireball/Fire Effect and Bullet 16x16.png" id="2_nh5l4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stsyy"]
+atlas = ExtResource("2_nh5l4")
+region = Rect2(480, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52wkt"]
+atlas = ExtResource("2_nh5l4")
+region = Rect2(496, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jx5o"]
+atlas = ExtResource("2_nh5l4")
+region = Rect2(512, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggct2"]
+atlas = ExtResource("2_nh5l4")
+region = Rect2(528, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eq7lj"]
+atlas = ExtResource("2_nh5l4")
+region = Rect2(544, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0eie8"]
+atlas = ExtResource("2_nh5l4")
+region = Rect2(560, 144, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_stsyy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stsyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52wkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jx5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggct2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eq7lj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0eie8")
+}],
+"loop": true,
+"name": &"burrow",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_52wkt"]
+radius = 19.0263
+
+[node name="Burrow" type="Area2D"]
+script = ExtResource("1_rdu3k")
+metadata/_custom_type_script = "uid://cem4lyk4ksjeg"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.674, 0.394, 0.394, 1)
+sprite_frames = SubResource("SpriteFrames_stsyy")
+animation = &"burrow"
+autoplay = "burrow"
+frame = 2
+frame_progress = 0.840208
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_52wkt")
+disabled = true
