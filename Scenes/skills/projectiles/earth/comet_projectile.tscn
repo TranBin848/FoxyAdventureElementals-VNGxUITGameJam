@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://dsmhubrec0g1o"]
 
-[ext_resource type="Script" uid="uid://hm8175hnifxg" path="res://Scenes/skills/projectiles/earth/comet_projectile.gd" id="1_casnx"]
-[ext_resource type="PackedScene" uid="uid://b33nvdvnniecl" path="res://Scenes/skills/projectiles/earth/comet_crater.tscn" id="2_ohy4f"]
+[ext_resource type="Script" uid="uid://hm8175hnifxg" path="res://scenes/skills/projectiles/earth/comet_projectile.gd" id="1_casnx"]
+[ext_resource type="PackedScene" uid="uid://b33nvdvnniecl" path="res://scenes/skills/projectiles/earth/comet_crater.tscn" id="2_ohy4f"]
 [ext_resource type="Texture2D" uid="uid://blwoyahqsw8vc" path="res://assets/skills/earth/Earth projectile Spritesheet .png" id="2_xy6jy"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="4_lgdea"]
 

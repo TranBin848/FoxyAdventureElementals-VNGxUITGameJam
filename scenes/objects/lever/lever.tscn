@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4f2nweypsibr"]
 
-[ext_resource type="Script" uid="uid://bejwilfarw6vy" path="res://scenes/objects/lever/lever.gd" id="1_fokg1"]
+[ext_resource type="Script" uid="uid://bejwilfarw6vy" path="res://Scenes/objects/lever/lever.gd" id="1_fokg1"]
 [ext_resource type="Texture2D" uid="uid://knarcsve4ijy" path="res://assets/object/lever/lever-activate.png" id="2_odwmr"]
 [ext_resource type="Texture2D" uid="uid://b5ivgbh5vmab7" path="res://assets/object/lever/lever-deactive.png" id="3_odwmr"]
 

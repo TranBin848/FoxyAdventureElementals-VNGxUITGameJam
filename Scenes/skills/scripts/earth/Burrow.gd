@@ -13,4 +13,4 @@ func _init():
 	mana = 30.0
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons26.png"
 	animation_name = "burrow"
-	projectile_scene = preload("res://Scenes/skills/buff/earth/burrow.tscn")
+	projectile_scene = preload("res://scenes/skills/buff/earth/burrow.tscn")

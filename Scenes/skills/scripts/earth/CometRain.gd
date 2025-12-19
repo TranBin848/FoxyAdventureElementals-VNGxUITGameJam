@@ -12,4 +12,4 @@ func _init():
 	damage = 0
 	mana = 10.0
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons28.png"
-	area_scene = preload("res://Scenes/skills/area/earth/cometRain.tscn")
+	area_scene = preload("res://scenes/skills/area/earth/cometRain.tscn")

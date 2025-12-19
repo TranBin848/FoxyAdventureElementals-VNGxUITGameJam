@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dns4h3bxal3p1"]
 
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_dgygd"]
-[ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/icon_and_health.tscn" id="2_rg2lp"]
+[ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://Scenes/ui/icon_and_health.tscn" id="2_rg2lp"]
 
 [node name="HealthBarContainer" type="MarginContainer"]
 offset_right = 40.0

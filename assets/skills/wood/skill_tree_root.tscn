@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://bcupn8lintl77"]
 
-[ext_resource type="Script" uid="uid://c613v451tucd0" path="res://scenes/ui/skill_tree/skill_tree_root.gd" id="1_r363v"]
-[ext_resource type="PackedScene" uid="uid://c24hsf56rny2a" path="res://scenes/ui/skill_tree1.tscn" id="2_l5itb"]
-[ext_resource type="PackedScene" uid="uid://sgxxofrggjed" path="res://scenes/ui/skill_info_panel.tscn" id="3_chxqf"]
+[ext_resource type="Script" uid="uid://c613v451tucd0" path="res://Scenes/ui/skill_tree/skill_tree_root.gd" id="1_r363v"]
+[ext_resource type="PackedScene" uid="uid://c24hsf56rny2a" path="res://Scenes/ui/skill_tree1.tscn" id="2_l5itb"]
+[ext_resource type="PackedScene" uid="uid://sgxxofrggjed" path="res://Scenes/ui/skill_info_panel.tscn" id="3_chxqf"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="4_l5itb"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="5_chxqf"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://Scenes/ui/skill_bar.tscn" id="5_chxqf"]
 
 [node name="SkillTreeRoot" type="Control"]
 layout_mode = 3

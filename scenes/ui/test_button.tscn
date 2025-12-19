@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bg4sbcdhqgxfc"]
 
 [ext_resource type="Texture2D" uid="uid://bmcu8k7wl5pke" path="res://assets/ui/on_button.png" id="1_rxn4h"]
-[ext_resource type="Script" uid="uid://cg7eard82tebm" path="res://scenes/ui/test.gd" id="2_7ghdq"]
+[ext_resource type="Script" uid="uid://cg7eard82tebm" path="res://Scenes/ui/test.gd" id="2_7ghdq"]
 
 [node name="Control" type="MarginContainer"]
 anchors_preset = 15

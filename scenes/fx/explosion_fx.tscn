@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://c7oakmoqeoa5i"]
 
-[ext_resource type="Script" uid="uid://bwcwbd68abn2j" path="res://scenes/fx/animated_fx.gd" id="1_w80cl"]
+[ext_resource type="Script" uid="uid://bwcwbd68abn2j" path="res://Scenes/fx/animated_fx.gd" id="1_w80cl"]
 [ext_resource type="Texture2D" uid="uid://de22uag16alld" path="res://assets/fx/explosion/blastwave1.png" id="2_aajkh"]
 [ext_resource type="Texture2D" uid="uid://cnb7mo2lxovcb" path="res://assets/fx/explosion/blastwave2.png" id="3_6tf8v"]
 [ext_resource type="Texture2D" uid="uid://cshcerp60ig5j" path="res://assets/fx/explosion/blastwave3.png" id="4_gmoov"]

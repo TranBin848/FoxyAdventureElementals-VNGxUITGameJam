@@ -81,7 +81,7 @@
 [ext_resource type="Texture2D" uid="uid://bqykhn7xwriyi" path="res://assets/foxy/fox_hat_wand/fox_walk_3.png" id="57_ws0t6"]
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
 [ext_resource type="Texture2D" uid="uid://bnxmtrxr3ke7q" path="res://assets/skills/fire/Fireball/Fire Effect and Bullet 16x16.png" id="60_gs7hn"]
-[ext_resource type="PackedScene" uid="uid://b33nvdvnniecl" path="res://Scenes/skills/projectiles/earth/comet_crater.tscn" id="66_gs7hn"]
+[ext_resource type="PackedScene" uid="uid://cld6jdeq2p8te" path="res://Scenes/skills/projectiles/earth/comet_crater.tscn" id="66_gs7hn"]
 [ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://Scenes/fx/slash_fx.tscn" id="67_31ki0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lwhcj"]

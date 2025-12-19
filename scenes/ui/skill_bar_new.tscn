@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dn0lqvt5ra32c"]
 
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_nor56"]
-[ext_resource type="Script" uid="uid://cqoavximieiqo" path="res://scenes/ui/skill_bar.gd" id="2_kk6d2"]
-[ext_resource type="PackedScene" uid="uid://cbop0r31m7elf" path="res://scenes/ui/spell_button.tscn" id="3_jhbmx"]
+[ext_resource type="Script" uid="uid://cqoavximieiqo" path="res://Scenes/ui/skill_bar.gd" id="2_kk6d2"]
+[ext_resource type="PackedScene" uid="uid://cbop0r31m7elf" path="res://Scenes/ui/spell_button.tscn" id="3_jhbmx"]
 
 [node name="skillbar" type="PanelContainer"]
 offset_right = 248.296

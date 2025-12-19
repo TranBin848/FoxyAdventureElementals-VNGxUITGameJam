@@ -406,7 +406,7 @@ func apply_metal_effect() -> void:
 func _update_elemental_palette() -> void:
 	if not is_instance_valid(animated_sprite): return
 	var shader_material = ShaderMaterial.new()
-	shader_material.shader = load("res://Scenes/player/player_glowing.gdshader")
+	shader_material.shader = load("res://scenes/player/player_glowing.gdshader")
 	animated_sprite.material = shader_material
 	var shader_mat = animated_sprite.material as ShaderMaterial
 	shader_mat.set_shader_parameter("elemental_type", elemental_type)

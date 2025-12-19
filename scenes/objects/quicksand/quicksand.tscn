@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://clv23qmtscnof"]
 
 [ext_resource type="Texture2D" uid="uid://dajbe00rioo4e" path="res://assets/object/quicksand/quicksand.png" id="1_gs2h1"]
-[ext_resource type="Script" uid="uid://cw6uvamskk0eu" path="res://scenes/objects/quicksand/quicksand.gd" id="1_psf7j"]
+[ext_resource type="Script" uid="uid://cw6uvamskk0eu" path="res://Scenes/objects/quicksand/quicksand.gd" id="1_psf7j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_toj85"]
 size = Vector2(50, 8)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://b2se2pnqiq8ba"]
 
-[ext_resource type="Script" uid="uid://b0co5l3fr8oad" path="res://Scenes/skills/projectiles/wood/wooden_clone.gd" id="1_djjju"]
+[ext_resource type="Script" uid="uid://b0co5l3fr8oad" path="res://scenes/skills/projectiles/wood/wooden_clone.gd" id="1_djjju"]
 [ext_resource type="Texture2D" uid="uid://b6k6x07jbps0a" path="res://assets/foxy/fox_hat_wand/fox_hit_1.png" id="2_h5unx"]
 [ext_resource type="Texture2D" uid="uid://cm8qbkbykjxrm" path="res://assets/foxy/fox_hat_wand/fox_hit_2.png" id="3_8mq2m"]
 [ext_resource type="Texture2D" uid="uid://0jmgtwuyojnn" path="res://assets/foxy/fox_hat_wand/fox_hit_3.png" id="4_h4stq"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cbop0r31m7elf"]
 
-[ext_resource type="Script" uid="uid://cgwmnsu6dbojw" path="res://scenes/ui/spell_button.gd" id="2_02r78"]
+[ext_resource type="Script" uid="uid://cgwmnsu6dbojw" path="res://Scenes/ui/spell_button.gd" id="2_02r78"]
 [ext_resource type="Texture2D" uid="uid://ckirn2a8e6sjq" path="res://assets/skills/glossy-white.png" id="2_we2kx"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="3_a8xnk"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://iaq1pu180j0s"]
 
-[ext_resource type="Script" uid="uid://5btdwob525wm" path="res://scenes/skills/projectiles/projectileBase.gd" id="1_qag1m"]
+[ext_resource type="Script" uid="uid://5btdwob525wm" path="res://Scenes/skills/projectiles/projectileBase.gd" id="1_qag1m"]
 [ext_resource type="Texture2D" uid="uid://dj80dcybhxkbr" path="res://assets/skills/water/Water Ball - Spritesheet/WaterBall - Startup and Infinite.png" id="63_qag1m"]
 [ext_resource type="Texture2D" uid="uid://b6e7bqero8rk7" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - Startup and Infinite.png" id="64_61trm"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://pjg067fjvr3h" path="res://assets/ui/pannel_player.png" id="1_0545j"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_u3i16"]
-[ext_resource type="Script" uid="uid://dxv2pgo8vl74m" path="res://scenes/ui/icon_and_health.gd" id="2_8np0s"]
+[ext_resource type="Script" uid="uid://dxv2pgo8vl74m" path="res://Scenes/ui/icon_and_health.gd" id="2_8np0s"]
 [ext_resource type="Texture2D" uid="uid://ccr478wasxi54" path="res://assets/ui/bars.png" id="3_27flr"]
 [ext_resource type="Texture2D" uid="uid://r4uk8rh3cg1h" path="res://assets/foxy/face/foxy_faces.png" id="3_lwx6g"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="6_kci34"]

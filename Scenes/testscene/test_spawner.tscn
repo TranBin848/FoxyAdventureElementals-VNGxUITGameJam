@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_ihf7f"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="2_u14bh"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="3_mcrro"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://Scenes/player/player.tscn" id="3_mcrro"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="4_lij6g"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="5_a3442"]
 [ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="6_iyi8e"]
@@ -29,12 +29,12 @@
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="28_oi0ud"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="29_tyosl"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="31_cw110"]
-[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="31_mcrro"]
-[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="32_u14bh"]
-[ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://scenes/skills/scripts/fire/FireShot.gd" id="33_a3442"]
-[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://scenes/skills/scripts/water/WaterBall.gd" id="33_iyi8e"]
-[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="34_lij6g"]
-[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://scenes/skills/scripts/water/Tornado.gd" id="35_nr3pa"]
+[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://Scenes/enemies/spawner/spawner.tscn" id="31_mcrro"]
+[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://Scenes/enemies/minions/seahorse/seahorse.tscn" id="32_u14bh"]
+[ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://Scenes/skills/scripts/fire/FireShot.gd" id="33_a3442"]
+[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://Scenes/skills/scripts/water/WaterBall.gd" id="33_iyi8e"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="34_lij6g"]
+[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://Scenes/skills/scripts/water/Tornado.gd" id="35_nr3pa"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
 script/source = "extends Node2D
