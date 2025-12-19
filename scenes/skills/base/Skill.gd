@@ -17,6 +17,8 @@ class_name Skill
 @export var mana: int = 1.0
 
 @export var type: String = "single_shot" 
+
+var texture = load(texture_path)
 # có thể là: "single_shot", "multi_shot", "radial", "area", "buff"
 
 #Thêm trường mã hóa element để tiện xử lý logic
