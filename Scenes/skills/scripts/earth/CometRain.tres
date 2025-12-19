@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cc6qdlelt05ae"]
 
-[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://Scenes/skills/base/Skill.gd" id="1_3ptjf"]
-[ext_resource type="PackedScene" uid="uid://c5gb2h683tnyv" path="res://Scenes/skills/area/earth/cometRain.tscn" id="1_kausm"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_3ptjf"]
+[ext_resource type="PackedScene" uid="uid://c5gb2h683tnyv" path="res://scenes/skills/area/earth/cometRain.tscn" id="1_kausm"]
 
 [resource]
 script = ExtResource("1_3ptjf")

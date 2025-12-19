@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bf2uetkx1otc6"]
 
 [ext_resource type="Texture2D" uid="uid://gxdcobbhkb2i" path="res://assets/object/door/door-close.png" id="1_dh7do"]
-[ext_resource type="Script" uid="uid://dsygwke67f56e" path="res://Scenes/objects/house_door/house_door.gd" id="1_fnivu"]
+[ext_resource type="Script" uid="uid://dsygwke67f56e" path="res://scenes/objects/house_door/house_door.gd" id="1_fnivu"]
 [ext_resource type="Texture2D" uid="uid://dbw2h0pnml03g" path="res://assets/object/door/door-open.png" id="2_fnivu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_55hu4"]

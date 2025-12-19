@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://bbk5vp0ss60j5"]
 
-[ext_resource type="Script" uid="uid://b7u8638cjta7m" path="res://Scenes/skills/projectiles/metal/stun_shot_projectile.gd" id="1_w28rp"]
+[ext_resource type="Script" uid="uid://b7u8638cjta7m" path="res://scenes/skills/projectiles/metal/stun_shot_projectile.gd" id="1_w28rp"]
 [ext_resource type="Texture2D" uid="uid://bmd75knokqgjh" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact1.png" id="2_jw2g5"]
 [ext_resource type="Texture2D" uid="uid://bex6k1xhjjpso" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact2.png" id="3_8v08l"]
 [ext_resource type="Texture2D" uid="uid://bmkel1bjq823s" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact3.png" id="4_kgqm5"]

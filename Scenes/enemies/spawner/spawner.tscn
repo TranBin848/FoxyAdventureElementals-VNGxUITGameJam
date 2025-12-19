@@ -1,6 +1,6 @@
 [gd_scene load_steps=53 format=3 uid="uid://eam3ft7648pk"]
 
-[ext_resource type="Script" uid="uid://dfm8mev0b22np" path="res://Scenes/enemies/spawner/spawner.gd" id="1_j8wy5"]
+[ext_resource type="Script" uid="uid://dfm8mev0b22np" path="res://scenes/enemies/spawner/spawner.gd" id="1_j8wy5"]
 [ext_resource type="Texture2D" uid="uid://bnrcrc2grwxk7" path="res://assets/enemy/spawner/spawner_dead7.png" id="2_5xtu1"]
 [ext_resource type="Texture2D" uid="uid://22y845kqhg2w" path="res://assets/enemy/spawner/water_spawner_1.png" id="2_fb8vx"]
 [ext_resource type="Texture2D" uid="uid://7b6nyukuagxx" path="res://assets/enemy/spawner/fire_spawner_1.png" id="2_h4u0x"]
@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b045wwrcjwupt" path="res://assets/enemy/spawner/water_spawner_6.png" id="7_fapcy"]
 [ext_resource type="Texture2D" uid="uid://2mnlhen3u53g" path="res://assets/enemy/spawner/fire_spawner_6.png" id="7_idvbn"]
 [ext_resource type="Texture2D" uid="uid://d4k2o27o022hf" path="res://assets/enemy/spawner/spawner_dead12.png" id="7_vm5qj"]
-[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="8_1t3h5"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="8_1t3h5"]
 [ext_resource type="Texture2D" uid="uid://dyhqagqw2be5d" path="res://assets/enemy/spawner/spawner_dead14.png" id="8_10n51"]
 [ext_resource type="Texture2D" uid="uid://p36qrm0r05em" path="res://assets/enemy/spawner/spawner_hurt.png" id="10_vm5qj"]
 [ext_resource type="Texture2D" uid="uid://du5v4fxvlfdo1" path="res://assets/enemy/spawner/wood_spawner_1.png" id="14_5jg0x"]
@@ -41,10 +41,10 @@
 [ext_resource type="Texture2D" uid="uid://bpxdl5xu854df" path="res://assets/enemy/spawner/earth_spawner_5.png" id="30_vnhym"]
 [ext_resource type="Texture2D" uid="uid://tk0iwacf3kf4" path="res://assets/enemy/spawner/earth_spawner_6.png" id="31_qlnli"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="39_deekk"]
-[ext_resource type="Script" uid="uid://c48clrolbcwpc" path="res://Scenes/enemies/spawner/idle.gd" id="40_b57hv"]
-[ext_resource type="Script" uid="uid://rf0ag50mstqj" path="res://Scenes/enemies/spawner/spawn.gd" id="41_q67ao"]
-[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="42_deekk"]
-[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://Scenes/enemies/states/dead.gd" id="43_vm5qj"]
+[ext_resource type="Script" uid="uid://c48clrolbcwpc" path="res://scenes/enemies/spawner/idle.gd" id="40_b57hv"]
+[ext_resource type="Script" uid="uid://rf0ag50mstqj" path="res://scenes/enemies/spawner/spawn.gd" id="41_q67ao"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="42_deekk"]
+[ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="43_vm5qj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54d3e"]
 radius = 17.0

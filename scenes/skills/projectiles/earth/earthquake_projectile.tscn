@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bhb73wsv0b8qg"]
 
-[ext_resource type="Script" uid="uid://ckgt8njm4ymtt" path="res://Scenes/skills/projectiles/earth/earthquake_projectile.gd" id="1_h1gyn"]
+[ext_resource type="Script" uid="uid://ckgt8njm4ymtt" path="res://scenes/skills/projectiles/earth/earthquake_projectile.gd" id="1_h1gyn"]
 [ext_resource type="Texture2D" uid="uid://c1fthml3sdr33" path="res://assets/skills/earth/Earth Bump.png" id="2_5nw6t"]
 [ext_resource type="Texture2D" uid="uid://bxu61oh3nvp2v" path="res://assets/skills/earth/Impact Spritesheet.png" id="4_3i2q0"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="19_x20ww"]

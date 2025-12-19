@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://c1h5e81m8pg5d"]
 
-[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://Scenes/skills/base/Skill.gd" id="1_kcwmj"]
-[ext_resource type="PackedScene" uid="uid://bhb73wsv0b8qg" path="res://Scenes/skills/projectiles/earth/earthquake_projectile.tscn" id="1_wv36o"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_kcwmj"]
+[ext_resource type="PackedScene" uid="uid://bhb73wsv0b8qg" path="res://scenes/skills/projectiles/earth/earthquake_projectile.tscn" id="1_wv36o"]
 
 [resource]
 script = ExtResource("1_kcwmj")

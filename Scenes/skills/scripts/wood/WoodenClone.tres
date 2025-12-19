@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dalrpimaw8kqv"]
 
-[ext_resource type="PackedScene" uid="uid://b2se2pnqiq8ba" path="res://Scenes/skills/projectiles/wood/wooden_clone.tscn" id="1_bojuf"]
-[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://Scenes/skills/base/Skill.gd" id="1_hsbgc"]
+[ext_resource type="PackedScene" uid="uid://b2se2pnqiq8ba" path="res://scenes/skills/projectiles/wood/wooden_clone.tscn" id="1_bojuf"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_hsbgc"]
 
 [resource]
 script = ExtResource("1_hsbgc")

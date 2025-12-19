@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dp5yiuk6etm8k"]
 
-[ext_resource type="Script" uid="uid://ilve84efvlhj" path="res://Scenes/skills/projectiles/metal/sword_projectile.gd" id="1_0g75m"]
+[ext_resource type="Script" uid="uid://ilve84efvlhj" path="res://scenes/skills/projectiles/metal/sword_projectile.gd" id="1_0g75m"]
 [ext_resource type="Texture2D" uid="uid://d50b7em2rtfn" path="res://assets/skills/metal/thousandSwords/spritesheet.png" id="2_jt2st"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_i8hic"]
 

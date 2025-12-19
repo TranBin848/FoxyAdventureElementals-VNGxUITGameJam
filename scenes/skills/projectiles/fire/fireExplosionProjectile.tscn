@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://dgcjhv4d3hvu"]
 
-[ext_resource type="Script" uid="uid://dhjy816rov0pm" path="res://Scenes/skills/projectiles/fire/fire_explosion_projectile.gd" id="1_i50lh"]
+[ext_resource type="Script" uid="uid://dhjy816rov0pm" path="res://scenes/skills/projectiles/fire/fire_explosion_projectile.gd" id="1_i50lh"]
 [ext_resource type="Texture2D" uid="uid://cld72nn514rmh" path="res://assets/skills/fire/Fireexplosion/Explosion 2 SpriteSheet.png" id="2_lg4hk"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_lg4hk"]
 

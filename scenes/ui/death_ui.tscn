@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cpadeikbdhgul"]
 
-[ext_resource type="Script" uid="uid://cnduespd5fuvh" path="res://Scenes/ui/death_ui.gd" id="1_8uvnn"]
+[ext_resource type="Script" uid="uid://cnduespd5fuvh" path="res://scenes/ui/death_ui.gd" id="1_8uvnn"]
 [ext_resource type="Shader" uid="uid://dwj67af1w0v4e" path="res://shaders/ui/death_screen.gdshader" id="1_e71jf"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_8uvnn"]
 

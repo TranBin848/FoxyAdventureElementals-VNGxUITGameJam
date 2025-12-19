@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cnhjct6qvq77d"]
 
-[ext_resource type="Script" uid="uid://cem4lyk4ksjeg" path="res://Scenes/skills/buff/buffBase.gd" id="1_rdu3k"]
+[ext_resource type="Script" uid="uid://cem4lyk4ksjeg" path="res://scenes/skills/buff/buffBase.gd" id="1_rdu3k"]
 [ext_resource type="Texture2D" uid="uid://bnxmtrxr3ke7q" path="res://assets/skills/fire/Fireball/Fire Effect and Bullet 16x16.png" id="2_nh5l4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stsyy"]
