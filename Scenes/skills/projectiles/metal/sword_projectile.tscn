@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp5yiuk6etm8k"]
+
+[ext_resource type="Script" uid="uid://ilve84efvlhj" path="res://Scenes/skills/projectiles/metal/sword_projectile.gd" id="1_0g75m"]
+[ext_resource type="Texture2D" uid="uid://d50b7em2rtfn" path="res://assets/skills/metal/thousandSwords/spritesheet.png" id="2_jt2st"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_i8hic"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqr0l"]
+radius = 5.0
+height = 17.0
+
+[node name="SwordProjectile" type="Area2D"]
+script = ExtResource("1_0g75m")
+metadata/_custom_type_script = "uid://5btdwob525wm"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785397
+texture = ExtResource("2_jt2st")
+hframes = 9
+vframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 0)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_mqr0l")
+
+[node name="HitArea2D" parent="." instance=ExtResource("3_i8hic")]
+collision_mask = 16
+elemental_type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(2.5, 0)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_mqr0l")

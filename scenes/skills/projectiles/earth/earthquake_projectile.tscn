@@ -146,13 +146,13 @@ script = ExtResource("1_h1gyn")
 position = Vector2(3.75, -0.5)
 shape = SubResource("RectangleShape2D_uhoxj")
 
-[node name="HitArea2d" parent="." instance=ExtResource("19_x20ww")]
+[node name="HitArea2D" parent="." instance=ExtResource("19_x20ww")]
 position = Vector2(1, 2)
 collision_layer = 32
 collision_mask = 16
 elemental_type = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 shape = SubResource("RectangleShape2D_tnvla")
 
 [node name="Skill" type="Sprite2D" parent="."]
@@ -180,4 +180,4 @@ frame = 7
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]
