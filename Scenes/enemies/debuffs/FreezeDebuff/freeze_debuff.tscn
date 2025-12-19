@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bilgfkyn3jabe"]
+
+[node name="FreezeDebuff" type="Node2D"]
