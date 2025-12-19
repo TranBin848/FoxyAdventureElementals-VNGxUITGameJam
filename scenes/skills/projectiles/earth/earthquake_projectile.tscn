@@ -1,107 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bhb73wsv0b8qg"]
+[gd_scene load_steps=11 format=3 uid="uid://bhb73wsv0b8qg"]
 
-[ext_resource type="Script" uid="uid://ckgt8njm4ymtt" path="res://scenes/skills/projectiles/earth/earthquake_projectile.gd" id="1_h1gyn"]
+[ext_resource type="Script" uid="uid://ckgt8njm4ymtt" path="res://Scenes/skills/projectiles/earth/earthquake_projectile.gd" id="1_h1gyn"]
 [ext_resource type="Texture2D" uid="uid://c1fthml3sdr33" path="res://assets/skills/earth/Earth Bump.png" id="2_5nw6t"]
+[ext_resource type="Texture2D" uid="uid://bxu61oh3nvp2v" path="res://assets/skills/earth/Impact Spritesheet.png" id="4_3i2q0"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="19_x20ww"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0rlev"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5nmby"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uw0c8"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w5pch"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(0, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6328j"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(48, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mgn2p"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(96, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2bwaq"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(144, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sv2hn"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(0, 96, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uyg4x"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(48, 96, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_58l5h"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(96, 96, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dmsva"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(144, 96, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qixru"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(0, 144, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h1gyn"]
-atlas = ExtResource("2_5nw6t")
-region = Rect2(48, 144, 48, 48)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0rlev")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5nmby")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uw0c8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w5pch")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6328j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mgn2p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2bwaq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sv2hn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uyg4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_58l5h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dmsva")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qixru")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h1gyn")
-}],
-"loop": false,
-"name": &"Earthquake",
-"speed": 10.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhoxj"]
 size = Vector2(32.5, 15)
@@ -109,15 +11,134 @@ size = Vector2(32.5, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tnvla"]
 size = Vector2(32, 20)
 
+[sub_resource type="Animation" id="Animation_1qcxq"]
+length = 1.15
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skill:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1, 1.08333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FX:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_3i2q0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FX:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skill:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5wvks"]
+_data = {
+&"Earthquake": SubResource("Animation_1qcxq"),
+&"RESET": SubResource("Animation_3i2q0")
+}
+
+[sub_resource type="GDScript" id="GDScript_dbyep"]
+script/source = "@tool
+extends AnimationPlayer
+
+# --- CONFIGURATION ---
+@export var sprite_node: Sprite2D
+@export var anim_name: String = \"Skill_A\"
+@export var start_frame: int = 0
+@export var frame_count: int = 10 # How many frames to add
+@export var fps: float = 15.0     # Speed of animation
+
+# Click this checkbox in Inspector to run the script
+@export var generate_keys: bool = false : set = _on_generate
+
+func _on_generate(value):
+	if value == false: return # Prevents running when unchecking
+	
+	if not sprite_node:
+		printerr(\"❌ Please assign a Sprite2D node first!\")
+		generate_keys = false # Reset checkbox
+		return
+
+	# 1. Get or Create Animation
+	var library: AnimationLibrary
+	if has_animation_library(\"\"):
+		library = get_animation_library(\"\")
+	else:
+		library = AnimationLibrary.new()
+		add_animation_library(\"\", library)
+	
+	var anim: Animation
+	if library.has_animation(anim_name):
+		anim = library.get_animation(anim_name)
+		print(\"⚠️ Updating existing animation: \" + anim_name)
+	else:
+		anim = Animation.new()
+		library.add_animation(anim_name, anim)
+		print(\"✅ Created new animation: \" + anim_name)
+
+	# 2. Setup Animation Settings
+	var step = 1.0 / fps
+	anim.loop_mode = Animation.LOOP_NONE
+	anim.length = step * frame_count
+	anim.step = step
+
+	# 3. Find or Create the Track for \"frame\"
+	# The path to the property is \"NodeName:frame\"
+	var track_path = str(sprite_node.name) + \":frame\"
+	var track_idx = anim.find_track(track_path, Animation.TYPE_VALUE)
+
+	if track_idx == -1:
+		track_idx = anim.add_track(Animation.TYPE_VALUE)
+		anim.track_set_path(track_idx, track_path)
+	
+	# 4. Insert Keys Loop
+	for i in range(frame_count):
+		var time = i * step
+		var frame_value = start_frame + i
+		anim.track_insert_key(track_idx, time, frame_value)
+
+	print(\"🎉 Generated %d keys for '%s'!\" % [frame_count, anim_name])
+	generate_keys = false # Reset checkbox
+"
+
 [node name="Projectile" type="Area2D"]
 collision_layer = 32
 script = ExtResource("1_h1gyn")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 2)
-sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"Earthquake"
-autoplay = "Earthquake"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -126,13 +147,36 @@ position = Vector2(3.75, -0.5)
 shape = SubResource("RectangleShape2D_uhoxj")
 
 [node name="HitArea2d" parent="." instance=ExtResource("19_x20ww")]
-position = Vector2(0, -7)
+position = Vector2(1, 2)
 collision_layer = 32
 collision_mask = 16
+elemental_type = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
-position = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_tnvla")
+
+[node name="Skill" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 2)
+texture = ExtResource("2_5nw6t")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprite_node")]
+libraries = {
+&"": SubResource("AnimationLibrary_5wvks")
+}
+script = SubResource("GDScript_dbyep")
+sprite_node = NodePath("../FX")
+anim_name = "Earthquake"
+frame_count = 8
+fps = 12.0
+
+[node name="FX" type="Sprite2D" parent="."]
+position = Vector2(5, -1)
+texture = ExtResource("4_3i2q0")
+hframes = 8
+frame = 7
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

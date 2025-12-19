@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
-[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="3_qfhyh"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="3_qfhyh"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="4_6fwx2"]
-[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="5_ulcqf"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="6_rdvgg"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://Scenes/ui/skill_bar_new.tscn" id="5_ulcqf"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://Scenes/ui/hud.tscn" id="6_rdvgg"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="7_c0166"]
 [ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="8_4x2cg"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="10_r7wcl"]
@@ -14,17 +14,17 @@
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="14_km4sl"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="15_oaqh1"]
 [ext_resource type="Texture2D" uid="uid://xyf33vrykcne" path="res://assets/island/background/sandria-small.png" id="16_xpuws"]
-[ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="18_pqi81"]
-[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="20_ppf8r"]
-[ext_resource type="PackedScene" uid="uid://crhikmylhv4ty" path="res://scenes/env_particle/sand_storm.tscn" id="20_pvqwi"]
-[ext_resource type="Script" uid="uid://cgj2on3wrpmw2" path="res://scenes/skills/scripts/metal/ThunderStrike.gd" id="21_gsja5"]
-[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="22_1h50e"]
-[ext_resource type="Script" uid="uid://cf7o1kqvk2msb" path="res://scenes/skills/scripts/fire/FireExplosion.gd" id="23_ihnwd"]
-[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="23_vdtjt"]
-[ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://scenes/skills/scripts/fire/FireShot.gd" id="24_km4sl"]
+[ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://Scenes/objects/quicksand/quicksand.tscn" id="18_pqi81"]
+[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://Scenes/ui/health_bar_container.tscn" id="20_ppf8r"]
+[ext_resource type="PackedScene" uid="uid://crhikmylhv4ty" path="res://Scenes/env_particle/sand_storm.tscn" id="20_pvqwi"]
+[ext_resource type="Script" uid="uid://cgj2on3wrpmw2" path="res://Scenes/skills/scripts/metal/ThunderStrike.gd" id="21_gsja5"]
+[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://Scenes/enemies/minions/mushroom/mushroom.tscn" id="22_1h50e"]
+[ext_resource type="Script" uid="uid://cf7o1kqvk2msb" path="res://Scenes/skills/scripts/fire/FireExplosion.gd" id="23_ihnwd"]
+[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://Scenes/enemies/minions/crab/crab.tscn" id="23_vdtjt"]
+[ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://Scenes/skills/scripts/fire/FireShot.gd" id="24_km4sl"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="24_nouef"]
-[ext_resource type="Script" uid="uid://b02jnsp6w3alh" path="res://scenes/skills/scripts/fire/Ultimate.gd" id="25_oaqh1"]
-[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="25_ppf8r"]
+[ext_resource type="Script" uid="uid://b02jnsp6w3alh" path="res://Scenes/skills/scripts/fire/Ultimate.gd" id="25_oaqh1"]
+[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://Scenes/enemies/spawner/spawner.tscn" id="25_ppf8r"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="25_t8ul1"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="27_6fwx2"]
 [ext_resource type="Script" uid="uid://cetul0ws8d05n" path="res://scenes/skills/scripts/earth/Earthquake.gd" id="27_xpuws"]
@@ -163,7 +163,7 @@ _data = {
 }
 point_count = 2
 
-[node name="Stage" type="Node2D"]
+[node name="Stage2" type="Node2D"]
 script = ExtResource("1_ppf8r")
 
 [node name="BladeCollectable" parent="." instance=ExtResource("3_qfhyh")]
@@ -877,9 +877,9 @@ enemy_per_spawn = 2
 spawn_interval = 15.0
 elemental_type = 5
 
-[node name="FX" type="Node2D" parent="."]
+[node name="FX" type="Node" parent="."]
 
-[node name="Projectiles" type="Node2D" parent="."]
+[node name="Projectiles" type="Node" parent="."]
 
 [node name="Checkpoint" parent="." instance=ExtResource("38_km4sl")]
 position = Vector2(-473, 816)

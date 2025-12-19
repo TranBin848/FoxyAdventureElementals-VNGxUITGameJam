@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://cl1w85aimh25"]
 
-[ext_resource type="Script" uid="uid://b30xdiesd037h" path="res://scenes/skills/projectiles/metal/stun_beam.gd" id="1_wx5uc"]
+[ext_resource type="Script" uid="uid://b30xdiesd037h" path="res://Scenes/skills/projectiles/metal/stun_beam.gd" id="1_wx5uc"]
 [ext_resource type="Texture2D" uid="uid://cewdknh8ry83o" path="res://assets/skills/metal/stunBeam/Holy VFX 02 1.png" id="2_1fqjs"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_4mj1y"]
 [ext_resource type="Texture2D" uid="uid://cnfxoxd4wql5n" path="res://assets/skills/metal/stunBeam/Holy VFX 02 2.png" id="3_t6ix0"]
@@ -91,10 +91,12 @@ script = ExtResource("1_wx5uc")
 knockback_force = 0.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_tbddh")
 animation = &"StunBeam"
 autoplay = "StunBeam"
+frame = 15
+frame_progress = 1.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -106,6 +108,7 @@ shape = SubResource("RectangleShape2D_uhoxj")
 position = Vector2(0, -7)
 collision_layer = 32
 collision_mask = 16
+elemental_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
 position = Vector2(4, 4)

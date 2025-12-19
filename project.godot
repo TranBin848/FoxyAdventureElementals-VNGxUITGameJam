@@ -30,6 +30,7 @@ DamageNumbers="*res://scripts/autoload/damage_numbers.gd"
 SkillStackManager="*res://scripts/autoload/skill_stack_manager.gd"
 CameraTransition="*res://autoloads/camera_transition.tscn"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
+SettingsManager="*res://scripts/autoload/settings_manager.gd"
 
 [dialogic]
 
@@ -92,9 +93,35 @@ window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/movie_file="D:/Semester5/Sieu_Pham_Ngu_Hanh/Scenes/skills/buff/fire/fireball.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+
+[importer_defaults]
+
+texture={
+"compress/channel_pack": 0,
+"compress/hdr_compression": 1,
+"compress/high_quality": false,
+"compress/lossy_quality": 0.7,
+"compress/mode": 1,
+"compress/normal_map": 0,
+"detect_3d/compress_to": 1,
+"mipmaps/generate": true,
+"mipmaps/limit": -1,
+"process/fix_alpha_border": true,
+"process/hdr_as_srgb": false,
+"process/hdr_clamp_exposure": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"process/size_limit": 0,
+"roughness/mode": 0,
+"roughness/src_normal": ""
+}
 
 [input]
 

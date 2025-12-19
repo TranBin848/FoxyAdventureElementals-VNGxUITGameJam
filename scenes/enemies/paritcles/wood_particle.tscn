@@ -41,6 +41,6 @@ anim_offset_max = 1.0
 [node name="Wood" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_mlgto")
 emitting = false
-amount = 20
+amount = 5
 texture = ExtResource("1_v64ib")
 process_material = SubResource("ParticleProcessMaterial_0u8n4")

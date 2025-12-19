@@ -1,13 +1,13 @@
 extends Area2D
 class_name AmbienceArea2D
 
-@export var ambience_music_id: String = ""
+@export var ambience_id: String = ""
 @export var volume_db: float = 0.0
-@export var fade_in: float = 0.0
+@export var fade_in: float = 1.0
+@export var fade_out: float = 1.0
 
 var is_player_inside: bool = false
-var previous_music_id: String = ""
-var previous_volume_db: float = 0.0
+var previous_ambience_id: String = ""
 
 func _ready() -> void:
 	if not AudioManager:
@@ -19,27 +19,40 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
-# called when body entered
-func _on_body_entered(body):
+# Called when body entered
+func _on_body_entered(body: Node2D) -> void:
+	if not body is Player:
+		return
+	
 	if is_player_inside:
 		return
+	
 	is_player_inside = true
 	
 	if AudioManager:
-		previous_music_id = AudioManager.get_current_music_id()
-		previous_volume_db = AudioManager.music_player.volume_db
+		# Store previous ambience to restore later
+		previous_ambience_id = AudioManager.get_current_ambience_id()
 		
-	_switch_music_id(ambience_music_id, volume_db, fade_in)
-	print("Player entered area - Switched to ambience music: ", ambience_music_id)
+		# Play new ambience alongside music
+		if ambience_id != "":
+			AudioManager.play_ambience(ambience_id, volume_db, fade_in)
+			print("Player entered area - Playing ambience: ", ambience_id)
 
-func _on_body_exited(body):
+func _on_body_exited(body: Node2D) -> void:
+	if not body is Player:
+		return
+	
 	if not is_player_inside:
 		return
-	is_player_inside = false
-	_switch_music_id(previous_music_id, previous_volume_db, fade_in)
-	print("Player exited area - Switched to previous music: ", previous_music_id)
 	
-func _switch_music_id(music_id: String, volume_db: float, fade_in: float) -> void:
-	if not AudioManager:
-		return
-	AudioManager.play_music(music_id, volume_db, fade_in)
+	is_player_inside = false
+	
+	if AudioManager:
+		# Stop current ambience
+		AudioManager.stop_ambience(fade_out)
+		print("Player exited area - Stopped ambience: ", ambience_id)
+		
+		# Optionally restore previous ambience if it existed
+		if previous_ambience_id != "":
+			AudioManager.play_ambience(previous_ambience_id, 0.0, fade_in)
+			print("Restored previous ambience: ", previous_ambience_id)

@@ -17,7 +17,7 @@ func _update(_delta: float) -> void:
 	
 	obj.is_right()
 	
-	if obj.is_on_wall() and is_moving:
+	if obj.is_on_wall() and is_moving and !obj.is_in_fireball_state:
 		change_state(fsm.states.wallcling)
 	
 	#If on floor change to idle if not moving and not jumping

@@ -29,7 +29,8 @@ func control_moving() -> bool:
 		obj.velocity.x = 0
 		#print(fsm.current_state.name)
 		if fsm.current_state.name == "Dash":
-			print("wtf")
+			#print("Dash")
+			pass
 	return false
 
 #Control jumping

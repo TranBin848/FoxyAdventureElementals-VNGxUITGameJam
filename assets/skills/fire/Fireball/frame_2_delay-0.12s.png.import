@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ephbvmyidgwe"
-path="res://.godot/imported/MyFloorTile2.png-4a8ab6e2c3f63b93a2de338d6b0264bc.ctex"
+uid="uid://dqpwb8p05eb61"
+path="res://.godot/imported/frame_2_delay-0.12s.png-9fcbe25c320b7777a6dfdf01266698c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/level_4/MyFloorTile2.png"
-dest_files=["res://.godot/imported/MyFloorTile2.png-4a8ab6e2c3f63b93a2de338d6b0264bc.ctex"]
+source_file="res://assets/skills/fire/Fireball/frame_2_delay-0.12s.png"
+dest_files=["res://.godot/imported/frame_2_delay-0.12s.png-9fcbe25c320b7777a6dfdf01266698c1.ctex"]
 
 [params]
 

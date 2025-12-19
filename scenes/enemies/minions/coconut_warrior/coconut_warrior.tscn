@@ -105,21 +105,17 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Metal" parent="Particles" instance=ExtResource("2_xwc4j")]
 position = Vector2(0, -26)
-emitting = false
 
 [node name="Wood" parent="Particles" instance=ExtResource("3_27qoa")]
 position = Vector2(0, -15)
 
 [node name="Earth" parent="Particles" instance=ExtResource("4_g34j8")]
 position = Vector2(0, 10)
-emitting = false
 
 [node name="Water" parent="Particles" instance=ExtResource("5_ily67")]
-emitting = false
 
 [node name="Fire" parent="Particles" instance=ExtResource("6_venbl")]
 position = Vector2(0, 5)
-emitting = false
 
 [node name="Direction" type="Node2D" parent="."]
 
@@ -180,3 +176,5 @@ script = ExtResource("22_1gu4w")
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("22_3ufwa")
+despawn_time = null
+bounce_back_velocity = null

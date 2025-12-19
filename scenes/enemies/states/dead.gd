@@ -1,5 +1,5 @@
-extends EnemyState
 class_name EnemyStateDead
+extends EnemyState
 
 @export var despawn_time: float = 2
 const SKILL_DROP_SCENE: PackedScene = preload("res://scenes/skills/base/skill_drop/skill_drop.tscn")

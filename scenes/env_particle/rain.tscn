@@ -46,7 +46,7 @@ scale_curve = SubResource("CurveXYZTexture_cxcrb")
 color_initial_ramp = SubResource("GradientTexture1D_8al0x")
 alpha_curve = SubResource("CurveTexture_32rye")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="RainGPUParticles2D" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_oppti")
 amount = 1000
 lifetime = 0.5
