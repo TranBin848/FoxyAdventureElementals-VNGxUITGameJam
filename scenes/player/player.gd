@@ -269,6 +269,7 @@ func _physics_process(delta: float) -> void:
 	debuglabel.text = str(fsm.current_state.name)
 			
 func handle_invulnerable(delta) -> void:
+	if !is_invulnerable: return
 	if invulnerable_timer > 0:
 		invulnerable_timer -= delta
 	else:
@@ -474,7 +475,7 @@ func _set_player_visuals(new_main_sprite: AnimatedSprite2D, new_silhouette: Anim
 	set_animated_sprite(new_main_sprite)
 	
 	_update_elemental_palette()
-
+	
 func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 	# Hide all known extra sprites immediately
 	for s in extra_sprites:
@@ -602,7 +603,9 @@ func dash() -> void:
 	await get_tree().create_timer(dash_cd).timeout
 	can_dash = true
 
-# FUNC : INVISIBLE GAME STATE
+# ================================================================
+# === INVISIBLE LOGIC (Sprite Hiding) ============================
+# ================================================================
 
 func go_invisible(duration: float) -> void:
 	if _invisible_timer:
@@ -611,19 +614,23 @@ func go_invisible(duration: float) -> void:
 	
 	_is_invisible = true
 	
-	# Visual fade
+	# 1. Hide the main body completely
 	if animated_sprite:
-		animated_sprite.modulate.a = 0.3
+		animated_sprite.hide()
+		
+	# 2. Utilize the silhouette (extra_sprites)
+	# We make sure they are visible and perhaps give them a "ghostly" alpha
 	for s in extra_sprites:
 		if is_instance_valid(s):
-			s.modulate.a = 0.3
+			s.show() 
+			s.modulate.a = 0.5 # Adjust this: 1.0 for solid, 0.5 for ghost
 	
-	# Disable taking damage (no enemy hurt)
+	# 3. Disable taking damage (no enemy hurt)
 	hurt_area.monitorable = false
 	
-	# Make sure player only collides with terrain (mask 1)
-	collision_layer = 0 << 1   # Layer 1: terrain
-	collision_mask  = 1 << 0   # Mask 1: environment only
+	# 4. Collision logic (Terrain only)
+	collision_layer = 0 << 1 
+	collision_mask  = 1 << 0 
 	
 	_invisible_timer = get_tree().create_timer(duration)
 	_invisible_timer.timeout.connect(_on_invisible_ended)
@@ -632,25 +639,43 @@ func _on_invisible_ended() -> void:
 	_is_invisible = false
 	_invisible_timer = null
 	
-	# Restore visuals
+	# 1. Restore visuals (Show body again)
 	if animated_sprite:
+		animated_sprite.show()
 		animated_sprite.modulate.a = 1.0
+		
+	# 2. Reset silhouette to normal (usually 1.0 or whatever your default is)
 	for s in extra_sprites:
 		if is_instance_valid(s):
 			s.modulate.a = 1.0
+			# Note: If silhouettes should normally be hidden, call s.hide() here instead.
 	
-	# Re‑enable damage detection
+	# 3. Restore Gameplay
 	hurt_area.monitorable = true
-	
-	# Restore original collision setup (layer 2, mask 1)
-	collision_layer = 1 << 1   # player
+	collision_layer = 1 << 1
 
+# Renamed from _apply_invisible_modulate to reflect that we are forcing visibility state
+func _maintain_invisible_visuals() -> void:
+	if not _is_invisible:
+		return
+		
+	# Force the main sprite to stay hidden every frame
+	# (BaseCharacter might try to show it during animation updates)
+	if animated_sprite and animated_sprite.visible:
+		animated_sprite.hide()
+		
+	# Ensure silhouettes stay visible
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			if not s.visible: s.show()
+			s.modulate.a = 0.5
 # BURROW LOGIC
 
 func _apply_burrow_buff(duration: float) -> void:
 	# 1. State & Stats
 	is_in_burrow_state = true
 	speed_multiplier = 1.25
+
 	
 	# 2. Disable Collision Layer 2 (Player Body Layer) / Hurtbox
 	hurt_area.call_deferred("set_monitorable", false)

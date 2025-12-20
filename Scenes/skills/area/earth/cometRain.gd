@@ -2,12 +2,12 @@ extends AreaBase
 class_name CometRainArea
 
 @export var comet_scene_path: String = ""
-@export var comets_count: int = 24
+@export var comets_count: int = 32
 @export var spawn_height: float = 800.0
 @export var area_width: float = 160.0
-@export var spawn_interval: float = 0.15
+@export var spawn_interval: float = 0.05
 @export var fall_angle_deg: float = 45.0
-@export var base_speed: float = 350.0
+@export var base_speed: float = 500.0
 @export var speed_random_ratio: float = 0.2
 
 # NEW: How far in front of the player the rain centers
