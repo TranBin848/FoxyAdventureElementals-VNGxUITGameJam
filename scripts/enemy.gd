@@ -352,7 +352,7 @@ func _on_player_not_in_sight() -> void:
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Demo debuff
-	var debuff: PackedScene = load("res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn") as PackedScene
+	var debuff: PackedScene = load("res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn") as PackedScene
 	set_debuff(debuff)
 	
 	# Tính damage dựa trên quan hệ sinh - khắc

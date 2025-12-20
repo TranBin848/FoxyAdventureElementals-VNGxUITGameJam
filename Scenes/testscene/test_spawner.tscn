@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="28_oi0ud"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="29_tyosl"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="31_cw110"]
-[ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="31_yross"]
+[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="31_yross"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="34_lij6g"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
@@ -281,6 +281,7 @@ position = Vector2(601, 119)
 [node name="BladeCollectable" parent="." instance=ExtResource("34_lij6g")]
 position = Vector2(516, 235)
 
-[node name="CoconutWarrior" parent="." instance=ExtResource("31_yross")]
-position = Vector2(739, 227)
+[node name="Mushroom" parent="." instance=ExtResource("31_yross")]
+position = Vector2(695, 241)
+self_scene = ExtResource("31_yross")
 max_health = 100

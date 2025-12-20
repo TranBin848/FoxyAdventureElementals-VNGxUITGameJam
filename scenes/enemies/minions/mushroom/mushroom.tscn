@@ -1,27 +1,24 @@
-[gd_scene load_steps=58 format=3 uid="uid://u0fxijnn4sx"]
+[gd_scene load_steps=25 format=3 uid="uid://u0fxijnn4sx"]
 
-[ext_resource type="Script" uid="uid://2xjq81uyo1vl" path="res://Scenes/enemies/minions/mushroom/mushroom.gd" id="1_sl7hc"]
-[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://Scenes/enemies/paritcles/metal_particle.tscn" id="2_02d7m"]
+[ext_resource type="Script" uid="uid://2xjq81uyo1vl" path="res://scenes/enemies/minions/mushroom/mushroom.gd" id="1_sl7hc"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_02d7m"]
 [ext_resource type="Shader" uid="uid://doovon2v0i5dx" path="res://assets/shader/outer_outline.gdshader" id="2_o68j7"]
 [ext_resource type="Texture2D" uid="uid://dnauvp8oyye3y" path="res://assets/enemy/mushroom/mushroom_hit_01.png" id="2_vad1n"]
-[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://Scenes/enemies/paritcles/wood_particle.tscn" id="3_bq6vc"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_bq6vc"]
 [ext_resource type="Texture2D" uid="uid://0at7gcwwkdrb" path="res://assets/enemy/mushroom/mushroom_hit_02.png" id="3_p52hk"]
-[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://Scenes/enemies/paritcles/dirt_particle.tscn" id="4_hjpn5"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_hjpn5"]
 [ext_resource type="Texture2D" uid="uid://cumo4bfr0rcpt" path="res://assets/enemy/mushroom/mushroom_hit_03.png" id="4_t0f5o"]
-[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://Scenes/enemies/paritcles/water_particle.tscn" id="5_0dcl5"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_0dcl5"]
 [ext_resource type="Texture2D" uid="uid://6o0ryerh3t3f" path="res://assets/enemy/mushroom/mushroom_01.png" id="5_8xtti"]
-[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://Scenes/enemies/paritcles/fire_particle.tscn" id="6_ark0v"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_ark0v"]
 [ext_resource type="Texture2D" uid="uid://dh2yf13qglxxf" path="res://assets/enemy/mushroom/mushroom_02.png" id="6_pqg2d"]
 [ext_resource type="Texture2D" uid="uid://b6dn5oietc0js" path="res://assets/enemy/mushroom/mushroom_03.png" id="7_wy1pw"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_m6me8"]
-[ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://Scenes/enemies/states/moving.gd" id="8_sl7hc"]
-[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://Scenes/enemies/states/hurt.gd" id="10_dxuq7"]
-[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://Scenes/enemies/ui/enemy_health_bar.tscn" id="13_16htk"]
+[ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://scenes/enemies/states/moving.gd" id="8_sl7hc"]
+[ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="10_dxuq7"]
+[ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="13_16htk"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="15_bq6vc"]
-[ext_resource type="Script" uid="uid://d6klvw0tpn6m" path="res://Scenes/enemies/minions/mushroom/dead.gd" id="17_02d7m"]
-[ext_resource type="Texture2D" uid="uid://cy1tvw34onwxx" path="res://assets/enemy/effects/freeze.png" id="20_ark0v"]
-[ext_resource type="Texture2D" uid="uid://bl66efvg2uxgs" path="res://assets/enemy/effects/stunned.png" id="21_ert7p"]
-[ext_resource type="Texture2D" uid="uid://b8oer0ibyd3ld" path="res://assets/enemy/effects/poison.png" id="22_ark0v"]
+[ext_resource type="Script" uid="uid://d6klvw0tpn6m" path="res://scenes/enemies/minions/mushroom/dead.gd" id="17_02d7m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0y1l"]
 radius = 12.0
@@ -80,210 +77,6 @@ height = 28.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hjpn5"]
 radius = 15.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5sidv"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(0, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q80g8"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(90, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jki6j"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(180, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dvidg"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(270, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lsmip"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(360, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_reejd"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(450, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ubijs"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(450, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8tueo"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(540, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jmnyx"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(630, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6s67k"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(720, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2e300"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(810, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_volmh"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(900, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ite73"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(990, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e6xl0"]
-atlas = ExtResource("20_ark0v")
-region = Rect2(1080, 0, 90, 90)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ikdvn"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5sidv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q80g8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jki6j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dvidg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lsmip")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_reejd")
-}],
-"loop": false,
-"name": &"freeze",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ubijs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8tueo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jmnyx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6s67k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2e300")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_volmh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ite73")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e6xl0")
-}],
-"loop": false,
-"name": &"unfreeze",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_do5la"]
-atlas = ExtResource("21_ert7p")
-region = Rect2(0, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kuiuq"]
-atlas = ExtResource("21_ert7p")
-region = Rect2(90, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f72lo"]
-atlas = ExtResource("21_ert7p")
-region = Rect2(180, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_brgqa"]
-atlas = ExtResource("21_ert7p")
-region = Rect2(270, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ls7av"]
-atlas = ExtResource("21_ert7p")
-region = Rect2(360, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_enupp"]
-atlas = ExtResource("21_ert7p")
-region = Rect2(450, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rdowp"]
-atlas = ExtResource("21_ert7p")
-region = Rect2(540, 0, 90, 90)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8oy4k"]
-atlas = ExtResource("21_ert7p")
-region = Rect2(630, 0, 90, 90)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_mk5eg"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_do5la")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kuiuq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f72lo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_brgqa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ls7av")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_enupp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rdowp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8oy4k")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ert7p"]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id="Gradient_1k26f"]
-offsets = PackedFloat32Array(0, 0.192771, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.494247, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gpqr6"]
-gradient = SubResource("Gradient_1k26f")
-
-[sub_resource type="Curve" id="Curve_1k26f"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.481175), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_gpqr6"]
-curve = SubResource("Curve_1k26f")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o7hv3"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(20, 1, 1)
-gravity = Vector3(0, -50, 0)
-scale_curve = SubResource("CurveTexture_gpqr6")
-color_ramp = SubResource("GradientTexture1D_gpqr6")
-anim_speed_max = 1.0
 
 [node name="Mushroom" type="CharacterBody2D"]
 z_index = 1
@@ -373,32 +166,5 @@ offset_right = 72.0
 offset_bottom = -12.0
 enemy = NodePath("..")
 
-[node name="Effects" type="Node2D" parent="."]
-
-[node name="Freeze" type="AnimatedSprite2D" parent="Effects"]
-visible = false
-modulate = Color(1, 1, 1, 0.490196)
-position = Vector2(-5, -23)
-sprite_frames = SubResource("SpriteFrames_ikdvn")
-animation = &"freeze"
-frame = 5
-frame_progress = 1.0
-
-[node name="Stun" type="AnimatedSprite2D" parent="Effects"]
-visible = false
-position = Vector2(0, -16)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_mk5eg")
-frame_progress = 0.00579501
-
-[node name="Fire" parent="Effects" instance=ExtResource("6_ark0v")]
-visible = false
-position = Vector2(0, 6)
-
-[node name="Posion" parent="Effects" instance=ExtResource("6_ark0v")]
-visible = false
-modulate = Color(1, 1, 1, 0.458824)
-material = SubResource("CanvasItemMaterial_ert7p")
-position = Vector2(0, 6)
-texture = ExtResource("22_ark0v")
-process_material = SubResource("ParticleProcessMaterial_o7hv3")
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-4, 15)
