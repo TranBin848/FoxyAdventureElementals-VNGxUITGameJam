@@ -11,7 +11,6 @@ func _ready() -> void:
 	
 	load_data(SkillStackManager.get_skill_bar_data())
 	
-	var player = get_tree().get_first_node_in_group("player")
 	for i in get_child_count():
 		slots[i].change_key = str(i + 1)
 		if i <= skills.size() - 1:

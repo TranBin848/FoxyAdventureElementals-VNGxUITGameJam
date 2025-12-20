@@ -183,7 +183,6 @@ func cast_spell(skill: Skill) -> String:
 			mana = max(0, mana - skill.mana); mana_changed.emit()
 			_check_and_use_skill_stack(skill); return "" 
 		_: return "Unknown Skill Type"
-	return ""
 
 # Skill Helpers
 func _single_shot(skill: Skill) -> void:
@@ -302,7 +301,7 @@ func can_attack() -> bool:
 
 func can_throw() -> bool: return has_blade && is_equipped_blade
 
-func cast_skill(skill_name: String) -> void:
+func cast_skill(_skill_name: String) -> void:
 	if fsm.current_state != fsm.states.castspell: fsm.change_state(fsm.states.castspell)
 
 func set_invulnerable() -> void:
@@ -571,13 +570,13 @@ func _update_movement(delta: float) -> void:
 	move_and_slide()
 
 # This function runs whenever the Fireball HitArea touches a HurtArea
-func _on_fireball_hit_enemy(hurt_area: Area2D) -> void:
+func _on_fireball_hit_enemy(_hurt_area: Area2D) -> void:
 	# Only bounce if we are actually in fireball mode
 	if not is_in_fireball_state: return
 	
 	# 1. Find the Enemy Node
 	# Usually the HurtArea is a child of the Enemy, so we get the parent
-	var enemy = hurt_area.get_parent() 
+	var enemy = _hurt_area.get_parent() 
 	
 	if enemy:
 		_perform_bounce(enemy.global_position)

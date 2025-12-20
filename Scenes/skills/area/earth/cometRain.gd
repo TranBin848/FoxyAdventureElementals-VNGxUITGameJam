@@ -17,12 +17,12 @@ class_name CometRainArea
 
 var comet_scene: PackedScene
 
-func setup(skill: Skill, caster_position: Vector2, _enemy: EnemyCharacter, direction: Vector2 = Vector2.RIGHT) -> void:
+func setup(skill: Skill, caster_position: Vector2, _enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	print("[RainArea] Setup started. Caster Pos: ", caster_position)
 	self.damage = skill.damage
 	self.elemental_type = skill.elemental_type
 	self.duration = skill.duration
-	self.direction = direction
+	self.direction = _direction
 	
 	# --- CHANGE 1: Offset the Area Position ---
 	# Ensure direction is normalized (length 1) then multiply by offset

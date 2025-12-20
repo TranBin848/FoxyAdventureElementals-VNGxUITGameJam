@@ -8,7 +8,7 @@ func _init():
 	cooldown = 1
 	duration = 15
 	ground_targeted = true
-	mana = 20.0
+	mana = 20
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons45.png"
 	area_scene = preload("res://scenes/skills/area/metal/thousandSwords.tscn")
 	damage = 5

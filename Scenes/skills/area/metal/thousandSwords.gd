@@ -21,9 +21,9 @@ var active_swords: Array[SwordProjectile] = []
 var current_target: Node2D = null 
 var is_firing: bool = false 
 
-func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direction: Vector2 = Vector2.RIGHT) -> void:
+func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	# 1. Base Setup (Handles damage, elemental type, duration timer)
-	super.setup(skill, caster_position, enemy, direction)
+	super.setup(skill, caster_position, enemy, _direction)
 	
 	# 2. Shift Position Logic
 	# Move the area (the center of the ring) above the player's head
@@ -32,6 +32,7 @@ func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direct
 	# 3. Disable the Area's own hitbox (It's just a manager)
 	_disable_hitbox()
 	
+	#print("[ThousandSwords] Setup. Area Pos: %s" % global_position)
 	
 	sword_scene = load(sword_scene_path)
 	if not sword_scene:
@@ -72,6 +73,7 @@ func _sequence_start() -> void:
 	can_rotate_swords = false
 
 	# --- PHASE 1: SUMMONING ---
+	#print("[ThousandSwords] Phase 1: Summoning...")
 	var angle_step = (2.0 * PI) / sword_count
 
 	for i in range(sword_count):
@@ -91,13 +93,20 @@ func _sequence_start() -> void:
 		await get_tree().create_timer(spawn_interval).timeout
 
 	# --- PHASE 2: TARGETING ---
+	#print("[ThousandSwords] Phase 2: Finding High Value Target...")
 	current_target = _find_highest_hp_enemy()
-	
+
+	#if current_target:
+		#print("[ThousandSwords] LOCKED ON: %s" % current_target.name)
+	#else:
+		#print("[ThousandSwords] NO TARGET. Aiming at fallback.")
+
 	# 0.3s delay *before* enabling rotation
 	await get_tree().create_timer(0.3).timeout
 	can_rotate_swords = true
 
 	# --- PHASE 3: FIRING ---
+	#print("[ThousandSwords] Phase 3: Firing.")
 	await get_tree().create_timer(0.5).timeout
 	is_firing = true
 
@@ -129,8 +138,14 @@ func _sequence_start() -> void:
 func _find_highest_hp_enemy() -> Node2D:
 	var candidates = get_tree().get_nodes_in_group("enemies")
 	
+	# Debug 1: Are we even finding nodes?
+	#print("--- TARGETING DEBUG ---")
+	#print("Candidates in group 'enemies': %d" % candidates.size())
+	
 	var viewport_rect = get_viewport().get_visible_rect()
 	var canvas_transform = get_canvas_transform()
+	
+	#print("Viewport Rect: %s" % viewport_rect)
 	
 	var best_target: Node2D = null
 	var highest_hp: float = -1.0
@@ -140,9 +155,14 @@ func _find_highest_hp_enemy() -> Node2D:
 		
 		# Debug 2: Check Position Math
 		var screen_pos = canvas_transform * enemy.global_position
-		var is_visible = viewport_rect.has_point(screen_pos)
-
-		if not is_visible:
+		var _is_visible = viewport_rect.has_point(screen_pos)
+		
+		#print("Checking [%s]:" % enemy.name)
+		#print(" - Global Pos: %s" % enemy.global_position)
+		#print(" - Screen Pos: %s" % screen_pos)
+		#print(" - Visible?: %s" % _is_visible)
+		
+		if not _is_visible:
 			continue
 
 		# Debug 3: Check HP Logic
@@ -154,10 +174,14 @@ func _find_highest_hp_enemy() -> Node2D:
 		elif "stats" in enemy and "max_health" in enemy.stats:
 			hp_val = enemy.stats.max_health
 		else:
+			#print(" - FAILURE: Could not find HP variable.")
 			continue
+			
+		#print(" - HP Found: %s" % hp_val)
 			
 		if hp_val > highest_hp:
 			highest_hp = hp_val
 			best_target = enemy
 			
+	#print("--- END DEBUG ---")
 	return best_target

@@ -10,6 +10,7 @@ height = 32.0
 
 [node name="SwordProjectile" type="Area2D"]
 script = ExtResource("1_0g75m")
+elemental_type = 1
 metadata/_custom_type_script = "uid://5btdwob525wm"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

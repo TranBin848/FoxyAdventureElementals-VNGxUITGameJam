@@ -256,14 +256,18 @@ func _init_culling() -> void:
 		call_deferred("_setup_culling_rect", enabler)
 
 func _setup_culling_rect(enabler: VisibleOnScreenEnabler2D) -> void:
-	var viewport_size = get_viewport_rect().size
-	
+	var viewport_size: Vector2 = get_viewport_rect().size
+
+	# Fallback size if viewport_size is invalid / zero
+	if viewport_size == Vector2.ZERO:
+		viewport_size = Vector2(1280, 720)  # your fallback resolution
+
 	# Extend the rect to 2x viewport size
-	var extended_rect = Rect2(
-		-viewport_size,
-		viewport_size * 3
+	var extended_rect := Rect2(
+		-viewport_size,          # position
+		viewport_size * 3.0      # size
 	)
-	
+
 	enabler.rect = extended_rect
 	enabler.enable_mode = VisibleOnScreenEnabler2D.ENABLE_MODE_INHERIT
 

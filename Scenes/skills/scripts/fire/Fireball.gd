@@ -10,7 +10,7 @@ func _init():
 	duration = 10.0
 	speed = 0
 	damage = 0
-	mana = 30.0
+	mana = 30
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_fireball.png"
 	animation_name = "Fireball"
 	projectile_scene = preload("res://scenes/skills/buff/fire/fireball.tscn")

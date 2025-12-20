@@ -9,7 +9,7 @@ func _init():
 	cooldown = 3.0
 	speed = 0
 	damage = 5
-	mana = 10.0
+	mana = 10
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons12.png"
 	animation_name = "ToxicBreath"
 	projectile_scene = preload("res://scenes/skills/projectiles/wood/toxic_breath.tscn")

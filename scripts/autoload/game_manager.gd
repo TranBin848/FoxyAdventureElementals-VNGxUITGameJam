@@ -74,7 +74,7 @@ func _on_scene_changed() -> void:
 # --- Chuyển stage ---
 func change_stage(stage_path: String, _target_portal_name: String = "") -> void:
 	target_portal_name = _target_portal_name
-	await get_tree().change_scene_to_file(stage_path)
+	get_tree().change_scene_to_file(stage_path)
 	
 	current_stage = get_tree().current_scene
 
@@ -116,7 +116,7 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	}
 	
 	var skillbarroot = current_stage.find_child("SkillBarUI", true, false)
-	var skill_bar = skillbarroot.get_node("MarginContainer/SkillBar")
+	skill_bar = skillbarroot.get_node("MarginContainer/SkillBar")
 	var skill_bar_data = skill_bar.save_data() if skill_bar else []
 	
 	print("✅ Checkpoint saved:", checkpoint_id)

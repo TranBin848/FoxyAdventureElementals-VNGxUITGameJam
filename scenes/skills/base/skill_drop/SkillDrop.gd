@@ -34,9 +34,9 @@ func _ready() -> void:
 	tween.tween_property(self, "position:y", position.y + 5, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
-func setup_drop(resource_class: Script, name: String, texture_path: String) -> void:
+func setup_drop(resource_class: Script, _name: String, texture_path: String) -> void:
 	self.skill_resource_class = resource_class
-	self.skill_name = name
+	self.skill_name = _name
 	self.skill_texture_path = texture_path
 	
 	# Cài đặt hình ảnh nếu được gọi sau _ready

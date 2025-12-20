@@ -36,7 +36,7 @@ func get_shader_values() -> void:
 		if (item.name == "shader_parameter/glow_opacity"):
 			max_glow_opaque = item.hint
 
-func take_damage(direction: Variant, damage: int = 1) -> void:
+func take_damage(direction: Variant, _damage: int = 1) -> void:
 	pass
 
 func _drop_skill_item():

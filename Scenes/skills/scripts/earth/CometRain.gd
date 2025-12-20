@@ -10,6 +10,6 @@ func _init():
 	cooldown = 3
 	speed = 0
 	damage = 0
-	mana = 10.0
+	mana = 10
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons28.png"
 	area_scene = preload("res://scenes/skills/area/earth/cometRain.tscn")

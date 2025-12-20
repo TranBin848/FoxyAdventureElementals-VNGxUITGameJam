@@ -3,7 +3,7 @@ class_name SwordProjectile
 
 @export var fly_speed: float = 1500.0
 @export var damage: int = 0
-@export var elemental_type: int = 0
+@export var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 @export var fade_duration: float = 10.0   # how long to fade before freeing
 
 # Bezier Variables
@@ -28,7 +28,7 @@ var sword_id := randi()
 func _ready() -> void:
 	print("Sword ready: ", sword_id, " parent: ", get_parent())
 
-func setup_hover(pos: Vector2, dmg: int, elem: int, duration: float) -> void:
+func setup_hover(pos: Vector2, dmg: int, elem: ElementsEnum.Elements, duration: float) -> void:
 	damage = dmg
 	elemental_type = elem
 	stick_duration = duration

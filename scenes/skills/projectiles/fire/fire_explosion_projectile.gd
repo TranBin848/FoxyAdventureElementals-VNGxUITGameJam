@@ -18,11 +18,11 @@ var exploding: bool = false
 var explosion_center: Vector2  # Store explosion position
 
 
-func _on_hit_area_2d_hitted(area: Variant) -> void:
+func _on_hit_area_2d_hitted(_area: Variant) -> void:
 	_trigger_explosion()
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	_trigger_explosion()
 
 
@@ -86,12 +86,12 @@ func _on_animation_finished() -> void:
 			e.exit_skill()
 
 			# Calculate radial knockback direction
-			var direction = (e.global_position - explosion_center).normalized()
+			var _direction = (e.global_position - explosion_center).normalized()
 			
 			# Create knockback vector with upward component
 			var knockback_vector = Vector2(
-				direction.x * knockback_force,
-				direction.y * knockback_force - (knockback_force * knockback_upward_bias)
+				_direction.x * knockback_force,
+				_direction.y * knockback_force - (knockback_force * knockback_upward_bias)
 			)
 			
 			e.apply_knockback(knockback_vector)

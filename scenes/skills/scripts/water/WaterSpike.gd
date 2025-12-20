@@ -7,7 +7,7 @@ func _init():
 	type = "area"
 	cooldown = 3.5
 	duration = 1.5
-	mana = 20.0
+	mana = 20
 	animation_name = "WaterSpike"
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons11.png"
 	area_scene = preload("res://scenes/skills/area/water/waterSpikeArea.tscn")

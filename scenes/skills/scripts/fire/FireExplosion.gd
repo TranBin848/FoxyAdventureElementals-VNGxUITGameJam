@@ -9,7 +9,7 @@ func _init():
 	cooldown = 2.0
 	speed = 500
 	damage = 4
-	mana = 40.0
+	mana = 40
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons3.png"
 	animation_name = "FireExplosion"
 	projectile_scene = preload("res://scenes/skills/projectiles/fire/fireExplosionProjectile.tscn")

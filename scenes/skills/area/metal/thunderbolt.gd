@@ -3,7 +3,7 @@ class_name ThunderboltArea
 
 @export var knockback_force: float = 350.0
 
-func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direction: Vector2 = Vector2.ZERO) -> void:
+func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.ZERO) -> void:
 	super.setup(skill, caster_position, enemy)
 	
 	# Immediately disable enemy movement

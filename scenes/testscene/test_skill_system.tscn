@@ -108,7 +108,7 @@ script/source = "extends ParallaxLayer
 @export var repeat_start: float = 200
 @export var repeat_distance: float = 500
 var repeat_end: float = INF
-func _process(delta):
+func _process(_delta):
 	if not player:
 		return 
 	

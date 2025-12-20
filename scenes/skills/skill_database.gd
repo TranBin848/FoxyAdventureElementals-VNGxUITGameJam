@@ -18,7 +18,8 @@ var all_skills = {
 		"Comet Rain": CometRain,
 		"Burrow": Burrow
 	}
-func get_skill_by_name(name: String) -> Script:
-	if name in all_skills:
-		return all_skills[name]
+	
+func get_skill_by_name(_name: String) -> Script:
+	if _name in all_skills:
+		return all_skills[_name]
 	return null

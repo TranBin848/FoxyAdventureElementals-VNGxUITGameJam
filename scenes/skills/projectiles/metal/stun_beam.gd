@@ -107,11 +107,11 @@ func _on_animation_finished() -> void:
 		print("  -> Called exit_skill (", processed_count, " total)")
 		
 		# Calculate radial knockback direction
-		var direction = (e.global_position - stun_center).normalized()
+		var _direction = (e.global_position - stun_center).normalized()
 		
 		var knockback_vector = Vector2(
-			direction.x * knockback_force,
-			(direction.y * knockback_force) - (knockback_force * knockback_upward_bias)
+			_direction.x * knockback_force,
+			(_direction.y * knockback_force) - (knockback_force * knockback_upward_bias)
 		)
 		
 		e.apply_knockback(knockback_vector)
