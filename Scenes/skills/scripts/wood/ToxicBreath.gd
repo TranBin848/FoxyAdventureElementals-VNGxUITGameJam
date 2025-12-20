@@ -4,7 +4,7 @@ class_name ToxicBreath
 
 func _init():
 	name = "Toxic Breath"
-	element = ElementsEnum.Elements.WOOD
+	elemental_type = ElementsEnum.Elements.WOOD
 	type = "single_shot"
 	cooldown = 3.0
 	speed = 0

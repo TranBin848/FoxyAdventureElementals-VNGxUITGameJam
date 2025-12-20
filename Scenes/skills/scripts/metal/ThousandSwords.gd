@@ -3,7 +3,7 @@ class_name ThousandSwords
 
 func _init():
 	name = "Thousand Swords"
-	element = ElementsEnum.Elements.METAL
+	elemental_type = ElementsEnum.Elements.METAL
 	type = "area"
 	cooldown = 1
 	duration = 15

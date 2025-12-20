@@ -6,7 +6,7 @@ class_name HealOverTime
 
 func _init():
 	name = "Heal Over Time"
-	element = ElementsEnum.Elements.WOOD # Hoặc Earth (đất) liên quan đến sự sống
+	elemental_type = ElementsEnum.Elements.WOOD # Hoặc Earth (đất) liên quan đến sự sống
 	type = "buff"
 	cooldown = 15.0
 	duration = 5.0 # Kỹ năng kéo dài 5 giây (tổng cộng 5 tick)

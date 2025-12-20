@@ -3,7 +3,7 @@ class_name Thunderbolt
 
 func _init():
 	name = "Thunderbolt"
-	element = ElementsEnum.Elements.METAL
+	elemental_type = ElementsEnum.Elements.METAL
 	type = "area"
 	cooldown = 3.5
 	duration = 1.5

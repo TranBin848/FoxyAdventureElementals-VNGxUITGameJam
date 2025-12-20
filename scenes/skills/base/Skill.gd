@@ -3,7 +3,7 @@ class_name Skill
 
 ## 🧙 Cấu trúc cơ bản cho mọi loại skill
 @export var name: String
-@export var element: ElementsEnum.Elements = ElementsEnum.Elements.NONE
+@export var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 @export var cooldown: float = 1.0
 @export var duration: float = 1.0
 @export var hit_delay: float = 0.0

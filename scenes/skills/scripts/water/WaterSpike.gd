@@ -3,7 +3,7 @@ class_name WaterSpike
 
 func _init():
 	name = "Water Spike"
-	element = ElementsEnum.Elements.WATER
+	elemental_type = ElementsEnum.Elements.WATER
 	type = "area"
 	cooldown = 3.5
 	duration = 1.5

@@ -6,15 +6,16 @@
 [resource]
 script = ExtResource("2_fa0to")
 name = "Thunder Strike"
-element = 1
+elemental_type = 1
 cooldown = 3.5
 duration = 1.5
 hit_delay = 0.25
+ground_targeted = false
 texture_path = "res://assets/skills/icons_skill/48x48/skill_icons34.png"
 animation_name = "Thunderbolt"
 area_scene = ExtResource("1_w5i07")
 speed = 250.0
-damage = 10
+damage = 10.0
 mana = 20
 type = "area"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

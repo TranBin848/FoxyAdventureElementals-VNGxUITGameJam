@@ -4,7 +4,7 @@ class_name WoodShot
 
 func _init():
 	name = "Wood Shot"
-	element = ElementsEnum.Elements.WOOD
+	elemental_type = ElementsEnum.Elements.WOOD
 	type = "multi_shot"
 	cooldown = 2.0
 	speed = 350

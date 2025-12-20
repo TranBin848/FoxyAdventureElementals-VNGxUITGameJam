@@ -4,7 +4,7 @@ class_name Burrow
 
 func _init():
 	name = "Burrow"
-	element = ElementsEnum.Elements.EARTH
+	elemental_type = ElementsEnum.Elements.EARTH
 	type = "buff"
 	cooldown = 90.0
 	duration = 15.0

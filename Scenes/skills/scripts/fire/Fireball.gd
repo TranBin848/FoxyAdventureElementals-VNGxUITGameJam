@@ -4,7 +4,7 @@ class_name Fireball
 
 func _init():
 	name = "Fireball"
-	element = ElementsEnum.Elements.FIRE
+	elemental_type = ElementsEnum.Elements.FIRE
 	type = "buff"
 	cooldown = 20.0
 	duration = 10.0

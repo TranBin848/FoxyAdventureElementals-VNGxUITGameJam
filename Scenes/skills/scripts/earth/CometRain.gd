@@ -3,7 +3,7 @@ class_name CometRain
 
 func _init():
 	name = "Comet Rain"
-	element = ElementsEnum.Elements.EARTH
+	elemental_type = ElementsEnum.Elements.EARTH
 	type = "area"
 	ground_targeted = true
 	duration = 10

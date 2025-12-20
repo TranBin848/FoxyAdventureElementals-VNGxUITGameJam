@@ -3,7 +3,7 @@ class_name CometProjectile
 
 @export var travel_time: float = 1.0
 @export var arc_height: float = 20.0
-@export var damage: int = 0
+@export var damage: float = 0
 @export var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 @export var crater_scene: PackedScene
 @export var floor_dot_threshold: float = 0.7
@@ -23,7 +23,7 @@ var last_position: Vector2
 # NEW variable to store the height threshold
 var arming_height: float = -99999.0 
 
-func setup(start_pos: Vector2, end_pos: Vector2, damage_amount: int, elem_type: ElementsEnum.Elements) -> void:
+func setup(start_pos: Vector2, end_pos: Vector2, damage_amount: float, elem_type: ElementsEnum.Elements) -> void:
 	A = start_pos
 	C = end_pos
 	damage = damage_amount

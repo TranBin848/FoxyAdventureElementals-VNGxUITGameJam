@@ -3,7 +3,7 @@ class_name StunShot
 
 func _init():
 	name = "Stun Shot"
-	element = ElementsEnum.Elements.METAL
+	elemental_type = ElementsEnum.Elements.METAL
 	type = "single_shot"
 	cooldown = 2.0
 	speed = 200

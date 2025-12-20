@@ -4,7 +4,7 @@ class_name WoodenClone
 
 func _init():
 	name = "Wooden Clone"
-	element = ElementsEnum.Elements.WOOD
+	elemental_type = ElementsEnum.Elements.WOOD
 	type = "single_shot"
 	cooldown = 20.0
 	duration = 10.0

@@ -4,7 +4,7 @@ class_name FireShot
 
 func _init():
 	name = "Fire Shot"
-	element = ElementsEnum.Elements.FIRE
+	elemental_type = ElementsEnum.Elements.FIRE
 	type = "multi_shot"
 	cooldown = 2.0
 	speed = 350

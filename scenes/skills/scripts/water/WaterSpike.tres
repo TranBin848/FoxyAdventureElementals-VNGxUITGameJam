@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_5tho6")
 name = "Water Spike"
-element = 3
+elemental_type = 3
 cooldown = 3.5
 duration = 1.5
 hit_delay = 0.2

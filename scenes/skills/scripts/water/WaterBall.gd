@@ -3,7 +3,7 @@ class_name WaterBall
 
 func _init():
 	name = "Water Ball"
-	element = ElementsEnum.Elements.WATER
+	elemental_type = ElementsEnum.Elements.WATER
 	type = "multi_shot"
 	cooldown = 3.5
 	animation_name = "WaterBlast"

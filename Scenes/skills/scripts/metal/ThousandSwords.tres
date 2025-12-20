@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_c6vis")
 name = "Thousand Swords"
-element = 1
+elemental_type = 1
 cooldown = 1.0
 duration = 15.0
 hit_delay = 0.0

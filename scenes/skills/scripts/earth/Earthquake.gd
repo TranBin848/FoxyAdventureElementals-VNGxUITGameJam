@@ -3,7 +3,7 @@ class_name Earthquake
 
 func _init():
 	name = "Earthquake"
-	element = ElementsEnum.Elements.EARTH
+	elemental_type = ElementsEnum.Elements.EARTH
 	type = "single_shot"
 	cooldown = 2.5
 	speed = 400
