@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://dos8jgdamucqc"]
+[gd_scene load_steps=39 format=4 uid="uid://dos8jgdamucqc"]
 
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_ihf7f"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="2_u14bh"]
@@ -29,9 +29,8 @@
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="28_oi0ud"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="29_tyosl"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="31_cw110"]
-[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="32_u14bh"]
+[ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="31_yross"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="34_lij6g"]
-[ext_resource type="Script" uid="uid://bdlsyvemhqsng" path="res://scenes/skills/scripts/fire/Fireball.gd" id="36_iyi8e"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
 script/source = "extends Node2D
@@ -282,7 +281,6 @@ position = Vector2(601, 119)
 [node name="BladeCollectable" parent="." instance=ExtResource("34_lij6g")]
 position = Vector2(516, 235)
 
-[node name="SeaHorse" parent="." instance=ExtResource("32_u14bh")]
-position = Vector2(737, 219)
-elemental_type = 3
-skill_to_drop = ExtResource("36_iyi8e")
+[node name="CoconutWarrior" parent="." instance=ExtResource("31_yross")]
+position = Vector2(739, 227)
+max_health = 100

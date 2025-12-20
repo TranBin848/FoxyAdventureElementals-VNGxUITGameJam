@@ -73,6 +73,7 @@ var start_position: Vector2
 
 var current_particle: GPUParticles2D
 
+var debuff_place_holder: Node2D
 var current_debuff: Debuff
 
 func _ready() -> void:
@@ -86,6 +87,7 @@ func _ready() -> void:
 	_init_material()
 	_init_start_position()
 	_init_particle()
+	_init_debuff()
 	
 	#current_debuff = Debuff.new(self)
 	#add_child(current_debuff)
@@ -97,6 +99,13 @@ func _ready() -> void:
 	# Use global interval value
 	particle_audio_interval = SettingsManager.particle_audio_interval
 
+func _init_debuff():
+	if has_node("DebuffPlaceHolder"):
+		debuff_place_holder = $DebuffPlaceHolder
+		if debuff_place_holder == null: print ("Please assign a debuff place holder for enemy")
+	else: print ("Please assign a debuff place holder for enemy")
+	current_debuff = null
+
 # -- Initialize current values
 func _init_current_values():
 	current_movement_speed = movement_speed
@@ -105,7 +114,6 @@ func _init_current_values():
 	current_air_time = air_time
 	current_attack_speed = attack_speed
 	current_vulnerability = vulnerability
-	current_debuff = null
 
 # -- Initialize start position
 func _init_start_position():
@@ -343,6 +351,10 @@ func _on_player_not_in_sight() -> void:
 
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
+	# Demo debuff
+	var debuff: PackedScene = load("res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn") as PackedScene
+	set_debuff(debuff)
+	
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	#print(_elemental_type)
@@ -447,7 +459,6 @@ func apply_weakness_effect() -> void:
 # --- Apply damage through FSM
 func _take_damage_from_dir(_damage_dir: Vector2, _damage: float):
 	fsm.current_state.take_damage(_damage_dir, _damage)
-	
 
 # -- Disable collision, enemy will no longer has collision with player
 func disable_collision():
@@ -490,16 +501,21 @@ func apply_knockback(knockback_vec: Vector2):
 
 # Functions for debuff
 func set_debuff(debuff_scene: PackedScene) -> void:
+	if current_debuff != null: return
 	if debuff_scene == null: return
+	if debuff_place_holder == null: return
 	var debuff: Debuff = (debuff_scene.instantiate() as Debuff)
 	if debuff == null: return
-	add_child(debuff)
+	debuff.init(self)
+	debuff_place_holder.add_child(debuff)
+	debuff.position = Vector2.ZERO
 	current_debuff = debuff
 
 func remove_debuff(debuff: Debuff) -> void:
 	if current_debuff == null: return
+	if debuff_place_holder == null: return
 	if debuff == current_debuff:
-		remove_child(current_debuff)
+		debuff_place_holder.remove_child(current_debuff)
 		current_debuff = null
 
 func set_is_blind(value: bool) -> void:
@@ -524,6 +540,7 @@ func freeze_in_place(value: bool) -> void:
 	#if value == true: current_movement_speed = 0
 	#else: current_movement_speed = movement_speed
 	is_frozen = value
+	velocity.x = 0
 	if animated_sprite != null:
 		if value == true: animated_sprite.speed_scale = 0
 		else: animated_sprite.speed_scale = 1

@@ -178,3 +178,6 @@ bounce_back_velocity = 0.0
 script = ExtResource("21_f564q")
 despawn_time = null
 bounce_back_velocity = null
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-3, 26)
