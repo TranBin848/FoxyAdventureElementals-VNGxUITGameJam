@@ -652,7 +652,6 @@ func _apply_burrow_buff(duration: float) -> void:
 	# 1. State & Stats
 	is_in_burrow_state = true
 	speed_multiplier = 1.25
-	is_able_attack = false
 	
 	# 2. Disable Collision Layer 2 (Player Body Layer) / Hurtbox
 	hurt_area.call_deferred("set_monitorable", false)
@@ -691,7 +690,6 @@ func _apply_burrow_buff(duration: float) -> void:
 	
 	is_in_burrow_state = false
 	speed_multiplier = 1.0
-	is_able_attack = true
 	
 	# 6. Revert Collision Layer
 	# Set monitorable back to TRUE so player can take damage again

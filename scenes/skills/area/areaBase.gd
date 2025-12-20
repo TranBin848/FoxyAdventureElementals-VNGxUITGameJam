@@ -10,7 +10,7 @@ var direction: Vector2
 var targets_in_area: Array = [] 
 var timer: Timer
 
-func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direction: Vector2  = Vector2.RIGHT) -> void:
+func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direction: Vector2 = Vector2.RIGHT) -> void:
 	self.damage = skill.damage
 	self.elemental_type = skill.elemental_type
 	self.duration = skill.duration
@@ -19,9 +19,17 @@ func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direct
 	
 	targetenemy = enemy
 	
-	# Determine casting direction
-	var direction_to_enemy = (enemy.global_position - caster_position).normalized()
-	var is_facing_right = direction_to_enemy.x > 0
+	# --- FIX START: Safely determine facing direction ---
+	var is_facing_right = true
+	
+	if enemy and is_instance_valid(enemy):
+		# If we have a target, look at them
+		var direction_to_enemy = (enemy.global_position - caster_position).normalized()
+		is_facing_right = direction_to_enemy.x > 0
+	else:
+		# If enemy is null, use the fallback 'direction' passed from the player
+		is_facing_right = direction.x > 0
+	# --- FIX END ---
 	
 	# Flip sprite based on direction
 	var sprite = get_node_or_null("Sprite2D")
@@ -53,7 +61,7 @@ func _disable_hitbox() -> void:
 
 # Called by method track when startup completes
 func _on_startup_complete() -> void:
-	pass  # AnimationPlayer automatically transitions if you use AnimationPlayback tracks
+	pass 
 
 func _setup_duration_timer() -> void:
 	if not is_inside_tree():

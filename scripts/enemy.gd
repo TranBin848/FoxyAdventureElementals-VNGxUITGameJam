@@ -76,6 +76,8 @@ func _ready() -> void:
 	_init_start_position()
 	_init_particle()
 	
+	add_to_group("enemies")
+	
 	# Connect to global particle quality signal (check if not already connected)
 	if not SettingsManager.particle_quality_changed.is_connected(_on_particle_quality_changed):
 		SettingsManager.particle_quality_changed.connect(_on_particle_quality_changed)

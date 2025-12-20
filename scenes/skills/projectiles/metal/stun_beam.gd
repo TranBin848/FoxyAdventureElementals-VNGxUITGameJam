@@ -31,6 +31,13 @@ func _trigger_stun() -> void:
 	stun_center = global_position
 	set_physics_process(false)
 	
+	# --- FIX START ---
+	# Wait for the physics server to update this new Area2D's collisions
+	await get_tree().physics_frame
+	await get_tree().physics_frame 
+	# (Sometimes 2 frames are safer to ensure position updates propagate)
+	# --- FIX END ---
+	
 	# Find any additional enemies in stun area (in case they walked into range)
 	if stun_area:
 		var overlaps = stun_area.get_overlapping_bodies()

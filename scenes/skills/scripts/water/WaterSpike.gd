@@ -9,6 +9,6 @@ func _init():
 	duration = 1.5
 	mana = 20.0
 	animation_name = "WaterSpike"
-	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons19.png"
+	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons11.png"
 	area_scene = preload("res://scenes/skills/area/water/waterSpikeArea.tscn")
 	damage = 2

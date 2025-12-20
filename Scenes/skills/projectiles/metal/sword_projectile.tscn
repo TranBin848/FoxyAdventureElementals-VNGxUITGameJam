@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_i8hic"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqr0l"]
-radius = 5.0
-height = 17.0
+radius = 3.0
+height = 32.0
 
 [node name="SwordProjectile" type="Area2D"]
 script = ExtResource("1_0g75m")
@@ -18,16 +18,18 @@ texture = ExtResource("2_jt2st")
 hframes = 9
 vframes = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, 0)
-rotation = 1.57079
-shape = SubResource("CapsuleShape2D_mqr0l")
-
 [node name="HitArea2D" parent="." instance=ExtResource("3_i8hic")]
 collision_mask = 16
 elemental_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
-position = Vector2(2.5, 0)
 rotation = 1.57079
+shape = SubResource("CapsuleShape2D_mqr0l")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(17, 0)
+target_position = Vector2(6, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
 shape = SubResource("CapsuleShape2D_mqr0l")
