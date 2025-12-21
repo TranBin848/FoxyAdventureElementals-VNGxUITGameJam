@@ -47,7 +47,6 @@ func _on_scene_changed() -> void:
 	## Nếu có checkpoint → khôi phục trạng thái
 	#if current_checkpoint_id in checkpoint_data:
 		#var checkpoint_info = checkpoint_data[current_checkpoint_id]
-		#player.health = checkpoint_info.get("health", player.max_health)
 		#player.has_blade = checkpoint_info.get("has_blade", false)
 		#player.has_wand = checkpoint_info.get("has_wand", false)
 		#player.load_state(checkpoint_info.get("player_state", {}))
@@ -109,7 +108,6 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	
 	checkpoint_data[checkpoint_id] = {
 		"player_state": player_state_dict,
-		"health": player.health,
 		"has_blade": player.has_blade,
 		"has_wand": player.has_wand,
 		"inventory_data": inventory_data,
@@ -157,7 +155,6 @@ func respawn_at_checkpoint() -> void:
 
 	if player:
 		player.load_state(checkpoint_info.get("player_state", {}))
-		player.health = checkpoint_info.get("health", player.max_health)
 		player.has_blade = checkpoint_info.get("has_blade", false)
 		player.has_wand = checkpoint_info.get("has_wand", false)
 		

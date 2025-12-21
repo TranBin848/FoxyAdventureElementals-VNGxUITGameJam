@@ -8,25 +8,14 @@ var dragging := false
 var last_mouse_pos := Vector2.ZERO
 
 @onready var camera: Camera2D = $SubViewportContainer/SubViewport/SkillCamera2D
-
-#onready var camera: Camera2D = $SkillCamera2D
 @onready var info_panel: SkillInfoPanel = $"../CanvasLayer_SkillPanel/SkillInfoPanel"
-#@onready var info_panel: SkillInfoPanel
-
-#func _ready() -> void:
-	#camera.make_current()
 
 func _input(event: InputEvent) -> void:
-	# --- ZOOM ---
-	# Nếu panel mở → KHÔNG ZOOM, KHÔNG DRAG
-	if info_panel.visible:
-		return
-	
+	# --- ZOOM (always allowed) ---
 	if event is InputEventMouseButton:
 		if event.is_pressed():	
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				_apply_zoom(-zoom_speed)
-
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				_apply_zoom(zoom_speed)
 
@@ -36,13 +25,12 @@ func _input(event: InputEvent) -> void:
 			dragging = event.is_pressed()
 			last_mouse_pos = get_viewport().get_mouse_position()
 
-	# --- DRAG MOVE ---
+	# --- DRAG MOVE (always allowed) ---
 	if event is InputEventMouseMotion and dragging:
 		var mouse_pos = get_viewport().get_mouse_position()
 		var delta = mouse_pos - last_mouse_pos
 		camera.global_position -= delta / camera.zoom
 		last_mouse_pos = mouse_pos
-
 
 # ===========================
 #      HÀM ZOOM GỌN GÀNG

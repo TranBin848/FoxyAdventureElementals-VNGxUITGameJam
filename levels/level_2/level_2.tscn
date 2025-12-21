@@ -1000,6 +1000,6 @@ position = Vector2(-473, 816)
 checkpoint_id = "999"
 
 [node name="Player" parent="." instance=ExtResource("14_km4sl")]
-position = Vector2(10059, -1104)
+position = Vector2(-557, 824)
 has_blade = true
 max_health = 1000

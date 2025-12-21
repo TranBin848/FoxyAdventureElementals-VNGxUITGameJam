@@ -334,11 +334,10 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 # ================================================================
 
 func save_state() -> Dictionary:
-	return { "position": [global_position.x, global_position.y], "health": health, "has_blade": has_blade, "is_in_fireball_state": is_in_fireball_state }
+	return { "position": [global_position.x, global_position.y], "has_blade": has_blade, "is_in_fireball_state": is_in_fireball_state }
 
 func load_state(data: Dictionary) -> void:
 	if data.has("position"): global_position = Vector2(data["position"][0], data["position"][1])
-	if data.has("health"): health = clamp(data["health"], 0, max_health); health_changed.emit()
 	if data.has("has_blade"):
 		has_blade = data["has_blade"]
 		if has_blade and not is_in_fireball_state: collected_blade()

@@ -14,6 +14,11 @@ class_name SkillButtonNode
 
 var children: Array[SkillButtonNode] = []
 
+# Line colors
+const NORMAL_COLOR: Color = Color(0.5, 0.5, 0.5, 0.7)    # Gray (locked)
+const UNLOCKED_COLOR: Color = Color(1, 1, 0.3, 1.0)       # Gold (unlocked)
+const PARENT_COLOR: Color = Color(0.8, 0.8, 0.2, 1.0)     # Darker gold (parent)
+
 signal skill_selected(skill)
 
 func _ready() -> void:
@@ -23,18 +28,20 @@ func _ready() -> void:
 		
 		line_2d.add_point(global_position + size/2 - Vector2(4,4))
 		line_2d.add_point(get_parent().global_position + size/2 - Vector2(4,4))
+		line_2d.default_color = NORMAL_COLOR  # Default locked color
 		
 	SkillStackManager.stack_changed.connect(_on_stack_changed)
 	SkillStackManager.level_changed.connect(_on_level_changed)
-	#SkillStackManager.level_changed.connect(_on_unlocked_changed)
 	
+	# Set initial line color
+	_update_line_color()
+
 var level : int = 0:
 	set(value):
 		level = value
 		level_label.text = str(level) + "/3"
 
 var stack: int = 0
-
 var unlocked: bool = false
 
 func _on_pressed() -> void:
@@ -44,7 +51,6 @@ func set_skill():
 	if skill == null:
 		return
 
-	# Cập nhật texture
 	if skill.texture_path:
 		texture_normal = load(skill.texture_path)
 	
@@ -57,15 +63,23 @@ func set_skill():
 		panel.show_behind_parent = true	
 		
 	stack_label.text = str(stack)
-	
-	# Đặt tooltip hoặc tên nếu cần
 	tooltip_text = skill.name
+	
+	_update_line_color()
 	
 	for child in children:
 		var skillchildunlocked = SkillStackManager.get_unlocked(child.skill.name)
 		if skillchildunlocked:
-			_highlight_line(child)
-			
+			child._highlight_line()
+
+func _update_line_color():
+	if unlocked:
+		line_2d.default_color = UNLOCKED_COLOR
+		line_2d.width = 4
+	else:
+		line_2d.default_color = NORMAL_COLOR
+		line_2d.width = 2
+
 func _on_stack_changed(skill_name: String, new_stack: int):
 	if skill == null or skill_name != skill.name:
 		return
@@ -73,30 +87,34 @@ func _on_stack_changed(skill_name: String, new_stack: int):
 	stack = new_stack
 	stack_label.text = str(stack)
 
-# ───────────────────────────────────────────
-# CẬP NHẬT LEVEL
-# ───────────────────────────────────────────
 func _on_level_changed(skill_name: String, new_level: int):
 	if skill == null or skill_name != skill.name:
 		return
 
-	level = new_level  # setter tự update UI
+	level = new_level
 
-	# Nếu đã đạt cấp 3 → mở khóa children
 	if level >= 3:
 		_unlock_children()
 	
+	_update_line_color()  # Update color when level changes
+
 func _unlock_children():
 	for child in children:
 		var skillchildunlocked = SkillStackManager.get_unlocked(child.skill.name)
 		if not skillchildunlocked:
-			#SkillStackManager.set_unlocked(child.skill.name)
-			#child.unlocked = true
 			child.disabled = false
 			child.panel.show_behind_parent = true	
-			_highlight_line(child)
+			child._highlight_line()
+
+# Updated to use new color system
+func _highlight_line():
+	line_2d.default_color = UNLOCKED_COLOR
+	line_2d.width = 4
 	
-func _highlight_line(child: SkillButtonNode):
-	var line = child.line_2d
-	line.default_color = Color(1,1,0.3)
-	line.width = 4
+	# If this is a parent, highlight its parent line too
+	if get_parent() is SkillButtonNode:
+		get_parent()._highlight_parent_line()
+
+func _highlight_parent_line():
+	line_2d.default_color = PARENT_COLOR
+	line_2d.width = 5

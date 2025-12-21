@@ -43,43 +43,39 @@ func show_skill(btn: SkillButtonNode):
 func get_stat_text(sk: Skill) -> String:
 	var lines: Array[String] = []
 		
-	# --- Element Color ---
+	# --- elemental_type Color using ENUM names directly ---
 	var color_map := {
-		"Fire": "[color=#ff4a4a]",   # đỏ
-		"Water": "[color=#4aaaff]",  # xanh nước
-		"Earth": "[color=#c29a5b]",  # nâu đất
-		"Wood": "[color=#4caf50]",   # xanh lá
-		"Metal": "[color=#d0d0d0]",  # bạc
+		ElementsEnum.Elements.FIRE: "[color=#ff4a4a]",   
+		ElementsEnum.Elements.WATER: "[color=#4aaaff]",  
+		ElementsEnum.Elements.EARTH: "[color=#c29a5b]",  
+		ElementsEnum.Elements.WOOD: "[color=#4caf50]",   
+		ElementsEnum.Elements.METAL: "[color=#d0d0d0]",  
 	}
 
 	var elem_color := "[color=white]"
-	if color_map.has(sk.element):
-		elem_color = color_map[sk.element]
+	if color_map.has(sk.elemental_type):
+		elem_color = color_map[sk.elemental_type]
 
-	# --- Header line ---
-	var element_text := "%s%s[/color]" % [elem_color, sk.element]
-	lines.append("Stats:                         " + element_text)
-
-	# --- Các stats ---
-	if sk.damage > 0:
-		lines.append("Damage: %d" % sk.damage)
-
-	if sk.cooldown > 0:
-		lines.append("Cooldown: %.2f s" % sk.cooldown)
-
-	if sk.mana > 0:
-		lines.append("Mana: %d" % sk.mana)
-
-	if sk.speed > 0:
-		lines.append("Speed: %d" % sk.speed)
-
-	if sk.duration > 0:
-		lines.append("Duration: %.2f s" % sk.duration)
-
-	if sk.type != "":
-		lines.append("Skill Type: %s" % sk.type)
+	# --- Header line with ENUM name ---
+	var elem_name = ElementsEnum.Elements.keys()[sk.elemental_type]
+	var elemental_type_text := "%s%s[/color]" % [elem_color, elem_name]
+	lines.append("Stats:                         " + elemental_type_text)
+	lines.append("Damage: %d" % sk.damage)
+	lines.append("Cooldown: %.2f s" % sk.cooldown)
+	lines.append("Mana: %d" % sk.mana)
+	lines.append("Duration: %.2f s" % sk.duration)
 	
-	# --- ghép dòng + spacing giả ---
+	# --- Translated Skill Types ---
+	var type_map := {
+		"single_shot": "Single Shot",
+		"multi_shot": "Multi Shot", 
+		"radial": "Radial Burst",
+		"area": "Area Effect",
+		"buff": "Self Buff"
+	}
+	var skill_type_text = type_map.get(sk.type, sk.type)
+	lines.append("Skill Type: %s" % skill_type_text)
+	
 	return "\n\n".join(lines)
 
 func _update_buttons():
@@ -210,3 +206,7 @@ func _on_equip_button_pressed() -> void:
 		_show_error_text("Skill not unlocked.")
 		return
 	_show_error_text("Skill bar is full!")
+
+
+func _on_close_button_pressed():
+	visible = false
