@@ -39,35 +39,35 @@ func _on_scene_changed() -> void:
 	skill_bar = current_stage.find_child("SkillBar", true, false)
 	
 	
-	if not player:
-		print("⚠️ Không tìm thấy Player trong scene mới.")
-		return
-	else:
-		print("Đã tìm thấy player")
-	# Nếu có checkpoint → khôi phục trạng thái
-	if current_checkpoint_id in checkpoint_data:
-		var checkpoint_info = checkpoint_data[current_checkpoint_id]
-		player.health = checkpoint_info.get("health", player.max_health)
-		player.has_blade = checkpoint_info.get("has_blade", false)
-		player.has_wand = checkpoint_info.get("has_wand", false)
-		player.load_state(checkpoint_info.get("player_state", {}))
-
-		# Khôi phục inventory nếu có
-		if checkpoint_info.has("inventory_data") and inventory_system:
-			inventory_system.load_data(checkpoint_info["inventory_data"])
-			print("👜 Inventory đã được khôi phục từ checkpoint")
-		
-		if checkpoint_info.has("skill_stack"):
-			SkillStackManager.load_data(checkpoint_info["skill_stack"], checkpoint_info["skill_bar"])
-			print("✨ Skill stack đã được khôi phục: ", checkpoint_info["skill_stack"], checkpoint_info["skill_bar"])
-		
-		if player.has_blade:
-			player.collected_blade()
-	
-		
-		print("✅ Player đã được khôi phục từ checkpoint:", current_checkpoint_id)
-	else:
-		print("ℹ️ Không có dữ liệu checkpoint cho scene này.")
+	#if not player:
+		#print("⚠️ Không tìm thấy Player trong scene mới.")
+		#return
+	#else:
+		#print("Đã tìm thấy player")
+	## Nếu có checkpoint → khôi phục trạng thái
+	#if current_checkpoint_id in checkpoint_data:
+		#var checkpoint_info = checkpoint_data[current_checkpoint_id]
+		#player.health = checkpoint_info.get("health", player.max_health)
+		#player.has_blade = checkpoint_info.get("has_blade", false)
+		#player.has_wand = checkpoint_info.get("has_wand", false)
+		#player.load_state(checkpoint_info.get("player_state", {}))
+#
+		## Khôi phục inventory nếu có
+		#if checkpoint_info.has("inventory_data") and inventory_system:
+			#inventory_system.load_data(checkpoint_info["inventory_data"])
+			#print("👜 Inventory đã được khôi phục từ checkpoint")
+		#
+		#if checkpoint_info.has("skill_stack"):
+			#SkillStackManager.load_data(checkpoint_info["skill_stack"], checkpoint_info["skill_bar"])
+			#print("✨ Skill stack đã được khôi phục: ", checkpoint_info["skill_stack"], checkpoint_info["skill_bar"])
+		#
+		#if player.has_blade:
+			#player.collected_blade()
+	#
+		#
+		#print("✅ Player đã được khôi phục từ checkpoint:", current_checkpoint_id)
+	#else:
+		#print("ℹ️ Không có dữ liệu checkpoint cho scene này.")
 		
 
 

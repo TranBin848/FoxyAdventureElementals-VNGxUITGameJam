@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=75 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -53,6 +53,7 @@
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="49_mvtf2"]
 [ext_resource type="PackedScene" uid="uid://dlo5gf1o05dgq" path="res://scenes/env_particle/rain.tscn" id="53_5oe72"]
 [ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="53_nx43y"]
+[ext_resource type="AudioStream" uid="uid://da2jb75pixowd" path="res://assets/sounds/44474__bullockjs__waterfall2.mp3" id="54_h8kgu"]
 [ext_resource type="Script" uid="uid://ddphxb2lvd1do" path="res://scripts/area_component/ambience_area_2d.gd" id="54_nx43y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mjh6"]
@@ -677,6 +678,14 @@ position = Vector2(1221, -264)
 lifetime = 1.0
 visibility_rect = Rect2(-450, -500, 900, 1000)
 process_material = SubResource("ParticleProcessMaterial_5oe72")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="RainGPUParticles2D"]
+position = Vector2(-16.8766, 432.57)
+stream = ExtResource("54_h8kgu")
+volume_db = -10.0
+autoplay = true
+max_distance = 300.0
+bus = &"Ambience SFX"
 
 [node name="AmbienceArea2D" type="Area2D" parent="RainGPUParticles2D"]
 script = ExtResource("54_nx43y")

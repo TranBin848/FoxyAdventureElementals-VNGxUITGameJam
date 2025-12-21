@@ -39,7 +39,7 @@ func _trigger_explosion() -> void:
 	for b in overlaps:
 		if b is EnemyCharacter:
 			affected_enemies.append(b)
-			b.enter_skill(explosion_center)  # Pull to center
+			#b.enter_skill(explosion_center)  # Pull to center
 	
 	# Reset scale + play animation
 	$AnimatedSprite2D.scale = start_scale

@@ -25,8 +25,8 @@ var is_stuck: bool = false
 var stick_duration: float = 5.0
 var sword_id := randi()
 
-func _ready() -> void:
-	print("Sword ready: ", sword_id, " parent: ", get_parent())
+#func _ready() -> void:
+	#print("Sword ready: ", sword_id, " parent: ", get_parent())
 
 func setup_hover(pos: Vector2, dmg: int, elem: ElementsEnum.Elements, duration: float) -> void:
 	damage = dmg
@@ -71,7 +71,8 @@ func launch(target: Vector2) -> void:
 	
 	elapsed = 0.0
 	active = true
-	if hit_area: hit_area.set_deferred("monitoring", true)
+	if hit_area: 
+		hit_area.set_deferred("monitoring", true)
 
 func _physics_process(delta: float) -> void:
 	if not active or is_stuck:
@@ -89,7 +90,7 @@ func _physics_process(delta: float) -> void:
 		next_pos = global_position + final_dir * fly_speed * delta
 
 	var motion := next_pos - global_position
-
+	
 	if motion.length() > 0.001:
 		rotation = motion.angle() + ROTATION_OFFSET
 
@@ -143,21 +144,15 @@ func _stick_to_ground(hit_pos: Vector2, embed_dir: Vector2) -> void:
 		ground_ray.enabled = false
 		print("  ground_ray disabled")
 
-	# Start fade out
 	_start_fade_out()
 
 func _start_fade_out() -> void:
-	if not sprite:
-		# if no sprite, just free after fade_duration
-		get_tree().create_timer(fade_duration).timeout.connect(queue_free)
-		return
-
+	# Fade sprite AND trail
 	var tween := create_tween()
-	# fade alpha from 1.0 to 0.0 over fade_duration
-	tween.tween_property(sprite, "modulate:a", 0.0, fade_duration)
-	# when tween is done, free the node
+	if sprite:
+		tween.parallel().tween_property(sprite, "modulate:a", 0.0, fade_duration)
+	
 	tween.finished.connect(queue_free)
-
 
 func _on_hit_something(_area):
 	pass

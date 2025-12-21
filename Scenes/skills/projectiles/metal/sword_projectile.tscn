@@ -14,6 +14,7 @@ elemental_type = 1
 metadata/_custom_type_script = "uid://5btdwob525wm"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6, 0)
 rotation = 0.785397
 texture = ExtResource("2_3i17v")
 hframes = 70
@@ -28,9 +29,11 @@ rotation = 1.57079
 shape = SubResource("CapsuleShape2D_mqr0l")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(17, 0)
+position = Vector2(12, 0)
 target_position = Vector2(6, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_mqr0l")
+
+[node name="Trail" type="Line2D" parent="."]
