@@ -6,7 +6,7 @@ class_name ToxicBreathProjectile
 @export var lifetime_sec: float = 3.0     # How long the breath persists
 @export var breath_anim: String = "ToxicBreath"  # Animation name on AnimatedSprite2D
 
-@onready var hit_area: Area2D = $HitArea2d
+@onready var hit_area: Area2D = $HitArea2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var center_position: Vector2

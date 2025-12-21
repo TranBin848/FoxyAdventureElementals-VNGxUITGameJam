@@ -1,7 +1,7 @@
-[gd_scene load_steps=105 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=107 format=3 uid="uid://d0jou4iuydvkg"]
 
-[ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://Scenes/player/player_glowing.gdshader" id="1_am21h"]
-[ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://Scenes/player/player.gd" id="1_wodsf"]
+[ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
+[ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
 [ext_resource type="Texture2D" uid="uid://bkabwrpxdc7cc" path="res://assets/foxy/fox_hat_blade/fox_atk_2.png" id="3_j4nxn"]
 [ext_resource type="Texture2D" uid="uid://byd3g4nnxwfcq" path="res://assets/foxy/fox_hat_blade/fox_atk_3.png" id="4_28m0y"]
@@ -20,14 +20,14 @@
 [ext_resource type="Texture2D" uid="uid://3g5hdrfwcd2c" path="res://assets/foxy/fox_hat/fox_walk_2.png" id="19_avmva"]
 [ext_resource type="Texture2D" uid="uid://cp2ag6s67gj73" path="res://assets/foxy/fox_hat_blade/fox_defeat_1.png" id="19_genst"]
 [ext_resource type="Texture2D" uid="uid://cg0s41812vukj" path="res://assets/foxy/fox_hat/fox_walk_3.png" id="20_0ioy2"]
-[ext_resource type="Script" uid="uid://li1jbn65pf6r" path="res://Scenes/player/states/hurt.gd" id="20_8ydkj"]
+[ext_resource type="Script" uid="uid://li1jbn65pf6r" path="res://scenes/player/states/hurt.gd" id="20_8ydkj"]
 [ext_resource type="Texture2D" uid="uid://cx3p62gjf57ep" path="res://assets/foxy/fox_hat_blade/fox_defeat_2.png" id="20_niom3"]
 [ext_resource type="Texture2D" uid="uid://cbaa3uxgjfwo6" path="res://assets/foxy/fox_hat_blade/fox_cling_1.png" id="21_hir57"]
 [ext_resource type="Texture2D" uid="uid://blvo22k8hckk0" path="res://assets/foxy/fox_hat_blade/fox_defeat_3.png" id="21_ttakn"]
 [ext_resource type="Texture2D" uid="uid://2j5ksjww4suq" path="res://assets/foxy/fox_hat_blade/fox_cling_2.png" id="21_vkc6f"]
 [ext_resource type="Texture2D" uid="uid://8u26ji11yaua" path="res://assets/foxy/fox_hat/fox_walk_4.png" id="21_vlhku"]
 [ext_resource type="Texture2D" uid="uid://bv5er34emc8g1" path="res://assets/foxy/fox_hat_blade/fox_jump_2.png" id="22_rw8a5"]
-[ext_resource type="Script" uid="uid://21al21syvgln" path="res://Scenes/player/states/dead.gd" id="22_yj68g"]
+[ext_resource type="Script" uid="uid://21al21syvgln" path="res://scenes/player/states/dead.gd" id="22_yj68g"]
 [ext_resource type="Texture2D" uid="uid://bh18dgm068hhf" path="res://assets/foxy/fox_hat_blade/fox_hit_1.png" id="23_iwuka"]
 [ext_resource type="Texture2D" uid="uid://gg8v11cck4hu" path="res://assets/foxy/fox_hat_blade/fox_hit_2.png" id="24_hyqqp"]
 [ext_resource type="Texture2D" uid="uid://cbfcke2rlqmtw" path="res://assets/foxy/fox_hat_blade/fox_hit_3.png" id="25_ds1xl"]
@@ -42,46 +42,47 @@
 [ext_resource type="Texture2D" uid="uid://ce35c6mn7dcok" path="res://assets/foxy/fox_hat_blade/fox_walk_4.png" id="34_uygh0"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="35_o1e43"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="37_iwuka"]
-[ext_resource type="PackedScene" uid="uid://dtvvbmgptni3i" path="res://Scenes/player/jump_fx.tscn" id="37_k00gf"]
-[ext_resource type="PackedScene" uid="uid://b4j3dswx4n2cy" path="res://Scenes/player/walk_fx.tscn" id="38_48wxx"]
-[ext_resource type="PackedScene" uid="uid://cs0qvp0xeh0tn" path="res://Scenes/blade/blade_projectile.tscn" id="38_hyqqp"]
-[ext_resource type="Script" uid="uid://dp3lba7mnpcyn" path="res://Scenes/player/states/idle.gd" id="39_art4l"]
+[ext_resource type="PackedScene" uid="uid://dtvvbmgptni3i" path="res://scenes/player/jump_fx.tscn" id="37_k00gf"]
+[ext_resource type="PackedScene" uid="uid://b4j3dswx4n2cy" path="res://scenes/player/walk_fx.tscn" id="38_48wxx"]
+[ext_resource type="PackedScene" uid="uid://cs0qvp0xeh0tn" path="res://scenes/blade/blade_projectile.tscn" id="38_hyqqp"]
+[ext_resource type="Script" uid="uid://dp3lba7mnpcyn" path="res://scenes/player/states/idle.gd" id="39_art4l"]
 [ext_resource type="Texture2D" uid="uid://cltcckgaeat63" path="res://assets/foxy/fox_hat_wand/fox_attack_1.png" id="39_ej2d6"]
-[ext_resource type="Script" uid="uid://bn74l4ngryo6x" path="res://Scenes/player/states/run.gd" id="40_fjxoa"]
+[ext_resource type="Script" uid="uid://bn74l4ngryo6x" path="res://scenes/player/states/run.gd" id="40_fjxoa"]
 [ext_resource type="Texture2D" uid="uid://bw5qwrn88lybs" path="res://assets/foxy/fox_hat_wand/fox_attack_2.png" id="40_fvjb1"]
 [ext_resource type="Texture2D" uid="uid://btcp2mst3e6vw" path="res://assets/foxy/fox_hat_wand/fox_attack_3.png" id="41_bysbl"]
-[ext_resource type="Script" uid="uid://di3w8xw7t025o" path="res://Scenes/player/states/jump.gd" id="41_gswnw"]
+[ext_resource type="Script" uid="uid://di3w8xw7t025o" path="res://scenes/player/states/jump.gd" id="41_gswnw"]
 [ext_resource type="Texture2D" uid="uid://nhfj6hi2shfk" path="res://assets/foxy/fox_hat_wand/fox_attack_4.png" id="42_2wy34"]
-[ext_resource type="PackedScene" uid="uid://dy04qa0qn7d0r" path="res://Scenes/fx/ghost.tscn" id="42_5xbmr"]
-[ext_resource type="Script" uid="uid://caxtbpdyga1ay" path="res://Scenes/player/states/fall.gd" id="42_xcnuv"]
-[ext_resource type="Script" uid="uid://d3tdm7uhl16p7" path="res://Scenes/player/states/attack.gd" id="43_niom3"]
+[ext_resource type="PackedScene" uid="uid://dy04qa0qn7d0r" path="res://scenes/fx/ghost.tscn" id="42_5xbmr"]
+[ext_resource type="Script" uid="uid://caxtbpdyga1ay" path="res://scenes/player/states/fall.gd" id="42_xcnuv"]
+[ext_resource type="Script" uid="uid://d3tdm7uhl16p7" path="res://scenes/player/states/attack.gd" id="43_niom3"]
 [ext_resource type="Texture2D" uid="uid://dt7xim2i85pbx" path="res://assets/foxy/fox_hat_wand/fox_attack_5.png" id="43_ymths"]
 [ext_resource type="Texture2D" uid="uid://c84uvvo7okdq1" path="res://assets/foxy/fox_hat_wand/fox_attack_6.png" id="44_3p0jd"]
-[ext_resource type="Script" uid="uid://blp1td1nitt5f" path="res://Scenes/player/states/jump_attack.gd" id="44_ttakn"]
+[ext_resource type="Script" uid="uid://blp1td1nitt5f" path="res://scenes/player/states/jump_attack.gd" id="44_ttakn"]
 [ext_resource type="Texture2D" uid="uid://bb82yjgt7kv8q" path="res://assets/foxy/fox_hat_wand/fox_defeat_1.png" id="45_4b1ex"]
 [ext_resource type="Texture2D" uid="uid://dqklcp0tf1nww" path="res://assets/foxy/fox_hat_wand/fox_attack_7.png" id="45_7nf13"]
-[ext_resource type="Script" uid="uid://ke058dpyk512" path="res://Scenes/player/states/throw_attack.gd" id="45_rw8a5"]
+[ext_resource type="Script" uid="uid://ke058dpyk512" path="res://scenes/player/states/throw_attack.gd" id="45_rw8a5"]
 [ext_resource type="Texture2D" uid="uid://cuae61du4ejhn" path="res://assets/foxy/fox_hat_wand/fox_defeat_2.png" id="46_v8cnd"]
 [ext_resource type="Texture2D" uid="uid://bkwd1ycvd1aec" path="res://assets/foxy/fox_hat_wand/fox_defeat_3.png" id="47_wuxn4"]
 [ext_resource type="Texture2D" uid="uid://dfg63wgeanrnu" path="res://assets/foxy/fox_hat_wand/fox_jump_2.png" id="48_46q5t"]
 [ext_resource type="Texture2D" uid="uid://b6k6x07jbps0a" path="res://assets/foxy/fox_hat_wand/fox_hit_1.png" id="49_5miun"]
 [ext_resource type="Texture2D" uid="uid://cm8qbkbykjxrm" path="res://assets/foxy/fox_hat_wand/fox_hit_2.png" id="50_7u1tp"]
-[ext_resource type="Script" uid="uid://c3c1jskkab60p" path="res://Scenes/player/cast_spell.gd" id="51_jrbya"]
+[ext_resource type="Script" uid="uid://c3c1jskkab60p" path="res://scenes/player/cast_spell.gd" id="51_jrbya"]
 [ext_resource type="Texture2D" uid="uid://0jmgtwuyojnn" path="res://assets/foxy/fox_hat_wand/fox_hit_3.png" id="51_pq1ih"]
 [ext_resource type="Texture2D" uid="uid://bmp31uas81s76" path="res://assets/foxy/fox_hat_wand/fox_idle_1.png" id="52_31ki0"]
 [ext_resource type="Texture2D" uid="uid://cnv7qbobh8kv3" path="res://assets/foxy/fox_hat_wand/fox_idle_2.png" id="53_hf5gj"]
 [ext_resource type="Texture2D" uid="uid://b1graa382sjmt" path="res://assets/foxy/fox_hat_wand/fox_jump_1.png" id="54_avmva"]
-[ext_resource type="Script" uid="uid://bj844sdvrx8tj" path="res://Scenes/player/states/wallcling.gd" id="54_t1aof"]
+[ext_resource type="Script" uid="uid://bj844sdvrx8tj" path="res://scenes/player/states/wallcling.gd" id="54_t1aof"]
 [ext_resource type="Texture2D" uid="uid://csjbkp3ft1g0w" path="res://assets/foxy/fox_hat_wand/fox_walk_1.png" id="55_0ioy2"]
 [ext_resource type="Texture2D" uid="uid://cq40il32pklvp" path="res://assets/ui/Hearts/PNG/basic/heart.png" id="55_uygh0"]
-[ext_resource type="Script" uid="uid://c0cdtrjscwk6k" path="res://Scenes/player/states/wall_jump.gd" id="55_w8qe1"]
-[ext_resource type="Script" uid="uid://df4tai7suuyna" path="res://Scenes/player/states/dash.gd" id="56_hdvrm"]
+[ext_resource type="Script" uid="uid://c0cdtrjscwk6k" path="res://scenes/player/states/wall_jump.gd" id="55_w8qe1"]
+[ext_resource type="Script" uid="uid://df4tai7suuyna" path="res://scenes/player/states/dash.gd" id="56_hdvrm"]
 [ext_resource type="Texture2D" uid="uid://tsq6bto77a2v" path="res://assets/foxy/fox_hat_wand/fox_walk_2.png" id="56_vlhku"]
-[ext_resource type="PackedScene" uid="uid://cpadeikbdhgul" path="res://Scenes/ui/death_ui.tscn" id="57_uygh0"]
+[ext_resource type="PackedScene" uid="uid://cpadeikbdhgul" path="res://scenes/ui/death_ui.tscn" id="57_uygh0"]
 [ext_resource type="Texture2D" uid="uid://bqykhn7xwriyi" path="res://assets/foxy/fox_hat_wand/fox_walk_3.png" id="57_ws0t6"]
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
 [ext_resource type="Texture2D" uid="uid://bnxmtrxr3ke7q" path="res://assets/skills/fire/Fireball/Fire Effect and Bullet 16x16.png" id="60_gs7hn"]
-[ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://Scenes/fx/slash_fx.tscn" id="67_31ki0"]
+[ext_resource type="PackedScene" uid="uid://b33nvdvnniecl" path="res://scenes/skills/projectiles/earth/comet_crater.tscn" id="66_gs7hn"]
+[ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://scenes/fx/slash_fx.tscn" id="67_31ki0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lwhcj"]
 shader = ExtResource("1_am21h")
@@ -579,6 +580,9 @@ point_count = 3
 radius = 7.0
 height = 28.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwhcj"]
+size = Vector2(5.5, 3)
+
 [node name="Player" type="CharacterBody2D"]
 light_mask = 0
 material = SubResource("ShaderMaterial_lwhcj")
@@ -620,7 +624,6 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
-visible = false
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"cling"
@@ -673,15 +676,15 @@ product_packed_scene = ExtResource("37_k00gf")
 target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
+[node name="SlashFX" type="Node2D" parent="Direction"]
+position = Vector2(24, -23)
+
 [node name="SlashFXFactory" type="Marker2D" parent="Direction"]
 position = Vector2(24, -23)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("67_31ki0")
-target_container_name = &"SlashFX"
+target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
-
-[node name="SlashFX" type="Node2D" parent="Direction"]
-position = Vector2(24, -23)
 
 [node name="WalkFXFactory" type="Marker2D" parent="Direction"]
 position = Vector2(-8, -2)
@@ -700,6 +703,13 @@ metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 [node name="SkillFactory" type="Marker2D" parent="Direction"]
 position = Vector2(37, -12)
 script = ExtResource("37_iwuka")
+metadata/_custom_type_script = "uid://b2o007yxvk7qa"
+
+[node name="SurfaceFXFactory" type="Marker2D" parent="Direction"]
+position = Vector2(0, -37)
+script = ExtResource("37_iwuka")
+product_packed_scene = ExtResource("66_gs7hn")
+target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
@@ -771,6 +781,11 @@ shape = SubResource("CapsuleShape2D_genst")
 [node name="FireballShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ru3bc")
+disabled = true
+
+[node name="BurrowShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -39)
+shape = SubResource("RectangleShape2D_lwhcj")
 disabled = true
 
 [node name="States" type="Node" parent="."]

@@ -11,9 +11,12 @@ var all_skills = {
 		"Wood Shot": WoodShot,
 		"Heal Over Time": HealOverTime,
 		"Toxic Breath": ToxicBreath,
+		"Wooden Clone": WoodenClone,
 		"Stun Shot": StunShot,
 		"Thunder Strike": Thunderbolt,
-		"Earthquake": Earthquake
+		"Earthquake": Earthquake,
+		"Comet Rain": CometRain,
+		"Burrow": Burrow
 	}
 func get_skill_by_name(name: String) -> Script:
 	if name in all_skills:
