@@ -274,6 +274,7 @@ boss = NodePath("Boss")
 [node name="Boss" parent="Bosszone" instance=ExtResource("28_smwot")]
 position = Vector2(-2.74074, 4.5)
 scale = Vector2(0.037037, 0.0555556)
+max_health = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bosszone"]
 shape = SubResource("RectangleShape2D_dfjn3")
