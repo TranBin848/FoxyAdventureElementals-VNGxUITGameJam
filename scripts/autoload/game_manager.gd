@@ -71,17 +71,16 @@ func respawn_at_portal() -> bool:
 			return true
 	return false
 
+# --- SAVE SYSTEM ---
 func save_checkpoint(checkpoint_id: String) -> void:
-	if not player:
-		return
+	if not player: return
 
 	current_checkpoint_id = checkpoint_id
 	checkpoint_changed.emit(checkpoint_id)
 	
-	var player_state_dict: Dictionary = player.save_state()
+	var player_state_dict = player.save_state()
 	var inventory_data = inventory_system.save_data() if inventory_system else {}
 	
-	# Lưu luôn stage_path hiện tại để đối chiếu sau này
 	checkpoint_data[checkpoint_id] = {
 		"player_state": player_state_dict,
 		"has_blade": player.has_blade,
@@ -90,14 +89,13 @@ func save_checkpoint(checkpoint_id: String) -> void:
 		"stage_path": current_stage.scene_file_path 
 	}
 	
+	# LƯU SKILL TREE + SKILL BAR + COINS
 	SaveSystem.save_checkpoint_data(
 		checkpoint_id,
 		checkpoint_data[checkpoint_id],
 		current_stage.scene_file_path,
-		SkillStackManager.save_data(),
-		SkillStackManager.save_skillbar_data()
+		SkillTreeManager.save_data() # <--- Dùng hàm mới này
 	)
-
 # --- Respawn (ĐÃ SỬA LOGIC) ---
 func respawn_at_checkpoint() -> void:
 	if current_checkpoint_id.is_empty(): return
@@ -125,26 +123,27 @@ func respawn_at_checkpoint() -> void:
 func has_checkpoint() -> bool:
 	return not current_checkpoint_id.is_empty()
 
-# --- PERSISTENT SAVE/LOAD ---
+# --- LOAD SYSTEM ---
 func load_checkpoint_data() -> void:
 	var save_data = SaveSystem.load_checkpoint_data()
-	if save_data.is_empty():
-		return
+	if save_data.is_empty(): return
 	
 	current_checkpoint_id = save_data.get("checkpoint_id", "")
 	var player_data = save_data.get("player", {})
-	var skill_stack = save_data.get("skill_stack", {})
-	var skill_bar_data = save_data.get("skill_bar", [])
 	var inventory_data = save_data.get("inventory_data", {})
+	
+	# Lấy data skill tree (Key này phải khớp với SaveSystem)
+	var skill_tree_data = save_data.get("skill_tree", {}) 
 
 	if inventory_data and inventory_system:
 		inventory_system.load_data(inventory_data)
 	
-	SkillStackManager.load_data(skill_stack, skill_bar_data)
+	# LOAD VÀO MANAGER
+	SkillTreeManager.load_data(skill_tree_data)
 	
 	if not current_checkpoint_id.is_empty():
 		checkpoint_data[current_checkpoint_id] = player_data
-
+		
 func clear_checkpoint_data() -> void:
 	current_checkpoint_id = ""
 	checkpoint_data.clear()

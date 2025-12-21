@@ -17,7 +17,7 @@ const ERROR_DISPLAY_TIME: float = 2.0
 var current_button: SkillButtonNode
 
 func _ready() -> void:
-	SkillStackManager.stack_changed.connect(_on_stack_changed)
+	SkillTreeManager.stack_changed.connect(_on_stack_changed)
 
 func show_skill(btn: SkillButtonNode):
 	var sk = btn.skill
@@ -94,7 +94,7 @@ func _update_buttons():
 	else:
 		upgrade_btn.disabled = false
 	
-	var index = SkillStackManager.find_skill_in_bar(btn.skill.name)
+	var index = SkillTreeManager.find_skill_in_bar(btn.skill.name)
 	if index != -1:
 		equip_button.text = "UNEQUIP"
 	else:
@@ -106,9 +106,9 @@ func _on_unlock_button_pressed() -> void:
 		return
 
 	if btn.stack >= btn.require_stack_unlock:
-		SkillStackManager.remove_stack(btn.skill.name, btn.require_stack_upgrade)
-		#SkillStackManager.set_level(btn.skill.name, btn.level + 1)
-		SkillStackManager.set_unlocked(btn.skill.name)
+		SkillTreeManager.remove_stack(btn.skill.name, btn.require_stack_upgrade)
+		#SkillTreeManager.set_level(btn.skill.name, btn.level + 1)
+		SkillTreeManager.set_unlocked(btn.skill.name)
 		btn.unlocked = true
 		btn.disabled = false
 		_show_error_text("Unlock successfully.")
@@ -126,8 +126,8 @@ func _on_upgrade_button_pressed() -> void:
 		return
 
 	if btn.stack >= btn.require_stack_upgrade and btn.level < 3:
-		SkillStackManager.remove_stack(btn.skill.name, btn.require_stack_upgrade)
-		SkillStackManager.set_level(btn.skill.name, btn.level + 1)
+		SkillTreeManager.remove_stack(btn.skill.name, btn.require_stack_upgrade)
+		SkillTreeManager.set_level(btn.skill.name, btn.level + 1)
 		#if btn.level == 3:
 			#_unlock_children(btn)
 		_show_error_text("Upgrade successfully.")
@@ -183,22 +183,22 @@ func _on_equip_button_pressed() -> void:
 		return
 
 	var skill_name = current_button.skill.name
-	var index = SkillStackManager.find_skill_in_bar(skill_name)
+	var index = SkillTreeManager.find_skill_in_bar(skill_name)
 
 	# ----- ĐÃ EQUIP → UNEQUIP -----
 	if index != -1:
-		SkillStackManager.unequip_skill(skill_name)
+		SkillTreeManager.unequip_skill(skill_name)
 		_show_error_text("Unequipped.")
 		_update_buttons()
 		return
 
 	# ----- CHƯA EQUIP → EQUIP -----
-	var skill_unlock = SkillStackManager.get_unlocked(skill_name)
+	var skill_unlock = SkillTreeManager.get_unlocked(skill_name)
 	if skill_unlock:
-		var bar = SkillStackManager.get_skill_bar_data()
+		var bar = SkillTreeManager.get_skill_bar_data()
 		for i in range(bar.size()):
 			if bar[i] == null:
-				SkillStackManager.equip_skill(i, skill_name)
+				SkillTreeManager.equip_skill(i, skill_name)
 				_show_error_text("Equipped to slot %d." % (i + 1))
 				_update_buttons()
 				return

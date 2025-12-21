@@ -3,14 +3,13 @@ extends Node
 ## Save system for persistent checkpoint data
 const SAVE_FILE: String = "user://checkpoint_save.dat"
 
-# 🔹 Lưu dữ liệu checkpoint: gồm player, checkpoint_id, stage_path
-func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_stack: Dictionary, skill_bar: Array) -> void:
+# 🔹 ĐÃ SỬA: Gộp skill_stack và skill_bar thành một biến 'skill_tree_data'
+func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_tree_data: Dictionary) -> void:
 	var save_data := {
 		"checkpoint_id": checkpoint_id,
-		"player": player_data,
+		"player": player_data,          # Chứa cả inventory và state player
 		"stage_path": stage_path,
-		"skill_stack": skill_stack,
-		"skill_bar": skill_bar
+		"skill_tree": skill_tree_data   # <--- Thay đổi ở đây: Lưu toàn bộ data của SkillTreeManager
 	}
 
 	var file := FileAccess.open(SAVE_FILE, FileAccess.WRITE)
@@ -20,14 +19,14 @@ func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_
 
 	file.store_line(JSON.stringify(save_data))
 	file.close()
-	print("✅ Đã lưu checkpoint:", checkpoint_id, "ở stage:", stage_path)
+	# print("✅ Đã lưu checkpoint:", checkpoint_id, "ở stage:", stage_path)
 
 
-# 🔹 Load checkpoint data từ file
+# 🔹 Load checkpoint data từ file (Giữ nguyên logic, chỉ cần return Dictionary chuẩn)
 func load_checkpoint_data() -> Dictionary:
 	if not has_save_file():
-		print(ProjectSettings.globalize_path(SAVE_FILE))
-		print("⚠️ Không tìm thấy file save, bắt đầu mới.")
+		# print(ProjectSettings.globalize_path(SAVE_FILE))
+		# print("⚠️ Không tìm thấy file save, bắt đầu mới.")
 		return {}
 
 	var file := FileAccess.open(SAVE_FILE, FileAccess.READ)
@@ -39,7 +38,7 @@ func load_checkpoint_data() -> Dictionary:
 	file.close()
 
 	if typeof(result) == TYPE_DICTIONARY:
-		print("✅ Đã load dữ liệu checkpoint.")
+		# print("✅ Đã load dữ liệu checkpoint.")
 		return result
 	else:
 		push_error("❌ Dữ liệu checkpoint không hợp lệ.")

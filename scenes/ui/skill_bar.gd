@@ -18,7 +18,7 @@ func _ready() -> void:
 	call_deferred("setup_player_connection")
 	
 	alert_label = get_tree().root.find_child("ErrorLabel", true, false) as Label
-	SkillStackManager.skillbar_changed.connect(on_skillbar_changed)
+	SkillTreeManager.skillbar_changed.connect(on_skillbar_changed)
 	
 # ✅ RETRY until player loads
 func setup_player_connection():
@@ -78,7 +78,7 @@ func _on_skill_collected(skill_resource: Skill):
 	
 	var stack_gain := randi_range(2, 5)
 	
-	SkillStackManager.add_stack(skill_resource, stack_gain)
+	SkillTreeManager.add_stack(skill_resource, stack_gain)
 	
 	var text := "+%d stacks %s Lv%d" % [stack_gain, skill_name, skill_level]
 	_show_error_text(text)
@@ -89,7 +89,7 @@ func _on_skill_collected(skill_resource: Skill):
 		if slot.skill and slot.skill.name == skill_name:
 			slot.skill.level = skill_level
 			slot.skill.apply_to_button(slot)
-			SkillStackManager.set_skill_in_bar(i, skill_name)
+			SkillTreeManager.set_skill_in_bar(i, skill_name)
 			return
 	
 	for i in range(slots.size()):
@@ -101,7 +101,7 @@ func _on_skill_collected(skill_resource: Skill):
 			slot.cooldown.value = 0
 			slot.time_label.text = ""
 			slot.set_process(false)
-			SkillStackManager.set_skill_in_bar(i, skill_name)
+			SkillTreeManager.set_skill_in_bar(i, skill_name)
 			return
 	
 	_show_error_text("⚠️ Skill bar full!")
@@ -115,11 +115,11 @@ func refresh_from_stack() -> void:
 		slot.set_process(false)
 	
 	var index := 0
-	for skill_name in SkillStackManager.table:
+	for skill_name in SkillTreeManager.table:
 		if index >= slots.size(): 
 			break
 		
-		var skill_data = SkillStackManager.table[skill_name]
+		var skill_data = SkillTreeManager.table[skill_name]
 		if skill_data.stack <= 0: 
 			continue
 		

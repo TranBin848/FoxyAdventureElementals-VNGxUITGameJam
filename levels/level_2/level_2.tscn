@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=63 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -35,8 +35,15 @@
 [ext_resource type="PackedScene" uid="uid://eb702qll71qk" path="res://levels/objects/spider/spider.tscn" id="37_ihnwd"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="37_xpuws"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="38_km4sl"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="38_oaqh1"]
 [ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="38_sm3vb"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="39_pqi81"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_km4sl"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xpuws"]
+distance = 3.0
 
 [sub_resource type="Curve2D" id="Curve2D_s4b5i"]
 _data = {
@@ -172,6 +179,35 @@ point_count = 2
 
 [node name="Stage2" type="Node2D"]
 script = ExtResource("1_ppf8r")
+
+[node name="WorldBoundary" type="Node2D" parent="."]
+
+[node name="RightBorder" type="StaticBody2D" parent="WorldBoundary"]
+position = Vector2(18688, -1670)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/RightBorder"]
+shape = SubResource("WorldBoundaryShape2D_km4sl")
+
+[node name="The Void" type="Area2D" parent="WorldBoundary"]
+position = Vector2(6385, 1095)
+collision_layer = 0
+collision_mask = 20
+script = ExtResource("38_oaqh1")
+damage = 999999
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/The Void"]
+shape = SubResource("WorldBoundaryShape2D_xpuws")
+
+[node name="LeftBorder" type="StaticBody2D" parent="WorldBoundary"]
+position = Vector2(-641, 778)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/LeftBorder"]
+shape = SubResource("WorldBoundaryShape2D_km4sl")
 
 [node name="BladeCollectable" parent="." instance=ExtResource("3_qfhyh")]
 position = Vector2(511, 759)
@@ -917,6 +953,7 @@ checkpoint_id = "999"
 
 [node name="Player" parent="." instance=ExtResource("14_km4sl")]
 position = Vector2(-557, 824)
+collision_mask = 257
 has_blade = true
 max_health = 1000
 

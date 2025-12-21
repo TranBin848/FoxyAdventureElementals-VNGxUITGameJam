@@ -56,7 +56,7 @@ func _collect_item(player: Player) -> void:
 		queue_free()
 		return
 	
-	# Add skill with level to player (update SkillStackManager.add_stack())
+	# Add skill with level to player (update SkillTreeManager.add_stack())
 	var success = player.add_new_skill(skill_resource)  # Pass Skill, not Script!
 	
 	if success:
