@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=64 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -43,7 +43,9 @@
 normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xpuws"]
-distance = 3.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oaqh1"]
+normal = Vector2(1, 0)
 
 [sub_resource type="Curve2D" id="Curve2D_s4b5i"]
 _data = {
@@ -207,7 +209,7 @@ collision_layer = 256
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/LeftBorder"]
-shape = SubResource("WorldBoundaryShape2D_km4sl")
+shape = SubResource("WorldBoundaryShape2D_oaqh1")
 
 [node name="BladeCollectable" parent="." instance=ExtResource("3_qfhyh")]
 position = Vector2(511, 759)

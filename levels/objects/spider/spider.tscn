@@ -142,7 +142,7 @@ size = Vector2(50, 74.5)
 [node name="Path2D" type="Path2D"]
 
 [node name="Line2D" type="Line2D" parent="."]
-position = Vector2(1, -101)
+position = Vector2(0, -100)
 points = PackedVector2Array(-1, 60)
 width = 2.0
 
