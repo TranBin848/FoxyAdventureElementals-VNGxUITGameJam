@@ -683,7 +683,7 @@ position = Vector2(24, -23)
 position = Vector2(24, -23)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("67_31ki0")
-target_container_name = &"FX"
+target_container_name = &"SlashFX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="WalkFXFactory" type="Marker2D" parent="Direction"]
