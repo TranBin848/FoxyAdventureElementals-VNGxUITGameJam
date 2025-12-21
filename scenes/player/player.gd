@@ -137,7 +137,7 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 					slot.update_stack_ui()
 				return 
 
-func add_new_skill(new_skill_class: Script) -> bool:
+func add_new_skill(new_skill_class: Skill) -> bool:
 	skill_collected.emit(new_skill_class)
 	return true
 

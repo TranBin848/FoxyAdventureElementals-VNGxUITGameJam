@@ -6,6 +6,13 @@ var has_killed_player: bool = false
 func _enter_tree() -> void:
 	# Handle portal spawning first
 	GameManager.current_stage = self
+	GameManager.current_level = 2
+	# ✅ Wait 1 frame for enemies to spawn
+	await get_tree().process_frame
+	
+	# Scale health
+	GameManager.scale_health()
+
 	
 func _ready() -> void:
 	# Reset the flag when entering/respawning in the level

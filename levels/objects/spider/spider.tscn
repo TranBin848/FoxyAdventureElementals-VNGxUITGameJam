@@ -1,0 +1,172 @@
+[gd_scene load_steps=11 format=3 uid="uid://eb702qll71qk"]
+
+[ext_resource type="Texture2D" uid="uid://o08nj8b4unrg" path="res://assets/island/objects/spider/Arigopeaurantia2.png" id="1_3ih74"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_6d016"]
+
+[sub_resource type="GDScript" id="GDScript_6d016"]
+script/source = "extends PathFollow2D
+
+@onready var spider: Area2D = $Spider
+@onready var collision_shape: CollisionShape2D = $Spider/CollisionShape2D
+@onready var animated_sprite: AnimatedSprite2D = $Spider/AnimatedSprite2D
+@onready var web_line: Line2D = $\"../Line2D\"   # sibling of PathFollow2D
+
+@export var drop_speed: float = 1.5
+@export var climb_speed: float = 2.0
+@export var eating_time: float = 3.0
+
+var timer: Timer
+var is_active := false
+
+func _ready() -> void:
+	timer = Timer.new()
+	timer.wait_time = 3.0
+	timer.one_shot = true
+	timer.timeout.connect(_start_cycle)
+	add_child(timer)
+
+	progress_ratio = 0.0
+	collision_shape.disabled = true
+
+	if web_line:
+		web_line.clear_points()
+		web_line.add_point(Vector2.ZERO)
+		web_line.add_point(spider.position)
+
+	_set_state_idle()
+
+func _process(_delta: float) -> void:
+	if web_line:
+		var spider_local_pos = web_line.to_local(spider.global_position)
+		web_line.set_point_position(1, spider_local_pos)
+
+func _set_state_idle() -> void:
+	is_active = false
+	animated_sprite.play(\"idle\")
+	timer.start()
+
+func _start_cycle() -> void:
+	if is_active:
+		return
+	is_active = true
+
+	animated_sprite.play(\"moving\")
+	var tween_down = create_tween()
+	tween_down.tween_property(self, \"progress_ratio\", 1.0, drop_speed)
+	await tween_down.finished
+	_start_eating()
+
+func _start_eating() -> void:
+	collision_shape.set_deferred(\"disabled\", false)
+	animated_sprite.play(\"eating\")
+	await get_tree().create_timer(eating_time).timeout
+	collision_shape.set_deferred(\"disabled\", true)
+	_start_retreat()
+
+func _start_retreat() -> void:
+	animated_sprite.play(\"moving\")
+	var tween_up = create_tween()
+	tween_up.tween_property(self, \"progress_ratio\", 0.0, climb_speed)
+	await tween_up.finished
+	_set_state_idle()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvqym"]
+atlas = ExtResource("1_3ih74")
+region = Rect2(0, 9, 266, 171)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d58py"]
+atlas = ExtResource("1_3ih74")
+region = Rect2(266, 9, 266, 171)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3haq"]
+atlas = ExtResource("1_3ih74")
+region = Rect2(532, 9, 266, 171)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isr61"]
+atlas = ExtResource("1_3ih74")
+region = Rect2(0, 180, 266, 171)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlawx"]
+atlas = ExtResource("1_3ih74")
+region = Rect2(266, 180, 266, 171)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ibcm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvqym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d58py")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3haq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isr61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlawx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3haq")
+}],
+"loop": true,
+"name": &"eating",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3haq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3haq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d58py")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8q6c"]
+size = Vector2(50, 74.5)
+
+[node name="Path2D" type="Path2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(1, -101)
+points = PackedVector2Array(-1, 60)
+width = 2.0
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+loop = false
+script = SubResource("GDScript_6d016")
+
+[node name="Spider" type="Area2D" parent="PathFollow2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/Spider"]
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_5ibcm")
+animation = &"moving"
+frame_progress = 0.326223
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Spider"]
+shape = SubResource("RectangleShape2D_w8q6c")
+
+[node name="HitArea2D" type="Area2D" parent="PathFollow2D/Spider"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_6d016")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Spider/HitArea2D"]
+shape = SubResource("RectangleShape2D_w8q6c")

@@ -1,5 +1,4 @@
 extends Node
-class_name SkillDatabase
 
 var all_skills = {
 		"Fire Explosion": FireExplosion, 
@@ -19,7 +18,8 @@ var all_skills = {
 		"Burrow": Burrow
 	}
 	
-func get_skill_by_name(_name: String) -> Script:
+func get_skill_by_name(_name: String) -> Skill:
 	if _name in all_skills:
-		return all_skills[_name]
+		var skill_instance = all_skills[_name].new() as Skill
+		return skill_instance
 	return null

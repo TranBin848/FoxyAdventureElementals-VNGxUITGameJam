@@ -32,10 +32,6 @@ signal mana_changed
 @export var restraint_table = { 1: [4], 2: [1], 3: [2], 4: [5], 5: [3] }
 @export var creation_table = { 1: [3], 2: [5], 3: [4], 4: [2], 5: [1] }
 
-# --- SKILLS & VISUALS ---
-@export var skill_to_drop: Script = null      
-@export var skill_icon_path: String
-
 # --- ANIMATION SYSTEM ---
 var fsm: FSM = null
 var animated_sprite: AnimatedSprite2D = null
@@ -205,7 +201,7 @@ func jump() -> void:
 	if is_on_floor():
 		# Get platform velocity and subtract it
 		platform_vel = get_platform_velocity()
-	else: platform_vel = 0
+	else: platform_vel = Vector2.ZERO
 	velocity.y = -jump_speed * jump_multiplier - platform_vel.y
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=71 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -10,11 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="8_3cjb2"]
 [ext_resource type="PackedScene" uid="uid://cemwql616mbqj" path="res://scenes/npc/npc_master_fox.tscn" id="9_0j1hw"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="10_xsvho"]
-[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://scenes/skills/scripts/water/WaterBall.gd" id="11_u7q62"]
-[ext_resource type="Script" uid="uid://n0h5gosjpnrv" path="res://scenes/skills/scripts/wood/HealOverTime.gd" id="12_033ub"]
-[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://scenes/skills/scripts/water/Tornado.gd" id="13_uptk2"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="14_onjut"]
-[ext_resource type="Script" uid="uid://obmi03ksefk2" path="res://scenes/skills/scripts/wood/WoodShot.gd" id="15_2t2ib"]
 [ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="16_plcgd"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="17_v3xwt"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="18_gukcl"]
@@ -224,7 +220,6 @@ elements_color = Dictionary[int, Color]({
 5: Color(0.827451, 0.435294, 0, 1)
 })
 elemental_type = 3
-skill_to_drop = ExtResource("11_u7q62")
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("10_xsvho")]
 position = Vector2(2165, -489)
@@ -237,7 +232,6 @@ elements_color = Dictionary[int, Color]({
 5: Color(0.827451, 0.435294, 0, 1)
 })
 elemental_type = 2
-skill_to_drop = ExtResource("12_033ub")
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
@@ -252,7 +246,6 @@ elements_color = Dictionary[int, Color]({
 5: Color(0.827451, 0.435294, 0, 1)
 })
 elemental_type = 3
-skill_to_drop = ExtResource("11_u7q62")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
@@ -265,22 +258,18 @@ elements_color = Dictionary[int, Color]({
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
 })
-skill_to_drop = ExtResource("13_uptk2")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(1720, -394)
 elemental_type = 2
-skill_to_drop = ExtResource("15_2t2ib")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(2823, -362)
 elemental_type = 2
-skill_to_drop = ExtResource("12_033ub")
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(2624, -362)
 elemental_type = 2
-skill_to_drop = ExtResource("15_2t2ib")
 
 [node name="Boat" parent="." instance=ExtResource("16_plcgd")]
 position = Vector2(-1859, 443)

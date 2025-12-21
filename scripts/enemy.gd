@@ -472,3 +472,11 @@ func apply_knockback(knockback_vec: Vector2):
 	ignore_gravity = true
 	await get_tree().create_timer(0.25).timeout
 	ignore_gravity = false
+	
+	
+# Add to ALL Enemy scripts:
+func scale_health(multiplier: float):
+	if not has_node("EnemyHealthBar"): return  # Safety check
+	max_health *= multiplier
+	health = max_health
+	print("💚 %s: %.0fHP (x%.1f)" % [name, max_health, multiplier])
