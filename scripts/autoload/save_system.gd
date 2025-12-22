@@ -1,16 +1,13 @@
 extends Node
 
-## Save system for persistent checkpoint data
 const SAVE_FILE: String = "user://checkpoint_save.dat"
 
-# 🔹 Lưu dữ liệu checkpoint: gồm player, checkpoint_id, stage_path
-func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_stack: Dictionary, skill_bar: Array) -> void:
+func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_tree_data: Dictionary) -> void:
 	var save_data := {
 		"checkpoint_id": checkpoint_id,
 		"player": player_data,
 		"stage_path": stage_path,
-		"skill_stack": skill_stack,
-		"skill_bar": skill_bar
+		"skill_tree": skill_tree_data
 	}
 
 	var file := FileAccess.open(SAVE_FILE, FileAccess.WRITE)
@@ -20,42 +17,43 @@ func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_
 
 	file.store_line(JSON.stringify(save_data))
 	file.close()
-	print("✅ Đã lưu checkpoint:", checkpoint_id, "ở stage:", stage_path)
 
-
-# 🔹 Load checkpoint data từ file
 func load_checkpoint_data() -> Dictionary:
 	if not has_save_file():
-		print(ProjectSettings.globalize_path(SAVE_FILE))
-		print("⚠️ Không tìm thấy file save, bắt đầu mới.")
 		return {}
 
 	var file := FileAccess.open(SAVE_FILE, FileAccess.READ)
 	if file == null:
-		push_error("❌ Không thể mở file save để đọc.")
 		return {}
 
-	var result: Variant = JSON.parse_string(file.get_as_text())
+	var json_text := file.get_as_text().strip_edges()  # Remove whitespace
 	file.close()
-
-	if typeof(result) == TYPE_DICTIONARY:
-		print("✅ Đã load dữ liệu checkpoint.")
-		return result
-	else:
-		push_error("❌ Dữ liệu checkpoint không hợp lệ.")
+	
+	var json = JSON.new()
+	var parse_result = json.parse(json_text)
+	
+	if parse_result != OK:
+		push_error("❌ JSON Error %d: %s at line %d\n%s" % [
+			parse_result, 
+			json.get_error_message(), 
+			json.get_error_line(), 
+			json_text.substr(0, 100) + "..."
+		])
 		return {}
 
+	var result: Dictionary = json.data
+	# Validate required keys
+	if not result.has("checkpoint_id") or not result.has("player"):
+		push_error("❌ Missing required keys in save data")
+		return {}
+	
+	return result
 
-# 🔹 Kiểm tra tồn tại file save
 func has_save_file() -> bool:
 	return FileAccess.file_exists(SAVE_FILE)
 
-
-# 🔹 Xóa file save
 func delete_save_file() -> void:
 	if has_save_file():
-		var err := DirAccess.remove_absolute(SAVE_FILE)
-		if err == OK:
-			print("🗑️ Đã xóa file save.")
-		else:
+		var err := DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE_FILE))
+		if err != OK:
 			push_error("❌ Xóa file save thất bại: %s" % str(err))

@@ -2,56 +2,30 @@ extends HBoxContainer
 class_name SkillBarSkillTree
 
 var slots: Array
-var skills: Array = [Burrow, WaterSpike, StunShot, ToxicBreath]
-#var available_skills: Array = []
+var skills: Array = []
 
 func _ready() -> void:
-	#refresh_from_stack()
 	slots = get_children()
 	
-	load_data(SkillStackManager.get_skill_bar_data())
+	# Gọi Singleton SkillTreeManager (bạn nhớ add vào Autoload và đặt tên là SkillTreeManager)
+	load_ui_from_manager()
 	
-	var player = get_tree().get_first_node_in_group("player")
-	for i in get_child_count():
-		slots[i].change_key = str(i + 1)
-		if i <= skills.size() - 1:
-			slots[i].skill = skills[i].new()
-			slots[i].skill.apply_to_button(slots[i])
+	SkillTreeManager.skillbar_changed.connect(on_skillbar_changed)
 
-	SkillStackManager.skillbar_changed.connect(on_skillbar_changed)
-	
-
-
-####SAVE LOAD SYSTEM
-func save_data() -> Array:
-	var result := []
-	for slot in slots:
-		if slot.skill:
-			result.append(slot.skill.name) # lưu theo tên skill
-		else:
-			result.append(null)
-	return result
-	
-func load_data(data: Array) -> void:
-	slots = get_children()
-	if data.size() != slots.size():
-		return
-
+# Hàm này load lại toàn bộ UI dựa trên dữ liệu hiện tại của Manager
+func load_ui_from_manager() -> void:
+	var bar_data = SkillTreeManager.get_skill_bar_data()
 	for i in range(slots.size()):
-		var skill_name = data[i]
-		if skill_name == null:
-			continue
+		# Cấu hình phím tắt (1, 2, 3...)
+		slots[i].change_key = str(i + 1)
+		
+		# Reset slot trước
+		_clear_slot_visuals(slots[i])
 
-		# load skill instance
-		var db = SkillDatabase.new()
-		var skill_script = db.get_skill_by_name(skill_name)
-		if skill_script:
-			var instance = skill_script.new()
-			slots[i].skill = instance
-			slots[i].skill.apply_to_button(slots[i])
-			slots[i].disabled = false
-			slots[i].time_label.text = ""
-			slots[i].set_process(false)
+		if i < bar_data.size():
+			var skill_name = bar_data[i]
+			if skill_name:
+				on_skillbar_changed(i, skill_name)
 
 func on_skillbar_changed(slot_index: int, skill_name: String):
 	if slot_index < 0 or slot_index >= slots.size():
@@ -60,29 +34,28 @@ func on_skillbar_changed(slot_index: int, skill_name: String):
 	var slot = slots[slot_index]
 	
 	# ----- CLEAR SLOT -----
-	if skill_name == "":
-		slot.skill = null
-		slot.texture_normal = null
-		slot.update_stack_ui() 
-		slot.disabled = true
-		slot.time_label.text = ""
-		slot.set_process(false)
+	if skill_name == "" or skill_name == null:
+		_clear_slot_visuals(slot)
 		return
 	
 	# ----- SET SKILL -----
-	if slot.skill != null:
-		return
-	var db = SkillDatabase.new()
-	var skill_script = db.get_skill_by_name(skill_name)
-	if skill_script == null:
-		return
+	# Lấy skill resource từ Manager (đã bao gồm đúng Level)
+	var skill_instance = SkillTreeManager.get_skill_resource(skill_name)
+	
+	if skill_instance:
+		slot.skill = skill_instance
+		slot.skill.apply_to_button(slot)
+		slot.disabled = false
+		slot.cooldown.value = 0
+		slot.time_label.text = ""
+		slot.set_process(false)
+	else:
+		# Nếu skill có tên nhưng chưa unlock hoặc lỗi data
+		_clear_slot_visuals(slot)
 
-	var instance = skill_script.new()
-	slot.skill = instance
-
-	instance.apply_to_button(slot)
-	slot.disabled = false
-	slot.cooldown.value = 0
+func _clear_slot_visuals(slot) -> void:
+	slot.skill = null
+	slot.texture_normal = null
+	slot.disabled = true
 	slot.time_label.text = ""
 	slot.set_process(false)
-	

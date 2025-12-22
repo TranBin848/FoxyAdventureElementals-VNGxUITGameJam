@@ -27,10 +27,12 @@ ElementsEnum="*res://scripts/elements.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 FadeLayer="*res://scenes/ui/fade_layer.tscn"
 DamageNumbers="*res://scripts/autoload/damage_numbers.gd"
-SkillStackManager="*res://scripts/autoload/skill_stack_manager.gd"
 CameraTransition="*res://autoloads/camera_transition.tscn"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
 SettingsManager="*res://scripts/autoload/settings_manager.gd"
+SkillTreeManager="*res://scripts/autoload/skill_tree_manager.gd"
+SkillDropManager="*res://scripts/autoload/skill_drop_manager.gd"
+SkillDatabase="*res://scenes/skills/skill_database.gd"
 
 [dialogic]
 
@@ -198,6 +200,7 @@ ui_skilltree={
 2d_physics/layer_6="collectable"
 2d_physics/layer_7="pushable_object"
 2d_physics/layer_8="player_clone"
+2d_physics/layer_9="world_boundary"
 
 [rendering]
 

@@ -7,7 +7,7 @@ extends Node2D
 
 var is_activated: bool = false
 
-func _on_detect_area_body_entered(body: Node2D) -> void:
+func _on_detect_area_body_entered(_body: Node2D) -> void:
 	if not is_activated: 
 		is_activated = true
 		start_timer(0.5)
