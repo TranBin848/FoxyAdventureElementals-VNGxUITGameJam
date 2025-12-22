@@ -142,7 +142,7 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfjn3"]
 
-[node name="Stage2" type="Node2D"]
+[node name="Stage3" type="Node2D"]
 
 [node name="World" type="TileMapLayer" parent="."]
 position = Vector2(108, 129)

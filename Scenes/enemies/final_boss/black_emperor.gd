@@ -10,7 +10,6 @@ extends EnemyCharacter
 @onready var label: Label = $Label
 
 @export var atk_range: float = 200
-@export var skill_cd: float = 10
 @export var spin_velocity = 300
 
 var is_stunned: bool = false
@@ -23,7 +22,8 @@ enum Phase {
 }
 
 var skills_phase_1 = {
-	0: "flylightning"
+	0: "flylightning",
+	1: "meteorrain"
 }
 
 var skills_phase_2 = {
@@ -46,18 +46,9 @@ func _physics_process(delta: float) -> void:
 	if skill_cd_timer > 0:
 		skill_cd_timer -= delta
 	label.text = str(fsm.current_state)
-
-func can_use_skill() -> bool:
-	if skill_cd_timer > 0:
-		return false
-	if is_stunned:
-		return false
-	return true
 	
 func use_skill() -> void:
-	if not can_use_skill():
-		return
-
+	
 	var skill_dict
 
 	match current_phase:
@@ -70,7 +61,6 @@ func use_skill() -> void:
 	print("Skill: ", skill)
 	fsm.change_state(fsm.states[skill])
 
-	skill_cd_timer = skill_cd
 	cur_skill = (cur_skill + 1) % skill_dict.size()
 
 
@@ -92,7 +82,7 @@ func enter_phase_ground() -> void:
 	cur_skill = 0
 	
 	# Ép boss thoát skill hiện tại
-	fsm.change_state(fsm.states["Idle"])
+	#fsm.change_state(fsm.states["Idle"])
 
 	# Tắt va chạm bay / bật va chạm đất nếu có
 	collision.disabled = false

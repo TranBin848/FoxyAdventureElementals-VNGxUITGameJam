@@ -66,7 +66,7 @@ func _trigger_explosion() -> void:
 	for b in overlaps:
 		if b is EnemyCharacter:
 			affected_enemies.append(b)
-			b.enter_skill(tornado_center)
+			b.enter_tornado(tornado_center)
 
 
 func _on_animation_finished() -> void:
@@ -94,4 +94,4 @@ func _on_explosion_area_body_entered(body: Node2D) -> void:
 	if exploding and body is EnemyCharacter:
 		if not affected_enemies.has(body):
 			affected_enemies.append(body)
-			body.enter_skill(tornado_center)  # Use stored center position
+			body.enter_tornado(tornado_center)  # Use stored center position
