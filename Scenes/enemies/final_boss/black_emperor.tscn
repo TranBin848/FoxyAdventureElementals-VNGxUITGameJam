@@ -1,40 +1,46 @@
-[gd_scene load_steps=41 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=47 format=3 uid="uid://d0a57drf7tx4v"]
 
-[ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://Scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
-[ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/King_Crab/King_Crab_9.png" id="2_fxnya"]
-[ext_resource type="Texture2D" uid="uid://c5xpu72l3gxsv" path="res://assets/King_Crab/King_Crab_10.png" id="3_gxeb5"]
-[ext_resource type="Texture2D" uid="uid://cqf7rppdl0t5w" path="res://assets/King_Crab/King_Crab_11.png" id="4_v1ag1"]
-[ext_resource type="Texture2D" uid="uid://bf2xpbo3hfkcy" path="res://assets/King_Crab/King_Crab_12.png" id="5_o1ew0"]
-[ext_resource type="Texture2D" uid="uid://c1hlrmwm4tw5k" path="res://assets/King_Crab/King_Crab_13.png" id="6_36gyb"]
-[ext_resource type="Texture2D" uid="uid://dsh3aotiqihg" path="res://assets/King_Crab/King_Crab_29.png" id="7_1rtja"]
-[ext_resource type="Texture2D" uid="uid://ge1upmdjfbsf" path="res://assets/King_Crab/King_Crab_30.png" id="8_narhy"]
-[ext_resource type="Texture2D" uid="uid://dysuk1bfafggm" path="res://assets/King_Crab/King_Crab_28.png" id="9_y71pq"]
-[ext_resource type="Texture2D" uid="uid://dey7qtyrethq4" path="res://assets/King_Crab/King_Crab_27.png" id="10_ba5au"]
-[ext_resource type="Texture2D" uid="uid://dbdtkoapescgw" path="res://assets/King_Crab/King_Crab_33.png" id="11_8hi2o"]
-[ext_resource type="Texture2D" uid="uid://d3hyl6avqr1ek" path="res://assets/King_Crab/King_Crab_14.png" id="12_qymp2"]
-[ext_resource type="Texture2D" uid="uid://b72p5eqaq80ss" path="res://assets/King_Crab/King_Crab_15.png" id="13_vf1pa"]
-[ext_resource type="Texture2D" uid="uid://b18unk600vxvy" path="res://assets/King_Crab/King_Crab_16.png" id="14_ysbk3"]
-[ext_resource type="Texture2D" uid="uid://dqgoeiwjsfup3" path="res://assets/King_Crab/King_Crab_17.png" id="15_qnvde"]
-[ext_resource type="Texture2D" uid="uid://darupinmdtse8" path="res://assets/King_Crab/King_Crab_1.png" id="16_xu5s5"]
-[ext_resource type="Texture2D" uid="uid://diy043qrr5484" path="res://assets/King_Crab/King_Crab_2.png" id="17_tshyk"]
-[ext_resource type="Texture2D" uid="uid://b100xpmlhnqqo" path="res://assets/King_Crab/King_Crab_3.png" id="18_o0nxc"]
-[ext_resource type="Texture2D" uid="uid://b2ttvwmwkc406" path="res://assets/King_Crab/King_Crab_4.png" id="19_c8he5"]
-[ext_resource type="Texture2D" uid="uid://cc511q48y56lg" path="res://assets/King_Crab/King_Crab_26.png" id="20_vahud"]
-[ext_resource type="Texture2D" uid="uid://8x5m5w0fj7c8" path="res://assets/King_Crab/King_Crab_18.png" id="21_8aha7"]
-[ext_resource type="Texture2D" uid="uid://v33mwbyrh22o" path="res://assets/King_Crab/King_Crab_19.png" id="22_qk4op"]
-[ext_resource type="Texture2D" uid="uid://ddbax4ue3mef0" path="res://assets/King_Crab/King_Crab_20.png" id="23_v705o"]
-[ext_resource type="Texture2D" uid="uid://c05gr7s3ysoxf" path="res://assets/King_Crab/King_Crab_21.png" id="24_13ehs"]
-[ext_resource type="Texture2D" uid="uid://cky3y4hbssqqu" path="res://assets/King_Crab/King_Crab_22.png" id="25_bisx0"]
-[ext_resource type="Texture2D" uid="uid://oknrjbum3s3l" path="res://assets/King_Crab/King_Crab_5.png" id="26_j3sqo"]
-[ext_resource type="Texture2D" uid="uid://dhgpf7qpnmcbp" path="res://assets/King_Crab/King_Crab_6.png" id="27_y542f"]
-[ext_resource type="Texture2D" uid="uid://dpd4ftbhrpme1" path="res://assets/King_Crab/King_Crab_7.png" id="28_rr5ir"]
-[ext_resource type="Texture2D" uid="uid://ddunge53dx5ai" path="res://assets/King_Crab/King_Crab_8.png" id="29_itd3q"]
-[ext_resource type="Texture2D" uid="uid://c5ti15323v5te" path="res://assets/King_Crab/King_Crab_23.png" id="30_ldghs"]
-[ext_resource type="Texture2D" uid="uid://c5sqexv4tl2cw" path="res://assets/King_Crab/King_Crab_24.png" id="31_mud1y"]
-[ext_resource type="Texture2D" uid="uid://csbe8xs87d8to" path="res://assets/King_Crab/King_Crab_25.png" id="32_gpvjk"]
+[ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
+[ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fxnya"]
+[ext_resource type="Texture2D" uid="uid://c5xpu72l3gxsv" path="res://assets/king_crab/King_Crab_10.png" id="3_gxeb5"]
+[ext_resource type="Texture2D" uid="uid://cqf7rppdl0t5w" path="res://assets/king_crab/King_Crab_11.png" id="4_v1ag1"]
+[ext_resource type="Texture2D" uid="uid://bf2xpbo3hfkcy" path="res://assets/king_crab/King_Crab_12.png" id="5_o1ew0"]
+[ext_resource type="Texture2D" uid="uid://c1hlrmwm4tw5k" path="res://assets/king_crab/King_Crab_13.png" id="6_36gyb"]
+[ext_resource type="Texture2D" uid="uid://dsh3aotiqihg" path="res://assets/king_crab/King_Crab_29.png" id="7_1rtja"]
+[ext_resource type="Texture2D" uid="uid://ge1upmdjfbsf" path="res://assets/king_crab/King_Crab_30.png" id="8_narhy"]
+[ext_resource type="Texture2D" uid="uid://dysuk1bfafggm" path="res://assets/king_crab/King_Crab_28.png" id="9_y71pq"]
+[ext_resource type="Texture2D" uid="uid://dey7qtyrethq4" path="res://assets/king_crab/King_Crab_27.png" id="10_ba5au"]
+[ext_resource type="Texture2D" uid="uid://dbdtkoapescgw" path="res://assets/king_crab/King_Crab_33.png" id="11_8hi2o"]
+[ext_resource type="Texture2D" uid="uid://d3hyl6avqr1ek" path="res://assets/king_crab/King_Crab_14.png" id="12_qymp2"]
+[ext_resource type="Texture2D" uid="uid://b72p5eqaq80ss" path="res://assets/king_crab/King_Crab_15.png" id="13_vf1pa"]
+[ext_resource type="Texture2D" uid="uid://b18unk600vxvy" path="res://assets/king_crab/King_Crab_16.png" id="14_ysbk3"]
+[ext_resource type="Texture2D" uid="uid://dqgoeiwjsfup3" path="res://assets/king_crab/King_Crab_17.png" id="15_qnvde"]
+[ext_resource type="Texture2D" uid="uid://darupinmdtse8" path="res://assets/king_crab/King_Crab_1.png" id="16_xu5s5"]
+[ext_resource type="Texture2D" uid="uid://1yhsballaj34" path="res://assets/foxy/fox_final_boss/fox_idle_1.png" id="16_yr5q8"]
+[ext_resource type="Texture2D" uid="uid://j6axtr6pc7p6" path="res://assets/foxy/fox_final_boss/fox_idle_2.png" id="17_mpuyr"]
+[ext_resource type="Texture2D" uid="uid://b8osy1a5opmu3" path="res://assets/foxy/fox_final_boss/fox_walk_1.png" id="18_fwi6v"]
+[ext_resource type="Texture2D" uid="uid://dywt3fw6gkhlv" path="res://assets/foxy/fox_final_boss/fox_walk_2.png" id="19_wk8ah"]
+[ext_resource type="Texture2D" uid="uid://cc511q48y56lg" path="res://assets/king_crab/King_Crab_26.png" id="20_vahud"]
+[ext_resource type="Texture2D" uid="uid://4k2cq06mcgf0" path="res://assets/foxy/fox_final_boss/fox_walk_3.png" id="20_yr5q8"]
+[ext_resource type="Texture2D" uid="uid://8x5m5w0fj7c8" path="res://assets/king_crab/King_Crab_18.png" id="21_8aha7"]
+[ext_resource type="Texture2D" uid="uid://doj2url14e6ai" path="res://assets/foxy/fox_final_boss/fox_walk_4.png" id="21_mpuyr"]
+[ext_resource type="Texture2D" uid="uid://v33mwbyrh22o" path="res://assets/king_crab/King_Crab_19.png" id="22_qk4op"]
+[ext_resource type="Texture2D" uid="uid://ddbax4ue3mef0" path="res://assets/king_crab/King_Crab_20.png" id="23_v705o"]
+[ext_resource type="Texture2D" uid="uid://c05gr7s3ysoxf" path="res://assets/king_crab/King_Crab_21.png" id="24_13ehs"]
+[ext_resource type="Texture2D" uid="uid://cky3y4hbssqqu" path="res://assets/king_crab/King_Crab_22.png" id="25_bisx0"]
+[ext_resource type="Texture2D" uid="uid://oknrjbum3s3l" path="res://assets/king_crab/King_Crab_5.png" id="26_j3sqo"]
+[ext_resource type="Texture2D" uid="uid://dhgpf7qpnmcbp" path="res://assets/king_crab/King_Crab_6.png" id="27_y542f"]
+[ext_resource type="Texture2D" uid="uid://dpd4ftbhrpme1" path="res://assets/king_crab/King_Crab_7.png" id="28_rr5ir"]
+[ext_resource type="Texture2D" uid="uid://ddunge53dx5ai" path="res://assets/king_crab/King_Crab_8.png" id="29_itd3q"]
+[ext_resource type="Texture2D" uid="uid://c5ti15323v5te" path="res://assets/king_crab/King_Crab_23.png" id="30_ldghs"]
+[ext_resource type="Texture2D" uid="uid://c5sqexv4tl2cw" path="res://assets/king_crab/King_Crab_24.png" id="31_mud1y"]
+[ext_resource type="Texture2D" uid="uid://csbe8xs87d8to" path="res://assets/king_crab/King_Crab_25.png" id="32_gpvjk"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="35_1vt48"]
-[ext_resource type="Script" uid="uid://clpgdp80p1wyg" path="res://Scenes/enemies/final_boss/fly_lightning.gd" id="35_qc2kf"]
+[ext_resource type="Script" uid="uid://clpgdp80p1wyg" path="res://scenes/enemies/final_boss/fly_lightning.gd" id="35_qc2kf"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="36_451n5"]
+[ext_resource type="Script" uid="uid://bpqooax7ao0jd" path="res://scenes/enemies/final_boss/walk.gd" id="39_fwi6v"]
+[ext_resource type="Script" uid="uid://d1toxknqfdla6" path="res://scenes/enemies/final_boss/inactive.gd" id="40_wk8ah"]
+[ext_resource type="Script" uid="uid://b8wbpujyvf1qr" path="res://scenes/enemies/final_boss/stand_up.gd" id="41_yr5q8"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="46_mqsvn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
@@ -101,7 +107,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_8hi2o")
+"texture": ExtResource("16_yr5q8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_mpuyr")
 }],
 "loop": true,
 "name": &"inactive",
@@ -109,16 +118,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("16_xu5s5")
+"texture": ExtResource("18_fwi6v")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_tshyk")
+"texture": ExtResource("19_wk8ah")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_o0nxc")
+"texture": ExtResource("20_yr5q8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("19_c8he5")
+"texture": ExtResource("21_mpuyr")
 }],
 "loop": true,
 "name": &"moving",
@@ -180,13 +189,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_8hi2o")
+"texture": ExtResource("16_yr5q8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_ba5au")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_y71pq")
+"texture": ExtResource("17_mpuyr")
 }],
 "loop": false,
 "name": &"stand up",
@@ -222,6 +228,8 @@ radius = 25.0
 [node name="BlackEmperor" type="CharacterBody2D"]
 collision_layer = 137
 script = ExtResource("1_hljwo")
+spike = 1.0
+sight = 200.0
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Direction" type="Node2D" parent="."]
@@ -229,7 +237,7 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_4c0df")
-animation = &"stun"
+animation = &"stand up"
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)
@@ -240,11 +248,13 @@ position = Vector2(45, 0)
 target_position = Vector2(0, 40)
 
 [node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
-target_position = Vector2(-200, 0)
+position = Vector2(0, 4)
+target_position = Vector2(-164, 0)
 collision_mask = 130
 
 [node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
-target_position = Vector2(200, 0)
+position = Vector2(0, 4)
+target_position = Vector2(170, 0)
 collision_mask = 130
 
 [node name="HitArea2D" type="Area2D" parent="Direction"]
@@ -281,6 +291,15 @@ position = Vector2(25, -14)
 
 [node name="FlyLightning" type="Node" parent="States"]
 script = ExtResource("35_qc2kf")
+
+[node name="Walk" type="Node" parent="States"]
+script = ExtResource("39_fwi6v")
+
+[node name="Inactive" type="Node" parent="States"]
+script = ExtResource("40_wk8ah")
+
+[node name="StandUp" type="Node" parent="States"]
+script = ExtResource("41_yr5q8")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -25.0

@@ -229,7 +229,7 @@ radius = 26.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_5alav"]
 radius = 25.0
 
-[node name="KingCrab" type="CharacterBody2D"]
+[node name="KingCrab2" type="CharacterBody2D"]
 collision_layer = 137
 script = ExtResource("1_3jl1k")
 skill_cd = 5.0
@@ -242,7 +242,7 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_4c0df")
-animation = &"stun"
+animation = &"fire claw"
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)

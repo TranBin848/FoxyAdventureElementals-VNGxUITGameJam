@@ -23,12 +23,12 @@ enum Phase {
 }
 
 var skills_phase_1 = {
-	0: "FlyLightning"
+	0: "flylightning"
 }
 
 var skills_phase_2 = {
-	0: "SummonEnemy",
-	1: "SpinAttack"
+	0: "summonenemy",
+	1: "spinattack"
 }
 
 var current_phase: Phase = Phase.FLY
@@ -38,7 +38,7 @@ var cur_skill = 0
 
 func _ready() -> void:
 	super._ready()
-	fsm = FSM.new(self, $States, $States/FlyLightning)
+	fsm = FSM.new(self, $States, $States/Inactive)
 	
 
 func _physics_process(delta: float) -> void:
@@ -67,6 +67,7 @@ func use_skill() -> void:
 			skill_dict = skills_phase_2
 
 	var skill = skill_dict[cur_skill]
+	print("Skill: ", skill)
 	fsm.change_state(fsm.states[skill])
 
 	skill_cd_timer = skill_cd
