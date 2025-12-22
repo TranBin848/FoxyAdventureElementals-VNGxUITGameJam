@@ -43,11 +43,11 @@ func _start_ending_sequence() -> void:
 		CONNECT_ONE_SHOT
 	)
 
-func _on_hit_area_2d_hitted(area: Variant) -> void:
+func _on_hit_area_2d_hitted(_area: Variant) -> void:
 	_trigger_explosion()
 		
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	if $AnimatedSprite2D.animation != "WaterTornado_End":
 		_start_ending_sequence() 
 
@@ -66,7 +66,7 @@ func _trigger_explosion() -> void:
 	for b in overlaps:
 		if b is EnemyCharacter:
 			affected_enemies.append(b)
-			b.enter_skill(tornado_center)
+			b.enter_tornado(tornado_center)
 
 
 func _on_animation_finished() -> void:
@@ -75,12 +75,12 @@ func _on_animation_finished() -> void:
 			e.exit_skill()
 
 			# Calculate radial knockback from tornado center
-			var direction = (e.global_position - tornado_center).normalized()
+			var _direction = (e.global_position - tornado_center).normalized()
 			
 			# Create knockback vector with upward spiral effect
 			var knockback_vector = Vector2(
-				direction.x * knockback_force,
-				(direction.y * knockback_force) - (knockback_force * knockback_upward_bias)
+				_direction.x * knockback_force,
+				(_direction.y * knockback_force) - (knockback_force * knockback_upward_bias)
 			)
 			
 			e.apply_knockback(knockback_vector)
@@ -94,4 +94,4 @@ func _on_explosion_area_body_entered(body: Node2D) -> void:
 	if exploding and body is EnemyCharacter:
 		if not affected_enemies.has(body):
 			affected_enemies.append(body)
-			body.enter_skill(tornado_center)  # Use stored center position
+			body.enter_tornado(tornado_center)  # Use stored center position

@@ -6,11 +6,12 @@
 [resource]
 script = ExtResource("1_5tho6")
 name = "Water Spike"
-element = 3
+elemental_type = 3
 cooldown = 3.5
 duration = 1.5
 hit_delay = 0.2
-texture_path = "res://assets/skills/icons_skill/48x48/skill_icons19.png"
+ground_targeted = false
+texture_path = "res://assets/skills/icons_skill/48x48/skill_icons11.png"
 animation_name = "WaterSpike"
 area_scene = ExtResource("1_jydya")
 speed = 0.0

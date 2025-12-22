@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c24hsf56rny2a"]
+[gd_scene load_steps=39 format=3 uid="uid://c24hsf56rny2a"]
 
 [ext_resource type="Script" uid="uid://bdn1n66kv8ps0" path="res://scenes/ui/skill_tree/skill_tree.gd" id="1_oed8u"]
 [ext_resource type="PackedScene" uid="uid://ceb23m3y0l0fh" path="res://scenes/ui/skill_button_skill_tree.tscn" id="2_4casc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://bx5fdlijjfddx" path="res://scenes/skills/scripts/wood/WoodShot.tres" id="4_v0x7f"]
 [ext_resource type="VideoStream" uid="uid://d0eux0ncbfs4n" path="res://assets/skills/fire/FireExplosion.ogv" id="5_itx8d"]
 [ext_resource type="Resource" uid="uid://cbqr44nfnip01" path="res://scenes/skills/scripts/wood/HealOverTime.tres" id="5_ph0o5"]
+[ext_resource type="Resource" uid="uid://wcqmaxfc27j3" path="res://scenes/skills/scripts/fire/Fireball.tres" id="6_003vk"]
 [ext_resource type="Resource" uid="uid://dgk56c5pavl8r" path="res://scenes/skills/scripts/water/WaterBall.tres" id="6_dvmm8"]
 [ext_resource type="Resource" uid="uid://ly2bn32wiwrn" path="res://scenes/skills/scripts/water/Tornado.tres" id="7_fxybv"]
 [ext_resource type="VideoStream" uid="uid://dg1xi0pxhwif7" path="res://assets/skills/wood/WoodShot.ogv" id="7_wqp3i"]
@@ -16,10 +17,17 @@
 [ext_resource type="VideoStream" uid="uid://ojhe2vh1ap0v" path="res://assets/skills/wood/HealOverTime.ogv" id="9_wqp3i"]
 [ext_resource type="Texture2D" uid="uid://dbho8gm8knh3l" path="res://assets/skills/icon element/Fire.png" id="10_gc6eq"]
 [ext_resource type="Texture2D" uid="uid://dti3pt7ltqbcg" path="res://assets/skills/icon element/Earth.png" id="11_7kvha"]
+[ext_resource type="Resource" uid="uid://dalrpimaw8kqv" path="res://scenes/skills/scripts/wood/WoodenClone.tres" id="11_574nj"]
 [ext_resource type="VideoStream" uid="uid://dfutgpufyyxhv" path="res://assets/skills/water/WaterTornado.ogv" id="11_ph0o5"]
 [ext_resource type="Texture2D" uid="uid://dst33l31ylqxr" path="res://assets/skills/icon element/Water.png" id="12_ee0ex"]
 [ext_resource type="VideoStream" uid="uid://bxm3jygx8pmfj" path="res://assets/skills/water/WaterSpike.ogv" id="13_dvmm8"]
 [ext_resource type="Texture2D" uid="uid://dj3ixewktcc2j" path="res://assets/skills/icon element/Metal.png" id="13_j1upi"]
+[ext_resource type="Resource" uid="uid://bi6xhg0h8erpa" path="res://scenes/skills/scripts/metal/StunShot.tres" id="16_7kvha"]
+[ext_resource type="Resource" uid="uid://dnqe0sn17m7iq" path="res://scenes/skills/scripts/metal/Thunderbolt.tres" id="17_ee0ex"]
+[ext_resource type="Resource" uid="uid://ydvgf5lwhd1w" path="res://scenes/skills/scripts/metal/ThousandSwords.tres" id="18_j1upi"]
+[ext_resource type="Resource" uid="uid://c1h5e81m8pg5d" path="res://scenes/skills/scripts/earth/Earthquake.tres" id="19_g38uo"]
+[ext_resource type="Resource" uid="uid://bh7ca4qndbgby" path="res://scenes/skills/scripts/earth/Burrow.tres" id="21_574nj"]
+[ext_resource type="Resource" uid="uid://cc6qdlelt05ae" path="res://scenes/skills/scripts/earth/CometRain.tres" id="22_003vk"]
 
 [sub_resource type="Gradient" id="Gradient_woo0h"]
 colors = PackedColorArray(0.498039, 0.756863, 0.129412, 1, 0.968627, 0.298039, 0.0156863, 1)
@@ -71,6 +79,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -643.0
+offset_top = -400.0
+offset_right = 637.0
+offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -105,6 +117,18 @@ position = Vector2(664, 230)
 points = PackedVector2Array(-112, 121, -194, 66)
 width = 2.0
 default_color = Color(0.498039, 0.756863, 0.129412, 1)
+
+[node name="SkillLine4" type="Line2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(881, 326)
+points = PackedVector2Array(-183, 114, -113, 173)
+width = 2.0
+default_color = Color(0.866667, 0.870588, 0.870588, 1)
+
+[node name="SkillLine5" type="Line2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(664, 230)
+points = PackedVector2Array(65, 121, 151, 64)
+width = 2.0
+default_color = Color(0.694118, 0.443137, 0.239216, 1)
 
 [node name="ELementalLine1" type="Line2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(520, 318)
@@ -194,6 +218,16 @@ scale = Vector2(1, 1)
 skill = ExtResource("3_itx8d")
 video_stream = ExtResource("5_itx8d")
 
+[node name="Fireball" parent="SubViewportContainer/SubViewport/FireShot" instance=ExtResource("2_4casc")]
+layout_mode = 0
+offset_left = 70.6667
+offset_top = -85.3333
+offset_right = 110.667
+offset_bottom = -45.3333
+scale = Vector2(1, 1)
+skill = ExtResource("6_003vk")
+video_stream = ExtResource("5_itx8d")
+
 [node name="WoodShot" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4casc")]
 offset_left = 441.0
 offset_top = 280.0
@@ -205,12 +239,20 @@ video_stream = ExtResource("7_wqp3i")
 
 [node name="Heal Over Time" parent="SubViewportContainer/SubViewport/WoodShot" instance=ExtResource("2_4casc")]
 layout_mode = 0
-offset_left = -86.6667
-offset_top = -85.3333
-offset_right = -46.6667
-offset_bottom = -45.3333
+offset_left = -41.3333
+offset_top = -92.0
+offset_right = -1.33332
+offset_bottom = -52.0
 scale = Vector2(1, 1)
 skill = ExtResource("5_ph0o5")
+video_stream = ExtResource("9_wqp3i")
+
+[node name="WoodenClone" parent="SubViewportContainer/SubViewport/WoodShot" instance=ExtResource("2_4casc")]
+layout_mode = 0
+offset_left = -104.0
+offset_right = -64.0
+scale = Vector2(1, 1)
+skill = ExtResource("11_574nj")
 video_stream = ExtResource("9_wqp3i")
 
 [node name="WaterBlast" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4casc")]
@@ -240,6 +282,62 @@ offset_right = 114.667
 offset_bottom = 136.0
 scale = Vector2(1, 1)
 skill = ExtResource("8_wqp3i")
+video_stream = ExtResource("13_dvmm8")
+
+[node name="StunShot" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4casc")]
+offset_left = 748.0
+offset_top = 485.0
+offset_right = 788.0
+offset_bottom = 525.0
+scale = Vector2(0.75, 0.75)
+skill = ExtResource("16_7kvha")
+video_stream = ExtResource("9_v0x7f")
+
+[node name="Thunderbolt" parent="SubViewportContainer/SubViewport/StunShot" instance=ExtResource("2_4casc")]
+layout_mode = 0
+offset_left = -74.6667
+offset_top = 96.0
+offset_right = -34.6667
+offset_bottom = 136.0
+scale = Vector2(1, 1)
+skill = ExtResource("17_ee0ex")
+video_stream = ExtResource("11_ph0o5")
+
+[node name="ThousandSwords" parent="SubViewportContainer/SubViewport/StunShot" instance=ExtResource("2_4casc")]
+layout_mode = 0
+offset_left = 74.6667
+offset_top = 96.0
+offset_right = 114.667
+offset_bottom = 136.0
+scale = Vector2(1, 1)
+skill = ExtResource("18_j1upi")
+video_stream = ExtResource("13_dvmm8")
+
+[node name="Earthqua" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_4casc")]
+offset_left = 802.0
+offset_top = 275.0
+offset_right = 842.0
+offset_bottom = 315.0
+scale = Vector2(0.75, 0.75)
+skill = ExtResource("19_g38uo")
+video_stream = ExtResource("9_v0x7f")
+
+[node name="Burrow" parent="SubViewportContainer/SubViewport/Earthqua" instance=ExtResource("2_4casc")]
+layout_mode = 0
+offset_left = 67.9999
+offset_top = -113.333
+offset_right = 108.0
+offset_bottom = -73.3333
+scale = Vector2(1, 1)
+skill = ExtResource("21_574nj")
+video_stream = ExtResource("11_ph0o5")
+
+[node name="CometRain" parent="SubViewportContainer/SubViewport/Earthqua" instance=ExtResource("2_4casc")]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 168.0
+scale = Vector2(1, 1)
+skill = ExtResource("22_003vk")
 video_stream = ExtResource("13_dvmm8")
 
 [node name="IconElement" type="Control" parent="SubViewportContainer/SubViewport"]

@@ -3,8 +3,8 @@ class_name WaterSpikeArea
 
 @export var knockback_force: float = 350.0
 
-func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, direction: Vector2 = Vector2.RIGHT) -> void:
-	super.setup(skill, caster_position, enemy, direction)
+func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
+	super.setup(skill, caster_position, enemy, _direction)
 	
 	if targetenemy and is_instance_valid(targetenemy):
 		targetenemy.enter_stun(global_position)

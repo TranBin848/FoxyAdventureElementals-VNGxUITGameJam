@@ -1,9 +1,8 @@
-[gd_scene load_steps=37 format=4 uid="uid://c47jft3el2tid"]
+[gd_scene load_steps=43 format=4 uid="uid://c47jft3el2tid"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_g2lgl"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_njnvt"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="3_5m7h2"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar.tscn" id="3_psyei"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="4_nby2r"]
 [ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="5_0qtpp"]
 [ext_resource type="Texture2D" uid="uid://b6dilwf04d4be" path="res://assets/island/background/water_reflect_big_02.png" id="6_pxq0b"]
@@ -29,7 +28,28 @@
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="26_ybxfk"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="28_38tfo"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="29_jx6ob"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="30_n5lmc"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="30_roqqn"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="31_yxbeg"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="32_hwtel"]
+[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="33_88oj5"]
+[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="34_3dcit"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="35_1233e"]
+
+[sub_resource type="GDScript" id="GDScript_n5lmc"]
+script/source = "extends Node2D
+
+func _ready() -> void:
+	var skill_names = [\"Fireball\", \"Wooden Clone\", \"Earthquake\", \"Burrow\"]
+	
+	for i in skill_names.size():
+		# 🔥 Validate + equip
+		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
+		if skill:
+			SkillTreeManager.unlock_skill(skill_names[i])
+			SkillTreeManager.equip_skill(i, skill_names[i])
+			print(\"✅ Equipped %s to slot %d\" % [skill_names[i], i])
+"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
 animations = [{
@@ -108,7 +128,7 @@ script/source = "extends ParallaxLayer
 @export var repeat_start: float = 200
 @export var repeat_distance: float = 500
 var repeat_end: float = INF
-func _process(delta):
+func _process(_delta):
 	if not player:
 		return 
 	
@@ -142,6 +162,7 @@ animations = [{
 }]
 
 [node name="Stage" type="Node2D"]
+script = SubResource("GDScript_n5lmc")
 
 [node name="World" type="TileMapLayer" parent="."]
 position = Vector2(101, 160)
@@ -150,10 +171,6 @@ tile_set = ExtResource("1_g2lgl")
 
 [node name="Player" parent="." instance=ExtResource("2_njnvt")]
 position = Vector2(317, 211)
-
-[node name="UI" type="CanvasLayer" parent="Player"]
-
-[node name="SkillBar" parent="Player/UI" instance=ExtResource("3_psyei")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -275,3 +292,64 @@ position = Vector2(809, 243)
 
 [node name="Starfish" parent="Enemies" instance=ExtResource("30_roqqn")]
 position = Vector2(688, 231)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("30_n5lmc")
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("31_yxbeg")]
+offset_bottom = 100.0
+
+[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -104.0
+offset_right = 122.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("32_hwtel")
+text = "Enemy Out of Range"
+horizontal_alignment = 1
+
+[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("33_88oj5")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -111.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("34_3dcit")]
+
+[node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("35_1233e")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -78.0
+offset_right = 117.296
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8

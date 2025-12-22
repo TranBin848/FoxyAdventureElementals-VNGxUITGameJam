@@ -102,6 +102,7 @@ size = Vector2(14, 6)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_casnx")
+elemental_type = 5
 crater_scene = ExtResource("2_ohy4f")
 metadata/_custom_type_script = "uid://5btdwob525wm"
 

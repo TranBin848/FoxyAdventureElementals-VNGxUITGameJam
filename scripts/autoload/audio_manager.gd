@@ -35,7 +35,7 @@ func _ready() -> void:
 	
 	# Initialize ambience player
 	ambience_player = AudioStreamPlayer.new()
-	ambience_player.name = "MusicPlayer"
+	ambience_player.name = "AmbiencePlayer"
 	ambience_player.bus = AMBIENCE_BUS
 	add_child(ambience_player)
 	
@@ -190,7 +190,7 @@ func play_ambience(ambience_id: String, volume_db: float = 0.0, fade_in: float =
 	
 	# Stop current ambience if playing
 	if ambience_player.playing:
-		stop_ambience(0.0)  # Immediate stop, no fade
+		stop_ambience(1.0)  # Immediate stop, no fade
 		await get_tree().process_frame  # Wait one frame
 	
 	ambience_player.stream = audio_clip.stream

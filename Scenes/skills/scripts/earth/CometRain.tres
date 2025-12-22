@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_3ptjf")
 name = "Comet Rain"
-element = 5
+elemental_type = 5
 cooldown = 30.0
 duration = 10.0
 hit_delay = 0.0

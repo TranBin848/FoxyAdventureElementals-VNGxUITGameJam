@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=61 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -18,13 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="18_pqi81"]
 [ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="20_ppf8r"]
 [ext_resource type="PackedScene" uid="uid://crhikmylhv4ty" path="res://scenes/env_particle/sand_storm.tscn" id="20_pvqwi"]
-[ext_resource type="Script" uid="uid://cgj2on3wrpmw2" path="res://scenes/skills/scripts/metal/ThunderStrike.gd" id="21_gsja5"]
+[ext_resource type="Script" uid="uid://cgj2on3wrpmw2" path="res://scenes/skills/scripts/metal/Thunderbolt.gd" id="21_gsja5"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="22_1h50e"]
-[ext_resource type="Script" uid="uid://cf7o1kqvk2msb" path="res://scenes/skills/scripts/fire/FireExplosion.gd" id="23_ihnwd"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="23_vdtjt"]
-[ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://scenes/skills/scripts/fire/FireShot.gd" id="24_km4sl"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="24_nouef"]
-[ext_resource type="Script" uid="uid://b02jnsp6w3alh" path="res://scenes/skills/scripts/fire/Ultimate.gd" id="25_oaqh1"]
 [ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="25_ppf8r"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="25_t8ul1"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="27_6fwx2"]
@@ -36,8 +33,17 @@
 [ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="36_oaqh1"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="37_xpuws"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="38_km4sl"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="38_oaqh1"]
 [ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="38_sm3vb"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="39_pqi81"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_km4sl"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xpuws"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oaqh1"]
+normal = Vector2(1, 0)
 
 [sub_resource type="Curve2D" id="Curve2D_s4b5i"]
 _data = {
@@ -168,6 +174,35 @@ point_count = 2
 [node name="Stage2" type="Node2D"]
 script = ExtResource("1_ppf8r")
 
+[node name="WorldBoundary" type="Node2D" parent="."]
+
+[node name="RightBorder" type="StaticBody2D" parent="WorldBoundary"]
+position = Vector2(18688, -1670)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/RightBorder"]
+shape = SubResource("WorldBoundaryShape2D_km4sl")
+
+[node name="The Void" type="Area2D" parent="WorldBoundary"]
+position = Vector2(6385, 1095)
+collision_layer = 0
+collision_mask = 20
+script = ExtResource("38_oaqh1")
+damage = 999999
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/The Void"]
+shape = SubResource("WorldBoundaryShape2D_xpuws")
+
+[node name="LeftBorder" type="StaticBody2D" parent="WorldBoundary"]
+position = Vector2(-641, 778)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/LeftBorder"]
+shape = SubResource("WorldBoundaryShape2D_oaqh1")
+
 [node name="BladeCollectable" parent="." instance=ExtResource("3_qfhyh")]
 position = Vector2(511, 759)
 
@@ -185,11 +220,6 @@ target_door = "EntryDoor"
 
 [node name="EntryDoor" parent="." instance=ExtResource("15_oaqh1")]
 position = Vector2(-552, 805)
-
-[node name="Player" parent="." instance=ExtResource("14_km4sl")]
-position = Vector2(-482, 828)
-has_blade = true
-max_health = 1000
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0
@@ -305,111 +335,89 @@ elemental_type = 1
 [node name="Crab19" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(15479, -1869)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="Starfish16" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(15708, -1935)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="Starfish5" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(8193, 241)
 elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="Starfish6" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(7855, 241)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Crab8" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(7983, 50)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Crab9" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(7648, 51)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Crab10" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(8247, -269)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Crab11" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(8015, -77)
 elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="Mushroom7" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(8387, 52)
 elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="Mushroom8" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(9273, -332)
 elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="Crab12" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(9499, 114)
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Crab14" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(9247, 179)
 elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="Starfish9" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(9219, -175)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Starfish10" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(8997, -303)
 elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="Mushroom9" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(8602, -427)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Pelican2" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(3411, 236)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Pelican3" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(4395, 236)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Pelican4" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(3867, 284)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Crab15" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(12459, -749)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="Starfish12" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(12938, -1006)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="Mushroom11" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(12002, -1196)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="Mushroom12" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(12257, -1196)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="Starfish13" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(13230, -431)
@@ -418,17 +426,14 @@ elemental_type = 1
 [node name="Starfish14" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(12845, -431)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="Pelican5" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(13202, -710)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="Crab5" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(2426, -13)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Saw3" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(7169, -266)
@@ -461,32 +466,26 @@ curve = SubResource("Curve2D_4x2cg")
 [node name="Pelican6" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(131, 567)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Starfish17" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(1344, -16)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(-301, 468)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(-24, 307)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Starfish" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(688, 145)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(87, -77)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Saw" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(1657, -289)
@@ -495,17 +494,14 @@ curve = SubResource("Curve2D_xpuws")
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(633, -364)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Starfish2" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(982, -431)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Starfish3" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(1253, -495)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Pelican" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(2910, 326)
@@ -514,167 +510,128 @@ elemental_type = 5
 [node name="Crab3" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(1469, -525)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(1512, -11)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Crab20" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(940, 147)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="CoconutWarrior" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(274, 297)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="SpearWarrior" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(-313, -242)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="CoconutWarrior2" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(2148, 105)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="SpearWarrior2" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(2598, -18)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="CoconutWarrior3" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(5016, 489)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="CoconutWarrior4" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(-205, 809)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Crab4" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(93, 755)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="SpearWarrior3" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(-582, 462)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(448, 757)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Crab6" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(790, 691)
 elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="CoconutWarrior5" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(1094, 681)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="CoconutWarrior6" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(2987, 489)
-elemental_type = 5
-skill_to_drop = ExtResource("27_xpuws")
 
 [node name="Turtle" parent="Enemies" instance=ExtResource("28_6fwx2")]
 position = Vector2(5815, 368)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Turtle2" parent="Enemies" instance=ExtResource("28_6fwx2")]
 position = Vector2(6740, 240)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Turtle3" parent="Enemies" instance=ExtResource("28_6fwx2")]
 position = Vector2(7070, 240)
 elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="SpearWarrior4" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(6745, -82)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="SpearWarrior5" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(6937, -82)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="SpearWarrior6" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(7129, -82)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="CoconutWarrior7" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(7764, -151)
 elemental_type = 4
-skill_to_drop = ExtResource("25_oaqh1")
 
 [node name="CoconutWarrior8" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(8503, 233)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="CoconutWarrior9" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(8674, -87)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="CoconutWarrior10" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(8097, -471)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Turtle4" parent="Enemies" instance=ExtResource("28_6fwx2")]
 position = Vector2(7718, -400)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="Turtle5" parent="Enemies" instance=ExtResource("28_6fwx2")]
 position = Vector2(9316, 336)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="SpearWarrior7" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(8946, -434)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="SpearWarrior8" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(8790, -306)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="SpearWarrior9" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(7936, -274)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="SeaHorse" parent="Enemies" instance=ExtResource("28_rdvgg")]
 position = Vector2(9778, -347)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="Turtle6" parent="Enemies" instance=ExtResource("28_6fwx2")]
 position = Vector2(6476, 1008)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Pelican7" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(6132, 214)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Saw6" parent="Enemies" instance=ExtResource("24_nouef")]
 position = Vector2(6601, 379)
@@ -683,72 +640,58 @@ curve = SubResource("Curve2D_sm3vb")
 [node name="Pelican8" parent="Enemies" instance=ExtResource("9_qsvqe")]
 position = Vector2(5682, 184)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="CoconutWarrior11" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(6298, 1001)
 elemental_type = 4
-skill_to_drop = ExtResource("23_ihnwd")
 
 [node name="Crab7" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(6144, 403)
 elemental_type = 4
-skill_to_drop = ExtResource("24_km4sl")
 
 [node name="CoconutWarrior12" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(10501, -599)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="CoconutWarrior13" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(10765, -599)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="Starfish4" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(11217, -367)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="SeaHorse2" parent="Enemies" instance=ExtResource("28_rdvgg")]
 position = Vector2(11526, -379)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="SeaHorse3" parent="Enemies" instance=ExtResource("28_rdvgg")]
 position = Vector2(11847, -827)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="SpearWarrior10" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(10053, -1042)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="Mushroom6" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(10393, -1036)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="SpearWarrior11" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(10573, -1618)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="Turtle7" parent="Enemies" instance=ExtResource("28_6fwx2")]
 position = Vector2(11050, -1360)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="Turtle8" parent="Enemies" instance=ExtResource("28_6fwx2")]
 position = Vector2(11362, -1360)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="CoconutWarrior14" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(12547, -1207)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="CoconutWarrior15" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(12618, -1019)
@@ -756,32 +699,26 @@ position = Vector2(12618, -1019)
 [node name="SeaHorse4" parent="Enemies" instance=ExtResource("28_rdvgg")]
 position = Vector2(12618, -1019)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="SeaHorse5" parent="Enemies" instance=ExtResource("28_rdvgg")]
 position = Vector2(12511, -443)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="SpearWarrior12" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(14227, -658)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="CoconutWarrior16" parent="Enemies" instance=ExtResource("28_ulcqf")]
 position = Vector2(13651, -759)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="SeaHorse6" parent="Enemies" instance=ExtResource("28_rdvgg")]
 position = Vector2(15348, -1723)
 elemental_type = 1
-skill_to_drop = ExtResource("21_gsja5")
 
 [node name="SpearWarrior13" parent="Enemies" instance=ExtResource("27_6fwx2")]
 position = Vector2(16114, -1938)
 elemental_type = 1
-skill_to_drop = ExtResource("29_ulcqf")
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -1003,3 +940,9 @@ elemental_type = 5
 [node name="Checkpoint" parent="." instance=ExtResource("38_km4sl")]
 position = Vector2(-473, 816)
 checkpoint_id = "999"
+
+[node name="Player" parent="." instance=ExtResource("14_km4sl")]
+position = Vector2(-557, 824)
+collision_mask = 257
+has_blade = true
+max_health = 1000

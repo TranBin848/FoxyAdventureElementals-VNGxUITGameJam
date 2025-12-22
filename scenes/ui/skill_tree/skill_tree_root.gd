@@ -23,17 +23,25 @@ func _connect_all_skill_buttons(node):
 		_connect_all_skill_buttons(child)
 
 func _on_skill_selected(skill: SkillButtonNode):
-	# Nếu đang mở panel và bấm lại cùng skill → TẮT PANEL
 	if current_skill == skill and info_panel.visible:
+		# Close panel → restore full interaction
 		info_panel.visible = false
 		skill_bar.visible = false
 		current_skill = null
+		group.mouse_filter = Control.MOUSE_FILTER_STOP
 		return
 	
-	# Nếu bấm skill mới → MỞ PANEL
 	current_skill = skill
 	info_panel.show_skill(skill)
 	skill_bar.visible = true
+	
+	# Panel open → tree clickable BUT draggable
+	group.mouse_filter = Control.MOUSE_FILTER_PASS
+	
+	# Optional: Make info_panel ignore mouse too if you want background drag
+	info_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	skill_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	
 func _refresh_tree_from_stack():
 	for btn in group.get_children():
