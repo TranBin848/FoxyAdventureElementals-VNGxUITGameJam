@@ -281,7 +281,6 @@ shape = SubResource("RectangleShape2D_dfjn3")
 debug_color = Color(0.988235, 0, 0.290196, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Bosszone"]
-zoom = Vector2(2, 2)
 
 [node name="BladeCollectable" parent="." instance=ExtResource("29_ol1w0")]
 position = Vector2(155, 206)
