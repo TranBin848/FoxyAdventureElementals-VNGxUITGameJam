@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=68 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -37,6 +37,7 @@
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="40_mmdk3"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="41_aiurf"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud.tscn" id="44_81g5i"]
+[ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/minimap.tscn" id="45_rflqb"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_xwrc7"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="47_4idv8"]
 [ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="47_fdo7j"]
@@ -572,6 +573,14 @@ position = Vector2(176, 250)
 guide_text = "Press V to change weapon"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Minimap" parent="CanvasLayer" node_paths=PackedStringArray("player", "tilemap") instance=ExtResource("45_rflqb")]
+offset_left = -283.0
+offset_top = 101.0
+offset_right = -283.0
+offset_bottom = 101.0
+player = NodePath("../../Player")
+tilemap = NodePath("../../Ground")
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("44_81g5i")]
 
