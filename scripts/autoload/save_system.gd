@@ -24,17 +24,30 @@ func load_checkpoint_data() -> Dictionary:
 
 	var file := FileAccess.open(SAVE_FILE, FileAccess.READ)
 	if file == null:
-		push_error("❌ Không thể mở file save để đọc.")
 		return {}
 
-	var result: Variant = JSON.parse_string(file.get_as_text())
+	var json_text := file.get_as_text().strip_edges()  # Remove whitespace
 	file.close()
-
-	if typeof(result) == TYPE_DICTIONARY:
-		return result
-	else:
-		push_error("❌ Dữ liệu checkpoint không hợp lệ.")
+	
+	var json = JSON.new()
+	var parse_result = json.parse(json_text)
+	
+	if parse_result != OK:
+		push_error("❌ JSON Error %d: %s at line %d\n%s" % [
+			parse_result, 
+			json.get_error_message(), 
+			json.get_error_line(), 
+			json_text.substr(0, 100) + "..."
+		])
 		return {}
+
+	var result: Dictionary = json.data
+	# Validate required keys
+	if not result.has("checkpoint_id") or not result.has("player"):
+		push_error("❌ Missing required keys in save data")
+		return {}
+	
+	return result
 
 func has_save_file() -> bool:
 	return FileAccess.file_exists(SAVE_FILE)

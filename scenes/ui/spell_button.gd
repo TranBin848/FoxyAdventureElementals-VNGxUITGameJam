@@ -103,11 +103,11 @@ func _show_error_text(message: String) -> void:
 	tween.tween_callback(Callable(alert_label, "set_visible").bind(false))
 
 func update_stack_ui():
-	if skill == null:
+	if skill == null or SkillTreeManager.get_unlocked(skill.name):
 		stack_label.visible = false
 		return
-		
-	var skill_current_stack = SkillTreeManager.get_stack(skill.name)
+	
+	var skill_current_stack = SkillTreeManager.get_skill_stack(skill.name)
 	stack_label.visible = true
 	stack_label.text = "x" + str(skill_current_stack)
 	#stack_label.text = "x" + str(skill.current_stack)

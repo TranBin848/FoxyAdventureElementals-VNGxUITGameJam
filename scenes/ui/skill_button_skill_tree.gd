@@ -63,10 +63,10 @@ func set_skill():
 	
 	# 1. Lấy dữ liệu Bền vững (Level & Unlock)
 	level = SkillTreeManager.get_level(skill.name)
-	unlocked = SkillTreeManager.is_unlocked(skill.name)
+	unlocked = SkillTreeManager.get_unlocked(skill.name)
 	
 	# 2. Lấy dữ liệu Tạm thời (Stack - Runtime only)
-	stack = SkillTreeManager.get_stack(skill.name)
+	stack = SkillTreeManager.get_skill_stack(skill.name)
 	stack_label.text = str(stack)
 	
 	# Cập nhật trạng thái hiển thị

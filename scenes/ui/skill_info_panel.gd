@@ -15,6 +15,7 @@ const ERROR_DISPLAY_TIME: float = 2.0
 @onready var skillbar: PanelContainer = $"../skillbar"
 
 var current_button: SkillButtonNode
+var current_skill_name: String = ""
 
 func _ready() -> void:
 	SkillTreeManager.stack_changed.connect(_on_stack_changed)
@@ -25,12 +26,15 @@ func show_skill(btn: SkillButtonNode):
 		return
 	
 	visible = true
+	current_button = btn
+	current_skill_name = sk.name
+	
+	# 🔥 USE SkillTreeManager data (not btn properties!)
 	title_label.text = sk.name
-	level_label.text = "Level: %d" % btn.level
-	stack_label.text = "Stack: %d" % btn.stack
+	level_label.text = "Level: %d" % SkillTreeManager.get_level(sk.name)
+	stack_label.text = "Stack: %d" % SkillTreeManager.get_skill_stack(sk.name)
 	stat_label.text = get_stat_text(sk)
 	
-	current_button = btn
 	_update_buttons()
 	
 	if btn.video_stream:
@@ -39,7 +43,7 @@ func show_skill(btn: SkillButtonNode):
 	else:
 		video_player.stream = null
 		video_player.stop()
-	
+
 func get_stat_text(sk: Skill) -> String:
 	var lines: Array[String] = []
 		
@@ -79,82 +83,111 @@ func get_stat_text(sk: Skill) -> String:
 	return "\n\n".join(lines)
 
 func _update_buttons():
-	var btn = current_button
-
-	# ----- UNLOCK -----
-	if btn.unlocked:
+	if current_button == null:
+		return
+		
+	var skill_name = current_skill_name
+	var is_unlocked = SkillTreeManager.get_unlocked(skill_name)
+	var level = SkillTreeManager.get_level(skill_name)
+	var stack = SkillTreeManager.get_skill_stack(skill_name)
+	
+	# ----- UNLOCK BUTTON -----
+	if is_unlocked:
 		unlock_btn.disabled = true
-		btn.panel.show_behind_parent = true	
+		unlock_btn.text = "UNLOCKED"
 	else:
 		unlock_btn.disabled = false
-	# ----- UPGRADE -----
-	if not btn.unlocked or btn.level >= 3:
-		# Chưa mở khóa → không được nâng cấp
+		unlock_btn.text = "UNLOCK"
+	
+	# ----- UPGRADE BUTTON -----
+	if not is_unlocked or level >= 3:
 		upgrade_btn.disabled = true
+		upgrade_btn.text = "MAX LEVEL"
 	else:
 		upgrade_btn.disabled = false
+		upgrade_btn.text = "UPGRADE"
 	
-	var index = SkillTreeManager.find_skill_in_bar(btn.skill.name)
+	# ----- EQUIP BUTTON -----
+	var index = SkillTreeManager.find_skill_in_bar(skill_name)
 	if index != -1:
-		equip_button.text = "UNEQUIP"
+		equip_button.text = "UNEQUIP (Slot %d)" % (index + 1)
 	else:
 		equip_button.text = "EQUIP"
 
 func _on_unlock_button_pressed() -> void:
-	var btn = current_button
-	if btn.unlocked:
+	if current_skill_name == "":
+		return
+		
+	var skill_name = current_skill_name
+	if SkillTreeManager.get_unlocked(skill_name):
 		return
 
-	if btn.stack >= btn.require_stack_unlock:
-		SkillTreeManager.remove_stack(btn.skill.name, btn.require_stack_upgrade)
-		#SkillTreeManager.set_level(btn.skill.name, btn.level + 1)
-		SkillTreeManager.set_unlocked(btn.skill.name)
-		btn.unlocked = true
-		btn.disabled = false
-		_show_error_text("Unlock successfully.")
-		#if btn.level == 3:
-			#_unlock_children(btn)
+	var require_stack = 5  # Configurable
+	if SkillTreeManager.get_skill_stack(skill_name) >= require_stack:
+		var skill_res = SkillDatabase.get_skill_by_name(skill_name)
+		if skill_res:
+			SkillTreeManager.remove_stack(skill_res, require_stack)
+			SkillTreeManager.unlock_skill(skill_name)
+			_show_error_text("✅ Unlocked %s!" % skill_name)
 	else:
-		_show_error_text("Not enough stacks.")	
+		_show_error_text("❌ Need %d stacks (have %d)" % [require_stack, SkillTreeManager.get_skill_stack(skill_name)])
+	
 	_update_buttons()
-
 
 func _on_upgrade_button_pressed() -> void:
-	var btn = current_button
-
-	if not btn.unlocked:
+	if current_skill_name == "":
 		return
-
-	if btn.stack >= btn.require_stack_upgrade and btn.level < 3:
-		SkillTreeManager.remove_stack(btn.skill.name, btn.require_stack_upgrade)
-		SkillTreeManager.set_level(btn.skill.name, btn.level + 1)
-		#if btn.level == 3:
-			#_unlock_children(btn)
-		_show_error_text("Upgrade successfully.")
+		
+	var skill_name = current_skill_name
+	if not SkillTreeManager.get_unlocked(skill_name):
+		return
 	
+	var level = SkillTreeManager.get_level(skill_name)
+	var require_stack = 10  # Configurable
+	if SkillTreeManager.get_skill_stack(skill_name) >= require_stack:
+		var skill_res = SkillDatabase.get_skill_by_name(skill_name)
+		if skill_res:
+			SkillTreeManager.remove_stack(skill_res, require_stack)
+			SkillTreeManager.level_up_skill(skill_name)
+			_show_error_text("✅ Upgraded to Lv%d!" % (level + 1))
 	else:
-		_show_error_text("Not enough stacks.")	
+		_show_error_text("❌ Need %d stacks" % require_stack)
 	
 	_update_buttons()
 
-
-
-func _unlock_children(parent: SkillButtonNode) -> void:
-	for child in parent.children:
-		# Chỉ mở khóa nếu chưa mở
-		if not child.unlocked:
-			child.unlocked = true
-			child.disabled = false  # Cho bấm luôn nếu muốn
-			_highlight_line(child)
-
-func _highlight_line(child: SkillButtonNode) -> void:
-	# Line nằm ở child
-	var line := child.line_2d
-	line.modulate = Color(1,1,0.3,1.0).lerp(Color(1,1,1,1), 0.5)
-	line.width = 4
-
 func _on_stack_changed(skill_name: String, new_stack: int):
-	stack_label.text = "Stack: %d" % new_stack
+	# Only update if this panel shows that skill
+	if current_skill_name == skill_name:
+		stack_label.text = "Stack: %d" % new_stack
+
+func _on_equip_button_pressed() -> void:
+	if current_skill_name == "":
+		return
+
+	var skill_name = current_skill_name
+	var index = SkillTreeManager.find_skill_in_bar(skill_name)
+
+	# ----- UNEQUIP -----
+	if index != -1:
+		SkillTreeManager.unequip_skill(skill_name)
+		_show_error_text("🗑️ Unequipped from slot %d" % (index + 1))
+		_update_buttons()
+		return
+
+	# ----- EQUIP -----
+	if not SkillTreeManager.get_unlocked(skill_name):
+		_show_error_text("❌ Skill not unlocked!")
+		return
+	
+	var bar = SkillTreeManager.get_skill_bar_data()
+	for i in range(bar.size()):
+		if bar[i] == null:
+			SkillTreeManager.equip_skill(i, skill_name)
+			_show_error_text("✅ Equipped to slot %d!" % (i + 1))
+			_update_buttons()
+			return
+	
+	_show_error_text("❌ Skill bar is full!")
 
 func _show_error_text(message: String) -> void:
 	if alert_label == null:
@@ -163,50 +196,21 @@ func _show_error_text(message: String) -> void:
 	
 	alert_label.text = message
 	alert_label.visible = true
-	alert_label.modulate = Color(1, 1, 1, 1) # Đảm bảo không trong suốt ban đầu
+	alert_label.modulate = Color(1, 1, 1, 1)
 	
-	# Khởi tạo Tween để làm hiệu ứng Fade Out
 	var tween = create_tween()
-	
-	# Chờ một chút
 	tween.tween_interval(ERROR_DISPLAY_TIME)
-	
-	# Fade Out và ẩn Label
 	tween.tween_property(alert_label, "modulate", Color(1, 1, 1, 0), 0.3)
-	
-	# Sau khi fade xong, đảm bảo label.visible = false
-	tween.tween_callback(Callable(alert_label, "set_visible").bind(false))
-
-
-func _on_equip_button_pressed() -> void:
-	if current_button == null:
-		return
-
-	var skill_name = current_button.skill.name
-	var index = SkillTreeManager.find_skill_in_bar(skill_name)
-
-	# ----- ĐÃ EQUIP → UNEQUIP -----
-	if index != -1:
-		SkillTreeManager.unequip_skill(skill_name)
-		_show_error_text("Unequipped.")
-		_update_buttons()
-		return
-
-	# ----- CHƯA EQUIP → EQUIP -----
-	var skill_unlock = SkillTreeManager.get_unlocked(skill_name)
-	if skill_unlock:
-		var bar = SkillTreeManager.get_skill_bar_data()
-		for i in range(bar.size()):
-			if bar[i] == null:
-				SkillTreeManager.equip_skill(i, skill_name)
-				_show_error_text("Equipped to slot %d." % (i + 1))
-				_update_buttons()
-				return
-	else:
-		_show_error_text("Skill not unlocked.")
-		return
-	_show_error_text("Skill bar is full!")
-
+	tween.tween_callback(func(): alert_label.visible = false)
 
 func _on_close_button_pressed():
 	visible = false
+
+# Legacy functions (for compatibility)
+func set_unlocked(skill_name: String) -> void:
+	SkillTreeManager.unlock_skill(skill_name)
+
+func set_level(skill_name: String, new_level: int) -> void:
+	if SkillTreeManager.skill_data.has(skill_name):
+		SkillTreeManager.skill_data[skill_name]["level"] = new_level
+		SkillTreeManager.skill_leveled_up.emit(skill_name, new_level)

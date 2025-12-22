@@ -13,13 +13,15 @@ var retry_count: int = 0
 
 func _ready() -> void:
 	slots = get_children()
-	
-	# ✅ DEFERRED: Wait for player to load
 	call_deferred("setup_player_connection")
-	
 	alert_label = get_tree().root.find_child("ErrorLabel", true, false) as Label
+	
+	# ✅ Connect AFTER SkillTreeManager loads
 	SkillTreeManager.skillbar_changed.connect(on_skillbar_changed)
 	
+	# 🔥 INITIAL SYNC with SkillTreeManager
+	call_deferred("sync_with_skilltree")
+
 # ✅ RETRY until player loads
 func setup_player_connection():
 	print("🔍 [Retry %d] Searching for player..." % retry_count)
@@ -105,34 +107,28 @@ func _on_skill_collected(skill_resource: Skill):
 			return
 	
 	_show_error_text("⚠️ Skill bar full!")
-# ✅ DEBUG: Stack refresh tracking
-func refresh_from_stack() -> void:
+# 🔥 FULL SYNC with SkillTreeManager
+func sync_with_skilltree() -> void:
+	print("🔄 SYNCING SkillBar with SkillTreeManager...")
+	
 	for i in range(slots.size()):
-		var slot = slots[i]
-		slot.skill = null
-		slot.disabled = true
-		slot.time_label.text = ""
-		slot.set_process(false)
-	
-	var index := 0
-	for skill_name in SkillTreeManager.table:
-		if index >= slots.size(): 
-			break
-		
-		var skill_data = SkillTreeManager.table[skill_name]
-		if skill_data.stack <= 0: 
-			continue
-		
-		var skill_resource = skill_data.skill_resource
-		if skill_resource:
-			slots[index].skill = skill_resource.duplicate()
-			slots[index].skill.apply_to_button(slots[index])
-			slots[index].disabled = false
-			index += 1
+		var skill_name = SkillTreeManager.skillbar[i]
+		if skill_name:
+			var skill_resource = SkillTreeManager.get_skill_resource(skill_name)
+			if skill_resource:
+				slots[i].skill = skill_resource
+				slots[i].skill.apply_to_button(slots[i])
+				slots[i].disabled = false
+				print("🔄 SYNC slot %d: %s" % [i, skill_name])
+			else:
+				print("⚠️ SYNC FAIL slot %d: %s not unlocked" % [i, skill_name])
+				slots[i].skill = null
+				slots[i].disabled = true
 		else:
-			print("⚠️ NULL skill_resource for %s in stack" % skill_name)
+			slots[i].skill = null
+			slots[i].disabled = true
 	
-	print("✅ REFRESH complete: %d slots filled" % index)
+	print("✅ SkillBar SYNC COMPLETE")
 
 # SAVE/LOAD: Store skill name + level
 func save_data() -> Array:
@@ -180,19 +176,17 @@ func load_data(data: Array) -> void:
 		else:
 			print("❌ LOAD FAIL slot %d: %s not found in DB" % [i, skill_name])
 
-# ✅ DEBUG: Skillbar change events
-func on_skillbar_changed(slot_index: int, skill_data: Dictionary):
-	print("📡 SkillbarChanged(slot=%d, data=%s)" % [slot_index, skill_data])
+# ✅ FIX: Match SkillTreeManager signal signature
+func on_skillbar_changed(slot_index: int, skill_name: String):  # ← String, not Dictionary!
+	print("📡 SkillbarChanged(slot=%d, skill_name='%s')" % [slot_index, skill_name])
 	
 	if slot_index < 0 or slot_index >= slots.size(): 
 		print("❌ Invalid slot_index: %d" % slot_index)
 		return
 	
 	var slot = slots[slot_index]
-	var skill_name = skill_data.get("name", "")
-	var skill_level = skill_data.get("level", 1)
 	
-	if skill_name == "":
+	if skill_name == "" or skill_name == null:
 		print("🗑️ CLEARING slot %d" % slot_index)
 		slot.skill = null
 		slot.disabled = true
@@ -200,18 +194,20 @@ func on_skillbar_changed(slot_index: int, skill_data: Dictionary):
 		slot.set_process(false)
 		return
 	
-	var skill_resource = SkillDatabase.get_skill_by_name(skill_name)
+	# 🔥 Get skill from SkillTreeManager (proper way)
+	var skill_resource = SkillTreeManager.get_skill_resource(skill_name)
 	if skill_resource:
-		skill_resource.level = skill_level
-		slot.skill = skill_resource.duplicate()
+		slot.skill = skill_resource
 		slot.skill.apply_to_button(slot)
 		slot.disabled = false
 		slot.cooldown.value = 0
 		slot.time_label.text = ""
 		slot.set_process(false)
-		print("✅ UPDATED slot %d: %s Lv%d" % [slot_index, skill_name, skill_level])
+		print("✅ UPDATED slot %d: %s Lv%d" % [slot_index, skill_name, skill_resource.level])
 	else:
-		print("❌ DB MISS: %s not found for slot %d" % [skill_name, slot_index])
+		print("❌ SkillTreeManager MISS: %s not unlocked/loaded" % skill_name)
+		slot.skill = null
+		slot.disabled = true
 
 func _show_error_text(message: String) -> void:
 	print("📢 UI ALERT: %s" % message)

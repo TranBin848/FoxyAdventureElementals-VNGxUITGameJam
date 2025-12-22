@@ -23,3 +23,11 @@ func get_skill_by_name(_name: String) -> Skill:
 		var skill_instance = all_skills[_name].new() as Skill
 		return skill_instance
 	return null
+	
+func get_skill_index(skill_name: String) -> int:
+	var keys = all_skills.keys()
+	return keys.find(skill_name)
+
+func get_skill_name_by_index(index: int) -> String:
+	var keys = all_skills.keys()
+	return keys[index] if index >= 0 and index < keys.size() else ""

@@ -128,12 +128,12 @@ func _check_and_use_skill_stack(skill_to_use: Skill):
 		for i in range(skill_bar.slots.size()):
 			var slot = skill_bar.slots[i]
 			if slot.skill == skill_to_use:
-				var stack = SkillTreeManager.get_stack(skill_to_use.name)
+				var stack = SkillTreeManager.get_skill_stack(skill_to_use.name)
 				var unlocked = SkillTreeManager.get_unlocked(skill_to_use.name)
 				if unlocked: return
 				if stack == 1: SkillTreeManager.clear_skill_in_bar(i)
 				elif stack > 1:
-					SkillTreeManager.remove_stack(skill_to_use.name, 1)
+					SkillTreeManager.remove_stack(skill_to_use, 1)
 					slot.update_stack_ui()
 				return 
 
