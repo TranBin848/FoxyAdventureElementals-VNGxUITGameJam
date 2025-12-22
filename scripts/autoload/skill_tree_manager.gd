@@ -74,6 +74,9 @@ func get_unlocked(skill_name: String) -> bool:
 
 func get_level(skill_name: String) -> int:
 	return skill_data.get(skill_name, {}).get("level", 0)
+	
+func set_level(skill_name: String, level: int) -> void:
+	skill_data[skill_name].level = level
 
 func get_skill_resource(skill_name: String) -> Skill:
 	if not get_unlocked(skill_name): return null

@@ -15,6 +15,7 @@ func _update(_delta: float):
 	if (obj.is_in_burrow_state):
 		if not control_moving():
 			change_state(fsm.states.idle)
+		control_jump()
 		return
 	if update_timer(_delta):
 		var walk_fx = walk_fx_factory.create() as Node2D

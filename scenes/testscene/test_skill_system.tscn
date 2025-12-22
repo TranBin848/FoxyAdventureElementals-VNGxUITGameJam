@@ -40,7 +40,7 @@
 script/source = "extends Node2D
 
 func _ready() -> void:
-	var skill_names = [\"Thousand Swords\", \"Wooden Clone\", \"Earthquake\", \"Burrow\"]
+	var skill_names = [\"Thousand Swords\", \"Wooden Clone\", \"Comet Rain\", \"Burrow\"]
 	
 	for i in skill_names.size():
 		# 🔥 Validate + equip
@@ -48,6 +48,7 @@ func _ready() -> void:
 		if skill:
 			SkillTreeManager.unlock_skill(skill_names[i])
 			SkillTreeManager.equip_skill(i, skill_names[i])
+			SkillTreeManager.set_level(skill_names[i],3)
 			print(\"✅ Equipped %s to slot %d\" % [skill_names[i], i])
 "
 

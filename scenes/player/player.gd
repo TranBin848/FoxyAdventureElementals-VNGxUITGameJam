@@ -248,12 +248,12 @@ func _area_shot(skill: Skill, target_position: Vector2, target_enemy: Node2D) ->
 func _apply_buff(skill: Skill) -> void: 
 	# UPDATED: Use the new BuffState manager
 	if skill is Fireball:
-		enter_buff_state(BuffState.FIREBALL, skill.duration)
+		enter_buff_state(BuffState.FIREBALL, skill.duration * (skill.level + 1)/ 2)
 	elif skill is Burrow:
-		enter_buff_state(BuffState.BURROW, skill.duration)
+		enter_buff_state(BuffState.BURROW, skill.duration * (skill.level + 1)/ 2)
 	elif skill is HealOverTime:
 		# Heal Over Time doesn't really have a "state", so we keep it independent
-		_apply_heal_over_time(skill.heal_per_tick, skill.duration, skill.tick_interval)
+		_apply_heal_over_time(skill.heal_per_tick, skill.duration * (skill.level + 1)/ 2, skill.tick_interval)
 
 func _apply_heal_over_time(heal_amount: float, duration: float, interval: float) -> void:
 	var total_ticks: int = floor(duration / interval)
@@ -337,6 +337,7 @@ func jump() -> void:
 	if !is_in_burrow_state:
 		jump_fx_factory.create() as Node2D
 	else:
+		_exit_burrow_internal(false)
 		surface_fx_factory.create() as Node2D
 
 func wall_jump() -> void:
@@ -608,7 +609,7 @@ func exit_current_buff() -> void:
 		BuffState.FIREBALL:
 			_exit_fireball_internal()
 		BuffState.BURROW:
-			_exit_burrow_internal()
+			_exit_burrow_internal(true)
 		BuffState.INVISIBLE:
 			_exit_invisible_internal()
 	
@@ -669,14 +670,14 @@ func _apply_burrow_buff_internal(_duration: float) -> void:
 			s.show()
 			s.modulate.a = 0.5 
 
-func _exit_burrow_internal() -> void:
+func _exit_burrow_internal(jump_required: bool = true) -> void:
 	is_in_burrow_state = false
 	speed_multiplier = 1.0
-	
 		
 	# Jump + horizontal impulse
-	jump()
-	velocity.x = 400.0 * direction 
+	if jump_required: 
+		jump()
+		velocity.x = 400.0 * direction 
 	
 	hurt_area.call_deferred("set_monitorable", true)
 	
