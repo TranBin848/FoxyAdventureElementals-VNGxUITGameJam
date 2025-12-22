@@ -91,7 +91,7 @@ script = ExtResource("1_wx5uc")
 knockback_force = 0.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_tbddh")
 animation = &"StunBeam"
 autoplay = "StunBeam"

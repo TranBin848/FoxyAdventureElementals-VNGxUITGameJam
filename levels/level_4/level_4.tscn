@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://dsxvyoo4n54nc"]
+[gd_scene load_steps=46 format=4 uid="uid://dsxvyoo4n54nc"]
 
 [ext_resource type="Script" uid="uid://daj5tdirvwlbt" path="res://levels/level_4/level_4.gd" id="1_36jj7"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
@@ -89,6 +89,9 @@ height = 100
 fill = 2
 fill_from = Vector2(0.5, 1)
 fill_to = Vector2(0.497738, 0.175214)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_36jj7"]
+normal = Vector2(-0.00564142, 0.999984)
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_36jj7")
@@ -454,3 +457,13 @@ size_flags_vertical = 8
 [node name="Checkpoint" parent="." instance=ExtResource("34_36jj7")]
 position = Vector2(78, 16)
 checkpoint_id = "999"
+
+[node name="WorldBoundary" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary"]
+position = Vector2(3774, -1374)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_36jj7")

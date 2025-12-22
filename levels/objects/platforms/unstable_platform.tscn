@@ -1,0 +1,193 @@
+[gd_scene load_steps=19 format=3 uid="uid://d356v232gn1ce"]
+
+[ext_resource type="Texture2D" uid="uid://dgh3uhedudcr" path="res://assets/island/objects/unstable_platform/Irregular rock Spritesheet.png" id="1_dig0u"]
+
+[sub_resource type="GDScript" id="GDScript_dig0u"]
+script/source = "extends StaticBody2D
+
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+var timer: Timer
+var trap_is_active = false # Renamed to avoid conflict with built-in 'is_visible'
+
+func _ready() -> void:
+	timer = Timer.new()
+	timer.wait_time = 6.0 
+	timer.one_shot = true # Set to One Shot so we can control exactly when it restarts
+	timer.timeout.connect(_on_timer_timeout)
+	add_child(timer)
+	
+	# Initial State: Hidden/Safe
+	trap_is_active = false
+	collision_shape.disabled = true
+	animated_sprite.play(\"end\") # Ensure it looks closed visually
+	animated_sprite.frame = animated_sprite.sprite_frames.get_frame_count(\"end\") - 1 # Jump to last frame of \"end\"
+	
+	print(\"🔄 Trap init - waiting for first trigger...\")
+	timer.start() # Starts the first cooldown cycle
+
+func _on_timer_timeout() -> void:
+	if trap_is_active:
+		_deactivate_trap()
+	else:
+		_activate_trap()
+
+func _activate_trap() -> void:
+	# 1. Play the warning/opening animation
+	animated_sprite.play(\"start\")
+	
+	# 2. Wait for animation to finish
+	await animated_sprite.animation_finished
+	
+	# 3. Enable danger
+	trap_is_active = true
+	collision_shape.set_deferred(\"disabled\", false)
+	print(\"⚠️ Trap ACTIVE\")
+	
+	# 4. Restart timer (How long the trap stays active)
+	timer.start() 
+
+func _deactivate_trap() -> void:
+	# 1. Disable danger immediately
+	trap_is_active = false
+	collision_shape.set_deferred(\"disabled\", true)
+	
+	# 2. Play closing animation
+	animated_sprite.play(\"end\")
+	
+	# 3. Wait for animation to finish
+	await animated_sprite.animation_finished
+	print(\"💤 Trap HIDDEN\")
+	
+	# 4. Restart timer (How long the trap stays hidden)
+	timer.start()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_csyct"]
+size = Vector2(30, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5jck"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0aoj"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opn4g"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hflc"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t606c"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jwxt"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg6mf"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dig0u"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1n8u"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiubb"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbxlp"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5vm6"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5etxy"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrbdt"]
+atlas = ExtResource("1_dig0u")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l5jck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5jck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0aoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opn4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hflc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t606c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jwxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hg6mf")
+}],
+"loop": false,
+"name": &"end",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dig0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1n8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qiubb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbxlp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5vm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5etxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrbdt")
+}],
+"loop": false,
+"name": &"start",
+"speed": 12.0
+}]
+
+[node name="UnstableRock" type="StaticBody2D"]
+collision_mask = 0
+script = SubResource("GDScript_dig0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_csyct")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -1)
+sprite_frames = SubResource("SpriteFrames_l5jck")
+animation = &"start"
+frame = 6
+frame_progress = 1.0

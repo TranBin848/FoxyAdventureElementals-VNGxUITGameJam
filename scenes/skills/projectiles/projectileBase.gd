@@ -4,8 +4,8 @@ class_name ProjectileBase
 
 var speed: float
 var direction: Vector2 = Vector2.RIGHT
-var damage: int
-var elemental_type: int = 0
+var damage: float
+var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 var affected_enemies: Array[EnemyCharacter] = []
 
 

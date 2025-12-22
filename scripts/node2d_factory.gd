@@ -12,21 +12,15 @@ var _is_ready: bool = false
 
 func _ready() -> void:
 	parent_node = find_parent("Stage")
-	
 	if parent_node == null:
 		parent_node = get_tree().current_scene
-	
-	# Wait one frame to ensure parent is ready
-	await get_tree().process_frame
-	
-	# Get or create container synchronously
-	# find_child(name, recursive=true, owned=false) to search all children
+
 	container = parent_node.find_child(target_container_name, true, false)
 	if container == null:
 		container = Node.new()
 		container.name = target_container_name
-		parent_node.add_child(container)  # Immediate, not deferred!
-	
+		parent_node.add_child(container)
+
 	_is_ready = true
 
 func create(_product_packed_scene := product_packed_scene) -> Node2D:

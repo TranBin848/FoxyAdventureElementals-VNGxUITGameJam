@@ -33,7 +33,7 @@ func _ready() -> void:
 		cooldown.max_value = timer.wait_time
 	set_process(false)
 	alert_label = get_tree().root.find_child("ErrorLabel", true, false) as Label
-	#SkillStackManager.connect("stack_changed", Callable(self, "_on_stack_changed"))
+	#SkillTreeManager.connect("stack_changed", Callable(self, "_on_stack_changed"))
 	
 	_update_all()
 #func _on_stack_changed(name, new_stack):
@@ -103,11 +103,11 @@ func _show_error_text(message: String) -> void:
 	tween.tween_callback(Callable(alert_label, "set_visible").bind(false))
 
 func update_stack_ui():
-	if skill == null:
+	if skill == null or SkillTreeManager.get_unlocked(skill.name):
 		stack_label.visible = false
 		return
-		
-	var skill_current_stack = SkillStackManager.get_stack(skill.name)
+	
+	var skill_current_stack = SkillTreeManager.get_skill_stack(skill.name)
 	stack_label.visible = true
 	stack_label.text = "x" + str(skill_current_stack)
 	#stack_label.text = "x" + str(skill.current_stack)

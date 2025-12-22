@@ -5,7 +5,7 @@ var my_logger: Logger = ConsoleLogger.new()
 func _enter_tree() -> void:
 	# Handle portal spawning first
 	GameManager.current_stage = self
-
+	GameManager.current_level = 4
 	
 func _ready() -> void:
 	if not GameManager.respawn_at_portal():

@@ -38,7 +38,6 @@ func split() -> void:
 			(son as Mushroom).max_level = max_level
 			(son as Mushroom).level = level + 1
 			(son as Mushroom).max_scale = max_scale
-			(son as Mushroom).skill_to_drop = skill_to_drop
 			if number_of_skill_drop_per_child < number_of_skill_drop:
 				number_of_skill_drop -= number_of_skill_drop_per_child
 				(son as Mushroom).number_of_skill_drop = number_of_skill_drop_per_child

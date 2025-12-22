@@ -34,7 +34,7 @@ func _on_body_entered(_body: Node) -> void:
 		return
 	drop_blade()
 
-func _on_hit_area_2d_hitted(area: Variant) -> void:
+func _on_hit_area_2d_hitted(_area: Variant) -> void:
 	if dropped:
 		return
 	drop_blade()

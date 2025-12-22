@@ -6,15 +6,16 @@
 [resource]
 script = ExtResource("1_kcwmj")
 name = "Earthquake"
-element = 0
+elemental_type = 5
 cooldown = 2.5
 duration = 1.0
 hit_delay = 0.0
-texture_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
+ground_targeted = false
+texture_path = "res://assets/skills/icons_skill/48x48/skill_icons32.png"
 animation_name = "Earthquake"
 projectile_scene = ExtResource("1_wv36o")
 speed = 400.0
-damage = 10
+damage = 10.0
 mana = 10
 type = "single_shot"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"
