@@ -15,6 +15,8 @@ extends EnemyCharacter
 var is_stunned: bool = false
 var boss_zone: Area2D = null
 var is_fighting: bool = false
+var fly_target_y: float = 0.0  # Độ cao bay cố định khi ở phase FLY
+var ground_y: float = 0.0  # Độ cao mặt đất ban đầu
 
 enum Phase {
 	FLY,
@@ -39,6 +41,8 @@ var cur_skill = 0
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Inactive)
+	ground_y = global_position.y  # Lưu độ cao mặt đất
+	fly_target_y = global_position.y - 150  # Lưu độ cao bay
 	
 
 func _physics_process(delta: float) -> void:
