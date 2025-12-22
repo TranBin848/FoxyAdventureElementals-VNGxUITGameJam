@@ -198,6 +198,7 @@ ui_skilltree={
 2d_physics/layer_6="collectable"
 2d_physics/layer_7="pushable_object"
 2d_physics/layer_8="player_clone"
+2d_physics/layer_9="FinalBoss"
 
 [rendering]
 

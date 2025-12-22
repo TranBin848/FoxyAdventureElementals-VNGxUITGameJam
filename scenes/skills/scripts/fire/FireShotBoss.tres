@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://usd62cwn6jhg"]
+
+[ext_resource type="PackedScene" uid="uid://bu243mknusv0a" path="res://scenes/skills/projectiles/fire/fireShotProjectile.tscn" id="1_86gd6"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="2_j5l55"]
+
+[resource]
+script = ExtResource("2_j5l55")
+name = "Fire Shot"
+element = 4
+cooldown = 1.0
+duration = 0.0
+hit_delay = 0.0
+ground_targeted = false
+texture_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
+animation_name = "FireShot"
+projectile_scene = ExtResource("1_86gd6")
+speed = 250.0
+damage = 2
+mana = 30
+type = "multi_shot"
+metadata/_custom_type_script = "uid://4fu7i05ai1gp"

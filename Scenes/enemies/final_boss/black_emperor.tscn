@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=52 format=3 uid="uid://d0a57drf7tx4v"]
 
 [ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fxnya"]
@@ -38,10 +38,15 @@
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="35_1vt48"]
 [ext_resource type="Script" uid="uid://clpgdp80p1wyg" path="res://scenes/enemies/final_boss/fly_lightning.gd" id="35_qc2kf"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="36_451n5"]
+[ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="38_u2mao"]
 [ext_resource type="Script" uid="uid://bpqooax7ao0jd" path="res://scenes/enemies/final_boss/walk.gd" id="39_fwi6v"]
+[ext_resource type="PackedScene" uid="uid://6g7y4d1dahuk" path="res://scenes/enemies/final_boss/warning.tscn" id="39_wk8ah"]
 [ext_resource type="Script" uid="uid://d1toxknqfdla6" path="res://scenes/enemies/final_boss/inactive.gd" id="40_wk8ah"]
+[ext_resource type="PackedScene" uid="uid://dtygsbfpy3r7i" path="res://scenes/skills/area/metal/thunderbolt.tscn" id="40_yr5q8"]
 [ext_resource type="Script" uid="uid://b8wbpujyvf1qr" path="res://scenes/enemies/final_boss/stand_up.gd" id="41_yr5q8"]
+[ext_resource type="Script" uid="uid://cax5v5vvvpy8n" path="res://scenes/enemies/final_boss/meteor_rain.gd" id="44_mpuyr"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="46_mqsvn"]
+[ext_resource type="Resource" uid="uid://usd62cwn6jhg" path="res://scenes/skills/scripts/fire/FireShotBoss.tres" id="46_u2mao"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
 animations = [{
@@ -226,7 +231,7 @@ radius = 26.0
 radius = 25.0
 
 [node name="BlackEmperor" type="CharacterBody2D"]
-collision_layer = 137
+collision_layer = 256
 script = ExtResource("1_hljwo")
 spike = 1.0
 sight = 200.0
@@ -269,7 +274,7 @@ shape = SubResource("CircleShape2D_w2egv")
 debug_color = Color(0.575242, 0.0792793, 0, 0.42)
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
-collision_layer = 16
+collision_layer = 256
 collision_mask = 0
 script = ExtResource("36_451n5")
 metadata/_custom_type_script = "uid://csu2b21cwchqw"
@@ -278,6 +283,11 @@ metadata/_custom_type_script = "uid://csu2b21cwchqw"
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_1rml4")
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="SkillFactory" type="Marker2D" parent="Direction"]
+position = Vector2(37, -12)
+script = ExtResource("38_u2mao")
+metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -291,6 +301,8 @@ position = Vector2(25, -14)
 
 [node name="FlyLightning" type="Node" parent="States"]
 script = ExtResource("35_qc2kf")
+warning_scene = ExtResource("39_wk8ah")
+lightning_scene = ExtResource("40_yr5q8")
 
 [node name="Walk" type="Node" parent="States"]
 script = ExtResource("39_fwi6v")
@@ -300,6 +312,11 @@ script = ExtResource("40_wk8ah")
 
 [node name="StandUp" type="Node" parent="States"]
 script = ExtResource("41_yr5q8")
+
+[node name="MeteorRain" type="Node" parent="States"]
+script = ExtResource("44_mpuyr")
+warning_scene = ExtResource("39_wk8ah")
+meteor_skill = ExtResource("46_u2mao")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -25.0
@@ -320,7 +337,6 @@ theme = ExtResource("46_mqsvn")
 theme_override_constants/margin_top = 20
 
 [node name="ProgressBar" type="ProgressBar" parent="UI/Control"]
-visible = false
 custom_minimum_size = Vector2(500, 30)
 layout_mode = 2
 size_flags_horizontal = 4
