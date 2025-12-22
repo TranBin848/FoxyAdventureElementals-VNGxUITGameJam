@@ -605,7 +605,7 @@ position = Vector2(12638, -542)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="SafeObjects/WorldBoundary"]
 position = Vector2(1986, -101)
-collision_layer = 256
+collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/WorldBoundary/StaticBody2D"]
@@ -613,7 +613,7 @@ shape = SubResource("WorldBoundaryShape2D_0dmjw")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="SafeObjects"]
 position = Vector2(15731, 889)
-collision_layer = 256
+collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/StaticBody2D3"]

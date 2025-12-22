@@ -178,7 +178,7 @@ script = ExtResource("1_ppf8r")
 
 [node name="RightBorder" type="StaticBody2D" parent="WorldBoundary"]
 position = Vector2(18688, -1670)
-collision_layer = 256
+collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/RightBorder"]
@@ -197,7 +197,7 @@ shape = SubResource("WorldBoundaryShape2D_xpuws")
 
 [node name="LeftBorder" type="StaticBody2D" parent="WorldBoundary"]
 position = Vector2(-641, 778)
-collision_layer = 256
+collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/LeftBorder"]
