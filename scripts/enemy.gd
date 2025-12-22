@@ -442,9 +442,13 @@ func disable_collision():
 
 # Enemy bị hút vào vùng nổ
 func enter_tornado(tornado_pos: Vector2) -> void:
+	# 1. Thiết lập trạng thái
+	is_movable = false
+	velocity = Vector2.ZERO
+	
 	# 3. Bắt đầu hiệu ứng "bay lên"
 	var target_pos = tornado_pos + Vector2(0, -30)
-	var duration = 0.2
+	var duration = 0.5
 	
 	var tween := get_tree().create_tween()
 	

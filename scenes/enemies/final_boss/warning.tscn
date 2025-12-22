@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://6g7y4d1dahuk"]
+
+[ext_resource type="Texture2D" uid="uid://tinptqnegyd7" path="res://assets/war_lord_bullet/target_tile.png" id="1_je7x8"]
+
+[node name="Warning" type="Sprite2D"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_je7x8")

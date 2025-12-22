@@ -1,7 +1,7 @@
 [gd_scene load_steps=37 format=4 uid="uid://dsmbhy8c7qvf6"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_xko0c"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://Scenes/player/player.tscn" id="2_nyk77"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_nyk77"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="3_k7016"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="4_ela4x"]
 [ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="5_7hpo2"]
@@ -27,7 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_crhod"]
 [ext_resource type="PackedScene" uid="uid://dfg7ew4joocvp" path="res://scenes/ui/healh_bar.tscn" id="26_byfyw"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="27_roaea"]
-[ext_resource type="PackedScene" path="res://Scenes/enemies/final_boss/black_emperor.tscn" id="28_xko0c"]
+[ext_resource type="PackedScene" uid="uid://d0a57drf7tx4v" path="res://scenes/enemies/final_boss/black_emperor.tscn" id="28_xko0c"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="29_rcebl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
@@ -142,7 +142,7 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfjn3"]
 
-[node name="Stage" type="Node2D"]
+[node name="Stage3" type="Node2D"]
 
 [node name="World" type="TileMapLayer" parent="."]
 position = Vector2(108, 129)
@@ -279,7 +279,7 @@ debug_color = Color(0.988235, 0, 0.290196, 0)
 zoom = Vector2(2, 2)
 
 [node name="BlackEmperor" parent="Bosszone" instance=ExtResource("28_xko0c")]
-position = Vector2(0, 6.55556)
+position = Vector2(0.185185, 6.55556)
 scale = Vector2(0.037, 0.056)
 
 [node name="BladeCollectable" parent="." instance=ExtResource("29_rcebl")]
