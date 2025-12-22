@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=70 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -36,11 +36,8 @@
 [ext_resource type="Shader" uid="uid://cn08g737h2o3b" path="res://shaders/water_refelection/water_refelection.gdshader" id="39_knpvw"]
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="40_mmdk3"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="41_aiurf"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="42_m18vu"]
-[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="43_0uo32"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="44_81g5i"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud.tscn" id="44_81g5i"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_xwrc7"]
-[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="46_sycnp"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="47_4idv8"]
 [ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="47_fdo7j"]
 [ext_resource type="PackedScene" uid="uid://c2nu6ncphw78a" path="res://scripts/area_component/boss_zone_area_2d.tscn" id="47_rflqb"]
@@ -48,7 +45,6 @@
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="49_5oe72"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="49_mvtf2"]
 [ext_resource type="PackedScene" uid="uid://dlo5gf1o05dgq" path="res://scenes/env_particle/rain.tscn" id="53_5oe72"]
-[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="53_nx43y"]
 [ext_resource type="AudioStream" uid="uid://da2jb75pixowd" path="res://assets/sounds/44474__bullockjs__waterfall2.mp3" id="54_h8kgu"]
 [ext_resource type="Script" uid="uid://ddphxb2lvd1do" path="res://scripts/area_component/ambience_area_2d.gd" id="54_nx43y"]
 
@@ -599,70 +595,7 @@ guide_text = "Press V to change weapon"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("42_m18vu")
-metadata/_edit_lock_ = true
-
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("44_81g5i")]
-offset_bottom = 100.0
-metadata/_edit_lock_ = true
-
-[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -122.0
-offset_top = -104.0
-offset_right = 122.0
-offset_bottom = -88.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("45_xwrc7")
-text = "Enemy Out of Range"
-horizontal_alignment = 1
-metadata/_edit_lock_ = true
-
-[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("46_sycnp")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -111.0
-offset_right = -15.0
-offset_bottom = -15.0
-grow_horizontal = 0
-grow_vertical = 0
-metadata/_edit_lock_ = true
-
-[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("53_nx43y")]
-metadata/_edit_lock_ = true
-
-[node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("43_0uo32")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -131.0
-offset_top = -78.0
-offset_right = 117.296
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 8
-metadata/_edit_lock_ = true
 
 [node name="FX" type="Node2D" parent="."]
 

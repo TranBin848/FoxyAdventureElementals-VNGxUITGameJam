@@ -713,8 +713,7 @@ target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
-visible = false
-collision_layer = 4
+collision_layer = 516
 script = ExtResource("35_o1e43")
 metadata/_custom_type_script = "uid://csu2b21cwchqw"
 

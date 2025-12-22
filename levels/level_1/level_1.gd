@@ -13,6 +13,16 @@ func _ready() -> void:
 	if AudioManager:
 		AudioManager.play_music("music_background")
 		AudioManager.play_ambience("ambience_forest", -10)
-	GameManager.logger.log("Hi Im global logger, Im from level 1")
-	my_logger.log("Hi Im script-level logger, Im from level 1")
+		
+	var skill_names = ["Thousand Swords", "Wooden Clone", "Earthquake", "Burrow"]
+	
+	for i in skill_names.size():
+		# 🔥 Validate + equip
+		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
+		if skill:
+			SkillTreeManager.unlock_skill(skill_names[i])
+			SkillTreeManager.equip_skill(i, skill_names[i])
+			print("✅ Equipped %s to slot %d" % [skill_names[i], i])
+	#GameManager.logger.log("Hi Im global logger, Im from level 1")
+	#my_logger.log("Hi Im script-level logger, Im from level 1")
 	

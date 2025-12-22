@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="29_jx6ob"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="30_n5lmc"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="30_roqqn"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="31_yxbeg"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/settings.tscn" id="31_yxbeg"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="32_hwtel"]
 [ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="33_88oj5"]
 [ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="34_3dcit"]
@@ -40,7 +40,7 @@
 script/source = "extends Node2D
 
 func _ready() -> void:
-	var skill_names = [\"Fireball\", \"Wooden Clone\", \"Earthquake\", \"Burrow\"]
+	var skill_names = [\"Thousand Swords\", \"Wooden Clone\", \"Earthquake\", \"Burrow\"]
 	
 	for i in skill_names.size():
 		# 🔥 Validate + equip
