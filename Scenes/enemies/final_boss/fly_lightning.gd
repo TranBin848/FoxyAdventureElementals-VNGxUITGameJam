@@ -12,7 +12,9 @@ var offsety = 20.0
 func _enter():
 	# Lưu vị trí ban đầu của boss
 	var start_pos = obj.global_position
-	var target_fly_pos = start_pos + Vector2(0, -fly_height)
+	
+	# Chỉ bay lên nếu boss đang ở thấp, nếu đang cao rồi thì giữ nguyên
+	var target_fly_pos = Vector2(start_pos.x, obj.fly_target_y)
 	
 	# Tắt gravity và di chuyển trong khi bay
 	obj.ignore_gravity = true
@@ -22,25 +24,32 @@ func _enter():
 	if obj.animated_sprite_2d and obj.animated_sprite_2d.sprite_frames.has_animation("fly"):
 		obj.animated_sprite_2d.play("fly")
 	
-	# Bay lên trời bằng Tween
-	var tween = get_tree().create_tween()
-	tween.tween_property(obj, "global_position", target_fly_pos, fly_duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	await tween.finished
+	# Bay lên độ cao cố định (nếu chưa đạt độ cao đó)
+	if start_pos.y > obj.fly_target_y:
+		var tween = get_tree().create_tween()
+		tween.tween_property(obj, "global_position", target_fly_pos, fly_duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		await tween.finished
+	else:
+		# Đã ở độ cao rồi, giữ nguyên
+		target_fly_pos = start_pos
 	
 	# Tạo 6 vị trí warning: 3 bên trái, 3 bên phải boss
 	var warning_positions = []
 	var spacing = 135  # Khoảng cách giữa các warning
+	var current_x = obj.global_position.x  # Vị trí x hiện tại của boss
+	var ground_y = obj.ground_y  # Độ cao mặt đất
+	
+	warning_positions.append(Vector2(current_x, ground_y + offsety))
 	
 	# 3 vị trí bên trái boss
-	for i in range(3):
+	for i in range(4):
 		var offset = (i + 1) * spacing
-		
-		warning_positions.append(start_pos + Vector2(-offset, offsety))
+		warning_positions.append(Vector2(current_x - offset, ground_y + offsety))
 	
 	# 3 vị trí bên phải boss
-	for i in range(3):
+	for i in range(4):
 		var offset = (i + 1) * spacing
-		warning_positions.append(start_pos + Vector2(offset, offsety))
+		warning_positions.append(Vector2(current_x + offset, ground_y + offsety))
 	
 	# Tạo các warning và lưu lại
 	var warnings = []

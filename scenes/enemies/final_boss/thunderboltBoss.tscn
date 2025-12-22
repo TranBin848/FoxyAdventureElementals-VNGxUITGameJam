@@ -9,7 +9,7 @@
 radius = 19.0263
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnhec"]
-size = Vector2(36, 77)
+size = Vector2(36, 91.2576)
 
 [sub_resource type="Animation" id="Animation_4o8rp"]
 length = 0.001
@@ -91,7 +91,7 @@ _data = {
 }
 
 [node name="Thunderbolt" type="Area2D"]
-scale = Vector2(1.4, 1.4)
+scale = Vector2(1.65, 1.65)
 collision_layer = 32
 collision_mask = 8
 script = ExtResource("1_bifge")
@@ -110,6 +110,7 @@ elemental_type = 1
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(0, -7.12878)
 shape = SubResource("RectangleShape2D_wnhec")
 
 [node name="FX" type="Sprite2D" parent="."]
@@ -120,7 +121,8 @@ hframes = 22
 frame = 21
 
 [node name="Skill" type="Sprite2D" parent="."]
-position = Vector2(0, -9.85714)
+position = Vector2(-0.303032, -20.1101)
+scale = Vector2(0.9375, 1.51265)
 texture = ExtResource("4_waqlv")
 offset = Vector2(0, -12)
 hframes = 13

@@ -40,8 +40,8 @@
 script/source = "extends Node2D
 
 func _ready() -> void:
-	var skill_names = [\"Fireball\", \"Wooden Clone\", \"Earthquake\", \"Burrow\", \"Thunderbolt\"]
-	
+	var skill_names = [\"Fireball\", \"Wooden Clone\", \"Earthquake\", \"Burrow\", \"Thousand Swords\"]
+	ThousandSwords
 	for i in skill_names.size():
 		# 🔥 Validate + equip
 		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
