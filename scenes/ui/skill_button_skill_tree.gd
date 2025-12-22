@@ -25,13 +25,11 @@ func _ready() -> void:
 		var parent_btn: SkillButtonNode = get_parent()
 		parent_btn.children.append(self)
 		
-		# Sửa lỗi vẽ Line2D: Tính toán tọa độ tương đối thay vì global_position thô
-		# Điểm 1: Tâm của nút hiện tại (Local)
-		line_2d.add_point(size / 2) 
+		# Point 1: Center of this node
+		line_2d.add_point(global_position + size / 2) 
 		
-		# Điểm 2: Tâm của nút cha (Tính tương đối từ nút con)
-		var relative_pos = parent_btn.global_position - global_position
-		line_2d.add_point(relative_pos + parent_btn.size / 2)
+		# Point 2: Center of parent node (Relative calculation)
+		line_2d.add_point(parent_btn.global_position + parent_btn.size / 2)
 		
 		line_2d.default_color = NORMAL_COLOR
 		

@@ -5,6 +5,10 @@ extends BlackEmperorState
 @export var fly_height: float = 150.0  # Độ cao boss bay lên
 @export var fly_duration: float = 0.8  # Thời gian bay lên
 var offsety = 20.0
+
+@onready var skill_factory: Node2DFactory = $"../../Direction/SkillFactory"
+
+
 func _enter():
 	# Lưu vị trí ban đầu của boss
 	var start_pos = obj.global_position
@@ -25,7 +29,7 @@ func _enter():
 	
 	# Tạo 6 vị trí warning: 3 bên trái, 3 bên phải boss
 	var warning_positions = []
-	var spacing = 80  # Khoảng cách giữa các warning
+	var spacing = 135  # Khoảng cách giữa các warning
 	
 	# 3 vị trí bên trái boss
 	for i in range(3):
