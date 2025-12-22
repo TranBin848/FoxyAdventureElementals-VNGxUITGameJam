@@ -73,7 +73,7 @@ func get_unlocked(skill_name: String) -> bool:
 	return skill_data.get(skill_name, {}).get("unlocked", false)
 
 func get_level(skill_name: String) -> int:
-	return skill_data.get(skill_name, {}).get("level", 1)
+	return skill_data.get(skill_name, {}).get("level", 0)
 
 func get_skill_resource(skill_name: String) -> Skill:
 	if not get_unlocked(skill_name): return null
@@ -152,7 +152,7 @@ func save_data() -> Dictionary:
 		var skill_name = skillbar[i]
 		if skill_name == null:
 			skillbar_indices.append(null)
-			print("DEBUG: skillbar[%d] = null → %s (stacks: %d)" % [i, "null", get_skill_stack(skill_name)])
+			print("DEBUG: skillbar[%d] = null → %s" % [i, "null"])
 		else:
 			var index = SkillDatabase.get_skill_index(skill_name)
 			skillbar_indices.append(index)
