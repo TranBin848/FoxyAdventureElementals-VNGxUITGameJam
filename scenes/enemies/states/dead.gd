@@ -41,12 +41,12 @@ func _drop_skill_item():
 			skill_drop.global_position.x,
 			skill_drop.global_position.y
 		])
-	else:
-		print("❌ [%s] %s enemy → NO DROP (%.0f%% chance)" % [
-			"Level%d" % (SkillDropManager.current_level + 1),
-			ElementsEnum.Elements.keys()[obj.elemental_type],
-			SkillDropManager.base_drop_chance[SkillDropManager.current_level] * 100
-		])
+	#else:
+		#print("❌ [%s] %s enemy → NO DROP (%.0f%% chance)" % [
+			#"Level%d" % (SkillDropManager.current_level + 1),
+			#ElementsEnum.Elements.keys()[obj.elemental_type],
+			#SkillDropManager.base_drop_chance[SkillDropManager.current_level] * 100
+		#])
 
 
 	

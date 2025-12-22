@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=61 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -24,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="24_nouef"]
 [ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="25_ppf8r"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="25_t8ul1"]
-[ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="26_bkbve"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="27_6fwx2"]
 [ext_resource type="Script" uid="uid://cetul0ws8d05n" path="res://scenes/skills/scripts/earth/Earthquake.gd" id="27_xpuws"]
 [ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="28_6fwx2"]
@@ -32,7 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="28_ulcqf"]
 [ext_resource type="Script" uid="uid://d25a8kytk1gnd" path="res://scenes/skills/scripts/metal/StunShot.gd" id="29_ulcqf"]
 [ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="36_oaqh1"]
-[ext_resource type="PackedScene" uid="uid://eb702qll71qk" path="res://levels/objects/spider/spider.tscn" id="37_ihnwd"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="37_xpuws"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="38_km4sl"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="38_oaqh1"]
@@ -170,12 +168,6 @@ point_count = 2
 [sub_resource type="Curve2D" id="Curve2D_ppf8r"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 279, 161)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_1h50e"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, -62, 0, 0, 0, 0, 0, 80)
 }
 point_count = 2
 
@@ -844,10 +836,6 @@ checkpoint_id = "6"
 position = Vector2(14816, -1584)
 checkpoint_id = "7"
 
-[node name="platform" parent="InteractableObjects" instance=ExtResource("26_bkbve")]
-position = Vector2(-371, 783)
-is_unstable = true
-
 [node name="TileMaps" type="Node2D" parent="."]
 
 [node name="TerrainTileMap" type="TileMapLayer" parent="TileMaps"]
@@ -958,7 +946,3 @@ position = Vector2(-557, 824)
 collision_mask = 257
 has_blade = true
 max_health = 1000
-
-[node name="Path2D" parent="." instance=ExtResource("37_ihnwd")]
-position = Vector2(-460.479, 707.202)
-curve = SubResource("Curve2D_1h50e")

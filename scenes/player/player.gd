@@ -3,6 +3,18 @@ extends BaseCharacter
 
 @onready var camera_2d: Camera2D = $Camera2D
 
+# === CENTRALIZED BUFF STATE MANAGER ===
+enum BuffState {
+	NONE,
+	FIREBALL,
+	BURROW,
+	INVISIBLE
+}
+
+var current_buff_state: BuffState = BuffState.NONE
+var buff_timer: SceneTreeTimer = null
+var buff_end_callbacks: Array[Callable] = []
+
 #Invulnerable Logic
 @export var invulnerable_duration: float = 2
 var is_invulnerable: bool = false
@@ -11,8 +23,7 @@ const FLICKER_INTERVAL := 0.1
 var flicker_timer := 0.0
 var saved_collision_layer: int
 
-#Invisible Logic
-var _invisible_timer: SceneTreeTimer = null
+#Invisible Logic (Variables kept for internal state use)
 var _is_invisible: bool = false
 
 # Add this near your other export variables
@@ -24,8 +35,11 @@ var _is_invisible: bool = false
 var is_able_attack: bool = true 
 @export var has_blade: bool = false
 @export var has_wand: bool = true
+
+# State Booleans (Managed by Buff System now)
 var is_in_fireball_state: bool = false
 var is_in_burrow_state: bool = false
+
 var is_equipped_blade: bool = false   
 var is_equipped_wand: bool = false    
 signal weapon_swapped(equipped_weapon_type: String)
@@ -146,6 +160,7 @@ func cast_spell(skill: Skill) -> String:
 	if(mana - skill.mana < 0): return "Not Enough Mana"
 	if not is_equipped_wand: return "Require Wand"
 	if is_in_burrow_state: return "Is In Burrow"
+	
 	_cancel_invisibility_if_active()
 		
 	await get_tree().create_timer(0.15).timeout
@@ -167,7 +182,6 @@ func cast_spell(skill: Skill) -> String:
 			mana = max(0, mana - skill.mana); mana_changed.emit()
 
 			if skill.ground_targeted:
-				# Ground-targeted: cast at player position
 				_area_shot(skill, global_position, null)
 			elif has_valid_target_in_range():
 				var target = get_closest_target()
@@ -232,14 +246,14 @@ func _area_shot(skill: Skill, target_position: Vector2, target_enemy: Node2D) ->
 		area_effect.setup(skill, target_position, target_enemy)
 
 func _apply_buff(skill: Skill) -> void: 
-	if skill is Fireball: _apply_fireball_buff(skill.duration)
-	elif skill is Burrow: _apply_burrow_buff(skill.duration)
-	elif skill is HealOverTime: _apply_heal_over_time(skill.heal_per_tick, skill.duration, skill.tick_interval)
-
-func _apply_fireball_buff(duration: float) -> void:
-	enter_fireball()
-	await get_tree().create_timer(duration).timeout
-	exit_fireball()
+	# UPDATED: Use the new BuffState manager
+	if skill is Fireball:
+		enter_buff_state(BuffState.FIREBALL, skill.duration)
+	elif skill is Burrow:
+		enter_buff_state(BuffState.BURROW, skill.duration)
+	elif skill is HealOverTime:
+		# Heal Over Time doesn't really have a "state", so we keep it independent
+		_apply_heal_over_time(skill.heal_per_tick, skill.duration, skill.tick_interval)
 
 func _apply_heal_over_time(heal_amount: float, duration: float, interval: float) -> void:
 	var total_ticks: int = floor(duration / interval)
@@ -253,8 +267,12 @@ func _apply_heal_over_time(heal_amount: float, duration: float, interval: float)
 # === PHYSICS & LOGIC ============================================
 # ================================================================
 
+func _process(_delta: float) -> void:
+	if current_buff_state == BuffState.BURROW or current_buff_state == BuffState.INVISIBLE:
+		_maintain_invisible_visuals()
+
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta) # Base character handles visuals now
+	super._physics_process(delta) # Base character handles visuals
 	
 	handle_invulnerable(delta)
 	
@@ -292,8 +310,9 @@ func start_atk_cd() -> void:
 	is_able_attack = true
 	
 func _cancel_invisibility_if_active() -> void:
-	if _is_invisible:
-		_on_invisible_ended()
+	# UPDATED: Use manager
+	if current_buff_state == BuffState.INVISIBLE:
+		exit_current_buff()
 
 func can_attack() -> bool:
 	if not is_able_attack: return false
@@ -329,6 +348,7 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	fsm.current_state.take_damage(_direction, modified_damage)
 	handle_elemental_damage(_elemental_type)
 	hurt_particle.emitting = true
+
 # ================================================================
 # === SAVE/LOAD & ELEMENTS =======================================
 # ================================================================
@@ -342,9 +362,11 @@ func load_state(data: Dictionary) -> void:
 		has_blade = data["has_blade"]
 		if has_blade and not is_in_fireball_state: collected_blade()
 	if data.has("is_in_fireball_state"):
-		is_in_fireball_state = data["is_in_fireball_state"]
-		if is_in_fireball_state: enter_fireball()
-		else: exit_fireball()
+		# UPDATED: Use manager to restore state
+		if data["is_in_fireball_state"]:
+			enter_buff_state(BuffState.FIREBALL) # No duration means it persists until cancelled
+		else:
+			exit_current_buff()
 
 # ================================================================
 # === ELEMENTAL LOGIC REFACTOR ===================================
@@ -363,11 +385,9 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 		ElementsEnum.Elements.FIRE:  [ElementsEnum.Elements.METAL]
 	}
 	
-	# Case 1: Attacker has advantage over Player (Super Effective) -> Take MORE damage
 	if advantages.has(attacker_element) and elemental_type in advantages[attacker_element]:
 		return base_damage * 1.5 
 		
-	# Case 2: Player has advantage over Attacker (Resist) -> Take LESS damage
 	if advantages.has(elemental_type) and attacker_element in advantages[elemental_type]:
 		return base_damage * 0.5 
 		
@@ -381,29 +401,15 @@ func handle_elemental_damage(incoming_element: int) -> void:
 		ElementsEnum.Elements.WOOD:  apply_wood_effect()
 		ElementsEnum.Elements.METAL: apply_metal_effect()
 
-# === Status Effect Stubs ===
-func apply_fire_effect() -> void: 
-	# Example: Burn DOT
-	pass
-
-func apply_earth_effect() -> void: 
-	# Example: Stun or Slow
-	pass
-
-func apply_water_effect() -> void: 
-	# Example: Knockback or Wet status
-	pass
-
-func apply_wood_effect() -> void:
-	# Example: Root/Bind or Poison
-	pass
-
-func apply_metal_effect() -> void:
-	# Example: Bleed or Armor Break
-	pass
+func apply_fire_effect() -> void: pass
+func apply_earth_effect() -> void: pass
+func apply_water_effect() -> void: pass
+func apply_wood_effect() -> void: pass
+func apply_metal_effect() -> void: pass
 
 func _update_elemental_palette() -> void:
 	if not is_instance_valid(animated_sprite): return
+	if not animated_sprite.visible: return
 	var shader_material = ShaderMaterial.new()
 	shader_material.shader = load("res://scenes/player/player_glowing.gdshader")
 	animated_sprite.material = shader_material
@@ -411,6 +417,21 @@ func _update_elemental_palette() -> void:
 	shader_mat.set_shader_parameter("elemental_type", elemental_type)
 	shader_mat.set_shader_parameter("glow_intensity", 1.5)
 	shader_mat.set_shader_parameter("is_fireball_state", is_in_fireball_state)
+	
+func _maintain_invisible_visuals() -> void:
+	if not _is_invisible and not is_in_burrow_state:
+		return
+		
+	# Force the main sprite to stay hidden every frame
+	# (BaseCharacter might try to show it during animation updates)
+	if animated_sprite and animated_sprite.visible:
+		animated_sprite.hide()
+		
+	# Ensure silhouettes stay visible
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			if not s.visible: s.show()
+			s.modulate.a = 0.5
 
 # ================================================================
 # === TARGETING ==================================================
@@ -466,23 +487,22 @@ func throwed_blade() -> void:
 # ====== VISUAL HELPERS (CORE REFACTOR LOGIC) ======
 
 func _set_player_visuals(new_main_sprite: AnimatedSprite2D, new_silhouette: AnimatedSprite2D) -> void:
-	# 1. Update Silhouette list FIRST so the sync logic works on the next frame
+	# 0. Hide all first (prevents lingering sprites)
+	_hide_all_visuals()
+	
+	# 1. Update Silhouette list
 	_update_silhouette(new_silhouette)
 	
-	# 2. Tell BaseCharacter to swap the active sprite
-	# This will trigger the _check_changed_animation logic in BaseCharacter
+	# 2. Update Active Sprite (BaseCharacter logic - may auto-show)
 	set_animated_sprite(new_main_sprite)
 	
+	# 3. Update Shaders
 	_update_elemental_palette()
-	
+
 func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
-	# Hide all known extra sprites immediately
 	for s in extra_sprites:
 		if is_instance_valid(s): s.hide()
-	
 	extra_sprites.clear()
-	
-	# Add the new one to the list so BaseCharacter can sync it
 	if new_silhouette:
 		extra_sprites.append(new_silhouette)
 		new_silhouette.show()
@@ -490,43 +510,123 @@ func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
 # ====== WEAPON SWAP LOGIC ======
 
 func swap_weapon() -> void:
-	if is_in_fireball_state: return
+	# 1. Fireball blocks swapping completely
+	if current_buff_state == BuffState.FIREBALL: return
 	if not has_blade and not has_wand: return
 
+	# 2. Perform Swap
 	if is_equipped_blade:
 		if has_wand: _equip_wand_from_swap()
 		else: _equip_normal_from_swap()
 	elif is_equipped_wand:
 		if has_blade: _equip_blade_from_swap()
 		else: _equip_normal_from_swap()
-	else: # Currently Normal
+	else:
 		if has_blade: _equip_blade_from_swap()
 		elif has_wand: _equip_wand_from_swap()
 
 func _equip_blade_from_swap() -> void:
-	if is_in_fireball_state: is_equipped_blade = true; is_equipped_wand = false; weapon_swapped.emit("blade"); return
+	# Only FIREBALL should block visual updates. 
+	# BURROW/INVISIBLE should proceed so the silhouette updates.
+	if current_buff_state == BuffState.FIREBALL:
+		is_equipped_blade = true; is_equipped_wand = false
+		weapon_swapped.emit("blade")
+		return
+
 	is_equipped_blade = true; is_equipped_wand = false
+	
+	# This call is now guaranteed to run in Burrow mode
 	_set_player_visuals(blade_sprite, silhouette_blade_sprite)
-	_update_elemental_palette()
 	weapon_swapped.emit("blade")
 	
 func _equip_wand_from_swap() -> void:
-	if is_in_fireball_state: is_equipped_wand = true; is_equipped_blade = false; weapon_swapped.emit("wand"); return
+	if current_buff_state == BuffState.FIREBALL: 
+		is_equipped_wand = true; is_equipped_blade = false
+		weapon_swapped.emit("wand")
+		return
+
 	is_equipped_wand = true; is_equipped_blade = false
+	
+	# This call is now guaranteed to run in Burrow mode
 	_set_player_visuals(wand_sprite, silhouette_wand_sprite)
-	_update_elemental_palette()
 	weapon_swapped.emit("wand")
 	
 func _equip_normal_from_swap() -> void:
-	if is_in_fireball_state: is_equipped_blade = false; is_equipped_wand = false; weapon_swapped.emit("normal"); return
+	if current_buff_state == BuffState.FIREBALL:
+		is_equipped_blade = false; is_equipped_wand = false
+		weapon_swapped.emit("normal")
+		return
+
 	is_equipped_blade = false; is_equipped_wand = false
+	
+	# This call is now guaranteed to run in Burrow mode
 	_set_player_visuals(normal_sprite, silhouette_normal_sprite)
-	_update_elemental_palette()
 	weapon_swapped.emit("normal")
+# ================================================================
+# === STATE LOGIC (NEW IMPLEMENTATION) ===========================
+# ================================================================
 
-# ====== FIREBALL STATE (REFACTORED) ======
+func enter_buff_state(new_state: BuffState, duration: float = 0.0, end_callback: Callable = Callable()) -> void:
+	# Exit current buff first
+	exit_current_buff()
+	
+	# Enter new buff
+	current_buff_state = new_state
+	# print("DEBUG: Enter buff state: %s" % BuffState.keys()[new_state])
+	
+	# Start timer if duration specified
+	if duration > 0:
+		buff_timer = get_tree().create_timer(duration)
+		buff_timer.timeout.connect(_on_buff_timer_timeout)
+	
+	# Store end callback
+	if end_callback.is_valid():
+		buff_end_callbacks.append(end_callback)
+	
+	# Apply buff logic
+	match new_state:
+		BuffState.FIREBALL:
+			_apply_fireball_buff_internal(duration)
+		BuffState.BURROW:
+			_apply_burrow_buff_internal(duration)
+		BuffState.INVISIBLE:
+			go_invisible_internal(duration)
 
-func enter_fireball() -> void:
+func exit_current_buff() -> void:
+	if buff_timer:
+		buff_timer.disconnect("timeout", _on_buff_timer_timeout)
+		buff_timer = null
+	
+	# Execute all end callbacks
+	for callback in buff_end_callbacks:
+		if callback.is_valid():
+			callback.call()
+	buff_end_callbacks.clear()
+	
+	# Apply exit logic based on current state
+	match current_buff_state:
+		BuffState.FIREBALL:
+			_exit_fireball_internal()
+		BuffState.BURROW:
+			_exit_burrow_internal()
+		BuffState.INVISIBLE:
+			_exit_invisible_internal()
+	
+	current_buff_state = BuffState.NONE
+	# print("DEBUG: Exit buff state → NONE")
+
+func _on_buff_timer_timeout() -> void:
+	exit_current_buff()
+
+func is_in_buff_state(buff_type: BuffState) -> bool:
+	return current_buff_state == buff_type
+
+func has_active_buff() -> bool:
+	return current_buff_state != BuffState.NONE
+
+# === INTERNAL BUFF LOGIC (CALLED BY STATE MANAGER) ===
+
+func _apply_fireball_buff_internal(_duration: float) -> void:
 	is_in_fireball_state = true 
 	fireball_collision.disabled = false
 	speed_multiplier = 2.0
@@ -536,10 +636,10 @@ func enter_fireball() -> void:
 	change_animation("Fireball")
 	fireball_fx.show()
 	fireball_fx.play()
-	hurt_area.monitorable = false;
+	hurt_area.monitorable = false
 	fireball_hit_area.monitoring = true
 
-func exit_fireball() -> void:
+func _exit_fireball_internal() -> void:
 	is_in_fireball_state = false
 	fireball_collision.disabled = true
 	speed_multiplier = 1.0
@@ -547,12 +647,73 @@ func exit_fireball() -> void:
 	_update_elemental_palette()
 	fireball_fx.hide()
 	fireball_fx.stop()
-	fireball_hit_area.monitoring = false;
+	fireball_hit_area.monitoring = false
 	hurt_area.monitorable = true 
 	
+	# Restore weapon visuals
 	if is_equipped_blade: _set_player_visuals(blade_sprite, silhouette_blade_sprite)
 	elif is_equipped_wand: _set_player_visuals(wand_sprite, silhouette_wand_sprite)
 	else: _set_player_visuals(normal_sprite, silhouette_normal_sprite)
+
+func _apply_burrow_buff_internal(_duration: float) -> void:
+	is_in_burrow_state = true
+	speed_multiplier = 1.25
+	hurt_area.call_deferred("set_monitorable", false)
+	
+	if default_collision: default_collision.set_deferred("disabled", true)
+	if burrow_collision: burrow_collision.set_deferred("disabled", false)
+
+	if animated_sprite: animated_sprite.hide()
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.show()
+			s.modulate.a = 0.5 
+
+func _exit_burrow_internal() -> void:
+	is_in_burrow_state = false
+	speed_multiplier = 1.0
+	
+		
+	# Jump + horizontal impulse
+	jump()
+	velocity.x = 400.0 * direction 
+	
+	hurt_area.call_deferred("set_monitorable", true)
+	
+	if animated_sprite: animated_sprite.show()
+	for s in extra_sprites:
+		if is_instance_valid(s): s.modulate.a = 1.0
+		
+	await get_tree().create_timer(1).timeout
+	
+	if default_collision: default_collision.set_deferred("disabled", false)
+	if burrow_collision: burrow_collision.set_deferred("disabled", true)
+
+
+func go_invisible_internal(_duration: float) -> void:
+	_is_invisible = true
+	if animated_sprite: animated_sprite.hide()
+	
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.show() 
+			s.modulate.a = 0.5
+	
+	hurt_area.monitorable = false
+	collision_layer = 0 << 1 
+	collision_mask  = 1 << 0 
+
+func _exit_invisible_internal() -> void:
+	_is_invisible = false
+	if animated_sprite:
+		animated_sprite.show()
+		animated_sprite.modulate.a = 1.0
+		
+	for s in extra_sprites:
+		if is_instance_valid(s): s.modulate.a = 1.0
+	
+	hurt_area.monitorable = true
+	collision_layer = 1 << 1
 
 func _update_movement(delta: float) -> void:
 	if not can_move: velocity = Vector2.ZERO; return
@@ -566,33 +727,18 @@ func _update_movement(delta: float) -> void:
 	
 	if is_dashing: velocity.y = 0
 	
-	# --- Perform Movement ---
 	move_and_slide()
 
 # This function runs whenever the Fireball HitArea touches a HurtArea
 func _on_fireball_hit_enemy(_hurt_area: Area2D) -> void:
-	# Only bounce if we are actually in fireball mode
 	if not is_in_fireball_state: return
-	
-	# 1. Find the Enemy Node
-	# Usually the HurtArea is a child of the Enemy, so we get the parent
 	var enemy = _hurt_area.get_parent() 
-	
 	if enemy:
 		_perform_bounce(enemy.global_position)
 
 func _perform_bounce(enemy_position: Vector2) -> void:
-	# 2. Calculate the "Surface Normal"
-	# Vector Math: (Destination - Source) = Direction Vector
-	# This gives us a vector pointing FROM the enemy TO the player
 	var normal_vector = (global_position - enemy_position).normalized()
-	
-	# 3. Apply the Bounce
-	# We use the existing velocity speed, or a minimum bounce speed (300)
-	# so you don't lose momentum if you hit them slowly.
 	var bounce_speed = max(velocity.length(), 300.0)
-	
-	# The bounce method reflects the velocity vector off the normal
 	velocity = velocity.bounce(normal_vector).normalized() * bounce_speed
 
 func dash() -> void:
@@ -601,130 +747,3 @@ func dash() -> void:
 	is_dashing = true; can_dash = false
 	await get_tree().create_timer(dash_cd).timeout
 	can_dash = true
-
-# ================================================================
-# === INVISIBLE LOGIC (Sprite Hiding) ============================
-# ================================================================
-
-func go_invisible(duration: float) -> void:
-	if _invisible_timer:
-		_invisible_timer.disconnect("timeout", Callable(self, "_on_invisible_ended"))
-		_invisible_timer = null
-	
-	_is_invisible = true
-	
-	# 1. Hide the main body completely
-	if animated_sprite:
-		animated_sprite.hide()
-		
-	# 2. Utilize the silhouette (extra_sprites)
-	# We make sure they are visible and perhaps give them a "ghostly" alpha
-	for s in extra_sprites:
-		if is_instance_valid(s):
-			s.show() 
-			s.modulate.a = 0.5 # Adjust this: 1.0 for solid, 0.5 for ghost
-	
-	# 3. Disable taking damage (no enemy hurt)
-	hurt_area.monitorable = false
-	
-	# 4. Collision logic (Terrain only)
-	collision_layer = 0 << 1 
-	collision_mask  = 1 << 0 
-	
-	_invisible_timer = get_tree().create_timer(duration)
-	_invisible_timer.timeout.connect(_on_invisible_ended)
-
-func _on_invisible_ended() -> void:
-	_is_invisible = false
-	_invisible_timer = null
-	
-	# 1. Restore visuals (Show body again)
-	if animated_sprite:
-		animated_sprite.show()
-		animated_sprite.modulate.a = 1.0
-		
-	# 2. Reset silhouette to normal (usually 1.0 or whatever your default is)
-	for s in extra_sprites:
-		if is_instance_valid(s):
-			s.modulate.a = 1.0
-			# Note: If silhouettes should normally be hidden, call s.hide() here instead.
-	
-	# 3. Restore Gameplay
-	hurt_area.monitorable = true
-	collision_layer = 1 << 1
-
-# Renamed from _apply_invisible_modulate to reflect that we are forcing visibility state
-func _maintain_invisible_visuals() -> void:
-	if not _is_invisible:
-		return
-		
-	# Force the main sprite to stay hidden every frame
-	# (BaseCharacter might try to show it during animation updates)
-	if animated_sprite and animated_sprite.visible:
-		animated_sprite.hide()
-		
-	# Ensure silhouettes stay visible
-	for s in extra_sprites:
-		if is_instance_valid(s):
-			if not s.visible: s.show()
-			s.modulate.a = 0.5
-# BURROW LOGIC
-
-func _apply_burrow_buff(duration: float) -> void:
-	# 1. State & Stats
-	is_in_burrow_state = true
-	speed_multiplier = 1.25
-
-	
-	# 2. Disable Collision Layer 2 (Player Body Layer) / Hurtbox
-	hurt_area.call_deferred("set_monitorable", false)
-	
-	# Disable the standing collision shape
-	if default_collision: default_collision.set_deferred("disabled", true)
-	if burrow_collision: burrow_collision.set_deferred("disabled", false)
-
-	# 3. Handle Visuals
-	if animated_sprite:
-		animated_sprite.hide()
-	
-	# Ensure the silhouette remains visible
-	for s in extra_sprites:
-		if is_instance_valid(s):
-			s.show()
-			s.modulate.a = 0.5 
-			
-	# --- Wait for Duration ---
-	await get_tree().create_timer(duration).timeout
-	
-	# 4. Revert Visuals
-	if animated_sprite:
-		animated_sprite.show()
-	
-	# 5. Revert State & Stats
-	jump() # Apply Vertical Force
-	
-	# --- NEW LOGIC: Push horizontally towards active collision ---
-	# We apply an immediate impulse on X axis based on direction.
-	# You can adjust '400.0' to change how far they fly forward.
-	velocity.x = 400.0 * direction 
-	# -------------------------------------------------------------
-	
-	await get_tree().create_timer(0.5).timeout
-	
-	is_in_burrow_state = false
-	speed_multiplier = 1.0
-	
-	# 6. Revert Collision Layer
-	# Set monitorable back to TRUE so player can take damage again
-	hurt_area.call_deferred("set_monitorable", true)
-		
-	# Reset silhouette opacity
-	for s in extra_sprites:
-		if is_instance_valid(s):
-			s.modulate.a = 1.0
-
-	# Re-enable standing collision
-	if default_collision: default_collision.set_deferred("disabled", false)
-	
-	# Disable BOTH burrow collisions
-	if burrow_collision: burrow_collision.set_deferred("disabled", true)

@@ -3,7 +3,7 @@ extends Node
 var all_skills = {
 		"Fire Explosion": FireExplosion, 
 		"Fire Shot": FireShot,
-		"Fire Ball": Fireball,
+		"Fireball": Fireball,
 		"Water Ball": WaterBall,
 		"Water Spike": WaterSpike, 
 		"Tornado": Tornado,
@@ -12,7 +12,8 @@ var all_skills = {
 		"Toxic Breath": ToxicBreath,
 		"Wooden Clone": WoodenClone,
 		"Stun Shot": StunShot,
-		"Thunder Strike": Thunderbolt,
+		"Thunderbolt": Thunderbolt,
+		"Thousand Swords": ThousandSwords,
 		"Earthquake": Earthquake,
 		"Comet Rain": CometRain,
 		"Burrow": Burrow
