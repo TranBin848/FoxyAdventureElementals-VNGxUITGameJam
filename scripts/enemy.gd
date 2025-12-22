@@ -352,7 +352,7 @@ func _on_player_not_in_sight() -> void:
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Demo debuff
-	var debuff: PackedScene = load("res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn") as PackedScene
+	var debuff: PackedScene = load("res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn") as PackedScene
 	set_debuff(debuff)
 	
 	# Tính damage dựa trên quan hệ sinh - khắc
@@ -521,13 +521,13 @@ func remove_debuff(debuff: Debuff) -> void:
 func set_is_blind(value: bool) -> void:
 	if value == true:
 		if front_ray_cast != null: front_ray_cast.enabled = false
-		if down_ray_cast != null: down_ray_cast.enabled = false
+		#if down_ray_cast != null: down_ray_cast.enabled = false
 		if right_detect_ray != null: right_detect_ray.enabled = false
 		if left_detect_ray != null: left_detect_ray.enabled = false
 		found_player = null
 	else:
 		if front_ray_cast != null: front_ray_cast.enabled = true
-		if down_ray_cast != null: down_ray_cast.enabled = true
+		#if down_ray_cast != null: down_ray_cast.enabled = true
 		if right_detect_ray != null: right_detect_ray.enabled = true
 		if left_detect_ray != null: left_detect_ray.enabled = true
 

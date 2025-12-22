@@ -282,6 +282,5 @@ position = Vector2(601, 119)
 position = Vector2(516, 235)
 
 [node name="Mushroom" parent="." instance=ExtResource("31_yross")]
-position = Vector2(695, 241)
-self_scene = ExtResource("31_yross")
+position = Vector2(691, 239)
 max_health = 100

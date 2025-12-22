@@ -1,0 +1,142 @@
+[gd_scene load_steps=20 format=3 uid="uid://6ppqcm5ge1yh"]
+
+[ext_resource type="Script" uid="uid://nadlf3eq3r5" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.gd" id="1_jfxby"]
+[ext_resource type="Texture2D" uid="uid://cvypn22y8d5qg" path="res://assets/enemy/effects/fire.png" id="1_ui5lf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfheh"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(990, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqepn"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(1080, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3udw"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(1170, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osce8"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(1260, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5qk3"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(1350, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfxby"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(540, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0bqy"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(630, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw5vg"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(720, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4ksc"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(810, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5ul0"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(900, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fbpv"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7llwd"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca5s0"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(180, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_viwpm"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(270, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht336"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(360, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygrpm"]
+atlas = ExtResource("1_ui5lf")
+region = Rect2(450, 0, 90, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mfheh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfheh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqepn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3udw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osce8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5qk3")
+}],
+"loop": false,
+"name": &"end",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfxby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0bqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw5vg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4ksc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5ul0")
+}],
+"loop": true,
+"name": &"perform",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fbpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7llwd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca5s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_viwpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht336")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygrpm")
+}],
+"loop": false,
+"name": &"start",
+"speed": 10.0
+}]
+
+[node name="FireDebuff" type="Node2D"]
+script = ExtResource("1_jfxby")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_mfheh")
+animation = &"end"
