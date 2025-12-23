@@ -1,12 +1,19 @@
 extends GPUParticles2D
 
 @export var wind_force: float = 0.2  # Speed boost when in wind
+@export var base_amount: int = 20
 
 var player_in_wind: Node2D = null
 var wind_direction: Vector2 = Vector2.ZERO
 var logger: Logger = ConsoleLogger.new()
 
 func _ready():
+	# 1. Set initial state
+	_update_particles(SettingsManager.particle_quality)
+	
+	# 2. Listen for changes from the menu
+	SettingsManager.particle_quality_changed.connect(_update_particles)
+	
 	# Get wind direction from particle gravity
 	if process_material and process_material is ParticleProcessMaterial:
 		var gravity = process_material.gravity
@@ -56,3 +63,22 @@ func _on_body_exited(body: Node2D):
 			player_in_wind.set_speed_multiplier(1.0)
 			logger.log("Player exited wind area. Speed reset to 1.0")
 		player_in_wind = null
+
+func _update_particles(quality_level: int):
+	# Calculate target amount
+	var new_amount = int(base_amount * (float(quality_level) / 3.0))
+
+	# CASE 1: Turn OFF (Quality is 0)
+	if new_amount <= 0:
+		emitting = false
+		# Do NOT set amount to 0, or Godot will force it to 1
+		return
+
+	# CASE 2: Turn ON (Quality > 0)
+	# Ensure it's emitting in case it was previously turned off
+	emitting = true
+
+	# Only change 'amount' if the number is different.
+	# Changing 'amount' forces the particle system to restart!
+	if amount != new_amount:
+		amount = new_amount

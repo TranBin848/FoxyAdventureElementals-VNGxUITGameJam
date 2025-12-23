@@ -78,6 +78,12 @@ func _ready() -> void:
 	
 	add_to_group("enemies")
 	
+	var minimap = GameManager.minimap
+	
+	if minimap:
+		# 2. Register self. MUST match the key in 'group_settings' ("enemies")
+		minimap.register_object("enemies", self)
+	
 	# Connect to global particle quality signal (check if not already connected)
 	if not SettingsManager.particle_quality_changed.is_connected(_on_particle_quality_changed):
 		SettingsManager.particle_quality_changed.connect(_on_particle_quality_changed)
@@ -484,3 +490,9 @@ func scale_health(multiplier: float):
 	max_health *= multiplier
 	health = max_health
 	print("💚 %s: %.0fHP (x%.1f)" % [name, max_health, multiplier])
+
+func _exit_tree():
+	# 3. Clean up when enemy dies so the icon disappears immediately
+	var minimap = get_tree().get_first_node_in_group("Minimap")
+	if minimap:
+		minimap.remove_object("enemies", self)

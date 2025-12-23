@@ -55,6 +55,29 @@ func reset_all_stacks() -> void:
 	runtime_stacks.clear()
 
 # --- PERMANENT SKILL TREE LOGIC (unchanged) ---
+# Call this when the user clicks the "Unlock" button in your UI
+func unlock_skill_with_cost(skill_name: String, cost: int) -> void:
+	var current_stack = get_skill_stack(skill_name)
+
+	# 1. Check if we have enough stacks
+	if current_stack >= cost:
+		# 2. Deduct the cost
+		var skill_res: Skill = SkillDatabase.get_skill_by_name(skill_name)
+		remove_stack(skill_res, cost)
+
+		# 3. Mark as Permanent
+		unlock_skill(skill_name)
+
+		print("✅ Unlocked Permanent Skill: %s (Cost: %d)" % [skill_name, cost])
+
+		# 4. Force refresh the bar to switch visuals from "Stack" to "Permanent"
+		var slot_index = find_skill_in_bar(skill_name)
+		if slot_index != -1:
+			skillbar_changed.emit(slot_index, skill_name)
+	else:
+		print("❌ Not enough stacks to unlock %s" % skill_name)
+
+
 func unlock_skill(skill_name: String) -> void:
 	if not skill_data.has(skill_name):
 		skill_data[skill_name] = { "level": 1, "unlocked": true }

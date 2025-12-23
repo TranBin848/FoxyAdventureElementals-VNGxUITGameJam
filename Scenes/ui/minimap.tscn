@@ -2,27 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bwi5try8jyhh6" path="res://scenes/ui/minimap.gd" id="1_4bivy"]
 
-[node name="MinimapContainer" type="Control"]
-layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-grow_horizontal = 0
+[node name="Minimap" type="MarginContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+pivot_offset = Vector2(125, -125)
 script = ExtResource("1_4bivy")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-custom_minimum_size = Vector2(250, 250)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(250, 250)
-render_target_update_mode = 4
-
-[node name="MinimapCamera" type="Camera2D" parent="SubViewportContainer/SubViewport"]
-
-[node name="Border" type="Control" parent="."]
-anchors_preset = 0

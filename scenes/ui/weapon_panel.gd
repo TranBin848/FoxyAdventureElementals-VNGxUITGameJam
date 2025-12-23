@@ -39,8 +39,6 @@ func _on_weapon_swapped(equipped_weapon_type: String):
 
 
 func _update_texture_instantly():
-	texture_rect.position.x = 0
-	
 	texture_rect.modulate.a = 1.0 
 
 	if next_texture:

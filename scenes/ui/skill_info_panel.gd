@@ -126,8 +126,7 @@ func _on_unlock_button_pressed() -> void:
 	if SkillTreeManager.get_skill_stack(skill_name) >= require_stack:
 		var skill_res = SkillDatabase.get_skill_by_name(skill_name)
 		if skill_res:
-			SkillTreeManager.remove_stack(skill_res, require_stack)
-			SkillTreeManager.unlock_skill(skill_name)
+			SkillTreeManager.unlock_skill_with_cost(skill_name, require_stack)
 			_show_error_text("✅ Unlocked %s!" % skill_name)
 	else:
 		_show_error_text("❌ Need %d stacks (have %d)" % [require_stack, SkillTreeManager.get_skill_stack(skill_name)])
@@ -205,12 +204,3 @@ func _show_error_text(message: String) -> void:
 
 func _on_close_button_pressed():
 	visible = false
-
-# Legacy functions (for compatibility)
-func set_unlocked(skill_name: String) -> void:
-	SkillTreeManager.unlock_skill(skill_name)
-
-func set_level(skill_name: String, new_level: int) -> void:
-	if SkillTreeManager.skill_data.has(skill_name):
-		SkillTreeManager.skill_data[skill_name]["level"] = new_level
-		SkillTreeManager.skill_leveled_up.emit(skill_name, new_level)

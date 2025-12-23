@@ -1,9 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://c24hsf56rny2a"]
+[gd_scene load_steps=40 format=3 uid="uid://c24hsf56rny2a"]
 
 [ext_resource type="Script" uid="uid://bdn1n66kv8ps0" path="res://scenes/ui/skill_tree/skill_tree.gd" id="1_oed8u"]
 [ext_resource type="PackedScene" uid="uid://ceb23m3y0l0fh" path="res://scenes/ui/skill_button_skill_tree.tscn" id="2_4casc"]
 [ext_resource type="VideoStream" uid="uid://bxobppegcl25p" path="res://assets/skills/fire/2025-12-09-23-59-58.ogv" id="3_4casc"]
 [ext_resource type="Resource" uid="uid://buqpvp30f6xfo" path="res://scenes/skills/scripts/fire/FireExplosion.tres" id="3_itx8d"]
+[ext_resource type="Resource" uid="uid://dyms886k12vqv" path="res://scenes/skills/scripts/fire/FireShot.tres" id="3_qunng"]
 [ext_resource type="Resource" uid="uid://bx5fdlijjfddx" path="res://scenes/skills/scripts/wood/WoodShot.tres" id="4_v0x7f"]
 [ext_resource type="VideoStream" uid="uid://d0eux0ncbfs4n" path="res://assets/skills/fire/FireExplosion.ogv" id="5_itx8d"]
 [ext_resource type="Resource" uid="uid://cbqr44nfnip01" path="res://scenes/skills/scripts/wood/HealOverTime.tres" id="5_ph0o5"]
@@ -206,6 +207,7 @@ offset_top = 161.0
 offset_right = 665.0
 offset_bottom = 201.0
 scale = Vector2(0.75, 0.75)
+skill = ExtResource("3_qunng")
 video_stream = ExtResource("3_4casc")
 
 [node name="FireExplosion" parent="SubViewportContainer/SubViewport/FireShot" instance=ExtResource("2_4casc")]

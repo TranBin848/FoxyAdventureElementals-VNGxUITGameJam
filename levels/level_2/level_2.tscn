@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://wopr13pq4dnf"]
+[gd_scene load_steps=58 format=4 uid="uid://wopr13pq4dnf"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="2_s4b5i"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="7_c0166"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud.tscn" id="9_4x2cg"]
 [ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="9_qsvqe"]
+[ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/minimap.tscn" id="10_qsvqe"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="10_r7wcl"]
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="11_gsja5"]
 [ext_resource type="PackedScene" uid="uid://bf2uetkx1otc6" path="res://scenes/objects/house_door/house_door.tscn" id="12_bkbve"]
@@ -230,7 +231,6 @@ scale = Vector2(0.978125, 1.25278)
 texture = ExtResource("16_xpuws")
 
 [node name="SandStormParticle" parent="." instance=ExtResource("20_pvqwi")]
-visible = false
 position = Vector2(-290, 633)
 
 [node name="HouseDoor2" parent="." instance=ExtResource("12_bkbve")]
@@ -264,6 +264,14 @@ position = Vector2(6447, 992)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("9_4x2cg")]
+
+[node name="Minimap" parent="CanvasLayer" node_paths=PackedStringArray("tilemap_layers", "player") instance=ExtResource("10_qsvqe")]
+offset_top = -240.0
+offset_bottom = -240.0
+pivot_offset = Vector2(250, 75)
+tilemap_layers = [NodePath("../../TileMaps/TerrainTileMap")]
+player = NodePath("../../Player")
+metadata/_edit_use_anchors_ = true
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -789,9 +797,6 @@ tile_set = ExtResource("2_s4b5i")
 z_index = -1
 tile_map_data = PackedByteArray("AAAbAur/CAACAA8AAAAcAur/CAAAAA8AAAAaAur/CAAAAA8AAAAdAur/CAACAA8AAAAfAur/CAAAAA8AAAAgAur/CAADAA8AAAAiAur/CAACAA8AAAAjAur/CAAAAA8AAAAkAur/CAADAA8AAAAmAur/CAADAA8AAAAnAur/CAAAAA8AAAAoAur/CAAAAA8AAAApAur/CAACAA8AAAArAur/CAADAA8AAAAsAur/CAACAA8AAAAtAur/CAAAAA8AAAAwAuj/CAAHAAUAAAAxAub/CAAGAAcAAAAvAun/CAAIAAUAAAAyAuP/CAAIAAUAAAAzAt//CAAIAAUAAAA0Atr/CAAHAAUAAAA1AtT/CAAGAAcAAAAZAun/CAAHAAUAAAAYAuj/CAAGAAcAAAAXAub/CAAIAAUAAAAWAuP/CAAIAAUAAAAVAt//CAAHAAUAAAAUAtr/CAAGAAcAAAATAtT/CAAHAAUAAAA=")
 tile_set = ExtResource("2_s4b5i")
-
-[node name="SandStormParticle" parent="TileMaps" instance=ExtResource("20_pvqwi")]
-position = Vector2(-291, 631)
 
 [node name="SkillTreeUI" type="CanvasLayer" parent="."]
 process_mode = 3

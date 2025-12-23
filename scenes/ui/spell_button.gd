@@ -33,12 +33,16 @@ func _ready() -> void:
 		cooldown.max_value = timer.wait_time
 	set_process(false)
 	alert_label = get_tree().root.find_child("ErrorLabel", true, false) as Label
-	#SkillTreeManager.connect("stack_changed", Callable(self, "_on_stack_changed"))
+	SkillTreeManager.connect("stack_changed", Callable(self, "_on_stack_changed"))
 	
 	_update_all()
-#func _on_stack_changed(name, new_stack):
-	#if name == skill.name:
-		#stack_label.text = str(new_stack)
+	
+func _on_stack_changed(name: String, new_stack: int) -> void:
+	if skill and name == skill.name:
+		# 1. Update text
+		stack_label.text = "x" + str(new_stack)
+		# 2. Re-evaluate visibility / clearing
+		update_stack_ui()
 
 func _update_all():
 	pass
@@ -102,12 +106,24 @@ func _show_error_text(message: String) -> void:
 	# Sau khi fade xong, đảm bảo label.visible = false
 	tween.tween_callback(Callable(alert_label, "set_visible").bind(false))
 
-func update_stack_ui():
-	if skill == null or SkillTreeManager.get_unlocked(skill.name):
+func update_stack_ui() -> void:
+	if skill == null:
 		stack_label.visible = false
 		return
-	
-	var skill_current_stack = SkillTreeManager.get_skill_stack(skill.name)
-	stack_label.visible = true
-	stack_label.text = "x" + str(skill_current_stack)
-	#stack_label.text = "x" + str(skill.current_stack)
+
+	# A. Permanent skill: hide stack label completely
+	if SkillTreeManager.get_unlocked(skill.name):
+		stack_label.visible = false
+		return
+
+	# B. Temporary skill: handle stacks
+	var current_stack: int = SkillTreeManager.get_skill_stack(skill.name)
+
+	if current_stack <= 0:
+		# Clear slot if no stacks and not permanent
+		if get_parent().has_method("clear_skill_in_bar"):
+			get_parent().clear_skill_in_bar(get_index())
+		stack_label.visible = false
+	else:
+		stack_label.visible = true
+		stack_label.text = "x" + str(current_stack)

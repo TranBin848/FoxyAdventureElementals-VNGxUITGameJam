@@ -6,6 +6,7 @@ func _enter_tree() -> void:
 	# Handle portal spawning first
 	GameManager.current_stage = self
 	GameManager.current_level = 1
+	GameManager.minimap = find_child("Minimap")
 	
 func _ready() -> void:
 	if not GameManager.respawn_at_portal():

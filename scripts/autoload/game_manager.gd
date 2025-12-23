@@ -6,6 +6,7 @@ var current_stage: Node = null
 var current_level: int = 0
 var player: Player = null
 var skill_bar: SkillBar = null
+var minimap: Minimap = null
 
 # --- Checkpoint system ---
 var current_checkpoint_id: String = ""
