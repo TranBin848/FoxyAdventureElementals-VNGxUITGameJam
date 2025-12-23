@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dd7umy7lqfimd"]
+[gd_scene load_steps=27 format=3 uid="uid://dd7umy7lqfimd"]
 
 [ext_resource type="Script" uid="uid://dxje7ds7lbspm" path="res://scenes/enemies/minions/crab/crab.gd" id="1_4p1sk"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_2qm7m"]
@@ -8,11 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="2_oeh51"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="2_oirif"]
 [ext_resource type="Script" uid="uid://xr3qiw4s3uef" path="res://scenes/enemies/states/moving.gd" id="2_tccyh"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_tlb4h"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_51iix"]
 [ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="3_280wf"]
 [ext_resource type="Texture2D" uid="uid://2utfw8mnjxfa" path="res://assets/enemy/crab/crab_hit_02.png" id="3_clpyl"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_17b3c"]
 [ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="4_gw7ur"]
 [ext_resource type="Texture2D" uid="uid://plut0bvriiy0" path="res://assets/enemy/crab/crab_01.png" id="4_l1170"]
+[ext_resource type="PackedScene" uid="uid://6ppqcm5ge1yh" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.tscn" id="5_8s2ek"]
 [ext_resource type="Texture2D" uid="uid://hvmpun86fh2b" path="res://assets/enemy/crab/crab_02.png" id="5_oirif"]
+[ext_resource type="PackedScene" uid="uid://c00jedhwcnsij" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn" id="6_775k1"]
 [ext_resource type="Texture2D" uid="uid://h5y5vqxjhhvh" path="res://assets/enemy/crab/crab_03.png" id="6_gvprn"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="7_oeh51"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_2qm7m"]
@@ -67,6 +72,13 @@ size = Vector2(40, 24)
 z_index = 1
 collision_layer = 8
 script = ExtResource("1_4p1sk")
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_tlb4h"),
+2: ExtResource("3_51iix"),
+3: ExtResource("4_17b3c"),
+4: ExtResource("5_8s2ek"),
+5: ExtResource("6_775k1")
+})
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 sight = 100.0
@@ -149,3 +161,6 @@ enemy = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-6, 16)

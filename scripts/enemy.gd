@@ -354,18 +354,18 @@ func _on_player_not_in_sight() -> void:
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Demo debuff
-	var debuff: PackedScene = load("res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn") as PackedScene
-	set_debuff(debuff)
+	#var debuff: PackedScene = load("res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn") as PackedScene
+	#set_debuff(debuff)
 	
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	modified_damage += modified_damage * current_vulnerability
-	#print(_elemental_type)
 	#print(elemental_type)
 	#print(_damage)
 	#print(modified_damage)
 	#var is_critical = modified_damage > _damage
 	var is_critical = (check_element(_elemental_type, elemental_type) == -1)
+	print("my element: " + str(elemental_type) + " enemy: " + str(_elemental_type) + " is critical: " + str(is_critical))
 	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
 	if (fsm.current_state != null): fsm.current_state.take_damage(_direction, modified_damage)
 	if is_critical: handle_elemental_damage(_elemental_type)
@@ -411,21 +411,20 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 
 func check_element(elemental_type_1: int, elemental_type_2: int) -> int:
 	# 1 khắc 2
-	if (elemental_type_1 in restraint_table and elemental_type_2 in restraint_table[elemental_type_1]):
+	if (restraint_table.has(elemental_type_1) and restraint_table[elemental_type_1].has(elemental_type_2)):
 		return -1
 	# 1 sinh 2
-	if (elemental_type_1 in creation_table and elemental_type_2 in creation_table[elemental_type_1]):
+	if (creation_table.has(elemental_type_1) and creation_table[elemental_type_1].has(elemental_type_2)):
 		return 1
 	# Không sinh khắc
 	return 0
 
 func handle_elemental_damage(attacker_element: int) -> void:
-	if check_element(attacker_element, elemental_type) == 1:
-		var debuff_scene: PackedScene = null
-		if elements_debuff.has(attacker_element):
-			debuff_scene = elements_debuff[attacker_element]
-		if debuff_scene == null: return
-		#set_debuff(debuff_scene)
+	var debuff_scene: PackedScene = null
+	if elements_debuff.has(attacker_element):
+		debuff_scene = elements_debuff[attacker_element]
+	if debuff_scene == null: return
+	set_debuff(debuff_scene)
 		#match attacker_element:
 			#ElementsEnum.Elements.NONE:  # None
 				#pass
@@ -508,6 +507,7 @@ func apply_knockback(knockback_vec: Vector2):
 
 # Functions for debuff
 func set_debuff(debuff_scene: PackedScene) -> void:
+	print("debuff: " + str(debuff_scene))
 	if current_debuff != null: return
 	if debuff_scene == null: return
 	if debuff_place_holder == null: return

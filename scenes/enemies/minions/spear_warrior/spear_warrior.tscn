@@ -1,12 +1,17 @@
-[gd_scene load_steps=32 format=3 uid="uid://b35vjjohukg22"]
+[gd_scene load_steps=37 format=3 uid="uid://b35vjjohukg22"]
 
 [ext_resource type="Script" uid="uid://b586ix60tpkyt" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.gd" id="1_nmrfe"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_8orck"]
 [ext_resource type="PackedScene" uid="uid://c6635vu0ttwxf" path="res://scenes/enemies/ui/enemy_health_bar.tscn" id="2_67m24"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_hhlv2"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_4oyw7"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_u7ym1"]
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_1ilut"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_dml5g"]
+[ext_resource type="PackedScene" uid="uid://6ppqcm5ge1yh" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.tscn" id="5_dbmas"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_pkd16"]
 [ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_ipcoo"]
+[ext_resource type="PackedScene" uid="uid://c00jedhwcnsij" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn" id="6_orhlr"]
 [ext_resource type="Texture2D" uid="uid://bibbggt5jgslb" path="res://assets/spear/spear/spear_10.png" id="9_u4c4y"]
 [ext_resource type="Texture2D" uid="uid://b6g0qbxr2udas" path="res://assets/spear/spear/spear_11.png" id="10_nmrfe"]
 [ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="11_asimf"]
@@ -23,7 +28,7 @@
 [ext_resource type="Script" uid="uid://ye5ltbp62i0r" path="res://scenes/enemies/minions/spear_warrior/states/prepare.gd" id="23_asimf"]
 [ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="23_nmrfe"]
 [ext_resource type="Script" uid="uid://o58wwfpbjusr" path="res://scenes/enemies/minions/spear_warrior/states/attack.gd" id="24_huggj"]
-[ext_resource type="Script" path="res://Scenes/enemies/minions/spear_warrior/wind.gd" id="28_yxdmg"]
+[ext_resource type="Script" uid="uid://bluxo3qpktmav" path="res://Scenes/enemies/minions/spear_warrior/wind.gd" id="28_yxdmg"]
 [ext_resource type="Texture2D" uid="uid://ooaidbsd0cjw" path="res://assets/spear/spear/spear_attack1.png" id="29_fopfn"]
 [ext_resource type="Texture2D" uid="uid://dtjgrwn8kfn3l" path="res://assets/spear/spear/spear_attack2.png" id="30_3lrjo"]
 
@@ -114,6 +119,13 @@ size = Vector2(46, 34)
 [node name="SpearWarrior" type="CharacterBody2D"]
 collision_layer = 8
 script = ExtResource("1_nmrfe")
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_8orck"),
+2: ExtResource("3_u7ym1"),
+3: ExtResource("4_dml5g"),
+4: ExtResource("5_dbmas"),
+5: ExtResource("6_orhlr")
+})
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 sight = 200.0
@@ -125,21 +137,17 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Metal" parent="Particles" instance=ExtResource("2_hhlv2")]
 position = Vector2(0, -26)
-emitting = false
 
 [node name="Wood" parent="Particles" instance=ExtResource("3_4oyw7")]
 position = Vector2(0, -15)
 
 [node name="Earth" parent="Particles" instance=ExtResource("4_1ilut")]
 position = Vector2(0, 10)
-emitting = false
 
 [node name="Water" parent="Particles" instance=ExtResource("5_pkd16")]
-emitting = false
 
 [node name="Fire" parent="Particles" instance=ExtResource("6_ipcoo")]
 position = Vector2(0, 5)
-emitting = false
 
 [node name="Direction" type="Node2D" parent="."]
 
@@ -217,3 +225,6 @@ offset_top = -28.0
 offset_right = 72.0
 offset_bottom = -20.0
 enemy = NodePath("..")
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-9, 21)
