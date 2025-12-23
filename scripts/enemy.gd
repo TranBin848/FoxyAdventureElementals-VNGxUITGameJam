@@ -25,6 +25,8 @@ var particle_audio_timer: Timer = null
 	ElementsEnum.Elements.NONE: "None"
 }
 
+@export var elements_debuff: Dictionary[ElementsEnum.Elements, PackedScene]
+
 # Shader that will be used for outlining the enemy based on its element
 @export_file("*.gdshader") var shader_path
 # Damage deal damage when player touch (HP)
@@ -44,7 +46,7 @@ var current_air_time: float
 @export var attack_speed: float
 var current_attack_speed: float
 # Vulnerability determines the percentage of damge the enemy will get when being attacked
-@export var vulnerability: float
+@export var vulnerability: float = 0
 var current_vulnerability: float
 
 var current_movement_speed: float
@@ -352,11 +354,12 @@ func _on_player_not_in_sight() -> void:
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Demo debuff
-	var debuff: PackedScene = load("res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn") as PackedScene
+	var debuff: PackedScene = load("res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn") as PackedScene
 	set_debuff(debuff)
 	
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
+	modified_damage += modified_damage * current_vulnerability
 	#print(_elemental_type)
 	#print(elemental_type)
 	#print(_damage)
@@ -418,19 +421,23 @@ func check_element(elemental_type_1: int, elemental_type_2: int) -> int:
 
 func handle_elemental_damage(attacker_element: int) -> void:
 	if check_element(attacker_element, elemental_type) == 1:
-		match attacker_element:
-			0:  # None
-				pass
-			1:  # Fire - burn status
-				apply_burn_effect()
-			2:  # Earth - slow status
-				apply_stun_effect()
-			3:  # Water - freeze status
-				apply_freeze_effect()
-			4: 	# Metal - weakness
-				apply_weakness_effect()
-			5:  # Wood - poison
-				apply_poison_effect()
+		var debuff_scene: PackedScene = null
+		if elements_debuff.has(attacker_element):
+			debuff_scene = elements_debuff[attacker_element]
+		if debuff_scene == null: return
+		#set_debuff(debuff_scene)
+		#match attacker_element:
+			#ElementsEnum.Elements.NONE:  # None
+				#pass
+			#ElementsEnum.Elements.FIRE:  # Fire - burn status
+			#ElementsEnum.Elements.EARTH:  # Earth - slow status
+				#
+			#ElementsEnum.Elements.WATER:  # Water - freeze status
+#
+			#ElementsEnum.Elements.METAL: 	# Metal - weakness
+#
+			#ElementsEnum.Elements.WOOD:  # Wood - poison
+
 
 func apply_burn_effect() -> void:
 	# Có thể thêm hiệu ứng lửa (burn status, animation, etc)
