@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=55 format=3 uid="uid://d0a57drf7tx4v"]
 
 [ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fxnya"]
@@ -47,7 +47,9 @@
 [ext_resource type="Script" uid="uid://cax5v5vvvpy8n" path="res://scenes/enemies/final_boss/meteor_rain.gd" id="44_mpuyr"]
 [ext_resource type="PackedScene" uid="uid://pgf87lpdsfte" path="res://scenes/enemies/final_boss/star_scene.tscn" id="46_i0lyx"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="46_mqsvn"]
-[ext_resource type="Resource" uid="uid://usd62cwn6jhg" path="res://scenes/skills/scripts/fire/FireShotBoss.tres" id="46_u2mao"]
+[ext_resource type="PackedScene" uid="uid://8ucurw88rfh2" path="res://scenes/enemies/final_boss/fireShotProjectileBoss.tscn" id="47_o7w2u"]
+[ext_resource type="Script" uid="uid://nyc2dcgdpxlh" path="res://scenes/enemies/final_boss/rain_bullets.gd" id="48_o7w2u"]
+[ext_resource type="PackedScene" uid="uid://cb6h82l7nm4a2" path="res://scenes/enemies/final_boss/waterbullet_projectile.tscn" id="49_o7w2u"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
 animations = [{
@@ -318,7 +320,11 @@ script = ExtResource("41_yr5q8")
 script = ExtResource("44_mpuyr")
 warning_scene = ExtResource("39_wk8ah")
 star_scene = ExtResource("46_i0lyx")
-meteor_skill = ExtResource("46_u2mao")
+meteor_scene = ExtResource("47_o7w2u")
+
+[node name="RainBullets" type="Node" parent="States"]
+script = ExtResource("48_o7w2u")
+water_bullet_scene = ExtResource("49_o7w2u")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -25.0

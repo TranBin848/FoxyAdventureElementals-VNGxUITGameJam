@@ -103,7 +103,8 @@ shape = SubResource("CircleShape2D_gp0ck")
 
 [node name="HitArea2D" type="Area2D" parent="."]
 position = Vector2(0, -23)
-collision_mask = 16
+collision_layer = 0
+collision_mask = 4
 monitoring = false
 script = ExtResource("2_gk4sj")
 elemental_type = 1

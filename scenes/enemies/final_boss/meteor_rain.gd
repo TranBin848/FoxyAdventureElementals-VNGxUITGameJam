@@ -2,11 +2,12 @@ extends BlackEmperorState
 
 @export var warning_scene: PackedScene
 @export var star_scene: PackedScene  # Scene ngôi sao bay lên trước
-@export var meteor_skill: Skill  # Export skill để setup meteor
+@export var meteor_scene: PackedScene  # Scene fire shot projectile
 @export var meteor_count: int = 24  # Số lượng meteor
 @export var arc_radius: float = 200.0  # Bán kính vòng cung (tăng lên để rộng hơn)
 @export var meteor_spawn_delay: float = 0.2  # Delay giữa mỗi meteor
-@onready var skill_factory: Node2DFactory = $"../../Direction/SkillFactory"
+@export var meteor_speed: float = 300.0  # Tốc độ meteor
+@export var meteor_damage: int = 15  # Damage của meteor
 
 func _enter():
 	# Lấy vị trí boss
@@ -70,15 +71,15 @@ func _enter():
 		change_state(fsm.states.idle)
 		return
 	
-	# Spawn meteor theo thứ tự với delay
+	# Spawn tất cả meteor cùng lúc
 	for i in range(warning_positions.size()):
 		var angle = angles[i]
 		
 		# Tính direction từ angle
 		var dir = Vector2(cos(angle), sin(angle)).normalized()
 		
-		# Dùng _spawn_projectile để spawn meteor chuẩn
-		var meteor = _spawn_projectile(meteor_skill, dir)
+		# Spawn meteor từ vị trí boss/star
+		var meteor = _spawn_meteor(boss_pos, dir)
 	
 	# Xóa các warning
 	for warning in warnings:
@@ -117,22 +118,29 @@ func _spawn_star(target_pos: Vector2) -> Node2D:
 	star.global_position = obj.global_position
 	get_tree().current_scene.add_child(star)
 	return star
-	
-func _spawn_projectile(skill: Skill, dir: Vector2) -> Area2D:
-	var proj_node: Node = skill.projectile_scene.instantiate() if skill.projectile_scene else (skill_factory.create() if skill_factory else null)
-	if not proj_node: return null
-	var proj = proj_node as Area2D
-	if proj == null: return null
 
-	if proj.has_method("setup"): proj.setup(skill, dir)
-	else:
-		if proj.has_variable("speed"): proj.speed = skill.speed
-		if proj.has_variable("damage"): proj.damage = skill.damage
-		if proj.has_variable("direction"): proj.direction = dir
+func _spawn_meteor(spawn_pos: Vector2, dir: Vector2) -> Area2D:
+	if not meteor_scene:
+		return null
+	
+	var meteor = meteor_scene.instantiate() as Area2D
+	if not meteor:
+		return null
+	
+	# Set properties
+	if "direction" in meteor:
+		meteor.direction = dir
+	if "speed" in meteor:
+		meteor.speed = meteor_speed
+	if "damage" in meteor:
+		meteor.damage = meteor_damage
 	
 	# Scale projectile lên x1.25
-	proj.scale = Vector2(1.25, 1.25)
+	meteor.scale = Vector2(1.25, 1.25)
 	
-	proj.global_position = skill_factory.global_position
-	get_tree().current_scene.add_child(proj)
-	return proj
+	# Set vị trí và rotation
+	meteor.global_position = spawn_pos
+	meteor.rotation = dir.angle()
+	
+	get_tree().current_scene.add_child(meteor)
+	return meteor

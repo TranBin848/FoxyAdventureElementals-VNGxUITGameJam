@@ -25,7 +25,8 @@ enum Phase {
 
 var skills_phase_1 = {
 	0: "flylightning",
-	1: "meteorrain"
+	1: "meteorrain",
+	2: "rainbullets"
 }
 
 var skills_phase_2 = {

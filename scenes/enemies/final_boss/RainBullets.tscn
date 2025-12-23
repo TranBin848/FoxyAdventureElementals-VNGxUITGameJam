@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdwlv5r43vl0j"]
-
-[ext_resource type="Script" uid="uid://nodntbsviffe" path="res://scenes/enemies/final_boss/rainBullets.gd" id="1_4wb1s"]
-
-[node name="RainBullets" type="Area2D"]
-script = ExtResource("1_4wb1s")
-metadata/_custom_type_script = "uid://52fejgdsdbp7"
-
-[node name="Marker2D" type="Marker2D" parent="."]
