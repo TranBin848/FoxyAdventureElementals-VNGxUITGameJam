@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbatj0xwa0jd4"]
+[gd_scene load_steps=11 format=3 uid="uid://bbatj0xwa0jd4"]
 
 [ext_resource type="Script" uid="uid://iqarjjvr3mim" path="res://levels/objects/coin/coin.gd" id="1_ais5i"]
-[ext_resource type="AudioStream" uid="uid://d4eta46rumfw5" path="res://assets/sounds/Fruit collect 1.wav" id="2_5mp48"]
-[ext_resource type="Texture2D" uid="uid://2pes1nx6fi6o" path="res://assets/island/objects/coin/effect/01.png" id="2_bo6c2"]
-[ext_resource type="Texture2D" uid="uid://dpjbvwlbcjnhb" path="res://assets/island/objects/coin/effect/02.png" id="3_clxuu"]
-[ext_resource type="Texture2D" uid="uid://d07c5s5nnlnj0" path="res://assets/island/objects/coin/effect/03.png" id="4_yyguw"]
+[ext_resource type="Texture2D" uid="uid://2pes1nx6fi6o" path="res://assets/items/effect/01.png" id="2_bo6c2"]
+[ext_resource type="Texture2D" uid="uid://dpjbvwlbcjnhb" path="res://assets/items/effect/02.png" id="3_clxuu"]
+[ext_resource type="Texture2D" uid="uid://d07c5s5nnlnj0" path="res://assets/items/effect/03.png" id="4_yyguw"]
 [ext_resource type="Texture2D" uid="uid://dtwnvoh5jfgsn" path="res://assets/island/objects/coin/01.png" id="5_666tr"]
 [ext_resource type="Texture2D" uid="uid://b66ku1hcmsevy" path="res://assets/island/objects/coin/02.png" id="6_5mp48"]
 [ext_resource type="Texture2D" uid="uid://bt5c3w1sy3vbv" path="res://assets/island/objects/coin/03.png" id="7_3e746"]
@@ -47,10 +46,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Coin" type="Area2D"]
-collision_mask = 2
+[node name="Coin" type="RigidBody2D"]
+collision_layer = 32
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 3
 script = ExtResource("1_ais5i")
-consumed_sfx = ExtResource("2_5mp48")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ais5i")
@@ -59,5 +60,12 @@ shape = SubResource("CircleShape2D_ais5i")
 sprite_frames = SubResource("SpriteFrames_bp5sd")
 animation = &"idle"
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 14)
+[node name="DetectionArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D"]
+shape = SubResource("CircleShape2D_ais5i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="DetectionArea2D" to="." method="_on_body_entered"]
