@@ -24,8 +24,8 @@
 [ext_resource type="VideoStream" uid="uid://bxm3jygx8pmfj" path="res://assets/skills/water/WaterSpike.ogv" id="13_dvmm8"]
 [ext_resource type="Texture2D" uid="uid://dj3ixewktcc2j" path="res://assets/skills/icon element/Metal.png" id="13_j1upi"]
 [ext_resource type="Resource" uid="uid://bi6xhg0h8erpa" path="res://scenes/skills/scripts/metal/StunShot.tres" id="16_7kvha"]
-[ext_resource type="Resource" uid="uid://dnqe0sn17m7iq" path="res://scenes/skills/scripts/metal/Thunderbolt.tres" id="17_ee0ex"]
 [ext_resource type="Resource" uid="uid://ydvgf5lwhd1w" path="res://scenes/skills/scripts/metal/ThousandSwords.tres" id="18_j1upi"]
+[ext_resource type="Resource" path="res://scenes/skills/scripts/metal/Thunderbolt.tres" id="19_574nj"]
 [ext_resource type="Resource" uid="uid://c1h5e81m8pg5d" path="res://scenes/skills/scripts/earth/Earthquake.tres" id="19_g38uo"]
 [ext_resource type="Resource" uid="uid://bh7ca4qndbgby" path="res://scenes/skills/scripts/earth/Burrow.tres" id="21_574nj"]
 [ext_resource type="Resource" uid="uid://cc6qdlelt05ae" path="res://scenes/skills/scripts/earth/CometRain.tres" id="22_003vk"]
@@ -302,7 +302,7 @@ offset_top = 96.0
 offset_right = -34.6667
 offset_bottom = 136.0
 scale = Vector2(1, 1)
-skill = ExtResource("17_ee0ex")
+skill = ExtResource("19_574nj")
 video_stream = ExtResource("11_ph0o5")
 
 [node name="ThousandSwords" parent="SubViewportContainer/SubViewport/StunShot" instance=ExtResource("2_4casc")]

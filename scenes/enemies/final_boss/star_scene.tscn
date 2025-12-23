@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://pgf87lpdsfte"]
+
+[ext_resource type="Texture2D" uid="uid://cld72nn514rmh" path="res://assets/skills/fire/Fireexplosion/Explosion 2 SpriteSheet.png" id="1_khqok"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khqok"]
+atlas = ExtResource("1_khqok")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snvfj"]
+atlas = ExtResource("1_khqok")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwqk6"]
+atlas = ExtResource("1_khqok")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6buw"]
+atlas = ExtResource("1_khqok")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r8ht"]
+atlas = ExtResource("1_khqok")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxvst"]
+atlas = ExtResource("1_khqok")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vmlim"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khqok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snvfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwqk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6buw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r8ht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxvst")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="StarScene" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vmlim")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0

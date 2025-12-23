@@ -1,6 +1,7 @@
 extends BlackEmperorState
 
 @export var warning_scene: PackedScene
+@export var star_scene: PackedScene  # Scene ngôi sao bay lên trước
 @export var meteor_skill: Skill  # Export skill để setup meteor
 @export var meteor_count: int = 24  # Số lượng meteor
 @export var arc_radius: float = 200.0  # Bán kính vòng cung (tăng lên để rộng hơn)
@@ -19,6 +20,18 @@ func _enter():
 	# Play animation nếu có
 	if obj.animated_sprite_2d and obj.animated_sprite_2d.sprite_frames.has_animation("cast"):
 		obj.animated_sprite_2d.play("cast")
+	
+	# Bắn ngôi sao lên trên đầu boss
+	var star_target_pos = boss_pos + Vector2(0, -75)  # Vị trí phía trên boss
+	var star = _spawn_star(star_target_pos)
+	# Chờ ngôi sao bay đến vị trí
+	if star:
+		var tween = get_tree().create_tween()
+		tween.tween_property(star, "global_position", star_target_pos, 0.5)
+		await tween.finished
+		
+		# Cập nhật boss_pos thành vị trí ngôi sao
+		boss_pos = star.global_position
 	
 	# Tạo các vị trí warning theo hình vòng tròn đầy đủ (360 độ)
 	var warning_positions = []
@@ -66,22 +79,17 @@ func _enter():
 		
 		# Dùng _spawn_projectile để spawn meteor chuẩn
 		var meteor = _spawn_projectile(meteor_skill, dir)
-		
-		#if meteor:
-			## Tween meteor bay ra vị trí warning
-			#var pos = warning_positions[i]
-			#var tween = get_tree().create_tween()
-			#tween.tween_property(meteor, "global_position", pos, 0.2)
-		
-		#await get_tree().create_timer(meteor_spawn_delay).timeout
 	
 	# Xóa các warning
 	for warning in warnings:
 		if is_instance_valid(warning):
 			warning.queue_free()
 	
-	# Khôi phục trạng thái (giữ ignore_gravity = true để boss tiếp tục bay)
-	obj.is_movable = true
+	# Đợi 3 giây trước khi chuyển sang skill tiếp theo
+	await get_tree().create_timer(3.0).timeout
+	
+	# Gọi use_skill để tự động chuyển sang skill tiếp theo
+	obj.use_skill()
 
 
 func alert_coroutine(warnings: Array) -> void:
@@ -97,6 +105,18 @@ func alert_coroutine(warnings: Array) -> void:
 		for warning in warnings:
 			if is_instance_valid(warning):
 				warning.visible = false
+
+func _spawn_star(target_pos: Vector2) -> Node2D:
+	if not star_scene:
+		return null
+	
+	var star = star_scene.instantiate() as Node2D
+	if not star:
+		return null
+	
+	star.global_position = obj.global_position
+	get_tree().current_scene.add_child(star)
+	return star
 	
 func _spawn_projectile(skill: Skill, dir: Vector2) -> Area2D:
 	var proj_node: Node = skill.projectile_scene.instantiate() if skill.projectile_scene else (skill_factory.create() if skill_factory else null)
@@ -109,6 +129,10 @@ func _spawn_projectile(skill: Skill, dir: Vector2) -> Area2D:
 		if proj.has_variable("speed"): proj.speed = skill.speed
 		if proj.has_variable("damage"): proj.damage = skill.damage
 		if proj.has_variable("direction"): proj.direction = dir
+	
+	# Scale projectile lên x1.25
+	proj.scale = Vector2(1.25, 1.25)
+	
 	proj.global_position = skill_factory.global_position
 	get_tree().current_scene.add_child(proj)
 	return proj

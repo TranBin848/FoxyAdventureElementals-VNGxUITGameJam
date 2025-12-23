@@ -100,7 +100,7 @@ script = ExtResource("1_uhoxj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"FireShot_End"
+animation = &"FireShot"
 autoplay = "FireShot"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

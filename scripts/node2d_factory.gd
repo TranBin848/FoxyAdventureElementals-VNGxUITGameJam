@@ -11,11 +11,15 @@ var container: Node = null  # Store reference after initialization
 var _is_ready: bool = false
 
 func _ready() -> void:
+	_setup_container.call_deferred()
+
+func _setup_container() -> void:
 	parent_node = find_parent("Stage")
 	if parent_node == null:
 		parent_node = get_tree().current_scene
 
 	container = parent_node.find_child(target_container_name, true, false)
+
 	if container == null:
 		container = Node.new()
 		container.name = target_container_name
