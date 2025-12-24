@@ -172,8 +172,9 @@ script = ExtResource("1_ppf8r")
 position = Vector2(511, 759)
 
 [node name="Lever" parent="." node_paths=PackedStringArray("linked_door") instance=ExtResource("11_gsja5")]
-position = Vector2(1287, 624)
+position = Vector2(1296, 552)
 linked_door = NodePath("../HouseDoor")
+type = 2
 
 [node name="HouseDoor" parent="." instance=ExtResource("12_bkbve")]
 position = Vector2(1328, 608)
@@ -915,6 +916,7 @@ tile_map_data = PackedByteArray("AAAbAur/CAACAA8AAAAcAur/CAAAAA8AAAAaAur/CAAAAA8
 tile_set = ExtResource("2_s4b5i")
 
 [node name="SandStormParticle" parent="TileMaps" instance=ExtResource("20_pvqwi")]
+visible = false
 position = Vector2(-291, 631)
 
 [node name="SkillTreeUI" type="CanvasLayer" parent="."]

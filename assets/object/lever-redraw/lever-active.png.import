@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1graa382sjmt"
-path="res://.godot/imported/fox_jump_1.png-b7c1d11dcce0aa16b9e91b7b130b76aa.ctex"
+uid="uid://dn0mid24l3bk3"
+path="res://.godot/imported/lever-active.png-446a4ab3cecfedd94b7264226f1088df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/foxy/fox_hat_soul_wand/fox_jump_1.png"
-dest_files=["res://.godot/imported/fox_jump_1.png-b7c1d11dcce0aa16b9e91b7b130b76aa.ctex"]
+source_file="res://assets/object/lever-redraw/lever-active.png"
+dest_files=["res://.godot/imported/lever-active.png-446a4ab3cecfedd94b7264226f1088df.ctex"]
 
 [params]
 

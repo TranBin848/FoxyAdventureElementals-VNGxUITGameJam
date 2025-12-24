@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5fsvledlxp2b"
-path="res://.godot/imported/wand.png-fa47d0f76296e7bd7641985941b5401c.ctex"
+path="res://.godot/imported/wand.png-8625fe777e5e955ee69926e8f5106f21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/foxy/fox_hat_wand/wand.png"
-dest_files=["res://.godot/imported/wand.png-fa47d0f76296e7bd7641985941b5401c.ctex"]
+source_file="res://assets/foxy/fox_hat_sorrow_wand/wand.png"
+dest_files=["res://.godot/imported/wand.png-8625fe777e5e955ee69926e8f5106f21.ctex"]
 
 [params]
 
