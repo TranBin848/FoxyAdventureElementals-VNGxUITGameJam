@@ -1,11 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhf2ehr61a3ks"]
+[gd_scene load_steps=18 format=3 uid="uid://bhf2ehr61a3ks"]
 
 [ext_resource type="Script" uid="uid://780dumn4jaur" path="res://scenes/enemies/minions/barrel/barrel.gd" id="1_d1rwy"]
 [ext_resource type="Texture2D" uid="uid://ch0hp25m7evv1" path="res://assets/object/barrel/barrel_hurt_01.png" id="2_588nf"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_inrr5"]
 [ext_resource type="Texture2D" uid="uid://ckjp4ccybo5i6" path="res://assets/object/barrel/barrel_hurt_02.png" id="3_tnlx8"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_wbmsr"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_eol76"]
 [ext_resource type="Texture2D" uid="uid://dfnk2rp7cs1vg" path="res://assets/object/barrel/barrel_01.png" id="4_jni0l"]
+[ext_resource type="PackedScene" uid="uid://6ppqcm5ge1yh" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.tscn" id="5_3xjn8"]
 [ext_resource type="Texture2D" uid="uid://bwg8hpav3cy74" path="res://assets/object/barrel/barrel_02.png" id="5_c88dd"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="6_h7irp"]
+[ext_resource type="PackedScene" uid="uid://c00jedhwcnsij" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn" id="6_qrhgi"]
 [ext_resource type="Script" uid="uid://h2nw5lfwv82p" path="res://scenes/enemies/minions/barrel/idle.gd" id="7_yviuf"]
 [ext_resource type="Script" uid="uid://derwpw4f3q4fs" path="res://scenes/enemies/minions/barrel/hurt.gd" id="8_q55l5"]
 [ext_resource type="Script" uid="uid://d0rmsua68du3x" path="res://scenes/enemies/minions/barrel/dead.gd" id="9_588nf"]
@@ -52,6 +57,13 @@ animations = [{
 [node name="Barrel" type="CharacterBody2D"]
 collision_layer = 129
 script = ExtResource("1_d1rwy")
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_inrr5"),
+2: ExtResource("3_wbmsr"),
+3: ExtResource("4_eol76"),
+4: ExtResource("5_3xjn8"),
+5: ExtResource("6_qrhgi")
+})
 max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
@@ -89,5 +101,8 @@ position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_4xqu7")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-5, 18)
 
 [connection signal="hurt" from="HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]

@@ -5,6 +5,7 @@ func _enter() -> void:
 	obj.velocity.x = 0
 
 func _update(_delta: float) -> void:
+	if obj.is_frozen: return
 	if obj.found_player != null:
 		var dir = obj.found_player.position - obj.position
 		obj.change_direction(sign(dir.x))

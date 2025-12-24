@@ -1,0 +1,156 @@
+[gd_scene load_steps=22 format=3 uid="uid://c00jedhwcnsij"]
+
+[ext_resource type="Script" uid="uid://cau6ogulx41k5" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.gd" id="1_g8rqd"]
+[ext_resource type="Texture2D" uid="uid://bl66efvg2uxgs" path="res://assets/enemy/effects/stunned.png" id="1_r7dlq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8rqd"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(1170, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfqrj"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(1260, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kymu"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(1350, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xse44"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(1440, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_armm3"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(1530, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi4l8"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(900, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n6qr"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(990, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03nd3"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(1080, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be57p"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnmnh"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6hq3"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(180, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1aas"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(270, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udhj6"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(360, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0wgh"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(450, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71gvr"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(540, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a573h"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(630, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn0e2"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(720, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uej2"]
+atlas = ExtResource("1_r7dlq")
+region = Rect2(810, 0, 90, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8c4n7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8rqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfqrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kymu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xse44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_armm3")
+}],
+"loop": false,
+"name": &"end",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi4l8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n6qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03nd3")
+}],
+"loop": true,
+"name": &"perform",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be57p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnmnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6hq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1aas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udhj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0wgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71gvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a573h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn0e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uej2")
+}],
+"loop": false,
+"name": &"start",
+"speed": 10.0
+}]
+
+[node name="StunnedDebuff" type="Node2D"]
+script = ExtResource("1_g8rqd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -35)
+sprite_frames = SubResource("SpriteFrames_8c4n7")
+animation = &"perform"

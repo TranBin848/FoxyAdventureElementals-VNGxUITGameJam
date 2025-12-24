@@ -27,6 +27,7 @@ func calculate_animation_speed() -> void:
 		##obj.spear_collision_shape.size.x = 0
 
 func _update(_delta: float) -> void:
+	if obj.is_frozen: return
 	#obj.animated_sprite.speed_scale = animation_speed
 	if update_timer(_delta):
 		change_state(fsm.states.idle)

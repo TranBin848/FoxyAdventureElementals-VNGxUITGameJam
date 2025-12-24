@@ -1,0 +1,219 @@
+[gd_scene load_steps=31 format=3 uid="uid://8disgaqoamxk"]
+
+[ext_resource type="Script" uid="uid://cykrhr3hcbvo8" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.gd" id="1_2b51f"]
+[ext_resource type="Texture2D" uid="uid://dffmhwumtr035" path="res://assets/enemy/effects/weakness.png" id="1_f2545"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b51f"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1890, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m2kh"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1980, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxx65"]
+atlas = ExtResource("1_f2545")
+region = Rect2(2070, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dufxw"]
+atlas = ExtResource("1_f2545")
+region = Rect2(2160, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31bq8"]
+atlas = ExtResource("1_f2545")
+region = Rect2(2250, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6l54b"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1260, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp462"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1350, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss7be"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1440, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txs3h"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1530, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi3nk"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1620, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0urn"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1710, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lh6yd"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1800, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5j28"]
+atlas = ExtResource("1_f2545")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_meeem"]
+atlas = ExtResource("1_f2545")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3j7l"]
+atlas = ExtResource("1_f2545")
+region = Rect2(180, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qlyc"]
+atlas = ExtResource("1_f2545")
+region = Rect2(270, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwnuh"]
+atlas = ExtResource("1_f2545")
+region = Rect2(360, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjow5"]
+atlas = ExtResource("1_f2545")
+region = Rect2(450, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpoe6"]
+atlas = ExtResource("1_f2545")
+region = Rect2(540, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1c4t"]
+atlas = ExtResource("1_f2545")
+region = Rect2(630, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcu7x"]
+atlas = ExtResource("1_f2545")
+region = Rect2(720, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tq1o6"]
+atlas = ExtResource("1_f2545")
+region = Rect2(810, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp5jt"]
+atlas = ExtResource("1_f2545")
+region = Rect2(900, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gak8i"]
+atlas = ExtResource("1_f2545")
+region = Rect2(990, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixjj7"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1080, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfgj0"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1170, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkpy4"]
+atlas = ExtResource("1_f2545")
+region = Rect2(1260, 0, 90, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bflqk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b51f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m2kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxx65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dufxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31bq8")
+}],
+"loop": false,
+"name": &"end",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6l54b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lp462")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss7be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txs3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi3nk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0urn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lh6yd")
+}],
+"loop": true,
+"name": &"perform",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5j28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_meeem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3j7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qlyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwnuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjow5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpoe6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1c4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcu7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tq1o6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp5jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gak8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixjj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfgj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkpy4")
+}],
+"loop": false,
+"name": &"start",
+"speed": 15.0
+}]
+
+[node name="WeaknessDebuff" type="Node2D"]
+script = ExtResource("1_2b51f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -35)
+sprite_frames = SubResource("SpriteFrames_bflqk")
+animation = &"end"

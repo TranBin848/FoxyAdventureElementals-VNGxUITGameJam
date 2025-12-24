@@ -11,6 +11,7 @@ func _enter() -> void:
 	has_thrown = false
 
 func _update(_delta):
+	if obj.is_frozen: return
 	control_moving()
 	
 	# Check if attack duration is complete

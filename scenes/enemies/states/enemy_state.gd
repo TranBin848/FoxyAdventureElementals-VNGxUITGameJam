@@ -6,7 +6,7 @@ extends FSMState
 #Return true if moving
 func control_moving() -> bool:
 	if obj.is_on_floor():
-		obj.velocity.x = obj.movement_speed * obj.direction
+		obj.velocity.x = obj.current_movement_speed * obj.direction
 	if _should_turn_around():
 		obj.turn_around()
 	return false

@@ -5,6 +5,7 @@ func _enter() -> void:
 	timer = obj.drop_bomb_interval
 
 func _update(_delta: float) -> void:
+	if obj.is_frozen: return
 	#Control moving
 	control_moving()
 	control_flying_up()
