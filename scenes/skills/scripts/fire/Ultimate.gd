@@ -3,7 +3,7 @@ class_name Ultimate
 
 func _init():
 	name = "Ultimate"
-	element = "None"
+	elemental_type = ElementsEnum.Elements.NONE
 	cooldown = 8.0
 	type = "radial"
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons53.png"

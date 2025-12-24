@@ -97,6 +97,7 @@ height = 28.0
 
 [node name="CoconutWarrior" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_g34j8")
 elements_debuff = Dictionary[int, PackedScene]({
 1: ExtResource("2_n3ajn"),
@@ -111,6 +112,7 @@ sight = 100.0
 movement_range = 200.0
 attack_speed = 500.0
 max_health = 10
+elemental_type = 5
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Particles" type="Node2D" parent="."]

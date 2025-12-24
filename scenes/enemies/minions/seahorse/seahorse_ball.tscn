@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://vx762t1kdt2"]
 
-[ext_resource type="Script" uid="uid://xnl4q457wubk" path="res://Scenes/enemies/minions/seahorse/seahorse_ball.gd" id="1_8v234"]
+[ext_resource type="Script" uid="uid://xnl4q457wubk" path="res://scenes/enemies/minions/seahorse/seahorse_ball.gd" id="1_8v234"]
 [ext_resource type="Texture2D" uid="uid://cx6hnj7sdhslo" path="res://assets/enemy/seahorse/seahorse_ball.png" id="2_3u6l5"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_p3lxm"]
 

@@ -2,7 +2,7 @@
 extends Area2D
 class_name BuffBase
 
-var elemental_type: int = 0
+var elemental_type: ElementsEnum.Elements
 var caster: Node2D = null # ⬅️ Biến để lưu trữ tham chiếu đến Player
 @export var y_offset: float = -10.0 # ⬅️ Độ cao dịch chuyển (âm để đi lên)
 @export var x_offset: float = -5.0 # ⬅️ Độ cao dịch chuyển (âm để đi lên)
@@ -17,7 +17,7 @@ func setup(skill: Skill, caster_node: Node2D) -> void: # ⬅️ Nhận Player l�
 	# NOTE: Node này sẽ được hủy bởi Player sau khi duration kết thúc.
 
 
-func _physics_process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# 🎯 FIX: Gán vị trí của Buff bằng vị trí của Player mỗi frame
 	if is_instance_valid(caster):
 		var offset_vector = Vector2(caster.direction * x_offset, y_offset)

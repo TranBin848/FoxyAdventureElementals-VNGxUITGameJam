@@ -1,13 +1,13 @@
-[gd_scene load_steps=45 format=4 uid="uid://dsxvyoo4n54nc"]
+[gd_scene load_steps=46 format=4 uid="uid://dsxvyoo4n54nc"]
 
-[ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_n8468"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://Scenes/player/player.tscn" id="2_tu7ib"]
+[ext_resource type="Script" uid="uid://daj5tdirvwlbt" path="res://levels/level_4/level_4.gd" id="1_36jj7"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
 [ext_resource type="TileSet" uid="uid://bui3wquutm1yg" path="res://levels/level_4/level_4.tres" id="3_rjkgb"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="4_0odlo"]
-[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://Scenes/enemies/minions/seahorse/seahorse.tscn" id="7_5mfhe"]
+[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="7_5mfhe"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="7_401k1"]
-[ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://Scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="8_f8hbo"]
-[ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://Scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="9_s3y0x"]
+[ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="8_f8hbo"]
+[ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="9_s3y0x"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="11_s6hm0"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="12_behyl"]
 [ext_resource type="Texture2D" uid="uid://db66s7skgnftt" path="res://assets/terrain_plus/background1.png" id="13_0odlo"]
@@ -15,25 +15,25 @@
 [ext_resource type="Texture2D" uid="uid://bojjm6k4aiyh8" path="res://assets/terrain_plus/background3.png" id="15_rjkgb"]
 [ext_resource type="Texture2D" uid="uid://bm7glj3finew5" path="res://assets/terrain_plus/background4a.png" id="16_s6hm0"]
 [ext_resource type="Texture2D" uid="uid://ch2rf6wnkg6el" path="res://assets/terrain_plus/background4b.png" id="17_t21h0"]
-[ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://Scenes/enemies/minions/pelican/pelican.tscn" id="20_87ux8"]
-[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://Scenes/enemies/minions/crab/crab.tscn" id="22_0odlo"]
-[ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://Scenes/enemies/minions/turtle/turtle.tscn" id="23_iqjrd"]
-[ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://Scenes/enemies/minions/starfish/starfish.tscn" id="24_rjkgb"]
-[ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://Scenes/enemies/minions/barrel/barrel.tscn" id="25_iqjrd"]
+[ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="20_87ux8"]
+[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="22_0odlo"]
+[ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="23_iqjrd"]
+[ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="24_rjkgb"]
+[ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="25_iqjrd"]
 [ext_resource type="Texture2D" uid="uid://bnrhstmshrm2u" path="res://assets/island/images/fox/fox_defeat_3.png" id="28_otr1q"]
-[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://Scenes/ui/health_bar_container.tscn" id="28_t21h0"]
-[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://Scenes/blade/blade_collectable.tscn" id="28_w8t0s"]
+[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="28_t21h0"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="28_w8t0s"]
 [ext_resource type="Texture2D" uid="uid://c20cr4u76ve2f" path="res://assets/island/images/blade/blade_target_3.png" id="29_sumgr"]
-[ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://Scenes/ui/skill_tree_ui.gd" id="30_b06ts"]
+[ext_resource type="Script" path="res://Scenes/ui/skill_tree_ui.gd" id="30_b06ts"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="31_36jj7"]
 [ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="32_otmpl"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="33_ac2k2"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="34_36jj7"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="42_3fy2r"]
-[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://Scenes/ui/skill_bar_new.tscn" id="43_uyyvu"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://Scenes/ui/hud.tscn" id="44_ot27n"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="43_uyyvu"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="44_ot27n"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_2si7y"]
-[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://Scenes/ui/weapon_panel.tscn" id="46_hi8w3"]
+[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="46_hi8w3"]
 
 [sub_resource type="Gradient" id="Gradient_rjkgb"]
 offsets = PackedFloat32Array(0.293413, 0.748503)
@@ -90,8 +90,11 @@ fill = 2
 fill_from = Vector2(0.5, 1)
 fill_to = Vector2(0.497738, 0.175214)
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_36jj7"]
+normal = Vector2(-0.00564142, 0.999984)
+
 [node name="Stage" type="Node2D"]
-script = ExtResource("1_n8468")
+script = ExtResource("1_36jj7")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
@@ -454,3 +457,13 @@ size_flags_vertical = 8
 [node name="Checkpoint" parent="." instance=ExtResource("34_36jj7")]
 position = Vector2(78, 16)
 checkpoint_id = "999"
+
+[node name="WorldBoundary" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary"]
+position = Vector2(3774, -1374)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_36jj7")

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://ydvgf5lwhd1w"]
+
+[ext_resource type="PackedScene" uid="uid://ce67wq8nkpvyx" path="res://scenes/skills/area/metal/thousandSwords.tscn" id="1_ipbb0"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="2_c6vis"]
+
+[resource]
+script = ExtResource("2_c6vis")
+name = "Thousand Swords"
+elemental_type = 1
+level = 1
+cooldown = 1.0
+duration = 15.0
+hit_delay = 0.0
+ground_targeted = true
+texture_path = "res://assets/skills/icons_skill/48x48/skill_icons45.png"
+animation_name = ""
+area_scene = ExtResource("1_ipbb0")
+speed = 250.0
+damage = 5
+mana = 20
+type = "area"
+metadata/_custom_type_script = "uid://4fu7i05ai1gp"

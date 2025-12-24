@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://d0kbj7vc5hjhj"]
 
-[ext_resource type="Script" uid="uid://cl6qeq12ugag0" path="res://Scenes/skills/projectiles/water/water_tornado_projectile.gd" id="1_a7uo3"]
+[ext_resource type="Script" uid="uid://cl6qeq12ugag0" path="res://scenes/skills/projectiles/water/water_tornado_projectile.gd" id="1_a7uo3"]
 [ext_resource type="Texture2D" uid="uid://b6e7bqero8rk7" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - Startup and Infinite.png" id="2_a7uo3"]
 [ext_resource type="Texture2D" uid="uid://cmhfp428s70tb" path="res://assets/skills/water/Water Blast - Spritesheet/Water Blast - End.png" id="3_a7uo3"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_d4fu0"]
@@ -156,13 +156,13 @@ frame_progress = 1.0
 position = Vector2(-1, -13.5)
 shape = SubResource("RectangleShape2D_a7uo3")
 
-[node name="HitArea2d" parent="." instance=ExtResource("3_d4fu0")]
+[node name="HitArea2D" parent="." instance=ExtResource("3_d4fu0")]
 position = Vector2(0, -33)
 collision_layer = 32
 collision_mask = 16
 elemental_type = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 position = Vector2(-0.5, 7.5)
 shape = SubResource("RectangleShape2D_wn83h")
 
@@ -175,6 +175,6 @@ shape = SubResource("CircleShape2D_5ejyq")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]
 [connection signal="area_entered" from="ExplosionArea" to="." method="_on_explosion_area_area_entered"]
 [connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]

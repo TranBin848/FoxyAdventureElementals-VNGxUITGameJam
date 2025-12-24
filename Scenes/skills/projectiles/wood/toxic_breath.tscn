@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://dmgc4l5rudiuo"]
 
-[ext_resource type="Script" uid="uid://k7dh58mctcq7" path="res://Scenes/skills/projectiles/wood/toxic_breath.gd" id="1_vulyi"]
+[ext_resource type="Script" uid="uid://k7dh58mctcq7" path="res://scenes/skills/projectiles/wood/toxic_breath.gd" id="1_vulyi"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="2_n5yf3"]
 [ext_resource type="Texture2D" uid="uid://bcsfa8unsb623" path="res://assets/skills/wood/toxic_breath/Fire Breath SpriteSheet.png" id="2_vulyi"]
 
@@ -151,13 +151,13 @@ position = Vector2(3.75, -0.5)
 shape = SubResource("RectangleShape2D_w7bhr")
 disabled = true
 
-[node name="HitArea2d" parent="." instance=ExtResource("2_n5yf3")]
+[node name="HitArea2D" parent="." instance=ExtResource("2_n5yf3")]
 collision_layer = 32
 collision_mask = 16
 elemental_type = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_4lfir")
 
-[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

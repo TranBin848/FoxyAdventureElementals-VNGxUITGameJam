@@ -3,7 +3,7 @@ class_name WaterBall
 
 func _init():
 	name = "Water Ball"
-	element = ElementsEnum.Elements.WATER
+	elemental_type = ElementsEnum.Elements.WATER
 	type = "multi_shot"
 	cooldown = 3.5
 	animation_name = "WaterBlast"
@@ -11,4 +11,4 @@ func _init():
 	projectile_scene = preload("res://scenes/skills/projectiles/water/waterBlastProjectile.tscn")
 	speed = 250
 	damage = 2
-	mana = 5.0
+	mana = 5

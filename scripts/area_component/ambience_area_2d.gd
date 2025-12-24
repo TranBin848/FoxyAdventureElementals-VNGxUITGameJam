@@ -49,7 +49,6 @@ func _on_body_exited(body: Node2D) -> void:
 	
 	if AudioManager:
 		# Stop current ambience
-		AudioManager.stop_ambience(fade_out)
 		print("Player exited area - Stopped ambience: ", ambience_id)
 		
 		# Optionally restore previous ambience if it existed

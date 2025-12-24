@@ -109,6 +109,7 @@ height = 32.0
 
 [node name="Starfish" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_wfme5")
 elements_debuff = Dictionary[int, PackedScene]({
 1: ExtResource("2_oyexg"),
@@ -177,12 +178,14 @@ target_position = Vector2(0, 18)
 
 [node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
 target_position = Vector2(139, 0)
-collision_mask = 2
+collision_mask = 130
+hit_from_inside = true
 
 [node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
 enabled = false
 target_position = Vector2(-48, 0)
-collision_mask = 2
+collision_mask = 130
+hit_from_inside = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_wfme5")

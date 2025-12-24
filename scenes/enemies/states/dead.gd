@@ -14,7 +14,41 @@ func _enter() -> void:
 	obj.disable_collision()
 	timer = despawn_time
 	get_shader_values()
+	
+	# ✅ Global skill drop (element = enemy's element)
 	_drop_skill_item()
+	
+func _drop_skill_item():
+	# Element từ enemy → Global manager → Perfect leveled skill! + DEBUG
+	var skill = SkillDropManager.roll_skill_drop(obj.elemental_type)
+	if skill:
+		print("🎲 [%s] Enemy(%s) → %s Lv%d" % [
+			"Level%d" % (SkillDropManager.current_level + 1),
+			ElementsEnum.Elements.keys()[obj.elemental_type],
+			skill.name, 
+			skill.level
+		])
+		
+		var skill_drop = SKILL_DROP_SCENE.instantiate() as SkillDrop
+		var skill_name = "%s Lv%d" % [skill.name, skill.level]
+		skill_drop.setup_drop(skill, skill_name, skill.texture_path)
+		skill_drop.global_position = obj.global_position
+		get_tree().current_scene.add_child(skill_drop)
+		
+		print("✅ [%s] Spawned %s drop at %.1f,%.1f" % [
+			"Level%d" % (SkillDropManager.current_level + 1),
+			skill_name,
+			skill_drop.global_position.x,
+			skill_drop.global_position.y
+		])
+	#else:
+		#print("❌ [%s] %s enemy → NO DROP (%.0f%% chance)" % [
+			#"Level%d" % (SkillDropManager.current_level + 1),
+			#ElementsEnum.Elements.keys()[obj.elemental_type],
+			#SkillDropManager.base_drop_chance[SkillDropManager.current_level] * 100
+		#])
+
+
 	
 func _update( _delta ):
 	var time_ratio: float = timer / despawn_time
@@ -36,22 +70,5 @@ func get_shader_values() -> void:
 		if (item.name == "shader_parameter/glow_opacity"):
 			max_glow_opaque = item.hint
 
-func take_damage(direction: Variant, damage: int = 1) -> void:
+func take_damage(direction: Variant, _damage: int = 1) -> void:
 	pass
-
-func _drop_skill_item():
-	if obj.skill_to_drop and SKILL_DROP_SCENE:
-		var skill_drop = SKILL_DROP_SCENE.instantiate() as SkillDrop
-		
-		if skill_drop:
-			# 1. Thiết lập thông tin Skill
-			var skill_name = obj.skill_to_drop.new().name # Lấy tên từ resource instance
-			skill_drop.setup_drop(obj.skill_to_drop, skill_name, obj.skill_icon_path)
-			
-			# 2. Đặt vị trí
-			skill_drop.global_position = obj.global_position
-			
-			# 3. Thêm vào Scene
-			get_tree().current_scene.add_child(skill_drop)
-			
-			#print("✅ Enemy dropped skill:", skill_name)

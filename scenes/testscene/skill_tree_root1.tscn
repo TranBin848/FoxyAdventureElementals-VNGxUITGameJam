@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://difgaawhpyo0r"]
+[gd_scene load_steps=4 format=3 uid="uid://biflpl8cvxhic"]
 
 [ext_resource type="Script" uid="uid://c613v451tucd0" path="res://scenes/ui/skill_tree/skill_tree_root.gd" id="1_6goge"]
 [ext_resource type="PackedScene" uid="uid://bvf8uqbc214c3" path="res://scenes/ui/skill_tree0.tscn" id="2_bsd3t"]

@@ -55,6 +55,7 @@ animations = [{
 }]
 
 [node name="Barrel" type="CharacterBody2D"]
+collision_layer = 129
 script = ExtResource("1_d1rwy")
 elements_debuff = Dictionary[int, PackedScene]({
 1: ExtResource("2_inrr5"),

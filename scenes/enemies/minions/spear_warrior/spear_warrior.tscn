@@ -28,7 +28,7 @@
 [ext_resource type="Script" uid="uid://ye5ltbp62i0r" path="res://scenes/enemies/minions/spear_warrior/states/prepare.gd" id="23_asimf"]
 [ext_resource type="Script" uid="uid://drqovfyg7urhp" path="res://scenes/enemies/states/dead.gd" id="23_nmrfe"]
 [ext_resource type="Script" uid="uid://o58wwfpbjusr" path="res://scenes/enemies/minions/spear_warrior/states/attack.gd" id="24_huggj"]
-[ext_resource type="Script" uid="uid://bluxo3qpktmav" path="res://Scenes/enemies/minions/spear_warrior/wind.gd" id="28_yxdmg"]
+[ext_resource type="Script" uid="uid://bluxo3qpktmav" path="res://scenes/enemies/minions/spear_warrior/wind.gd" id="28_yxdmg"]
 [ext_resource type="Texture2D" uid="uid://ooaidbsd0cjw" path="res://assets/spear/spear/spear_attack1.png" id="29_fopfn"]
 [ext_resource type="Texture2D" uid="uid://dtjgrwn8kfn3l" path="res://assets/spear/spear/spear_attack2.png" id="30_3lrjo"]
 
@@ -118,6 +118,7 @@ size = Vector2(46, 34)
 
 [node name="SpearWarrior" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_nmrfe")
 elements_debuff = Dictionary[int, PackedScene]({
 1: ExtResource("2_8orck"),
@@ -174,11 +175,11 @@ animation = &"prepare"
 
 [node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
 target_position = Vector2(139, 0)
-collision_mask = 2
+collision_mask = 130
 
 [node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
 target_position = Vector2(-48, 0)
-collision_mask = 2
+collision_mask = 130
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
 collision_layer = 16

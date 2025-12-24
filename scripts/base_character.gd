@@ -12,6 +12,7 @@ var direction: int = 1
 @export var _next_direction: int = 1
 var jump_speed: float = 400.0
 var jump_multiplier: float = 1.0
+var platform_vel
 
 # --- STATS ---
 @export var attack_damage: int = 1
@@ -40,10 +41,6 @@ signal mana_changed
 	ElementsEnum.Elements.WOOD: [ElementsEnum.Elements.FIRE], 
 	ElementsEnum.Elements.FIRE: [ElementsEnum.Elements.EARTH], 
 	ElementsEnum.Elements.EARTH: [ElementsEnum.Elements.METAL] }
-
-# --- SKILLS & VISUALS ---
-@export var skill_to_drop: Script = null      
-@export var skill_icon_path: String
 
 # --- ANIMATION SYSTEM ---
 var fsm: FSM = null
@@ -211,7 +208,12 @@ func turn_left() -> void: _next_direction = -1
 func turn_right() -> void: _next_direction = 1
 
 func jump() -> void:
-	velocity.y = -jump_speed * jump_multiplier
+	if is_on_floor():
+		# Get platform velocity and subtract it
+		platform_vel = get_platform_velocity()
+	else: platform_vel = Vector2.ZERO
+	velocity.y = -jump_speed * jump_multiplier - platform_vel.y
+
 
 func stop_move() -> void:
 	velocity.x = 0; velocity.y = 0

@@ -5,7 +5,7 @@ render_mode unshaded;
 uniform int elemental_type : hint_range(0, 5) = 0;
 uniform float color_tolerance : hint_range(0.0, 1.0) = 0.3;
 uniform float glow_intensity : hint_range(0.0, 5.0) = 0.7;
-uniform float outline_threshold : hint_range(0.0, 1.0) = 0.1; 
+uniform float outline_threshold : hint_range(0.0, 1.0) = 0.1;
 
 // NEW: Toggle for the crop logic
 uniform bool is_fireball_state = false;
@@ -95,17 +95,17 @@ void fragment() {
 		// IS THIS PIXEL PART OF THE SPRITE?
 		if (current_color.a > outline_threshold) {
 			vec4 swapped_color = current_color;
-			
+
 			if (elemental_type == 1) swapped_color = apply_palette_swap(current_color, metal_target_1, metal_replace_1, metal_target_2, metal_replace_2);
 			else if (elemental_type == 2) swapped_color = apply_palette_swap(current_color, wood_target_1, wood_replace_1, wood_target_2, wood_replace_2);
 			else if (elemental_type == 3) swapped_color = apply_palette_swap(current_color, water_target_1, water_replace_1, water_target_2, water_replace_2);
 			else if (elemental_type == 4) swapped_color = apply_palette_swap(current_color, fire_target_1, fire_replace_1, fire_target_2, fire_replace_2);
 			else if (elemental_type == 5) swapped_color = apply_palette_swap(current_color, earth_target_1, earth_replace_1, earth_target_2, earth_replace_2);
-			
+
 			// Apply the circle mask alpha (If not fireball, this is just * 1.0)
 			swapped_color.a *= circle_alpha;
 			COLOR = swapped_color;
-		} 
+		}
 		// IS THIS PIXEL EMPTY SPACE? (Outline logic)
 		else {
 			if (elemental_type > 0) {
@@ -119,11 +119,11 @@ void fragment() {
 				if (alpha_down > outline_threshold) max_neighbor = max(max_neighbor, alpha_down);
 				if (alpha_left > outline_threshold) max_neighbor = max(max_neighbor, alpha_left);
 				if (alpha_right > outline_threshold) max_neighbor = max(max_neighbor, alpha_right);
-				
+
 				if (max_neighbor > 0.0) {
 					vec4 outline_col = get_glow_color(elemental_type);
 					// Important: Mask the outline too!
-					outline_col.a = min(1.0, glow_intensity) * circle_alpha; 
+					outline_col.a = min(1.0, glow_intensity) * circle_alpha;
 					COLOR = outline_col;
 				} else {
 					COLOR = current_color;

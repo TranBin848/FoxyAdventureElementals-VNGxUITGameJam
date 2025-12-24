@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://b33nvdvnniecl"]
+
+[ext_resource type="Texture2D" uid="uid://bxu61oh3nvp2v" path="res://assets/skills/earth/Impact Spritesheet.png" id="1_qs7ng"]
+[ext_resource type="Script" uid="uid://cmqcefap6jlif" path="res://scenes/skills/projectiles/earth/comet_crater.gd" id="2_no3ak"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_no3ak"]
+atlas = ExtResource("1_qs7ng")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsfqk"]
+atlas = ExtResource("1_qs7ng")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6w42y"]
+atlas = ExtResource("1_qs7ng")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6a5i"]
+atlas = ExtResource("1_qs7ng")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oh4y6"]
+atlas = ExtResource("1_qs7ng")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5463"]
+atlas = ExtResource("1_qs7ng")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxjdm"]
+atlas = ExtResource("1_qs7ng")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8xd2"]
+atlas = ExtResource("1_qs7ng")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqait"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_no3ak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsfqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6w42y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6a5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oh4y6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5463")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxjdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8xd2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="CometCrater" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_oqait")
+autoplay = "default"
+frame = 7
+frame_progress = 1.0
+offset = Vector2(2, -12)
+script = ExtResource("2_no3ak")

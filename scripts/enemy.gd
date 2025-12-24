@@ -94,6 +94,8 @@ func _ready() -> void:
 	#current_debuff = Debuff.new(self)
 	#add_child(current_debuff)
 	
+	add_to_group("enemies")
+	
 	# Connect to global particle quality signal (check if not already connected)
 	if not SettingsManager.particle_quality_changed.is_connected(_on_particle_quality_changed):
 		SettingsManager.particle_quality_changed.connect(_on_particle_quality_changed)
@@ -284,14 +286,18 @@ func _init_culling() -> void:
 		call_deferred("_setup_culling_rect", enabler)
 
 func _setup_culling_rect(enabler: VisibleOnScreenEnabler2D) -> void:
-	var viewport_size = get_viewport_rect().size
-	
+	var viewport_size: Vector2 = get_viewport_rect().size
+
+	# Fallback size if viewport_size is invalid / zero
+	if viewport_size == Vector2.ZERO:
+		viewport_size = Vector2(1280, 720)  # your fallback resolution
+
 	# Extend the rect to 2x viewport size
-	var extended_rect = Rect2(
-		-viewport_size,
-		viewport_size * 3
+	var extended_rect := Rect2(
+		-viewport_size,          # position
+		viewport_size * 3.0      # size
 	)
-	
+
 	enabler.rect = extended_rect
 	enabler.enable_mode = VisibleOnScreenEnabler2D.ENABLE_MODE_INHERIT
 
@@ -474,9 +480,13 @@ func disable_collision():
 
 # Enemy bị hút vào vùng nổ
 func enter_tornado(tornado_pos: Vector2) -> void:
+	# 1. Thiết lập trạng thái
+	is_movable = false
+	velocity = Vector2.ZERO
+	
 	# 3. Bắt đầu hiệu ứng "bay lên"
 	var target_pos = tornado_pos + Vector2(0, -30)
-	var duration = 0.2
+	var duration = 0.5
 	
 	var tween := get_tree().create_tween()
 	
@@ -504,6 +514,14 @@ func apply_knockback(knockback_vec: Vector2):
 	ignore_gravity = true
 	await get_tree().create_timer(0.25).timeout
 	ignore_gravity = false
+	
+	
+# Add to ALL Enemy scripts:
+func scale_health(multiplier: float):
+	if not has_node("EnemyHealthBar"): return  # Safety check
+	max_health *= multiplier
+	health = max_health
+	print("💚 %s: %.0fHP (x%.1f)" % [name, max_health, multiplier])
 
 # Functions for debuff
 func set_debuff(debuff_scene: PackedScene) -> void:

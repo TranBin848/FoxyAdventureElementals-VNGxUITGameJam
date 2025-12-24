@@ -86,6 +86,7 @@ radius = 15.0
 [node name="Mushroom" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_sl7hc")
 elements_debuff = Dictionary[int, PackedScene]({
 1: ExtResource("2_an34f"),

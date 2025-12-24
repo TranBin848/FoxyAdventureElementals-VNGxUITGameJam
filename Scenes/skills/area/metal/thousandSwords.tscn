@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce67wq8nkpvyx"]
+
+[ext_resource type="Script" path="res://scenes/skills/area/metal/thousandSwords.gd" id="1_b2i4o"]
+
+[node name="ThousandSwords" type="Area2D"]
+script = ExtResource("1_b2i4o")
+sword_scene_path = "res://scenes/skills/projectiles/metal/sword_projectile.tscn"
+metadata/_custom_type_script = "uid://52fejgdsdbp7"
+
+[node name="Marker2D" type="Marker2D" parent="."]

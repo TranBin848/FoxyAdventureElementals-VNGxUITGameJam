@@ -7,11 +7,15 @@ extends PlayerState
 func _enter() -> void:
 	#Change animation to run
 	obj.change_animation("run")
-	AudioManager.play_sound("player_walk")
+	if (!obj.is_in_burrow_state):
+		AudioManager.play_sound("player_walk")
 	timer = 0.3
-	pass
 
 func _update(_delta: float):
+	if (obj.is_in_burrow_state):
+		if not control_moving():
+			change_state(fsm.states.idle)
+		return
 	if update_timer(_delta):
 		var walk_fx = walk_fx_factory.create() as Node2D
 		AudioManager.play_sound("player_walk")
