@@ -88,10 +88,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhoxj"]
-size = Vector2(32.5, 15)
+size = Vector2(32.5, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tnvla"]
-size = Vector2(32, 20)
+size = Vector2(34, 10)
 
 [node name="FireShotProjectileBoss" type="Area2D"]
 collision_layer = 0
@@ -107,7 +107,7 @@ autoplay = "FireShot"
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.75, -0.5)
+position = Vector2(3.75, 1.5)
 shape = SubResource("RectangleShape2D_uhoxj")
 
 [node name="HitArea2D" parent="." instance=ExtResource("3_leffw")]
@@ -117,7 +117,7 @@ collision_mask = 4
 elemental_type = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
-position = Vector2(4, 4)
+position = Vector2(5, 9)
 shape = SubResource("RectangleShape2D_tnvla")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

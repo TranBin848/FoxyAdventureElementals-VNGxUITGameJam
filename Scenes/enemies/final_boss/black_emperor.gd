@@ -17,6 +17,7 @@ var boss_zone: Area2D = null
 var is_fighting: bool = false
 var fly_target_y: float = 0.0  # Độ cao bay cố định khi ở phase FLY
 var ground_y: float = 0.0  # Độ cao mặt đất ban đầu
+var original_x: float = 0.0  # Vị trí x ban đầu để di chuyển qua lại
 
 enum Phase {
 	FLY,
@@ -44,7 +45,9 @@ func _ready() -> void:
 	fsm = FSM.new(self, $States, $States/Inactive)
 	ground_y = global_position.y  # Lưu độ cao mặt đất
 	fly_target_y = global_position.y - 150  # Lưu độ cao bay
+	original_x = global_position.x  # Lưu vị trí x ban đầu
 	
+	add_to_group("enemies")
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)

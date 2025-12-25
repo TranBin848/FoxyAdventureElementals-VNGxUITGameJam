@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=56 format=3 uid="uid://d0a57drf7tx4v"]
 
 [ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fxnya"]
@@ -50,6 +50,7 @@
 [ext_resource type="PackedScene" uid="uid://8ucurw88rfh2" path="res://scenes/enemies/final_boss/fireShotProjectileBoss.tscn" id="47_o7w2u"]
 [ext_resource type="Script" uid="uid://nyc2dcgdpxlh" path="res://scenes/enemies/final_boss/rain_bullets.gd" id="48_o7w2u"]
 [ext_resource type="PackedScene" uid="uid://cb6h82l7nm4a2" path="res://scenes/enemies/final_boss/waterbullet_projectile.tscn" id="49_o7w2u"]
+[ext_resource type="Script" uid="uid://ch1op0epukahs" path="res://scenes/enemies/final_boss/hurt.gd" id="50_laq78"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
 animations = [{
@@ -234,7 +235,8 @@ radius = 26.0
 radius = 25.0
 
 [node name="BlackEmperor" type="CharacterBody2D"]
-collision_layer = 256
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_hljwo")
 spike = 1.0
 sight = 200.0
@@ -277,7 +279,7 @@ shape = SubResource("CircleShape2D_w2egv")
 debug_color = Color(0.575242, 0.0792793, 0, 0.42)
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
-collision_layer = 256
+collision_layer = 16
 collision_mask = 0
 script = ExtResource("36_451n5")
 metadata/_custom_type_script = "uid://csu2b21cwchqw"
@@ -325,6 +327,9 @@ meteor_scene = ExtResource("47_o7w2u")
 [node name="RainBullets" type="Node" parent="States"]
 script = ExtResource("48_o7w2u")
 water_bullet_scene = ExtResource("49_o7w2u")
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("50_laq78")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -25.0

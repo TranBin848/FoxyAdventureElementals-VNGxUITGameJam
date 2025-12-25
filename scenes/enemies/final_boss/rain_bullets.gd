@@ -5,7 +5,7 @@ extends BlackEmperorState
 @export var ring_radius: float = 100.0  # Bán kính vòng tròn
 @export var spawn_interval: float = 0.05  # Delay giữa mỗi đạn spawn
 @export var fire_interval: float = 0.08  # Delay giữa mỗi đạn bắn
-@export var bullet_speed: float = 400.0  # Tốc độ đạn
+@export var bullet_speed: float = 300.0  # Tốc độ đạn
 @export var bullet_damage: int = 10  # Damage của đạn
 
 var active_bullets: Array = []
@@ -43,8 +43,37 @@ func _enter():
 	# Đợi 3 giây trước khi chuyển sang skill tiếp theo
 	await get_tree().create_timer(3.0).timeout
 	
+	# Di chuyển qua lại trái phải dựa trên vị trí x ban đầu
+	await _move_horizontally()
+	
 	# Chuyển sang skill tiếp theo
 	obj.use_skill()
+
+func _move_horizontally():
+	# Lấy vị trí x ban đầu của boss
+	var original_x = obj.original_x if "original_x" in obj else obj.global_position.x
+	var current_x = obj.global_position.x
+	var move_distance = 200.0  # Khoảng cách di chuyển
+	var move_duration = 1.5  # Thời gian di chuyển
+	
+	# Xác định vị trí đích dựa trên vị trí hiện tại so với original
+	var target_x: float
+	if current_x < original_x:
+		# Đang ở bên trái, di chuyển sang phải
+		target_x = original_x + move_distance
+	else:
+		# Đang ở bên phải hoặc tại vị trí gốc, di chuyển sang trái
+		target_x = original_x - move_distance
+	
+	# Thêm biến thiên độ cao cố định (lên hoặc xuống 25 pixels)
+	var y_offset = 25.0 if randf() > 0.5 else -25.0
+	var target_y = obj.global_position.y + y_offset
+	
+	# Tạo tween để di chuyển
+	var target_pos = Vector2(target_x, target_y)
+	var tween = get_tree().create_tween()
+	tween.tween_property(obj, "global_position", target_pos, move_duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
 
 func _spawn_and_fire_bullets():
 	active_bullets.clear()

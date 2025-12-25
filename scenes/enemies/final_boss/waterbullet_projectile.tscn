@@ -260,10 +260,7 @@ metadata/_custom_type_script = "uid://5btdwob525wm"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-6, 0)
 sprite_frames = SubResource("SpriteFrames_ypcpm")
-animation = &"end"
 autoplay = "default"
-frame = 15
-frame_progress = 1.0
 
 [node name="HitArea2D" parent="." instance=ExtResource("3_tcl7s")]
 collision_layer = 0

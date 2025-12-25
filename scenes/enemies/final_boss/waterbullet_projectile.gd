@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 			var normal := ground_ray.get_collision_normal().normalized()
 			var dot := normal.dot(Vector2.UP)
 
-			if dot > -0.1:
+			if dot > -0.05:
 				_play_end_and_destroy()
 				return
 			else:
