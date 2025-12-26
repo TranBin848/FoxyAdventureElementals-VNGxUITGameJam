@@ -10,6 +10,7 @@ func _enter() -> void:
 	#ready_to_attack = false
 
 func _update(_delta: float) -> void:
+	if obj.is_frozen: return
 	ready_to_attack = obj.ready_to_turn_around()
 	#if obj.found_player != null and ready_to_attack:
 		#change_state(fsm.states.prepare)

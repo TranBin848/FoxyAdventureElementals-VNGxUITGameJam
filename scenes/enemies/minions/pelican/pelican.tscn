@@ -1,22 +1,27 @@
-[gd_scene load_steps=27 format=3 uid="uid://b55wlvp8e3emi"]
+[gd_scene load_steps=32 format=3 uid="uid://b55wlvp8e3emi"]
 
 [ext_resource type="Script" uid="uid://did28knq268sk" path="res://scenes/enemies/minions/pelican/pelican.gd" id="1_ktqmc"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_2n6ug"]
 [ext_resource type="Texture2D" uid="uid://dm54orux73pxu" path="res://assets/enemy/pelican/pelican_atk_01.png" id="2_adoyw"]
 [ext_resource type="Texture2D" uid="uid://by2b7tavl86iu" path="res://assets/enemy/pelican/pelican_01.png" id="2_dvi3v"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_qwma1"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_2iih0"]
 [ext_resource type="Texture2D" uid="uid://d306h85v33c88" path="res://assets/enemy/pelican/pelican_atk_02.png" id="3_34k3o"]
 [ext_resource type="Texture2D" uid="uid://p7brpsmpjjpe" path="res://assets/enemy/pelican/pelican_02.png" id="3_vr5qo"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_wa382"]
 [ext_resource type="Texture2D" uid="uid://c2h5d72yhi400" path="res://assets/enemy/pelican/pelican_atk_03.png" id="4_kbikv"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_ojo0w"]
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_wpn33"]
 [ext_resource type="Texture2D" uid="uid://dkfubffp38yud" path="res://assets/enemy/pelican/pelican_03.png" id="4_y5g72"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_5lwol"]
 [ext_resource type="Texture2D" uid="uid://btchudadw108i" path="res://assets/enemy/pelican/pelican_04.png" id="5_6tny8"]
+[ext_resource type="PackedScene" uid="uid://6ppqcm5ge1yh" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.tscn" id="5_71pn2"]
 [ext_resource type="Script" uid="uid://bpsldgg0c0iav" path="res://scenes/enemies/minions/pelican/states/moving.gd" id="6_dvi3v"]
 [ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_ovw27"]
+[ext_resource type="PackedScene" uid="uid://c00jedhwcnsij" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn" id="6_v8u71"]
 [ext_resource type="Texture2D" uid="uid://ce3twrfpcugbt" path="res://assets/enemy/pelican/pelican_hurt.png" id="7_bvgja"]
 [ext_resource type="Script" uid="uid://cufl3p0vdicln" path="res://scenes/enemies/minions/pelican/states/leave.gd" id="7_vr5qo"]
-[ext_resource type="Script" uid="uid://bog5fjackwlfe" path="res://scenes/enemies/minions/pelican/drop_bomb.gd" id="7_y5g72"]
+[ext_resource type="Script" uid="uid://bog5fjackwlfe" path="res://scenes/enemies/minions/pelican/states/drop_bomb.gd" id="7_y5g72"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="9_34k3o"]
 [ext_resource type="PackedScene" uid="uid://ywndjg6kc5hy" path="res://scenes/enemies/minions/pelican/pelican_bomb.tscn" id="10_kbikv"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="17_24neh"]
@@ -99,6 +104,13 @@ collision_mask = 129
 script = ExtResource("1_ktqmc")
 drop_bomb_angle = 90.0
 drop_bomb_force = 300.0
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_2n6ug"),
+2: ExtResource("3_2iih0"),
+3: ExtResource("4_ojo0w"),
+4: ExtResource("5_71pn2"),
+5: ExtResource("6_v8u71")
+})
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 sight = 100.0
@@ -179,3 +191,6 @@ enemy = NodePath("..")
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]
 position = Vector2(0, -17)
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-8, 17)

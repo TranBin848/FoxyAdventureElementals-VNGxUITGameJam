@@ -13,6 +13,7 @@ func _enter() -> void:
 	drop_bomb_timer = drop_bomb_start_time
 
 func _update(_delta: float) -> void:
+	if obj.is_frozen: return
 	#Control moving
 	control_moving()
 	control_flying_up()

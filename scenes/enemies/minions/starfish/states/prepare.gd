@@ -15,6 +15,7 @@ func _exit() -> void:
 	pass
 
 func _update( _delta ):
+	if obj.is_frozen: return
 	if obj.found_player == null:
 		change_state(fsm.states.moving)
 		return
