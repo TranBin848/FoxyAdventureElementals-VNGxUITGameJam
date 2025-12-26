@@ -29,13 +29,13 @@ signal died
 signal mana_changed
 
 # --- ELEMENTAL TABLES ---
-@export var restraint_table = { 
+const restraint_table = { 
 	ElementsEnum.Elements.METAL: [ElementsEnum.Elements.WOOD], 
 	ElementsEnum.Elements.WOOD: [ElementsEnum.Elements.EARTH], 
 	ElementsEnum.Elements.WATER: [ElementsEnum.Elements.FIRE], 
 	ElementsEnum.Elements.FIRE: [ElementsEnum.Elements.METAL], 
 	ElementsEnum.Elements.EARTH: [ElementsEnum.Elements.WATER] }
-@export var creation_table = { 
+const creation_table = { 
 	ElementsEnum.Elements.METAL: [ElementsEnum.Elements.WATER], 
 	ElementsEnum.Elements.WATER: [ElementsEnum.Elements.WOOD], 
 	ElementsEnum.Elements.WOOD: [ElementsEnum.Elements.FIRE], 

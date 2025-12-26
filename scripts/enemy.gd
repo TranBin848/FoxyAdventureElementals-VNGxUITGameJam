@@ -426,7 +426,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	
 	return base_damage
 
-func check_element(elemental_type_1: int, elemental_type_2: int) -> int:
+func check_element(elemental_type_1: ElementsEnum.Elements, elemental_type_2: ElementsEnum.Elements) -> int:
 	# 1 khắc 2
 	if (restraint_table.has(elemental_type_1) and restraint_table[elemental_type_1].has(elemental_type_2)):
 		return -1
@@ -436,7 +436,7 @@ func check_element(elemental_type_1: int, elemental_type_2: int) -> int:
 	# Không sinh khắc
 	return 0
 
-func handle_elemental_damage(attacker_element: int) -> void:
+func handle_elemental_damage(attacker_element: ElementsEnum.Elements) -> void:
 	var debuff_scene: PackedScene = null
 	if elements_debuff.has(attacker_element):
 		debuff_scene = elements_debuff[attacker_element]
