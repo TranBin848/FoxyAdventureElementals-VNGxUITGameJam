@@ -286,6 +286,10 @@ func is_can_fall() -> bool:
 	return down_ray_cast != null and not down_ray_cast.is_colliding()
 
 
+func _process(delta):
+	if not is_visible_in_tree():
+		return
+
 # --- Called every frame (or physics frame)
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)

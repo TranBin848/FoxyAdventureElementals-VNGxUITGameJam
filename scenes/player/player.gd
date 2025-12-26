@@ -123,6 +123,7 @@ func _hide_all_visuals() -> void:
 	blade_sprite.hide()
 	wand_sprite.hide()
 	fireball_sprite.hide()
+	fireball_fx.hide()
 	silhouette_normal_sprite.hide()
 	silhouette_blade_sprite.hide()
 	silhouette_wand_sprite.hide()
@@ -355,19 +356,16 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 # ================================================================
 
 func save_state() -> Dictionary:
-	return { "position": [global_position.x, global_position.y], "has_blade": has_blade, "is_in_fireball_state": is_in_fireball_state }
+	return { "position": [global_position.x, global_position.y], "has_blade": has_blade, "has_wand": has_wand}
 
 func load_state(data: Dictionary) -> void:
 	if data.has("position"): global_position = Vector2(data["position"][0], data["position"][1])
 	if data.has("has_blade"):
 		has_blade = data["has_blade"]
-		if has_blade and not is_in_fireball_state: collected_blade()
-	if data.has("is_in_fireball_state"):
-		# UPDATED: Use manager to restore state
-		if data["is_in_fireball_state"]:
-			enter_buff_state(BuffState.FIREBALL) # No duration means it persists until cancelled
-		else:
-			exit_current_buff()
+		if has_blade: collected_blade()
+	if data.has("has_wand"):
+		has_blade = data["has_wand"]
+		if has_blade: collected_wand()
 
 # ================================================================
 # === ELEMENTAL LOGIC REFACTOR ===================================
@@ -414,6 +412,8 @@ func _update_elemental_palette() -> void:
 	var shader_material = ShaderMaterial.new()
 	shader_material.shader = load("res://scenes/player/player_glowing.gdshader")
 	animated_sprite.material = shader_material
+	for silhouette in extra_sprites:
+		silhouette.material = shader_material
 	var shader_mat = animated_sprite.material as ShaderMaterial
 	shader_mat.set_shader_parameter("elemental_type", elemental_type)
 	shader_mat.set_shader_parameter("glow_intensity", 1.5)
@@ -634,6 +634,7 @@ func _apply_fireball_buff_internal(_duration: float) -> void:
 	elemental_type = ElementsEnum.Elements.FIRE
 	_update_elemental_palette()
 	_set_player_visuals(fireball_sprite, null)
+	set_collision_mask_value(4,true)
 	change_animation("Fireball")
 	fireball_fx.show()
 	fireball_fx.play()
@@ -646,6 +647,7 @@ func _exit_fireball_internal() -> void:
 	speed_multiplier = 1.0
 	elemental_type = ElementsEnum.Elements.NONE
 	_update_elemental_palette()
+	set_collision_mask_value(4,false)
 	fireball_fx.hide()
 	fireball_fx.stop()
 	fireball_hit_area.monitoring = false
@@ -685,7 +687,7 @@ func _exit_burrow_internal(jump_required: bool = true) -> void:
 	for s in extra_sprites:
 		if is_instance_valid(s): s.modulate.a = 1.0
 		
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	
 	if default_collision: default_collision.set_deferred("disabled", false)
 	if burrow_collision: burrow_collision.set_deferred("disabled", true)
@@ -738,10 +740,20 @@ func _on_fireball_hit_enemy(_hurt_area: Area2D) -> void:
 		_perform_bounce(enemy.global_position)
 
 func _perform_bounce(enemy_position: Vector2) -> void:
-	var normal_vector = (global_position - enemy_position).normalized()
-	var bounce_speed = max(velocity.length(), 300.0)
-	velocity = velocity.bounce(normal_vector).normalized() * bounce_speed
-
+	# 1. Get the direction purely based on positions (Ignoring current velocity)
+	var direction_away = (global_position - enemy_position).normalized()
+	
+	# 2. Define how hard the bounce should be
+	# You can set a fixed force (e.g., 500) or keep the current speed if it's faster.
+	var knockback_force = 500.0 
+	
+	# Optional: If you want to keep momentum when moving fast, use max()
+	var bounce_speed = max(velocity.length(), knockback_force)
+	
+	# 3. OVERWRITE velocity completely
+	# We do not add (+), we do not reflect (.bounce). We just Set.
+	velocity = direction_away * knockback_force
+	
 func dash() -> void:
 	velocity.x = movement_speed * dash_speed_mul * direction
 	velocity.y = 0.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=108 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
@@ -563,8 +563,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niom3"]
 size = Vector2(17, 28)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ru3bc"]
-radius = 15.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_21yht"]
+radius = 17.0294
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8qe1"]
 size = Vector2(15.3181, 31.9904)
@@ -579,6 +579,9 @@ point_count = 3
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_genst"]
 radius = 7.0
 height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ru3bc"]
+radius = 17.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lwhcj"]
 size = Vector2(5.5, 3)
@@ -733,7 +736,7 @@ metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/FireballHitArea2D"]
 position = Vector2(0, -15)
-shape = SubResource("CircleShape2D_ru3bc")
+shape = SubResource("CircleShape2D_21yht")
 
 [node name="HitArea2D" type="Area2D" parent="Direction"]
 collision_mask = 16
