@@ -305,4 +305,6 @@ collision_mask = 1
 [node name="BladeCollectable" parent="." instance=ExtResource("29_rcebl")]
 position = Vector2(155, 206)
 
+[node name="Enemies" type="Node2D" parent="."]
+
 [connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]

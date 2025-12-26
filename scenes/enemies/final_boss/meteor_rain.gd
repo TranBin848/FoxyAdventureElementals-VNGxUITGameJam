@@ -9,7 +9,7 @@ extends BlackEmperorState
 @export var shot_interval: float = 1.0  # Thời gian giữa các lần bắn
 @export var meteor_speed: float = 400.0  # Tốc độ meteor
 @export var meteor_damage: int = 15  # Damage của meteor
-@export var follow_distance: float = 350.0  # Khoảng cách giữ với player
+@export var follow_distance: float = 300.0  # Khoảng cách giữ với player
 @export var move_speed: float = 150.0  # Tốc độ di chuyển của boss
 
 func _enter():
@@ -34,7 +34,7 @@ func _enter():
 		# Kiểm tra phase
 		if obj.current_phase != obj.Phase.FLY:
 			obj.is_movable = true
-			change_state(fsm.states.idle)
+			#change_state(fsm.states.idle)
 			return
 		
 		# Di chuyển về phía player giữ khoảng cách

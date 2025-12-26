@@ -46,8 +46,29 @@ func _enter():
 	# Di chuyển qua lại trái phải dựa trên vị trí x ban đầu
 	await _move_horizontally()
 	
-	# Chuyển sang skill tiếp theo
-	obj.use_skill()
+	# Kiểm tra phase để quyết định chuyển state
+	if obj.current_phase == obj.Phase.GROUND:
+		# Phase 2: hạ xuống và charge lại
+		await _land_and_charge()
+	else:
+		# Phase 1: tiếp tục skill tiếp theo
+		obj.use_skill()
+
+func _land_and_charge() -> void:
+	# Hạ boss xuống mặt đất
+	if obj.animated_sprite_2d and obj.animated_sprite_2d.sprite_frames.has_animation("land"):
+		obj.animated_sprite_2d.play("land")
+	
+	var target_pos = Vector2(obj.global_position.x, obj.ground_y)
+	var tween = create_tween()
+	tween.tween_property(obj, "global_position", target_pos, 1.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await tween.finished
+	
+	# Chuyển sang state charge
+	if fsm.states.has("charge"):
+		fsm.change_state(fsm.states.charge)
+	else:
+		obj.use_skill()
 
 func _move_horizontally():
 	# Lấy vị trí x ban đầu của boss

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=63 format=3 uid="uid://d0a57drf7tx4v"]
 
 [ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fxnya"]
@@ -51,6 +51,13 @@
 [ext_resource type="Script" uid="uid://nyc2dcgdpxlh" path="res://scenes/enemies/final_boss/rain_bullets.gd" id="48_o7w2u"]
 [ext_resource type="PackedScene" uid="uid://cb6h82l7nm4a2" path="res://scenes/enemies/final_boss/waterbullet_projectile.tscn" id="49_o7w2u"]
 [ext_resource type="Script" uid="uid://ch1op0epukahs" path="res://scenes/enemies/final_boss/hurt.gd" id="50_laq78"]
+[ext_resource type="Script" uid="uid://ce8mie4i6bkt8" path="res://scenes/enemies/final_boss/spam_enemies.gd" id="51_spam"]
+[ext_resource type="PackedScene" uid="uid://cfwdngvncdiwu" path="res://scenes/enemies/final_boss/boss_spawner.tscn" id="52_spawner"]
+[ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="53_qin12"]
+[ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="54_maoj0"]
+[ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="55_2anp0"]
+[ext_resource type="Script" uid="uid://byheauwog643v" path="res://scenes/enemies/final_boss/dead.gd" id="56_2anp0"]
+[ext_resource type="Script" uid="uid://rs2knmi2vck7" path="res://scenes/enemies/final_boss/charge.gd" id="57_mq2q6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
 animations = [{
@@ -238,6 +245,8 @@ radius = 25.0
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_hljwo")
+spawner_scene = ExtResource("52_spawner")
+enemies_to_spawn = Array[PackedScene]([ExtResource("53_qin12"), ExtResource("55_2anp0")])
 spike = 1.0
 sight = 200.0
 metadata/_custom_type_script = "uid://s4xx82espxdt"
@@ -330,6 +339,18 @@ water_bullet_scene = ExtResource("49_o7w2u")
 
 [node name="Hurt" type="Node" parent="States"]
 script = ExtResource("50_laq78")
+
+[node name="SpamEnemies" type="Node" parent="States"]
+script = ExtResource("51_spam")
+spawner_scene = ExtResource("52_spawner")
+enemies_to_spawn = Array[PackedScene]([ExtResource("53_qin12"), ExtResource("54_maoj0"), ExtResource("55_2anp0")])
+spawn_duration = 10.0
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("56_2anp0")
+
+[node name="Charge" type="Node" parent="States"]
+script = ExtResource("57_mq2q6")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -25.0
