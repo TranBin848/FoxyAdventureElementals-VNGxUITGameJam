@@ -9,5 +9,6 @@ func _update(_delta: float) -> void:
 	if obj.found_player != null:
 		var dir = obj.found_player.position - obj.position
 		obj.change_direction(sign(dir.x))
+		print(str(obj.found_player.position.x) + " " + str(obj.position.x))
 		if obj.update_cool_down_timer(_delta): change_state(fsm.states.shoot)
 	else: obj.update_cool_down_timer(_delta)

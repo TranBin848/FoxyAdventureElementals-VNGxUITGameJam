@@ -360,7 +360,7 @@ func _on_player_not_in_sight() -> void:
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Demo debuff
-	#var debuff: PackedScene = load("res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn") as PackedScene
+	#var debuff: PackedScene = load("res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn") as PackedScene
 	#set_debuff(debuff)
 	
 	# Tính damage dựa trên quan hệ sinh - khắc
@@ -374,7 +374,7 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	print("my element: " + str(elemental_type) + " enemy: " + str(_elemental_type) + " is critical: " + str(is_critical))
 	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
 	if (fsm.current_state != null): fsm.current_state.take_damage(_direction, modified_damage)
-	if is_critical: handle_elemental_damage(_elemental_type)
+	handle_elemental_damage(_elemental_type)
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	## Nếu tấn công không có nguyên tố, dùng damage gốc

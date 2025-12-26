@@ -13,6 +13,10 @@ func start_state_enter() -> void:
 	super.start_state_enter()
 	if target != null: target.freeze_in_place(true)
 
+func start_state_update(delta: float) -> void:
+	super.start_state_update(delta)
+	if target != null: target.velocity.x = 0
+
 func perform_state_update(delta: float) -> void:
 	super.perform_state_update(delta)
 	if target != null: target.velocity.x = 0
@@ -20,3 +24,7 @@ func perform_state_update(delta: float) -> void:
 func end_state_exit() -> void:
 	if target != null: target.freeze_in_place(false)
 	super.end_state_exit()
+
+func end_state_update(delta: float):
+	super.end_state_update(delta)
+	if target != null: target.velocity.x = 0
