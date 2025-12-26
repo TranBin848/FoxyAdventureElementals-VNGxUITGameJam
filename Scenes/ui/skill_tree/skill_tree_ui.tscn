@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://ceyye5a53ckes"]
+
+[ext_resource type="Script" uid="uid://8vtovny64gjj" path="res://scenes/ui/skill_tree/skill_tree_ui.gd" id="1_ef1ca"]
+[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="1_kjyl8"]
+[ext_resource type="PackedScene" uid="uid://c24hsf56rny2a" path="res://scenes/ui/skill_tree/skill_tree.tscn" id="3_37kbm"]
+[ext_resource type="PackedScene" uid="uid://sgxxofrggjed" path="res://scenes/ui/skill_tree/skill_info_panel.tscn" id="3_kjyl8"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="3_trb1m"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_2s5r4"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar/skill_bar.tscn" id="4_kjyl8"]
+
+[node name="SkillTreeUI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_ef1ca")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.05176e-05
+offset_right = 1472.0
+offset_bottom = 816.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.465121, 0.468751)
+texture = ExtResource("1_kjyl8")
+
+[node name="OpacityLayer" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.764706)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="InstructionLabel" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 360.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("3_trb1m")
+theme_override_font_sizes/font_size = 16
+text = "Tab to open/close skill tree
+Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 332.0
+offset_bottom = 65.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2s5r4")
+theme_override_font_sizes/font_size = 32
+text = "SKILL TREE"
+vertical_alignment = 1
+
+[node name="SkillTreeRoot" parent="." instance=ExtResource("3_37kbm")]
+
+[node name="SkillInfoPanel" parent="." instance=ExtResource("3_kjyl8")]
+visible = false
+offset_top = -329.5
+offset_bottom = 329.5
+
+[node name="SkillBar" parent="." instance=ExtResource("4_kjyl8")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_bottom = 0.0
+grow_vertical = 0
+
+[node name="NotiLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -60.0
+offset_right = 117.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_trb1m")
+theme_override_font_sizes/font_size = 16
+text = "Enemy Out of Range"
+horizontal_alignment = 1

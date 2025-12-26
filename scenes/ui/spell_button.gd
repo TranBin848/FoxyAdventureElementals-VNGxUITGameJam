@@ -112,12 +112,12 @@ func update_stack_ui() -> void:
 		return
 
 	# A. Permanent skill: hide stack label completely
-	if SkillTreeManager.get_unlocked(skill.name):
+	if SkillTreeManager.is_unlocked(skill.name):
 		stack_label.visible = false
 		return
 
 	# B. Temporary skill: handle stacks
-	var current_stack: int = SkillTreeManager.get_skill_stack(skill.name)
+	var current_stack: int = SkillTreeManager.get_stacks(skill.name)
 
 	if current_stack <= 0:
 		# Clear slot if no stacks and not permanent

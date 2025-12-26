@@ -21,7 +21,7 @@ func _ready() -> void:
 		# 🔥 Validate + equip
 		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
 		if skill:
-			SkillTreeManager.unlock_skill(skill_names[i])
+			SkillTreeManager.unlock_skill(skill_names[i],0)
 			SkillTreeManager.equip_skill(i, skill_names[i])
 			print("✅ Equipped %s to slot %d" % [skill_names[i], i])
 	#GameManager.logger.log("Hi Im global logger, Im from level 1")

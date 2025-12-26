@@ -136,21 +136,11 @@ func _on_dialog_started(): can_move = false
 func _on_dialog_ended(): can_move = true
 
 func _check_and_use_skill_stack(skill_to_use: Skill):
-	var skillbar_root = get_tree().get_first_node_in_group("skill_bar")
-	var skill_bar
-	if skillbar_root: skill_bar = skillbar_root.get_node("MarginContainer/SkillBar")
-	if skill_bar:
-		for i in range(skill_bar.slots.size()):
-			var slot = skill_bar.slots[i]
-			if slot.skill == skill_to_use:
-				var stack = SkillTreeManager.get_skill_stack(skill_to_use.name)
-				var unlocked = SkillTreeManager.get_unlocked(skill_to_use.name)
-				if unlocked: return
-				if stack == 1: SkillTreeManager.clear_skill_in_bar(i)
-				elif stack > 1:
-					SkillTreeManager.remove_stack(skill_to_use, 1)
-					slot.update_stack_ui()
-				return 
+	if not skill_to_use:
+		return
+		
+	# The Manager handles the logic, math, and UI updates
+	SkillTreeManager.consume_skill_use(skill_to_use.name)
 
 func add_new_skill(new_skill_class: Skill) -> bool:
 	skill_collected.emit(new_skill_class)
