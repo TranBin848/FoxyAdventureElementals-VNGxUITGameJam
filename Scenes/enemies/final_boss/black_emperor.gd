@@ -91,67 +91,19 @@ func take_damage(damage: int) -> void:
 
 func enter_phase_ground() -> void:
 	current_phase = Phase.GROUND
-	
 	cur_skill = 0
-	
-	# Boss bị stun trong suốt quá trình chuyển phase
-	is_stunned = true
 	
 	# Tắt va chạm bay / bật va chạm đất nếu có
 	collision.disabled = false
 	
-	# === SLOW MOTION + CAMERA ZOOM ===
-	# Slow motion
-	Engine.time_scale = 0.3
-	
-	# Zoom camera vào boss
-	if boss_zone and boss_zone.camera_2d:
-		var boss_camera = boss_zone.camera_2d
-		var original_zoom = boss_camera.zoom
-		var target_zoom = original_zoom * 1.5  # Zoom in 1.5x
-		
-		# Tween zoom in
-		var tween = create_tween()
-		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-		tween.tween_property(boss_camera, "zoom", target_zoom, 0.5)
-		await tween.finished
-	
-	# Animation đau đớn
-	if animated_sprite_2d.sprite_frames.has_animation("hurt"):
-		animated_sprite_2d.play("hurt")
-	elif animated_sprite_2d.sprite_frames.has_animation("land"):
-		animated_sprite_2d.play("land")
-	
-	# Đợi một chút để player thấy boss đau
-	await get_tree().create_timer(0.3 * Engine.time_scale).timeout
-	
-	# === SPAWN 5 SPAWNER THEO HÌNH NGÔI SAO (chưa active) ===
-	_spawn_star_spawners(false)  # Spawn nhưng chưa cho hoạt động
-	
-	# Đợi thêm một chút
-	await get_tree().create_timer(0.5 * Engine.time_scale).timeout
-	
-	# === ZOOM CAMERA VỀ 1.5 ===
-	if boss_zone and boss_zone.camera_2d:
-		var boss_camera = boss_zone.camera_2d
-		var target_zoom = Vector2(1.5, 1.5)  # Zoom về 1.5
-		
-		var tween = create_tween()
-		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-		tween.tween_property(boss_camera, "zoom", target_zoom, 0.3)
-		await tween.finished
-	
-	# === TRẢ VỀ TỐC ĐỘ BÌNH THƯỜNG ===
-	Engine.time_scale = 1.0
-	
-	# === HẠ BOSS XUỐNG MẶT ĐẤT CHẬM CHẬM ===
-	animated_sprite_2d.play("land")
-	await _land_on_ground()
-	
-	# === SAU KHI HẠ CÁNH XONG, KÍCH HOẠT SPAWNER ===
-	_activate_spawners()
-	
-	is_stunned = false
+	# Chuyển sang state spam_enemies để triệu hồi spawner
+	if fsm.states.has("spamenemies"):
+		fsm.change_state(fsm.states.spamenemies)
+	else:
+		print("Error: spamenemies state not found!")
+		# Fallback: chuyển sang charge
+		if fsm.states.has("charge"):
+			fsm.change_state(fsm.states.charge)
 
 func _spawn_star_spawners(active: bool = true) -> void:
 	if spawner_scene == null:
@@ -173,8 +125,16 @@ func _spawn_star_spawners(active: bool = true) -> void:
 		ElementsEnum.Elements.EARTH
 	]
 	
-	# Vị trí hiện tại của boss (tâm ngôi sao)
-	var center = global_position
+	# Tâm của boss zone theo trục x, y cố định ở trên cao
+	var center_x = global_position.x
+	var center_y = ground_y - 200  # Y cố định, cao hơn mặt đất 100 pixel
+	
+	# Nếu có boss_zone, lấy tâm x của boss_zone
+	if boss_zone:
+		var zone_center = boss_zone.global_position
+		center_x = zone_center.x
+	
+	var center = Vector2(center_x, center_y)
 	
 	# Góc bắt đầu từ đỉnh trên (-90 độ)
 	var start_angle = -PI / 2
@@ -225,6 +185,96 @@ func _spawn_star_spawners(active: bool = true) -> void:
 		spawned_spawners.append(spawner)
 	
 	print("Spawned 5 spawners in star shape around boss")
+
+func _spawn_star_spawners_with_fade(active: bool = true) -> void:
+	if spawner_scene == null:
+		print("Error: spawner_scene not assigned in BlackEmperor!")
+		return
+	
+	# Xóa spawner cũ nếu có
+	for s in spawned_spawners:
+		if is_instance_valid(s):
+			s.queue_free()
+	spawned_spawners.clear()
+	
+	# 5 hệ nguyên tố
+	var element_types = [
+		ElementsEnum.Elements.METAL,
+		ElementsEnum.Elements.WOOD, 
+		ElementsEnum.Elements.WATER,
+		ElementsEnum.Elements.FIRE,
+		ElementsEnum.Elements.EARTH
+	]
+	
+	# Tâm của boss zone theo trục x, y cố định ở trên cao
+	var center_x = global_position.x
+	var center_y = ground_y - 200  # Y cố định, cao hơn mặt đất
+	
+	# Nếu có boss_zone, lấy tâm x của boss_zone
+	if boss_zone:
+		var zone_center = boss_zone.global_position
+		center_x = zone_center.x
+	
+	var center = Vector2(center_x, center_y)
+	
+	# Góc bắt đầu từ đỉnh trên (-90 độ)
+	var start_angle = -PI / 2
+	
+	for i in range(5):
+		var spawner = spawner_scene.instantiate()
+		
+		# Tính góc cho đỉnh thứ i của ngôi sao (ngũ giác)
+		var angle = start_angle + (i * 2 * PI / 5)
+		
+		# Tính vị trí theo tọa độ cực
+		var offset_x = cos(angle) * spawner_radius
+		var offset_y = sin(angle) * spawner_radius
+		
+		spawner.global_position = Vector2(center.x + offset_x, center.y + offset_y)
+		
+		# Set elemental type
+		if "elemental_type" in spawner:
+			spawner.elemental_type = element_types[i]
+		
+		# Set enemies để spawn
+		if enemies_to_spawn.size() > 0 and "enemy_to_spawn" in spawner:
+			spawner.enemy_to_spawn = enemies_to_spawn
+		
+		# Set máu spawner (spawn liên tục nhiều con)
+		if "max_health" in spawner:
+			spawner.max_health = spawner_health
+			spawner.health = spawner_health
+		
+		# Set spawn_interval chậm hơn nhiều
+		if "spawn_interval" in spawner:
+			spawner.spawn_interval = 8.0  # Spawn chậm hơn (8 giây)
+		
+		# Nếu chưa active, pause spawner
+		if not active and "is_paused" in spawner:
+			spawner.is_paused = true
+		elif not active:
+			spawner.set_process(false)
+			spawner.set_physics_process(false)
+		
+		# === HIỆU ỨNG FADE IN ===
+		# Set alpha ban đầu = 0 (trong suốt hoàn toàn)
+		spawner.modulate = Color(1, 1, 1, 0)
+		
+		# Thêm vào scene
+		var enemies_container = GameManager.current_stage.find_child("Enemies")
+		if enemies_container:
+			enemies_container.add_child(spawner)
+		else:
+			get_parent().add_child(spawner)
+		
+		spawned_spawners.append(spawner)
+		
+		# Tween fade in với delay giữa các spawner
+		var fade_tween = create_tween()
+		fade_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		fade_tween.tween_property(spawner, "modulate", Color(1, 1, 1, 1), 0.5).set_delay(i * 0.1)
+	
+	print("Spawned 5 spawners with fade effect in star shape around boss")
 
 func _activate_spawners() -> void:
 	# Kích hoạt tất cả spawner sau khi boss hạ cánh

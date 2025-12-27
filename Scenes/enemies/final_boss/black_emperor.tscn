@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=62 format=3 uid="uid://d0a57drf7tx4v"]
 
 [ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fxnya"]
@@ -54,7 +54,6 @@
 [ext_resource type="Script" uid="uid://ce8mie4i6bkt8" path="res://scenes/enemies/final_boss/spam_enemies.gd" id="51_spam"]
 [ext_resource type="PackedScene" uid="uid://cfwdngvncdiwu" path="res://scenes/enemies/final_boss/boss_spawner.tscn" id="52_spawner"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="53_qin12"]
-[ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="54_maoj0"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="55_2anp0"]
 [ext_resource type="Script" uid="uid://byheauwog643v" path="res://scenes/enemies/final_boss/dead.gd" id="56_2anp0"]
 [ext_resource type="Script" uid="uid://rs2knmi2vck7" path="res://scenes/enemies/final_boss/charge.gd" id="57_mq2q6"]
@@ -342,9 +341,6 @@ script = ExtResource("50_laq78")
 
 [node name="SpamEnemies" type="Node" parent="States"]
 script = ExtResource("51_spam")
-spawner_scene = ExtResource("52_spawner")
-enemies_to_spawn = Array[PackedScene]([ExtResource("53_qin12"), ExtResource("54_maoj0"), ExtResource("55_2anp0")])
-spawn_duration = 10.0
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("56_2anp0")
