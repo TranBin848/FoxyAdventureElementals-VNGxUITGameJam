@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfwdngvncdiwu"]
+
+[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://67n1jvrfldnt" path="res://scenes/enemies/final_boss/boss_spawner.gd" id="2_script"]
+
+[node name="BossSpawner" instance=ExtResource("1_base")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2_script")

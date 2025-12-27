@@ -145,7 +145,7 @@ distance = -82.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4idv8"]
 normal = Vector2(-0.999974, -0.00714268)
 
-[node name="Stage" type="Node2D"]
+[node name="Stage2" type="Node2D"]
 script = ExtResource("1_jq5vq")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
@@ -279,37 +279,7 @@ target_door = "EntryDoor"
 position = Vector2(-1808, 417)
 collision_mask = 329
 platform_floor_layers = 4294967231
-invulnerable_duration = 2.0
-fireball_bounciness = 1.0
-minimum_bounce_velocity = 300.0
-has_blade = false
-has_wand = true
-blade_throw_speed = 300.0
-skill_throw_speed = 200.0
-push_strength = 100.0
-wall_slide_speed = 50.0
-dash_speed_mul = 5.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
 max_health = 1000
-max_mana = 1000
-elemental_type = 0
-restraint_table = {
-1: [4],
-2: [1],
-3: [2],
-4: [5],
-5: [3]
-}
-creation_table = {
-1: [3],
-2: [5],
-3: [4],
-4: [2],
-5: [1]
-}
 
 [node name="Front" type="TileMapLayer" parent="."]
 position = Vector2(-1055, 355)
@@ -599,6 +569,7 @@ metadata/_edit_lock_ = true
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("44_81g5i")]
 offset_bottom = 100.0
+script = null
 metadata/_edit_lock_ = true
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]

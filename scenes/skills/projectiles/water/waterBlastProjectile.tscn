@@ -255,6 +255,8 @@ script = ExtResource("1_uj2b8")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tbddh")
 animation = &"WaterBlast_End"
+frame = 14
+frame_progress = 1.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
