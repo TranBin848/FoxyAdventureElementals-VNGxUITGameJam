@@ -1,7 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://c00jedhwcnsij"]
+[gd_scene load_steps=29 format=3 uid="uid://c00jedhwcnsij"]
 
 [ext_resource type="Script" uid="uid://cau6ogulx41k5" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.gd" id="1_g8rqd"]
 [ext_resource type="Texture2D" uid="uid://bl66efvg2uxgs" path="res://assets/enemy/effects/stunned.png" id="1_r7dlq"]
+[ext_resource type="Texture2D" uid="uid://cibty6sw7jgmk" path="res://assets/enemy/effects/ElementsCircle/circle_background.png" id="3_6kymu"]
+[ext_resource type="Texture2D" uid="uid://bxa2uhjlyc6jp" path="res://assets/enemy/effects/ElementsCircle/circle_earth.png" id="4_xse44"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g8rqd"]
 atlas = ExtResource("1_r7dlq")
@@ -147,6 +149,42 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpwcm"]
+atlas = ExtResource("3_6kymu")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbc0w"]
+atlas = ExtResource("3_6kymu")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnk3s"]
+atlas = ExtResource("3_6kymu")
+region = Rect2(180, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocxgl"]
+atlas = ExtResource("3_6kymu")
+region = Rect2(270, 0, 90, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_armm3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpwcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbc0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnk3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocxgl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="StunnedDebuff" type="Node2D"]
 script = ExtResource("1_g8rqd")
 
@@ -154,3 +192,12 @@ script = ExtResource("1_g8rqd")
 position = Vector2(0, -35)
 sprite_frames = SubResource("SpriteFrames_8c4n7")
 animation = &"perform"
+
+[node name="CircleAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+self_modulate = Color(0.635012, 0.301128, 0, 1)
+position = Vector2(5, -27)
+sprite_frames = SubResource("SpriteFrames_armm3")
+
+[node name="Sprite2D" type="Sprite2D" parent="CircleAnimatedSprite2D"]
+texture = ExtResource("4_xse44")

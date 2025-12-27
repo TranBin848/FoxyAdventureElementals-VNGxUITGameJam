@@ -98,6 +98,7 @@ elements_debuff = Dictionary[int, PackedScene]({
 4: ExtResource("5_764o7"),
 5: ExtResource("6_tckas")
 })
+shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 movement_range = 200.0
 max_health = 10

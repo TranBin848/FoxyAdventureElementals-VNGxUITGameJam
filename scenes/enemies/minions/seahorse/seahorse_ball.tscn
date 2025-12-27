@@ -1,21 +1,88 @@
-[gd_scene load_steps=7 format=3 uid="uid://vx762t1kdt2"]
+[gd_scene load_steps=18 format=3 uid="uid://vx762t1kdt2"]
 
 [ext_resource type="Script" uid="uid://xnl4q457wubk" path="res://scenes/enemies/minions/seahorse/seahorse_ball.gd" id="1_8v234"]
 [ext_resource type="Texture2D" uid="uid://cx6hnj7sdhslo" path="res://assets/enemy/seahorse/seahorse_ball.png" id="2_3u6l5"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="3_p3lxm"]
+[ext_resource type="Script" uid="uid://d2dnm1eel0mjr" path="res://scenes/enemies/minions/seahorse/idle.gd" id="4_loer7"]
+[ext_resource type="Script" uid="uid://d37ww88fx8dah" path="res://scenes/enemies/minions/seahorse/dead.gd" id="5_0m86e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uf2w5"]
 radius = 9.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fx0x"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(144, 0, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1am5o"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(192, 0, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o1hk"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(240, 0, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hag4"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(288, 0, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgtcd"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(336, 0, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3tra"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(384, 0, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vyvw"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(0, 0, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_loer7"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(48, 0, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m86e"]
+atlas = ExtResource("2_3u6l5")
+region = Rect2(96, 0, 48, 56)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_caqfb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_3u6l5")
+"texture": SubResource("AtlasTexture_3fx0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1am5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o1hk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hag4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgtcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3tra")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vyvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loer7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m86e")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6j17m"]
@@ -25,6 +92,7 @@ radius = 8.06226
 collision_layer = 0
 script = ExtResource("1_8v234")
 shader_path = "uid://doovon2v0i5dx"
+max_health = 1
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Direction" type="Node2D" parent="."]
@@ -40,7 +108,10 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_uf2w5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+position = Vector2(-9, 0)
 sprite_frames = SubResource("SpriteFrames_caqfb")
+animation = &"dead"
+frame_progress = 0.738821
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]
 position = Vector2(0, -17)
@@ -48,6 +119,14 @@ position = Vector2(0, -17)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_6j17m")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("4_loer7")
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("5_0m86e")
 
 [connection signal="area_entered" from="Direction/SpikeHitArea2D" to="." method="_on_spike_hit_area_2d_area_entered"]
 [connection signal="body_entered" from="Direction/SpikeHitArea2D" to="." method="_on_spike_hit_area_2d_body_entered"]
