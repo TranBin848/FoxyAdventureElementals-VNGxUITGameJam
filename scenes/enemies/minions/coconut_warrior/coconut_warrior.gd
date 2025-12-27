@@ -65,6 +65,7 @@ func reset_attack_timer() -> void:
 	attack_timer = attack_interval
 
 func update_attack_timer(delta: float) -> bool:
+	if is_frozen: return false
 	attack_timer -= delta
 	if attack_timer <= 0: return true
 	return false

@@ -2,7 +2,7 @@ class_name PelicanState
 extends EnemyState
 
 func control_moving() -> bool:
-	obj.velocity.x = obj.movement_speed * obj.direction
+	obj.velocity.x = obj.current_movement_speed * obj.direction
 	#print(_should_turn_around())
 	if _should_turn_around():
 		obj.turn_around()
@@ -14,10 +14,10 @@ func _should_turn_around() -> bool:
 
 func control_flying_up() -> void:
 	if obj._ground_check():
-		obj.velocity.y = -obj.fly_force
+		obj.velocity.y = -obj.current_fly_force
 		
 func control_flying_away() -> void:
-	obj.velocity.y = -obj.fly_force
+	obj.velocity.y = -obj.current_fly_force
 	
 func _update( _delta ):
 	#if obj.update_leave_timer(_delta):

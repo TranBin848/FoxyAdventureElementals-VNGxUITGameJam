@@ -45,4 +45,5 @@ func split() -> void:
 				(son as Mushroom).number_of_skill_drop = number_of_skill_drop
 				number_of_skill_drop = 0
 			(son as Mushroom)._ready()
+			get_tree().root.add_child(son)
 			#GameManager.current_stage.find_child("Enemies").add_child(son)
