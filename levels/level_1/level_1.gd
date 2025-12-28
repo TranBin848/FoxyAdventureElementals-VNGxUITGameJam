@@ -11,6 +11,10 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if not GameManager.respawn_at_portal():
 		GameManager.respawn_at_checkpoint()
+		await GameManager.checkpoint_loading_complete
+	
+	# Now safe to add coins
+	GameManager.inventory_system.add_coin(500)
 	if AudioManager:
 		AudioManager.play_music("music_background")
 		AudioManager.play_ambience("ambience_forest", -10)
@@ -24,6 +28,7 @@ func _ready() -> void:
 			SkillTreeManager.unlock_skill(skill_names[i],0)
 			SkillTreeManager.equip_skill(i, skill_names[i])
 			print("✅ Equipped %s to slot %d" % [skill_names[i], i])
+			
 	#GameManager.logger.log("Hi Im global logger, Im from level 1")
 	#my_logger.log("Hi Im script-level logger, Im from level 1")
 	

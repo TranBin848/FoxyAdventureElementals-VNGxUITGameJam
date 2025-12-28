@@ -81,7 +81,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.620921
+shader_parameter/y_zoom = 0.751315
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -145,10 +145,6 @@ normal = Vector2(-0.999974, -0.00714268)
 normal = Vector2(0, 1)
 distance = -1.0
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rflqb"]
-normal = Vector2(0, 1)
-distance = -1.0
-
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_jq5vq")
 
@@ -206,6 +202,11 @@ frame_progress = 0.143494
 position = Vector2(3673, 21)
 scale = Vector2(-1, 1)
 hoithoai = "guide_elemental"
+
+[node name="NpcMasterFox2" parent="Npc" instance=ExtResource("9_0j1hw")]
+position = Vector2(-176, 304)
+scale = Vector2(-1, 1)
+hoithoai = "upgrade_stats"
 
 [node name="Enemies" type="Node2D" parent="."]
 

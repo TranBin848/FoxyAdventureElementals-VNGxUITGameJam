@@ -28,11 +28,10 @@ func _connect_player() -> void:
 	if player and player.has_signal("skill_collected"):
 		player.skill_collected.connect(_on_player_collected_skill)
 
-func _on_player_collected_skill(skill_resource: Skill) -> void:
-	"""Forward to manager - don't modify state directly"""
-	var stack_amount = randi_range(2, 5)
-	SkillTreeManager.collect_skill(skill_resource.name, stack_amount)
-	_show_error_text("+%d %s" % [stack_amount, skill_resource.name])
+# ✅ REFACTORED: Only display notification, don't modify state
+func _on_player_collected_skill(skill_resource: Skill, stack_amount: int) -> void:
+	"""Display collection notification - state is already updated by manager"""
+	_show_collection_notification(skill_resource.name, stack_amount)
 
 func _on_skill_equipped(slot_index: int, skill_name: String) -> void:
 	"""React to state change from manager"""
@@ -83,11 +82,12 @@ func _clear_slot(index: int) -> void:
 	slot.disabled = true
 	slot.time_label.text = ""
 
-func _show_error_text(text: String) -> void:
+func _show_collection_notification(skill_name: String, amount: int) -> void:
+	"""Show visual feedback for collected skill"""
 	if not _alert_label:
 		return
 	
-	_alert_label.text = text
+	_alert_label.text = "+%d %s" % [amount, skill_name]
 	_alert_label.visible = true
 	_alert_label.modulate.a = 1.0
 	
@@ -95,17 +95,3 @@ func _show_error_text(text: String) -> void:
 	tween.tween_interval(2.0)
 	tween.tween_property(_alert_label, "modulate:a", 0.0, 0.3)
 	tween.tween_callback(func(): _alert_label.visible = false)
-
-# --- SAVE/LOAD (Optional - Manager handles this now) ---
-# These functions are kept for compatibility but are no longer needed
-# since SkillTreeManager is the single source of truth
-
-func save_data() -> Array:
-	"""DEPRECATED: Use SkillTreeManager.save_data() instead"""
-	print("⚠️ SkillBar.save_data() is deprecated. Data is saved in SkillTreeManager.")
-	return []
-
-func load_data(data: Array) -> void:
-	"""DEPRECATED: Use SkillTreeManager.load_data() instead"""
-	print("⚠️ SkillBar.load_data() is deprecated. Load from SkillTreeManager and sync will happen automatically.")
-	# Sync will happen automatically via signals

@@ -71,7 +71,7 @@ func collect_skill(skill_name: String, stack_amount: int = 1) -> void:
 			if empty_slot != -1:
 				equip_skill(empty_slot, skill_name)
 				print("⚡ Auto-equipped %s to slot %d" % [skill_name, empty_slot])
-
+		
 	print("📦 Collected +%d %s (Total: %d)" % [stack_amount, skill_name, get_stacks(skill_name)])
 
 func unlock_skill(skill_name: String, stack_cost: int = 0) -> bool:

@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud/settings.tscn" id="3_8qguk"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="3_oj5la"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar/skill_bar_skill_tree.tscn" id="4_136eg"]
 [ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/hud/health_bar_container.tscn" id="4_gss2c"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar/skill_bar.tscn" id="5_2wu1p"]
 [ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/hud/weapon_panel.tscn" id="5_136eg"]
 
 [node name="HUD" type="Control"]
@@ -46,17 +46,6 @@ offset_left = -104.0
 offset_bottom = 100.0
 grow_horizontal = 0
 
-[node name="skillbar" parent="." instance=ExtResource("4_136eg")]
-layout_mode = 1
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -124.148
-offset_top = -72.0
-offset_right = 124.148
-offset_bottom = 0.0
-grow_vertical = 0
-
 [node name="WeaponPanel" parent="." instance=ExtResource("5_136eg")]
 layout_mode = 1
 anchors_preset = 3
@@ -69,4 +58,18 @@ offset_top = -128.0
 offset_right = -32.0
 offset_bottom = -32.0
 grow_horizontal = 0
+grow_vertical = 0
+
+[node name="skillbar" parent="." instance=ExtResource("5_2wu1p")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -124.148
+offset_top = -72.0
+offset_right = 124.148
+offset_bottom = 0.0
+grow_horizontal = 2
 grow_vertical = 0

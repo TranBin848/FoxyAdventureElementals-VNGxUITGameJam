@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlayerStat" load_steps=3 format=3 uid="uid://chtqk8stpvle1"]
+
+[ext_resource type="Script" uid="uid://c2fs7mx2niu76" path="res://scripts/player_stat.gd" id="1_pdxg6"]
+[ext_resource type="Texture2D" uid="uid://cq40il32pklvp" path="res://assets/ui/Hearts/PNG/basic/heart.png" id="1_q5k83"]
+
+[resource]
+script = ExtResource("1_pdxg6")
+type = "max_health"
+display_name = "Max Health"
+description = "Increases your maximum health"
+icon = ExtResource("1_q5k83")
+value_per_point = 10
+max_points = 99
+cost_per_point = 1
+metadata/_custom_type_script = "uid://c2fs7mx2niu76"
