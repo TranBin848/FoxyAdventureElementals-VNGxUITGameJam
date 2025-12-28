@@ -56,7 +56,7 @@ func show_text() -> void:
 	label.visible = true
 	tween = create_tween()
 	tween.parallel().tween_property(label, "modulate:a", 1.0, 0.5).from(0.0)
-	tween.parallel().tween_property(label, "position:y", -72.0, 0.5).from(-28.0)
+	tween.parallel().tween_property(label, "position:y", -56.0, 0.5).from(-28.0)
 	tween.tween_interval(2.0)
 	tween.tween_callback(hide_text)
 

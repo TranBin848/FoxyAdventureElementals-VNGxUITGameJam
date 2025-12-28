@@ -199,7 +199,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.0
+shader_parameter/y_zoom = 1.94872
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -345,7 +345,7 @@ target_door = "EntryDoor"
 position = Vector2(2602, -123)
 
 [node name="Player" parent="." instance=ExtResource("8_q4xca")]
-position = Vector2(2500, -124)
+position = Vector2(10098, -1995)
 collision_mask = 73
 platform_floor_layers = 4294967231
 
