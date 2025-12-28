@@ -20,6 +20,7 @@ func _exit() -> void:
 	pass
 
 func _update( _delta ):	
+	if obj.is_frozen: return
 	control_moving()
 	if update_timer(_delta):
 		change_state(fsm.states.moving)

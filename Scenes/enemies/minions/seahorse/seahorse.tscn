@@ -1,10 +1,15 @@
-[gd_scene load_steps=26 format=3 uid="uid://d2xnvvob5vkgl"]
+[gd_scene load_steps=31 format=3 uid="uid://d2xnvvob5vkgl"]
 
 [ext_resource type="Script" uid="uid://coijve31u764s" path="res://scenes/enemies/minions/seahorse/seahorse.gd" id="1_07c8w"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_llfpg"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_xng6q"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_07c8w"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_57mf3"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_03b4v"]
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_y1cc5"]
+[ext_resource type="PackedScene" uid="uid://6ppqcm5ge1yh" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.tscn" id="5_oporw"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_ymkxy"]
+[ext_resource type="PackedScene" uid="uid://c00jedhwcnsij" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn" id="6_dbiv0"]
 [ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_ks11g"]
 [ext_resource type="Texture2D" uid="uid://dkgt8epv1kd3w" path="res://assets/enemy/seahorse/seahorse_idle1.png" id="7_35i8l"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="7_y1cc5"]
@@ -94,6 +99,13 @@ height = 50.0
 collision_layer = 8
 collision_mask = 129
 script = ExtResource("1_07c8w")
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_xng6q"),
+2: ExtResource("3_57mf3"),
+3: ExtResource("4_03b4v"),
+4: ExtResource("5_oporw"),
+5: ExtResource("6_dbiv0")
+})
 shader_path = "uid://doovon2v0i5dx"
 sight = 200.0
 attack_speed = 100.0
@@ -179,3 +191,6 @@ bounce_back_velocity = 0.0
 script = ExtResource("21_f564q")
 despawn_time = null
 bounce_back_velocity = null
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-3, 26)

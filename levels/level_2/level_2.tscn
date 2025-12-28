@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="18_pqi81"]
 [ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="20_ppf8r"]
 [ext_resource type="PackedScene" uid="uid://crhikmylhv4ty" path="res://scenes/env_particle/sand_storm.tscn" id="20_pvqwi"]
-[ext_resource type="Script" uid="uid://cgj2on3wrpmw2" path="res://scenes/skills/scripts/metal/Thunderbolt.gd" id="21_gsja5"]
+[ext_resource type="Script" path="res://scenes/skills/scripts/metal/Thunderbolt.gd" id="21_gsja5"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="22_1h50e"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="23_vdtjt"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="24_nouef"]
@@ -277,6 +277,7 @@ theme = ExtResource("4_6fwx2")
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("6_rdvgg")]
 offset_bottom = 100.0
+script = null
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 visible = false

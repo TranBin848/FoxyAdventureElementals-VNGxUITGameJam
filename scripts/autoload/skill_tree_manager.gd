@@ -152,7 +152,7 @@ func save_data() -> Dictionary:
 		var skill_name = skillbar[i]
 		if skill_name == null:
 			skillbar_indices.append(null)
-			print("DEBUG: skillbar[%d] = null → %s (stacks: %d)" % [i, "null", get_skill_stack(skill_name)])
+			#print("DEBUG: skillbar[%d] = null → %s (stacks: %d)" % [i, "null", get_skill_stack(skill_name)])
 		else:
 			var index = SkillDatabase.get_skill_index(skill_name)
 			skillbar_indices.append(index)

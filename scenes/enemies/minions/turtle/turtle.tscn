@@ -1,17 +1,22 @@
-[gd_scene load_steps=24 format=3 uid="uid://qq7375scp7fc"]
+[gd_scene load_steps=29 format=3 uid="uid://qq7375scp7fc"]
 
 [ext_resource type="Script" uid="uid://drmppmi1xokx0" path="res://scenes/enemies/minions/turtle/turtle.gd" id="1_6cox4"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_6cox4"]
 [ext_resource type="Texture2D" uid="uid://cs37fokkvqbhu" path="res://assets/enemy/turtle/turtle_blue_01.png" id="2_fdkqx"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_m18dw"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_1th6s"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_8jcwr"]
 [ext_resource type="Texture2D" uid="uid://ccyfufm01ggjg" path="res://assets/enemy/turtle/turtle_blue_02.png" id="3_060u5"]
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_g5w0h"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_gwvp5"]
 [ext_resource type="Texture2D" uid="uid://cmq610s06chig" path="res://assets/enemy/turtle/turtle_blue_05.png" id="4_jx8ye"]
 [ext_resource type="Texture2D" uid="uid://bg4aqmtuixwm" path="res://assets/enemy/turtle/turtle_blue_hurt.png" id="5_060u5"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_67em6"]
+[ext_resource type="PackedScene" uid="uid://6ppqcm5ge1yh" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.tscn" id="5_764o7"]
 [ext_resource type="Texture2D" uid="uid://d2weyrvgbssew" path="res://assets/enemy/turtle/turtle_blue_03.png" id="5_mt650"]
 [ext_resource type="Texture2D" uid="uid://bs8ook6e52uf2" path="res://assets/enemy/turtle/turtle_blue_walk_01.png" id="6_8nkqr"]
 [ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_p5cn0"]
+[ext_resource type="PackedScene" uid="uid://c00jedhwcnsij" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn" id="6_tckas"]
 [ext_resource type="Script" uid="uid://bhoj6ys7ptlrb" path="res://scenes/enemies/minions/turtle/states/moving.gd" id="8_jx8ye"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="8_s20xs"]
 [ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="9_itjvo"]
@@ -86,6 +91,14 @@ height = 24.0
 collision_layer = 8
 collision_mask = 129
 script = ExtResource("1_6cox4")
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_m18dw"),
+2: ExtResource("3_1th6s"),
+3: ExtResource("4_gwvp5"),
+4: ExtResource("5_764o7"),
+5: ExtResource("6_tckas")
+})
+shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 movement_range = 200.0
 max_health = 10
@@ -95,7 +108,6 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Metal" parent="Particles" instance=ExtResource("2_6cox4")]
 position = Vector2(0, -26)
-emitting = false
 amount = 1
 
 [node name="Wood" parent="Particles" instance=ExtResource("3_8jcwr")]
@@ -103,15 +115,12 @@ position = Vector2(0, -15)
 
 [node name="Earth" parent="Particles" instance=ExtResource("4_g5w0h")]
 position = Vector2(0, 10)
-emitting = false
 amount = 1
 
 [node name="Water" parent="Particles" instance=ExtResource("5_67em6")]
-emitting = false
 
 [node name="Fire" parent="Particles" instance=ExtResource("6_p5cn0")]
 position = Vector2(0, 5)
-emitting = false
 amount = 1
 
 [node name="Direction" type="Node2D" parent="."]
@@ -173,3 +182,6 @@ offset_top = -28.0
 offset_right = 72.0
 offset_bottom = -20.0
 enemy = NodePath("..")
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-6, 21)

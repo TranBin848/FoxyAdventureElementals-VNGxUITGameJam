@@ -40,8 +40,8 @@
 script/source = "extends Node2D
 
 func _ready() -> void:
-	var skill_names = [\"Fireball\", \"Wooden Clone\", \"Earthquake\", \"Burrow\"]
-	
+	var skill_names = [\"Stun Shot\", \"Thunderbolt\", \"Heal Over Time\", \"Wood Shot\", \"Comet Rain\"]
+	ThousandSwords
 	for i in skill_names.size():
 		# 🔥 Validate + equip
 		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
@@ -305,6 +305,7 @@ theme = ExtResource("30_n5lmc")
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("31_yxbeg")]
 offset_bottom = 100.0
+script = null
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 visible = false

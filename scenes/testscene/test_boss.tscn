@@ -1,7 +1,7 @@
 [gd_scene load_steps=37 format=4 uid="uid://crx2puwrf8kap"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_h5p3k"]
-[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://Scenes/player/player.tscn" id="2_7eaqf"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_7eaqf"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="3_57jre"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="4_tyho3"]
 [ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="5_1o38e"]
@@ -154,6 +154,37 @@ collision_visibility_mode = 1
 position = Vector2(94, 178)
 collision_mask = 73
 platform_floor_layers = 4294967231
+invulnerable_duration = 2.0
+fireball_bounciness = 1.0
+minimum_bounce_velocity = 300.0
+has_blade = false
+has_wand = true
+blade_throw_speed = 300.0
+skill_throw_speed = 200.0
+push_strength = 100.0
+wall_slide_speed = 50.0
+dash_speed_mul = 5.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_health = 100
+max_mana = 1000
+elemental_type = 0
+restraint_table = {
+1: [4],
+2: [1],
+3: [2],
+4: [5],
+5: [3]
+}
+creation_table = {
+1: [3],
+2: [5],
+3: [4],
+4: [2],
+5: [1]
+}
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

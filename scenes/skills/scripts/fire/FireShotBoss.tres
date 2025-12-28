@@ -6,16 +6,17 @@
 [resource]
 script = ExtResource("2_j5l55")
 name = "Fire Shot"
-element = 4
+elemental_type = 0
+level = 1
 cooldown = 1.0
 duration = 0.0
 hit_delay = 0.0
 ground_targeted = false
 texture_path = "res://assets/skills/icons_skill/48x48/skill_icons4.png"
-animation_name = "FireShot"
+animation_name = "FireShotBoss"
 projectile_scene = ExtResource("1_86gd6")
 speed = 250.0
-damage = 2
+damage = 10.0
 mana = 30
 type = "multi_shot"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

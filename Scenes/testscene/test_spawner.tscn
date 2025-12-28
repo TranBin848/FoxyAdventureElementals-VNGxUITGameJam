@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://dos8jgdamucqc"]
+[gd_scene load_steps=39 format=4 uid="uid://dos8jgdamucqc"]
 
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_ihf7f"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="2_u14bh"]
@@ -29,12 +29,8 @@
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="28_oi0ud"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="29_tyosl"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="31_cw110"]
-[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="31_mcrro"]
-[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="32_u14bh"]
-[ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://scenes/skills/scripts/fire/FireShot.gd" id="33_a3442"]
-[ext_resource type="Script" uid="uid://dj6ruq2235y3n" path="res://scenes/skills/scripts/water/WaterBall.gd" id="33_iyi8e"]
+[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="31_yross"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="34_lij6g"]
-[ext_resource type="Script" uid="uid://qfm5i8r7dgby" path="res://scenes/skills/scripts/water/Tornado.gd" id="35_nr3pa"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
 script/source = "extends Node2D
@@ -277,6 +273,7 @@ position = Vector2(88, 230)
 position = Vector2(180, 237)
 
 [node name="Platform" type="Node2D" parent="."]
+position = Vector2(36, 2)
 
 [node name="Platform2" parent="Platform" instance=ExtResource("31_cw110")]
 position = Vector2(601, 119)
@@ -284,9 +281,6 @@ position = Vector2(601, 119)
 [node name="BladeCollectable" parent="." instance=ExtResource("34_lij6g")]
 position = Vector2(516, 235)
 
-[node name="Spawner" parent="." instance=ExtResource("31_mcrro")]
-position = Vector2(803, 166)
-enemy_to_spawn = Array[PackedScene]([ExtResource("32_u14bh")])
-skill_drops = Array[Script]([ExtResource("33_iyi8e"), ExtResource("33_a3442"), ExtResource("35_nr3pa")])
-spawn_interval = 5.0
-max_health = 2
+[node name="Mushroom" parent="." instance=ExtResource("31_yross")]
+position = Vector2(691, 239)
+max_health = 100

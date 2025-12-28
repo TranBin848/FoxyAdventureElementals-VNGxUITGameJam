@@ -3,6 +3,7 @@ extends EnemyCharacter
 @export var drop_bomb_interval: float = 2
 @export var leave_time: float = 10
 @export var fly_force: float = 200
+var current_fly_force: float
 @export var drop_bomb_angle: float = 0
 @export var drop_bomb_force: float = 350
 
@@ -20,6 +21,10 @@ func _ready() -> void:
 func _init_ground_ray_cast():
 	if has_node("Direction/FrontRayCast2D"):
 		ground_ray_cast = $Direction/GroundRayCast2D
+
+func _init_current_values() -> void:
+	super._init_current_values()
+	current_fly_force = fly_force
 
 func _ground_check() -> bool:
 	return ground_ray_cast != null and ground_ray_cast.is_colliding()

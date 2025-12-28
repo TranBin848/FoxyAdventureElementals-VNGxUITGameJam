@@ -7,6 +7,7 @@ func _enter() -> void:
 	timer = prepare_time
 
 func _update(_delta: float) -> void:
+	if obj.is_frozen: return
 	if obj.found_player == null:
 		change_state(fsm.states.idle)
 	else:
