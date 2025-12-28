@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=62 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -36,13 +36,9 @@
 [ext_resource type="Shader" uid="uid://cn08g737h2o3b" path="res://shaders/water_refelection/water_refelection.gdshader" id="39_knpvw"]
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="40_mmdk3"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="41_aiurf"]
-[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud.tscn" id="44_81g5i"]
-[ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/minimap.tscn" id="45_rflqb"]
-[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_xwrc7"]
-[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="47_4idv8"]
-[ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="47_fdo7j"]
-[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="48_fdo7j"]
-[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="49_5oe72"]
+[ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="42_60i3m"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="44_81g5i"]
+[ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/hud/minimap.tscn" id="45_rflqb"]
 [ext_resource type="PackedScene" uid="uid://dlo5gf1o05dgq" path="res://scenes/env_particle/rain.tscn" id="53_5oe72"]
 [ext_resource type="AudioStream" uid="uid://da2jb75pixowd" path="res://assets/sounds/44474__bullockjs__waterfall2.mp3" id="54_h8kgu"]
 [ext_resource type="Script" uid="uid://ddphxb2lvd1do" path="res://scripts/area_component/ambience_area_2d.gd" id="54_nx43y"]
@@ -85,7 +81,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.564474
+shader_parameter/y_zoom = 0.620921
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -211,14 +207,6 @@ hoithoai = "guide_elemental"
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("10_xsvho")]
 position = Vector2(631, 151)
-max_level = 3
-max_scale = Vector2(1, 1)
-min_scale = Vector2(0.5, 0.5)
-number_per_split = 2
-split_min_distance = 10.0
-split_max_distance = 20.0
-number_of_skill_drop = 3
-particle_audio_interval = 1.0
 elements_color = Dictionary[int, Color]({
 0: Color(0, 0, 0, 1),
 1: Color(0.941176, 0.941176, 0.941176, 1),
@@ -226,14 +214,6 @@ elements_color = Dictionary[int, Color]({
 3: Color(0, 1, 1, 1),
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
-})
-elements_particle = Dictionary[int, String]({
-0: "None",
-1: "Metal",
-2: "Wood",
-3: "Water",
-4: "Fire",
-5: "Earth"
 })
 spike = 0.0
 jump_height = 0.0
@@ -245,31 +225,9 @@ _next_direction = 1
 attack_damage = 1
 max_mana = 1000
 elemental_type = 3
-restraint_table = {
-1: [4],
-2: [1],
-3: [2],
-4: [5],
-5: [3]
-}
-creation_table = {
-1: [3],
-2: [5],
-3: [4],
-4: [2],
-5: [1]
-}
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("10_xsvho")]
 position = Vector2(2165, -489)
-max_level = 3
-max_scale = Vector2(1, 1)
-min_scale = Vector2(0.5, 0.5)
-number_per_split = 2
-split_min_distance = 10.0
-split_max_distance = 20.0
-number_of_skill_drop = 3
-particle_audio_interval = 1.0
 elements_color = Dictionary[int, Color]({
 0: Color(0, 0, 0, 1),
 1: Color(0.941176, 0.941176, 0.941176, 1),
@@ -277,14 +235,6 @@ elements_color = Dictionary[int, Color]({
 3: Color(0, 1, 1, 1),
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
-})
-elements_particle = Dictionary[int, String]({
-0: "None",
-1: "Metal",
-2: "Wood",
-3: "Water",
-4: "Fire",
-5: "Earth"
 })
 spike = 0.0
 jump_height = 0.0
@@ -296,33 +246,11 @@ _next_direction = 1
 attack_damage = 1
 max_mana = 1000
 elemental_type = 2
-restraint_table = {
-1: [4],
-2: [1],
-3: [2],
-4: [5],
-5: [3]
-}
-creation_table = {
-1: [3],
-2: [5],
-3: [4],
-4: [2],
-5: [1]
-}
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
 position = Vector2(3097, -107)
 scale = Vector2(1.02679, 0.975904)
-max_level = 3
-max_scale = Vector2(1, 1)
-min_scale = Vector2(0.5, 0.5)
-number_per_split = 2
-split_min_distance = 10.0
-split_max_distance = 20.0
-number_of_skill_drop = 3
-particle_audio_interval = 1.0
 elements_color = Dictionary[int, Color]({
 0: Color(0, 0, 0, 1),
 1: Color(0.941176, 0.941176, 0.941176, 1),
@@ -330,14 +258,6 @@ elements_color = Dictionary[int, Color]({
 3: Color(0, 1, 1, 1),
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
-})
-elements_particle = Dictionary[int, String]({
-0: "None",
-1: "Metal",
-2: "Wood",
-3: "Water",
-4: "Fire",
-5: "Earth"
 })
 spike = 0.0
 jump_height = 0.0
@@ -349,32 +269,10 @@ _next_direction = 1
 attack_damage = 1
 max_mana = 1000
 elemental_type = 3
-restraint_table = {
-1: [4],
-2: [1],
-3: [2],
-4: [5],
-5: [3]
-}
-creation_table = {
-1: [3],
-2: [5],
-3: [4],
-4: [2],
-5: [1]
-}
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
 position = Vector2(3017, 173)
-max_level = 3
-max_scale = Vector2(1, 1)
-min_scale = Vector2(0.5, 0.5)
-number_per_split = 2
-split_min_distance = 10.0
-split_max_distance = 20.0
-number_of_skill_drop = 3
-particle_audio_interval = 1.0
 elements_color = Dictionary[int, Color]({
 0: Color(0, 0, 0, 1),
 1: Color(0.941176, 0.941176, 0.941176, 1),
@@ -382,14 +280,6 @@ elements_color = Dictionary[int, Color]({
 3: Color(0, 1, 1, 1),
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
-})
-elements_particle = Dictionary[int, String]({
-0: "None",
-1: "Metal",
-2: "Wood",
-3: "Water",
-4: "Fire",
-5: "Earth"
 })
 spike = 0.0
 jump_height = 0.0
@@ -401,20 +291,6 @@ _next_direction = 1
 attack_damage = 1
 max_mana = 1000
 elemental_type = 0
-restraint_table = {
-1: [4],
-2: [1],
-3: [2],
-4: [5],
-5: [3]
-}
-creation_table = {
-1: [3],
-2: [5],
-3: [4],
-4: [2],
-5: [1]
-}
 
 [node name="Crab" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(1720, -394)
@@ -440,37 +316,7 @@ target_door = "EntryDoor"
 position = Vector2(-1740, 406)
 collision_mask = 585
 platform_floor_layers = 4294967231
-invulnerable_duration = 2.0
-fireball_bounciness = 1.0
-minimum_bounce_velocity = 300.0
-has_blade = false
-has_wand = true
-blade_throw_speed = 300.0
-skill_throw_speed = 200.0
-push_strength = 100.0
-wall_slide_speed = 50.0
-dash_speed_mul = 5.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
 max_health = 1000
-max_mana = 1000
-elemental_type = 0
-restraint_table = {
-1: [4],
-2: [1],
-3: [2],
-4: [5],
-5: [3]
-}
-creation_table = {
-1: [3],
-2: [5],
-3: [4],
-4: [2],
-5: [1]
-}
 
 [node name="Front" type="TileMapLayer" parent="."]
 position = Vector2(-1055, 355)
@@ -678,67 +524,6 @@ position = Vector2(1560, 140)
 
 [node name="PelicanBombs" type="Node2D" parent="."]
 
-[node name="SkillTreeUI" type="CanvasLayer" parent="."]
-process_mode = 3
-layer = 10
-visible = false
-script = ExtResource("47_fdo7j")
-
-[node name="Background" type="TextureRect" parent="SkillTreeUI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 3.05176e-05
-offset_right = 1472.0
-offset_bottom = 816.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.465121, 0.468751)
-texture = ExtResource("47_4idv8")
-
-[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
-modulate = Color(1, 1, 1, 0.764706)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("48_fdo7j")]
-offset_left = 640.0
-offset_top = 384.0
-offset_right = 640.0
-offset_bottom = 384.0
-
-[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -88.0
-offset_right = 360.0
-offset_bottom = -16.0
-grow_vertical = 0
-theme_override_constants/line_spacing = 12
-theme_override_fonts/font = ExtResource("45_xwrc7")
-theme_override_font_sizes/font_size = 16
-text = "Tab to open/close skill tree
-Mouse wheel: Zoom in/out
-Hold left mouse: Drag"
-
-[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 332.0
-offset_bottom = 65.0
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("49_5oe72")
-theme_override_font_sizes/font_size = 32
-text = "SKILL TREE"
-vertical_alignment = 1
-
 [node name="GuideTrigger7" parent="." instance=ExtResource("31_dy5lu")]
 position = Vector2(841, 125)
 guide_text = "Press Tab to open Skill Tree"
@@ -747,9 +532,9 @@ guide_text = "Press Tab to open Skill Tree"
 position = Vector2(176, 250)
 guide_text = "Press V to change weapon"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Minimap" parent="CanvasLayer" node_paths=PackedStringArray("tilemap_layers", "player") instance=ExtResource("45_rflqb")]
+[node name="Minimap" parent="GUI" node_paths=PackedStringArray("tilemap_layers", "player") instance=ExtResource("45_rflqb")]
 offset_top = -240.0
 offset_bottom = -240.0
 pivot_offset = Vector2(250, 75)
@@ -757,7 +542,10 @@ tilemap_layers = [NodePath("../../Ground")]
 player = NodePath("../../Player")
 metadata/_edit_use_anchors_ = true
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("44_81g5i")]
+[node name="HUD" parent="GUI" instance=ExtResource("44_81g5i")]
+
+[node name="SkillTreeUI" parent="GUI" instance=ExtResource("42_60i3m")]
+visible = false
 
 [node name="FX" type="Node2D" parent="."]
 
@@ -794,7 +582,6 @@ collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder/StaticBody2D"]
-position = Vector2(-77, 4)
 shape = SubResource("WorldBoundaryShape2D_fdo7j")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="WorldBorder"]
