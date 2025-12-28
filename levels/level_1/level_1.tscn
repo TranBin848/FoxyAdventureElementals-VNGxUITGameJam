@@ -88,7 +88,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.564474
+shader_parameter/y_zoom = 4.59497
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
@@ -276,12 +276,13 @@ target_stage = "uid://wopr13pq4dnf"
 target_door = "EntryDoor"
 
 [node name="Player" parent="." instance=ExtResource("18_gukcl")]
-position = Vector2(-1808, 417)
+position = Vector2(-1443, 394)
 collision_mask = 329
 platform_floor_layers = 4294967231
 max_health = 1000
 
 [node name="Front" type="TileMapLayer" parent="."]
+light_mask = 0
 position = Vector2(-1055, 355)
 tile_map_data = PackedByteArray("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")
 tile_set = ExtResource("3_4idv8")
@@ -394,28 +395,44 @@ texture = ExtResource("30_t3e5a")
 [node name="GuideTrigger" type="Node" parent="."]
 
 [node name="GuideTrigger" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
+z_index = 199
 position = Vector2(-1588, 418)
 guide_text = "A, D to move left, right\\nSpace to jump"
 
 [node name="GuideTrigger2" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
+z_index = 199
 position = Vector2(-1069, 414)
 guide_text = "F to interact"
 
 [node name="GuideTrigger3" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
+z_index = 199
 position = Vector2(-23, 310)
 guide_text = "Take the blade \\n C to attack, X to throw"
 
 [node name="GuideTrigger4" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
+z_index = 199
 position = Vector2(-326, 310)
 guide_text = "Huh hah Huh hah"
 
 [node name="GuideTrigger5" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
+z_index = 199
 position = Vector2(4828, -434)
 guide_text = "F to interact"
 
 [node name="GuideTrigger6" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
+z_index = 199
 position = Vector2(3631, 9)
 guide_text = "F to interact"
+
+[node name="GuideTrigger7" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
+z_index = 199
+position = Vector2(841, 125)
+guide_text = "Press Tab to open Skill Tree"
+
+[node name="GuideTrigger8" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
+z_index = 199
+position = Vector2(176, 250)
+guide_text = "Press V to change weapon"
 
 [node name="Checkpoint1" parent="." instance=ExtResource("32_g2wda")]
 position = Vector2(-885, 403)
@@ -547,14 +564,6 @@ theme_override_fonts/font = ExtResource("49_5oe72")
 theme_override_font_sizes/font_size = 32
 text = "SKILL TREE"
 vertical_alignment = 1
-
-[node name="GuideTrigger7" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(841, 125)
-guide_text = "Press Tab to open Skill Tree"
-
-[node name="GuideTrigger8" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(176, 250)
-guide_text = "Press V to change weapon"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
