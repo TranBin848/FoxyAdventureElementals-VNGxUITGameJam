@@ -6,17 +6,3 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_kcigv")
-
-[node name="SkillTreeButtonGroup" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-z_index = 1
-layout_mode = 1
-script = null
