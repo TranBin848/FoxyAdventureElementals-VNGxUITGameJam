@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://wdfjgyhrjowc" path="res://levels/level_3/level_3.gd" id="1_b7gic"]
 [ext_resource type="TileSet" uid="uid://yxir4yavpav2" path="res://levels/level_1/level_1.tres" id="2_4c4sg"]
-[ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_2/level_2.tres" id="3_gsac8"]
+[ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_3/level_3.tres" id="3_gsac8"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="3_omsu6"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="4_06aei"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="6_32j6t"]
 [ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="6_gsac8"]
 [ext_resource type="Script" uid="uid://cf7o1kqvk2msb" path="res://scenes/skills/scripts/fire/FireExplosion.gd" id="6_vjcd7"]
-[ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door.tscn" id="7_1gf37"]
+[ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="7_1gf37"]
 [ext_resource type="Script" uid="uid://epiedpy5442a" path="res://scenes/enemies/boss/FireClaw.gd" id="7_lfhbv"]
 [ext_resource type="Script" uid="uid://brtry6aukhegk" path="res://scenes/skills/scripts/fire/FireShot.gd" id="8_2p3mc"]
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="8_3dcxb"]
@@ -203,7 +203,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.0
+shader_parameter/y_zoom = 0.239392
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
