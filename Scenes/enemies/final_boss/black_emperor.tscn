@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=66 format=3 uid="uid://d0a57drf7tx4v"]
 
 [ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fxnya"]
@@ -51,6 +51,10 @@
 [ext_resource type="Script" uid="uid://nyc2dcgdpxlh" path="res://scenes/enemies/final_boss/rain_bullets.gd" id="48_o7w2u"]
 [ext_resource type="PackedScene" uid="uid://cb6h82l7nm4a2" path="res://scenes/enemies/final_boss/waterbullet_projectile.tscn" id="49_o7w2u"]
 [ext_resource type="Script" uid="uid://ch1op0epukahs" path="res://scenes/enemies/final_boss/hurt.gd" id="50_laq78"]
+[ext_resource type="Script" uid="uid://cdgmrb0lrij71" path="res://scenes/enemies/final_boss/cutscene1.gd" id="51_cutscene1"]
+[ext_resource type="Script" uid="uid://do3sabwty0y1" path="res://scenes/enemies/final_boss/cutscene2.gd" id="51_cutscene2"]
+[ext_resource type="Script" uid="uid://yye803rj20g3" path="res://scenes/enemies/final_boss/cutscene3.gd" id="51_cutscene3"]
+[ext_resource type="Script" uid="uid://cjouhd4hglfwn" path="res://scenes/enemies/final_boss/cutscene4.gd" id="51_cutscene4"]
 [ext_resource type="Script" uid="uid://ce8mie4i6bkt8" path="res://scenes/enemies/final_boss/spam_enemies.gd" id="51_spam"]
 [ext_resource type="PackedScene" uid="uid://cfwdngvncdiwu" path="res://scenes/enemies/final_boss/boss_spawner.tscn" id="52_spawner"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="53_qin12"]
@@ -310,6 +314,10 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]
 position = Vector2(25, -14)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(2.5, 2.5)
+
 [node name="States" type="Node" parent="."]
 
 [node name="FlyLightning" type="Node" parent="States"]
@@ -338,6 +346,18 @@ water_bullet_scene = ExtResource("49_o7w2u")
 
 [node name="Hurt" type="Node" parent="States"]
 script = ExtResource("50_laq78")
+
+[node name="Cutscene1" type="Node" parent="States"]
+script = ExtResource("51_cutscene1")
+
+[node name="Cutscene2" type="Node" parent="States"]
+script = ExtResource("51_cutscene2")
+
+[node name="Cutscene3" type="Node" parent="States"]
+script = ExtResource("51_cutscene3")
+
+[node name="Cutscene4" type="Node" parent="States"]
+script = ExtResource("51_cutscene4")
 
 [node name="SpamEnemies" type="Node" parent="States"]
 script = ExtResource("51_spam")

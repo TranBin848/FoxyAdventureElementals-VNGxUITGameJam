@@ -1,209 +1,38 @@
-[gd_scene load_steps=75 format=4 uid="uid://dsmbhy8c7qvf6"]
+[gd_scene load_steps=41 format=4 uid="uid://dsmbhy8c7qvf6"]
 
 [ext_resource type="Script" uid="uid://dcauknneljyty" path="res://scenes/testscene/test_finalboss.gd" id="1_j8o77"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_xko0c"]
-[ext_resource type="Texture2D" uid="uid://c1065p6v5vwg8" path="res://assets/skills/finalboss_skill/02.png" id="2_lj6dd"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_nyk77"]
-[ext_resource type="Texture2D" uid="uid://60n5v0vh1m7i" path="res://assets/skills/finalboss_skill/01.png" id="2_sxtnh"]
+[ext_resource type="PackedScene" uid="uid://xkbcnxv5v0y7" path="res://scenes/enemies/final_boss/animated_bg.tscn" id="2_sxtnh"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="3_k7016"]
-[ext_resource type="Texture2D" uid="uid://cc21yi5v2d6ca" path="res://assets/skills/finalboss_skill/03.png" id="3_qautu"]
-[ext_resource type="Texture2D" uid="uid://beb5awxfkkluc" path="res://assets/skills/finalboss_skill/04.png" id="4_cy0fu"]
+[ext_resource type="PackedScene" uid="uid://bdl2j4hlt7yy4" path="res://scenes/enemies/final_boss/element_sprite.tscn" id="3_x14md"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="4_ela4x"]
 [ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="5_7hpo2"]
-[ext_resource type="Texture2D" uid="uid://duk804hal84ct" path="res://assets/skills/finalboss_skill/05.png" id="5_hh2ko"]
 [ext_resource type="Texture2D" uid="uid://b6dilwf04d4be" path="res://assets/island/background/water_reflect_big_02.png" id="6_ch1ni"]
-[ext_resource type="Texture2D" uid="uid://djkjebkds1inn" path="res://assets/skills/finalboss_skill/06.png" id="6_fdwuy"]
 [ext_resource type="Texture2D" uid="uid://drl3x1wfs0vai" path="res://assets/island/background/water_reflect_big_03.png" id="7_5tgrt"]
-[ext_resource type="Texture2D" uid="uid://chqsmbdwvagb0" path="res://assets/skills/finalboss_skill/07.png" id="7_8708s"]
-[ext_resource type="Texture2D" uid="uid://c7v6njomso5sa" path="res://assets/skills/finalboss_skill/08.png" id="8_6jiay"]
 [ext_resource type="Texture2D" uid="uid://c5ur36rqix0vh" path="res://assets/island/background/water_reflect_big_04.png" id="8_jo1y6"]
-[ext_resource type="Texture2D" uid="uid://bflylko5wq5b1" path="res://assets/skills/finalboss_skill/09.png" id="9_3r7qh"]
 [ext_resource type="Texture2D" uid="uid://clqwctkiuocld" path="res://assets/island/background/water_reflect_medium_01.png" id="9_h2pfk"]
 [ext_resource type="Texture2D" uid="uid://cc473o8yawaex" path="res://assets/island/background/water_reflect_medium_02.png" id="10_70klh"]
-[ext_resource type="Texture2D" uid="uid://k07wqrkufntr" path="res://assets/skills/finalboss_skill/11.png" id="10_bau2h"]
 [ext_resource type="Texture2D" uid="uid://853x36mkfxu8" path="res://assets/island/background/water_reflect_medium_03.png" id="11_qdjuk"]
-[ext_resource type="Texture2D" uid="uid://chej7g1wumsl8" path="res://assets/skills/finalboss_skill/12.png" id="11_rk0g2"]
 [ext_resource type="Texture2D" uid="uid://7ph1avmw5ka6" path="res://assets/island/background/water_reflect_medium_04.png" id="12_uqxch"]
-[ext_resource type="Texture2D" uid="uid://4ssx3o2ko3mf" path="res://assets/skills/finalboss_skill/13.png" id="12_vi6ry"]
-[ext_resource type="Texture2D" uid="uid://wym0vuxtxld2" path="res://assets/skills/finalboss_skill/14.png" id="13_1xw62"]
 [ext_resource type="Texture2D" uid="uid://do3ghl5b5mpgy" path="res://assets/island/background/water_reflect_small_01.png" id="13_ux7xt"]
 [ext_resource type="Texture2D" uid="uid://cm71bsgwox0jq" path="res://assets/island/background/water_reflect_small_02.png" id="14_1ba81"]
-[ext_resource type="Texture2D" uid="uid://drli7khqxdfp6" path="res://assets/skills/finalboss_skill/15.png" id="14_ldug0"]
-[ext_resource type="Texture2D" uid="uid://d4iosrs6f74qy" path="res://assets/skills/finalboss_skill/16.png" id="15_2vyjr"]
 [ext_resource type="Texture2D" uid="uid://d0b0yg85xphrg" path="res://assets/island/background/water_reflect_small_03.png" id="15_illx4"]
 [ext_resource type="Texture2D" uid="uid://o4iqthotrkum" path="res://assets/island/background/water_reflect_small_04.png" id="16_3s7gb"]
-[ext_resource type="Texture2D" uid="uid://cwxg0ur4x48g3" path="res://assets/skills/finalboss_skill/17.png" id="16_jaasw"]
 [ext_resource type="Texture2D" uid="uid://ck8762h1hy2cf" path="res://assets/island/background/additional_water.png" id="17_2gq5j"]
-[ext_resource type="Texture2D" uid="uid://8i83rsb82r0" path="res://assets/skills/finalboss_skill/18.png" id="17_scamg"]
 [ext_resource type="Texture2D" uid="uid://m5yds3bm8pou" path="res://assets/island/background/big_clouds.png" id="18_711uo"]
-[ext_resource type="Texture2D" uid="uid://nou07yuf1klj" path="res://assets/skills/finalboss_skill/19.png" id="18_nf6pc"]
-[ext_resource type="Texture2D" uid="uid://dnsjkm28i5xoq" path="res://assets/skills/finalboss_skill/20.png" id="19_71hgs"]
 [ext_resource type="Texture2D" uid="uid://ci5tpl05cnmra" path="res://assets/island/background/small_cloud_1.png" id="19_sa4nn"]
 [ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="20_84thd"]
-[ext_resource type="Texture2D" uid="uid://6dufvv0k8i4a" path="res://assets/skills/finalboss_skill/21.png" id="20_y2hts"]
-[ext_resource type="Texture2D" uid="uid://bxp82lppax3d2" path="res://assets/skills/finalboss_skill/22.png" id="21_b6b0f"]
 [ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="21_r38gm"]
-[ext_resource type="Texture2D" uid="uid://b1l2cdf51f1ql" path="res://assets/skills/finalboss_skill/23.png" id="22_80i61"]
 [ext_resource type="Texture2D" uid="uid://cheu53nimdwyt" path="res://assets/island/back_palm_trees/back_palm_tree_regular_01.png" id="22_wamk7"]
-[ext_resource type="Texture2D" uid="uid://dgnvpbauqoknb" path="res://assets/skills/finalboss_skill/24.png" id="23_50j3i"]
 [ext_resource type="Texture2D" uid="uid://dt1od2hyke60g" path="res://assets/island/back_palm_trees/back_palm_tree_regular_02.png" id="23_hv8yd"]
 [ext_resource type="Texture2D" uid="uid://frimagh5yfit" path="res://assets/island/back_palm_trees/back_palm_tree_regular_03.png" id="24_blk0o"]
-[ext_resource type="Texture2D" uid="uid://ubqu7hx7441w" path="res://assets/skills/finalboss_skill/25.png" id="24_qqtsg"]
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_crhod"]
-[ext_resource type="Texture2D" uid="uid://ds30vf8bnn4kg" path="res://assets/skills/finalboss_skill/26.png" id="25_xmttk"]
-[ext_resource type="Texture2D" uid="uid://b1hyrmsyc3qrp" path="res://assets/skills/finalboss_skill/27.png" id="26_6wyx0"]
 [ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="26_727lq"]
-[ext_resource type="Texture2D" uid="uid://b04p58tq8xtjk" path="res://assets/skills/finalboss_skill/28.png" id="27_01uxr"]
 [ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="27_75ang"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="27_roaea"]
 [ext_resource type="PackedScene" uid="uid://d0a57drf7tx4v" path="res://scenes/enemies/final_boss/black_emperor.tscn" id="28_xko0c"]
-[ext_resource type="Texture2D" uid="uid://b664d7578sd8e" path="res://assets/skills/finalboss_skill/29.png" id="28_y00gf"]
-[ext_resource type="Texture2D" uid="uid://d3x1fbrhglmue" path="res://assets/skills/finalboss_skill/30.png" id="29_5ddd0"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="29_rcebl"]
-[ext_resource type="Texture2D" uid="uid://bpf66j8xpo3nj" path="res://assets/skills/finalboss_skill/31.png" id="30_r26o2"]
-[ext_resource type="Texture2D" uid="uid://cmej4s776v66i" path="res://assets/skills/finalboss_skill/32.png" id="31_jptkl"]
-[ext_resource type="Texture2D" uid="uid://hpsaguay341n" path="res://assets/skills/finalboss_skill/33.png" id="32_yt0lh"]
-[ext_resource type="Texture2D" uid="uid://d0bh2xemtt0my" path="res://assets/skills/finalboss_skill/34.png" id="33_dx4av"]
-[ext_resource type="Texture2D" uid="uid://bufp6u8ypw5f2" path="res://assets/skills/finalboss_skill/35.png" id="34_5jvg5"]
-[ext_resource type="Texture2D" uid="uid://ci7c76nu4mvua" path="res://assets/skills/finalboss_skill/36.png" id="35_xtduu"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_sxtnh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_lj6dd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_qautu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_cy0fu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_hh2ko")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_fdwuy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_8708s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_6jiay")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_3r7qh")
-}],
-"loop": false,
-"name": &"cutscene1",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_bau2h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_rk0g2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_vi6ry")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_1xw62")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_ldug0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_2vyjr")
-}],
-"loop": true,
-"name": &"cutscene2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("16_jaasw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_scamg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_nf6pc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_71hgs")
-}],
-"loop": true,
-"name": &"cutscene3",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("20_y2hts")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_b6b0f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_80i61")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_50j3i")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_qqtsg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_xmttk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_6wyx0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_01uxr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_y00gf")
-}],
-"loop": true,
-"name": &"cutscene4",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("29_5ddd0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_r26o2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("31_jptkl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_yt0lh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_dx4av")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_5jvg5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("35_xtduu")
-}],
-"loop": true,
-"name": &"cutscene5",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_sxtnh")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
 animations = [{
@@ -320,14 +149,13 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_j8o77")
 
-[node name="AnimatedBg" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedBg" parent="." instance=ExtResource("2_sxtnh")]
 position = Vector2(651, 53)
-scale = Vector2(0.32, 0.290286)
-sprite_frames = SubResource("SpriteFrames_sxtnh")
-animation = &"cutscene1"
-autoplay = "default"
-frame = 7
-frame_progress = 1.0
+frame = 2
+frame_progress = 0.170576
+
+[node name="ElementSprite" parent="." instance=ExtResource("3_x14md")]
+position = Vector2(696, 116)
 
 [node name="World" type="TileMapLayer" parent="."]
 position = Vector2(108, 129)
@@ -489,5 +317,13 @@ collision_mask = 1
 position = Vector2(155, 206)
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="PosBossPlayer" type="Node2D" parent="."]
+
+[node name="PLayerPosCutscene1" type="Node2D" parent="PosBossPlayer"]
+position = Vector2(736, 108)
+
+[node name="BossPosCutscene1" type="Node2D" parent="PosBossPlayer"]
+position = Vector2(798, -122)
 
 [connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]

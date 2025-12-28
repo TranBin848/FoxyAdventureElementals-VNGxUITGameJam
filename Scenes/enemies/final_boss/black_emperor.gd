@@ -1,6 +1,8 @@
 class_name BlackEmperor
 extends EnemyCharacter
 
+signal phase_transition_started
+
 @onready var hit_box: CollisionShape2D = $Direction/HitArea2D/CollisionShape2D
 @onready var hurt_box: CollisionShape2D = $Direction/HurtArea2D/CollisionShape2D2
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -26,6 +28,7 @@ var spawned_spawners: Array = []  # Lưu các spawner đã tạo
 
 enum Phase {
 	FLY,
+	CUTSCENE,
 	GROUND
 }
 
@@ -35,8 +38,11 @@ var skills_phase_1 = {
 	2: "rainbullets"
 }
 
-# Phase 2: charge -> fly skill -> hạ xuống -> charge lại
-var skills_phase_2 = {
+# Phase 2: cutscene transition (không có skill, chỉ cutscene)
+var skills_phase_2 = {}
+
+# Phase 3: charge -> fly skill -> hạ xuống -> charge lại
+var skills_phase_3 = {
 	0: "charge"
 }
 
@@ -67,9 +73,14 @@ func use_skill() -> void:
 	match current_phase:
 		Phase.FLY:
 			skill_dict = skills_phase_1
-		Phase.GROUND:
+		Phase.CUTSCENE:
 			skill_dict = skills_phase_2
+		Phase.GROUND:
+			skill_dict = skills_phase_3
 
+	if skill_dict.is_empty():
+		return
+	
 	var skill = skill_dict[cur_skill]
 	print("Skill: ", skill)
 	fsm.change_state(fsm.states[skill])
@@ -86,12 +97,36 @@ func take_damage(damage: int) -> void:
 	var health_percent = (float(health) / max_health) * 100
 	health_bar.value = health_percent
 	
-	if health_percent <= 50 and current_phase == Phase.FLY:
+	# Phase 1 -> Phase 2: khi máu <= 66.67%
+	if health_percent <= 66.67 and current_phase == Phase.FLY:
+		enter_phase_cutscene()
+	# Phase 2 -> Phase 3: khi máu <= 33.33% (sau cutscene)
+	elif health_percent <= 33.33 and current_phase == Phase.CUTSCENE:
+		enter_phase_ground()
+
+func enter_phase_cutscene() -> void:
+	current_phase = Phase.CUTSCENE
+	cur_skill = 0
+	
+	print("Entering Phase CUTSCENE")
+	
+	# Emit signal để AnimatedBg bắt đầu cutscene sequence
+	phase_transition_started.emit()
+	
+	# Chuyển sang state cutscene1
+	if fsm.states.has("cutscene1"):
+		fsm.change_state(fsm.states.cutscene1)
+	else:
+		print("Error: cutscene1 state not found!")
+		# Nếu không có state, tự động chuyển phase
+		await get_tree().create_timer(5.0).timeout
 		enter_phase_ground()
 
 func enter_phase_ground() -> void:
 	current_phase = Phase.GROUND
 	cur_skill = 0
+	
+	print("Entering Phase GROUND")
 	
 	# Tắt va chạm bay / bật va chạm đất nếu có
 	collision.disabled = false
