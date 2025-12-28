@@ -1,37 +1,40 @@
-[gd_resource type="TileSet" load_steps=32 format=3 uid="uid://315u2uaue33w"]
+[gd_resource type="TileSet" load_steps=35 format=3 uid="uid://315u2uaue33w"]
 
-[ext_resource type="Texture2D" uid="uid://c6j20haao3tvp" path="res://assets/wood/dark_oak.png" id="1_nseid"]
-[ext_resource type="Texture2D" uid="uid://2v2waox8min4" path="res://assets/island/terrain/wood_terrain_32x32.png" id="2_pdt7f"]
-[ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="3_um804"]
-[ext_resource type="PackedScene" uid="uid://bbatj0xwa0jd4" path="res://levels/objects/coin/coin.tscn" id="4_spi2e"]
-[ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="5_tao4i"]
-[ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="6_pwo2k"]
-[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/spike.tscn" id="7_xftgg"]
-[ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="8_8u18p"]
-[ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="9_gb246"]
-[ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="10_84a4n"]
-[ext_resource type="Texture2D" uid="uid://cpaivu6qvkk7t" path="res://assets/island/terrain/water_terrain_32x32.png" id="11_c7ast"]
-[ext_resource type="Texture2D" uid="uid://u2air8500ab1" path="res://assets/terrain_plus/Pine Trees.png" id="12_o4ind"]
-[ext_resource type="Texture2D" uid="uid://bppumeldgyn1h" path="res://assets/island/terrain/earth_terrain_32x32.png" id="13_bh6fb"]
-[ext_resource type="Texture2D" uid="uid://d0d3rm5o6ebmt" path="res://assets/island/terrain/fire_terrain_32x32.png" id="14_vdnet"]
-[ext_resource type="Texture2D" uid="uid://dbskn2uc441go" path="res://assets/island/terrain/metal_terrain_32x32.png" id="15_814hv"]
-[ext_resource type="PackedScene" uid="uid://5nj0c207ldgc" path="res://levels/objects/tree/tree_1.tscn" id="16_t04bf"]
-[ext_resource type="PackedScene" uid="uid://dvs3j65i3c27e" path="res://levels/objects/tree/tree_2.tscn" id="17_y85x6"]
-[ext_resource type="PackedScene" uid="uid://drpcvsgtydoih" path="res://levels/objects/tree/tree_3.tscn" id="18_c1epj"]
-[ext_resource type="PackedScene" uid="uid://2ao4jldohksr" path="res://levels/objects/tree/tree_4.tscn" id="19_sjjbb"]
-[ext_resource type="Texture2D" uid="uid://clilecwvvs5g4" path="res://assets/terrain_plus/Decor.png" id="20_ubah1"]
+[ext_resource type="Texture2D" uid="uid://c6j20haao3tvp" path="res://assets/wood/dark_oak.png" id="1_m8yqy"]
+[ext_resource type="Texture2D" uid="uid://2v2waox8min4" path="res://assets/island/terrain/wood_terrain_32x32.png" id="2_j2nq5"]
+[ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="2_mpfbr"]
+[ext_resource type="PackedScene" uid="uid://bbatj0xwa0jd4" path="res://levels/objects/coin/coin.tscn" id="3_2y5ep"]
+[ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="4_extk5"]
+[ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="5_fqqsd"]
+[ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="7_4cvng"]
+[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/bottom_spike.tscn" id="7_bsugr"]
+[ext_resource type="PackedScene" uid="uid://bons01cnqio5e" path="res://levels/objects/spikes/left_spike.tscn" id="8_dinf3"]
+[ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="8_u083j"]
+[ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="9_v08cu"]
+[ext_resource type="PackedScene" uid="uid://blw7h0mcsdlyd" path="res://levels/objects/spikes/right_spike.tscn" id="10_dinf3"]
+[ext_resource type="Texture2D" uid="uid://u2air8500ab1" path="res://assets/terrain_plus/Pine Trees.png" id="11_8wybm"]
+[ext_resource type="PackedScene" uid="uid://bqolwkmxp86ss" path="res://levels/objects/spikes/top_spike.tscn" id="11_p0klp"]
+[ext_resource type="Texture2D" uid="uid://cpaivu6qvkk7t" path="res://assets/island/terrain/water_terrain_32x32.png" id="12_8ae23"]
+[ext_resource type="PackedScene" uid="uid://5nj0c207ldgc" path="res://levels/objects/tree/tree_1.tscn" id="16_vwqna"]
+[ext_resource type="PackedScene" uid="uid://dvs3j65i3c27e" path="res://levels/objects/tree/tree_2.tscn" id="17_ujinb"]
+[ext_resource type="Texture2D" uid="uid://bppumeldgyn1h" path="res://assets/island/terrain/earth_terrain_32x32.png" id="17_vx1rb"]
+[ext_resource type="PackedScene" uid="uid://drpcvsgtydoih" path="res://levels/objects/tree/tree_3.tscn" id="18_vsnvo"]
+[ext_resource type="PackedScene" uid="uid://2ao4jldohksr" path="res://levels/objects/tree/tree_4.tscn" id="19_c3g1n"]
+[ext_resource type="Texture2D" uid="uid://d0d3rm5o6ebmt" path="res://assets/island/terrain/fire_terrain_32x32.png" id="19_kikc8"]
+[ext_resource type="Texture2D" uid="uid://dbskn2uc441go" path="res://assets/island/terrain/metal_terrain_32x32.png" id="20_c0oal"]
+[ext_resource type="Texture2D" uid="uid://clilecwvvs5g4" path="res://assets/terrain_plus/Decor.png" id="20_xxsyr"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_wqd52"]
 tile_data = PackedInt32Array(0, 10, 655360, 1, 10, 655360, 2, 10, 655360)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vx1rb"]
-texture = ExtResource("1_nseid")
+texture = ExtResource("1_m8yqy")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ake40"]
-texture = ExtResource("2_pdt7f")
+texture = ExtResource("2_j2nq5")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -409,17 +412,20 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_n4nvx"]
 resource_name = "object"
-scenes/1/scene = ExtResource("3_um804")
-scenes/2/scene = ExtResource("7_xftgg")
-scenes/4/scene = ExtResource("8_8u18p")
-scenes/7/scene = ExtResource("9_gb246")
-scenes/8/scene = ExtResource("10_84a4n")
-scenes/10/scene = ExtResource("4_spi2e")
-scenes/11/scene = ExtResource("5_tao4i")
-scenes/12/scene = ExtResource("6_pwo2k")
+scenes/1/scene = ExtResource("2_mpfbr")
+scenes/2/scene = ExtResource("7_bsugr")
+scenes/3/scene = ExtResource("8_dinf3")
+scenes/4/scene = ExtResource("7_4cvng")
+scenes/5/scene = ExtResource("10_dinf3")
+scenes/6/scene = ExtResource("11_p0klp")
+scenes/7/scene = ExtResource("8_u083j")
+scenes/8/scene = ExtResource("9_v08cu")
+scenes/10/scene = ExtResource("3_2y5ep")
+scenes/11/scene = ExtResource("4_extk5")
+scenes/12/scene = ExtResource("5_fqqsd")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w8kvn"]
-texture = ExtResource("11_c7ast")
+texture = ExtResource("12_8ae23")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -836,7 +842,7 @@ texture_region_size = Vector2i(32, 32)
 16:4/0/terrains_peering_bit/top_side = 3
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t2hmq"]
-texture = ExtResource("12_o4ind")
+texture = ExtResource("11_8wybm")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -930,7 +936,7 @@ texture_region_size = Vector2i(32, 32)
 16:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nnxty"]
-texture = ExtResource("13_bh6fb")
+texture = ExtResource("17_vx1rb")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -1339,7 +1345,7 @@ texture_region_size = Vector2i(32, 32)
 16:4/0/terrains_peering_bit/top_side = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2o2og"]
-texture = ExtResource("14_vdnet")
+texture = ExtResource("19_kikc8")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -1753,7 +1759,7 @@ texture_region_size = Vector2i(32, 32)
 16:4/0/terrains_peering_bit/top_side = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pt76g"]
-texture = ExtResource("15_814hv")
+texture = ExtResource("20_c0oal")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -2167,14 +2173,14 @@ texture_region_size = Vector2i(32, 32)
 16:4/0/terrains_peering_bit/top_side = 2
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_yqulw"]
-resource_name = "Tree"
-scenes/1/scene = ExtResource("16_t04bf")
-scenes/2/scene = ExtResource("17_y85x6")
-scenes/3/scene = ExtResource("18_c1epj")
-scenes/4/scene = ExtResource("19_sjjbb")
+resource_name = "tree"
+scenes/1/scene = ExtResource("16_vwqna")
+scenes/2/scene = ExtResource("17_ujinb")
+scenes/3/scene = ExtResource("18_vsnvo")
+scenes/4/scene = ExtResource("19_c3g1n")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8x0gd"]
-texture = ExtResource("20_ubah1")
+texture = ExtResource("20_xxsyr")
 texture_region_size = Vector2i(32, 32)
 0:13/size_in_atlas = Vector2i(2, 1)
 0:13/0 = 0

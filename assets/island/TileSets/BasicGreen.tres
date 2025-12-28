@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bviwgo0mx8ymv" path="res://assets/island/TileSets/BasicGreen.png" id="1_j7jwh"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="2_8jbus"]
-[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/spike.tscn" id="3_ejc3q"]
+[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/bottom_spike.tscn" id="3_ejc3q"]
 [ext_resource type="PackedScene" uid="uid://c8iyq6ukbtgdh" path="res://levels/objects/tree/palm_tree_1.tscn" id="4_bejx7"]
 [ext_resource type="PackedScene" uid="uid://bghk1nocyicg" path="res://levels/objects/tree/palm_tree_2.tscn" id="5_5bb3h"]
 [ext_resource type="PackedScene" uid="uid://kgiks45x5kpk" path="res://levels/objects/tree/palm_tree_3.tscn" id="6_6l2ak"]
