@@ -145,6 +145,10 @@ normal = Vector2(-0.999974, -0.00714268)
 normal = Vector2(0, 1)
 distance = -1.0
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rflqb"]
+normal = Vector2(0, 1)
+distance = -1.0
+
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_jq5vq")
 

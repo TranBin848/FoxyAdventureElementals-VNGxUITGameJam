@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ce67wq8nkpvyx"]
 
-[ext_resource type="Script" path="res://scenes/skills/area/metal/thousandSwords.gd" id="1_b2i4o"]
+[ext_resource type="Script" uid="uid://bybif46ra0edc" path="res://scenes/skills/area/metal/thousandSwords.gd" id="1_b2i4o"]
 
 [node name="ThousandSwords" type="Area2D"]
 script = ExtResource("1_b2i4o")

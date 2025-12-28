@@ -371,50 +371,20 @@ func _on_player_not_in_sight() -> void:
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
 	# Demo debuff
-	#var debuff: PackedScene = load("res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn") as PackedScene
+	#var debuff: PackedScene = load("res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn") as PackedScene
 	#set_debuff(debuff)
 	
 	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	modified_damage += modified_damage * current_vulnerability
 	#print(elemental_type)
-	#print(_damage)
-	#print(modified_damage)
-	#var is_critical = modified_damage > _damage
 	var is_critical = (check_element(_elemental_type, elemental_type) == -1)
 	print("my element: " + str(elemental_type) + " enemy: " + str(_elemental_type) + " is critical: " + str(is_critical))
 	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
 	if (fsm.current_state != null): fsm.current_state.take_damage(_direction, modified_damage)
-	if is_critical: handle_elemental_damage(_elemental_type)
+	handle_elemental_damage(_elemental_type)
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
-	## Nếu tấn công không có nguyên tố, dùng damage gốc
-	#if attacker_element == 0:
-		#return base_damage
-	#
-	## Định nghĩa quan hệ khắc (lợi thế)
-	## Fire (1) > Earth (2), Earth (2) > Water (3), Water (3) > Fire (1)
-	#var advantage_table = {
-		#1: [5],  # Fire khắc Wood
-		#2: [3],  # Earth khắc Water
-		#3: [1]   # Water khắc Fire
-	#}
-	#
-	## Định nghĩa quan hệ sinh (bị khắc)
-	#var weakness_table = {
-		#1: [3],  # Fire bị Water khắc
-		#5: [1],  # Wood bị Fire khắc
-		#3: [2]   # Water bị Earth khắc
-	#}
-	#
-	## Kiểm tra lợi thế (tấn công khắc phòng thủ)
-	#if attacker_element in advantage_table and elemental_type in advantage_table[attacker_element]:
-		#return base_damage * 1.25  # +25% damage
-	#
-	## Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)
-	#if attacker_element in weakness_table and elemental_type in weakness_table[attacker_element]:
-		#return base_damage * 0.75  # -25% damage
-	
 	var check_element = check_element(attacker_element, elemental_type)
 	match check_element:
 		# Bị khắc
@@ -442,17 +412,6 @@ func handle_elemental_damage(attacker_element: ElementsEnum.Elements) -> void:
 		debuff_scene = elements_debuff[attacker_element]
 	if debuff_scene == null: return
 	set_debuff(debuff_scene)
-		#match attacker_element:
-			#ElementsEnum.Elements.NONE:  # None
-				#pass
-			#ElementsEnum.Elements.FIRE:  # Fire - burn status
-			#ElementsEnum.Elements.EARTH:  # Earth - slow status
-				#
-			#ElementsEnum.Elements.WATER:  # Water - freeze status
-#
-			#ElementsEnum.Elements.METAL: 	# Metal - weakness
-#
-			#ElementsEnum.Elements.WOOD:  # Wood - poison
 
 
 func apply_burn_effect() -> void:

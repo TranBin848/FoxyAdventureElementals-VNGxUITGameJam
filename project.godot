@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="FoxyAdventureElementals"
-run/main_scene="uid://c47jft3el2tid"
+run/main_scene="uid://dsmbhy8c7qvf6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+<<<<<<<Updatedupstreamrun/main_scene="uid://dsmbhy8c7qvf6"
 
 [audio]
 
@@ -92,6 +93,7 @@ variables={}
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -200,8 +202,8 @@ ui_skilltree={
 2d_physics/layer_6="collectable"
 2d_physics/layer_7="pushable_object"
 2d_physics/layer_8="player_clone"
-2d_physics/layer_9="FinalBoss"
-2d_physics/layer_10="world_boundary"
+2d_physics/layer_9="world_boundary"
+2d_physics/layer_10="boss"
 
 [rendering]
 

@@ -306,6 +306,7 @@ theme = ExtResource("30_n5lmc")
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("31_yxbeg")]
 offset_bottom = 100.0
+script = null
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 visible = false
