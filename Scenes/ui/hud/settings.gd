@@ -5,5 +5,5 @@ func _ready() -> void:
 
 
 func _on_settings_texture_button_pressed() -> void:
-	var popup_settings = load("res://scenes/ui/settings_popup.tscn").instantiate()
+	var popup_settings = load("res://scenes/ui/popup/settings_popup.tscn").instantiate()
 	get_parent().add_child(popup_settings)

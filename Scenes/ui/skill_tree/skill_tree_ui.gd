@@ -4,6 +4,8 @@
 extends CanvasLayer
 class_name SkillTreeUI
 
+signal skill_tree_toggled(state)
+
 # Use @onready with paths instead of @export since everything is in same scene
 @onready var tree_controller: Control = $SkillTreeRoot
 @onready var info_panel: SkillInfoPanel = $SkillInfoPanel
@@ -54,7 +56,7 @@ func _input(event):
 func toggle_ui():
 	visible = !visible
 	get_tree().paused = visible
-	
+	skill_tree_toggled.emit(visible)
 	print("🔄 Toggle UI: visible=%s, paused=%s" % [visible, get_tree().paused])
 	
 	if visible:

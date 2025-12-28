@@ -6,10 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://sgxxofrggjed" path="res://scenes/ui/skill_tree/skill_info_panel.tscn" id="3_kjyl8"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="3_trb1m"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_2s5r4"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar/skill_bar.tscn" id="4_kjyl8"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar/skill_bar_skill_tree.tscn" id="4_kjyl8"]
 
 [node name="SkillTreeUI" type="CanvasLayer"]
 process_mode = 3
+layer = 2
 script = ExtResource("1_ef1ca")
 
 [node name="Background" type="TextureRect" parent="."]

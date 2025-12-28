@@ -1,20 +1,31 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxu3dosyig3i8"]
+[gd_scene load_steps=13 format=3 uid="uid://dxu3dosyig3i8"]
 
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_1bpm1"]
 [ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="1_d402b"]
-[ext_resource type="Script" uid="uid://dmbpxi55j21as" path="res://scenes/ui/settings_popup.gd" id="1_yjfti"]
+[ext_resource type="Script" uid="uid://dmbpxi55j21as" path="res://scenes/ui/popup/settings_popup.gd" id="1_yjfti"]
 [ext_resource type="FontFile" uid="uid://bf742t4mxgd7l" path="res://assets/fonts/big_font.fnt" id="2_yjfti"]
 [ext_resource type="Texture2D" uid="uid://bvstiwpyblmnv" path="res://assets/ui/close_button.png" id="3_1bpm1"]
 [ext_resource type="Texture2D" uid="uid://bmcu8k7wl5pke" path="res://assets/ui/on_button.png" id="4_h7ats"]
 [ext_resource type="Texture2D" uid="uid://c25m38u7k6gou" path="res://assets/ui/off_button.png" id="5_kqam1"]
+[ext_resource type="Texture2D" uid="uid://b3a285d0cwoiy" path="res://assets/ui/settings/3.png" id="8_m1ppw"]
+[ext_resource type="Texture2D" uid="uid://dad58vienj64d" path="res://assets/ui/settings/slider.png" id="9_uy18l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rrlud"]
+font = ExtResource("2_yjfti")
+font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_6rodm"]
 font = ExtResource("2_yjfti")
 font_size = 60
 
-[sub_resource type="LabelSettings" id="LabelSettings_rrlud"]
-font = ExtResource("2_yjfti")
-font_size = 20
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u5ssl"]
+texture = ExtResource("9_uy18l")
+texture_margin_left = 4.0
+texture_margin_right = 4.0
+expand_margin_top = 2.0
+expand_margin_bottom = 4.0
+axis_stretch_horizontal = 1
+region_rect = Rect2(0, 0, 30, 6)
 
 [node name="SettingsPopup" type="MarginContainer"]
 process_mode = 3
@@ -42,6 +53,54 @@ patch_margin_right = 96
 patch_margin_bottom = 96
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="Off" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = 160.0
+offset_right = 200.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OFF"
+label_settings = SubResource("LabelSettings_rrlud")
+
+[node name="Low" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 160.0
+offset_right = 410.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LOW"
+label_settings = SubResource("LabelSettings_rrlud")
+
+[node name="High" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 167.0
+offset_top = 160.0
+offset_right = 617.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "HIGH"
+label_settings = SubResource("LabelSettings_rrlud")
 
 [node name="Label" type="Label" parent="NinePatchRect"]
 layout_mode = 1
@@ -123,62 +182,20 @@ theme_override_icons/checked = ExtResource("4_h7ats")
 theme_override_icons/unchecked = ExtResource("5_kqam1")
 
 [node name="ParticleSlider" type="HSlider" parent="NinePatchRect"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 71.0
-offset_top = 350.0
-offset_right = 508.0
-offset_bottom = 366.0
+offset_top = 334.0
+offset_right = 291.0
+offset_bottom = 350.0
+scale = Vector2(2, 2)
+theme_override_icons/grabber = ExtResource("8_m1ppw")
+theme_override_icons/grabber_highlight = ExtResource("8_m1ppw")
+theme_override_icons/grabber_disabled = ExtResource("8_m1ppw")
+theme_override_styles/slider = SubResource("StyleBoxTexture_u5ssl")
 max_value = 2.0
 rounded = true
 scrollable = false
-
-[node name="Off" type="Label" parent="NinePatchRect/ParticleSlider"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -234.5
-offset_top = 12.0
-offset_right = 215.5
-offset_bottom = 164.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "OFF"
-label_settings = SubResource("LabelSettings_rrlud")
-
-[node name="Low" type="Label" parent="NinePatchRect/ParticleSlider"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.5
-offset_top = 12.0
-offset_right = 425.5
-offset_bottom = 164.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "LOW"
-label_settings = SubResource("LabelSettings_rrlud")
-
-[node name="High" type="Label" parent="NinePatchRect/ParticleSlider"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 182.5
-offset_top = 12.0
-offset_right = 632.5
-offset_bottom = 164.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "HIGH"
-label_settings = SubResource("LabelSettings_rrlud")
 
 [connection signal="gui_input" from="OverlayColorRect" to="." method="_on_overlay_color_rect_gui_input"]
 [connection signal="toggled" from="NinePatchRect/MusicCheckButton" to="." method="_on_music_check_button_toggled"]

@@ -74,7 +74,7 @@ func collect_skill(skill_name: String, stack_amount: int = 1) -> void:
 
 	print("📦 Collected +%d %s (Total: %d)" % [stack_amount, skill_name, get_stacks(skill_name)])
 
-func unlock_skill(skill_name: String, stack_cost: int) -> bool:
+func unlock_skill(skill_name: String, stack_cost: int = 0) -> bool:
 	"""Unlock a skill permanently using stacks"""
 	if is_unlocked(skill_name):
 		return false
