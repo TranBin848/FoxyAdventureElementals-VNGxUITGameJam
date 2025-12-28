@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0llkjwu21gqr"]
+[gd_scene load_steps=6 format=3 uid="uid://d0llkjwu21gqr"]
 
 [ext_resource type="Texture2D" uid="uid://b4x2ssj1cgj2w" path="res://assets/particles/water.png" id="1_ojf5w"]
 
@@ -31,12 +31,9 @@ hue_variation_min = -2.23517e-08
 hue_variation_max = -2.23517e-08
 anim_speed_max = 1.0
 
-[sub_resource type="GDScript" id="GDScript_6p0im"]
-
 [node name="Water" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_50u0f")
 emitting = false
 amount = 4
 texture = ExtResource("1_ojf5w")
 process_material = SubResource("ParticleProcessMaterial_kvfmh")
-script = SubResource("GDScript_6p0im")

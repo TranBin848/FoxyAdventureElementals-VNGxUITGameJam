@@ -104,17 +104,8 @@ func _physics_process(delta: float) -> void:
 			var normal := ground_ray.get_collision_normal().normalized()
 			var dot := normal.dot(Vector2.UP)
 
-			print("--- SWORD HIT GROUND ---")
-			print("t: ", t)
-			print("global_position BEFORE stick: ", global_position)
-			print("next_pos: ", next_pos)
-			print("hit_pos: ", hit_pos)
-			print("normal: ", normal, " dot: ", dot)
-			print("is_stuck BEFORE stick: ", is_stuck)
-
 			if dot > -0.1:
 				_stick_to_ground(hit_pos, -normal)
-				print("is_stuck AFTER stick: ", is_stuck)
 				return
 			else:
 				print("Rejected surface (wall/steep slope)")
@@ -122,27 +113,17 @@ func _physics_process(delta: float) -> void:
 	global_position = next_pos
 
 func _stick_to_ground(hit_pos: Vector2, embed_dir: Vector2) -> void:
-	print(">>> _stick_to_ground CALLED")
-	print(">>> STICK sword_id=", sword_id, " parent=", get_parent(), " name=", name)
-	print("  hit_pos: ", hit_pos)
-	print("  embed_dir: ", embed_dir)
-	print("  old global_position: ", global_position)
-
 	set_as_top_level(true)
 	global_position = hit_pos
 	is_stuck = true
 	active = false
 	z_index = -1
 
-	print("  new global_position: ", global_position)
-	print("  active: ", active, " is_stuck: ", is_stuck)
-
 	if hit_area:
 		hit_area.set_deferred("monitoring", false)
 
 	if ground_ray:
 		ground_ray.enabled = false
-		print("  ground_ray disabled")
 
 	_start_fade_out()
 

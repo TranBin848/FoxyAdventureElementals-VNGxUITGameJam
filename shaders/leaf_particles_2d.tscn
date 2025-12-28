@@ -1,8 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://d28vgb0lxesvt"]
+[gd_scene load_steps=5 format=3 uid="uid://d28vgb0lxesvt"]
 
 [ext_resource type="Texture2D" uid="uid://core2vqk0dvnj" path="res://assets/terrain_plus/ELR_SpringlLeaf.png" id="1_05vur"]
 [ext_resource type="Material" uid="uid://blahf67ivqcqi" path="res://shaders/leaf.tres" id="2_la32b"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_05vur"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="GDScript" id="GDScript_05vur"]
+script/source = "extends GPUParticles2D
+
+@export var base_amount: int = 20
+
+func _ready():
+	# 1. Set initial state
+	_update_particles(SettingsManager.particle_quality)
+	
+	# 2. Listen for changes from the menu
+	SettingsManager.particle_quality_changed.connect(_update_particles)
+
+func _update_particles(quality_level: int):
+	# Calculate target amount
+	var new_amount = int(base_amount * (float(quality_level) / 3.0))
+
+	# CASE 1: Turn OFF (Quality is 0)
+	if new_amount <= 0:
+		emitting = false
+		# Do NOT set amount to 0, or Godot will force it to 1
+		return
+
+	# CASE 2: Turn ON (Quality > 0)
+	# Ensure it's emitting in case it was previously turned off
+	emitting = true
+
+	# Only change 'amount' if the number is different.
+	# Changing 'amount' forces the particle system to restart!
+	if amount != new_amount:
+		amount = new_amount
+"
+
 [node name="GPUParticles2D" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_05vur")
+amount = 32
 texture = ExtResource("1_05vur")
+lifetime = 3.0
+randomness = 1.0
 process_material = ExtResource("2_la32b")
+script = SubResource("GDScript_05vur")

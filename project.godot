@@ -45,7 +45,8 @@ directories/dch_directory={
 directories/dtl_directory={
 "end_lv1": "res://dialogs/end_lv1.dtl",
 "guide_elemental": "res://dialogs/guide_elemental.dtl",
-"start_game": "res://dialogs/start_game.dtl"
+"start_game": "res://dialogs/start_game.dtl",
+"upgrade_stats": "res://dialogs/upgrade_stats.dtl"
 }
 layout/style_directory={
 "": "res://dialogs/style.tres",
@@ -103,6 +104,10 @@ movie_writer/movie_file="D:/Semester5/Sieu_Pham_Ngu_Hanh/Scenes/skills/buff/fire
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+
+[global_group]
+
+stat_ui=""
 
 [importer_defaults]
 

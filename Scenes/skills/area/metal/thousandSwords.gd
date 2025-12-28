@@ -24,7 +24,12 @@ var is_firing: bool = false
 func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	# 1. Base Setup (Handles damage, elemental type, duration timer)
 	super.setup(skill, caster_position, enemy, _direction)
-	
+	var level_multiplier = (skill.level+1) * 0.5
+	self.sword_count = sword_count * level_multiplier
+	self.ring_radius = ring_radius * sqrt(level_multiplier)
+	self.hover_height = hover_height * level_multiplier / 2
+	self.fire_interval = fire_interval / level_multiplier
+	self.spawn_interval = spawn_interval / level_multiplier
 	# 2. Shift Position Logic
 	# Move the area (the center of the ring) above the player's head
 	self.global_position = caster_position + Vector2(0, -hover_height)

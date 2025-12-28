@@ -30,24 +30,25 @@
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="29_jx6ob"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="30_n5lmc"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="30_roqqn"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="31_yxbeg"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud/settings.tscn" id="31_yxbeg"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="32_hwtel"]
-[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="33_88oj5"]
-[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="34_3dcit"]
-[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="35_1233e"]
+[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/hud/weapon_panel.tscn" id="33_88oj5"]
+[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/hud/health_bar_container.tscn" id="34_3dcit"]
+[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar/skill_bar_skill_tree.tscn" id="35_1233e"]
 
 [sub_resource type="GDScript" id="GDScript_n5lmc"]
 script/source = "extends Node2D
 
 func _ready() -> void:
-	var skill_names = [\"Stun Shot\", \"Thunderbolt\", \"Heal Over Time\", \"Wood Shot\", \"Comet Rain\"]
-	ThousandSwords
+	var skill_names = [\"Thousand Swords\", \"Wooden Clone\", \"Comet Rain\", \"Burrow\"]
+	
 	for i in skill_names.size():
 		# 🔥 Validate + equip
 		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
 		if skill:
 			SkillTreeManager.unlock_skill(skill_names[i])
 			SkillTreeManager.equip_skill(i, skill_names[i])
+			SkillTreeManager._set_level(skill_names[i],3)
 			print(\"✅ Equipped %s to slot %d\" % [skill_names[i], i])
 "
 
@@ -342,15 +343,12 @@ grow_vertical = 0
 
 [node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("35_1233e")]
 anchors_preset = 7
-anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -131.0
 offset_top = -78.0
 offset_right = 117.296
 offset_bottom = -6.0
-grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlayerStat" load_steps=3 format=3 uid="uid://bmxxtbsbks2dx"]
+
+[ext_resource type="Script" uid="uid://c2fs7mx2niu76" path="res://scripts/player_stat.gd" id="1_dvobs"]
+[ext_resource type="Texture2D" uid="uid://cx1cqnm2lrgxo" path="res://icon.svg" id="1_mvpm0"]
+
+[resource]
+script = ExtResource("1_dvobs")
+type = "max_mana"
+display_name = "Max Mana"
+description = "Increases your maximum mana"
+icon = ExtResource("1_mvpm0")
+value_per_point = 5
+max_points = 99
+cost_per_point = 1
+metadata/_custom_type_script = "uid://c2fs7mx2niu76"

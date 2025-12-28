@@ -8,6 +8,7 @@ colors = PackedColorArray(0.0431373, 0.0431373, 0.0431373, 0, 1, 1, 1, 1, 0.7759
 gradient = SubResource("Gradient_wc8kj")
 
 [resource]
+lifetime_randomness = 0.4
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(1000, 200, 1)
