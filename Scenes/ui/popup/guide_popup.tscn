@@ -1,0 +1,116 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqw2hs1cw106b"]
+
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_mabun"]
+[ext_resource type="Script" uid="uid://eheybhst42ce" path="res://scenes/ui/popup/guide_popup.gd" id="2_532iv"]
+[ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="3_uoqwc"]
+[ext_resource type="FontFile" uid="uid://bf742t4mxgd7l" path="res://assets/fonts/big_font.fnt" id="4_bi0kk"]
+[ext_resource type="Texture2D" uid="uid://bvstiwpyblmnv" path="res://assets/ui/close_button.png" id="5_532iv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rodm"]
+font = ExtResource("4_bi0kk")
+font_size = 60
+
+[node name="GuidePopup" type="MarginContainer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mabun")
+script = ExtResource("2_532iv")
+
+[node name="OverlayColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.0352941, 0.54902, 0.870588, 0.694118)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_uoqwc")
+region_rect = Rect2(0, 0, 288, 288)
+patch_margin_left = 96
+patch_margin_top = 96
+patch_margin_right = 96
+patch_margin_bottom = 96
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="CloseTextureButton" type="TextureButton" parent="NinePatchRect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+texture_normal = ExtResource("5_532iv")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -456.0
+offset_top = -194.0
+offset_right = -56.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MUSIC
+"
+label_settings = SubResource("LabelSettings_6rodm")
+
+[node name="Label2" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -455.0
+offset_top = -96.0
+offset_right = -55.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SFX"
+label_settings = SubResource("LabelSettings_6rodm")
+
+[node name="Label3" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -452.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PARTICLES"
+label_settings = SubResource("LabelSettings_6rodm")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -458.0
+offset_top = -236.0
+offset_right = -67.0
+offset_bottom = 245.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[connection signal="gui_input" from="OverlayColorRect" to="." method="_on_overlay_color_rect_gui_input"]

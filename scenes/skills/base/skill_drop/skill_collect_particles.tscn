@@ -1,3 +1,4 @@
 [gd_scene format=3 uid="uid://dvlk21pqof7ww"]
 
 [node name="SkillCollectParticles" type="GPUParticles2D"]
+emitting = false

@@ -10,6 +10,14 @@ class_name EarthquakeProjectile
 var segments_spawned: int = 0
 var is_hit: bool = false
 
+func setup(skill: Skill, dir: Vector2) -> void:
+	super.setup(skill,dir)
+	self.wave_count = (wave_count * skill.level + 1 )/2
+	#print(skill.damage)
+	#print(skill.elemental_type)
+	speed = skill.speed
+	elemental_type = skill.elemental_type
+
 func _ready() -> void:
 	# 1. HIDE VISUALS
 	if has_node("Skill"):

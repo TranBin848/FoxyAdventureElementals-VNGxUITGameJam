@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://ud7wkcb14klg"]
+
+[ext_resource type="Script" uid="uid://c7iik4wcqnxre" path="res://scenes/ui/upgrade/upgrade_popup.gd" id="2_rphrw"]
+[ext_resource type="Script" uid="uid://c2fs7mx2niu76" path="res://scripts/player_stat.gd" id="3_c4tiq"]
+[ext_resource type="Resource" uid="uid://chtqk8stpvle1" path="res://resources/stats/max_health.tres" id="3_q362k"]
+[ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="3_wsap1"]
+[ext_resource type="Texture2D" uid="uid://bvstiwpyblmnv" path="res://assets/ui/close_button.png" id="4_2egru"]
+[ext_resource type="Resource" uid="uid://bmxxtbsbks2dx" path="res://resources/stats/max_mana.tres" id="4_c4tiq"]
+[ext_resource type="PackedScene" uid="uid://3382macmw6fi" path="res://scenes/ui/upgrade/stat_row.tscn" id="4_rphrw"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="6_q362k"]
+
+[node name="upgrade_popup" type="MarginContainer" groups=["stat_ui"]]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_rphrw")
+stat_row_scene = ExtResource("4_rphrw")
+available_stats = Array[ExtResource("3_c4tiq")]([ExtResource("3_q362k"), ExtResource("4_c4tiq")])
+
+[node name="OverlayColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+mouse_filter = 1
+color = Color(0.0352941, 0.54902, 0.870588, 0.694118)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_wsap1")
+region_rect = Rect2(0, 0, 288, 288)
+patch_margin_left = 96
+patch_margin_top = 96
+patch_margin_right = 96
+patch_margin_bottom = 96
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("6_q362k")
+theme_override_font_sizes/font_size = 48
+text = "5 Points Remaining"
+uppercase = true
+
+[node name="StatsContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="ResetButton" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+text = "RESET"
+
+[node name="ApplyButton" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+text = "APPLY"
+
+[node name="CloseTextureButton" type="TextureButton" parent="NinePatchRect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_2egru")
+stretch_mode = 0

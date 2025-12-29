@@ -2,10 +2,10 @@ extends AreaBase
 class_name CometRainArea
 
 @export var comet_scene_path: String = ""
-@export var comets_count: int = 32
+@export var comets_count: int = 12
 @export var spawn_height: float = 800.0
 @export var area_width: float = 160.0
-@export var spawn_interval: float = 0.05
+@export var spawn_interval: float = 0.02
 @export var fall_angle_deg: float = 45.0
 @export var base_speed: float = 500.0
 @export var speed_random_ratio: float = 0.2
@@ -23,6 +23,7 @@ func setup(skill: Skill, caster_position: Vector2, _enemy: EnemyCharacter, _dire
 	self.elemental_type = skill.elemental_type
 	self.duration = skill.duration
 	self.direction = _direction
+	self.comets_count = comets_count * (skill.level+1)
 	
 	# --- CHANGE 1: Offset the Area Position ---
 	# Ensure direction is normalized (length 1) then multiply by offset
