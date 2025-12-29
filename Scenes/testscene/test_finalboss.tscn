@@ -151,8 +151,9 @@ script = ExtResource("1_j8o77")
 
 [node name="AnimatedBg" parent="." instance=ExtResource("2_sxtnh")]
 position = Vector2(651, 53)
-frame = 2
-frame_progress = 0.170576
+animation = &"cutscene3"
+frame = 0
+frame_progress = 0.0
 
 [node name="ElementSprite" parent="." instance=ExtResource("3_x14md")]
 position = Vector2(696, 116)
@@ -325,5 +326,11 @@ position = Vector2(736, 108)
 
 [node name="BossPosCutscene1" type="Node2D" parent="PosBossPlayer"]
 position = Vector2(798, -59)
+
+[node name="PLayerPosCutscene2" type="Node2D" parent="PosBossPlayer"]
+position = Vector2(731, 207)
+
+[node name="BossPosCutscene2" type="Node2D" parent="PosBossPlayer"]
+position = Vector2(651, -59)
 
 [connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]

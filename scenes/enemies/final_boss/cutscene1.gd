@@ -90,7 +90,7 @@ func _start_cutscene_sequence() -> void:
 	# === STEP 3: CHUYỂN SANG CAMERA BOSS ===
 	if boss_camera:
 		# Enable camera boss trước
-		boss_camera.enabled = true
+		boss_camera.enabled = true 
 		# Chuyển camera
 		CameraTransition.transition_camera2D(boss_camera, 1.0)
 		await get_tree().create_timer(1.0).timeout
@@ -135,10 +135,22 @@ func _start_cutscene_sequence() -> void:
 	# Đợi 3 giây trước khi chuyển sang cutscene2
 	await get_tree().create_timer(1.0).timeout
 	
+	# Unlock boss trước khi chuyển state
+	is_boss_locked = false
+	obj.set_physics_process(true)
+	
 	# Tự chuyển sang Cutscene2 (không dùng signal từ AnimatedBg nữa)
+	print("Cutscene1: About to transition to Cutscene2")
+	print("  FSM valid: ", is_instance_valid(fsm))
+	print("  FSM: ", fsm)
+	print("  Has cutscene2: ", fsm.states.has("cutscene2") if fsm else false)
+	
 	if is_instance_valid(fsm) and fsm.states.has("cutscene2"):
 		print("Cutscene1: Finished, transitioning to Cutscene2")
 		fsm.change_state(fsm.states.cutscene2)
+		print("Cutscene1: After change_state call")
+	else:
+		print("ERROR: Cannot transition to cutscene2!")
 
 func _zoom_boss_camera_in() -> void:
 	# Slow motion
@@ -288,10 +300,12 @@ func _play_flash_effect() -> void:
 	print("Cutscene1: Flash effect completed")
 
 func _physics_process(_delta):
+	if not is_instance_valid(obj) or not is_instance_valid(fsm):
+		return
+	
 	if is_boss_locked:
 		obj.velocity = Vector2.ZERO
 		obj.global_position = boss_locked_position
-		return
 
 func _exit() -> void:
 	obj.is_stunned = false

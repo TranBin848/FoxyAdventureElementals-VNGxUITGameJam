@@ -315,6 +315,7 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 position = Vector2(25, -14)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 8)
 enabled = false
 zoom = Vector2(3, 3)
 
