@@ -96,16 +96,20 @@ func _enter():
 	# Đợi 3 giây trước khi chuyển sang skill tiếp theo
 	await get_tree().create_timer(3.0).timeout
 	
+	# Kiểm tra phase trước khi di chuyển
+	if obj.current_phase != obj.Phase.FLY:
+		# Đã chuyển phase, dừng hẳn
+		return
+	
 	# Di chuyển qua lại trái phải dựa trên vị trí x ban đầu
 	await _move_horizontally()
 	
-	# Kiểm tra phase để quyết định chuyển state
-	if obj.current_phase == obj.Phase.GROUND:
-		# Phase 2: hạ xuống và charge lại
-		await _land_and_charge()
-	else:
-		# Phase 1: tiếp tục skill tiếp theo
-		obj.use_skill()
+	# Kiểm tra phase lần nữa sau khi di chuyển xong
+	if obj.current_phase != obj.Phase.FLY:
+		return
+	
+	# Phase 1: tiếp tục skill tiếp theo
+	obj.use_skill()
 
 func _land_and_charge() -> void:
 	# Hạ boss xuống mặt đất

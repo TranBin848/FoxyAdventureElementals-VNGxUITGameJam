@@ -316,7 +316,7 @@ position = Vector2(25, -14)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(3, 3)
 
 [node name="States" type="Node" parent="."]
 

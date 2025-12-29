@@ -91,8 +91,6 @@ func _start_cutscene_sequence() -> void:
 	if boss_camera:
 		# Enable camera boss trước
 		boss_camera.enabled = true
-		# Reset position về (0, 0) để follow boss đúng cách
-		boss_camera.position = Vector2.ZERO
 		# Chuyển camera
 		CameraTransition.transition_camera2D(boss_camera, 1.0)
 		await get_tree().create_timer(1.0).timeout
@@ -135,7 +133,7 @@ func _start_cutscene_sequence() -> void:
 	await _land_player_on_ground()
 	
 	# Đợi 3 giây trước khi chuyển sang cutscene2
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	
 	# Tự chuyển sang Cutscene2 (không dùng signal từ AnimatedBg nữa)
 	if is_instance_valid(fsm) and fsm.states.has("cutscene2"):
@@ -143,11 +141,8 @@ func _start_cutscene_sequence() -> void:
 		fsm.change_state(fsm.states.cutscene2)
 
 func _zoom_boss_camera_in() -> void:
-	if not boss_camera:
-		return	
 	# Slow motion
 	Engine.time_scale = 0.4
-	
 
 
 func _move_boss_to_position() -> void:
@@ -206,8 +201,7 @@ func _move_boss_to_position() -> void:
 	Engine.time_scale = 1.0	
 
 func _zoom_camera_out() -> void:
-	if not boss_zone_camera:
-		return
+	pass
 
 func _move_player_to_position() -> void:
 	if not player or not player_pos:
@@ -285,9 +279,8 @@ func _play_flash_effect() -> void:
 	obj.get_tree().root.add_child(canvas_layer)
 	canvas_layer.add_child(flash)
 	
-	# Play flash effect
-	flash.play_flash_effect(0.8)
-	await flash.tree_exited
+	# Play flash effect và đợi nó hoàn thành
+	await flash.play_flash_effect(0.8)
 	
 	# Xóa canvas layer
 	canvas_layer.queue_free()

@@ -324,6 +324,6 @@ position = Vector2(155, 206)
 position = Vector2(736, 108)
 
 [node name="BossPosCutscene1" type="Node2D" parent="PosBossPlayer"]
-position = Vector2(798, -122)
+position = Vector2(798, -59)
 
 [connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]
