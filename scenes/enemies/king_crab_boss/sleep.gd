@@ -17,3 +17,4 @@ func _update(_delta: float) -> void:
 func _exit() -> void:
 	$"../../Direction/HitArea2D/CollisionShape2D".disabled = false
 	$"../../Direction/HurtArea2D/CollisionShape2D2".disabled = false
+	obj.change_phase()

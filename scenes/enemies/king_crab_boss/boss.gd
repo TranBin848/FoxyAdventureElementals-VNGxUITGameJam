@@ -19,6 +19,11 @@ var fired_claw: Node2D = null
 var boss_zone: Area2D = null
 var is_fighting: bool = false
 
+var elements = ElementsEnum.Elements
+var phase_order := [elements.METAL, elements.EARTH]
+var current_phase_index: int = 1
+var next_phase_index: int = current_phase_index
+
 var skills = {
 	0: "spin",
 	1: "fireclaw"
@@ -77,7 +82,25 @@ func take_damage(damage: int) -> void:
 	var health_percent = (float(health) / max_health) * 100
 	health_bar.value = health_percent
 	#print("health: " + str(health) + " max health: " + str(max_health) + " percent: " + str(health_percent))
-	
+	var total_phases := phase_order.size()
+	var bucket_size := 100.0 / total_phases
+
+	next_phase_index = int((health_percent) / bucket_size)
+	# phòng trường hợp health_percent == 100 => int(...) == total_phases
+	next_phase_index = clamp(next_phase_index, 0, total_phases - 1)
+
+func is_phase_changed() -> bool:
+	return next_phase_index != current_phase_index
+
+func change_phase() -> void:
+	current_phase_index = next_phase_index
+	elemental_type = phase_order[current_phase_index]
+	apply_element()
+
+func apply_element() -> void:
+	_init_material()
+	_init_particle()
+
 func flash_corountine() -> void:
 	animated_sprite_2d.modulate = Color(20, 20, 20)
 	await get_tree().create_timer(0.3).timeout
@@ -93,10 +116,13 @@ func handle_dead() -> void:
 	hit_box.disabled = true
 	gravity = 0
 	velocity.x = 0
+	elemental_type = -1
+	$Particles.visible = false
 	health_bar.hide()
 	
-	if fired_claw:
-		fired_claw.queue_free()
+	#unique crab logic
+	#if fired_claw:
+		#fired_claw.queue_free()
 	if boss_zone:
 		boss_zone._on_boss_dead()
 	
