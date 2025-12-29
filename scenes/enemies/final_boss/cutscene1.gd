@@ -24,6 +24,7 @@ var boss_camera: Camera2D = null
 var boss_zone_camera: Camera2D = null
 var boss_locked_position: Vector2 = Vector2.ZERO  # Vị trí lock boss
 var is_boss_locked: bool = false  # Flag để lock boss
+var canvas_layer: CanvasLayer = null  # CanvasLayer UI cần ẩn đi
 
 func _enter() -> void:
 	print("State: Cutscene1 Enter")
@@ -47,6 +48,15 @@ func _enter() -> void:
 	# Tìm AnimatedBg
 	if animated_bg == null:
 		animated_bg = obj.get_tree().get_first_node_in_group("animated_bg")
+	
+	# Tìm và ẩn CanvasLayer UI
+	if canvas_layer == null:
+		canvas_layer = obj.get_tree().root.find_child("GameCanvasLayer", true, false) as CanvasLayer
+		if canvas_layer:
+			print("Cutscene1: Found CanvasLayer, hiding it")
+			canvas_layer.visible = false
+		else:
+			print("Warning: CanvasLayer not found")
 	
 	# Tìm position nodes từ PosBossPlayer trong scene hiện tại
 	var pos_container = obj.get_tree().root.find_child("PosBossPlayer", true, false)
@@ -121,6 +131,12 @@ func _start_cutscene_sequence() -> void:
 	# === STEP 10: BẮT ĐẦU CHẠY ANIMATION CUTSCENE1 ===
 	if animated_bg:
 		print("Cutscene1: Triggering AnimatedBg to play cutscene1")
+		
+		# Ẩn player khi bắt đầu animation
+		if player:
+			player.visible = false
+			print("Cutscene1: Player hidden")
+		
 		animated_bg.play("cutscene1")
 		# Đợi animation hoàn thành
 		await animated_bg.animation_finished
@@ -313,9 +329,11 @@ func _exit() -> void:
 	obj.set_physics_process(true)  # Bật lại physics khi exit
 	is_boss_locked = false
 	
-	# Re-enable player input
+	# Re-enable player input và hiện player lại
 	if player:
 		player.set_physics_process(true)
+		player.visible = true
+		print("Cutscene1: Player shown again")
 	
 	# Đảm bảo camera boss bị tắt khi exit
 	if boss_camera:

@@ -151,9 +151,6 @@ script = ExtResource("1_j8o77")
 
 [node name="AnimatedBg" parent="." instance=ExtResource("2_sxtnh")]
 position = Vector2(651, 53)
-animation = &"cutscene4"
-frame = 2
-frame_progress = 0.757779
 
 [node name="ElementSprite" parent="." instance=ExtResource("3_x14md")]
 position = Vector2(696, 116)
@@ -273,12 +270,12 @@ sprite_frames = SubResource("SpriteFrames_et5yk")
 autoplay = "default"
 frame_progress = 0.914773
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GameCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("26_727lq")]
+[node name="HealthBarContainer" parent="GameCanvasLayer" instance=ExtResource("26_727lq")]
 metadata/_edit_lock_ = true
 
-[node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("27_75ang")]
+[node name="SkillBarUI" parent="GameCanvasLayer" groups=["skill_bar"] instance=ExtResource("27_75ang")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -337,7 +334,7 @@ position = Vector2(685, 0)
 position = Vector2(651, -59)
 
 [node name="BossPosCutscene3" type="Node2D" parent="PosBossPlayer"]
-position = Vector2(320, -59)
+position = Vector2(439, -59)
 
 [node name="PLayerPosCutscene4" type="Node2D" parent="PosBossPlayer"]
 position = Vector2(414, 145)

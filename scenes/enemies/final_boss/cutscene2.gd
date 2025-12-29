@@ -99,6 +99,8 @@ func _start_cutscene_sequence() -> void:
 		await animated_bg.animation_finished
 		print("Cutscene2: AnimatedBg cutscene2 finished")
 	
+	player.change_animation("dead")
+	
 	# Đợi một chút trước khi chuyển sang cutscene3
 	await get_tree().create_timer(3.0).timeout
 	

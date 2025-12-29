@@ -77,13 +77,12 @@ func _start_cutscene_sequence() -> void:
 	# === STEP 3: FLASH EFFECT (ÁNH SÁNG LÓE) ===
 	await _play_flash_effect()
 	
-	# Đợi thêm một chút để đảm bảo movement hoàn thành (nếu animation ngắn hơn)
-	await get_tree().create_timer(0.5).timeout
-	
 	# Đợi một chút trước khi chuyển sang cutscene4
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	
-	# Chuyển sang cutscene4
+	obj.set_physics_process(true)
+	# Kiểm tra obj vẫn còn valid
+	
 	if is_instance_valid(fsm) and fsm.states.has("cutscene4"):
 		print("Cutscene3: Finished, transitioning to Cutscene4")
 		fsm.change_state(fsm.states.cutscene4)
@@ -152,8 +151,8 @@ func _move_characters_to_positions() -> void:
 	var overshoot_pos = boss_pos.global_position + knockback_direction * 50  # Bay xa hơn 50 pixels
 	
 	# Bay nhanh đến vị trí overshoot (0.4s), sau đó về vị trí đích (0.5s)
-	boss_tween.tween_property(obj, "global_position", overshoot_pos, 1.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	boss_tween.tween_property(obj, "global_position", boss_pos.global_position, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	boss_tween.tween_property(obj, "global_position", overshoot_pos, 1.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	boss_tween.tween_property(obj, "global_position", boss_pos.global_position, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	
 	# Đợi cả 2 tweens hoàn thành
 	if player_tween:
