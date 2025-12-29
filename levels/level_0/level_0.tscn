@@ -1,0 +1,287 @@
+[gd_scene load_steps=27 format=4 uid="uid://5f5m765bnxg8"]
+
+[ext_resource type="Script" uid="uid://daj5tdirvwlbt" path="res://levels/level_4/level_4.gd" id="1_o5uhf"]
+[ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="2_pxy07"]
+[ext_resource type="Texture2D" uid="uid://ck8762h1hy2cf" path="res://assets/island/background/additional_water.png" id="3_v3mv3"]
+[ext_resource type="Texture2D" uid="uid://bojjm6k4aiyh8" path="res://assets/terrain_plus/background3.png" id="4_hk5st"]
+[ext_resource type="Texture2D" uid="uid://ch2rf6wnkg6el" path="res://assets/terrain_plus/background4b.png" id="5_r6d3i"]
+[ext_resource type="Texture2D" uid="uid://bm7glj3finew5" path="res://assets/terrain_plus/background4a.png" id="6_q6r03"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="8_weilm"]
+[ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="9_76loc"]
+[ext_resource type="TileSet" uid="uid://bui3wquutm1yg" path="res://levels/level_4/level_4.tres" id="10_j5c03"]
+[ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="20_eppev"]
+[ext_resource type="Texture2D" uid="uid://dxgb08biccb24" path="res://assets/island/images/fox_blade/fox_defeat_3.png" id="22_pxy07"]
+[ext_resource type="PackedScene" uid="uid://cy3uch5sn63wf" path="res://scenes/objects/water_reflection.tscn" id="23_v3mv3"]
+[ext_resource type="Texture2D" uid="uid://bnrhstmshrm2u" path="res://assets/island/images/fox/fox_defeat_3.png" id="51_6tf7l"]
+[ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="53_n2pfd"]
+[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="54_8pds6"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="55_echvh"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="56_ioufq"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="57_2isx6"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="58_yjkv6"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="59_7e416"]
+[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="60_fyh0v"]
+[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="61_vfk86"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="62_w1qk2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwhcj"]
+shader = ExtResource("9_76loc")
+shader_parameter/elemental_type = 3
+shader_parameter/color_tolerance = 0.3
+shader_parameter/glow_intensity = 0.7
+shader_parameter/outline_threshold = 0.1
+shader_parameter/is_fireball_state = false
+shader_parameter/crop_radius = 0.5
+shader_parameter/crop_feathering = 1.0
+shader_parameter/metal_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/metal_replace_1 = Color(0.9, 0.95, 1, 1)
+shader_parameter/metal_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/metal_replace_2 = Color(0.5, 0.55, 0.65, 1)
+shader_parameter/wood_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wood_replace_1 = Color(0.2, 0.8, 0.3, 1)
+shader_parameter/wood_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/wood_replace_2 = Color(0.55, 0.35, 0.15, 1)
+shader_parameter/water_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/water_replace_1 = Color(0, 0.5, 1, 1)
+shader_parameter/water_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/water_replace_2 = Color(0, 0.2, 0.8, 1)
+shader_parameter/fire_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/fire_replace_1 = Color(1, 0.3, 0, 1)
+shader_parameter/fire_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/fire_replace_2 = Color(0.8, 0.1, 0, 1)
+shader_parameter/earth_target_1 = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/earth_replace_1 = Color(0.6, 0.5, 0.2, 1)
+shader_parameter/earth_target_2 = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/earth_replace_2 = Color(0.72, 0.48, 0.29, 1)
+shader_parameter/metal_glow = Color(0.9, 0.95, 1, 1)
+shader_parameter/wood_glow = Color(0.2, 0.9, 0.3, 1)
+shader_parameter/water_glow = Color(0, 0.5, 1, 1)
+shader_parameter/fire_glow = Color(1, 0.4, 0, 1)
+shader_parameter/earth_glow = Color(0.7, 0.5, 0.2, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v3mv3"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3slpx"]
+normal = Vector2(-1, 0)
+
+[node name="Stage" type="Node2D"]
+script = ExtResource("1_o5uhf")
+
+[node name="FarBG" type="Parallax2D" parent="."]
+z_index = -5
+repeat_size = Vector2(1900, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="FarBG"]
+z_index = -100
+position = Vector2(800, -50)
+scale = Vector2(5, 5)
+texture = ExtResource("2_pxy07")
+
+[node name="Sprite2D2" type="Sprite2D" parent="FarBG"]
+z_index = -100
+position = Vector2(801, 558)
+scale = Vector2(60, 20)
+texture = ExtResource("3_v3mv3")
+
+[node name="MediumBG" type="Parallax2D" parent="."]
+visible = false
+z_index = -5
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(1900, 0)
+
+[node name="Sprite2D3" type="Sprite2D" parent="MediumBG"]
+z_index = -100
+position = Vector2(800, 300)
+scale = Vector2(2, 2)
+texture = ExtResource("4_hk5st")
+
+[node name="CloseBG" type="Parallax2D" parent="."]
+visible = false
+z_index = -5
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(1900, 0)
+
+[node name="Sprite2D5" type="Sprite2D" parent="CloseBG"]
+z_index = -100
+position = Vector2(800, 300)
+scale = Vector2(2, 2)
+texture = ExtResource("5_r6d3i")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CloseBG"]
+z_index = -100
+position = Vector2(800, 300)
+scale = Vector2(2, 2)
+texture = ExtResource("6_q6r03")
+
+[node name="Player" parent="." instance=ExtResource("8_weilm")]
+material = SubResource("ShaderMaterial_lwhcj")
+position = Vector2(135, 136)
+collision_mask = 257
+has_blade = true
+has_wand = false
+max_health = 1000
+
+[node name="TileMap" type="TileMapLayer" parent="."]
+z_index = -5
+tile_map_data = PackedByteArray("AAATAAYADwABAAEAAAASAAgADwABAAIAAAASAAcADwABAAEAAAASAAYADwABAAEAAAARAAgADwABAAIAAAARAAcADwABAAEAAAARAAYADwABAAEAAAAnAAgADwACAAIAAAAnAAcADwACAAEAAAAnAAYADwACAAEAAAAnAAUADwACAAAAAAAmAAgADwABAAIAAAAmAAcADwABAAEAAAAmAAYADwABAAEAAAAmAAUADwABAAAAAAAlAAgADwABAAIAAAAlAAcADwABAAEAAAAlAAYADwABAAEAAAAlAAUADwABAAAAAAAkAAgADwABAAIAAAAkAAcADwABAAEAAAAkAAYADwABAAEAAAAkAAUADwABAAAAAAAjAAgADwABAAIAAAAjAAcADwABAAEAAAAjAAYADwABAAEAAAAjAAUADwABAAAAAAAiAAgADwABAAIAAAAiAAcADwABAAEAAAAiAAYADwABAAEAAAAiAAUADwABAAAAAAAhAAgADwABAAIAAAAhAAcADwABAAEAAAAhAAYADwABAAEAAAAhAAUADwABAAAAAAAgAAgADwABAAIAAAAgAAcADwABAAEAAAAgAAYADwABAAEAAAAgAAUADwABAAAAAAAfAAgADwABAAIAAAAfAAcADwABAAEAAAAfAAYADwABAAEAAAAfAAUADwABAAAAAAAeAAgADwABAAIAAAAeAAcADwABAAEAAAAeAAYADwABAAEAAAAeAAUADwABAAAAAAAdAAgADwABAAIAAAAdAAcADwABAAEAAAAdAAYADwABAAEAAAAdAAUADwABAAAAAAAcAAgADwABAAIAAAAcAAcADwABAAEAAAAcAAYADwABAAEAAAAcAAUADwABAAAAAAAbAAgADwABAAIAAAAbAAcADwABAAEAAAAbAAYADwABAAEAAAAbAAUADwABAAAAAAAaAAgADwABAAIAAAAaAAcADwABAAEAAAAaAAYADwABAAEAAAAaAAUADwABAAAAAAAZAAgADwABAAIAAAAZAAcADwABAAEAAAAZAAYADwABAAEAAAAZAAUADwABAAAAAAAYAAgADwABAAIAAAAYAAcADwABAAEAAAAYAAYADwABAAEAAAAXAAgADwABAAIAAAAXAAcADwABAAEAAAAXAAYADwABAAEAAAAWAAgADwABAAIAAAAWAAcADwABAAEAAAAWAAYADwABAAEAAAAVAAgADwABAAIAAAAVAAcADwABAAEAAAAUAAgADwABAAIAAAAQAAgADwABAAIAAAAQAAcADwABAAEAAAAQAAYADwABAAEAAAAQAAUADwABAAAAAAAPAAgADwABAAIAAAAPAAcADwABAAEAAAAPAAYADwABAAEAAAAPAAUADwABAAAAAAAOAAgADwABAAIAAAAOAAcADwABAAEAAAAOAAYADwABAAEAAAAOAAUADwABAAAAAAANAAgADwABAAIAAAANAAcADwABAAEAAAANAAYADwABAAEAAAANAAUADwABAAAAAAAMAAgADwABAAIAAAAMAAcADwABAAEAAAAMAAYADwABAAEAAAAMAAUADwABAAAAAAALAAgADwABAAIAAAALAAcADwABAAEAAAALAAYADwABAAEAAAALAAUADwABAAAAAAAKAAgADwABAAIAAAAKAAcADwABAAEAAAAKAAYADwABAAEAAAAKAAUADwABAAAAAAAJAAgADwABAAIAAAAJAAcADwABAAEAAAAJAAYADwABAAEAAAAJAAUADwABAAAAAAAIAAgADwABAAIAAAAIAAcADwABAAEAAAAIAAYADwABAAEAAAAIAAUADwABAAAAAAAHAAgADwABAAIAAAAHAAcADwABAAEAAAAHAAYADwABAAEAAAAHAAUADwABAAAAAAAGAAgADwABAAIAAAAGAAcADwABAAEAAAAGAAYADwABAAEAAAAGAAUADwABAAAAAAAFAAgADwABAAIAAAAFAAcADwABAAEAAAAFAAYADwABAAEAAAAFAAUADwABAAAAAAAEAAgADwABAAIAAAAEAAcADwABAAEAAAAEAAYADwABAAEAAAAEAAUADwABAAAAAAADAAgADwABAAIAAAADAAcADwABAAEAAAADAAYADwABAAEAAAADAAUADwABAAAAAAACAAgADwABAAIAAAACAAcADwABAAEAAAACAAYADwABAAEAAAACAAUADwABAAAAAAABAAgADwABAAIAAAABAAcADwABAAEAAAABAAYADwABAAEAAAABAAUADwABAAAAAAAAAAgADwAAAAIAAAAAAAcADwAAAAEAAAAAAAYADwAAAAEAAAAAAAUADwAAAAAAAAACAAQACAAGAAMAAAAEAAQACAAGAAMAAAADAAQACAAHAAMAAAAFAAQACAAJAAMAAAAZAAQACAAJAAUAAAAbAAQACAALAAUAAAAbAAMACAALAAQAAAAMAAMACAAAAAEAAAAJAAQACAAAAAIAAAAJAAMACAAAAAEAAAARAAQACAADAAIAAAAPAAQACAABAAMAAAAOAAQACAAIAAEAAAAhAAQACAAGAAkAAAAhAAMACAAHAAgAAAARAAUADwABAAAAAAASAAUADwABAAAAAAATAAUADwABAAAAAAAUAAUADwABAAAAAAAVAAUADwABAAAAAAAWAAUADwABAAAAAAAXAAUADwABAAAAAAAYAAUADwABAAAAAAAVAAYADwABAAEAAAAUAAYADwABAAEAAAATAAcADwABAAEAAAAUAAcADwABAAEAAAATAAgADwABAAIAAAAWAAQACwAAAAAAAAAMAAQACAAAAAIAAAA=")
+tile_set = ExtResource("10_j5c03")
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="SkillTreeUI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+visible = false
+script = ExtResource("53_n2pfd")
+
+[node name="Background" type="TextureRect" parent="SkillTreeUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.05176e-05
+offset_right = 1472.0
+offset_bottom = 816.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.465121, 0.468751)
+texture = ExtResource("54_8pds6")
+
+[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
+modulate = Color(1, 1, 1, 0.764706)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("55_echvh")]
+offset_left = 640.0
+offset_top = 384.0
+offset_right = 640.0
+offset_bottom = 384.0
+
+[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 360.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/line_spacing = 12
+theme_override_fonts/font = ExtResource("56_ioufq")
+theme_override_font_sizes/font_size = 16
+text = "Tab to open/close skill tree
+Mouse wheel: Zoom in/out
+Hold left mouse: Drag"
+
+[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 332.0
+offset_bottom = 65.0
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("57_2isx6")
+theme_override_font_sizes/font_size = 32
+text = "SKILL TREE"
+vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("58_yjkv6")
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("59_7e416")]
+offset_bottom = 100.0
+script = null
+
+[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -104.0
+offset_right = 122.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("56_ioufq")
+text = "Enemy Out of Range"
+horizontal_alignment = 1
+
+[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("60_fyh0v")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -111.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("61_vfk86")]
+
+[node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("62_w1qk2")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -78.0
+offset_right = 117.296
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="WorldBoundary" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary"]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_v3mv3")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="WorldBoundary"]
+position = Vector2(1364, 1)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/StaticBody2D2"]
+shape = SubResource("WorldBoundaryShape2D_3slpx")
+
+[node name="Boat" parent="." instance=ExtResource("20_eppev")]
+position = Vector2(1321, 197)
+
+[node name="FoxDefeat3" type="Sprite2D" parent="."]
+position = Vector2(743, 145)
+texture = ExtResource("51_6tf7l")
+
+[node name="FoxDefeat4" type="Sprite2D" parent="."]
+position = Vector2(684, 144)
+texture = ExtResource("22_pxy07")
+
+[node name="Water2" parent="." instance=ExtResource("23_v3mv3")]
+position = Vector2(774, 322)

@@ -121,8 +121,6 @@ func handle_dead() -> void:
 	health_bar.hide()
 	
 	#unique crab logic
-	#if fired_claw:
-		#fired_claw.queue_free()
 	if boss_zone:
 		boss_zone._on_boss_dead()
 	
