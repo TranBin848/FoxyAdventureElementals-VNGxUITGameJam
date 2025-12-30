@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=112 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://m4di78taixns" path="res://assets/foxy/fox_hat/fox_defeat_1.png" id="8_4b1ex"]
 [ext_resource type="Texture2D" uid="uid://b6jgthsrynctr" path="res://assets/foxy/fox_hat/fox_defeat_2.png" id="9_v8cnd"]
 [ext_resource type="Texture2D" uid="uid://fii540ugfj5n" path="res://assets/foxy/fox_hat/fox_defeat_3.png" id="10_wuxn4"]
+[ext_resource type="Texture2D" uid="uid://dovg7vrsfx4fi" path="res://assets/island/images/fox_hat/fox_defeat_3.png" id="11_4b1ex"]
 [ext_resource type="Texture2D" uid="uid://6gko14qsmmw4" path="res://assets/foxy/fox_hat/fox_jump_2.png" id="11_46q5t"]
 [ext_resource type="Texture2D" uid="uid://yom7r0j05to2" path="res://assets/foxy/fox_hat/fox_hit_1.png" id="12_5miun"]
 [ext_resource type="Texture2D" uid="uid://ck8edmupc3gra" path="res://assets/foxy/fox_hat/fox_hit_2.png" id="13_7u1tp"]
@@ -83,6 +84,7 @@
 [ext_resource type="Texture2D" uid="uid://bnxmtrxr3ke7q" path="res://assets/skills/fire/Fireball/Fire Effect and Bullet 16x16.png" id="60_gs7hn"]
 [ext_resource type="PackedScene" uid="uid://b33nvdvnniecl" path="res://scenes/skills/projectiles/earth/comet_crater.tscn" id="66_gs7hn"]
 [ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://scenes/fx/slash_fx.tscn" id="67_31ki0"]
+[ext_resource type="Script" uid="uid://vqavncunfnes" path="res://scenes/player/actor.gd" id="83_trum3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trum3"]
 shader = ExtResource("2_21yht")
@@ -129,6 +131,14 @@ animations = [{
 "loop": false,
 "name": &"dead",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_4b1ex")
+}],
+"loop": true,
+"name": &"faint",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -612,7 +622,7 @@ autoplay = "idle"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
-animation = &"dead"
+animation = &"faint"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
@@ -813,6 +823,9 @@ script = ExtResource("55_w8qe1")
 
 [node name="Dash" type="Node" parent="States"]
 script = ExtResource("56_hdvrm")
+
+[node name="Actor" type="Node" parent="States"]
+script = ExtResource("83_trum3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

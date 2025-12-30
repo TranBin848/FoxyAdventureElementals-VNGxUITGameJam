@@ -48,9 +48,13 @@ frame_progress = 0.548366
 [node name="BoatFrame" parent="." instance=ExtResource("6_fotra")]
 
 [node name="InteractiveArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("7_2l30g")
 metadata/_custom_type_script = "uid://0qvd447gmgon"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
 position = Vector2(-1, -16)
 shape = SubResource("RectangleShape2D_kc5hd")
+
+[connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

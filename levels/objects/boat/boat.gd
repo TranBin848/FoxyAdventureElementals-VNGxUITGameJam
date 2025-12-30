@@ -8,10 +8,10 @@ extends Node2D
 
 var is_busy := false
 
-func _ready() -> void:
-	$InteractiveArea2D.interacted.connect(_on_interactive_area_2d_interacted)
-
-	
+#func _ready() -> void:
+	#$InteractiveArea2D.interacted.connect(_on_interactive_area_2d_interacted)
+#
+	#
 func _on_interactive_area_2d_interacted() -> void:
 	if is_busy:
 		return

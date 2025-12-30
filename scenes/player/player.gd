@@ -55,7 +55,7 @@ var current_weapon: WeaponType = WeaponType.NORMAL
 
 # Inventory Flags
 var has_blade: bool = false
-var has_wand: bool = true # Default based on your old code
+var has_wand: bool = false
 
 # Combat State
 var is_invulnerable: bool = false
@@ -67,6 +67,11 @@ var is_able_attack: bool = true
 
 # Targeting
 var _targets_in_range: Array[Node2D] = []
+
+# Actor state
+var actor_target_x: float = 0.0
+var is_actor_moving: bool = false
+signal actor_arrived #emit when actor move toward designated target
 #endregion
 
 #region Configuration (Exports)
@@ -127,8 +132,8 @@ func _ready() -> void:
 	if fireball_hit_area:
 		fireball_hit_area.hitted.connect(_on_fireball_hit_enemy)
 	
-	Dialogic.timeline_started.connect(func(): can_move = false)
-	Dialogic.timeline_ended.connect(func(): can_move = true)
+	#Dialogic.timeline_started.connect(func(): can_move = false)
+	#Dialogic.timeline_ended.connect(func(): can_move = true)
 	
 	# Initial Visual Setup
 	_hide_all_visuals()
@@ -691,3 +696,55 @@ func add_new_skill(skill: Skill, stack_amount: int = 1) -> void:
 	
 	# Add to SkillTreeManager
 	SkillTreeManager.collect_skill(skill.name, stack_amount)
+
+# ==============================================================================
+# CUTSCENE LOGIC
+# ==============================================================================
+
+func toggle_actor_state() -> void:
+	if fsm.current_state == fsm.states.actor:
+		fsm.change_state(fsm.states.idle)
+	else:
+		fsm.change_state(fsm.states.actor)
+
+func move_to_scene_point(point_name: String) -> void:
+	# 1. Find the node in the current scene (recursive search)
+	var scene = get_tree().current_scene
+	var target_node = scene.find_child(point_name, true, false)
+	
+	if not target_node:
+		push_error("Player: Could not find node named '%s' for actor movement." % point_name)
+		return
+
+	# 2. Setup Movement State
+	actor_target_x = target_node.global_position.x
+	print(actor_target_x)
+	is_actor_moving = true
+	
+	fsm.change_state(fsm.states.actor)
+	
+	# 3. Switch FSM to Actor/Cutscene state to disable standard logic
+	# (Assuming 'actor' is the state name in your FSM)
+	#if fsm.has_state("actor"):
+		#fsm.change_state(fsm.states.actor)
+
+func _handle_actor_physics() -> void:
+	# Calculate distance to target
+	var dist = actor_target_x - global_position.x
+	print(str(actor_target_x) + " " + str(global_position.x))
+	# Threshold (5 pixels) to stop jittering
+	if abs(dist) < 5.0:
+		velocity.x = 0
+		is_actor_moving = false
+		change_animation("idle")
+		actor_arrived.emit() # Signal Dialogic that we are done
+	else:
+		direction = sign(dist)
+		velocity.x = direction * movement_speed
+
+func _apply_gravity_only(delta: float) -> void:
+	# Copied strictly gravity logic from _update_movement
+	# This ensures the actor falls if the target is on a lower platform
+	var current_gravity = jump_gravity if velocity.y < 0 else fall_gravity
+	velocity.y += current_gravity * delta
+	velocity.y = clamp(velocity.y, -INF, max_fall_speed)

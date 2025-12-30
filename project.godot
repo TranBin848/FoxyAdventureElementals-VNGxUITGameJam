@@ -45,6 +45,7 @@ directories/dch_directory={
 directories/dtl_directory={
 "end_lv1": "res://dialogs/end_lv1.dtl",
 "guide_elemental": "res://dialogs/guide_elemental.dtl",
+"level0": "res://dialogic_timelines/level0.dtl",
 "start_game": "res://dialogs/start_game.dtl",
 "upgrade_stats": "res://dialogs/upgrade_stats.dtl"
 }

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=114 format=3 uid="uid://di6o1yntkov7w"]
+[gd_resource type="TileSet" load_steps=116 format=3 uid="uid://di6o1yntkov7w"]
 
 [ext_resource type="Texture2D" uid="uid://bnmuiut4rgvqk" path="res://assets/terrain_plus/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="1_4ia71"]
 [ext_resource type="Texture2D" uid="uid://ca4mpbifj2vre" path="res://assets/terrain_plus/Floor Tiles2.png" id="2_resf3"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="11_pws78"]
 [ext_resource type="PackedScene" uid="uid://bmqknea8bh0ev" path="res://levels/objects/campfire/campfire.tscn" id="12_d7grt"]
 [ext_resource type="Texture2D" uid="uid://bexwk04lgo3r6" path="res://assets/terrain_plus/Weeping Willow1.png" id="13_13lrs"]
+[ext_resource type="Texture2D" uid="uid://dvdmgeeti7hvh" path="res://assets/terrain_plus/broken_statue.png" id="13_gxuvc"]
 [ext_resource type="Texture2D" uid="uid://bcg7vq3cae51b" path="res://assets/terrain_plus/metalLand.png" id="14_yyisx"]
 [ext_resource type="Texture2D" uid="uid://bppumeldgyn1h" path="res://assets/island/terrain/earth_terrain_32x32.png" id="15_8sfwm"]
 [ext_resource type="Texture2D" uid="uid://dbskn2uc441go" path="res://assets/island/terrain/metal_terrain_32x32.png" id="16_o38wn"]
@@ -252,6 +253,13 @@ scenes/9/scene = ExtResource("12_d7grt")
 scenes/10/scene = ExtResource("4_rotw0")
 scenes/11/scene = ExtResource("5_dvw13")
 scenes/12/scene = ExtResource("6_rnvmb")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jqxws"]
+texture = ExtResource("13_gxuvc")
+texture_region_size = Vector2i(32, 32)
+0:0/size_in_atlas = Vector2i(3, 3)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bi7ob"]
 texture = ExtResource("13_13lrs")
@@ -3495,4 +3503,5 @@ sources/14 = SubResource("TileSetAtlasSource_tg65d")
 sources/15 = SubResource("TileSetAtlasSource_1x8xo")
 sources/16 = SubResource("TileSetAtlasSource_jmqy2")
 sources/17 = SubResource("TileSetAtlasSource_v3hrv")
+sources/11 = SubResource("TileSetAtlasSource_jqxws")
 pattern_0 = SubResource("TileMapPattern_wqd52")
