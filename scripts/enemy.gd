@@ -96,6 +96,12 @@ func _ready() -> void:
 	
 	add_to_group("enemies")
 	
+	var minimap = GameManager.minimap
+	
+	if minimap:
+		# 2. Register self. MUST match the key in 'group_settings' ("enemies")
+		minimap.register_object("enemies", self)
+	
 	# Connect to global particle quality signal (check if not already connected)
 	if not SettingsManager.particle_quality_changed.is_connected(_on_particle_quality_changed):
 		SettingsManager.particle_quality_changed.connect(_on_particle_quality_changed)
@@ -309,6 +315,11 @@ func is_touch_wall() -> bool:
 func is_can_fall() -> bool:
 	return down_ray_cast != null and not down_ray_cast.is_colliding()
 
+
+func _process(delta):
+	if not is_visible_in_tree():
+		return
+
 # --- Called every frame (or physics frame)
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -385,7 +396,7 @@ func calculate_elemental_damage(base_damage: float, attacker_element: int) -> fl
 	
 	return base_damage
 
-func check_element(elemental_type_1: int, elemental_type_2: int) -> int:
+func check_element(elemental_type_1: ElementsEnum.Elements, elemental_type_2: ElementsEnum.Elements) -> int:
 	# 1 khắc 2
 	if (restraint_table.has(elemental_type_1) and restraint_table[elemental_type_1].has(elemental_type_2)):
 		return -1
@@ -395,7 +406,7 @@ func check_element(elemental_type_1: int, elemental_type_2: int) -> int:
 	# Không sinh khắc
 	return 0
 
-func handle_elemental_damage(attacker_element: int) -> void:
+func handle_elemental_damage(attacker_element: ElementsEnum.Elements) -> void:
 	var debuff_scene: PackedScene = null
 	if elements_debuff.has(attacker_element):
 		debuff_scene = elements_debuff[attacker_element]
@@ -481,6 +492,12 @@ func scale_health(multiplier: float):
 	max_health *= multiplier
 	health = max_health
 	print("💚 %s: %.0fHP (x%.1f)" % [name, max_health, multiplier])
+
+func _exit_tree():
+	# 3. Clean up when enemy dies so the icon disappears immediately
+	var minimap = get_tree().get_first_node_in_group("Minimap")
+	if minimap:
+		minimap.remove_object("enemies", self)
 
 # Functions for debuff
 func set_debuff(debuff_scene: PackedScene) -> void:

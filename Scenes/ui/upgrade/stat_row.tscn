@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://3382macmw6fi"]
+
+[ext_resource type="Texture2D" uid="uid://cx1cqnm2lrgxo" path="res://icon.svg" id="1_5b2e0"]
+[ext_resource type="Script" uid="uid://c6jege8rqvkcc" path="res://scenes/ui/upgrade/stat_row.gd" id="1_ttdva"]
+[ext_resource type="Texture2D" uid="uid://crc7kwfflls13" path="res://assets/ui/upgrade/minus.png" id="2_ttdva"]
+[ext_resource type="Texture2D" uid="uid://bv6u4l653k783" path="res://assets/ui/upgrade/plus.png" id="3_u47mb"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_uuray"]
+
+[node name="StatRow" type="HBoxContainer"]
+process_mode = 3
+offset_right = 170.0
+offset_bottom = 128.0
+theme_override_constants/separation = 10
+script = ExtResource("1_ttdva")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_5b2e0")
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_uuray")
+theme_override_font_sizes/font_size = 36
+text = "TEST"
+
+[node name="MinusButton" type="TextureButton" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("2_ttdva")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ValueLabel" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_uuray")
+theme_override_font_sizes/font_size = 36
+text = "100"
+
+[node name="PlusButton" type="TextureButton" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("3_u47mb")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="pressed" from="MinusButton" to="." method="_on_minus_button_pressed"]
+[connection signal="pressed" from="PlusButton" to="." method="_on_plus_button_pressed"]

@@ -1,26 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://plkay1dhhsoh"]
+[gd_scene load_steps=11 format=3 uid="uid://plkay1dhhsoh"]
 
 [ext_resource type="Script" uid="uid://cs8wx3enui401" path="res://levels/objects/chest/chest.gd" id="1_4ahkj"]
-[ext_resource type="Texture2D" uid="uid://bidl5brkimhxo" path="res://assets/items/chest/chest_close_01.png" id="2_2u810"]
-[ext_resource type="Texture2D" uid="uid://bjcqjfm23puad" path="res://assets/items/chest/chest_close_02.png" id="3_attkn"]
-[ext_resource type="Texture2D" uid="uid://dqrogefu4p788" path="res://assets/items/chest/chest_close_03.png" id="4_yqtcl"]
-[ext_resource type="Texture2D" uid="uid://btnwd6wmuxmda" path="res://assets/items/chest/chest_open_01.png" id="5_fvglp"]
-[ext_resource type="Texture2D" uid="uid://dkn0i1fahffwr" path="res://assets/items/chest/chest_open_02.png" id="6_1rp4i"]
-[ext_resource type="Texture2D" uid="uid://br8hwwry0gxvd" path="res://assets/items/chest/chest_open_03.png" id="7_6mai0"]
-[ext_resource type="Texture2D" uid="uid://b67b2vn864ieo" path="res://assets/items/chest/chest_open_04.png" id="8_bi4wm"]
-[ext_resource type="Texture2D" uid="uid://bwcclik4ny1ry" path="res://assets/items/chest/chest_open_05.png" id="9_vthut"]
+[ext_resource type="Texture2D" uid="uid://c1oe2ajw3hwdp" path="res://assets/items/chest/chest_gold_open_01.png" id="2_kyow5"]
+[ext_resource type="Texture2D" uid="uid://cc8424juwfrr0" path="res://assets/items/chest/chest_gold_open_02.png" id="3_ubh8l"]
+[ext_resource type="Texture2D" uid="uid://db1k53jjooxc0" path="res://assets/items/chest/chest_gold_open_03.png" id="4_3srgs"]
+[ext_resource type="Texture2D" uid="uid://c4m2ji6v3v1sj" path="res://assets/items/chest/chest_gold_open_04.png" id="5_aga8g"]
+[ext_resource type="Texture2D" uid="uid://rklpp03vtdqy" path="res://assets/items/chest/chest_gold_open_05.png" id="6_2b5gf"]
+[ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="7_ubh8l"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dynor"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2u810")
+"texture": ExtResource("2_kyow5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_attkn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_yqtcl")
+"texture": ExtResource("3_ubh8l")
 }],
 "loop": true,
 "name": &"close",
@@ -28,19 +23,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_fvglp")
+"texture": ExtResource("2_kyow5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_1rp4i")
+"texture": ExtResource("3_ubh8l")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_6mai0")
+"texture": ExtResource("4_3srgs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_bi4wm")
+"texture": ExtResource("5_aga8g")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_vthut")
+"texture": ExtResource("6_2b5gf")
 }],
 "loop": false,
 "name": &"open",
@@ -50,7 +45,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ahkj"]
 size = Vector2(34, 27)
 
-[node name="Chest" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3srgs"]
+size = Vector2(82, 33)
+
+[node name="Chest" type="StaticBody2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_4ahkj")
@@ -59,8 +57,21 @@ script = ExtResource("1_4ahkj")
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_dynor")
 animation = &"close"
-frame_progress = 0.768257
+frame_progress = 0.469852
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_4ahkj")
+
+[node name="InteractiveArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("7_ubh8l")
+metadata/_custom_type_script = "uid://0qvd447gmgon"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_3srgs")
+
+[connection signal="interaction_available" from="InteractiveArea2D" to="." method="_on_interaction_available"]
+[connection signal="interaction_unavailable" from="InteractiveArea2D" to="." method="_on_interaction_unavailable"]

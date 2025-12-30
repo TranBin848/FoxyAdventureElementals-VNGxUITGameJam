@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=4 uid="uid://beaf2cwec5xlr"]
+[gd_scene load_steps=69 format=4 uid="uid://beaf2cwec5xlr"]
 
 [ext_resource type="Script" uid="uid://wdfjgyhrjowc" path="res://levels/level_3/level_3.gd" id="1_b7gic"]
 [ext_resource type="TileSet" uid="uid://yxir4yavpav2" path="res://levels/level_1/level_1.tres" id="2_4c4sg"]
@@ -37,16 +37,12 @@
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="32_vjcd7"]
 [ext_resource type="PackedScene" uid="uid://bf2uetkx1otc6" path="res://scenes/objects/house_door/house_door.tscn" id="33_q7qyy"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="38_xb74x"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="39_2s1pb"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="39_8vtkf"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="40_7k6of"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="42_rrv8b"]
-[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="43_p1s2p"]
-[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="44_0dmjw"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="44_gp4mp"]
-[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="45_3x5uw"]
-[ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="46_3ctgw"]
+[ext_resource type="Script" uid="uid://8vtovny64gjj" path="res://scenes/ui/skill_tree/skill_tree_ui.gd" id="46_3ctgw"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="47_ic0q8"]
-[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="48_uc3y8"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://scenes/ui/skill_tree/skill_tree_root.tscn" id="48_uc3y8"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="49_qt2nh"]
 
 [sub_resource type="Curve2D" id="Curve2D_omsu6"]
@@ -605,7 +601,7 @@ position = Vector2(12638, -542)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="SafeObjects/WorldBoundary"]
 position = Vector2(1986, -101)
-collision_layer = 256
+collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/WorldBoundary/StaticBody2D"]
@@ -613,7 +609,7 @@ shape = SubResource("WorldBoundaryShape2D_0dmjw")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="SafeObjects"]
 position = Vector2(15731, 889)
-collision_layer = 256
+collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/StaticBody2D3"]
@@ -643,55 +639,7 @@ zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("42_rrv8b")
-
-[node name="SkillBarUI" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_p1s2p")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("44_gp4mp")]
-offset_bottom = 100.0
-script = null
-
-[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -122.0
-offset_top = -104.0
-offset_right = 122.0
-offset_bottom = -88.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("23_rmb4t")
-text = "Enemy Out of Range"
-horizontal_alignment = 1
-
-[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("45_3x5uw")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -111.0
-offset_right = -15.0
-offset_bottom = -15.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("44_0dmjw")]
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("39_2s1pb")]
 
 [node name="SkillTreeUI" type="CanvasLayer" parent="."]
 process_mode = 3

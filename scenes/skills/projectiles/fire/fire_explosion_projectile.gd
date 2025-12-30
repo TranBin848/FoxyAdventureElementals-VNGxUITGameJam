@@ -1,5 +1,5 @@
 extends ProjectileBase
-class_name StunBeam
+class_name FireExplosionProjectile
 
 # --- Explosion Config ---
 @export var start_scale: Vector2 = Vector2.ONE
@@ -24,6 +24,9 @@ func _on_hit_area_2d_hitted(_area: Variant) -> void:
 
 func _on_body_entered(_body: Node2D) -> void:
 	_trigger_explosion()
+	
+func _setup():
+	pass
 
 
 func _trigger_explosion() -> void:

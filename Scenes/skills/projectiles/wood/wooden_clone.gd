@@ -12,6 +12,10 @@ class_name WoodenCloneProjectile
 var center_position: Vector2
 var is_active: bool = false
 
+func setup(skill: Skill, dir: Vector2) -> void:
+	super.setup(skill,dir)
+	clone_lifetime_sec = clone_lifetime_sec * (skill.level + 1) / 2
+
 func _ready() -> void:
 	rotation = 0.0  # cancel ProjectileBase rotation
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=110 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
@@ -543,8 +543,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niom3"]
 size = Vector2(17, 28)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ru3bc"]
-radius = 15.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_21yht"]
+radius = 17.0294
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8qe1"]
 size = Vector2(15.3181, 31.9904)
@@ -560,18 +560,22 @@ point_count = 3
 radius = 7.0
 height = 28.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ru3bc"]
+radius = 17.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lwhcj"]
 size = Vector2(5.5, 3)
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 0
 collision_layer = 2
+collision_mask = 257
 safe_margin = 0.1
 script = ExtResource("1_wodsf")
-atk_cd = 0.15
 max_fall_speed = 500.0
 dash_dist = 100.0
 dash_cd = 0.5
+atk_cd = 0.15
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -40)
@@ -695,8 +699,7 @@ target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
-visible = false
-collision_layer = 4
+collision_layer = 516
 script = ExtResource("35_o1e43")
 metadata/_custom_type_script = "uid://csu2b21cwchqw"
 
@@ -715,7 +718,7 @@ metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/FireballHitArea2D"]
 position = Vector2(0, -15)
-shape = SubResource("CircleShape2D_ru3bc")
+shape = SubResource("CircleShape2D_21yht")
 
 [node name="HitArea2D" type="Area2D" parent="Direction"]
 collision_mask = 16
