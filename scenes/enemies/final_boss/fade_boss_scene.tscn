@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq7uprjintvpb"]
+
+[ext_resource type="Script" path="res://scenes/enemies/final_boss/fade_boss_scene.gd" id="1_fade"]
+
+[node name="FadeBossScene" type="ColorRect"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.886275, 0.94902, 0.847059, 1)
+script = ExtResource("1_fade")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdl2j4hlt7yy4"]
+
+[ext_resource type="Script" uid="uid://d15eyudlptkyn" path="res://scenes/enemies/final_boss/element_sprite.gd" id="1_element"]
+
+[node name="ElementSprite" type="Sprite2D"]
+script = ExtResource("1_element")

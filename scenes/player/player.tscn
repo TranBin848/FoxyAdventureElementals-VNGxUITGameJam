@@ -612,7 +612,7 @@ autoplay = "idle"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
-animation = &"cling"
+animation = &"dead"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
