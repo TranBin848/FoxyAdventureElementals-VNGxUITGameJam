@@ -2,35 +2,59 @@ class_name PlayerState
 extends FSMState
 
 # Constant for knockback if not defined in Player
-const DEFAULT_KNOCKBACK_FORCE := 250.0
+const DEFAULT_KNOCKBACK_FORCE := 100.0
 const ACCELERATION = 800.0
 const FRICTION = 1000.0
 
 # region Movement Controls
 # ------------------------------------------------------------------------------
-
 func control_moving() -> bool:
-	var dir: float = Input.get_axis("left", "right")
+	var delta = obj.get_physics_process_delta_time()
 	
-	# Calculate target speed (Where we WANT to be)
+	# SOCD Handling: Track which key was pressed most recently
+	if Input.is_action_just_pressed("right"):
+		obj.last_dir = 1
+	if Input.is_action_just_pressed("left"):
+		obj.last_dir = -1
+	
+	# Determine actual direction
+	var right_held = Input.is_action_pressed("right")
+	var left_held = Input.is_action_pressed("left")
+	var dir: int = 0
+	
+	if right_held and left_held:
+		# Both held: use last pressed direction
+		dir = obj.last_dir
+	elif right_held:
+		dir = 1
+		obj.last_dir = 1
+	elif left_held:
+		dir = -1
+		obj.last_dir = -1
+	else:
+		obj.last_dir = 0
+	
+	# Calculate target speed
 	var target_speed = obj.movement_speed * dir * obj.speed_multiplier
 	
 	if dir != 0:
-		# Accel: Smoothly move current velocity toward target speed
-		# get_physics_process_delta_time() is safer than passing delta manually
-		var delta = obj.get_physics_process_delta_time()
+		# Smooth acceleration toward target speed
 		obj.velocity.x = move_toward(obj.velocity.x, target_speed, ACCELERATION * delta)
 		
-		# Facing direction logic (only flip if actually moving input)
+		# Update facing direction
 		obj.change_direction(dir)
 		
+		# Change to run state only when grounded
 		if obj.is_on_floor() and fsm.current_state != fsm.states.run:
 			change_state(fsm.states.run)
 		return true
 		
 	else:
-		# Friction: Smoothly reduce speed to 0
-		var delta = obj.get_physics_process_delta_time()
+		# Don't apply friction during Dash - preserve momentum
+		if fsm.current_state.name == "Dash":
+			return false
+		
+		# Smooth deceleration to stop
 		obj.velocity.x = move_toward(obj.velocity.x, 0, FRICTION * delta)
 		return false
 
