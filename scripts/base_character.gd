@@ -9,6 +9,7 @@ var is_movable: bool = true
 @export var gravity: float = 700.0
 var ignore_gravity := false
 var direction: int = 1
+var last_dir: int = 1
 @export var _next_direction: int = 1
 var jump_speed: float = 400.0
 var jump_multiplier: float = 1.0
