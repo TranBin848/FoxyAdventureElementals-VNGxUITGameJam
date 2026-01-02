@@ -2,8 +2,8 @@ class_name PlayerState
 extends FSMState
 
 const DEFAULT_KNOCKBACK_FORCE := 100.0
-const ACCELERATION = 800.0
-const FRICTION = 1000.0
+const ACCELERATION = 1500.0
+const FRICTION = 800.0
 const AIR_FRICTION_MULTIPLIER = 0.25  # Much less friction in air
 
 func control_moving() -> bool:
