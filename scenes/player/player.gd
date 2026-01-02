@@ -86,9 +86,9 @@ var _targets_in_range: Array[Node2D] = []
 @export var fireball_bounciness: float = 1.0
 
 @export_group("Jump Physics")
-@export var jump_height: float = 64.0  # How high (in pixels) you jump. (~2 tiles)
-@export var jump_time_to_peak: float = 0.5 # Seconds to reach top. Higher = Floatier.
-@export var jump_time_to_descent: float = 0.5 # Seconds to fall back down.
+@export var jump_height: float = 56.0  # How high (in pixels) you jump. (~2 tiles)
+@export var jump_time_to_peak: float = 0.45 # Seconds to reach top. Higher = Floatier.
+@export var jump_time_to_descent: float = 0.8 # Seconds to fall back down.
 #endregion
 
 #region Internal Variables
@@ -248,6 +248,8 @@ func throw_blade() -> void:
 	# Remove Blade Logic
 	has_blade = false
 	equip_weapon(WeaponType.NORMAL)
+
+func can_throw() -> bool: return has_blade && current_weapon == WeaponType.BLADE
 
 func swap_weapon() -> void:
 	# Block swapping during special states

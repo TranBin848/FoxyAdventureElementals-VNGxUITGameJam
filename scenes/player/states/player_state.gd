@@ -3,8 +3,8 @@ extends FSMState
 
 # Constant for knockback if not defined in Player
 const DEFAULT_KNOCKBACK_FORCE := 100.0
-const ACCELERATION = 800.0
-const FRICTION = 1000.0
+const ACCELERATION = 1500.0
+const FRICTION = 800.0
 
 # region Movement Controls
 # ------------------------------------------------------------------------------
