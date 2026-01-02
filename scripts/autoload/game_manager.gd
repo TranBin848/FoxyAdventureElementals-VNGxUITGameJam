@@ -47,6 +47,7 @@ func _ready() -> void:
 #region Scene Management
 func _on_tree_changed() -> void:
 	# If the engine has swapped the current scene, and it's different from our cache:
+	if !get_tree(): return
 	if get_tree().current_scene and get_tree().current_scene != current_stage:
 		_on_scene_changed()
 
