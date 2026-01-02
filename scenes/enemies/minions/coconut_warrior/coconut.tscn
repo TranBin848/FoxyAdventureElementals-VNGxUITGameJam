@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://r7tfrorsfck0"]
 
-[ext_resource type="Script" uid="uid://eop3ure2ua2c" path="res://Scenes/enemies/minions/coconut_warrior/coconut.gd" id="1_g5g73"]
+[ext_resource type="Script" uid="uid://eop3ure2ua2c" path="res://scenes/enemies/minions/coconut_warrior/coconut.gd" id="1_g5g73"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="7_6rao5"]
 [ext_resource type="Texture2D" uid="uid://ljup3gpysk1e" path="res://assets/enemy/coconut_warrior/coconut.png" id="8_g5g73"]
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=97 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=110 format=3 uid="uid://d0jou4iuydvkg"]
 
-[ext_resource type="Shader" uid="uid://nerkcvsgkina" path="res://scenes/player/player_glowing.gdshader" id="1_am21h"]
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
-[ext_resource type="Shader" uid="uid://hxfbyuvi3j8m" path="res://shaders/player_shader/silhouetter.gdshader" id="2_ahqnk"]
+[ext_resource type="Shader" uid="uid://hxfbyuvi3j8m" path="res://shaders/player_shader/silhouetter.gdshader" id="2_21yht"]
 [ext_resource type="Texture2D" uid="uid://bkabwrpxdc7cc" path="res://assets/foxy/fox_hat_blade/fox_atk_2.png" id="3_j4nxn"]
 [ext_resource type="Texture2D" uid="uid://byd3g4nnxwfcq" path="res://assets/foxy/fox_hat_blade/fox_atk_3.png" id="4_28m0y"]
 [ext_resource type="Texture2D" uid="uid://m4di78taixns" path="res://assets/foxy/fox_hat/fox_defeat_1.png" id="8_4b1ex"]
@@ -81,10 +80,12 @@
 [ext_resource type="PackedScene" uid="uid://cpadeikbdhgul" path="res://scenes/ui/death_ui.tscn" id="57_uygh0"]
 [ext_resource type="Texture2D" uid="uid://bqykhn7xwriyi" path="res://assets/foxy/fox_hat_wand/fox_walk_3.png" id="57_ws0t6"]
 [ext_resource type="Texture2D" uid="uid://bcu5mjdbacrse" path="res://assets/foxy/fox_hat_wand/fox_walk_4.png" id="58_i6ap2"]
+[ext_resource type="Texture2D" uid="uid://bnxmtrxr3ke7q" path="res://assets/skills/fire/Fireball/Fire Effect and Bullet 16x16.png" id="60_gs7hn"]
+[ext_resource type="PackedScene" uid="uid://b33nvdvnniecl" path="res://scenes/skills/projectiles/earth/comet_crater.tscn" id="66_gs7hn"]
 [ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://scenes/fx/slash_fx.tscn" id="67_31ki0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahqnk"]
-shader = ExtResource("2_ahqnk")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trum3"]
+shader = ExtResource("2_21yht")
 shader_parameter/silhouette_color = Color(0, 0, 0, 0.5)
 shader_parameter/color_tolerance = 0.05
 
@@ -107,6 +108,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("21_hir57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_vkc6f")
 }],
 "loop": true,
 "name": &"cling",
@@ -188,8 +192,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vb1ce"]
-shader = ExtResource("2_ahqnk")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4b1ex"]
+shader = ExtResource("2_21yht")
 shader_parameter/silhouette_color = Color(0, 0, 0, 0.5)
 shader_parameter/color_tolerance = 0.05
 
@@ -304,8 +308,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ej2d6"]
-shader = ExtResource("2_ahqnk")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v8cnd"]
+shader = ExtResource("2_21yht")
 shader_parameter/silhouette_color = Color(0, 0, 0, 0.5)
 shader_parameter/color_tolerance = 0.05
 
@@ -336,6 +340,17 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_hir57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_vkc6f")
+}],
+"loop": true,
+"name": &"cling",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -439,77 +454,97 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_am21h"]
-shader = ExtResource("1_am21h")
-shader_parameter/elemental_type = 0
-shader_parameter/border_threshold = Vector2(0.1, 0.1)
-shader_parameter/glow_intensity = 1.0
-shader_parameter/alpha_threshold = 0.5
-shader_parameter/color_tolerance = 0.2
-shader_parameter/fire_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/fire_replace_1 = Color(1, 0.3, 0, 1)
-shader_parameter/fire_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/fire_replace_2 = Color(0.8, 0.1, 0, 1)
-shader_parameter/earth_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/earth_replace_1 = Color(0.6, 0.5, 0.2, 1)
-shader_parameter/earth_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/earth_replace_2 = Color(0.561293, 0.426662, 0.158432, 1)
-shader_parameter/water_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/water_replace_1 = Color(0, 0.5, 1, 1)
-shader_parameter/water_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/water_replace_2 = Color(0, 0.2, 0.8, 1)
-shader_parameter/fire_glow = Color(1, 0.5, 0, 1)
-shader_parameter/earth_glow = Color(0.8, 0.6, 0.2, 1)
-shader_parameter/water_glow = Color(0, 0.5, 1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwhcj"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(304, 144, 16, 16)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1scxs"]
-shader = ExtResource("1_am21h")
-shader_parameter/elemental_type = 0
-shader_parameter/border_threshold = Vector2(0.003, 0.003)
-shader_parameter/glow_intensity = 1.0
-shader_parameter/alpha_threshold = 0.5
-shader_parameter/color_tolerance = 0.2
-shader_parameter/fire_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/fire_replace_1 = Color(1, 0.3, 0, 1)
-shader_parameter/fire_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/fire_replace_2 = Color(0.8, 0.1, 0, 1)
-shader_parameter/earth_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/earth_replace_1 = Color(0.6, 0.5, 0.2, 1)
-shader_parameter/earth_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/earth_replace_2 = Color(0.4, 0.3, 0.1, 1)
-shader_parameter/water_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/water_replace_1 = Color(0, 0.5, 1, 1)
-shader_parameter/water_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/water_replace_2 = Color(0, 0.2, 0.8, 1)
-shader_parameter/fire_glow = Color(1, 0.5, 0, 1)
-shader_parameter/earth_glow = Color(0.8, 0.6, 0.2, 1)
-shader_parameter/water_glow = Color(0, 0.5, 1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs7hn"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(320, 144, 16, 16)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4b1ex"]
-shader = ExtResource("1_am21h")
-shader_parameter/elemental_type = 0
-shader_parameter/border_threshold = Vector2(0.01, 0.01)
-shader_parameter/glow_intensity = 1.0
-shader_parameter/alpha_threshold = 0.9
-shader_parameter/color_tolerance = 0.2
-shader_parameter/fire_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/fire_replace_1 = Color(1, 0.3, 0, 1)
-shader_parameter/fire_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/fire_replace_2 = Color(0.8, 0.1, 0, 1)
-shader_parameter/earth_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/earth_replace_1 = Color(0.6, 0.5, 0.2, 1)
-shader_parameter/earth_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/earth_replace_2 = Color(0.72, 0.48, 0.29, 1)
-shader_parameter/water_target_1 = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/water_replace_1 = Color(0, 0.5, 1, 1)
-shader_parameter/water_target_2 = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/water_replace_2 = Color(0, 0.2, 0.8, 1)
-shader_parameter/fire_glow = Color(1, 0.5, 0, 1)
-shader_parameter/earth_glow = Color(0.8, 0.6, 0.2, 1)
-shader_parameter/water_glow = Color(0, 0.5, 1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_70kry"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(336, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj3y2"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(352, 144, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ru3bc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwhcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gs7hn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70kry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj3y2")
+}],
+"loop": true,
+"name": &"Fireball",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru3bc"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(480, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgiot"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(496, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bxdm"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(512, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16w3r"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(528, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sg1o"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(544, 144, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3gso"]
+atlas = ExtResource("60_gs7hn")
+region = Rect2(560, 144, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_if3bc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru3bc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgiot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bxdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16w3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sg1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3gso")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niom3"]
 size = Vector2(17, 28)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_21yht"]
+radius = 17.0294
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8qe1"]
 size = Vector2(15.3181, 31.9904)
@@ -525,15 +560,22 @@ point_count = 3
 radius = 7.0
 height = 28.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ru3bc"]
+radius = 17.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwhcj"]
+size = Vector2(5.5, 3)
+
 [node name="Player" type="CharacterBody2D"]
 light_mask = 0
 collision_layer = 2
+collision_mask = 257
 safe_margin = 0.1
 script = ExtResource("1_wodsf")
-atk_cd = 0.15
 max_fall_speed = 500.0
 dash_dist = 100.0
 dash_cd = 0.5
+atk_cd = 0.15
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -40)
@@ -542,25 +584,26 @@ zoom = Vector2(2, 2)
 [node name="Direction" type="Node2D" parent="."]
 
 [node name="SilhouetteSprite2D" type="AnimatedSprite2D" parent="Direction"]
+visible = false
 z_index = 199
-material = SubResource("ShaderMaterial_ahqnk")
+material = SubResource("ShaderMaterial_trum3")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
-animation = &"attack"
+animation = &"cling"
 
 [node name="SilhouetteBladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
 z_index = 199
-material = SubResource("ShaderMaterial_vb1ce")
+material = SubResource("ShaderMaterial_4b1ex")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"cling"
+animation = &"dead"
 autoplay = "idle"
 
 [node name="SilhouetteWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
 z_index = 199
-material = SubResource("ShaderMaterial_ej2d6")
+material = SubResource("ShaderMaterial_v8cnd")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_0y4ya")
 animation = &"attack"
@@ -568,26 +611,42 @@ autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
-material = SubResource("ShaderMaterial_am21h")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
-animation = &"attack"
+animation = &"dead"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
-material = SubResource("ShaderMaterial_1scxs")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
-animation = &"jump attack"
+animation = &"cling"
 autoplay = "idle"
 
 [node name="WandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
-visible = false
-material = SubResource("ShaderMaterial_4b1ex")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_0y4ya")
-animation = &"jump attack"
+animation = &"cling"
 autoplay = "idle"
+
+[node name="FireballSprite2D" type="AnimatedSprite2D" parent="Direction"]
+visible = false
+position = Vector2(-1.66893e-06, -15)
+scale = Vector2(2.375, 2.375)
+sprite_frames = SubResource("SpriteFrames_ru3bc")
+animation = &"Fireball"
+autoplay = "Fireball"
+frame = 3
+frame_progress = 1.0
+flip_h = true
+
+[node name="FireballFXSprite2D" type="AnimatedSprite2D" parent="Direction"]
+visible = false
+position = Vector2(-18, -14)
+rotation = -1.57079
+scale = Vector2(1.75297, 1.84064)
+sprite_frames = SubResource("SpriteFrames_if3bc")
+autoplay = "default"
+frame_progress = 0.422653
 
 [node name="BladeFactory" type="Marker2D" parent="Direction"]
 position = Vector2(9, -14)
@@ -610,7 +669,7 @@ position = Vector2(24, -23)
 position = Vector2(24, -23)
 script = ExtResource("37_iwuka")
 product_packed_scene = ExtResource("67_31ki0")
-target_container_name = &"FX"
+target_container_name = &"SlashFX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="WalkFXFactory" type="Marker2D" parent="Direction"]
@@ -632,15 +691,34 @@ position = Vector2(37, -12)
 script = ExtResource("37_iwuka")
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
+[node name="SurfaceFXFactory" type="Marker2D" parent="Direction"]
+position = Vector2(0, -37)
+script = ExtResource("37_iwuka")
+product_packed_scene = ExtResource("66_gs7hn")
+target_container_name = &"FX"
+metadata/_custom_type_script = "uid://b2o007yxvk7qa"
+
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
-visible = false
-collision_layer = 4
+collision_layer = 516
 script = ExtResource("35_o1e43")
 metadata/_custom_type_script = "uid://csu2b21cwchqw"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_niom3")
+
+[node name="FireballHitArea2D" type="Area2D" parent="Direction"]
+collision_layer = 0
+collision_mask = 16
+monitoring = false
+script = ExtResource("17_ioxgp")
+damage = 10
+elemental_type = 4
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/FireballHitArea2D"]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_21yht")
 
 [node name="HitArea2D" type="Area2D" parent="Direction"]
 collision_mask = 16
@@ -684,6 +762,16 @@ scale_amount_curve = SubResource("Curve_bywm7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_genst")
+
+[node name="FireballShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_ru3bc")
+disabled = true
+
+[node name="BurrowShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -39)
+shape = SubResource("RectangleShape2D_lwhcj")
+disabled = true
 
 [node name="States" type="Node" parent="."]
 

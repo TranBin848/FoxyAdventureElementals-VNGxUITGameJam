@@ -3,12 +3,12 @@ class_name Tornado
 
 func _init():
 	name = "Tornado"
-	element = "Water"
+	elemental_type = ElementsEnum.Elements.WATER
 	type = "single_shot"
 	cooldown = 5.0
 	animation_name = "WaterTornado"
-	texture = preload("res://assets/skills/icons_skill/48x48/skill_icons24.png")
+	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
 	projectile_scene = preload("res://scenes/skills/projectiles/water/waterTornadoProjectile.tscn")
 	speed = 180
 	damage = 1.5
-	mana = 40.0
+	mana = 40

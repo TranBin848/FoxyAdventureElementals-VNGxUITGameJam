@@ -35,8 +35,11 @@ func display_number(value: int, position: Vector2, is_critical: bool = false):
 		number, "scale", Vector2.ZERO, 0.25 
 	).set_ease(tween.EASE_IN).set_delay(0.5)
 	
+	get_tree().create_timer(1.0).timeout.connect(func():
+		if is_instance_valid(number):
+			number.queue_free())
+	
 	await tween.finished
-	number.queue_free()
 	
 	
 	

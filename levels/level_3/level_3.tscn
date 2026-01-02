@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=4 uid="uid://beaf2cwec5xlr"]
+[gd_scene load_steps=69 format=4 uid="uid://beaf2cwec5xlr"]
 
 [ext_resource type="Script" uid="uid://wdfjgyhrjowc" path="res://levels/level_3/level_3.gd" id="1_b7gic"]
 [ext_resource type="TileSet" uid="uid://yxir4yavpav2" path="res://levels/level_1/level_1.tres" id="2_4c4sg"]
@@ -37,16 +37,12 @@
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="32_vjcd7"]
 [ext_resource type="PackedScene" uid="uid://bf2uetkx1otc6" path="res://scenes/objects/house_door/house_door.tscn" id="33_q7qyy"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="38_xb74x"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="39_2s1pb"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="39_8vtkf"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="40_7k6of"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="42_rrv8b"]
-[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar_new.tscn" id="43_p1s2p"]
-[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/health_bar_container.tscn" id="44_0dmjw"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud.tscn" id="44_gp4mp"]
-[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/weapon_panel.tscn" id="45_3x5uw"]
-[ext_resource type="Script" uid="uid://dpoa7y1vwg4wm" path="res://scenes/ui/skill_tree_ui.gd" id="46_3ctgw"]
+[ext_resource type="Script" uid="uid://8vtovny64gjj" path="res://scenes/ui/skill_tree/skill_tree_ui.gd" id="46_3ctgw"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="47_ic0q8"]
-[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://assets/skills/wood/skill_tree_root.tscn" id="48_uc3y8"]
+[ext_resource type="PackedScene" uid="uid://bcupn8lintl77" path="res://scenes/ui/skill_tree/skill_tree_root.tscn" id="48_uc3y8"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="49_qt2nh"]
 
 [sub_resource type="Curve2D" id="Curve2D_omsu6"]
@@ -204,14 +200,21 @@ shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
 shader_parameter/y_zoom = 1.0
+shader_parameter/surface_speed = 3.0
+shader_parameter/surface_frequency = 10.0
+shader_parameter/surface_amplitude = 0.02
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_omn1t"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjcd7"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0dmjw"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rrv8b"]
+normal = Vector2(-1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2s1pb"]
 
-[node name="Stage" type="Node2D"]
+[node name="Stage2" type="Node2D"]
 script = ExtResource("1_b7gic")
 
 [node name="Front" type="TileMapLayer" parent="."]
@@ -278,28 +281,59 @@ elemental_type = 4
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(3786, -368)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
-skill_to_drop = ExtResource("15_8vtkf")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(7874, -755)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 4
-skill_to_drop = ExtResource("15_8vtkf")
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(6015, -188)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
-skill_to_drop = ExtResource("15_8vtkf")
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(6026, -4)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
-skill_to_drop = ExtResource("15_8vtkf")
 
 [node name="Crab" parent="Enemies" instance=ExtResource("4_06aei")]
 position = Vector2(6722, -190)
 elemental_type = 5
-skill_to_drop = ExtResource("15_8vtkf")
 
 [node name="Starfish" parent="Enemies" instance=ExtResource("6_32j6t")]
 position = Vector2(10973, -1113)
@@ -312,45 +346,34 @@ elemental_type = 4
 [node name="Starfish3" parent="Enemies" instance=ExtResource("6_32j6t")]
 position = Vector2(14121, 936)
 elemental_type = 3
-skill_to_drop = ExtResource("12_xb74x")
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("4_06aei")]
 position = Vector2(13247, -264)
 elemental_type = 3
-skill_to_drop = ExtResource("12_xb74x")
 
 [node name="CoconutWarrior" parent="Enemies" instance=ExtResource("8_3dcxb")]
 position = Vector2(6270, -528)
-elemental_type = 5
-skill_to_drop = ExtResource("15_8vtkf")
 
 [node name="CoconutWarrior2" parent="Enemies" instance=ExtResource("8_3dcxb")]
 position = Vector2(4289, -1062)
-elemental_type = 5
-skill_to_drop = ExtResource("15_8vtkf")
 
 [node name="CoconutWarrior3" parent="Enemies" instance=ExtResource("8_3dcxb")]
 position = Vector2(7093, -471)
-elemental_type = 5
-skill_to_drop = ExtResource("15_8vtkf")
 
 [node name="SeaHorse" parent="Enemies" instance=ExtResource("9_gsac8")]
 position = Vector2(12287, 186)
 _next_direction = -1
 elemental_type = 4
-skill_to_drop = ExtResource("6_vjcd7")
 
 [node name="SeaHorse2" parent="Enemies" instance=ExtResource("9_gsac8")]
 position = Vector2(12567, 91)
 _next_direction = -1
 elemental_type = 4
-skill_to_drop = ExtResource("6_vjcd7")
 
 [node name="SeaHorse3" parent="Enemies" instance=ExtResource("9_gsac8")]
 position = Vector2(12805, 187)
 _next_direction = -1
 elemental_type = 3
-skill_to_drop = ExtResource("11_i8vga")
 
 [node name="ExitDoor" parent="." instance=ExtResource("7_1gf37")]
 position = Vector2(12479, -507)
@@ -361,7 +384,7 @@ target_door = "EntryDoor"
 position = Vector2(2602, -123)
 
 [node name="Player" parent="." instance=ExtResource("8_q4xca")]
-position = Vector2(2500, -124)
+position = Vector2(10098, -1995)
 collision_mask = 73
 platform_floor_layers = 4294967231
 
@@ -613,35 +636,23 @@ linked_door = NodePath("../HouseDoor2")
 [node name="HouseDoor2" parent="SafeObjects" instance=ExtResource("33_q7qyy")]
 position = Vector2(12638, -542)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="SafeObjects"]
-position = Vector2(1994, -108)
-scale = Vector2(1, 10)
+[node name="WorldBoundary" type="Node2D" parent="SafeObjects"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/StaticBody2D"]
-shape = SubResource("RectangleShape2D_vjcd7")
+[node name="StaticBody2D" type="StaticBody2D" parent="SafeObjects/WorldBoundary"]
+position = Vector2(1986, -101)
+collision_layer = 512
+collision_mask = 0
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="SafeObjects"]
-position = Vector2(2154, -282)
-rotation = 1.07101
-scale = Vector2(1, 20)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/StaticBody2D2"]
-shape = SubResource("RectangleShape2D_vjcd7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/WorldBoundary/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_0dmjw")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="SafeObjects"]
 position = Vector2(15731, 889)
-scale = Vector2(1, 20)
+collision_layer = 512
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/StaticBody2D3"]
-shape = SubResource("RectangleShape2D_vjcd7")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="SafeObjects"]
-position = Vector2(15575, 579.001)
-rotation = 2.26799
-scale = Vector2(1, 20)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SafeObjects/StaticBody2D4"]
-shape = SubResource("RectangleShape2D_vjcd7")
+shape = SubResource("WorldBoundaryShape2D_rrv8b")
 
 [node name="BladeCollectable" parent="SafeObjects" instance=ExtResource("38_xb74x")]
 position = Vector2(4654, -169)
@@ -667,54 +678,7 @@ zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("42_rrv8b")
-
-[node name="SkillBarUI" parent="CanvasLayer/MarginContainer" groups=["skill_bar"] instance=ExtResource("43_p1s2p")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("44_gp4mp")]
-offset_bottom = 100.0
-
-[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -122.0
-offset_top = -104.0
-offset_right = 122.0
-offset_bottom = -88.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("23_rmb4t")
-text = "Enemy Out of Range"
-horizontal_alignment = 1
-
-[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("45_3x5uw")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -111.0
-offset_right = -15.0
-offset_bottom = -15.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("44_0dmjw")]
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("39_2s1pb")]
 
 [node name="SkillTreeUI" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -744,10 +708,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("48_uc3y8")]
-offset_left = 640.0
-offset_top = 384.0
-offset_right = 640.0
-offset_bottom = 384.0
 
 [node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
 anchors_preset = 2

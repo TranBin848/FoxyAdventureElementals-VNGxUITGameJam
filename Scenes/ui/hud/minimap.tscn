@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bae3h26xicif2"]
+
+[ext_resource type="Script" uid="uid://bwi5try8jyhh6" path="res://scenes/ui/hud/minimap.gd" id="1_4bivy"]
+
+[node name="Minimap" type="MarginContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+pivot_offset = Vector2(125, -125)
+script = ExtResource("1_4bivy")

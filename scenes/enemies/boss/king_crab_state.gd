@@ -14,7 +14,7 @@ func _should_turn_around() -> bool:
 		return true
 	return false
 
-func take_damage(direction: Variant, damage: int = 1) -> void:
+func take_damage(_direction: Variant, damage: int = 1) -> void:
 	#Enemy take damage
 	obj.take_damage(damage)
 	#obj.velocity.x = bounce_back_velocity * direction.x

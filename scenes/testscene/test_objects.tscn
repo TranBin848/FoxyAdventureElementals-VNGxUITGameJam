@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://bfc2p71ftmqt3"]
+[gd_scene load_steps=41 format=4 uid="uid://bfc2p71ftmqt3"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_45ksp"]
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_mv08x"]
@@ -31,6 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="29_7eyp3"]
 [ext_resource type="PackedScene" uid="uid://cxdb52cgepv0d" path="res://levels/objects/boulder/boulder.tscn" id="29_7x1wm"]
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="30_7eyp3"]
+[ext_resource type="PackedScene" uid="uid://bagtndimgpaee" path="res://levels/objects/chest/boss_chest.tscn" id="32_k6a7r"]
+[ext_resource type="PackedScene" uid="uid://yg0w6u1dl0v6" path="res://levels/objects/trampoline/trampoline.tscn" id="33_2c2yo"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
 script/source = "extends Node2D
@@ -286,3 +288,10 @@ position = Vector2(777, 166)
 
 [node name="Platform2" parent="Platform" instance=ExtResource("30_7eyp3")]
 position = Vector2(1024, 150)
+
+[node name="BossChest" parent="." instance=ExtResource("32_k6a7r")]
+position = Vector2(103, 74)
+mass = 100.0
+
+[node name="Trampoline" parent="." instance=ExtResource("33_2c2yo")]
+position = Vector2(245, 251)

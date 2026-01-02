@@ -1,0 +1,125 @@
+[gd_scene load_steps=17 format=3 uid="uid://8ucurw88rfh2"]
+
+[ext_resource type="Script" uid="uid://bhjbcd4e6xh3g" path="res://scenes/enemies/final_boss/fire_shot_projectile_boss.gd" id="1_t3fwc"]
+[ext_resource type="Texture2D" uid="uid://b4q2gs3lihqub" path="res://assets/skills/fire/Fireshot/Firebolt SpriteSheet.png" id="2_bfhfr"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_leffw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7puen"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42tal"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lg41"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8b74"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht11m"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tutn"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18c0y"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xppgs"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvg27"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5ie1"]
+atlas = ExtResource("2_bfhfr")
+region = Rect2(480, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7puen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42tal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lg41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8b74")
+}],
+"loop": true,
+"name": &"FireShot",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht11m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tutn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18c0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xppgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvg27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5ie1")
+}],
+"loop": false,
+"name": &"FireShot_End",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhoxj"]
+size = Vector2(32.5, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnvla"]
+size = Vector2(34, 10)
+
+[node name="FireShotProjectileBoss" type="Area2D"]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_t3fwc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_tbddh")
+animation = &"FireShot"
+autoplay = "FireShot"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.75, 1.5)
+shape = SubResource("RectangleShape2D_uhoxj")
+
+[node name="HitArea2D" parent="." instance=ExtResource("3_leffw")]
+position = Vector2(0, -7)
+collision_layer = 0
+collision_mask = 4
+elemental_type = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(5, 9)
+shape = SubResource("RectangleShape2D_tnvla")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

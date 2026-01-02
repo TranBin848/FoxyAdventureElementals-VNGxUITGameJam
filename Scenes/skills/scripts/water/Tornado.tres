@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://ly2bn32wiwrn"]
+
+[ext_resource type="PackedScene" uid="uid://d0kbj7vc5hjhj" path="res://scenes/skills/projectiles/water/waterTornadoProjectile.tscn" id="1_yktl8"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="2_0bypa"]
+
+[resource]
+script = ExtResource("2_0bypa")
+name = "Tornado"
+elemental_type = 3
+cooldown = 5.0
+duration = 0.0
+hit_delay = 0.0
+ground_targeted = false
+texture_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
+animation_name = "WaterTornado"
+projectile_scene = ExtResource("1_yktl8")
+speed = 180.0
+damage = 2
+mana = 40
+type = "single_shot"
+metadata/_custom_type_script = "uid://4fu7i05ai1gp"

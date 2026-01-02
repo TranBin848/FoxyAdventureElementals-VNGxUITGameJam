@@ -1,0 +1,163 @@
+[gd_scene load_steps=23 format=3 uid="uid://dmgc4l5rudiuo"]
+
+[ext_resource type="Script" uid="uid://k7dh58mctcq7" path="res://scenes/skills/projectiles/wood/toxic_breath.gd" id="1_vulyi"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="2_n5yf3"]
+[ext_resource type="Texture2D" uid="uid://bcsfa8unsb623" path="res://assets/skills/wood/toxic_breath/Fire Breath SpriteSheet.png" id="2_vulyi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5yf3"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjavm"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7bhr"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lfir"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pl45"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yb42"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3sp8"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npwmo"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mirfx"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbsg0"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71wl3"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf0lb"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qml6j"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(192, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ab1pj"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(240, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu2lj"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(288, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb1iq"]
+atlas = ExtResource("2_vulyi")
+region = Rect2(336, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yjavm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5yf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjavm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7bhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lfir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pl45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yb42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3sp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npwmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mirfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbsg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71wl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uf0lb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qml6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ab1pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu2lj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb1iq")
+}],
+"loop": false,
+"name": &"ToxicBreath",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7bhr"]
+size = Vector2(32.5, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lfir"]
+size = Vector2(66, 36)
+
+[node name="ToxicBreath" type="Area2D"]
+script = ExtResource("1_vulyi")
+metadata/_custom_type_script = "uid://5btdwob525wm"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.4, 0.05, 2, 1)
+position = Vector2(12.5, -16.5)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_yjavm")
+animation = &"ToxicBreath"
+autoplay = "ToxicBreath"
+frame = 5
+frame_progress = 0.970013
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.75, -0.5)
+shape = SubResource("RectangleShape2D_w7bhr")
+disabled = true
+
+[node name="HitArea2D" parent="." instance=ExtResource("2_n5yf3")]
+collision_layer = 32
+collision_mask = 16
+elemental_type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_4lfir")
+
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

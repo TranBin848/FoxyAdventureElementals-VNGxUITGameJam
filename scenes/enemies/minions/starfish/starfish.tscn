@@ -1,16 +1,21 @@
-[gd_scene load_steps=30 format=3 uid="uid://c74auvuhbghse"]
+[gd_scene load_steps=35 format=3 uid="uid://c74auvuhbghse"]
 
 [ext_resource type="Script" uid="uid://bb2so4xk7mo5k" path="res://scenes/enemies/minions/starfish/starfish.gd" id="1_wfme5"]
 [ext_resource type="Texture2D" uid="uid://btkb5krxhe0bd" path="res://assets/enemy/starfish/starfish_hit_01.png" id="2_ffnw0"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_jhkca"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_oyexg"]
 [ext_resource type="Texture2D" uid="uid://b5xyfam3762xo" path="res://assets/enemy/starfish/starfish_01.png" id="2_wfme5"]
 [ext_resource type="Texture2D" uid="uid://b4js2ae34xwqk" path="res://assets/enemy/starfish/starfish_02.png" id="3_1he1w"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_db8tt"]
 [ext_resource type="Texture2D" uid="uid://btlfx8p2dgirm" path="res://assets/enemy/starfish/starfish_hit_02.png" id="3_l1cs0"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_ot2et"]
 [ext_resource type="Texture2D" uid="uid://ismdacnnh32c" path="res://assets/enemy/starfish/starfish_03.png" id="4_5oess"]
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_o38c5"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_qcknk"]
+[ext_resource type="PackedScene" uid="uid://6ppqcm5ge1yh" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.tscn" id="5_8vwjw"]
 [ext_resource type="Texture2D" uid="uid://dbb5rkld2dgvx" path="res://assets/enemy/starfish/exclamation_mark.png" id="5_mdsml"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_xgvsc"]
+[ext_resource type="PackedScene" uid="uid://c00jedhwcnsij" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn" id="6_k11yd"]
 [ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_lmt3n"]
 [ext_resource type="Script" uid="uid://b8hrao6bn2upj" path="res://scenes/enemies/minions/starfish/states/moving.gd" id="6_mdsml"]
 [ext_resource type="Script" uid="uid://cc36ubeilvyos" path="res://scenes/enemies/states/hurt.gd" id="7_i1h07"]
@@ -104,7 +109,15 @@ height = 32.0
 
 [node name="Starfish" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_wfme5")
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_oyexg"),
+2: ExtResource("3_db8tt"),
+3: ExtResource("4_qcknk"),
+4: ExtResource("5_8vwjw"),
+5: ExtResource("6_k11yd")
+})
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 sight = 200.0
@@ -165,12 +178,14 @@ target_position = Vector2(0, 18)
 
 [node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
 target_position = Vector2(139, 0)
-collision_mask = 2
+collision_mask = 130
+hit_from_inside = true
 
 [node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
 enabled = false
 target_position = Vector2(-48, 0)
-collision_mask = 2
+collision_mask = 130
+hit_from_inside = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_wfme5")
@@ -201,5 +216,8 @@ offset_top = -25.0
 offset_right = 72.0
 offset_bottom = -17.0
 enemy = NodePath("..")
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-7, 20)
 
 [connection signal="area_entered" from="Direction/SpikeHitArea2D" to="States/Roll" method="_on_hit_area_2d_area_entered"]

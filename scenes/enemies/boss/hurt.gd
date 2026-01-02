@@ -7,5 +7,8 @@ func _enter() -> void:
 	obj.handle_dead()
 	obj.change_animation("die")
 	Engine.time_scale = 0.2
-	await $"../../Direction/AnimatedSprite2D".animation_finished
-	Engine.time_scale = 1.0
+	timer = get_current_anim_duration()
+
+func _update(_delta: float) -> void:
+	if update_timer(_delta):
+		Engine.time_scale = 1.0

@@ -139,27 +139,22 @@ sprite_frames = SubResource("SpriteFrames_tbddh")
 animation = &"WoodShot"
 autoplay = "WoodShot"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
-position = Vector2(0, -4)
-sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"WoodShot"
-autoplay = "WoodShot"
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3.75, -0.5)
 shape = SubResource("RectangleShape2D_uhoxj")
 
-[node name="HitArea2d" parent="." instance=ExtResource("3_6soxv")]
+[node name="HitArea2D" parent="." instance=ExtResource("3_6soxv")]
 position = Vector2(0, -7)
 collision_layer = 32
 collision_mask = 16
+elemental_type = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 position = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_tnvla")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

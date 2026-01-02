@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://dgcjhv4d3hvu"]
 
 [ext_resource type="Script" uid="uid://dhjy816rov0pm" path="res://scenes/skills/projectiles/fire/fire_explosion_projectile.gd" id="1_i50lh"]
-[ext_resource type="Texture2D" uid="uid://cld72nn514rmh" path="res://assets/skills/fire/FireExplosion/Explosion 2 SpriteSheet.png" id="2_lg4hk"]
+[ext_resource type="Texture2D" uid="uid://cld72nn514rmh" path="res://assets/skills/fire/Fireexplosion/Explosion 2 SpriteSheet.png" id="2_lg4hk"]
 [ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_lg4hk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ahuh"]
@@ -171,12 +171,13 @@ frame_progress = 1.0
 position = Vector2(3.75, -0.5)
 shape = SubResource("RectangleShape2D_uhoxj")
 
-[node name="HitArea2d" parent="." instance=ExtResource("3_lg4hk")]
+[node name="HitArea2D" parent="." instance=ExtResource("3_lg4hk")]
 position = Vector2(0, -7)
 collision_layer = 32
 collision_mask = 16
+elemental_type = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
 position = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_tnvla")
 
@@ -189,4 +190,4 @@ shape = SubResource("CircleShape2D_i50lh")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="hitted" from="HitArea2d" to="." method="_on_hit_area_2d_hitted"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

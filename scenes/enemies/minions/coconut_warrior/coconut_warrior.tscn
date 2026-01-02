@@ -1,10 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://dglmldw2eudyb"]
+[gd_scene load_steps=32 format=3 uid="uid://dglmldw2eudyb"]
 
 [ext_resource type="Script" uid="uid://bd8mo0mygqnii" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.gd" id="1_g34j8"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_n3ajn"]
 [ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_xwc4j"]
 [ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_27qoa"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_254jw"]
 [ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_g34j8"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_smllc"]
 [ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_ily67"]
+[ext_resource type="PackedScene" uid="uid://6ppqcm5ge1yh" path="res://scenes/enemies/debuffs/FireDebuff/fire_debuff.tscn" id="5_pwrkw"]
+[ext_resource type="PackedScene" uid="uid://c00jedhwcnsij" path="res://scenes/enemies/debuffs/StunnedDebuff/stunned_debuff.tscn" id="6_sidt0"]
 [ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_venbl"]
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="7_3ufwa"]
 [ext_resource type="PackedScene" uid="uid://r7tfrorsfck0" path="res://scenes/enemies/minions/coconut_warrior/coconut.tscn" id="8_g34j8"]
@@ -92,13 +97,22 @@ height = 28.0
 
 [node name="CoconutWarrior" type="CharacterBody2D"]
 collision_layer = 8
+collision_mask = 129
 script = ExtResource("1_g34j8")
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_n3ajn"),
+2: ExtResource("3_254jw"),
+3: ExtResource("4_smllc"),
+4: ExtResource("5_pwrkw"),
+5: ExtResource("6_sidt0")
+})
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 sight = 100.0
 movement_range = 200.0
 attack_speed = 500.0
 max_health = 10
+elemental_type = 5
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Particles" type="Node2D" parent="."]
@@ -178,3 +192,6 @@ script = ExtResource("22_1gu4w")
 script = ExtResource("22_3ufwa")
 despawn_time = null
 bounce_back_velocity = null
+
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-2, 26)

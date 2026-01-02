@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://780dumn4jaur" path="res://scenes/enemies/minions/barrel/barrel.gd" id="1_d1rwy"]
 [ext_resource type="Texture2D" uid="uid://ch0hp25m7evv1" path="res://assets/object/barrel/barrel_hurt_01.png" id="2_588nf"]
+[ext_resource type="PackedScene" uid="uid://8disgaqoamxk" path="res://scenes/enemies/debuffs/WeaknessDebuff/weakness_debuff.tscn" id="2_inrr5"]
 [ext_resource type="Texture2D" uid="uid://ckjp4ccybo5i6" path="res://assets/object/barrel/barrel_hurt_02.png" id="3_tnlx8"]
+[ext_resource type="PackedScene" uid="uid://bnb08ip671ng1" path="res://scenes/enemies/debuffs/PoisonDebuff/poison_debuff.tscn" id="3_wbmsr"]
+[ext_resource type="PackedScene" uid="uid://bilgfkyn3jabe" path="res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn" id="4_eol76"]
 [ext_resource type="Texture2D" uid="uid://dfnk2rp7cs1vg" path="res://assets/object/barrel/barrel_01.png" id="4_jni0l"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4xqu7"]
@@ -39,7 +42,15 @@ animations = [{
 size = Vector2(32, 32)
 
 [node name="Barrel" type="CharacterBody2D"]
+collision_layer = 129
 script = ExtResource("1_d1rwy")
+elements_debuff = Dictionary[int, PackedScene]({
+1: ExtResource("2_inrr5"),
+2: ExtResource("3_wbmsr"),
+3: ExtResource("4_eol76"),
+4: ExtResource("5_3xjn8"),
+5: ExtResource("6_qrhgi")
+})
 max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
@@ -50,3 +61,7 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4xqu7")
+[node name="DebuffPlaceHolder" type="Node2D" parent="."]
+position = Vector2(-5, 18)
+
+[connection signal="hurt" from="HurtArea2D" to="." method="_on_hurt_area_2d_hurt"]

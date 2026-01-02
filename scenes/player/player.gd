@@ -1,736 +1,733 @@
 class_name Player
 extends BaseCharacter
-@onready var camera_2d: Camera2D = $Camera2D
 
-#Invulnerable Logic Parameters
-@export var invulnerable_duration: float = 2
-var is_invulnerable: bool = false
-var invulnerable_timer: float = 0
-const FLICKER_INTERVAL := 0.1
-var flicker_timer := 0.0
-var saved_collision_layer: int
-
-#Attack Logic Parameter
-@export var atk_cd: float = 1 #Time between attack
-var is_able_attack: bool = true 
-
-@export var has_blade: bool = false
-@export var has_wand: bool = true
-var is_equipped_blade: bool = false    #Đang cầm Blade?
-var is_equipped_wand: bool = false     # Đang cầm Wand?
+#region Signal Definitions
 signal weapon_swapped(equipped_weapon_type: String)
+signal skill_collected(skill_resource_class)
+#endregion
 
+#region Node References & Factories
+@onready var camera_2d: Camera2D = $Camera2D
+@onready var debuglabel: Label = $debuglabel
 
-var blade_hit_area: Area2D
-@export var blade_throw_speed: float = 300
-@export var skill_throw_speed: float = 200
-
-@onready var blade_factory: Node2DFactory = $Direction/BladeFactory
-@onready var jump_fx_factory: Node2DFactory = $Direction/JumpFXFactory
-@onready var skill_factory: Node2DFactory = $Direction/SkillFactory
-@onready var hurt_particle: CPUParticles2D = $Direction/HurtFXFactory
-@onready var slash_fx_factory: Node2DFactory = $Direction/SlashFXFactory
-
+# Collision & Areas
+@onready var default_collision: CollisionShape2D = $CollisionShape2D
+@onready var fireball_collision: CollisionShape2D = $FireballShape2D
+@onready var burrow_collision: CollisionShape2D = $BurrowShape2D
 @onready var hurt_area: HurtArea2D = $Direction/HurtArea2D
+@onready var fireball_hit_area: HitArea2D = $Direction/FireballHitArea2D
 
-@export var push_strength = 100.0
+# Factories & Effects
+@onready var blade_factory: Node2DFactory = $Direction/BladeFactory
+@onready var skill_factory: Node2DFactory = $Direction/SkillFactory
+@onready var jump_fx_factory: Node2DFactory = $Direction/JumpFXFactory
+@onready var surface_fx_factory: Node2DFactory = $Direction/SurfaceFXFactory
+@onready var slash_fx_factory: Node2DFactory = $Direction/SlashFXFactory
+@onready var hurt_particle: CPUParticles2D = $Direction/HurtFXFactory
+#endregion
 
-@onready var normal_sprite: AnimatedSprite2D = $Direction/AnimatedSprite2D
-@onready var blade_sprite: AnimatedSprite2D = $Direction/BladeAnimatedSprite2D
-@onready var wand_sprite: AnimatedSprite2D = $Direction/WandAnimatedSprite2D #
-@onready var silhouette_normal_sprite: AnimatedSprite2D = $Direction/SilhouetteSprite2D
-@onready var silhouette_blade_sprite: AnimatedSprite2D = $Direction/SilhouetteBladeAnimatedSprite2D
-@onready var silhouette_wand_sprite: AnimatedSprite2D = $Direction/SilhouetteWandAnimatedSprite2D
+#region Visual System (Sprite Dictionaries)
+# We map keys to nodes so we can swap them easily in code
+@onready var sprites: Dictionary = {
+	"normal": $Direction/AnimatedSprite2D,
+	"blade": $Direction/BladeAnimatedSprite2D,
+	"wand": $Direction/WandAnimatedSprite2D,
+	"fireball": $Direction/FireballSprite2D,
+}
 
-#Movement
-var last_dir: float = 0.0
+@onready var silhouettes: Dictionary = {
+	"normal": $Direction/SilhouetteSprite2D,
+	"blade": $Direction/SilhouetteBladeAnimatedSprite2D,
+	"wand": $Direction/SilhouetteWandAnimatedSprite2D,
+}
+
+@onready var fireball_fx: AnimatedSprite2D = $Direction/FireballFXSprite2D
+#endregion
+
+#region State Management
+enum BuffState { NONE, FIREBALL, BURROW, INVISIBLE }
+var current_buff_state: BuffState = BuffState.NONE
+var buff_timer: SceneTreeTimer
+var buff_end_callbacks: Array[Callable] = []
+
+enum WeaponType { NORMAL, BLADE, WAND }
+var current_weapon: WeaponType = WeaponType.NORMAL
+
+# Inventory Flags
+var has_blade: bool = false
+var has_wand: bool = true # Default based on your old code
+
+# Combat State
+var is_invulnerable: bool = false
+var is_in_fireball_state: bool = false
+var is_in_burrow_state: bool = false
+var invulnerable_timer: float = 0.0
+var saved_collision_layer: int
+var is_able_attack: bool = true
+
+# Targeting
+var _targets_in_range: Array[Node2D] = []
+#endregion
+
+#region Configuration (Exports)
+@export_group("Movement")
 @export var wall_slide_speed: float = 50.0
-@export var max_fall_speed: float = 100.0
-var can_move: bool = true
-
-#dash
+@export var max_fall_speed: float = 300.0
 @export var dash_speed_mul: float = 5.0
 @export var dash_dist: float = 200.0
 @export var dash_cd: float = 5.0
+@export var push_strength: float = 100.0
+@export var coyote_time: float = 0.15  # NEW: Grace period after leaving ground
+@export var air_control_multiplier: float = 0.8  # NEW: Air acceleration modifier
+@export var jump_buffer_time: float = 0.1  # Can press jump this early
+
+@export_group("Combat")
+@export var atk_cd: float = 1.0
+@export var blade_throw_speed: float = 300.0
+@export var skill_throw_speed: float = 200.0
+@export var invulnerable_duration: float = 2.0
+@export var fireball_bounciness: float = 1.0
+
+@export_group("Jump Physics")
+@export var jump_height: float = 56.0  # How high (in pixels) you jump. (~2 tiles)
+@export var jump_time_to_peak: float = 0.45 # Seconds to reach top. Higher = Floatier.
+@export var jump_time_to_descent: float = 0.8 # Seconds to fall back down.
+#endregion
+
+#region Internal Variables
+var speed_multiplier: float = 1.0
 var is_dashing: bool = false
 var can_dash: bool = true
+var can_move: bool = true
+var jump_velocity: float
+var jump_gravity: float
+var fall_gravity: float
+var coyote_timer: float = 0.0
+var jump_buffer_timer: float = 0.0
+#endregion
 
-
-#Debug
-@onready var debuglabel: Label = $debuglabel
-
-var _targets_in_range: Array[Node2D] = []
-
-signal skill_collected(skill_resource_class)
+# ==============================================================================
+# LIFECYCLE
+# ==============================================================================
 
 func _ready() -> void:
-	super._ready()
-	fsm = FSM.new(self, $States, $States/Idle)
-	GameManager.player = self
-	extra_sprites.append(silhouette_normal_sprite)
-	silhouette_blade_sprite.hide()
-	silhouette_wand_sprite.hide()
-	add_to_group("player")
-	if has_blade:
-		collected_blade()
+	# Stats Init
+	max_health = 100; health = 100
+	max_mana = 50; mana = 50
 	
+	# MATH: Calculates exact gravity needed to hit that height in that time
+	jump_velocity = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+	jump_gravity = (2.0 * jump_height) / pow(jump_time_to_peak, 2)
+	fall_gravity = (2.0 * jump_height) / pow(jump_time_to_descent, 2)
+	
+	# FIX: Tell BaseCharacter to use our calculated jump velocity
+	jump_speed = abs(jump_velocity)  # BaseCharacter expects positive value
+	
+	super._ready() # Initialize BaseCharacter
+	
+	# Global Setup
+	GameManager.player = self
+	add_to_group("player")
+	fsm = FSM.new(self, $States, $States/Idle)
 	camera_2d.make_current()
 
-	Dialogic.timeline_started.connect(_on_dialog_started)
-	Dialogic.timeline_ended.connect(_on_dialog_ended)
+	# Connect Signals
+	if fireball_hit_area:
+		fireball_hit_area.hitted.connect(_on_fireball_hit_enemy)
 	
-# ================================================================
-# === SKILL SYSTEM ===============================================
-# ================================================================
-
-func _on_dialog_started():
-	can_move = false
-
-func _on_dialog_ended():
-	can_move = true
-
-func _check_and_use_skill_stack(skill_to_use: Skill):
-	#1. Tìm Skill đó trong SkillBar
-	var skillbar_root = get_tree().get_first_node_in_group("skill_bar")
-	var skill_bar
-	if skillbar_root:
-		skill_bar = skillbar_root.get_node("MarginContainer/SkillBar")
-	if skill_bar:
-		for i in range(skill_bar.slots.size()):
-			var slot = skill_bar.slots[i]
-			if slot.skill == skill_to_use:
-				
-				var skill_current_stack = SkillStackManager.get_stack(skill_to_use.name)
-				var skill_current_unlocked = SkillStackManager.get_unlocked(skill_to_use.name)
-				
-				if skill_current_unlocked:
-					return
-				
-				# KIỂM TRA HỦY BỎ - Cần phải dùng LẦN NÀY (Stack == 1)
-				if skill_current_stack == 1:					
-					SkillStackManager.clear_skill_in_bar(i)
-				
-				# TRỪ STACK - Còn Stack để dùng tiếp (Stack > 1)
-				elif skill_current_stack > 1:
-					SkillStackManager.remove_stack(skill_to_use.name, 1)
-					slot.update_stack_ui()
-				
-				
-				return # Thoát sau khi xử lý Stack
-
-func add_new_skill(new_skill_class: Script) -> bool:
-	# 1. Phát tín hiệu cho SkillBar (để SkillBar tự quản lý Slot)
-	skill_collected.emit(new_skill_class)
+	Dialogic.timeline_started.connect(func(): can_move = false)
+	Dialogic.timeline_ended.connect(func(): can_move = true)
 	
-	# Giả sử luôn thành công khi nhặt được skill
-	return true
-
-func cast_spell(skill: Skill) -> String:
-	if not skill:
-		return "Skill invalid"
-	
-	#print(mana)
-	if(mana - skill.mana < 0): 
-		return "Not Enough Mana"
-	
-	if not is_equipped_wand:
-		#Sẽ cần thêm một biến để theo dõi vũ khí đang cầm
-		#Giả sử logic Swap Weapon đã được triển khai với biến is_equipped_wand
-		return "Require Wand"
-		
-	await get_tree().create_timer(0.15).timeout
-	# Xử lý theo loại skill
-	match skill.type:
-		"single_shot":
-			_single_shot(skill)
-			mana = max(0, mana - skill.mana)
-			mana_changed.emit()
-			_check_and_use_skill_stack(skill)
-			return ""
-		"multi_shot":
-			_multi_shot(skill, 2, 0.3)
-			mana = max(0, mana - skill.mana)
-			mana_changed.emit()
-			_check_and_use_skill_stack(skill)
-			return ""
-		"radial":
-			_radial(skill, 18)
-			mana = max(0, mana - skill.mana)
-			mana_changed.emit()
-			_check_and_use_skill_stack(skill)
-			return ""
-		"area": 
-			cast_skill(skill.animation_name)
-			# Kiểm tra mục tiêu CHỈ cho skill dạng area
-			if has_valid_target_in_range():
-				var target = get_closest_target()
-				if is_instance_valid(target):
-					# 2. Lấy vị trí mục tiêu
-					var target_pos = target.global_position
-					mana = max(0, mana - skill.mana)
-					mana_changed.emit()
-					# 3. Gọi hàm triệu hồi, truyền cả skill, vị trí VÀ đối tượng target
-					_area_shot(skill as Skill, target_pos, target)
-					_check_and_use_skill_stack(skill)
-					return ""
-			else:
-				print("⚠️ Không có kẻ địch trong phạm vi để dùng skill dạng Area.")
-				# Tùy chọn: Đặt cooldown = 0 nếu không có mục tiêu để người chơi không bị phạt.
-				# Ví dụ: skill_timer.stop()
-				return "Enemy Out of Range"
-		"buff": # ⬅️ THÊM LOGIC CHO BUFF SKILL VÀO ĐÂY
-			cast_skill(skill.animation_name)
-			_apply_buff(skill)
-			mana = max(0, mana - skill.mana)
-			mana_changed.emit()
-			_check_and_use_skill_stack(skill)
-			return "" # Kỹ năng Buff lên bản thân luôn thành công
-		_:
-			print("Unknown skill type: %s" % skill.type)
-			return "Unknown Skill Type"
-	return ""
-
-# ====== SINGLE SHOT ======
-func _single_shot(skill: Skill) -> void:
-	var dir := Vector2.RIGHT if direction == 1 else Vector2.LEFT
-	# Đổi sang state cast
-	cast_skill(skill.animation_name)
-	var projectile = _spawn_projectile(skill, dir)
-	if projectile:
-		# projectile.setup đã gọi animation; thêm gọi play nếu muốn override
-		pass
-
-# ====== MULTI SHOT ======
-func _multi_shot(skill: Skill, count: int, delay: float) -> void:
-	for i in range(count):
-		_single_shot(skill)
-		# Hàm sẽ tạm dừng tại đây và chờ timer hết thời gian
-		await get_tree().create_timer(delay).timeout
-
-# ====== ANGLED SHOT cho radial ======
-func _angled_shot(angle: float, i: int, skill: Skill) -> void:
-	var dir = Vector2(cos(angle), sin(angle)).normalized()
-	var projectile = _spawn_projectile(skill, dir)
-	if projectile:
-		# ví dụ đổi animation theo index nếu muốn
-		if i % 2 == 0:
-			projectile.play("Fire")
-		elif i % 2 == 1:
-			projectile.play("WaterBlast")
-
-# ====== RADIAL (xung quanh) ======
-func _radial(skill: Skill, count: int) -> void:
-	for i in range(count):
-		var angle = (float(i) / count) * 2.0 * PI
-		_angled_shot(angle, i, skill)
-
-# ====== TẠO PROJECTILE ======
-# bây giờ nhận thêm dir vector và gọi setup()
-func _spawn_projectile(skill: Skill, dir: Vector2) -> Area2D:
-	# Nếu skill.projectile_scene là PackedScene: instantiate trực tiếp
-	var proj_node: Node = null
-	if skill.projectile_scene:
-		proj_node = skill.projectile_scene.instantiate()
-	else:
-		# fallback dùng factory (nếu bệ hạ vẫn muốn dùng skill_factory)
-		proj_node = skill_factory.create() if skill_factory else null
-
-	if not proj_node:
-		return null
-
-	var proj = proj_node as Area2D
-	if proj == null:
-		return null
-
-	# nếu có method setup, gọi nó; nếu không, set thẳng thuộc tính
-	if proj.has_method("setup"):
-		proj.setup(skill, dir)
-	else:
-		# fallback: gán thủ công
-		if proj.has_variable("speed"):
-			proj.speed = skill.speed
-		if proj.has_variable("damage"):
-			proj.damage = skill.damage
-		if proj.has_variable("direction"):
-			proj.direction = dir
-
-	proj.global_position = skill_factory.global_position
-	
-	# add to scene tree
-	get_tree().current_scene.add_child(proj)
-
-	return proj
-
-# ====== AREA SHOT (Triệu hồi vùng) ======
-# NHẬN THÊM THAM SỐ target_position: Vector2
-func _area_shot(skill: Skill, target_position: Vector2, target_enemy: Node2D) -> void:	
-	if not skill.area_scene:
-		print("Area skill %s missing area_scene!" % skill.name)
-		return
-		
-	var area_node: Node = skill.area_scene.instantiate()
-	if not area_node:
-		return
-
-	var area_effect = area_node as AreaBase
-	if area_effect == null:
-		return
-
-	if area_effect.has_method("setup"):
-		# Vùng lửa sẽ được tạo tại VỊ TRÍ KẺ ĐỊCH GẦN NHẤT
-		area_effect.setup(skill, target_position, target_enemy)
-	else:
-		pass
-
-	get_tree().current_scene.add_child(area_effect)
-
-# ====== BUFF APPLICATION ======
-var active_buff_node: Area2D = null
-func _apply_buff(skill: Skill) -> void: 
-	cast_skill(skill.animation_name)
-	
-	# Nếu đang có buff, hủy buff cũ trước khi áp dụng buff mới (tùy chọn)
-	if is_instance_valid(active_buff_node):
-		active_buff_node.queue_free()
-		active_buff_node = null
-
-	# 1. TRIỆU HỒI BUFF NODE (chỉ khi skill có packed scene)
-	if skill.projectile_scene: # Giả sử bạn dùng projectile_scene để chứa BuffBase
-		var buff_node = skill.projectile_scene.instantiate()
-		if buff_node:
-			active_buff_node = buff_node as BuffBase
-			
-			# Thiết lập Buff và truyền chính Player (self) vào làm caster
-			active_buff_node.setup(skill, self) 
-			
-			# Thêm vào Scene Tree
-			get_tree().current_scene.add_child(active_buff_node)
-			
-			# Đặt vị trí ban đầu
-			active_buff_node.global_position = self.global_position
-
-	# 2. XỬ LÝ LƯU THÔNG SỐ VÀ CÁC LOẠI BUFF CỤ THỂ (Speed, Heal, v.v.)
-	match skill.type: # Bạn nên dùng skill.type thay vì skill.buff_type nếu không định nghĩa buff_type trong base Skill
-		"buff":
-			# Kiểm tra cụ thể xem đây là loại buff nào (dựa trên class_name)
-			if skill is HealOverTime:
-				var heal_skill = skill as HealOverTime
-				_apply_heal_over_time(heal_skill.heal_per_tick, heal_skill.duration, heal_skill.tick_interval)
-			#elif skill is SpeedBoostSkill: # Ví dụ: nếu bạn đã tạo SpeedBoostSkill
-				 #_apply_speed_buff(skill.buff_value, skill.duration)
-			#else:
-				 #print("Unknown buff type class.")
-		# ... (các loại khác nếu cần)
-		_:
-			print("Unknown skill type: %s" % skill.type)
-	
-	# 3. CHỜ HẾT DURATION (Lấy duration từ Skill)
-	await get_tree().create_timer(skill.duration).timeout
-	
-	# 4. LOẠI BỎ BUFF (Khôi phục các thuộc tính đã thay đổi)
-	# ... (Logic khôi phục tốc độ, vv) ...
-	
-	# 5. HỦY NODE BUFF HÀO QUANG
-	if is_instance_valid(active_buff_node):
-		active_buff_node.queue_free()
-		active_buff_node = null
-
-	print("❌ Buff: Hết hạn.")
-
-# ====== HEAL OVER TIME LOGIC ======
-func _apply_heal_over_time(heal_amount: float, duration: float, interval: float) -> void:
-	# Tính toán tổng số lần hồi máu (ticks)
-	var total_ticks: int = floor(duration / interval)
-	
-	print("✨ Hồi máu: Bắt đầu hồi %s HP mỗi %s giây, tổng %s lần." % [heal_amount, interval, total_ticks])
-	
-	for i in range(total_ticks):
-		# Đảm bảo người chơi còn sống trước khi hồi máu
-		if health <= 0: 
-			break
-			
-		# Hồi máu: Giới hạn không vượt quá max_health
-		health = min(health + heal_amount, max_health)
-		
-		health_changed.emit() # 🎯 Rất quan trọng: Phát tín hiệu cập nhật UI Health Bar
-		
-		# Chờ khoảng thời gian giữa các lần tick
-		await get_tree().create_timer(interval).timeout
-	
-	print("✅ Buff Hồi máu: Hết hạn.")
-
-# ================================================================
-# === END SKILL SYSTEM ===========================================
-# ================================================================
+	# Initial Visual Setup
+	_hide_all_visuals()
+	if has_blade: equip_weapon(WeaponType.BLADE)
+	elif has_wand: equip_weapon(WeaponType.WAND)
+	else: equip_weapon(WeaponType.NORMAL)
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
+	super._physics_process(delta) # Animation, FSM, etc.
 	
-	handle_invulnerable(delta)
+	_handle_invulnerability(delta)
+	_handle_rigid_push()
+	_update_coyote_time(delta)
+	_update_jump_buffer(delta)
+
+	# Enforce visual state
+	if current_buff_state == BuffState.BURROW or current_buff_state == BuffState.INVISIBLE:
+		_enforce_invisibility_visuals()
 		
+	if debuglabel:
+		debuglabel.text = str(fsm.current_state.name)
+
+
+# ==============================================================================
+# MOVEMENT & PHYSICS
+# ==============================================================================
+
+func _update_movement(delta: float) -> void:
+	if not can_move: 
+		velocity = Vector2.ZERO
+		return
+	
+	# Custom gravity system
+	var current_gravity = jump_gravity if velocity.y < 0 else fall_gravity
+	velocity.y += current_gravity * delta
+	
+	# Clamp fall speed
+	if fsm.current_state == fsm.states.wallcling:
+		velocity.y = clamp(velocity.y, -INF, wall_slide_speed)
+	else:
+		velocity.y = clamp(velocity.y, -INF, max_fall_speed)
+	
+	# Dashing Override
+	if is_dashing: 
+		velocity.y = 0
+
+func jump() -> void:
+	super.jump() # BaseCharacter logic
+	
+	if current_buff_state == BuffState.BURROW:
+		# Special Burrow Exit Jump
+		exit_current_buff() # This triggers the pop-up logic in _set_burrow_state(false)
+	else:
+		jump_fx_factory.create()
+		
+func _update_jump_buffer(delta: float) -> void:
+	if jump_buffer_timer > 0:
+		jump_buffer_timer -= delta
+	
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_timer = jump_buffer_time
+		
+func _update_coyote_time(delta: float) -> void:
+	"""Updates coyote time - grace period for jumping after leaving ground"""
+	if is_on_floor():
+		coyote_timer = coyote_time
+	else:
+		coyote_timer = max(0, coyote_timer - delta)
+
+func has_coyote_time() -> bool:
+	"""Returns true if player can still jump (on ground OR within coyote time)"""
+	return is_on_floor() or coyote_timer > 0
+
+func wall_jump() -> void:
+	turn_around()
+	# FIX: Use _next_direction because 'direction' hasn't updated yet!
+	# _next_direction holds the value we just set in turn_around()
+	velocity.x = movement_speed * _next_direction 
+	
+	# Optional: Add a multiplier if you want the kick to be stronger than walking
+	# velocity.x = movement_speed * 1.5 * _next_direction
+	jump()
+
+func dash() -> void:
+	if not can_dash: return
+	velocity.x = movement_speed * dash_speed_mul * direction
+	velocity.y = 0.0
+	is_dashing = true
+	can_dash = false
+	
+	await get_tree().create_timer(0.2).timeout # Dash Duration
+	is_dashing = false
+	
+	await get_tree().create_timer(dash_cd).timeout
+	can_dash = true
+
+func _handle_rigid_push() -> void:
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		var body = c.get_collider()
-		
 		if body is RigidBody2D:
-			var normal = -c.get_normal()
-			body.apply_central_impulse(normal * push_strength)
-	
-	debuglabel.text = str(fsm.current_state.name)
-			
-func handle_invulnerable(delta) -> void:
-	if invulnerable_timer > 0:
-		invulnerable_timer -= delta
-	else:
-		if is_invulnerable:
-			# Restore collision layer when invulnerability ends
-			hurt_area.collision_layer = saved_collision_layer
-		is_invulnerable = false
-	if is_invulnerable:
-		invulnerable_flicker(delta)
-	else:
-		animated_sprite.modulate.a = 1
+			body.apply_central_impulse(-c.get_normal() * push_strength)
 
-func invulnerable_flicker(delta) -> void:
-	flicker_timer += delta
-	if flicker_timer >= FLICKER_INTERVAL:
-		flicker_timer = 0.0
-		animated_sprite.modulate.a = 1/(animated_sprite.modulate.a/(0.4*0.7))
+# ==============================================================================
+# COMBAT & WEAPONS
+# ==============================================================================
+
+func collect_blade() -> void:
+	has_blade = true;
+	swap_weapon()
+
+func collect_wand() -> void:
+	has_wand = true
+	swap_weapon()
+	
+func can_attack() -> bool:
+	if not is_able_attack: return false
+	_cancel_invisibility_if_active()
+	return current_weapon == WeaponType.BLADE or current_weapon == WeaponType.WAND
 
 func start_atk_cd() -> void:
 	is_able_attack = false
 	await get_tree().create_timer(atk_cd).timeout
 	is_able_attack = true
 
-func can_attack() -> bool:
-	if not is_able_attack:
-		return false
+func throw_blade() -> void:
+	if current_weapon != WeaponType.BLADE: return
 	
-	if not (is_equipped_blade or is_equipped_wand):
-		return false
+	var blade = blade_factory.create() as RigidBody2D
+	if blade:
+		var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
+		blade.apply_impulse(throw_velocity)
 	
-	return true
+	# Remove Blade Logic
+	has_blade = false
+	equip_weapon(WeaponType.NORMAL)
 
-func can_throw() -> bool:
-	return has_blade && is_equipped_blade
+func can_throw() -> bool: return has_blade && current_weapon == WeaponType.BLADE
 
-func cast_skill(skill_name: String) -> void:
-	if fsm.current_state != fsm.states.castspell:
-		fsm.change_state(fsm.states.castspell)
+func swap_weapon() -> void:
+	# Block swapping during special states
+	if current_buff_state == BuffState.FIREBALL: return
+	if not has_blade and not has_wand: return
+
+	match current_weapon:
+		WeaponType.NORMAL:
+			if has_blade: equip_weapon(WeaponType.BLADE)
+			elif has_wand: equip_weapon(WeaponType.WAND)
+		WeaponType.BLADE:
+			if has_wand: equip_weapon(WeaponType.WAND)
+			else: equip_weapon(WeaponType.NORMAL)
+		WeaponType.WAND:
+			if has_blade: equip_weapon(WeaponType.BLADE)
+			else: equip_weapon(WeaponType.NORMAL)
+
+func equip_weapon(type: WeaponType) -> void:
+	current_weapon = type
+	
+	match type:
+		WeaponType.BLADE: weapon_swapped.emit("blade")
+		WeaponType.WAND: weapon_swapped.emit("wand")
+		_: weapon_swapped.emit("normal")
+		
+	_update_visual_state()
+
+func set_speed_multiplier(val: float) -> void: speed_multiplier = val
+
+# ==============================================================================
+# SKILLS & SPELLS
+# ==============================================================================
+
+func cast_spell(skill: Skill) -> String:
+	# Validation
+	if not skill: return "Skill Invalid"
+	if mana < skill.mana: return "Not Enough Mana"
+	if current_weapon != WeaponType.WAND: return "Require Wand"
+	if current_buff_state == BuffState.BURROW: return "Cannot cast in Burrow"
+
+	_cancel_invisibility_if_active()
+	
+	# Change FSM State to play animation
+	cast_skill(skill.animation_name)
+	
+	# 1. Consume Resources immediately
+	mana = max(0, mana - skill.mana)
+	mana_changed.emit()
+	SkillTreeManager.consume_skill_use(skill.name)
+
+	# 2. Execution (Small delay to sync with animation frame)
+	await get_tree().create_timer(0.15).timeout
+	
+	match skill.type:
+		"single_shot":
+			_fire_projectile(skill, 1)
+		"multi_shot":
+			_fire_projectile(skill, 2, 0.3)
+		"radial":
+			_fire_radial(skill, 18)
+		"area":
+			_fire_area(skill)
+		"buff":
+			_apply_buff_skill(skill)
+		_:
+			return "Unknown Skill Type"
+			
+	return ""
+
+# --- Skill Helpers ---
+
+func _fire_projectile(skill: Skill, count: int, delay: float = 0.0) -> void:
+	var dir := Vector2.RIGHT if direction == 1 else Vector2.LEFT
+	
+	for i in range(count):
+		var proj = _spawn_projectile_node(skill, dir)
+		if delay > 0: await get_tree().create_timer(delay).timeout
+
+func _fire_radial(skill: Skill, count: int) -> void:
+	for i in range(count):
+		var angle = (float(i) / count) * 2.0 * PI
+		var dir = Vector2(cos(angle), sin(angle)).normalized()
+		_spawn_projectile_node(skill, dir)
+
+func _spawn_projectile_node(skill: Skill, dir: Vector2) -> Area2D:
+	# Use specific scene or fallback to factory
+	var proj_node: Node
+	if skill.projectile_scene:
+		proj_node = skill.projectile_scene.instantiate()
+	elif skill_factory:
+		proj_node = skill_factory.create()
+	else:
+		return null
+		
+	var proj = proj_node as Area2D
+	if not proj: return null
+	
+	proj.global_position = skill_factory.global_position
+	get_tree().current_scene.add_child(proj)
+
+	if proj.has_method("setup"):
+		proj.setup(skill, dir)
+	else:
+		# Manual Property Injection fallback
+		if "speed" in proj: proj.speed = skill.speed
+		if "damage" in proj: proj.damage = skill.damage
+		if "direction" in proj: proj.direction = dir
+		
+	return proj
+
+func _fire_area(skill: Skill) -> void:
+	var target_pos = global_position
+	var target_enemy = null
+	
+	if skill.ground_targeted:
+		target_pos = global_position
+	elif has_valid_target_in_range():
+		target_enemy = get_closest_target()
+		if is_instance_valid(target_enemy):
+			target_pos = target_enemy.global_position
+	else:
+		# If no target, maybe fail or cast at self?
+		return
+
+	if not skill.area_scene: return
+	var area_node = skill.area_scene.instantiate()
+	get_tree().current_scene.add_child(area_node)
+	area_node.global_position = target_pos
+	
+	if area_node.has_method("setup"):
+		area_node.setup(skill, target_pos, target_enemy)
+
+func _apply_buff_skill(skill: Skill) -> void:
+	var duration = skill.duration * (skill.level + 1.0) / 2.0
+	
+	if skill is Fireball:
+		enter_buff_state(BuffState.FIREBALL, duration)
+	elif skill is Burrow:
+		enter_buff_state(BuffState.BURROW, duration)
+	elif skill is HealOverTime:
+		_apply_heal_over_time(skill.heal_per_tick, duration, skill.tick_interval)
+
+func _apply_heal_over_time(amount: float, duration: float, interval: float) -> void:
+	var ticks = floor(duration / interval)
+	for i in range(ticks):
+		if health <= 0: break
+		health = min(health + amount, max_health)
+		health_changed.emit()
+		await get_tree().create_timer(interval).timeout
+
+# ==============================================================================
+# BUFF STATE MACHINE
+# ==============================================================================
+
+func enter_buff_state(new_state: BuffState, duration: float = 0.0, end_callback: Callable = Callable()) -> void:
+	exit_current_buff() # Clean up previous
+	
+	current_buff_state = new_state
+	
+	# Timer Setup
+	if duration > 0:
+		buff_timer = get_tree().create_timer(duration)
+		buff_timer.timeout.connect(exit_current_buff)
+	
+	if end_callback.is_valid():
+		buff_end_callbacks.append(end_callback)
+		
+	# Apply State Logic
+	match new_state:
+		BuffState.FIREBALL: _set_fireball_state(true)
+		BuffState.BURROW: _set_burrow_state(true)
+		BuffState.INVISIBLE: _set_invisible_state(true)
+
+func exit_current_buff() -> void:
+	# Cleanup Timer
+	if buff_timer: 
+		buff_timer.disconnect("timeout", exit_current_buff)
+		buff_timer = null
+
+	# Run Callbacks
+	for cb in buff_end_callbacks: 
+		if cb.is_valid(): cb.call()
+	buff_end_callbacks.clear()
+
+	# Remove State Logic
+	match current_buff_state:
+		BuffState.FIREBALL: _set_fireball_state(false)
+		BuffState.BURROW: _set_burrow_state(false)
+		BuffState.INVISIBLE: _set_invisible_state(false)
+	
+	current_buff_state = BuffState.NONE
+	_update_visual_state()
+
+func _set_fireball_state(active: bool) -> void:
+	fireball_collision.set_deferred("disabled", !active)
+	hurt_area.set_deferred("monitorable", !active)
+	fireball_hit_area.monitoring = active
+	set_collision_mask_value(4, active) # Adjust layer as needed
+	
+	if active:
+		is_in_fireball_state = true # Maintain old bool if FSM needs it
+		elemental_type = ElementsEnum.Elements.FIRE
+		speed_multiplier = 2.0
+		change_animation("Fireball")
+		fireball_fx.show(); fireball_fx.play()
+		_update_visual_state(sprites.fireball) # Force fireball sprite
+	else:
+		is_in_fireball_state = false
+		elemental_type = ElementsEnum.Elements.NONE
+		speed_multiplier = 1.0
+		fireball_fx.hide(); fireball_fx.stop()
+
+func _set_burrow_state(active: bool) -> void:
+	is_in_burrow_state = active
+	default_collision.set_deferred("disabled", active)
+	burrow_collision.set_deferred("disabled", !active)
+	hurt_area.set_deferred("monitorable", !active)
+	
+	if active:
+		speed_multiplier = 1.25
+		_update_visual_state(null, true) # Force silhouette
+	else:
+		speed_multiplier = 1.0
+		# Exit Pop Logic
+		velocity.x = 400.0 * direction
+		jump_fx_factory.create() # Or surface FX
+		jump()
+
+func _set_invisible_state(active: bool) -> void:
+	hurt_area.set_deferred("monitorable", !active)
+	collision_layer = 0 if active else (1 << 1) # Example layer mask logic
+	
+	if active:
+		_update_visual_state(null, true) # Force silhouette
+	else:
+		# Handled by generic _update_visual_state in exit_current_buff
+		pass
+
+func _cancel_invisibility_if_active() -> void:
+	if current_buff_state == BuffState.INVISIBLE:
+		exit_current_buff()
+
+# ==============================================================================
+# VISUAL CONTROLLER
+# ==============================================================================
+
+func _hide_all_visuals() -> void:
+	for k in sprites: 
+		if sprites[k]: sprites[k].hide()
+	for k in silhouettes: 
+		if silhouettes[k]: silhouettes[k].hide()
+	if fireball_fx: fireball_fx.hide()
+
+func _update_visual_state(forced_main: AnimatedSprite2D = null, force_silhouette: bool = false) -> void:
+	# 1. Fireball overrides everything
+	if current_buff_state == BuffState.FIREBALL:
+		_hide_all_visuals()
+		sprites.fireball.show()
+		fireball_fx.show()
+		return
+
+	_hide_all_visuals()
+
+	# 2. Determine Active Sprites based on Weapon
+	var active_main: AnimatedSprite2D
+	var active_silhouette: AnimatedSprite2D
+	
+	match current_weapon:
+		WeaponType.BLADE:
+			active_main = sprites.blade
+			active_silhouette = silhouettes.blade
+		WeaponType.WAND:
+			active_main = sprites.wand
+			active_silhouette = silhouettes.wand
+		_:
+			active_main = sprites.normal
+			active_silhouette = silhouettes.normal
+
+	if forced_main: active_main = forced_main
+
+	# 3. Apply Visibility
+	# If in burrow/invisible, HIDE main, SHOW silhouette
+	if force_silhouette or current_buff_state in [BuffState.BURROW, BuffState.INVISIBLE]:
+		if active_silhouette:
+			active_silhouette.show()
+			active_silhouette.modulate.a = 0.5
+			# Update list for BaseCharacter to not mess up
+			extra_sprites = [active_silhouette]
+	else:
+		# Normal state
+		if active_main:
+			set_animated_sprite(active_main) # Inform BaseCharacter
+			active_main.show()
+			active_main.modulate.a = 1.0
+		if active_silhouette:
+			active_silhouette.show()
+			active_silhouette.modulate.a = 0.5
+			# Update list for BaseCharacter to not mess up
+			extra_sprites = [active_silhouette]	
+	_update_elemental_palette()
+
+func _enforce_invisibility_visuals() -> void:
+	# BaseCharacter might try to show the main sprite during animation changes.
+	# We force it hidden here.
+	if animated_sprite and animated_sprite.visible:
+		animated_sprite.hide()
+
+func _update_elemental_palette() -> void:
+	if not is_instance_valid(animated_sprite): return
+	
+	# Basic Shader logic placeholder
+	var shader_mat = animated_sprite.material as ShaderMaterial
+	if shader_mat:
+		shader_mat.set_shader_parameter("elemental_type", elemental_type)
+		shader_mat.set_shader_parameter("is_fireball_state", current_buff_state == BuffState.FIREBALL)
+
+# ==============================================================================
+# TARGETING & DAMAGE
+# ==============================================================================
+
+func _on_detection_area_2d_body_entered(body: Node2D):
+	if body.is_in_group("enemies") or body is EnemyCharacter:
+		if not _targets_in_range.has(body): _targets_in_range.append(body)
+
+func _on_detection_area_2d_body_exited(body: Node2D):
+	if _targets_in_range.has(body): _targets_in_range.erase(body)
+
+func has_valid_target_in_range() -> bool:
+	_targets_in_range = _targets_in_range.filter(func(t): return is_instance_valid(t))
+	return not _targets_in_range.is_empty()
+
+func get_closest_target() -> Node2D:
+	if not has_valid_target_in_range(): return null
+	var closest: Node2D = null
+	var min_dist = INF
+	
+	for t in _targets_in_range:
+		var d = global_position.distance_squared_to(t.global_position)
+		if d < min_dist:
+			min_dist = d
+			closest = t
+	return closest
+
+func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
+	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
+	
+	# Let FSM handle the animation/knockback
+	if fsm.current_state.has_method("take_damage"):
+		fsm.current_state.take_damage(_direction, modified_damage)
+	
+	handle_elemental_damage(_elemental_type)
+	if hurt_particle: hurt_particle.emitting = true
+
+func _handle_invulnerability(delta: float) -> void:
+	if not is_invulnerable: return
+	
+	invulnerable_timer -= delta
+	
+	# Flicker Effect
+	var is_visible_frame = fmod(invulnerable_timer, 0.2) > 0.1
+	if animated_sprite:
+		animated_sprite.modulate.a = 0.5 if is_visible_frame else 1.0
+
+	if invulnerable_timer <= 0:
+		is_invulnerable = false
+		hurt_area.collision_layer = saved_collision_layer
+		if animated_sprite: animated_sprite.modulate.a = 1.0
 
 func set_invulnerable() -> void:
 	is_invulnerable = true
 	invulnerable_timer = invulnerable_duration
-	# Save current layer and disable player's collision layer
 	saved_collision_layer = hurt_area.collision_layer
-	hurt_area.collision_layer = 0  # Temporarily disable collision layer
+	hurt_area.collision_layer = 0
 
-func is_char_invulnerable() -> bool:
-	return is_invulnerable
+# ==============================================================================
+# ELEMENTAL LOGIC & FIREBALL BOUNCE
+# ==============================================================================
 
-func jump() -> void:
-	super.jump()
-	jump_fx_factory.create() as Node2D
+func _on_fireball_hit_enemy(_hurt_area: Area2D) -> void:
+	if current_buff_state != BuffState.FIREBALL: return
+	var enemy = _hurt_area.get_parent()
+	if enemy:
+		# Bounce away from enemy
+		var dir_away = (global_position - enemy.global_position).normalized()
+		var bounce_force = 500.0
+		velocity = dir_away * bounce_force
 
-func wall_jump() -> void:
-	turn_around()
-	jump()
+func calculate_elemental_damage(base: float, attacker_elem: int) -> float:
+	if attacker_elem == ElementsEnum.Elements.NONE: return base
+	
+	# Simplified Element Cycle
+	# Metal(1) > Wood(2) > Earth(5) > Water(3) > Fire(4) > Metal(1)
+	var advantages = {
+		ElementsEnum.Elements.METAL: [ElementsEnum.Elements.WOOD],
+		ElementsEnum.Elements.WOOD:  [ElementsEnum.Elements.EARTH],
+		ElementsEnum.Elements.EARTH: [ElementsEnum.Elements.WATER],
+		ElementsEnum.Elements.WATER: [ElementsEnum.Elements.FIRE],
+		ElementsEnum.Elements.FIRE:  [ElementsEnum.Elements.METAL]
+	}
+	
+	if advantages.has(attacker_elem) and elemental_type in advantages[attacker_elem]:
+		return base * 1.5 # Critical
+	if advantages.has(elemental_type) and attacker_elem in advantages[elemental_type]:
+		return base * 0.5 # Resist
+		
+	return base
 
-func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
-	# Tính damage dựa trên quan hệ sinh - khắc
-	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
-	fsm.current_state.take_damage(_direction, modified_damage)
-	handle_elemental_damage(_elemental_type)
-	#health_changed.emit()
-	hurt_particle.emitting = true
+func handle_elemental_damage(elem: int) -> void:
+	# Placeholder for status effects (Burn, Slow, etc)
+	pass
+
+# ==============================================================================
+# SAVE / LOAD
+# ==============================================================================
 
 func save_state() -> Dictionary:
 	return {
 		"position": [global_position.x, global_position.y],
-		"health": health,
-		"has_blade": has_blade
+		"has_blade": has_blade,
+		"has_wand": has_wand
 	}
 
 func load_state(data: Dictionary) -> void:
-	"""Load player state from checkpoint data"""
-	if data.has("position"):
-		var pos_array = data["position"]
-		global_position = Vector2(pos_array[0], pos_array[1])
-	
-	if data.has("health"):
-		health = clamp(data["health"], 0, max_health)
-		health_changed.emit()
-	
-	if data.has("has_blade"):
+	if "position" in data:
+		global_position = Vector2(data["position"][0], data["position"][1])
+	if "has_blade" in data:
 		has_blade = data["has_blade"]
-		if has_blade:
-			normal_sprite.hide()
-			collected_blade() 
+		if has_blade: equip_weapon(WeaponType.BLADE)
+	if "has_wand" in data:
+		has_wand = data["has_wand"]
+		if has_wand: equip_weapon(WeaponType.WAND)
+	
+	# Helper definitions for FSM/Animation use
+func cast_skill(anim_name: String) -> void:
+	if fsm.current_state != fsm.states.castspell:
+		fsm.change_state(fsm.states.castspell)
 
-func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
-	# Nếu tấn công không có nguyên tố, dùng damage gốc
-	if attacker_element == 0:
-		return base_damage
-	
-	# Định nghĩa quan hệ khắc (lợi thế)
-	# Fire (1) > Earth (2), Earth (2) > Water (3), Water (3) > Fire (1)
-	var advantage_table = {
-		1: [2],  # Fire khắc Earth
-		2: [3],  # Earth khắc Water
-		3: [1]   # Water khắc Fire
-	}
-	
-	# Định nghĩa quan hệ sinh (bị khắc)
-	var weakness_table = {
-		1: [3],  # Fire bị Water khắc
-		2: [1],  # Earth bị Fire khắc
-		3: [2]   # Water bị Earth khắc
-	}
-	
-	# Kiểm tra lợi thế (tấn công khắc phòng thủ)
-	if attacker_element in advantage_table and health in advantage_table[attacker_element]:
-		#print("True")
-		return base_damage * 1.25  # +25% damage
-	
-	# Kiểm tra bất lợi (tấn công bị khắc bởi phòng thủ)
-	if attacker_element in weakness_table and elemental_type in weakness_table[attacker_element]:
-		return base_damage * 0.75  # -25% damage
-	
-	return base_damage
+# ==============================================================================
+# SKILL COLLECTION & MANAGEMENT
+# ==============================================================================
 
-func handle_elemental_damage(elemental_type: int) -> void:
-	match elemental_type:
-		0:  # None
-			pass
-		1:  # Fire - burn status
-			apply_fire_effect()
-		2:  # Earth - slow status
-			apply_earth_effect()
-		3:  # Water - freeze status
-			apply_water_effect()
-
-func apply_fire_effect() -> void:
-	# Có thể thêm hiệu ứng lửa (burn status, animation, etc)
-	pass
-
-func apply_earth_effect() -> void:
-	# Có thể thêm hiệu ứng đất (slow, knockback, etc)
-	pass
-
-func apply_water_effect() -> void:
-	# Có thể thêm hiệu ứng nước (freeze, slow, etc)
-	pass
-
-func _update_elemental_palette() -> void:
-	var shader_material = ShaderMaterial.new()
-	shader_material.shader = load("res://Scenes/player/player_glowing.gdshader")
-	animated_sprite.material = shader_material
+func add_new_skill(skill: Skill, stack_amount: int = 1) -> void:
+	"""
+	Adds a new skill to the player's collection
+	stack_amount: How many charges/stacks to add (default 1)
+	Returns true on success, false on failure
+	"""
+	if not skill:
+		push_error("Player.add_new_skill: Invalid skill resource")
 	
-	var shader_mat = animated_sprite.material as ShaderMaterial
-	shader_mat.set_shader_parameter("elemental_type", elemental_type)
-	shader_mat.set_shader_parameter("glow_intensity", 1.5)
-
-# ================================================================
-# === DETECTION AREA SIGNALS =====================================
-# ================================================================
-
-# Hàm được gọi khi một Node2D đi vào DetectionArea2D
-func _on_detection_area_2d_body_entered(body: Node2D):
-	# Giả sử mọi kẻ địch đều có group "enemies"
-	# Hoặc sử dụng class_name "EnemyCharacter" nếu bạn đã định nghĩa nó
-	if body.is_in_group("enemies") or body is EnemyCharacter:
-		if not _targets_in_range.has(body):
-			_targets_in_range.append(body)
-			# print("Enemy entered range: ", body.name)
-
-# Hàm được gọi khi một Node2D đi ra khỏi DetectionArea2D
-func _on_detection_area_2d_body_exited(body: Node2D):
-	if _targets_in_range.has(body):
-		_targets_in_range.erase(body)
-		# print("Enemy exited range: ", body.name)
-
-# --- NEW HELPER FUNCTION ---
-# Hàm kiểm tra xem có mục tiêu hợp lệ nào trong phạm vi không
-func has_valid_target_in_range() -> bool:
-	# Lọc qua danh sách để đảm bảo các Node vẫn hợp lệ (chưa bị xóa)
-	_targets_in_range = _targets_in_range.filter(func(target): return is_instance_valid(target))
+	if stack_amount <= 0:
+		push_warning("Player.add_new_skill: Invalid stack amount %d" % stack_amount)
 	
-	return not _targets_in_range.is_empty()
-
-# Hàm lấy vị trí mục tiêu gần nhất để định vị Area Skill
-func get_closest_target() -> Node2D:
-	# Lọc qua danh sách để đảm bảo các Node vẫn hợp lệ (chưa bị xóa)
-	_targets_in_range = _targets_in_range.filter(func(target): return is_instance_valid(target))
-	
-	if _targets_in_range.is_empty():
-		return null
-	
-	var closest_target: Node2D = null
-	var min_distance_sq: float = INF
-	
-	for target in _targets_in_range:
-		var distance_sq = global_position.distance_squared_to(target.global_position)
-		if distance_sq < min_distance_sq:
-			min_distance_sq = distance_sq
-			closest_target = target
-			
-	return closest_target
-
-# ================================================================
-# === END DETECTION AREA SIGNALS =================================
-# ================================================================
-
-# Thêm biến để lưu multiplier
-var speed_multiplier: float = 1.0
-
-# Phương thức để thay đổi multiplier
-func set_speed_multiplier(multiplier: float) -> void:
-	speed_multiplier = multiplier
-
-func set_jump_multiplier(multiplier: float) -> void:
-	jump_multiplier = multiplier
-
-# Cập nhật logic di chuyển
-
-# === SWAP WEAPON SYSTEM =================================
-func collected_wand() -> void:
-	has_wand = true
-	_equip_wand_from_swap()
-	
-func collected_blade() -> void:	
-	has_blade = true
-	_equip_blade_from_swap()
-	
-func throw_blade() -> void:
-	if is_equipped_wand:
-		return
-	var blade = blade_factory.create() as RigidBody2D
-	var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
-	blade.apply_impulse(throw_velocity)
-	throwed_blade()
-	
-func throwed_blade() -> void:
-	has_blade = false
-	is_equipped_blade = false
-	
-	set_animated_sprite($Direction/AnimatedSprite2D)
-	
-	# Quản lý sprite silhouette:
-	# 1. Ẩn sprite silhouette CŨ
-	if extra_sprites.size() > 0 and extra_sprites[0] != null:
-		extra_sprites[0].hide()
-		extra_sprites.clear()
-	# 2. Thêm sprite silhouette MỚI (thường) và hiện nó
-	extra_sprites.append(silhouette_normal_sprite)
-	silhouette_normal_sprite.show()
-	
-	weapon_swapped.emit("normal")
-# ====== WEAPON SWAP LOGIC ======
-func swap_weapon() -> void:
-	#Nếu không sở hữu bất kỳ vũ khí nào, không làm gì
-	if not has_blade and not has_wand:
-		print("⚠️ Không có vũ khí nào để đổi.")
-		return
-
-	#Nếu đang cầm Blade
-	if is_equipped_blade:
-		if has_wand:
-			_equip_wand_from_swap() #Đổi sang Wand
-		else:
-			_equip_normal_from_swap() #Về Normal (vì không có Wand)
-			
-	#Nếu đang cầm Wand
-	elif is_equipped_wand:
-		if has_blade:
-			_equip_blade_from_swap() #Đổi sang Blade
-		else:
-			_equip_normal_from_swap() #Về Normal (vì không có Blade)
-			
-	#Nếu không cầm gì (Normal)
-	else: 
-		if has_blade:
-			_equip_blade_from_swap() #Đổi sang Blade
-		elif has_wand:
-			_equip_wand_from_swap() #Đổi sang Wand
-		# Nếu không sở hữu gì, return (đã xử lý ở đầu hàm)
-	
-	# Debug
-	print("Weapon swapped. Has Blade: %s, Has Wand: %s" % [has_blade, has_wand])
-
-# --- Helper Functions cho việc Đổi Sprite ---
-
-func _equip_blade_from_swap() -> void:
-	# 1. Cập nhật trạng thái
-	is_equipped_blade = true   #✅ Đang cầm Blade
-	is_equipped_wand = false
-	
-	# 2. Đổi Sprite
-	set_animated_sprite(blade_sprite)
-	
-	# 3. Quản lý Silhouette (Ẩn Wand, Hiện Blade)
-	_update_silhouette(silhouette_blade_sprite)
-	
-	weapon_swapped.emit("blade")
-	
-func _equip_wand_from_swap() -> void:
-	# 1. Cập nhật trạng thái
-	is_equipped_wand = true    #✅ Đang cầm Wand
-	is_equipped_blade = false
-	
-	# 2. Đổi Sprite
-	set_animated_sprite(wand_sprite)
-	
-	# 3. Quản lý Silhouette (Ẩn Blade, Hiện Wand)
-	_update_silhouette(silhouette_wand_sprite)
-	
-	weapon_swapped.emit("wand")
-	
-func _equip_normal_from_swap() -> void:
-	# 1. Cập nhật trạng thái
-	is_equipped_blade = false
-	is_equipped_wand = false
-	
-	# 2. Đổi Sprite (về sprite thường)
-	set_animated_sprite(normal_sprite) 
-	
-	# 3. Quản lý Silhouette (Ẩn tất cả và hiện Normal)
-	_update_silhouette(silhouette_normal_sprite)
-	
-	weapon_swapped.emit("normal")
-	
-func _update_silhouette(new_silhouette: AnimatedSprite2D) -> void:
-	# 1. Ẩn sprite silhouette CŨ
-	if not extra_sprites.is_empty() and extra_sprites[0] != null:
-		extra_sprites[0].hide()
-		extra_sprites.clear()
-		
-	# 2. Thêm sprite silhouette MỚI và hiện nó
-	extra_sprites.append(new_silhouette)
-	new_silhouette.show()
-
-func _update_movement(delta: float) -> void:
-	if not can_move:
-		velocity = Vector2.ZERO
-		return
-	
-	velocity.y += gravity * delta
-
-	if fsm.current_state == fsm.states.wallcling:
-		velocity.y = clamp(velocity.y, -INF, wall_slide_speed)
-	else:
-		velocity.y = clamp(velocity.y, -INF, max_fall_speed)
-
-	if is_dashing:
-		velocity.y = 0
-
-	move_and_slide()
-	pass
-
-func dash() -> void:
-	velocity.x = movement_speed * dash_speed_mul * direction
-	velocity.y = 0.0
-
-	is_dashing = true
-	can_dash = false
-	await get_tree().create_timer(dash_cd).timeout
-	can_dash = true
+	# Add to SkillTreeManager
+	SkillTreeManager.collect_skill(skill.name, stack_amount)
+	skill_collected.emit(skill, stack_amount)

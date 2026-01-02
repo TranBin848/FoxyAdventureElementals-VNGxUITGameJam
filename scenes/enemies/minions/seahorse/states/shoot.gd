@@ -8,6 +8,7 @@ func _enter() -> void:
 	pass
 
 func _update( _delta ):
+	if obj.is_frozen: return
 	if (update_timer((_delta))):
 		#print(obj.ball_counter)
 		if obj.ball_counter == obj.ball_count:

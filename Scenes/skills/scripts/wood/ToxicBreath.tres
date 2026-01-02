@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://duefnr3mddxc7"]
+
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_hd2u7"]
+[ext_resource type="PackedScene" uid="uid://dmgc4l5rudiuo" path="res://scenes/skills/projectiles/wood/toxic_breath.tscn" id="1_nip4g"]
+
+[resource]
+script = ExtResource("1_hd2u7")
+name = "Toxic Breath"
+elemental_type = 2
+cooldown = 3.0
+duration = 1.0
+hit_delay = 0.0
+ground_targeted = false
+texture_path = "res://assets/skills/icons_skill/48x48/skill_icons12.png"
+animation_name = "ToxicBreath"
+projectile_scene = ExtResource("1_nip4g")
+speed = 0.0
+damage = 5
+mana = 5
+type = "single_shot"
+metadata/_custom_type_script = "uid://4fu7i05ai1gp"

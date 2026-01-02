@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dns4h3bxal3p1"]
+
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_jughh"]
+[ext_resource type="PackedScene" uid="uid://dchncc7ynoxdl" path="res://scenes/ui/hud/icon_and_health.tscn" id="2_urjcc"]
+
+[node name="HealthBarContainer" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme = ExtResource("1_jughh")
+
+[node name="icon_and_health" parent="." instance=ExtResource("2_urjcc")]
+layout_mode = 2
