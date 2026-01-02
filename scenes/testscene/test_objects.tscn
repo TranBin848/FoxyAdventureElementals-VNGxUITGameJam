@@ -295,5 +295,3 @@ mass = 100.0
 
 [node name="Trampoline" parent="." instance=ExtResource("33_2c2yo")]
 position = Vector2(245, 251)
-
-[connection signal="body_entered" from="World/Coin" to="World/Coin" method="_on_body_entered"]
