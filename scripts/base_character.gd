@@ -64,8 +64,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# 1. Animation & Visuals
-	_check_changed_animation() # Logic to swap sprites/anims
-	_sync_extra_sprites()      # Logic to keep silhouettes locked to main sprite
+	_check_changed_animation()
+	_sync_extra_sprites()
 	
 	# 2. Update Palette
 	if animated_sprite != null:
@@ -75,10 +75,13 @@ func _physics_process(delta: float) -> void:
 	if fsm != null:
 		fsm._update(delta)
 	
-	# 4. Movement
+	# 4. Movement (just calculates velocity, doesn't move)
 	_update_movement(delta)
 	
-	# 5. Direction
+	# 5. Apply movement - NOW CALLED HERE
+	_apply_physics()
+	
+	# 6. Direction
 	_check_changed_direction()
 
 # ------------------------------------------------------------------
@@ -191,12 +194,18 @@ func _sync_extra_sprites() -> void:
 
 func _update_elemental_palette() -> void: pass
 
+
+# Just applies gravity - doesn't call move_and_slide()
 func _update_movement(delta: float) -> void:
 	if not is_movable:
 		velocity = Vector2.ZERO
 		return
 	if not ignore_gravity:
 		velocity.y += gravity * delta
+	# REMOVED: move_and_slide()
+
+# New method: can be overridden by child classes
+func _apply_physics() -> void:
 	move_and_slide()
 
 func turn_around() -> void:
