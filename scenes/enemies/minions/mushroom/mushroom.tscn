@@ -109,8 +109,6 @@ attack_damage = null
 max_health = 10
 max_mana = null
 elemental_type = null
-restraint_table = null
-creation_table = null
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Particles" type="Node2D" parent="."]
