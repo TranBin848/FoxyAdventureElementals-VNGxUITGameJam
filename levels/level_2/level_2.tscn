@@ -266,23 +266,6 @@ attack_damage = 1
 max_mana = 1000
 elemental_type = 4
 
-[node name="Mushroom8" parent="Enemies" instance=ExtResource("22_1h50e")]
-position = Vector2(9273, -332)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
-elemental_type = 4
-
-=======
-position = Vector2(9499, 114)
->>>>>>> 0b4937c99d0de302e16cf2362c2ddddf3a74ea67
-
 [node name="Crab14" parent="Enemies" instance=ExtResource("23_vdtjt")]
 position = Vector2(9247, 179)
 elemental_type = 4
@@ -704,7 +687,3 @@ player = NodePath("../../Player")
 skill_tree_ui = NodePath("../SkillTreeUI")
 metadata/_edit_use_anchors_ = true
 
-[node name="HUD" parent="GUI" instance=ExtResource("9_4x2cg")]
-
-[node name="SkillTreeUI" parent="GUI" instance=ExtResource("29_rdvgg")]
-visible = false
