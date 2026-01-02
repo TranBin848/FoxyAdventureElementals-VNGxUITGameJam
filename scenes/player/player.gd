@@ -224,6 +224,14 @@ func _handle_rigid_push() -> void:
 # COMBAT & WEAPONS
 # ==============================================================================
 
+func collect_blade() -> void:
+	has_blade = true;
+	swap_weapon()
+
+func collect_wand() -> void:
+	has_wand = true
+	swap_weapon()
+	
 func can_attack() -> bool:
 	if not is_able_attack: return false
 	_cancel_invisibility_if_active()
