@@ -164,7 +164,6 @@ position = Vector2(-12, 5)
 
 [node name="Player" parent="." instance=ExtResource("2_tu7ib")]
 position = Vector2(95, 7)
-has_blade = true
 max_health = 1000
 
 [node name="LightSource" type="Node2D" parent="Player"]
@@ -352,10 +351,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="SkillTreeRoot" parent="SkillTreeUI" instance=ExtResource("32_otmpl")]
-offset_left = 640.0
-offset_top = 384.0
-offset_right = 640.0
-offset_bottom = 384.0
 
 [node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
 anchors_preset = 2

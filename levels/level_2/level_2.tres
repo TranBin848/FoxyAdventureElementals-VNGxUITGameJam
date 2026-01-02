@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=35 format=3 uid="uid://315u2uaue33w"]
+[gd_resource type="TileSet" load_steps=36 format=3 uid="uid://315u2uaue33w"]
 
 [ext_resource type="Texture2D" uid="uid://c6j20haao3tvp" path="res://assets/wood/dark_oak.png" id="1_m8yqy"]
 [ext_resource type="Texture2D" uid="uid://2v2waox8min4" path="res://assets/island/terrain/wood_terrain_32x32.png" id="2_j2nq5"]
@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="5_fqqsd"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="7_4cvng"]
 [ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/bottom_spike.tscn" id="7_bsugr"]
-[ext_resource type="PackedScene" uid="uid://bons01cnqio5e" path="res://levels/objects/spikes/left_spike.tscn" id="8_dinf3"]
 [ext_resource type="PackedScene" uid="uid://tj21ep6idpv0" path="res://levels/objects/platforms/unstable_rock.tscn" id="8_2k4di"]
+[ext_resource type="PackedScene" uid="uid://bons01cnqio5e" path="res://levels/objects/spikes/left_spike.tscn" id="8_dinf3"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="8_u083j"]
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="9_v08cu"]
 [ext_resource type="PackedScene" uid="uid://blw7h0mcsdlyd" path="res://levels/objects/spikes/right_spike.tscn" id="10_dinf3"]
