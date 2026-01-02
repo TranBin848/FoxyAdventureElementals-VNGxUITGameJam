@@ -89,9 +89,9 @@ var _targets_in_range: Array[Node2D] = []
 @export var fireball_bounciness: float = 1.0
 
 @export_group("Jump Physics")
-@export var jump_height: float = 56.0  # How high (in pixels) you jump. (~2 tiles)
-@export var jump_time_to_peak: float = 0.45 # Seconds to reach top. Higher = Floatier.
-@export var jump_time_to_descent: float = 0.8 # Seconds to fall back down.
+@export var jump_height: float = 120.0  # How high (in pixels) you jump. (~2 tiles)
+@export var jump_time_to_peak: float = 0.5 # Seconds to reach top. Higher = Floatier.
+@export var jump_time_to_descent: float = 0.55 # Seconds to fall back down.
 #endregion
 
 #region Internal Variables
