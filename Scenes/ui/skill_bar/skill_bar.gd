@@ -24,7 +24,7 @@ func _ready() -> void:
 	_sync_from_manager()
 
 func _connect_player() -> void:
-	var player = get_tree().get_first_node_in_group("player")
+	var player = get_tree().root.find_child("Player", true, false)
 	if player and player.has_signal("skill_collected"):
 		player.skill_collected.connect(_on_player_collected_skill)
 
@@ -87,7 +87,7 @@ func _show_collection_notification(skill_name: String, amount: int) -> void:
 	if not _alert_label:
 		return
 	
-	_alert_label.text = "+%d %s" % [amount, skill_name]
+	_alert_label.text = "+ %d stacks %s" % [amount, skill_name]
 	_alert_label.visible = true
 	_alert_label.modulate.a = 1.0
 	

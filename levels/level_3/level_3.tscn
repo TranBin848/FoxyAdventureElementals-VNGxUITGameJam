@@ -281,18 +281,54 @@ elemental_type = 4
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(3786, -368)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(7874, -755)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 4
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(6015, -188)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(6026, -4)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
 
 [node name="Crab" parent="Enemies" instance=ExtResource("4_06aei")]
