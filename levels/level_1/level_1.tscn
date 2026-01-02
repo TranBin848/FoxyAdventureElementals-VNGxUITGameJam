@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=63 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="37_y7g21"]
 [ext_resource type="PackedScene" uid="uid://d28vgb0lxesvt" path="res://shaders/leaf_particles_2d.tscn" id="38_p28rs"]
 [ext_resource type="Shader" uid="uid://cn08g737h2o3b" path="res://shaders/water_refelection/water_refelection.gdshader" id="39_knpvw"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="40_2jmd8"]
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="40_mmdk3"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="41_aiurf"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="42_60i3m"]
@@ -81,7 +82,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.1
+shader_parameter/y_zoom = 2.85312
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -458,16 +459,20 @@ guide_text = "F to interact"
 
 [node name="GuideTrigger9" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
 z_index = 199
-position = Vector2(1883, 134)
+position = Vector2(1853, 127)
 guide_text = "F to interact"
 
 [node name="GuideTrigger7" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
 z_index = 199
 position = Vector2(841, 125)
-guide_text = "Press Tab to open Skill Tree"
+guide_text = " Tab to open Skill Tree"
 
 [node name="GuideTrigger8" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
 z_index = 199
+position = Vector2(176, 250)
+guide_text = "Press V to change weapon"
+
+[node name="GuideTrigger11" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
 position = Vector2(176, 250)
 guide_text = "Press V to change weapon"
 
@@ -538,14 +543,6 @@ position = Vector2(1560, 140)
 
 [node name="PelicanBombs" type="Node2D" parent="."]
 
-[node name="GuideTrigger7" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(841, 125)
-guide_text = "Press Tab to open Skill Tree"
-
-[node name="GuideTrigger8" parent="." instance=ExtResource("31_dy5lu")]
-position = Vector2(176, 250)
-guide_text = "Press V to change weapon"
-
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Minimap" parent="GUI" node_paths=PackedStringArray("tilemap_layers", "player") instance=ExtResource("45_rflqb")]
@@ -560,6 +557,24 @@ metadata/_edit_use_anchors_ = true
 
 [node name="SkillTreeUI" parent="GUI" instance=ExtResource("42_60i3m")]
 visible = false
+
+[node name="ErrorLabel" type="Label" parent="GUI"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -99.0
+offset_right = 122.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("40_2jmd8")
+text = "Enemy Out of Range"
+horizontal_alignment = 1
 
 [node name="FX" type="Node2D" parent="."]
 

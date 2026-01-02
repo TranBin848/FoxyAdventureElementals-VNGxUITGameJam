@@ -261,6 +261,15 @@ position = Vector2(6447, 992)
 
 [node name="Mushroom14" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(15035, -1580)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 1
 
 [node name="Crab19" parent="Enemies" instance=ExtResource("23_vdtjt")]
@@ -297,10 +306,28 @@ elemental_type = 4
 
 [node name="Mushroom7" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(8387, 52)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 4
 
 [node name="Mushroom8" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(9273, -332)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 4
 
 [node name="Crab12" parent="Enemies" instance=ExtResource("23_vdtjt")]
@@ -320,6 +347,15 @@ elemental_type = 4
 
 [node name="Mushroom9" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(8602, -427)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 4
 
 [node name="Pelican2" parent="Enemies" instance=ExtResource("9_qsvqe")]
@@ -344,10 +380,28 @@ elemental_type = 1
 
 [node name="Mushroom11" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(12002, -1196)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 1
 
 [node name="Mushroom12" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(12257, -1196)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 1
 
 [node name="Starfish13" parent="Enemies" instance=ExtResource("10_r7wcl")]
@@ -404,6 +458,15 @@ elemental_type = 5
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(-301, 468)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
 
 [node name="Crab" parent="Enemies" instance=ExtResource("23_vdtjt")]
@@ -424,6 +487,15 @@ curve = SubResource("Curve2D_xpuws")
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(633, -364)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
 
 [node name="Starfish2" parent="Enemies" instance=ExtResource("10_r7wcl")]
@@ -444,6 +516,15 @@ elemental_type = 5
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(1512, -11)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
 
 [node name="Crab20" parent="Enemies" instance=ExtResource("23_vdtjt")]
@@ -480,6 +561,15 @@ elemental_type = 5
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(448, 757)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 5
 
 [node name="Crab6" parent="Enemies" instance=ExtResource("23_vdtjt")]
@@ -606,6 +696,15 @@ elemental_type = 1
 
 [node name="Mushroom6" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(10393, -1036)
+spike = 0.0
+jump_height = 0.0
+air_time = 0.0
+attack_speed = 0.0
+movement_speed = 200.0
+gravity = 700.0
+_next_direction = 1
+attack_damage = 1
+max_mana = 1000
 elemental_type = 1
 
 [node name="SpearWarrior11" parent="Enemies" instance=ExtResource("27_6fwx2")]

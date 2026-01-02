@@ -542,7 +542,11 @@ func _update_visual_state(forced_main: AnimatedSprite2D = null, force_silhouette
 			set_animated_sprite(active_main) # Inform BaseCharacter
 			active_main.show()
 			active_main.modulate.a = 1.0
-			
+		if active_silhouette:
+			active_silhouette.show()
+			active_silhouette.modulate.a = 0.5
+			# Update list for BaseCharacter to not mess up
+			extra_sprites = [active_silhouette]	
 	_update_elemental_palette()
 
 func _enforce_invisibility_visuals() -> void:
@@ -699,3 +703,4 @@ func add_new_skill(skill: Skill, stack_amount: int = 1) -> void:
 	
 	# Add to SkillTreeManager
 	SkillTreeManager.collect_skill(skill.name, stack_amount)
+	skill_collected.emit(skill, stack_amount)
