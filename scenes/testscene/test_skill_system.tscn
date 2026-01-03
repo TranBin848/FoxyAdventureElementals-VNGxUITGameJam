@@ -287,29 +287,9 @@ target_stage = "uid://c47jft3el2tid"
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("29_jx6ob")]
 position = Vector2(843, 243)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
-elemental_type = 0
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("29_jx6ob")]
 position = Vector2(809, 243)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
-elemental_type = 0
 
 [node name="Starfish" parent="Enemies" instance=ExtResource("30_roqqn")]
 position = Vector2(688, 231)

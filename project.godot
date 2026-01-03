@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FoxyAdventureElementals"
-run/main_scene="uid://bpfybvhktqi4t"
+run/main_scene="uid://dsmbhy8c7qvf6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 <<<<<<<Updatedupstreamrun/main_scene="uid://dsmbhy8c7qvf6"
@@ -34,6 +34,7 @@ SettingsManager="*res://scripts/autoload/settings_manager.gd"
 SkillTreeManager="*res://scripts/autoload/skill_tree_manager.gd"
 SkillDropManager="*res://scripts/autoload/skill_drop_manager.gd"
 SkillDatabase="*res://scenes/skills/skill_database.gd"
+GameProgressManager="*res://scripts/autoload/game_progress_manager.gd"
 
 [dialogic]
 
