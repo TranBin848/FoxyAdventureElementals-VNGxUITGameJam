@@ -48,7 +48,7 @@ func play_zoom_fade_effect(duration: float = 1.5) -> void:
 	# Lấy viewport size để tính scale cần thiết
 	var viewport_size = get_viewport_rect().size
 	# Giả sử icon 48x48, để phủ toàn màn hình (ví dụ 1920x1080) cần scale ~40x
-	var target_scale = max(viewport_size.x / 48.0, viewport_size.y / 48.0) * 1.2  # Thêm 20% để chắc chắn phủ hết
+	var target_scale = max(viewport_size.x / 90.0, viewport_size.y / 90.0) * 1.2  # Thêm 20% để chắc chắn phủ hết
 	
 	# Tween cho zoom
 	var tween = create_tween()

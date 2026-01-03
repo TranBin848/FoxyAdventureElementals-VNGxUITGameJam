@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://xkbcnxv5v0y7"]
+[gd_scene load_steps=42 format=3 uid="uid://xkbcnxv5v0y7"]
 
 [ext_resource type="Script" uid="uid://d0djolxvt6im6" path="res://scenes/enemies/final_boss/animated_bg.gd" id="1_bg_script"]
 [ext_resource type="Texture2D" uid="uid://c1065p6v5vwg8" path="res://assets/skills/finalboss_skill/02.png" id="1_qsvhq"]
@@ -36,6 +36,10 @@
 [ext_resource type="Texture2D" uid="uid://bufp6u8ypw5f2" path="res://assets/skills/finalboss_skill/35.png" id="33_weidh"]
 [ext_resource type="Texture2D" uid="uid://ci7c76nu4mvua" path="res://assets/skills/finalboss_skill/36.png" id="34_uj7di"]
 [ext_resource type="Texture2D" uid="uid://60n5v0vh1m7i" path="res://assets/skills/finalboss_skill/01.png" id="35_euc5r"]
+[ext_resource type="Texture2D" uid="uid://bqqel4nd7k34f" path="res://assets/skills/finalboss_skill/37.png" id="35_p567b"]
+[ext_resource type="Texture2D" uid="uid://sf3onah00tbq" path="res://assets/skills/finalboss_skill/38.png" id="36_6odkd"]
+[ext_resource type="Texture2D" uid="uid://bspb0usfbbvax" path="res://assets/skills/finalboss_skill/39.png" id="37_2est4"]
+[ext_resource type="Texture2D" uid="uid://d10h3g2et1y2x" path="res://assets/skills/finalboss_skill/40.png" id="38_3sr47"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sxtnh"]
 animations = [{
@@ -142,6 +146,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("27_ikida")
+}, {
+"duration": 1.0,
 "texture": ExtResource("28_snxge")
 }, {
 "duration": 1.0,
@@ -161,6 +168,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("34_uj7di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_p567b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_6odkd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_2est4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_3sr47")
 }],
 "loop": false,
 "name": &"cutscene5",
@@ -178,8 +197,8 @@ animations = [{
 [node name="AnimatedBg" type="AnimatedSprite2D"]
 scale = Vector2(0.32, 0.290286)
 sprite_frames = SubResource("SpriteFrames_sxtnh")
-animation = &"cutscene1"
+animation = &"cutscene5"
 autoplay = "default"
-frame = 7
+frame = 11
 frame_progress = 1.0
 script = ExtResource("1_bg_script")
