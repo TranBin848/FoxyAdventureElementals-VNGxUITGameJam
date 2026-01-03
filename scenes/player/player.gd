@@ -82,7 +82,7 @@ var _targets_in_range: Array[Node2D] = []
 @export var dash_dist: float = 200.0
 @export var dash_cd: float = 5.0
 @export var push_strength: float = 100.0
-@export var coyote_time: float = 0.15  # NEW: Grace period after leaving ground
+@export var coyote_time: float = 0.2  # NEW: Grace period after leaving ground
 @export var air_control_multiplier: float = 0.8  # NEW: Air acceleration modifier
 @export var jump_buffer_time: float = 0.1  # Can press jump this early
 
@@ -150,12 +150,14 @@ func _ready() -> void:
 	else: equip_weapon(WeaponType.NORMAL)
 
 func _physics_process(delta: float) -> void:
+	# 1. Update timers/inputs FIRST so the FSM has fresh data
+	_update_jump_buffer(delta)
+	_update_coyote_time(delta)
+	
 	super._physics_process(delta) # Animation, FSM, etc.
 	
 	_handle_invulnerability(delta)
 	_handle_rigid_push()
-	_update_coyote_time(delta)
-	_update_jump_buffer(delta)
 
 	# Enforce visual state
 	if current_buff_state == BuffState.BURROW or current_buff_state == BuffState.INVISIBLE:
@@ -168,6 +170,10 @@ func _physics_process(delta: float) -> void:
 # ==============================================================================
 # MOVEMENT & PHYSICS
 # ==============================================================================
+
+func set_speed_multiplier(multiplier: float) -> void: speed_multiplier = multiplier
+func set_jump_multiplier(multiplier: float) -> void: jump_multiplier = multiplier
+
 
 func _update_movement(delta: float) -> void:
 	if not can_move: 
@@ -335,8 +341,6 @@ func equip_weapon(type: WeaponType) -> void:
 		_: weapon_swapped.emit("normal")
 		
 	_update_visual_state()
-
-func set_speed_multiplier(val: float) -> void: speed_multiplier = val
 
 # ==============================================================================
 # SKILLS & SPELLS
