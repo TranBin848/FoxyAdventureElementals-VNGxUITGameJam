@@ -119,6 +119,8 @@ hframes = 22
 frame = 21
 
 [node name="Skill" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
+scale = Vector2(1.75, 1.75)
 texture = ExtResource("4_qclog")
 offset = Vector2(0, -12)
 hframes = 13

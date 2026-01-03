@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://c47jft3el2tid"]
+[gd_scene load_steps=40 format=4 uid="uid://c47jft3el2tid"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_g2lgl"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_njnvt"]
@@ -28,20 +28,16 @@
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="26_ybxfk"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="28_38tfo"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="29_jx6ob"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="30_n5lmc"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="30_roqqn"]
-[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud/settings.tscn" id="31_yxbeg"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="31_t3pi0"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="32_hwtel"]
-[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/hud/weapon_panel.tscn" id="33_88oj5"]
-[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/hud/health_bar_container.tscn" id="34_3dcit"]
-[ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar/skill_bar_skill_tree.tscn" id="35_1233e"]
+[ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="32_n5lmc"]
 
 [sub_resource type="GDScript" id="GDScript_n5lmc"]
 script/source = "extends Node2D
 
 func _ready() -> void:
-	var skill_names = [\"Thousand Swords\", \"Wooden Clone\", \"Comet Rain\", \"Burrow\"]
-	
+	var skill_names = [\"Thousand Swords\", \"Wooden Clone\", \"Thunderbolt\", \"Burrow\", \"Fireball\"]
 	for i in skill_names.size():
 		# 🔥 Validate + equip
 		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
@@ -287,28 +283,23 @@ target_stage = "uid://c47jft3el2tid"
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("29_jx6ob")]
 position = Vector2(843, 243)
+elements_debuff = Dictionary[int, PackedScene]({})
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("29_jx6ob")]
 position = Vector2(809, 243)
+elements_debuff = Dictionary[int, PackedScene]({})
 
 [node name="Starfish" parent="Enemies" instance=ExtResource("30_roqqn")]
 position = Vector2(688, 231)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("30_n5lmc")
+[node name="HUD" parent="GUI" instance=ExtResource("31_t3pi0")]
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("31_yxbeg")]
-offset_bottom = 100.0
-script = null
+[node name="SkillTreeUI" parent="GUI" instance=ExtResource("32_n5lmc")]
+visible = false
 
-[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+[node name="ErrorLabel" type="Label" parent="GUI"]
 visible = false
 anchors_preset = 7
 anchor_left = 0.5
@@ -316,39 +307,12 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -122.0
-offset_top = -104.0
+offset_top = -99.0
 offset_right = 122.0
-offset_bottom = -88.0
+offset_bottom = -83.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("32_hwtel")
 text = "Enemy Out of Range"
 horizontal_alignment = 1
-
-[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("33_88oj5")]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -111.0
-offset_right = -15.0
-offset_bottom = -15.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("34_3dcit")]
-
-[node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("35_1233e")]
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -131.0
-offset_top = -78.0
-offset_right = 117.296
-offset_bottom = -6.0
-grow_vertical = 0
-size_flags_horizontal = 4
-size_flags_vertical = 8
