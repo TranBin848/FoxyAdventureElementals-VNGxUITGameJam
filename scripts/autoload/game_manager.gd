@@ -36,7 +36,7 @@ func _ready() -> void:
 	add_child(inventory_system)
 	
 	# Load Data
-	load_checkpoint_data()
+	#load_checkpoint_data()
 	
 	# Connect Scene Handling
 	get_tree().tree_changed.connect(_on_tree_changed)
