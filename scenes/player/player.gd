@@ -112,8 +112,8 @@ var jump_buffer_timer: float = 0.0
 
 func _ready() -> void:
 	# Stats Init
-	max_health = 100; health = 100
-	max_mana = 50; mana = 50
+	#max_health = 100; health = 100
+	#max_mana = 50; mana = 50
 	
 	# MATH: Calculates exact gravity needed to hit that height in that time
 	jump_velocity = ((2.0 * jump_height) / jump_time_to_peak) * -1.0

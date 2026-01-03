@@ -82,7 +82,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.331
+shader_parameter/y_zoom = 0.513158
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -216,15 +216,6 @@ elements_color = Dictionary[int, Color]({
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
 })
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 3
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("10_xsvho")]
@@ -237,15 +228,6 @@ elements_color = Dictionary[int, Color]({
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
 })
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 2
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("10_xsvho")]
@@ -260,15 +242,6 @@ elements_color = Dictionary[int, Color]({
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
 })
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 3
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("10_xsvho")]
@@ -282,16 +255,6 @@ elements_color = Dictionary[int, Color]({
 4: Color(1, 0.321569, 0.0980392, 1),
 5: Color(0.827451, 0.435294, 0, 1)
 })
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
-elemental_type = 0
 
 [node name="Crab" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(1720, -394)
