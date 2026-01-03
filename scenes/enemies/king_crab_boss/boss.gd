@@ -7,8 +7,9 @@ extends EnemyCharacter
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $Direction/AnimatedSprite2D
 @onready var claw_factory: Node2DFactory = $Direction/ClawFactory
-@onready var health_bar: ProgressBar = $UI/Control/ProgressBar
+#@onready var health_bar: ProgressBar = $UI/Control/ProgressBar
 @onready var label: Label = $Label
+@onready var health_bar: TextureProgressBar = $UI/Control2/TextureProgressBar
 
 @export var atk_range: float = 200
 @export var skill_cd: float = 10

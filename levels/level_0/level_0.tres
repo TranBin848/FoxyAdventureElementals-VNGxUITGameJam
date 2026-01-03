@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=116 format=3 uid="uid://di6o1yntkov7w"]
+[gd_resource type="TileSet" load_steps=114 format=3 uid="uid://di6o1yntkov7w"]
 
 [ext_resource type="Texture2D" uid="uid://bnmuiut4rgvqk" path="res://assets/terrain_plus/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="1_4ia71"]
 [ext_resource type="Texture2D" uid="uid://ca4mpbifj2vre" path="res://assets/terrain_plus/Floor Tiles2.png" id="2_resf3"]
@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbatj0xwa0jd4" path="res://levels/objects/coin/coin.tscn" id="4_rotw0"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="5_dvw13"]
 [ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="6_rnvmb"]
-[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/spike.tscn" id="7_whtgi"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="8_ewhhx"]
-[ext_resource type="PackedScene" uid="uid://bons01cnqio5e" path="res://levels/objects/spikes/left_wall_spike.tscn" id="9_ckwqn"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="10_7lo0f"]
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="11_pws78"]
 [ext_resource type="PackedScene" uid="uid://bmqknea8bh0ev" path="res://levels/objects/campfire/campfire.tscn" id="12_d7grt"]
@@ -244,9 +242,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_n4nvx"]
 resource_name = "object"
 scenes/1/scene = ExtResource("3_kb8gf")
-scenes/2/scene = ExtResource("7_whtgi")
 scenes/4/scene = ExtResource("8_ewhhx")
-scenes/5/scene = ExtResource("9_ckwqn")
 scenes/7/scene = ExtResource("10_7lo0f")
 scenes/8/scene = ExtResource("11_pws78")
 scenes/9/scene = ExtResource("12_d7grt")

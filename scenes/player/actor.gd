@@ -2,6 +2,7 @@ extends PlayerState
 
 func _enter() -> void:
 	$"../../Direction/HurtArea2D/CollisionShape2D".disabled = true
+	obj.set_collision_mask_value(9, false)
 	obj.velocity.x = 0
 	
 func _update(delta: float) -> void:
@@ -16,3 +17,4 @@ func _update(delta: float) -> void:
 
 func _exit() -> void:
 	$"../../Direction/HurtArea2D/CollisionShape2D".disabled = false
+	obj.set_collision_mask_value(9, true)

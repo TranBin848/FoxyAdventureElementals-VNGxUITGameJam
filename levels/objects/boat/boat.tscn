@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0hlcumjqo0a4"]
+[gd_scene load_steps=14 format=3 uid="uid://b0hlcumjqo0a4"]
 
 [ext_resource type="Script" uid="uid://cehcm1eoioa5k" path="res://levels/objects/boat/boat.gd" id="1_hlncd"]
 [ext_resource type="Texture2D" uid="uid://bnyyso8r3xy7h" path="res://assets/island/images/boat/boat_sail_1.png" id="1_ndtfy"]
@@ -35,26 +35,68 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kc5hd"]
 size = Vector2(80, 50)
 
+[sub_resource type="Animation" id="Animation_kc5hd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoatFrame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hlncd"]
+resource_name = "sail right"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoatFrame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(400, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ayfn"]
+_data = {
+&"RESET": SubResource("Animation_kc5hd"),
+&"sail right": SubResource("Animation_hlncd")
+}
+
 [node name="Boat" type="Node2D"]
 script = ExtResource("1_hlncd")
 target_stage = "uid://dhghajv3v5q1v"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="BoatFrame" parent="." instance=ExtResource("6_fotra")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BoatFrame"]
 position = Vector2(6, -36)
 sprite_frames = SubResource("SpriteFrames_w62em")
 autoplay = "default"
 frame_progress = 0.548366
 
-[node name="BoatFrame" parent="." instance=ExtResource("6_fotra")]
-
-[node name="InteractiveArea2D" type="Area2D" parent="."]
+[node name="InteractiveArea2D" type="Area2D" parent="BoatFrame"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("7_2l30g")
 metadata/_custom_type_script = "uid://0qvd447gmgon"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoatFrame/InteractiveArea2D"]
 position = Vector2(-1, -16)
 shape = SubResource("RectangleShape2D_kc5hd")
 
-[connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5ayfn")
+}
+
+[connection signal="interacted" from="BoatFrame/InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

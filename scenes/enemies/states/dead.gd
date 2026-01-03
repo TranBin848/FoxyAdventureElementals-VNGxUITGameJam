@@ -18,7 +18,7 @@ func _enter() -> void:
 	get_shader_values()
 	
 	# HOOK HERE
-	GameProgressManager.trigger_event("KILL")
+	#GameProgressManager.trigger_event("KILL")
 	
 	# ✅ Global skill drop (element = enemy's element)
 	_drop_skill_item()

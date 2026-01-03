@@ -257,7 +257,7 @@ func collect_blade() -> void:
 	has_blade = true;
 	
 	# HOOK HERE: Trigger tutorial on first weapon pickup
-	GameProgressManager.trigger_event("WEAPON")
+	#GameProgressManager.trigger_event("WEAPON")
 	
 	swap_weapon()
 
@@ -265,7 +265,7 @@ func collect_wand() -> void:
 	has_wand = true
 	
 	# HOOK HERE: Trigger tutorial on first weapon pickup
-	GameProgressManager.trigger_event("WEAPON")
+	#GameProgressManager.trigger_event("WEAPON")
 	
 	swap_weapon()
 	
@@ -774,6 +774,8 @@ func move_to_scene_point(point_name: String) -> void:
 	is_actor_moving = true
 	
 	fsm.change_state(fsm.states.actor)
+	change_animation("run")
+	Dialogic.paused = true
 	
 	# 3. Switch FSM to Actor/Cutscene state to disable standard logic
 	# (Assuming 'actor' is the state name in your FSM)
@@ -783,14 +785,15 @@ func move_to_scene_point(point_name: String) -> void:
 func _handle_actor_physics() -> void:
 	# Calculate distance to target
 	var dist = actor_target_x - global_position.x
-	print(str(actor_target_x) + " " + str(global_position.x))
-	# Threshold (5 pixels) to stop jittering
+	#print(str(actor_target_x) + " " + str(global_position.x))
+	# if arrive then stop and resume dialogic
 	if abs(dist) < 5.0:
 		velocity.x = 0
 		is_actor_moving = false
 		change_animation("idle")
 		actor_arrived.emit() # Signal Dialogic that we are done
-	else:
+		Dialogic.paused = false
+	else: #moving logic
 		direction = sign(dist)
 		velocity.x = direction * movement_speed
 
@@ -800,4 +803,3 @@ func _apply_gravity_only(delta: float) -> void:
 	var current_gravity = jump_gravity if velocity.y < 0 else fall_gravity
 	velocity.y += current_gravity * delta
 	velocity.y = clamp(velocity.y, -INF, max_fall_speed)
-

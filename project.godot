@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FoxyAdventureElementals"
-run/main_scene="uid://bpfybvhktqi4t"
+run/main_scene="uid://5f5m765bnxg8"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 <<<<<<<Updatedupstreamrun/main_scene="uid://dsmbhy8c7qvf6"
@@ -46,6 +46,7 @@ directories/dtl_directory={
 "end_lv1": "res://dialogs/end_lv1.dtl",
 "guide_elemental": "res://dialogs/guide_elemental.dtl",
 "level0": "res://dialogic_timelines/level0.dtl",
+"sail_boat": "res://dialogs/sail_boat.dtl",
 "start_game": "res://dialogs/start_game.dtl",
 "upgrade_stats": "res://dialogs/upgrade_stats.dtl"
 }

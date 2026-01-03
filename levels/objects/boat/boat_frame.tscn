@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://crflavbexmqg2" path="res://assets/island/images/boat/boat_body.png" id="1_48xfn"]
 
-[node name="BoatFrame" type="StaticBody2D"]
+[node name="BoatFrame" type="AnimatableBody2D"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
