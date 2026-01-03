@@ -1,6 +1,8 @@
 class_name EnemyStateDead
 extends EnemyState
 
+
+
 @export var despawn_time: float = 2
 const SKILL_DROP_SCENE: PackedScene = preload("res://scenes/skills/base/skill_drop/skill_drop.tscn")
 
@@ -14,6 +16,9 @@ func _enter() -> void:
 	obj.disable_collision()
 	timer = despawn_time
 	get_shader_values()
+	
+	# HOOK HERE
+	GameProgressManager.trigger_event("KILL")
 	
 	# ✅ Global skill drop (element = enemy's element)
 	_drop_skill_item()

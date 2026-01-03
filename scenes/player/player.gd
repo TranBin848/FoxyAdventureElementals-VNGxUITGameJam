@@ -246,10 +246,18 @@ func _handle_rigid_push() -> void:
 
 func collect_blade() -> void:
 	has_blade = true;
+	
+	# HOOK HERE: Trigger tutorial on first weapon pickup
+	GameProgressManager.trigger_event("WEAPON")
+	
 	swap_weapon()
 
 func collect_wand() -> void:
 	has_wand = true
+	
+	# HOOK HERE: Trigger tutorial on first weapon pickup
+	GameProgressManager.trigger_event("WEAPON")
+	
 	swap_weapon()
 	
 func can_attack() -> bool:
