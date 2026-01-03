@@ -1,6 +1,8 @@
 class_name WarLordTurtle
 extends EnemyCharacter
 
+signal damaged(amount: int)
+
 @onready var hit_box: CollisionShape2D = $Direction/HitArea2D/CollisionShape2D
 @onready var hurt_box: CollisionShape2D = $Direction/HurtArea2D/CollisionShape2D2
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -84,6 +86,7 @@ func take_damage(damage: int) -> void:
 	flash_corountine()
 	
 	if (being_controled): 
+		emit_signal("damaged", damage)
 		return
 	
 	var health_percent = (float(health) / max_health) * 100
@@ -119,7 +122,8 @@ func alert_coroutine() -> void:
 		targets.visible = false;
 
 func start_fight() -> void:
-	health_bar.show()
+	if(!being_controled):
+		health_bar.show()
 	is_fighting = true
 
 func change_phase() -> void:

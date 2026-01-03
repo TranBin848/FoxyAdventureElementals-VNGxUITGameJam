@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dot0vlx7mvjxl"]
+[gd_scene load_steps=15 format=3 uid="uid://dot0vlx7mvjxl"]
 
 [ext_resource type="Script" uid="uid://dccdmdcgwmnjx" path="res://scenes/enemies/final_boss_phase_1/boss__phase_1.gd" id="1_5gnxn"]
 [ext_resource type="Texture2D" uid="uid://cwgjo8l0lmemi" path="res://assets/foxy/fox/fox_idle_1.png" id="2_2vt2g"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://dq5y05gdtrfpb" path="res://scenes/enemies/final_boss_phase_1/idle.gd" id="4_sxyfo"]
 [ext_resource type="Script" uid="uid://bukm1ysgaxpmp" path="res://scenes/enemies/final_boss_phase_1/inactive.gd" id="7_78qr5"]
 [ext_resource type="Script" uid="uid://k1h802kx0qli" path="res://scenes/enemies/final_boss_phase_1/to_the_sky.gd" id="8_s4x44"]
+[ext_resource type="Script" uid="uid://do552jrdc5v55" path="res://scenes/enemies/final_boss_phase_1/dead.gd" id="9_2j7v5"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="9_si3nb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5gnxn"]
 animations = [{
@@ -110,4 +112,34 @@ script = ExtResource("8_s4x44")
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource("4_sxyfo")
 
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("9_2j7v5")
+
 [node name="EnergyCenter" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -25.0
+offset_top = -48.0
+offset_right = 24.0
+offset_bottom = -25.0
+text = "debug"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_si3nb")
+theme_override_constants/margin_top = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Control"]
+custom_minimum_size = Vector2(500, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 100.0
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(25, -14)

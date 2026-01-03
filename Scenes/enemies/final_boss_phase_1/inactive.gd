@@ -11,6 +11,3 @@ func _update(delta: float) -> void:
 	if update_timer(delta):
 		obj.start_fight()
 		change_state(fsm.states.tothesky)
-
-	print("BossPhase1 local position at inact:", obj.position)
-	print("BossPhase1 global position:", obj.global_position)

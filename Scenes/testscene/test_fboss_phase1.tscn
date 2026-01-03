@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://d2xmukxa7b0yp"]
+[gd_scene load_steps=40 format=4 uid="uid://d2xmukxa7b0yp"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_6kue7"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_dm37j"]
@@ -27,10 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_nuu0j"]
 [ext_resource type="PackedScene" uid="uid://dfg7ew4joocvp" path="res://scenes/ui/healh_bar.tscn" id="26_55y57"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="27_8tla6"]
-[ext_resource type="Texture2D" uid="uid://da0l42mwk34fb" path="res://assets/object/chain/ChainSegment1.png" id="27_kfbrm"]
-[ext_resource type="PackedScene" uid="uid://bl6hhtc4quudu" path="res://scenes/enemies/final_boss_phase_1/chain/chain_segment.tscn" id="28_ig72v"]
 [ext_resource type="PackedScene" uid="uid://dot0vlx7mvjxl" path="res://scenes/enemies/final_boss_phase_1/boss__phase_1.tscn" id="29_6kue7"]
 [ext_resource type="PackedScene" uid="uid://dtgq532abhp77" path="res://scenes/enemies/final_boss_phase_1/chain/chain.tscn" id="30_0e1im"]
+[ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="30_ig72v"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="30_ninp4"]
 [ext_resource type="PackedScene" uid="uid://d0ig8xrtjp2v1" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.tscn" id="31_kfbrm"]
 
@@ -144,8 +143,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdijw"]
-size = Vector2(12, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qeyg"]
+size = Vector2(1276, 724)
 
 [node name="Stage" type="Node2D"]
 
@@ -270,161 +269,8 @@ position = Vector2(155, 206)
 [node name="ProductsContainer" type="Node2D" parent="."]
 position = Vector2(67, 68)
 
-[node name="Rope" type="Node2D" parent="."]
-position = Vector2(269, 11)
-
-[node name="RopeHolder" type="StaticBody2D" parent="Rope"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rope/RopeHolder"]
-shape = SubResource("RectangleShape2D_wdijw")
-
-[node name="Sprite2D" type="Sprite2D" parent="Rope/RopeHolder/CollisionShape2D"]
-position = Vector2(1.19209e-07, 0)
-scale = Vector2(0.757813, 0.757812)
-texture = ExtResource("27_kfbrm")
-
-[node name="PinJoint2D" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 6)
-node_a = NodePath("../RopeHolder")
-node_b = NodePath("../ChainSegment")
-disable_collision = false
-softness = 0.1
-
-[node name="ChainSegment" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 12)
-
-[node name="PinJoint2D2" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 18)
-node_a = NodePath("../ChainSegment")
-node_b = NodePath("../ChainSegment2")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment2" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 24)
-
-[node name="PinJoint2D3" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 30)
-node_a = NodePath("../ChainSegment2")
-node_b = NodePath("../ChainSegment3")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment3" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 36)
-
-[node name="PinJoint2D4" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 42)
-node_a = NodePath("../ChainSegment3")
-node_b = NodePath("../ChainSegment4")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment4" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 48)
-
-[node name="PinJoint2D5" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 54)
-node_a = NodePath("../ChainSegment4")
-node_b = NodePath("../ChainSegment5")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment5" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 60)
-
-[node name="PinJoint2D6" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 66)
-node_a = NodePath("../ChainSegment5")
-node_b = NodePath("../ChainSegment6")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment6" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 72)
-
-[node name="PinJoint2D7" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 78)
-node_a = NodePath("../ChainSegment6")
-node_b = NodePath("../ChainSegment7")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment7" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 84)
-
-[node name="PinJoint2D8" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 90)
-node_a = NodePath("../ChainSegment7")
-node_b = NodePath("../ChainSegment8")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment8" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 96)
-
-[node name="PinJoint2D9" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 102)
-node_a = NodePath("../ChainSegment8")
-node_b = NodePath("../ChainSegment9")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment9" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 108)
-
-[node name="PinJoint2D10" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 114)
-node_a = NodePath("../ChainSegment9")
-node_b = NodePath("../ChainSegment10")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment10" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(0, 120)
-
-[node name="PinJoint2D11" type="PinJoint2D" parent="Rope"]
-position = Vector2(0, 126)
-node_a = NodePath("../ChainSegment10")
-node_b = NodePath("../ChainSegment11")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
-[node name="ChainSegment11" parent="Rope" instance=ExtResource("28_ig72v")]
-position = Vector2(6, 126)
-rotation = -1.5708
-
-[node name="PinJoint2D12" type="PinJoint2D" parent="Rope"]
-position = Vector2(12, 126)
-node_a = NodePath("../ChainSegment11")
-node_b = NodePath("../../Player")
-disable_collision = false
-softness = 0.1
-angular_limit_lower = -0.15708
-angular_limit_upper = 1.5708
-
 [node name="Player" parent="." instance=ExtResource("2_dm37j")]
-position = Vector2(361, 205)
+position = Vector2(1, 197)
 collision_mask = 73
 platform_floor_layers = 4294967231
 wall_slide_speed = null
@@ -437,7 +283,7 @@ fireball_bounciness = null
 movement_speed = null
 gravity = null
 _next_direction = null
-attack_damage = null
+attack_damage = 100
 max_health = null
 max_mana = null
 elemental_type = null
@@ -445,8 +291,23 @@ elemental_type = null
 [node name="Node2D" type="Node2D" parent="Player"]
 position = Vector2(0, -17)
 
-[node name="BossPhase1" parent="." instance=ExtResource("29_6kue7")]
-position = Vector2(621, 55)
+[node name="BossZoneArea2D" type="Area2D" parent="." node_paths=PackedStringArray("boss")]
+position = Vector2(698, -85)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("30_ig72v")
+boss = NodePath("BossPhase1")
+
+[node name="Camera2D" type="Camera2D" parent="BossZoneArea2D"]
+
+[node name="BossPhase1" parent="BossZoneArea2D" instance=ExtResource("29_6kue7")]
+position = Vector2(0, 266)
 KING_CRAB_SCENE = ExtResource("30_ninp4")
 WAR_LORD_SCENE = ExtResource("31_kfbrm")
 ENERGY_LINE_SCENE = ExtResource("30_0e1im")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossZoneArea2D"]
+position = Vector2(2, -1)
+shape = SubResource("RectangleShape2D_4qeyg")
+
+[connection signal="body_entered" from="BossZoneArea2D" to="BossZoneArea2D" method="_on_body_entered"]

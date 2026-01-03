@@ -19,6 +19,10 @@ var fired_claw: Node2D = null
 var boss_zone: Area2D = null
 var is_fighting: bool = false
 
+#Added by BBNguyen
+signal damaged(amount: int)
+var being_controled = false
+
 var skills = {
 	0: "spin",
 	1: "fireclaw"
@@ -74,6 +78,11 @@ func take_damage(damage: int) -> void:
 	AudioManager.play_sound("boss_hurt")
 	
 	flash_corountine()
+	
+	if(being_controled):
+		emit_signal("damaged", damage)
+		return
+	
 	var health_percent = (float(health) / max_health) * 100
 	health_bar.value = health_percent
 	#print("health: " + str(health) + " max health: " + str(max_health) + " percent: " + str(health_percent))
@@ -84,7 +93,8 @@ func flash_corountine() -> void:
 	animated_sprite_2d.modulate = Color.WHITE  # go back to normal	
 
 func start_fight() -> void:
-	health_bar.show()
+	if(!being_controled):
+		health_bar.show()
 	is_fighting = true
 
 func handle_dead() -> void:

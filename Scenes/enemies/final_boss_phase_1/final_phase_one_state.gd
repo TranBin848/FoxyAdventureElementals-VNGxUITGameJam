@@ -20,14 +20,18 @@ func huhuhu() -> void:
 func control_fly() -> void:
 	obj.velocity.y = -1 * obj.movement_speed;
 
-func take_damage(direction: Variant, damage: int = 1) -> void:
+func take_damage(_direction: Variant, damage: int = 1) -> void:
 	#Enemy take damage
 	obj.take_damage(damage)
 	#obj.velocity.x = bounce_back_velocity * direction.x
 	if obj.health <= 0:
-		if obj.is_facing_left == false:
-			obj.scale.x = -1
 		change_state(fsm.states.dead)
+
+func handle_mini_bosses() -> void:
+	if obj.king_crab_instance.health <= 0:
+		obj.hide_coroutine_king_crab()
+	if obj.war_lord_instance.health <= 0:
+		obj.hide_coroutine_war_lord()
 
 var current_skill = 0
 var total_skill = 2

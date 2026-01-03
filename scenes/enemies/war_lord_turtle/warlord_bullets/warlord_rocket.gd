@@ -4,7 +4,7 @@ extends RigidBody2D
 @export var explode_sfx: AudioStream = null
 
 func launch(start_pos: Vector2, velo: Vector2):
-	position = start_pos
+	global_position = start_pos
 	apply_impulse(velo)
 	
 func _integrate_forces(state):
