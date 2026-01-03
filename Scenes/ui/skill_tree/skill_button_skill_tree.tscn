@@ -48,3 +48,5 @@ horizontal_alignment = 2
 top_level = true
 z_index = -1
 width = 3.0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
