@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cb1txsruca3mx"]
+
+[ext_resource type="Texture2D" uid="uid://cx1cqnm2lrgxo" path="res://icon.svg" id="1_r7uq2"]
+[ext_resource type="Script" uid="uid://btxq85glvgiat" path="res://levels/objects/platforms/recall_totem.gd" id="1_xh7nr"]
+[ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="2_qt12v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt12v"]
+size = Vector2(32, 32)
+
+[node name="RecallTotem" type="StaticBody2D"]
+collision_layer = 0
+script = ExtResource("1_xh7nr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_r7uq2")
+
+[node name="InteractiveArea2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("2_qt12v")
+metadata/_custom_type_script = "uid://0qvd447gmgon"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+shape = SubResource("RectangleShape2D_qt12v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qt12v")
+
+[connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

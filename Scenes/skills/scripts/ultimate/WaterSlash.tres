@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_n71gg")
 name = "Water Slash"
-elemental_type = 3
+elemental_type = 2
 level = 1
 cooldown = 1.0
 duration = 1.0
