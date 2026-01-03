@@ -24,14 +24,6 @@ func hit(hurt_area):
 		if not player:
 			player = get_parent().get_parent() as Player
 		
-		# Set damage based on current weapon
-		if player and player.current_weapon == player.WeaponType.BLADE:
-			damage = 5
-		elif player and player.current_weapon == player.WeaponType.WAND:
-			damage = 1
-		else:
-			damage = 5  # Default damage if player not found
-		
 		hurt_area.take_damage(hit_dir.normalized(), damage, elemental_type)
 
 func _on_area_entered(area):
