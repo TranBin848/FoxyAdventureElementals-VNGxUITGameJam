@@ -1,0 +1,100 @@
+class_name FinalBossPhaseOne
+extends EnemyCharacter
+
+@onready var hit_box: CollisionShape2D = $Direction/HitArea2D/CollisionShape2D
+@onready var hurt_box: CollisionShape2D = $Direction/HurtArea2D/CollisionShape2D2
+@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var anim: AnimatedSprite2D = $"Direction/AnimatedSprite2D" 
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $Direction/AnimatedSprite2D
+
+#node for spawhning 2 mini boss
+@onready var energy_center:Node2D = $EnergyCenter
+
+#references
+@export var KING_CRAB_SCENE: PackedScene
+@export var WAR_LORD_SCENE: PackedScene
+@export var ENERGY_LINE_SCENE: PackedScene
+
+var king_crab_instance: KingCrab = null
+var war_lord_instance: WarLordTurtle = null
+
+@onready var health_bar: ProgressBar = $UI/Control/ProgressBar
+@onready var label: Label = $Label
+
+var boss_zone: Area2D = null
+
+var is_fighting = false
+var movespeed = 1;
+
+func _ready() -> void:
+	super._ready()
+	fsm = FSM.new(self, $States, $States/ToTheSky)
+	direction = -1
+
+func take_damage(damage: int) -> void:
+	super.take_damage(damage)
+	
+	#AudioManager.play_sound("war_lord_hurt")
+	
+	flash_corountine()
+	var health_percent = (float(health) / max_health) * 100
+	health_bar.value = health_percent
+
+func flash_corountine() -> void:
+	animated_sprite_2d.modulate = Color(20, 20, 20)
+	await get_tree().create_timer(0.3).timeout
+	animated_sprite_2d.modulate = Color.WHITE  # go back to normal	
+
+
+func start_fight() -> void:
+	#health_bar.show()
+	fsm.change_state(fsm.states.tothesky)
+
+func spawn_mini_bosses() -> void:
+
+	if !is_instance_valid(king_crab_instance):
+		king_crab_instance = KING_CRAB_SCENE.instantiate() as KingCrab
+		king_crab_instance.modulate = Color8(144, 0, 255, 255)
+		energy_center.add_child(king_crab_instance)
+		king_crab_instance.position = Vector2(300, 0)
+
+
+	if !is_instance_valid(war_lord_instance):
+		war_lord_instance = WAR_LORD_SCENE.instantiate() as WarLordTurtle
+		war_lord_instance.modulate = Color8(144, 0, 255, 255)
+		energy_center.add_child(war_lord_instance)
+		war_lord_instance.position = Vector2(-300, 0)
+
+		war_lord_instance.being_controled = true
+		war_lord_instance.is_fighting = true
+
+	link_to_final_boss()
+
+
+func link_to_final_boss() -> void: 
+	if king_crab_instance == null or !is_instance_valid(king_crab_instance) or war_lord_instance == null or !is_instance_valid(war_lord_instance):
+		return
+	
+	var energy_line_1 = ENERGY_LINE_SCENE.instantiate() as EnergyLine
+	energy_line_1.a = energy_center
+	energy_line_1.b = king_crab_instance
+	energy_center.add_child(energy_line_1)
+	
+	var energy_line_2 = ENERGY_LINE_SCENE.instantiate() as EnergyLine
+	energy_line_2.a = energy_center
+	energy_line_2.b = war_lord_instance
+	energy_center.add_child(energy_line_2)
+
+func handle_dead() -> void:
+	hurt_box.disabled = true
+	collision.disabled = true
+	hit_box.disabled = true
+	gravity = 0
+	velocity.x = 0
+	health_bar.hide()
+	if boss_zone:
+		boss_zone._on_boss_dead()
+
+func get_animation_node() -> Node:
+	return anim

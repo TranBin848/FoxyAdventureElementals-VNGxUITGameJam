@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://dot0vlx7mvjxl"]
+
+[ext_resource type="Script" uid="uid://dccdmdcgwmnjx" path="res://scenes/enemies/final_boss_phase_1/boss__phase_1.gd" id="1_5gnxn"]
+[ext_resource type="Texture2D" uid="uid://cwgjo8l0lmemi" path="res://assets/foxy/fox/fox_idle_1.png" id="2_2vt2g"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_sxyfo"]
+[ext_resource type="Texture2D" uid="uid://cdiupfoo5xr6u" path="res://assets/foxy/fox/fox_idle_2.png" id="3_78qr5"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="3_wbrm6"]
+[ext_resource type="Script" uid="uid://dq5y05gdtrfpb" path="res://scenes/enemies/final_boss_phase_1/idle.gd" id="4_sxyfo"]
+[ext_resource type="Script" uid="uid://bukm1ysgaxpmp" path="res://scenes/enemies/final_boss_phase_1/inactive.gd" id="7_78qr5"]
+[ext_resource type="Script" uid="uid://k1h802kx0qli" path="res://scenes/enemies/final_boss_phase_1/to_the_sky.gd" id="8_s4x44"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5gnxn"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2vt2g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_78qr5")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vt2g"]
+radius = 36.0555
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_78qr5"]
+radius = 36.0555
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s4x44"]
+radius = 29.0172
+
+[node name="BossPhase1" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_5gnxn")
+movement_speed = 100.0
+gravity = 0.0
+metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+sprite_frames = SubResource("SpriteFrames_5gnxn")
+animation = &"Idle"
+frame_progress = 0.369674
+
+[node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(45, 0)
+target_position = Vector2(20, 0)
+
+[node name="DownRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(45, 0)
+target_position = Vector2(0, 40)
+
+[node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(0, 12)
+scale = Vector2(1, 10)
+target_position = Vector2(-300, 0)
+collision_mask = 130
+
+[node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(0, 12)
+scale = Vector2(1, 10)
+target_position = Vector2(300, 0)
+collision_mask = 130
+
+[node name="HitArea2D" type="Area2D" parent="Direction"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_sxyfo")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HitArea2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_2vt2g")
+debug_color = Color(0.575242, 0.0792793, 0, 0.42)
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_wbrm6")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_78qr5")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_s4x44")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="States" type="Node" parent="."]
+
+[node name="Inactive" type="Node" parent="States"]
+script = ExtResource("7_78qr5")
+
+[node name="ToTheSky" type="Node" parent="States"]
+script = ExtResource("8_s4x44")
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("4_sxyfo")
+
+[node name="EnergyCenter" type="Node2D" parent="."]

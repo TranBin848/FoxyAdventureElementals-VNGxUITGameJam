@@ -1,0 +1,158 @@
+[gd_scene load_steps=4 format=3 uid="uid://cag4aj8uondni"]
+
+[ext_resource type="Texture2D" uid="uid://da0l42mwk34fb" path="res://assets/object/chain/ChainSegment1.png" id="1_wdijw"]
+[ext_resource type="PackedScene" uid="uid://bl6hhtc4quudu" path="res://scenes/enemies/final_boss_phase_1/chain/chain_segment.tscn" id="2_wdijw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdijw"]
+size = Vector2(12, 12)
+
+[node name="Rope" type="Node2D"]
+
+[node name="RopeHolder" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RopeHolder"]
+shape = SubResource("RectangleShape2D_wdijw")
+
+[node name="Sprite2D" type="Sprite2D" parent="RopeHolder/CollisionShape2D"]
+position = Vector2(1.19209e-07, 0)
+scale = Vector2(0.757813, 0.757812)
+texture = ExtResource("1_wdijw")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, 6)
+node_a = NodePath("../RopeHolder")
+node_b = NodePath("../ChainSegment")
+disable_collision = false
+softness = 0.1
+
+[node name="ChainSegment" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 12)
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2(0, 18)
+node_a = NodePath("../ChainSegment")
+node_b = NodePath("../ChainSegment2")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment2" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 24)
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="."]
+position = Vector2(0, 30)
+node_a = NodePath("../ChainSegment2")
+node_b = NodePath("../ChainSegment3")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment3" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 36)
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="."]
+position = Vector2(0, 42)
+node_a = NodePath("../ChainSegment3")
+node_b = NodePath("../ChainSegment4")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment4" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 48)
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="."]
+position = Vector2(0, 54)
+node_a = NodePath("../ChainSegment4")
+node_b = NodePath("../ChainSegment5")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment5" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 60)
+
+[node name="PinJoint2D6" type="PinJoint2D" parent="."]
+position = Vector2(0, 66)
+node_a = NodePath("../ChainSegment5")
+node_b = NodePath("../ChainSegment6")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment6" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 72)
+
+[node name="PinJoint2D7" type="PinJoint2D" parent="."]
+position = Vector2(0, 78)
+node_a = NodePath("../ChainSegment6")
+node_b = NodePath("../ChainSegment7")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment7" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 84)
+
+[node name="PinJoint2D8" type="PinJoint2D" parent="."]
+position = Vector2(0, 90)
+node_a = NodePath("../ChainSegment7")
+node_b = NodePath("../ChainSegment8")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment8" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 96)
+
+[node name="PinJoint2D9" type="PinJoint2D" parent="."]
+position = Vector2(0, 102)
+node_a = NodePath("../ChainSegment8")
+node_b = NodePath("../ChainSegment9")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment9" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 108)
+
+[node name="PinJoint2D10" type="PinJoint2D" parent="."]
+position = Vector2(0, 114)
+node_a = NodePath("../ChainSegment9")
+node_b = NodePath("../ChainSegment10")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment10" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(0, 120)
+
+[node name="PinJoint2D11" type="PinJoint2D" parent="."]
+position = Vector2(0, 126)
+node_a = NodePath("../ChainSegment10")
+node_b = NodePath("../ChainSegment11")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708
+
+[node name="ChainSegment11" parent="." instance=ExtResource("2_wdijw")]
+position = Vector2(6, 126)
+rotation = -1.5708
+
+[node name="PinJoint2D12" type="PinJoint2D" parent="."]
+position = Vector2(12, 126)
+node_a = NodePath("../ChainSegment11")
+disable_collision = false
+softness = 0.1
+angular_limit_lower = -0.15708
+angular_limit_upper = 1.5708

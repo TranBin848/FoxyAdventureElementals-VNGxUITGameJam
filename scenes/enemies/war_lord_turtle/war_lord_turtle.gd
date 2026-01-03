@@ -20,6 +20,8 @@ var is_facing_left = true
 var is_attacking = false
 var has_delay_state = false
 
+var being_controled = false
+
 var phase_order := [4,3,2] 
 var current_phase_index := 2
 
@@ -80,6 +82,10 @@ func take_damage(damage: int) -> void:
 	AudioManager.play_sound("war_lord_hurt")
 	
 	flash_corountine()
+	
+	if (being_controled): 
+		return
+	
 	var health_percent = (float(health) / max_health) * 100
 	health_bar.value = health_percent
 	

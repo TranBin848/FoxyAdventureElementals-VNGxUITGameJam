@@ -152,19 +152,16 @@ tile_set = ExtResource("2_ig17x")
 collision_visibility_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("3_dvw2y")]
-position = Vector2(3, 77)
+position = Vector2(223, 219)
 collision_mask = 73
 platform_floor_layers = 4294967231
-invulnerable_duration = null
-fireball_bounciness = null
-minimum_bounce_velocity = null
-has_blade = null
-has_wand = null
-blade_throw_speed = null
-skill_throw_speed = null
-push_strength = null
 wall_slide_speed = null
 dash_speed_mul = null
+push_strength = null
+blade_throw_speed = null
+skill_throw_speed = null
+invulnerable_duration = null
+fireball_bounciness = null
 movement_speed = null
 gravity = null
 _next_direction = null
@@ -172,8 +169,6 @@ attack_damage = null
 max_health = null
 max_mana = null
 elemental_type = null
-restraint_table = null
-creation_table = null
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -282,6 +277,7 @@ frame_progress = 0.914773
 
 [node name="HealhBar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("27_uv1yj")]
 player = NodePath("../../Player")
+metadata/_edit_use_anchors_ = true
 
 [node name="BladeCollectable" parent="." instance=ExtResource("31_ncy64")]
 position = Vector2(155, 206)
@@ -289,7 +285,7 @@ position = Vector2(155, 206)
 [node name="ProductsContainer" type="Node2D" parent="."]
 
 [node name="BossZoneArea2D" parent="." node_paths=PackedStringArray("boss") instance=ExtResource("29_h17kd")]
-position = Vector2(771, 188)
+position = Vector2(434, 52)
 boss = NodePath("WarLordTurtle")
 
 [node name="WarLordTurtle" parent="BossZoneArea2D" instance=ExtResource("30_mqctd")]

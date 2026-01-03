@@ -7,7 +7,8 @@ var previous_music_id
 var player: Player = null
 
 func _ready() -> void:
-	boss.boss_zone = self
+	#boss.boss_zone = self
+	pass
 
 func _on_boss_dead() -> void:
 	if player:

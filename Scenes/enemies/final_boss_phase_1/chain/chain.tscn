@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtgq532abhp77"]
+
+[ext_resource type="Script" uid="uid://qe5cvknkrxh0" path="res://scenes/enemies/final_boss_phase_1/chain/chain.gd" id="1_vb3qb"]
+[ext_resource type="Texture2D" uid="uid://bj4u2d7uh0msl" path="res://assets/object/chain/energy_line.tres" id="9_tbtmy"]
+
+[node name="Chain" type="Line2D"]
+z_index = -1
+default_color = Color(1, 1, 1, 0)
+script = ExtResource("1_vb3qb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+scale = Vector2(1, 0.5)
+texture = ExtResource("9_tbtmy")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
