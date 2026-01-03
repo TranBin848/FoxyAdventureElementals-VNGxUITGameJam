@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://qv25yj3rt5ql"]
+[gd_scene load_steps=54 format=4 uid="uid://qv25yj3rt5ql"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_4qlm2"]
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_aq1cd"]
@@ -40,11 +40,10 @@
 [ext_resource type="Texture2D" uid="uid://b3m7niu1ye24m" path="res://assets/skills/icon element/Water_v2.png" id="38_x60jx"]
 [ext_resource type="Texture2D" uid="uid://dcvi82xfb8w5v" path="res://assets/skills/icon element/Earth_v2.png" id="39_mwgaq"]
 [ext_resource type="Texture2D" uid="uid://ch3gxklumk8cv" path="res://assets/skills/icon element/Metal_v2.png" id="40_3stc0"]
-[ext_resource type="Texture2D" uid="uid://bw0lj4v2jqd7c" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_1.png" id="40_qgkf7"]
-[ext_resource type="Texture2D" uid="uid://bu07xy8c7sahs" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_2.png" id="41_q4qdf"]
-[ext_resource type="Texture2D" uid="uid://m3hdk4fxfum3" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_3.png" id="42_il3ai"]
-[ext_resource type="Texture2D" uid="uid://bpwkwowucmnif" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_4.png" id="43_4mbfk"]
-[ext_resource type="Texture2D" uid="uid://hy4vhn4ex5b6" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_5.png" id="44_aheaj"]
+[ext_resource type="Texture2D" uid="uid://bgcq02tqj467s" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_hurt_1.png" id="40_f8kpm"]
+[ext_resource type="Texture2D" uid="uid://j1vbr38a6rnb" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_hurt_2.png" id="41_qgkf7"]
+[ext_resource type="Texture2D" uid="uid://ct02xl2uo3hri" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_hurt_3.png" id="42_q4qdf"]
+[ext_resource type="Texture2D" uid="uid://e7724kdltgta" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_hurt_4.png" id="43_il3ai"]
 
 [sub_resource type="GDScript" id="GDScript_82uhe"]
 script/source = "extends Node2D
@@ -169,19 +168,16 @@ load_path = "res://.godot/imported/ElementIcon4.png-3ab8c7805f289548a686aaa7b385
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("40_qgkf7")
+"texture": ExtResource("40_f8kpm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("41_q4qdf")
+"texture": ExtResource("41_qgkf7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("42_il3ai")
+"texture": ExtResource("42_q4qdf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("43_4mbfk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("44_aheaj")
+"texture": ExtResource("43_il3ai")
 }],
 "loop": true,
 "name": &"default",
@@ -459,7 +455,7 @@ texture = ExtResource("39_mwgaq")
 [node name="EvilFoxy" type="AnimatedSprite2D" parent="."]
 position = Vector2(652, 44)
 sprite_frames = SubResource("SpriteFrames_1lhn3")
-frame_progress = 0.681791
+frame_progress = 0.388661
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
 position = Vector2(484, 45)
