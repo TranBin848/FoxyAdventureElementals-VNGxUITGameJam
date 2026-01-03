@@ -52,36 +52,38 @@ stretch_mode = 0
 
 [node name="Label" type="Label" parent="NinePatchRect"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -456.0
-offset_top = -194.0
-offset_right = -56.0
-offset_bottom = 49.0
+offset_left = -417.0
+offset_top = 40.0
+offset_right = 417.0
+offset_bottom = 193.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "MUSIC
 "
 label_settings = SubResource("LabelSettings_6rodm")
+horizontal_alignment = 1
+autowrap_mode = 3
+uppercase = true
 
 [node name="Content" type="RichTextLabel" parent="NinePatchRect"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -452.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = 245.0
-grow_horizontal = 2
+offset_left = 40.0
+offset_top = -183.0
+offset_right = 490.0
+offset_bottom = 212.0
 grow_vertical = 2
 theme = ExtResource("1_mabun")
-text = "Particles"
+theme_override_constants/line_separation = 10
+theme_override_font_sizes/normal_font_size = 24
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet augue convallis elit aliquet pretium. Quisque ut ante urna. Pellentesque nec metus eu leo dignissim posuere. Proin at massa ipsum."
+fit_content = true
+vertical_alignment = 1
+justification_flags = 35
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="NinePatchRect"]
 layout_mode = 1
@@ -91,7 +93,7 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -458.0
-offset_top = -236.0
+offset_top = -186.0
 offset_right = -67.0
 offset_bottom = 245.0
 grow_horizontal = 0

@@ -7,12 +7,13 @@ const POPUP_SCENE = preload("res://scenes/ui/popup/guide_popup.tscn")
 var first_coin_collected: bool = false
 var first_key_collected: bool = false
 var first_enemy_killed: bool = false
+var first_weapon_collected: bool = false
 
 # Configuration for the guides
 # Format: "EVENT_KEY": { "title": "", "content": "", "video": "" }
 var guide_data: Dictionary = {
 	"COIN": {
-		"title": "Shiny Gold!",
+		"title": "Shiny Gold",
 		"content": "Gold is used to upgrade skills in the shop. Collect as much as you can!",
 		"video": "res://assets/videos/tutorial_coin.ogv" 
 	},
@@ -62,7 +63,7 @@ func _show_guide(key: String) -> void:
 	var popup = POPUP_SCENE.instantiate() as TutorialPopup
 	
 	# Add to the current scene (CanvasLayer is preferred if you have one, otherwise current_scene)
-	get_tree().current_scene.add_child(popup)
+	GameManager.current_stage.find_child("GUI").add_child(popup)
 	
 	# Setup the data
 	popup.setup(data["title"], data["content"], data["video"])

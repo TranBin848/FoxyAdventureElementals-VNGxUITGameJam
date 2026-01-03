@@ -3,7 +3,7 @@ class_name TutorialPopup
 
 @onready var video_player: VideoStreamPlayer = $NinePatchRect/VideoStreamPlayer
 @onready var label: Label = $NinePatchRect/Label
-@onready var content_label: Label = $NinePatchRect/Content # Assumed this is a Label or RichTextLabel
+@onready var content_label: RichTextLabel = $NinePatchRect/Content # Assumed this is a Label or RichTextLabel
 @onready var close_button: TextureButton = $NinePatchRect/CloseTextureButton
 
 func _ready():
