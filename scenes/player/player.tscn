@@ -620,6 +620,7 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+visible = false
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"faint"
@@ -632,7 +633,6 @@ animation = &"cling"
 autoplay = "idle"
 
 [node name="WandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
-visible = false
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_0y4ya")
 animation = &"cling"

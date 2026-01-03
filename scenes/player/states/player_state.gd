@@ -1,17 +1,15 @@
 class_name PlayerState
 extends FSMState
 
-# Constant for knockback if not defined in Player
 const DEFAULT_KNOCKBACK_FORCE := 100.0
-const ACCELERATION = 800.0
-const FRICTION = 1000.0
+const ACCELERATION = 1500.0
+const FRICTION = 800.0
+const AIR_FRICTION_MULTIPLIER = 0.25  # Much less friction in air
 
-# region Movement Controls
-# ------------------------------------------------------------------------------
 func control_moving() -> bool:
 	var delta = obj.get_physics_process_delta_time()
 	
-	# SOCD Handling: Track which key was pressed most recently
+	# SOCD Handling
 	if Input.is_action_just_pressed("right"):
 		obj.last_dir = 1
 	if Input.is_action_just_pressed("left"):
@@ -23,7 +21,6 @@ func control_moving() -> bool:
 	var dir: int = 0
 	
 	if right_held and left_held:
-		# Both held: use last pressed direction
 		dir = obj.last_dir
 	elif right_held:
 		dir = 1
@@ -34,33 +31,48 @@ func control_moving() -> bool:
 	else:
 		obj.last_dir = 0
 	
-	# Calculate target speed
 	var target_speed = obj.movement_speed * dir * obj.speed_multiplier
 	
+	# === COYOTE TIME + AIR CONTROL ===
+	var has_ground_control = obj.has_coyote_time()  # True if grounded OR within coyote time
+	
 	if dir != 0:
-		# Smooth acceleration toward target speed
-		obj.velocity.x = move_toward(obj.velocity.x, target_speed, ACCELERATION * delta)
+		if has_ground_control:
+			# Ground Control: Smooth acceleration
+			obj.velocity.x = move_toward(obj.velocity.x, target_speed, ACCELERATION * delta)
+		else:
+			# Air Control: Faster/more responsive
+			var air_accel = ACCELERATION * obj.air_control_multiplier
+			obj.velocity.x = move_toward(obj.velocity.x, target_speed, air_accel * delta)
 		
-		# Update facing direction
 		obj.change_direction(dir)
 		
-		# Change to run state only when grounded
+		# Only change to run state when actually grounded
 		if obj.is_on_floor() and fsm.current_state != fsm.states.run:
 			change_state(fsm.states.run)
 		return true
 		
 	else:
-		# Don't apply friction during Dash - preserve momentum
+		# No input - apply friction
 		if fsm.current_state.name == "Dash":
 			return false
 		
-		# Smooth deceleration to stop
-		obj.velocity.x = move_toward(obj.velocity.x, 0, FRICTION * delta)
+		if has_ground_control:
+			# Ground: Normal friction
+			obj.velocity.x = move_toward(obj.velocity.x, 0, FRICTION * delta)
+		else:
+			# Air: Reduced friction (preserve momentum)
+			obj.velocity.x = move_toward(obj.velocity.x, 0, FRICTION * AIR_FRICTION_MULTIPLIER * delta)
 		return false
 
 func control_jump() -> bool:
-	if Input.is_action_just_pressed("jump"):
+	# Check if jump was buffered OR just pressed
+	var wants_jump = obj.jump_buffer_timer > 0
+	
+	if wants_jump and obj.has_coyote_time():
 		obj.jump()
+		obj.coyote_timer = 0
+		obj.jump_buffer_timer = 0  # Consume buffer
 		change_state(fsm.states.jump)
 		return true
 	return false

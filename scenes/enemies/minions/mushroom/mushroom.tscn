@@ -96,21 +96,9 @@ elements_debuff = Dictionary[int, PackedScene]({
 5: ExtResource("6_eu3g3")
 })
 shader_path = "uid://doovon2v0i5dx"
-spike = null
 sight = 100.0
 movement_range = 100.0
-jump_height = null
-air_time = null
-attack_speed = null
-movement_speed = null
-gravity = null
-_next_direction = null
-attack_damage = null
 max_health = 10
-max_mana = null
-elemental_type = null
-restraint_table = null
-creation_table = null
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Particles" type="Node2D" parent="."]

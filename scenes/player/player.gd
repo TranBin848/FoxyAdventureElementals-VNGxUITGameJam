@@ -82,6 +82,9 @@ signal actor_arrived #emit when actor move toward designated target
 @export var dash_dist: float = 200.0
 @export var dash_cd: float = 5.0
 @export var push_strength: float = 100.0
+@export var coyote_time: float = 0.15  # NEW: Grace period after leaving ground
+@export var air_control_multiplier: float = 0.8  # NEW: Air acceleration modifier
+@export var jump_buffer_time: float = 0.1  # Can press jump this early
 
 @export_group("Combat")
 @export var atk_cd: float = 1.0
@@ -91,9 +94,9 @@ signal actor_arrived #emit when actor move toward designated target
 @export var fireball_bounciness: float = 1.0
 
 @export_group("Jump Physics")
-@export var jump_height: float = 64.0  # How high (in pixels) you jump. (~2 tiles)
+@export var jump_height: float = 120.0  # How high (in pixels) you jump. (~2 tiles)
 @export var jump_time_to_peak: float = 0.5 # Seconds to reach top. Higher = Floatier.
-@export var jump_time_to_descent: float = 0.5 # Seconds to fall back down.
+@export var jump_time_to_descent: float = 0.55 # Seconds to fall back down.
 #endregion
 
 #region Internal Variables
@@ -104,6 +107,8 @@ var can_move: bool = true
 var jump_velocity: float
 var jump_gravity: float
 var fall_gravity: float
+var coyote_timer: float = 0.0
+var jump_buffer_timer: float = 0.0
 #endregion
 
 # ==============================================================================
@@ -112,13 +117,16 @@ var fall_gravity: float
 
 func _ready() -> void:
 	# Stats Init
-	max_health = 100; health = 100
-	max_mana = 50; mana = 50
-	movement_speed = 120
+	#max_health = 100; health = 100
+	#max_mana = 50; mana = 50
+	
 	# MATH: Calculates exact gravity needed to hit that height in that time
 	jump_velocity = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 	jump_gravity = (2.0 * jump_height) / pow(jump_time_to_peak, 2)
 	fall_gravity = (2.0 * jump_height) / pow(jump_time_to_descent, 2)
+	
+	# FIX: Tell BaseCharacter to use our calculated jump velocity
+	jump_speed = abs(jump_velocity)  # BaseCharacter expects positive value
 	
 	super._ready() # Initialize BaseCharacter
 	
@@ -142,18 +150,20 @@ func _ready() -> void:
 	else: equip_weapon(WeaponType.NORMAL)
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta) # Handles base animation playback
+	super._physics_process(delta) # Animation, FSM, etc.
 	
 	_handle_invulnerability(delta)
 	_handle_rigid_push()
-	_update_movement(delta)
-	
-	# Enforce visual state (BaseCharacter might try to show the wrong sprite)
+	_update_coyote_time(delta)
+	_update_jump_buffer(delta)
+
+	# Enforce visual state
 	if current_buff_state == BuffState.BURROW or current_buff_state == BuffState.INVISIBLE:
 		_enforce_invisibility_visuals()
 		
 	if debuglabel:
 		debuglabel.text = str(fsm.current_state.name)
+
 
 # ==============================================================================
 # MOVEMENT & PHYSICS
@@ -164,9 +174,8 @@ func _update_movement(delta: float) -> void:
 		velocity = Vector2.ZERO
 		return
 	
-	# Use "Jump Gravity" when going up, "Fall Gravity" when going down
+	# Custom gravity system
 	var current_gravity = jump_gravity if velocity.y < 0 else fall_gravity
-	
 	velocity.y += current_gravity * delta
 	
 	# Clamp fall speed
@@ -178,8 +187,6 @@ func _update_movement(delta: float) -> void:
 	# Dashing Override
 	if is_dashing: 
 		velocity.y = 0
-	
-	move_and_slide()
 
 func jump() -> void:
 	super.jump() # BaseCharacter logic
@@ -189,6 +196,24 @@ func jump() -> void:
 		exit_current_buff() # This triggers the pop-up logic in _set_burrow_state(false)
 	else:
 		jump_fx_factory.create()
+		
+func _update_jump_buffer(delta: float) -> void:
+	if jump_buffer_timer > 0:
+		jump_buffer_timer -= delta
+	
+	if Input.is_action_just_pressed("jump"):
+		jump_buffer_timer = jump_buffer_time
+		
+func _update_coyote_time(delta: float) -> void:
+	"""Updates coyote time - grace period for jumping after leaving ground"""
+	if is_on_floor():
+		coyote_timer = coyote_time
+	else:
+		coyote_timer = max(0, coyote_timer - delta)
+
+func has_coyote_time() -> bool:
+	"""Returns true if player can still jump (on ground OR within coyote time)"""
+	return is_on_floor() or coyote_timer > 0
 
 func wall_jump() -> void:
 	turn_around()
@@ -217,8 +242,12 @@ func _handle_rigid_push() -> void:
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		var body = c.get_collider()
+		# Check if it is a RigidBody
 		if body is RigidBody2D:
-			body.apply_central_impulse(-c.get_normal() * push_strength)
+			# FIX: Only push if the object is light enough!
+			# If mass is greater than 50kg, treat it as unpushable.
+			if body.mass < 50.0:
+				body.apply_central_impulse(-c.get_normal() * push_strength)
 
 # ==============================================================================
 # COMBAT & WEAPONS
@@ -226,10 +255,18 @@ func _handle_rigid_push() -> void:
 
 func collect_blade() -> void:
 	has_blade = true;
+	
+	# HOOK HERE: Trigger tutorial on first weapon pickup
+	GameProgressManager.trigger_event("WEAPON")
+	
 	swap_weapon()
 
 func collect_wand() -> void:
 	has_wand = true
+	
+	# HOOK HERE: Trigger tutorial on first weapon pickup
+	GameProgressManager.trigger_event("WEAPON")
+	
 	swap_weapon()
 	
 func can_attack() -> bool:
@@ -253,6 +290,8 @@ func throw_blade() -> void:
 	# Remove Blade Logic
 	has_blade = false
 	equip_weapon(WeaponType.NORMAL)
+
+func can_throw() -> bool: return has_blade && current_weapon == WeaponType.BLADE
 
 func swap_weapon() -> void:
 	# Block swapping during special states
@@ -547,7 +586,11 @@ func _update_visual_state(forced_main: AnimatedSprite2D = null, force_silhouette
 			set_animated_sprite(active_main) # Inform BaseCharacter
 			active_main.show()
 			active_main.modulate.a = 1.0
-			
+		if active_silhouette:
+			active_silhouette.show()
+			active_silhouette.modulate.a = 0.5
+			# Update list for BaseCharacter to not mess up
+			extra_sprites = [active_silhouette]	
 	_update_elemental_palette()
 
 func _enforce_invisibility_visuals() -> void:
@@ -704,6 +747,7 @@ func add_new_skill(skill: Skill, stack_amount: int = 1) -> void:
 	
 	# Add to SkillTreeManager
 	SkillTreeManager.collect_skill(skill.name, stack_amount)
+	skill_collected.emit(skill, stack_amount)
 
 # ==============================================================================
 # CUTSCENE LOGIC
@@ -756,3 +800,4 @@ func _apply_gravity_only(delta: float) -> void:
 	var current_gravity = jump_gravity if velocity.y < 0 else fall_gravity
 	velocity.y += current_gravity * delta
 	velocity.y = clamp(velocity.y, -INF, max_fall_speed)
+

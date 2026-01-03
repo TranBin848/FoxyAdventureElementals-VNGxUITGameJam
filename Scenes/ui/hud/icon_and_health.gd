@@ -49,7 +49,7 @@ func _update_health() -> void:
 	# update UI
 	healthbar.value = hp_percent
 
-	health_label.text = str(player.health) + "/" + str(player.max_health)
+	health_label.text = str(max(player.health,0)) + "/" + str(player.max_health)
 
 
 func get_health_percentage() -> float:
