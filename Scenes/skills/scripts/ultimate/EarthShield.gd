@@ -1,7 +1,7 @@
 extends Skill
-class_name StunShot
+class_name EarthShield
 
 func _init():
-	name = "Stun Shot"
+	name = "Earth Shield"
 	elemental_type = ElementsEnum.Elements.METAL
-	type = "single_shot"
+	type = "ultimate"

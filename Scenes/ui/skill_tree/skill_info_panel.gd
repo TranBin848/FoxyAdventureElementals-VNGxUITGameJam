@@ -12,30 +12,36 @@ signal error_occurred(message: String)
 @onready var stat_label: RichTextLabel = $Stat
 @onready var stack_label: Label = $Stack
 @onready var upgrade_btn: Button = $UpgradeButton
+@onready var upgrade_label: Label = $StackToUpgrade
 @onready var unlock_btn: Button = $UnlockButton
+@onready var unlock_label: Label = $StackToUnlock
 @onready var equip_button: Button = $EquipButton
 @onready var video_player: VideoStreamPlayer = $VideoStreamPlayer
-@onready var close_button: Button = $CloseButton  # ✅ Make sure this exists in scene
+@onready var close_button: Button = $CloseButton
 
-var current_button: SkillButtonNode
+# Changed type to 'Node' to accept both SkillButtonNode and UltimateSkillButton
+var current_button: Node 
 var current_skill_name: String = ""
 
 func _ready() -> void:
-	SkillTreeManager.skill_unlocked.connect(_on_skill_unlocked)
-	SkillTreeManager.skill_leveled_up.connect(_on_skill_leveled_up)
-	SkillTreeManager.skill_equipped.connect(_on_skill_equipped)
-	SkillTreeManager.skill_unequipped.connect(_on_skill_unequipped)
-	SkillTreeManager.stack_changed.connect(_on_stack_changed)  # ✅ Singular
+	if SkillTreeManager:
+		SkillTreeManager.skill_unlocked.connect(_on_skill_unlocked)
+		SkillTreeManager.skill_leveled_up.connect(_on_skill_leveled_up)
+		SkillTreeManager.skill_equipped.connect(_on_skill_equipped)
+		SkillTreeManager.skill_unequipped.connect(_on_skill_unequipped)
+		SkillTreeManager.stack_changed.connect(_on_stack_changed)
 	
-	# ✅ Connect close button if it exists
 	if close_button:
 		close_button.pressed.connect(_on_close_button_pressed)
 
-func show_skill(btn: SkillButtonNode):
-	var sk = btn.skill
-	if sk == null:
-		push_error("SkillInfoPanel: Received button with null skill!")
+# Changed argument type to 'Node' to prevent crashes with Ultimate buttons
+func show_skill(btn: Node):
+	# Check if node has 'skill' property
+	if not "skill" in btn or btn.skill == null:
+		push_error("SkillInfoPanel: Received button with no skill!")
 		return
+	
+	var sk = btn.skill
 	
 	visible = true
 	current_button = btn
@@ -43,15 +49,22 @@ func show_skill(btn: SkillButtonNode):
 	
 	print("📊 Showing skill: %s" % sk.name)
 	
-	# Query state from SkillTreeManager
 	title_label.text = sk.name
-	level_label.text = "Level: %d" % SkillTreeManager.get_level(sk.name)
-	stack_label.text = "Stack: %d" % SkillTreeManager.get_stacks(sk.name)
+	
+	# Only show level/stack info if NOT ultimate (optional, but cleaner)
+	if sk.get("type") == "ultimate":
+		level_label.text = "Level: ???"
+		stack_label.text = ""
+	else:
+		level_label.text = "Level: %d" % SkillTreeManager.get_level(sk.name)
+		stack_label.text = "Stack: %d" % SkillTreeManager.get_stacks(sk.name)
+	
 	stat_label.text = get_stat_text(sk)
 	
 	_update_buttons()
 	
-	if btn.video_stream:
+	# Safe check for video_stream property
+	if "video_stream" in btn and btn.video_stream:
 		video_player.stream = btn.video_stream
 		video_player.play()
 	else:
@@ -59,6 +72,11 @@ func show_skill(btn: SkillButtonNode):
 		video_player.stop()
 
 func get_stat_text(sk: Skill) -> String:
+	# --- NEW LOGIC: ULTIMATE DESCRIPTION ---
+	if sk.get("type") == "ultimate":
+		return "[center][i][color=#a0a0a0]\n\nThe stars have not yet aligned...\nThis power remains dormant for now.[/color][/i][/center]"
+	# ---------------------------------------
+
 	var lines: Array[String] = []
 	
 	var color_map := {
@@ -75,7 +93,7 @@ func get_stat_text(sk: Skill) -> String:
 
 	var elem_name = ElementsEnum.Elements.keys()[sk.elemental_type]
 	var elemental_type_text := "%s%s[/color]" % [elem_color, elem_name]
-	lines.append("Stats:                         " + elemental_type_text)
+	lines.append("Stats:                          " + elemental_type_text)
 	lines.append("Damage: %d" % sk.damage)
 	lines.append("Cooldown: %.2f s" % sk.cooldown)
 	lines.append("Mana: %d" % sk.mana)
@@ -96,6 +114,23 @@ func get_stat_text(sk: Skill) -> String:
 func _update_buttons():
 	if current_button == null:
 		return
+	
+	# --- NEW LOGIC: HIDE BUTTONS FOR ULTIMATE ---
+	if current_button.skill.get("type") == "ultimate":
+		unlock_btn.visible = false
+		unlock_label.visible = false
+		upgrade_btn.visible = false
+		upgrade_label.visible = false
+		equip_button.visible = false
+		return
+	else:
+		# Make sure to show them again for normal skills
+		unlock_btn.visible = true
+		unlock_label.visible = true
+		upgrade_btn.visible = true
+		upgrade_label.visible = true
+		equip_button.visible = true
+	# --------------------------------------------
 	
 	var skill_name = current_skill_name
 	var is_unlocked = SkillTreeManager.is_unlocked(skill_name)

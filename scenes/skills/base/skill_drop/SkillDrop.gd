@@ -66,7 +66,7 @@ func _collect_item(player: Player) -> void:
 	if not skill_resource:
 		queue_free()
 		return
-	
+		
 	# Add skill through Player with stack amount
 	player.add_new_skill(skill_resource, stack_amount)
 	
