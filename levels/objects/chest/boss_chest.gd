@@ -1,58 +1,44 @@
 extends RigidBody2D
 
-#@export var coin_reward: int = 5
+@export var wand_pickup_scene: PackedScene 
 
-#@onready var coin = preload("res://levels/objects/coin/coin.tscn")
-
-var is_opened: bool = false
-var player_in_area: bool = false
+# 1. New Export to select level in Editor
+# 0 = Normal, 1 = Sorrow, 2 = Soul (Matches Player Enum)
+@export_enum("Normal", "Sorrow", "Soul") var drop_wand_level: int = 1 
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var interactive_area: InteractiveArea2D = $InteractiveArea2D 
+
+var is_opened: bool = false
 
 func _ready():
 	animated_sprite.play("close")
-
-func _unhandled_input(event):
-	if event.is_action_pressed("interact"):
-		attempt_open_chest()
-		get_viewport().set_input_as_handled()
-
-func _on_interaction_available():
-	player_in_area = true
-	set_process_unhandled_input(true)
-
-func _on_interaction_unavailable():
-	player_in_area = false
-	set_process_unhandled_input(false)
+	interactive_area.interacted.connect(attempt_open_chest)
 
 func attempt_open_chest():
-	if is_opened:
-		return
+	if is_opened: return
 	
-	if not player_in_area:
-		return
-	
-	#if GameManager.inventory_system.has_key():
 	open_chest()
 
 func open_chest():
-	if is_opened:
-		return
+	if is_opened: return
 	is_opened = true
-	GameManager.inventory_system.use_key()
+	
 	animated_sprite.play("open")
-	AudioManager.play_sound("chest_open")
+	if AudioManager: AudioManager.play_sound("chest_open")
+	
+	interactive_area.queue_free() 
+	
 	await animated_sprite.animation_finished
-	#
-	#for n in coin_reward:
-		#var coin_instance = coin.instantiate()
-		#add_child(coin_instance)
-		#
-		#coin_instance.global_position = global_position + Vector2(0, -20)
-		#coin_instance._gravity = 980
-		#coin_instance.velocity = Vector2(
-			#randf_range(-50, 50),
-			#randf_range(-150, -80)
-		#)
-		#
-		#await get_tree().create_timer(0.05).timeout
+	spawn_wand()
+
+func spawn_wand():
+	if wand_pickup_scene == null: return
+
+	var wand_instance = wand_pickup_scene.instantiate()
+	get_tree().current_scene.add_child(wand_instance)
+	wand_instance.global_position = global_position
+	
+	# 2. Pass the selected level to the wand
+	if "wand_level" in wand_instance:
+		wand_instance.wand_level = drop_wand_level

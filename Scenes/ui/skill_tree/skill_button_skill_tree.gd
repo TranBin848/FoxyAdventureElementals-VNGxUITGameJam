@@ -105,7 +105,7 @@ func refresh_visual() -> void:
 	level_label.text = "Lv.%d/%d" % [level, max_level]
 	stack_label.text = str(stacks)
 	
-	disabled = not is_unlocked and stacks == 0
+	#disabled = not is_unlocked and stacks == 0
 	panel.show_behind_parent = is_unlocked
 	tooltip_text = skill.name
 	
