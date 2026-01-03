@@ -222,7 +222,7 @@ func _exit() -> void:
 	
 	# Bật lại CanvasLayer UI
 	if canvas_layer == null:
-		canvas_layer = obj.get_tree().root.find_child("GameCanvasLayeaad", true, false) as CanvasLayer
+		canvas_layer = obj.get_tree().root.find_child("GUI", true, false) as CanvasLayer
 	if canvas_layer:
 		print("Cutscene5: Showing CanvasLayer again")
 		canvas_layer.visible = true

@@ -51,7 +51,7 @@ func _enter() -> void:
 	
 	# Tìm và ẩn CanvasLayer UI
 	if canvas_layer == null:
-		canvas_layer = obj.get_tree().root.find_child("GameCanvasLayer", true, false) as CanvasLayer
+		canvas_layer = obj.get_tree().root.find_child("GUI", true, false) as CanvasLayer
 		if canvas_layer:
 			print("Cutscene1: Found CanvasLayer, hiding it")
 			canvas_layer.visible = false
