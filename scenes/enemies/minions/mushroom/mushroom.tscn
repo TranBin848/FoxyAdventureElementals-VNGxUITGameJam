@@ -98,6 +98,7 @@ elements_debuff = Dictionary[int, PackedScene]({
 shader_path = "uid://doovon2v0i5dx"
 sight = 100.0
 movement_range = 100.0
+movement_speed = 75.0
 max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
@@ -132,7 +133,7 @@ frame_progress = 1.0
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(12, 10)
-target_position = Vector2(12, 0)
+target_position = Vector2(3, 0)
 
 [node name="DownRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(13, 0)

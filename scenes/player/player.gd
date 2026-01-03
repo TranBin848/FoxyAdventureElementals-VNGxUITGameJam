@@ -164,6 +164,10 @@ func _physics_process(delta: float) -> void:
 # ==============================================================================
 # MOVEMENT & PHYSICS
 # ==============================================================================
+func set_speed_multiplier(multiplier: float) -> void: 
+	speed_multiplier = multiplier
+func set_jump_multiplier(multiplier: float) -> void: 
+	jump_multiplier = multiplier
 
 func _update_movement(delta: float) -> void:
 	if not can_move: 
@@ -302,8 +306,6 @@ func equip_weapon(type: WeaponType) -> void:
 		_: weapon_swapped.emit("normal")
 		
 	_update_visual_state()
-
-func set_speed_multiplier(val: float) -> void: speed_multiplier = val
 
 # ==============================================================================
 # SKILLS & SPELLS
