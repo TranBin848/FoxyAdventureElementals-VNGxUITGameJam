@@ -237,8 +237,12 @@ func _handle_rigid_push() -> void:
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		var body = c.get_collider()
+		# Check if it is a RigidBody
 		if body is RigidBody2D:
-			body.apply_central_impulse(-c.get_normal() * push_strength)
+			# FIX: Only push if the object is light enough!
+			# If mass is greater than 50kg, treat it as unpushable.
+			if body.mass < 50.0:
+				body.apply_central_impulse(-c.get_normal() * push_strength)
 
 # ==============================================================================
 # COMBAT & WEAPONS
