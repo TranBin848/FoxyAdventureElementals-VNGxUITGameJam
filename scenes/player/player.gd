@@ -55,7 +55,7 @@ var current_weapon: WeaponType = WeaponType.NORMAL
 
 # Inventory Flags
 var has_blade: bool = false
-var has_wand: bool = true # Default based on your old code
+var has_wand: bool = false # Default based on your old code
 
 # Combat State
 var is_invulnerable: bool = false
@@ -112,8 +112,8 @@ var jump_buffer_timer: float = 0.0
 
 func _ready() -> void:
 	# Stats Init
-	max_health = 100; health = 100
-	max_mana = 50; mana = 50
+	#max_health = 100; health = 100
+	#max_mana = 50; mana = 50
 	
 	# MATH: Calculates exact gravity needed to hit that height in that time
 	jump_velocity = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
@@ -237,8 +237,12 @@ func _handle_rigid_push() -> void:
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		var body = c.get_collider()
+		# Check if it is a RigidBody
 		if body is RigidBody2D:
-			body.apply_central_impulse(-c.get_normal() * push_strength)
+			# FIX: Only push if the object is light enough!
+			# If mass is greater than 50kg, treat it as unpushable.
+			if body.mass < 50.0:
+				body.apply_central_impulse(-c.get_normal() * push_strength)
 
 # ==============================================================================
 # COMBAT & WEAPONS
@@ -246,10 +250,18 @@ func _handle_rigid_push() -> void:
 
 func collect_blade() -> void:
 	has_blade = true;
+	
+	# HOOK HERE: Trigger tutorial on first weapon pickup
+	GameProgressManager.trigger_event("WEAPON")
+	
 	swap_weapon()
 
 func collect_wand() -> void:
 	has_wand = true
+	
+	# HOOK HERE: Trigger tutorial on first weapon pickup
+	GameProgressManager.trigger_event("WEAPON")
+	
 	swap_weapon()
 	
 func can_attack() -> bool:

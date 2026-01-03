@@ -1,5 +1,4 @@
-extends EnemyCharacter
+extends StaticBody2D
 
 func _ready() -> void:
-	fsm = FSM.new(self, $States, $States/Idle)
-	super._ready()
+	$AnimatedSprite2D.play("idle")
