@@ -53,8 +53,6 @@ func spawn_enemy() -> bool:
 			(enemy as EnemyCharacter).position.x = position.x + random_distance
 			(enemy as EnemyCharacter).position.y = position.y
 			(enemy as EnemyCharacter).elemental_type = elemental_type
-			if skill_drops != null and skill_drops.size() > 0:
-				(enemy as EnemyCharacter).skill_to_drop = skill_drops[randi_range(0, skill_drops.size() - 1)]
 			(enemy as EnemyCharacter)._ready()
 		health-=1
 		health_changed.emit()

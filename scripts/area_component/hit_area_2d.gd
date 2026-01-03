@@ -30,7 +30,7 @@ func hit(hurt_area):
 		elif player and player.current_weapon == player.WeaponType.WAND:
 			damage = 1
 		else:
-			damage = 5  # Default damage if player not found
+			pass
 		
 		hurt_area.take_damage(hit_dir.normalized(), damage, elemental_type)
 

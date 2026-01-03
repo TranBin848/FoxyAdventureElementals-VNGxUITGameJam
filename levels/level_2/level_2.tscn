@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://docdrr2v8cok6"]
+[gd_scene load_steps=43 format=4 uid="uid://docdrr2v8cok6"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_3/level_3.tres" id="2_s4b5i"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="24_nouef"]
 [ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="25_ppf8r"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="25_t8ul1"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="26_s4b5i"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="27_6fwx2"]
 [ext_resource type="Script" uid="uid://cetul0ws8d05n" path="res://scenes/skills/scripts/earth/Earthquake.gd" id="27_xpuws"]
 [ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="28_6fwx2"]
@@ -84,7 +85,7 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_pqi81"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 855, -1)
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 620, -225)
 }
 point_count = 2
 
@@ -118,7 +119,7 @@ script = ExtResource("1_ppf8r")
 [node name="WorldBoundary" type="Node2D" parent="."]
 
 [node name="RightBorder" type="StaticBody2D" parent="WorldBoundary"]
-position = Vector2(18688, -1670)
+position = Vector2(14466, -1276)
 collision_layer = 512
 collision_mask = 0
 
@@ -126,11 +127,11 @@ collision_mask = 0
 shape = SubResource("WorldBoundaryShape2D_km4sl")
 
 [node name="The Void" type="Area2D" parent="WorldBoundary"]
-position = Vector2(6385, 1095)
+position = Vector2(6060, 1154)
 collision_layer = 0
 collision_mask = 20
 script = ExtResource("38_oaqh1")
-damage = 999999
+damage = 37159
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/The Void"]
@@ -199,27 +200,6 @@ position = Vector2(6447, 992)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Mushroom14" parent="Enemies" instance=ExtResource("22_1h50e")]
-position = Vector2(15035, -1580)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
-elemental_type = 1
-
-[node name="Crab19" parent="Enemies" instance=ExtResource("23_vdtjt")]
-position = Vector2(15479, -1869)
-elemental_type = 1
-
-[node name="Starfish16" parent="Enemies" instance=ExtResource("10_r7wcl")]
-position = Vector2(15708, -1935)
-elemental_type = 1
-
 [node name="Starfish5" parent="Enemies" instance=ExtResource("10_r7wcl")]
 position = Vector2(8193, 241)
 elemental_type = 4
@@ -246,15 +226,6 @@ elemental_type = 4
 
 [node name="Mushroom7" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(8387, 52)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 4
 
 [node name="Crab14" parent="Enemies" instance=ExtResource("23_vdtjt")]
@@ -271,15 +242,6 @@ elemental_type = 4
 
 [node name="Mushroom9" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(8602, -427)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 4
 
 [node name="Pelican2" parent="Enemies" instance=ExtResource("9_qsvqe")]
@@ -312,15 +274,6 @@ elemental_type = 5
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(-301, 468)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 5
 
 [node name="Crab" parent="Enemies" instance=ExtResource("23_vdtjt")]
@@ -337,15 +290,6 @@ elemental_type = 5
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(633, -364)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 5
 
 [node name="Starfish2" parent="Enemies" instance=ExtResource("10_r7wcl")]
@@ -391,15 +335,6 @@ elemental_type = 5
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(448, 757)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 5
 
 [node name="Crab6" parent="Enemies" instance=ExtResource("23_vdtjt")]
@@ -500,15 +435,6 @@ elemental_type = 1
 
 [node name="Mushroom6" parent="Enemies" instance=ExtResource("22_1h50e")]
 position = Vector2(10393, -1036)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 1
 
 [node name="SpearWarrior11" parent="Enemies" instance=ExtResource("27_6fwx2")]
@@ -636,3 +562,48 @@ pivot_offset = Vector2(250, 75)
 tilemap_layers = [NodePath("../../TileMaps/TerrainTileMap")]
 player = NodePath("../../Player")
 metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("26_s4b5i")]
+
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/Quicksand" to="TileMaps/TerrainTileMap/Quicksand" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/Quicksand" to="TileMaps/TerrainTileMap/Quicksand" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59092" to="TileMaps/TerrainTileMap/@Area2D@59092" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59092" to="TileMaps/TerrainTileMap/@Area2D@59092" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59093" to="TileMaps/TerrainTileMap/@Area2D@59093" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59093" to="TileMaps/TerrainTileMap/@Area2D@59093" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59094" to="TileMaps/TerrainTileMap/@Area2D@59094" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59094" to="TileMaps/TerrainTileMap/@Area2D@59094" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59095" to="TileMaps/TerrainTileMap/@Area2D@59095" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59095" to="TileMaps/TerrainTileMap/@Area2D@59095" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59096" to="TileMaps/TerrainTileMap/@Area2D@59096" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59096" to="TileMaps/TerrainTileMap/@Area2D@59096" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59097" to="TileMaps/TerrainTileMap/@Area2D@59097" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59097" to="TileMaps/TerrainTileMap/@Area2D@59097" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59098" to="TileMaps/TerrainTileMap/@Area2D@59098" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59098" to="TileMaps/TerrainTileMap/@Area2D@59098" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59099" to="TileMaps/TerrainTileMap/@Area2D@59099" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59099" to="TileMaps/TerrainTileMap/@Area2D@59099" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59100" to="TileMaps/TerrainTileMap/@Area2D@59100" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59100" to="TileMaps/TerrainTileMap/@Area2D@59100" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59101" to="TileMaps/TerrainTileMap/@Area2D@59101" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59101" to="TileMaps/TerrainTileMap/@Area2D@59101" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59102" to="TileMaps/TerrainTileMap/@Area2D@59102" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59102" to="TileMaps/TerrainTileMap/@Area2D@59102" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59103" to="TileMaps/TerrainTileMap/@Area2D@59103" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59103" to="TileMaps/TerrainTileMap/@Area2D@59103" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59104" to="TileMaps/TerrainTileMap/@Area2D@59104" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59104" to="TileMaps/TerrainTileMap/@Area2D@59104" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59105" to="TileMaps/TerrainTileMap/@Area2D@59105" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59105" to="TileMaps/TerrainTileMap/@Area2D@59105" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59106" to="TileMaps/TerrainTileMap/@Area2D@59106" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59106" to="TileMaps/TerrainTileMap/@Area2D@59106" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59107" to="TileMaps/TerrainTileMap/@Area2D@59107" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59107" to="TileMaps/TerrainTileMap/@Area2D@59107" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59108" to="TileMaps/TerrainTileMap/@Area2D@59108" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59108" to="TileMaps/TerrainTileMap/@Area2D@59108" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59109" to="TileMaps/TerrainTileMap/@Area2D@59109" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59109" to="TileMaps/TerrainTileMap/@Area2D@59109" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@59110" to="TileMaps/TerrainTileMap/@Area2D@59110" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@59110" to="TileMaps/TerrainTileMap/@Area2D@59110" method="_on_body_exited"]

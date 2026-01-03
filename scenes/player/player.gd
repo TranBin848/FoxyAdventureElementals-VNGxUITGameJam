@@ -2,6 +2,7 @@ class_name Player
 extends BaseCharacter
 
 #region Signal Definitions
+signal coin_collected(first_coin_collected: bool)
 signal weapon_swapped(equipped_weapon_type: String)
 signal skill_collected(skill_resource_class)
 #endregion

@@ -1,8 +1,5 @@
 extends Node
 
-@onready var player: CharacterBody2D = null
-var has_killed_player: bool = false
-
 func _enter_tree() -> void:
 	# Handle portal spawning first
 	GameManager.current_stage = self
@@ -10,14 +7,8 @@ func _enter_tree() -> void:
 	GameManager.minimap = find_child("Minimap")
 	
 func _ready() -> void:
-	# Reset the flag when entering/respawning in the level
-	has_killed_player = false
-	
 	if not GameManager.respawn_at_portal():
 		GameManager.respawn_at_checkpoint()
 	if AudioManager:
 		AudioManager.play_music("music_background")
 		AudioManager.play_ambience("ambience_forest")
-	
-	# Get player reference
-	player = get_tree().get_first_node_in_group("player")
