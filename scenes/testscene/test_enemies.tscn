@@ -457,9 +457,9 @@ position = Vector2(415, 45)
 texture = ExtResource("39_mwgaq")
 
 [node name="EvilFoxy" type="AnimatedSprite2D" parent="."]
-position = Vector2(718, 25)
+position = Vector2(652, 44)
 sprite_frames = SubResource("SpriteFrames_1lhn3")
-frame_progress = 0.333935
+frame_progress = 0.681791
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
 position = Vector2(484, 45)
