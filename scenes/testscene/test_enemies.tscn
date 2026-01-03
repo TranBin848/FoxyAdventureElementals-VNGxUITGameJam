@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://qv25yj3rt5ql"]
+[gd_scene load_steps=49 format=4 uid="uid://qv25yj3rt5ql"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_4qlm2"]
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_aq1cd"]
@@ -36,6 +36,10 @@
 [ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="33_dc5j8"]
 [ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="34_2b55n"]
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="35_31pr2"]
+[ext_resource type="Texture2D" uid="uid://b05srxtpilibq" path="res://assets/skills/icon element/Fire_v2.png" id="37_xciwo"]
+[ext_resource type="Texture2D" uid="uid://b3m7niu1ye24m" path="res://assets/skills/icon element/Water_v2.png" id="38_x60jx"]
+[ext_resource type="Texture2D" uid="uid://dcvi82xfb8w5v" path="res://assets/skills/icon element/Earth_v2.png" id="39_mwgaq"]
+[ext_resource type="Texture2D" uid="uid://ch3gxklumk8cv" path="res://assets/skills/icon element/Metal_v2.png" id="40_3stc0"]
 
 [sub_resource type="GDScript" id="GDScript_82uhe"]
 script/source = "extends Node2D
@@ -152,6 +156,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c54he"]
+load_path = "res://.godot/imported/ElementIcon4.png-3ab8c7805f289548a686aaa7b3857592.ctex"
 
 [node name="Stage" type="Node2D"]
 script = SubResource("GDScript_82uhe")
@@ -404,3 +411,23 @@ elemental_type = 4
 [node name="CoconutWarrior10" parent="." instance=ExtResource("35_31pr2")]
 position = Vector2(423, -327)
 elemental_type = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(202, 45)
+texture = SubResource("CompressedTexture2D_c54he")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(274, 45)
+texture = ExtResource("37_xciwo")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(346, 45)
+texture = ExtResource("38_x60jx")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(415, 45)
+texture = ExtResource("39_mwgaq")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(484, 45)
+texture = ExtResource("40_3stc0")
