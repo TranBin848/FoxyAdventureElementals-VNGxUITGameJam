@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm8qbkbykjxrm"
+uid="uid://cun7nbiiq2jmt"
 path="res://.godot/imported/fox_hit_2.png-94f129bc18fe7703c6f745d2da8d0fb3.ctex"
 metadata={
 "vram_texture": false
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

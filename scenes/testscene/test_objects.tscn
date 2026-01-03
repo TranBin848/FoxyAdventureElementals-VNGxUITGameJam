@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://bfc2p71ftmqt3"]
+[gd_scene load_steps=46 format=4 uid="uid://bfc2p71ftmqt3"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_45ksp"]
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_mv08x"]
@@ -33,11 +33,20 @@
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="30_7eyp3"]
 [ext_resource type="PackedScene" uid="uid://bagtndimgpaee" path="res://levels/objects/chest/boss_chest.tscn" id="32_k6a7r"]
 [ext_resource type="PackedScene" uid="uid://yg0w6u1dl0v6" path="res://levels/objects/trampoline/trampoline.tscn" id="33_2c2yo"]
+[ext_resource type="PackedScene" uid="uid://5e7xk2njusm2" path="res://levels/objects/barrel/barrel.tscn" id="34_fhwgh"]
+[ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/hud/minimap.tscn" id="35_im3gq"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="36_v4y5r"]
+[ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="37_ngimm"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="38_sspwi"]
 
 [sub_resource type="GDScript" id="GDScript_7eyp3"]
 script/source = "extends Node2D
 
 @export var background_music: AudioStream = null
+
+func _ready() -> void:
+	GameManager.current_stage = self
+	GameManager.player.collect_blade()
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
@@ -290,8 +299,46 @@ position = Vector2(777, 166)
 position = Vector2(1024, 150)
 
 [node name="BossChest" parent="." instance=ExtResource("32_k6a7r")]
-position = Vector2(103, 74)
+position = Vector2(129, 199)
 mass = 100.0
 
+[node name="Barrel" parent="." instance=ExtResource("34_fhwgh")]
+position = Vector2(245, 231)
+coin_amount = 5
+
 [node name="Trampoline" parent="." instance=ExtResource("33_2c2yo")]
-position = Vector2(245, 251)
+position = Vector2(550, 249)
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Minimap" parent="GUI" node_paths=PackedStringArray("tilemap_layers") instance=ExtResource("35_im3gq")]
+offset_top = -240.0
+offset_bottom = -240.0
+pivot_offset = Vector2(250, 75)
+tilemap_layers = [null]
+metadata/_edit_use_anchors_ = true
+
+[node name="HUD" parent="GUI" instance=ExtResource("36_v4y5r")]
+
+[node name="SkillTreeUI" parent="GUI" instance=ExtResource("37_ngimm")]
+visible = false
+
+[node name="ErrorLabel" type="Label" parent="GUI"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -99.0
+offset_right = 122.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("38_sspwi")
+text = "Enemy Out of Range"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="World/Coin" to="World/Coin" method="_on_body_entered"]
