@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdl75m23fhutt"]
 
 [ext_resource type="Texture2D" uid="uid://ctosdrmqgke0f" path="res://assets/skills/icons_skill/48x48/skill_icons1.png" id="1_s35po"]
-[ext_resource type="Script" uid="uid://dtsmbq3vxwwmy" path="res://Scenes/skills/base/skill_drop/SkillDrop.gd" id="1_wlvaj"]
+[ext_resource type="Script" uid="uid://dtsmbq3vxwwmy" path="res://scenes/skills/base/skill_drop/SkillDrop.gd" id="1_wlvaj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wlvaj"]
 radius = 23.0
