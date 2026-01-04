@@ -195,13 +195,12 @@ func _update_movement(delta: float) -> void:
 		velocity.y = 0
 
 func jump() -> void:
-	super.jump() # BaseCharacter logic
-	
 	if current_buff_state == BuffState.BURROW:
-		# Special Burrow Exit Jump
-		exit_current_buff() # This triggers the pop-up logic in _set_burrow_state(false)
-	else:
-		jump_fx_factory.create()
+		exit_current_buff()
+		return
+		
+	super.jump() # BaseCharacter logic
+	jump_fx_factory.create()
 		
 func _update_jump_buffer(delta: float) -> void:
 	if jump_buffer_timer > 0:
@@ -527,19 +526,61 @@ func _set_fireball_state(active: bool) -> void:
 
 func _set_burrow_state(active: bool) -> void:
 	is_in_burrow_state = active
-	default_collision.set_deferred("disabled", active)
-	burrow_collision.set_deferred("disabled", !active)
-	hurt_area.set_deferred("monitorable", !active)
 	
 	if active:
+		# --- ENTERING BURROW ---
+		default_collision.set_deferred("disabled", true)
+		burrow_collision.set_deferred("disabled", false)
+		hurt_area.set_deferred("monitorable", false)
+		
 		speed_multiplier = 1.25
-		_update_visual_state(null, true) # Force silhouette
+		_update_visual_state(null, true) 
+		surface_fx_factory.create()
 	else:
+		# --- EXITING BURROW ---
 		speed_multiplier = 1.0
-		# Exit Pop Logic
+		
+		# 1. Physics Launch
+		surface_fx_factory.create()
+		velocity.y = -jump_speed 
 		velocity.x = 400.0 * direction
-		jump_fx_factory.create() # Or surface FX
-		jump()
+		
+		# 2. Visuals
+		if animated_sprite: animated_sprite.play("jump")
+
+		# 3. Dynamic Hitbox Restoration
+		# We DO NOT enable default_collision yet. 
+		# We start the watcher to do it when safe.
+		_await_safe_hitbox_expansion()
+		
+func _await_safe_hitbox_expansion() -> void:
+	# 1. Setup the query using your Default Hitbox's shape
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = default_collision.shape
+	# We use the player's global transform so the query follows you as you jump
+	query.transform = global_transform 
+	# Set this to your World/Environment layer (usually Layer 1)
+	# Do not include enemies or hitboxes, or you'll never un-burrow next to them.
+	query.collision_mask = 1 
+	
+	# 2. Loop until empty
+	while true:
+		# Update query position to match player's current position (in case they are moving)
+		query.transform = global_transform
+		
+		# Ask the physics engine for overlaps
+		var results = space_state.intersect_shape(query, 1) # Max 1 result needed to fail
+		
+		if results.is_empty():
+			# SUCCESS: No walls inside our shape. Safe to expand.
+			default_collision.set_deferred("disabled", false)
+			burrow_collision.set_deferred("disabled", true)
+			hurt_area.set_deferred("monitorable", true)
+			break # Exit the loop
+		
+		# If we hit something, wait for the next physics frame and try again
+		await get_tree().physics_frame
 
 func _set_invisible_state(active: bool) -> void:
 	hurt_area.set_deferred("monitorable", !active)

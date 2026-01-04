@@ -35,10 +35,10 @@ func _drop_skill_item():
 		])
 		
 		var skill_drop = SKILL_DROP_SCENE.instantiate() as SkillDrop
-		var skill_name = "%s Lv%d" % [skill.name, skill.level]
-		skill_drop.setup_drop(skill, skill_name, skill.texture_path)
-		skill_drop.global_position = obj.global_position
 		get_tree().current_scene.add_child(skill_drop)
+		var skill_name = "%s Lv%d" % [skill.name, skill.level]
+		skill_drop.setup_drop(skill)
+		skill_drop.global_position = obj.global_position
 		
 		print("✅ [%s] Spawned %s drop at %.1f,%.1f" % [
 			"Level%d" % (SkillDropManager.current_level + 1),
