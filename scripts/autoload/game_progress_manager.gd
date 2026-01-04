@@ -31,6 +31,10 @@ var guide_data: Dictionary = {
 		"title": "New Weapon!",
 		"content": "You collected a weapon! Press 'Tab' (or your swap button) to switch between weapons.",
 		"video": "res://assets/videos/tutorial_weapon_swap.ogv"
+	},
+	"CUTLASS": {
+		"title": "Cutlass",
+		"content": "Bạn vừa nhặt được một thanh Cutlass. Thế giới ngoài kia có thể nguy hiểm lắm nên hãy cầm theo để phòng thân nhé.",
 	}
 }
 

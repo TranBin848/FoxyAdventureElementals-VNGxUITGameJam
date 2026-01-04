@@ -192,8 +192,6 @@ script = ExtResource("22_1gu4w")
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("22_3ufwa")
-despawn_time = null
-bounce_back_velocity = null
 
 [node name="DebuffPlaceHolder" type="Node2D" parent="."]
 position = Vector2(-2, 26)

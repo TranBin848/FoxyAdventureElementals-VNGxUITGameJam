@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://5f5m765bnxg8"]
+[gd_scene load_steps=21 format=4 uid="uid://5f5m765bnxg8"]
 
 [ext_resource type="Script" uid="uid://clqwsttic13aa" path="res://levels/level_0/level_0.gd" id="1_kumio"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="2_pxy07"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bojjm6k4aiyh8" path="res://assets/terrain_plus/background3.png" id="4_hk5st"]
 [ext_resource type="Texture2D" uid="uid://ch2rf6wnkg6el" path="res://assets/terrain_plus/background4b.png" id="5_r6d3i"]
 [ext_resource type="Texture2D" uid="uid://bm7glj3finew5" path="res://assets/terrain_plus/background4a.png" id="6_q6r03"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="18_kumio"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="19_kumio"]
 [ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="20_eppev"]
 [ext_resource type="PackedScene" uid="uid://cy3uch5sn63wf" path="res://scenes/objects/water_reflection.tscn" id="23_v3mv3"]
@@ -188,3 +189,8 @@ guide_text = "A, D to move left, right\\nSpace to jump"
 z_index = 199
 position = Vector2(1206, 150)
 guide_text = "Get on the boat and press F to sail"
+
+[node name="BladeCollectable" parent="." instance=ExtResource("18_kumio")]
+position = Vector2(944, 147)
+
+[node name="GUI" type="CanvasLayer" parent="."]
