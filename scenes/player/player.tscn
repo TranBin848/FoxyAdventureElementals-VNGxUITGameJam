@@ -1025,6 +1025,7 @@ visible = false
 player = NodePath("../..")
 
 [node name="debuglabel" type="Label" parent="."]
+visible = false
 offset_left = -25.0
 offset_top = -65.0
 offset_right = 24.0
