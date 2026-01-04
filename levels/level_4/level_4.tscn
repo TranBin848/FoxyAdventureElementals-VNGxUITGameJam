@@ -123,6 +123,7 @@ color = Color(0, 0, 0, 1)
 [node name="FarBG" type="Parallax2D" parent="."]
 z_index = -5
 scroll_scale = Vector2(0.1, 0.1)
+scroll_offset = Vector2(-4331, -33)
 repeat_size = Vector2(1900, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="FarBG"]
