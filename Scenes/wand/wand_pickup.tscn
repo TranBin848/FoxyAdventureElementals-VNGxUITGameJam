@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://t052oro0itet"]
+
+[ext_resource type="Script" uid="uid://bql7ll85j2oy8" path="res://scenes/wand/wand_pickup.gd" id="1_s7waw"]
+[ext_resource type="Texture2D" uid="uid://c5fsvledlxp2b" path="res://assets/foxy/fox_hat_wand/wand.png" id="2_6htyo"]
+[ext_resource type="PackedScene" uid="uid://j5oaxshr3fdy" path="res://levels/objects/trigger/guide_trigger.tscn" id="2_cyorf"]
+[ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="3_cyorf"]
+
+[sub_resource type="Gradient" id="Gradient_6htyo"]
+offsets = PackedFloat32Array(0, 0.348684, 0.835526, 1)
+colors = PackedColorArray(1, 0.969, 0.8, 0, 1, 0.969, 0.8, 0.337, 1, 0.968627, 0.8, 1, 1, 0.843, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cyorf"]
+gradient = SubResource("Gradient_6htyo")
+width = 192
+height = 192
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kds0u"]
+radius = 113.864
+
+[node name="WandPickup" type="Node2D"]
+script = ExtResource("1_s7waw")
+guide_trigger_scene = ExtResource("2_cyorf")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="WandSprite" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("2_6htyo")
+
+[node name="HaloSprite" type="Sprite2D" parent="Visuals"]
+texture = SubResource("GradientTexture2D_cyorf")
+
+[node name="InteractiveArea2D" type="Area2D" parent="."]
+visible = false
+script = ExtResource("3_cyorf")
+metadata/_custom_type_script = "uid://0qvd447gmgon"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+shape = SubResource("CircleShape2D_kds0u")

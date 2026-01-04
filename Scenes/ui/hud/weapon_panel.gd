@@ -4,7 +4,9 @@ class_name WeaponPanel
 @onready var texture_rect: TextureRect = $TextureRect
 
 const TEXTURE_BLADE = preload("res://assets/island/images/blade/blade_icon.png")
-const TEXTURE_WAND = preload("res://assets/foxy/fox_hat_wand/wand.png")
+const TEXTURE_WAND_NORMAL = preload("res://assets/foxy/fox_hat_wand/wand.png")
+const TEXTURE_WAND_SORROW = preload("res://assets/foxy/fox_hat_sorrow_wand/wand.png")
+const TEXTURE_WAND_SOUL = preload("res://assets/foxy/fox_hat_soul_wand/wand.png")
 
 const SLIDE_DURATION: float = 0.25
 const SLIDE_DISTANCE: float = 100.0
@@ -28,7 +30,11 @@ func _on_weapon_swapped(equipped_weapon_type: String):
 		"blade":
 			next_texture = TEXTURE_BLADE
 		"wand":
-			next_texture = TEXTURE_WAND
+			next_texture = TEXTURE_WAND_NORMAL
+		"wand_sorrow":
+			next_texture = TEXTURE_WAND_SORROW
+		"wand_soul":
+			next_texture = TEXTURE_WAND_SOUL
 		"normal":
 			next_texture = null
 		_:

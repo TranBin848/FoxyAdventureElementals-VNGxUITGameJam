@@ -116,11 +116,12 @@ func _start_cutscene_sequence() -> void:
 	
 	obj.set_physics_process(true)
 	
-	# === STEP 8: KẾT THÚC CUTSCENES - TRIGGER BOSS MẤT MÁU ===
-	print("Cutscene4: All cutscenes complete - Emitting signal")
-	if animated_bg:
-		animated_bg.all_cutscenes_finished.emit()
-
+	if is_instance_valid(fsm) and fsm.states.has("cutscene5"):
+		print("Cutscene4: Finished, transitioning to Cutscene5")
+		fsm.change_state(fsm.states.cutscene5)
+	else:
+		print("ERROR: Cannot transition to cutscene5!")
+	
 func _move_boss_to_position() -> void:
 	if not boss_pos:
 		print("Warning: BossPosCutscene4 not found!")
@@ -175,7 +176,7 @@ func _show_element_icons() -> void:
 	var sprite = ELEMENT_SPRITE_SCENE.instantiate()
 	
 	# Set element và load texture
-	if not sprite.set_element("metal"):
+	if not sprite.set_element("water"):
 		print("Warning: Failed to load metal element icon")
 		sprite.queue_free()
 		return
@@ -210,21 +211,9 @@ func _exit() -> void:
 	obj.is_stunned = false
 	obj.is_movable = true
 	obj.set_physics_process(true)
-	is_boss_locked = false
 	
 	# Re-enable player input
 	if player:
 		player.set_physics_process(true)
 	
-	# Tắt boss camera
-	if boss_camera:
-		boss_camera.enabled = false
-	
-	# Bật lại CanvasLayer UI
-	if canvas_layer == null:
-		canvas_layer = obj.get_tree().root.find_child("CanvasLayer", true, false) as CanvasLayer
-	if canvas_layer:
-		print("Cutscene4: Showing CanvasLayer again")
-		canvas_layer.visible = true
-	
-	print("Cutscene4: Exit")
+	print("Cutscene3: Exit")

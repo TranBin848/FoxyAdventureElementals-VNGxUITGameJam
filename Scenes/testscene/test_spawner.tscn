@@ -283,14 +283,4 @@ position = Vector2(516, 235)
 
 [node name="Mushroom" parent="." instance=ExtResource("31_yross")]
 position = Vector2(691, 239)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
 max_health = 100
-max_mana = 1000
-elemental_type = 0
