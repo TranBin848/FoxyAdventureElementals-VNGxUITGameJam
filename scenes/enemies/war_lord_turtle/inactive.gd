@@ -4,8 +4,6 @@ var activated := false
 
 func _enter() -> void:
 	obj.change_animation("inactive")
-	obj.elemental_type = obj.phase_order[obj.current_phase_index]
-	obj.apply_element()
 	activated = false
 
 
@@ -24,3 +22,7 @@ func _update(delta: float) -> void:
 		$"../../Particles".show()
 		obj.start_fight()
 		change_state(fsm.states.idle)
+
+func _exit() -> void:
+	obj.update_phase_index()
+	obj.change_phase()

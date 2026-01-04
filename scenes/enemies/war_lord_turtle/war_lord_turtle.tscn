@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://d0ig8xrtjp2v1"]
+[gd_scene load_steps=82 format=3 uid="uid://d0ig8xrtjp2v1"]
 
 [ext_resource type="Script" uid="uid://ckyw4uljyk87h" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.gd" id="1_ognfm"]
 [ext_resource type="Texture2D" uid="uid://b5kffli05vjsc" path="res://assets/war_lord/war_lord_turtle19.png" id="2_e3bfs"]
@@ -76,6 +76,7 @@
 [ext_resource type="Script" uid="uid://crhlo3of68gvb" path="res://scenes/enemies/war_lord_turtle/dead.gd" id="37_3ub61"]
 [ext_resource type="Texture2D" uid="uid://tinptqnegyd7" path="res://assets/war_lord_bullet/target_tile.png" id="44_f8pc6"]
 [ext_resource type="PackedScene" uid="uid://d0gxe3bh60m7y" path="res://scenes/enemies/war_lord_turtle/power_particles.tscn" id="54_4lnpy"]
+[ext_resource type="PackedScene" uid="uid://d0jkkqjvv3603" path="res://scenes/ui/boss_healthbar.tscn" id="76_evh1h"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ayec0"]
 animations = [{
@@ -404,7 +405,9 @@ radius = 36.0555
 radius = 31.0161
 
 [node name="WarLordTurtle" type="CharacterBody2D"]
+collision_layer = 8
 script = ExtResource("1_ognfm")
+phase_order = Array[int]([2, 3, 4])
 shader_path = "uid://doovon2v0i5dx"
 sight = 300.0
 metadata/_custom_type_script = "uid://s4xx82espxdt"
@@ -533,6 +536,7 @@ text = "debug"
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Control" type="MarginContainer" parent="UI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -547,6 +551,9 @@ custom_minimum_size = Vector2(500, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 value = 100.0
+
+[node name="BossHealthbar" parent="UI" node_paths=PackedStringArray("boss_node") instance=ExtResource("76_evh1h")]
+boss_node = NodePath("../..")
 
 [node name="RocketTargets" type="Node2D" parent="."]
 visible = false

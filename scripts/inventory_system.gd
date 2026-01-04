@@ -16,7 +16,7 @@ func add_coin(amount: int) -> void:
 	coins += amount
 	
 	# HOOK HERE
-	GameProgressManager.trigger_event("COIN")
+	#GameProgressManager.trigger_event("COIN")
 	
 	coin_changed.emit(coins)
 	item_collected.emit("coin", amount)
@@ -26,7 +26,7 @@ func add_key(_amount: int = 1) -> void:
 	keys += _amount
 	
 	# HOOK HERE
-	GameProgressManager.trigger_event("KEY")
+	#GameProgressManager.trigger_event("KEY")
 	
 	item_collected.emit("key", _amount)
 	print("Collected ", _amount, " keys. Total: ", keys)

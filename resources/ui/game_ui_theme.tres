@@ -89,6 +89,8 @@ texture_margin_bottom = 6.0
 
 [resource]
 default_font = ExtResource("5_j2ptf")
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("3_swjfl")
 DarkWoodPanel/base_type = &"PanelContainer"
 DarkWoodPanel/styles/panel = SubResource("StyleBoxTexture_yxdl1")
 HBoxContainer/constants/separation = 4
