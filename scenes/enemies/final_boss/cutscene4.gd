@@ -26,6 +26,8 @@ var canvas_layer: CanvasLayer = null  # CanvasLayer UI cần bật lại
 func _enter() -> void:
 	print("=== State: Cutscene4 Enter ===")
 	
+	obj.change_animation("idle")
+	
 	# Kill tất cả tweens cũ
 	var all_tweens = obj.get_tree().get_processed_tweens()
 	print("Cutscene4: Killing ", all_tweens.size(), " active tweens")
