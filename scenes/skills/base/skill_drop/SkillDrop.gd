@@ -97,14 +97,6 @@ func _play_collect_effect() -> void:
 	
 	tween.tween_callback(queue_free)
 
-func _on_detection_player_area_2d_body_entered(body: Node2D):
-	if body is Player and skill_resource.type != "ultimate":
-		target_player = body as Player
-		is_attracted = true
-		if float_tween and float_tween.is_valid():
-			float_tween.stop()
-		print("🎯 %s attracted to player!" % skill_name)
-
 func _on_detection_player_area_2d_body_exited(body: Node2D):
 	if body is Player and body == target_player:
 		target_player = null

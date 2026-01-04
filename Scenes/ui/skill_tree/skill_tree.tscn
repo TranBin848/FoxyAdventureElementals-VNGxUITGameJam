@@ -29,9 +29,9 @@
 [ext_resource type="VideoStream" uid="uid://bxm3jygx8pmfj" path="res://assets/skills/water/WaterSpike.ogv" id="16_a6do2"]
 [ext_resource type="Resource" uid="uid://bh7ca4qndbgby" path="res://scenes/skills/scripts/earth/Burrow.tres" id="16_xea02"]
 [ext_resource type="Resource" uid="uid://cc6qdlelt05ae" path="res://scenes/skills/scripts/earth/CometRain.tres" id="17_43v2m"]
+[ext_resource type="VideoStream" uid="uid://f7fhar0umvo3" path="res://assets/skills/metal/Stunshot.ogv" id="18_n402r"]
 [ext_resource type="Resource" uid="uid://b2417g2au2g6l" path="res://scenes/skills/scripts/ultimate/EarthShield.tres" id="21_m5q67"]
 [ext_resource type="Resource" uid="uid://ctl3eu0an05tj" path="res://scenes/skills/scripts/ultimate/MetalUltimate.tres" id="22_eu7kn"]
-[ext_resource type="VideoStream" uid="uid://f7fhar0umvo3" path="res://assets/skills/metal/Stunshot.ogv" id="18_n402r"]
 [ext_resource type="VideoStream" uid="uid://dw0sl8ytef4kk" path="res://assets/skills/metal/thousand_swords.ogv" id="23_n402r"]
 [ext_resource type="VideoStream" uid="uid://s4o5ko03tp5t" path="res://assets/skills/metal/thunderbolt.ogv" id="24_k1hmm"]
 [ext_resource type="VideoStream" uid="uid://hf03fhkggdew" path="res://assets/skills/earth/Earthquake.ogv" id="24_n402r"]
@@ -306,24 +306,6 @@ scale = Vector2(0.75, 0.75)
 skill = ExtResource("15_lqd2e")
 video_stream = ExtResource("9_p7tb3")
 
-[node name="Burrow" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/EarthShield/Earthqua" instance=ExtResource("2_5qiaq")]
-layout_mode = 0
-offset_left = 67.9999
-offset_top = -113.333
-offset_right = 108.0
-offset_bottom = -73.3333
-scale = Vector2(1, 1)
-skill = ExtResource("16_xea02")
-video_stream = ExtResource("11_a6do2")
-
-[node name="CometRain" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/EarthShield/Earthqua" instance=ExtResource("2_5qiaq")]
-layout_mode = 0
-offset_left = 128.0
-offset_right = 168.0
-scale = Vector2(1, 1)
-skill = ExtResource("17_43v2m")
-video_stream = ExtResource("14_h8p7b")
-
 [node name="MetalUltimate" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
 layout_mode = 0
 offset_left = 668.0
@@ -428,50 +410,20 @@ scale = Vector2(1, 1)
 skill = ExtResource("17_43v2m")
 video_stream = ExtResource("27_481k6")
 
-[node name="IconElement" type="Control" parent="SubViewportContainer/SubViewport"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 640.0
-offset_top = 359.0
-offset_right = 680.0
-offset_bottom = 399.0
-
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/IconElement"]
+[node name="SubViewportContainer_SubViewport_SkillTreeButtonGroup_EarthShield_Earthqua#Burrow" parent="." instance=ExtResource("2_5qiaq")]
 layout_mode = 0
-offset_left = -120.0
-offset_top = -40.0
-offset_right = -56.0
-offset_bottom = 24.0
-texture = ExtResource("3_vx3gc")
+offset_left = 67.9999
+offset_top = -113.333
+offset_right = 108.0
+offset_bottom = -73.3333
+scale = Vector2(1, 1)
+skill = ExtResource("16_xea02")
+video_stream = ExtResource("11_a6do2")
 
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/IconElement"]
+[node name="SubViewportContainer_SubViewport_SkillTreeButtonGroup_EarthShield_Earthqua#CometRain" parent="." instance=ExtResource("2_5qiaq")]
 layout_mode = 0
-offset_left = -32.0
-offset_top = -112.0
-offset_right = 32.0
-offset_bottom = -48.0
-texture = ExtResource("4_8ws8o")
-
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/IconElement"]
-layout_mode = 0
-offset_left = 56.0
-offset_top = -40.0
-offset_right = 120.0
-offset_bottom = 24.0
-texture = ExtResource("5_yebq3")
-
-[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/IconElement"]
-layout_mode = 0
-offset_left = -88.0
-offset_top = 49.0
-offset_right = -24.0
-offset_bottom = 113.0
-texture = ExtResource("6_svryp")
-
-[node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/IconElement"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 48.0
-offset_right = 88.0
-offset_bottom = 112.0
-texture = ExtResource("7_da0gi")
+offset_left = 128.0
+offset_right = 168.0
+scale = Vector2(1, 1)
+skill = ExtResource("17_43v2m")
+video_stream = ExtResource("14_h8p7b")
