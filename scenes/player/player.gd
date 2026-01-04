@@ -33,6 +33,8 @@ signal skill_collected(skill_resource_class)
 	"normal": $Direction/AnimatedSprite2D,
 	"blade": $Direction/BladeAnimatedSprite2D,
 	"wand": $Direction/WandAnimatedSprite2D,
+	"wand_sorrow": $Direction/SorrowWandAnimatedSprite2D, # NEW
+	"wand_soul": $Direction/SoulWandAnimatedSprite2D,     # NEW
 	"fireball": $Direction/FireballSprite2D,
 }
 
@@ -53,6 +55,9 @@ var buff_end_callbacks: Array[Callable] = []
 
 enum WeaponType { NORMAL, BLADE, WAND }
 var current_weapon: WeaponType = WeaponType.NORMAL
+# DEFINING THE LEVELS
+enum WandLevel { NORMAL, SORROW, SOUL }
+var current_wand_level: WandLevel = WandLevel.NORMAL
 
 # Inventory Flags
 var has_blade: bool = false
@@ -314,12 +319,29 @@ func swap_weapon() -> void:
 			if has_blade: equip_weapon(WeaponType.BLADE)
 			else: equip_weapon(WeaponType.NORMAL)
 
+func upgrade_wand_to(level: WandLevel) -> void:
+	has_wand = true # Ensure they own the weapon type
+	current_wand_level = level
+	
+	# Show notification
+	var level_name = "Sorrow" if level == WandLevel.SORROW else "Soul"
+	GameProgressManager.trigger_event("WEAPON_UPGRADE_" + level_name.to_upper())
+	
+	# Refresh visuals if holding the wand
+	if current_weapon == WeaponType.WAND:
+		equip_weapon(WeaponType.WAND)
+
 func equip_weapon(type: WeaponType) -> void:
 	current_weapon = type
 	
 	match type:
 		WeaponType.BLADE: weapon_swapped.emit("blade")
-		WeaponType.WAND: weapon_swapped.emit("wand")
+		WeaponType.WAND:
+			# EMIT DIFFERENT SIGNALS BASED ON LEVEL
+			match current_wand_level:
+				WandLevel.NORMAL: weapon_swapped.emit("wand")
+				WandLevel.SORROW: weapon_swapped.emit("wand_sorrow")
+				WandLevel.SOUL:   weapon_swapped.emit("wand_soul")
 		_: weapon_swapped.emit("normal")
 		
 	_update_visual_state()
@@ -567,8 +589,17 @@ func _update_visual_state(forced_main: AnimatedSprite2D = null, force_silhouette
 			active_main = sprites.blade
 			active_silhouette = silhouettes.blade
 		WeaponType.WAND:
-			active_main = sprites.wand
-			active_silhouette = silhouettes.wand
+			# SELECT SPRITE BASED ON LEVEL
+			match current_wand_level:
+				WandLevel.NORMAL:
+					active_main = sprites.wand
+					active_silhouette = silhouettes.wand
+				WandLevel.SORROW:
+					active_main = sprites.wand_sorrow
+					active_silhouette = silhouettes.wand
+				WandLevel.SOUL:
+					active_main = sprites.wand_soul
+					active_silhouette = silhouettes.wand
 		_:
 			active_main = sprites.normal
 			active_silhouette = silhouettes.normal
@@ -714,7 +745,8 @@ func save_state() -> Dictionary:
 	return {
 		"position": [global_position.x, global_position.y],
 		"has_blade": has_blade,
-		"has_wand": has_wand
+		"has_wand": has_wand,
+		"wand_level": current_wand_level
 	}
 
 func load_state(data: Dictionary) -> void:
@@ -726,6 +758,8 @@ func load_state(data: Dictionary) -> void:
 	if "has_wand" in data:
 		has_wand = data["has_wand"]
 		if has_wand: equip_weapon(WeaponType.WAND)
+	if "wand_level" in data:
+		current_wand_level = data["wand_level"]
 	
 	# Helper definitions for FSM/Animation use
 func cast_skill(anim_name: String) -> void:

@@ -34,6 +34,7 @@ SettingsManager="*res://scripts/autoload/settings_manager.gd"
 SkillTreeManager="*res://scripts/autoload/skill_tree_manager.gd"
 SkillDropManager="*res://scripts/autoload/skill_drop_manager.gd"
 SkillDatabase="*res://scenes/skills/skill_database.gd"
+GameProgressManager="*res://scripts/autoload/game_progress_manager.gd"
 
 [dialogic]
 
