@@ -19,14 +19,14 @@ var earth_ultimate_collected: bool = false
 # Format: "EVENT_KEY": { "title": "", "content": "", "video": "" }
 var guide_data: Dictionary = {
 	"COIN": {
-		"title": "Shiny Gold",
-		"content": "Gold is used to upgrade skills in the shop. Collect as much as you can!",
-		"video": "res://assets/videos/tutorial_coin.ogv" 
+		"title": "Gold Coin",
+		"content": "Bạn vừa nhặt được đồng vàng. Nó có giá trị trao đổi mua bán, hãy thu thập càng nhiều càng tốt nhé.",
+		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png" 
 	},
 	"KEY": {
-		"title": "Dungeon Key",
-		"content": "Keys open locked doors. Look for lock icons on the mini-map.",
-		"video": "res://assets/videos/tutorial_key.ogv"
+		"title": "Treasure Key",
+		"content": "Bạn vừa tìm được chìa khóa để mở rương kho báu, hãy truy tìm rương báu và mở chúng ra để nhận được nhiều của cải nhé.",
+		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png" 
 	},
 	"KILL": {
 		"title": "Enemy Slain",

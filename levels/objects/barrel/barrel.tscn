@@ -7,7 +7,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_krbv3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shyqh"]
-size = Vector2(28, 32)
+size = Vector2(32, 32)
 
 [node name="Barrel" type="RigidBody2D"]
 collision_layer = 64
