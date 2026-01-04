@@ -13,7 +13,8 @@ func _init() -> void:
 func _ready() -> void:
 	# Get player reference from parent hierarchy (Player/Direction/HitArea2D)
 	#player = get_parent().get_parent() as Player
-	owner_character = get_parent().get_parent()
+	owner_character = get_parent()#.get_parent()
+	print("owner character: " + str(owner_character))
 	#if not player:
 		#push_error("HitArea2D: Could not find Player in parent hierarchy")
 

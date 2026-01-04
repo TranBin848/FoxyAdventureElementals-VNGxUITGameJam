@@ -1,6 +1,8 @@
 class_name EnemyCharacter
 extends BaseCharacter
 
+@export var skill_level_to_debuff: int = 3
+
 @onready var damage_number_origin = $DamageNumbersOrigin
 
 @export var particle_audio_interval: float = 1.0  # Seconds between audio plays
@@ -381,11 +383,16 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	print("my element: " + str(elemental_type) + " enemy: " + str(_elemental_type) + " is critical: " + str(is_critical))
 	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
 	if (fsm.current_state != null): fsm.current_state.take_damage(_direction, modified_damage)
-	#if source != null:
-		#if (source as AreaBase) != null and (source as AreaBase):
-			#handle_elemental_damage(_elemental_type)
-		#if source as ProjectileBase != null and (source as ProjectileBase):
-			#handle_elemental_damage(_elemental_type)
+	if source != null:
+		if source is AreaBase or source is ProjectileBase:
+			if source is AreaBase:
+				print("AreaBase level: " + str((source as AreaBase).level))
+				if (source as AreaBase).level >= skill_level_to_debuff:
+					handle_elemental_damage(_elemental_type)
+			if source is ProjectileBase:
+				print("ProjectileBase level: " + str((source as ProjectileBase).level))
+				if (source as ProjectileBase).level >= skill_level_to_debuff:
+					handle_elemental_damage(_elemental_type)
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	var check_element = check_element(attacker_element, elemental_type)

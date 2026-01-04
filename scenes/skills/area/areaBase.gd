@@ -9,6 +9,7 @@ var duration: float
 var direction: Vector2
 var targets_in_area: Array = [] 
 var timer: Timer
+var level: int
 
 func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	self.damage = skill.damage
@@ -16,6 +17,9 @@ func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direc
 	self.duration = skill.duration
 	self.direction = _direction
 	self.global_position = caster_position
+	self.level = skill.level
+	
+	print("skill level: " + str(skill.level))
 	
 	targetenemy = enemy
 	
