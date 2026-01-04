@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://qv25yj3rt5ql"]
+[gd_scene load_steps=55 format=4 uid="uid://qv25yj3rt5ql"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_4qlm2"]
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_aq1cd"]
@@ -40,20 +40,11 @@
 [ext_resource type="Texture2D" uid="uid://b3m7niu1ye24m" path="res://assets/skills/icon element/Water_v2.png" id="38_x60jx"]
 [ext_resource type="Texture2D" uid="uid://dcvi82xfb8w5v" path="res://assets/skills/icon element/Earth_v2.png" id="39_mwgaq"]
 [ext_resource type="Texture2D" uid="uid://ch3gxklumk8cv" path="res://assets/skills/icon element/Metal_v2.png" id="40_3stc0"]
-[ext_resource type="Texture2D" uid="uid://d24pc25cha5hw" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_1.png" id="40_18dih"]
-[ext_resource type="Texture2D" uid="uid://b0dry7sp8quny" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_2.png" id="41_0txhb"]
-[ext_resource type="Texture2D" uid="uid://htplo31jgoah" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_3.png" id="42_akq34"]
-[ext_resource type="Texture2D" uid="uid://blry1ybp0cr3h" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_4.png" id="43_c8hys"]
-[ext_resource type="Texture2D" uid="uid://0hl8ixpbj7en" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_5.png" id="44_ic3cp"]
-[ext_resource type="Texture2D" uid="uid://koyb02ee6oqj" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_6.png" id="45_vo2kh"]
-[ext_resource type="Texture2D" uid="uid://doi7qd34pn20y" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_7.png" id="46_1uev5"]
-[ext_resource type="Texture2D" uid="uid://c8v6s18ylfr67" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_8.png" id="47_kl5a6"]
-[ext_resource type="Texture2D" uid="uid://bi4payhbl81hk" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_9.png" id="48_u8e6y"]
-[ext_resource type="Texture2D" uid="uid://6lsgwshurca4" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_10.png" id="49_hiivf"]
-[ext_resource type="Texture2D" uid="uid://0d7ui05tapgc" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_11.png" id="50_88dld"]
-[ext_resource type="Texture2D" uid="uid://dsdm30rjtonmw" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_12.png" id="51_usmht"]
-[ext_resource type="Texture2D" uid="uid://drhs4kdxjkabe" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_13.png" id="52_hulsn"]
-[ext_resource type="Texture2D" uid="uid://ebbyqduh0u6u" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_14.png" id="53_l2446"]
+[ext_resource type="Texture2D" uid="uid://bw0lj4v2jqd7c" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_1.png" id="40_qgkf7"]
+[ext_resource type="Texture2D" uid="uid://bu07xy8c7sahs" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_2.png" id="41_q4qdf"]
+[ext_resource type="Texture2D" uid="uid://m3hdk4fxfum3" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_3.png" id="42_il3ai"]
+[ext_resource type="Texture2D" uid="uid://bpwkwowucmnif" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_4.png" id="43_4mbfk"]
+[ext_resource type="Texture2D" uid="uid://hy4vhn4ex5b6" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_5.png" id="44_aheaj"]
 
 [sub_resource type="GDScript" id="GDScript_82uhe"]
 script/source = "extends Node2D
@@ -178,48 +169,21 @@ load_path = "res://.godot/imported/ElementIcon4.png-3ab8c7805f289548a686aaa7b385
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("40_18dih")
+"texture": ExtResource("40_qgkf7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("41_0txhb")
+"texture": ExtResource("41_q4qdf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("42_akq34")
+"texture": ExtResource("42_il3ai")
 }, {
 "duration": 1.0,
-"texture": ExtResource("43_c8hys")
+"texture": ExtResource("43_4mbfk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("44_ic3cp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("45_vo2kh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("46_1uev5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("47_kl5a6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("48_u8e6y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("49_hiivf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_88dld")
-}, {
-"duration": 1.0,
-"texture": ExtResource("51_usmht")
-}, {
-"duration": 1.0,
-"texture": ExtResource("52_hulsn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("53_l2446")
+"texture": ExtResource("44_aheaj")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 7.0
 }]
@@ -235,6 +199,26 @@ tile_set = ExtResource("1_4qlm2")
 
 [node name="Player" parent="." instance=ExtResource("2_qg72l")]
 position = Vector2(-361, 235)
+wall_slide_speed = null
+dash_speed_mul = null
+push_strength = null
+coyote_time = null
+air_control_multiplier = null
+jump_buffer_time = null
+blade_throw_speed = null
+skill_throw_speed = null
+invulnerable_duration = null
+fireball_bounciness = null
+jump_height = null
+jump_time_to_peak = null
+jump_time_to_descent = null
+movement_speed = null
+gravity = null
+_next_direction = null
+attack_damage = null
+max_health = null
+max_mana = null
+elemental_type = null
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 
@@ -493,10 +477,9 @@ position = Vector2(415, 45)
 texture = ExtResource("39_mwgaq")
 
 [node name="EvilFoxy" type="AnimatedSprite2D" parent="."]
-position = Vector2(723, 30)
+position = Vector2(234, 320)
 sprite_frames = SubResource("SpriteFrames_1lhn3")
-frame = 13
-frame_progress = 1.0
+frame_progress = 0.463358
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
 position = Vector2(484, 45)

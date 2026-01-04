@@ -630,7 +630,7 @@ func get_closest_target() -> Node2D:
 			closest = t
 	return closest
 
-func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
+func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int, _source: Node2D) -> void:
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	
 	# Let FSM handle the animation/knockback
