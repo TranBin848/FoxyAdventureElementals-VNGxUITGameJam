@@ -3,6 +3,7 @@ extends Debuff
 @export var weakness_perform_time: float = 5
 @export var weakness_end_time: float = 0.5
 @export var movement_speed_percentage: float = 0.5
+@export var vulnerability: float = 0.5
 
 
 func _init_default_time_values() -> void:
@@ -13,7 +14,7 @@ func _init_default_time_values() -> void:
 func start_state_enter() -> void:
 	super.start_state_enter()
 	if target != null: 
-		target.set_vulnerability(1)
+		target.set_vulnerability(vulnerability)
 		target.current_movement_speed = target.movement_speed * movement_speed_percentage
 
 func perform_state_update(delta: float) -> void:
