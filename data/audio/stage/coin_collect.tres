@@ -7,9 +7,10 @@
 script = ExtResource("1_x6whg")
 clip_id = "coin_collect"
 stream = ExtResource("2_lfn4r")
+variations = Array[AudioStream]([])
 volume_db = 0.0
 randomize_pitch = true
-pitch_min = 0.8
-pitch_max = 1.2
+pitch_min = 0.95
+pitch_max = 1.05
 description = ""
 metadata/_custom_type_script = "uid://chlphbiuq1gay"

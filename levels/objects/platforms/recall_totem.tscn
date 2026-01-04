@@ -1,19 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cb1txsruca3mx"]
+[gd_scene load_steps=6 format=3 uid="uid://cb1txsruca3mx"]
 
-[ext_resource type="Texture2D" uid="uid://cx1cqnm2lrgxo" path="res://icon.svg" id="1_r7uq2"]
 [ext_resource type="Script" uid="uid://btxq85glvgiat" path="res://levels/objects/platforms/recall_totem.gd" id="1_xh7nr"]
 [ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="2_qt12v"]
+[ext_resource type="Texture2D" uid="uid://fav4fettkln" path="res://assets/island/objects/recall_totem/recall_totem.png" id="2_xh7nr"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="4_agdpv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qt12v"]
-size = Vector2(32, 32)
+size = Vector2(33, 56.125)
 
 [node name="RecallTotem" type="StaticBody2D"]
 collision_layer = 0
 script = ExtResource("1_xh7nr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_r7uq2")
+texture = ExtResource("2_xh7nr")
 
 [node name="InteractiveArea2D" type="Area2D" parent="."]
 collision_mask = 2
@@ -21,9 +21,29 @@ script = ExtResource("2_qt12v")
 metadata/_custom_type_script = "uid://0qvd447gmgon"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+position = Vector2(0, -0.125)
 shape = SubResource("RectangleShape2D_qt12v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qt12v")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -22.0
+offset_right = 60.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("4_agdpv")
+theme_override_font_sizes/normal_font_size = 8
+text = "F to call platform"
+horizontal_alignment = 1
+
 [connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]
+[connection signal="interaction_available" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interaction_available"]
+[connection signal="interaction_unavailable" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interaction_unavailable"]
