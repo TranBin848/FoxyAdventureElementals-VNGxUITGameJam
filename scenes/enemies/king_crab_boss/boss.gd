@@ -31,6 +31,7 @@ var is_stunned: bool = false
 var fired_claw: Node2D = null
 var boss_zone: Area2D = null
 var is_fighting: bool = false
+var changing_phase: bool = false
 
 var current_phase_index: int = 0
 var next_phase_index: int = 0
@@ -56,7 +57,7 @@ func _ready() -> void:
 	next_phase_index = 0
 	
 	elemental_type = phase_order[current_phase_index]
-	call_deferred("apply_element") 
+	#call_deferred("apply_element") 
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
@@ -121,11 +122,13 @@ func take_damage(damage: int) -> void:
 		# Clamp to ensure we don't go out of bounds (e.g., at 0% HP)
 		next_phase_index = clamp(next_phase_index, 0, total_phases - 1)
 
+func update_phase_index() -> void:
+	current_phase_index = next_phase_index
+
 func is_phase_changed() -> bool:
 	return next_phase_index != current_phase_index
 
 func change_phase() -> void:
-	current_phase_index = next_phase_index
 	elemental_type = phase_order[current_phase_index]
 	apply_element()
 	
@@ -135,6 +138,26 @@ func change_phase() -> void:
 func apply_element() -> void:
 	_init_material()
 	_init_particle()
+	
+	match elemental_type:
+		ElementsEnum.Elements.METAL:
+			AudioManager.play_sound("metal impact")
+			pass
+			
+		ElementsEnum.Elements.WOOD:
+			AudioManager.play_sound("branch cracking")
+			pass
+			
+		ElementsEnum.Elements.WATER:
+			pass
+			
+		ElementsEnum.Elements.FIRE:
+			AudioManager.play_sound("fire burst")
+			pass
+			
+		ElementsEnum.Elements.EARTH:
+			AudioManager.play_sound("rock impact")
+			pass
 
 func flash_corountine() -> void:
 	animated_sprite_2d.modulate = Color(20, 20, 20)
