@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqw2hs1cw106b"]
+[gd_scene load_steps=8 format=3 uid="uid://cqw2hs1cw106b"]
 
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_mabun"]
 [ext_resource type="Script" uid="uid://eheybhst42ce" path="res://scenes/ui/popup/guide_popup.gd" id="2_532iv"]
 [ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="3_uoqwc"]
 [ext_resource type="FontFile" uid="uid://bf742t4mxgd7l" path="res://assets/fonts/big_font.fnt" id="4_bi0kk"]
 [ext_resource type="Texture2D" uid="uid://bvstiwpyblmnv" path="res://assets/ui/close_button.png" id="5_532iv"]
+[ext_resource type="FontFile" uid="uid://coes1s3eo0n6p" path="res://assets/fonts/SVN-Determination-Sans.ttf" id="6_uoqwc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6rodm"]
 font = ExtResource("4_bi0kk")
@@ -79,6 +80,7 @@ offset_bottom = 212.0
 grow_vertical = 2
 theme = ExtResource("1_mabun")
 theme_override_constants/line_separation = 10
+theme_override_fonts/normal_font = ExtResource("6_uoqwc")
 theme_override_font_sizes/normal_font_size = 24
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet augue convallis elit aliquet pretium. Quisque ut ante urna. Pellentesque nec metus eu leo dignissim posuere. Proin at massa ipsum."
 fit_content = true

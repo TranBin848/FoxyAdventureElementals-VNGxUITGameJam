@@ -7,7 +7,7 @@ const POPUP_SCENE = preload("res://scenes/ui/popup/guide_popup.tscn")
 var first_coin_collected: bool = false
 var first_key_collected: bool = false
 var first_enemy_killed: bool = false
-var first_weapon_collected: bool = false
+var first_cutlass_collected: bool = false
 
 # Configuration for the guides
 # Format: "EVENT_KEY": { "title": "", "content": "", "video": "" }
@@ -34,7 +34,8 @@ var guide_data: Dictionary = {
 	},
 	"CUTLASS": {
 		"title": "Cutlass",
-		"content": "Bạn vừa nhặt được một thanh Cutlass. Thế giới ngoài kia có thể nguy hiểm lắm nên hãy cầm theo để phòng thân nhé.",
+		"content": "Bạn vừa nhặt được một thanh Cutlass.\nThế giới ngoài kia có thể nguy hiểm lắm nên hãy cầm theo để phòng thân nhé.\nBấm C để chém và bấm X để ném đi.",
+		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png"
 	}
 }
 
@@ -55,10 +56,10 @@ func trigger_event(event_type: String) -> void:
 			first_enemy_killed = true
 			_show_guide("KILL")
 			
-		"WEAPON":
-			if first_weapon_collected: return
-			first_weapon_collected = true
-			_show_guide("WEAPON")
+		"CUTLASS":
+			if first_cutlass_collected: return
+			first_cutlass_collected = true
+			_show_guide("CUTLASS")
 
 func _show_guide(key: String) -> void:
 	var data = guide_data.get(key)
@@ -70,4 +71,9 @@ func _show_guide(key: String) -> void:
 	GameManager.current_stage.find_child("GUI").add_child(popup)
 	
 	# Setup the data
-	popup.setup(data["title"], data["content"], data["video"])
+	popup.setup(
+		data.get("title", ""), 
+		data.get("content", ""),
+		data.get("video", ""), 
+		data.get("image", "")
+	)

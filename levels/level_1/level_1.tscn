@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=65 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bibbggt5jgslb" path="res://assets/spear/spear/spear_10.png" id="6_nx43y"]
 [ext_resource type="Texture2D" uid="uid://b6g0qbxr2udas" path="res://assets/spear/spear/spear_11.png" id="7_h8kgu"]
 [ext_resource type="Texture2D" uid="uid://cek52mngfmhup" path="res://assets/spear/spear/spear_12.png" id="8_3cjb2"]
-[ext_resource type="PackedScene" uid="uid://cemwql616mbqj" path="res://scenes/npc/npc_master_fox.tscn" id="9_0j1hw"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="10_xsvho"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="14_onjut"]
 [ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="16_plcgd"]
@@ -40,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="42_60i3m"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="44_81g5i"]
 [ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/hud/minimap.tscn" id="45_rflqb"]
+[ext_resource type="PackedScene" uid="uid://ba2bhwl205has" path="res://scenes/npc/npc_wand_seller.tscn" id="45_tr4hg"]
 [ext_resource type="PackedScene" uid="uid://dlo5gf1o05dgq" path="res://scenes/env_particle/rain.tscn" id="53_5oe72"]
 [ext_resource type="AudioStream" uid="uid://da2jb75pixowd" path="res://assets/sounds/44474__bullockjs__waterfall2.mp3" id="54_h8kgu"]
 [ext_resource type="Script" uid="uid://ddphxb2lvd1do" path="res://scripts/area_component/ambience_area_2d.gd" id="54_nx43y"]
@@ -64,6 +64,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve2D" id="Curve2D_2jmd8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 43, 0, 0, 0, 0, 277, 43)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_wx43u"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 43, 0, 0, 0, 0, 277, 43)
+}
+point_count = 2
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xoq1q"]
 particles_animation = true
 particles_anim_h_frames = 5
@@ -82,7 +94,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.0
+shader_parameter/y_zoom = 2.85312
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -198,11 +210,6 @@ position = Vector2(-365, 305)
 sprite_frames = SubResource("SpriteFrames_4mjh6")
 autoplay = "default"
 frame_progress = 0.143494
-
-[node name="NpcMasterFox" parent="Npc" instance=ExtResource("9_0j1hw")]
-position = Vector2(1850, 117)
-scale = Vector2(-1, 1)
-hoithoai = "guide_elemental"
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -473,11 +480,13 @@ position = Vector2(3039, -362)
 position = Vector2(3386, -383)
 
 [node name="Path" parent="Object/Saw" instance=ExtResource("36_jg3i0")]
+curve = SubResource("Curve2D_2jmd8")
 
 [node name="Saw2" type="Node2D" parent="Object"]
 position = Vector2(3386, -428)
 
 [node name="Path" parent="Object/Saw2" instance=ExtResource("36_jg3i0")]
+curve = SubResource("Curve2D_wx43u")
 
 [node name="Platform" parent="Object" instance=ExtResource("37_y7g21")]
 position = Vector2(3538, -454)
@@ -589,3 +598,6 @@ position = Vector2(1991, -765)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder/StaticBody2D3"]
 shape = SubResource("WorldBoundaryShape2D_rflqb")
+
+[node name="NpcWandSeller" parent="." instance=ExtResource("45_tr4hg")]
+position = Vector2(2004, 107)

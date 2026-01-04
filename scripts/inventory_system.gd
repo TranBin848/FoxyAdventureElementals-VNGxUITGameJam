@@ -9,8 +9,6 @@ var keys: int = 0
 
 func _ready() -> void:
 	pass
-	
-# Inside InventorySystem.gd
 
 func add_coin(amount: int) -> void:
 	coins += amount
@@ -47,7 +45,7 @@ func load_data(saved_data: Dictionary) -> void:
 func has_key() -> bool:
 	return keys > 0	
 
-func get_gold() -> int:
+func get_coins() -> int:
 	return coins
 
 func get_keys() -> int:

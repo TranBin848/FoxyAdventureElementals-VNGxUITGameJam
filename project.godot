@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FoxyAdventureElementals"
-run/main_scene="uid://5f5m765bnxg8"
+run/main_scene="uid://dhghajv3v5q1v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 <<<<<<<Updatedupstreamrun/main_scene="uid://dsmbhy8c7qvf6"
@@ -40,6 +40,7 @@ GameProgressManager="*res://scripts/autoload/game_progress_manager.gd"
 
 directories/dch_directory={
 "Foxy": "res://dialogs/Foxy.dch",
+"Wand_Seller": "res://dialogs/Wand_Seller.dch",
 "npc_master_fox": "res://dialogs/npc_master_fox.dch",
 "npc_villager": "res://dialogs/npc_villager.dch"
 }
@@ -49,7 +50,8 @@ directories/dtl_directory={
 "level_0": "res://dialogic_timelines/level_0.dtl",
 "sail_boat": "res://dialogs/sail_boat.dtl",
 "start_game": "res://dialogs/start_game.dtl",
-"upgrade_stats": "res://dialogs/upgrade_stats.dtl"
+"upgrade_stats": "res://dialogs/upgrade_stats.dtl",
+"wand_seller": "res://dialogs/wand_seller.dtl"
 }
 layout/style_directory={
 "": "res://dialogs/style.tres",

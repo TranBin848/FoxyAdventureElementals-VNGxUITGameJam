@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=154 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
@@ -92,7 +92,6 @@
 [ext_resource type="Texture2D" uid="uid://do145amyos7rk" path="res://assets/foxy/fox_hat_soul_wand/fox_defeat_1.png" id="66_5oeuk"]
 [ext_resource type="PackedScene" uid="uid://b33nvdvnniecl" path="res://scenes/skills/projectiles/earth/comet_crater.tscn" id="66_gs7hn"]
 [ext_resource type="PackedScene" uid="uid://bqwtaxqc2pj5f" path="res://scenes/fx/slash_fx.tscn" id="67_31ki0"]
-[ext_resource type="Script" uid="uid://vqavncunfnes" path="res://scenes/player/actor.gd" id="83_trum3"]
 [ext_resource type="Texture2D" uid="uid://bok87oaywd0px" path="res://assets/foxy/fox_hat_soul_wand/fox_defeat_2.png" id="67_oq5hk"]
 [ext_resource type="Texture2D" uid="uid://buvoqwb2cii5i" path="res://assets/foxy/fox_hat_soul_wand/fox_defeat_3.png" id="68_kfile"]
 [ext_resource type="Texture2D" uid="uid://djfi7yqsmi4iy" path="res://assets/foxy/fox_hat_sorrow_wand/fox_jump_2.png" id="69_0epl4"]
@@ -124,6 +123,7 @@
 [ext_resource type="Texture2D" uid="uid://e6n3yam102mw" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_5.png" id="80_0epl4"]
 [ext_resource type="Texture2D" uid="uid://sm5bkiuhns2" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_6.png" id="81_3r8w6"]
 [ext_resource type="Texture2D" uid="uid://cssehk8qyeylv" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_7.png" id="82_i816j"]
+[ext_resource type="Script" uid="uid://vqavncunfnes" path="res://scenes/player/actor.gd" id="83_trum3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trum3"]
 shader = ExtResource("2_21yht")

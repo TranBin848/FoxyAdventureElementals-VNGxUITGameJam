@@ -47,7 +47,7 @@ func show_skill(btn: Node):
 	current_button = btn
 	current_skill_name = sk.name
 	
-	print("📊 Showing skill: %s" % sk.name)
+	print("Showing skill: %s" % sk.name)
 	
 	title_label.text = sk.name
 	
@@ -152,11 +152,11 @@ func _on_unlock_button_pressed() -> void:
 		return
 	
 	if SkillTreeManager.unlock_skill(current_skill_name, UNLOCK_COST):
-		error_occurred.emit("✅ Unlocked %s!" % current_skill_name)
+		error_occurred.emit("Unlocked %s!" % current_skill_name)
 		_update_buttons()
 	else:
 		var current_stacks = SkillTreeManager.get_stacks(current_skill_name)
-		error_occurred.emit("❌ Need %d stacks (have %d)" % [UNLOCK_COST, current_stacks])
+		error_occurred.emit("Need %d stacks (have %d)" % [UNLOCK_COST, current_stacks])
 
 func _on_upgrade_button_pressed() -> void:
 	if current_skill_name == "":
@@ -164,11 +164,11 @@ func _on_upgrade_button_pressed() -> void:
 	
 	if SkillTreeManager.upgrade_skill(current_skill_name, UPGRADE_COST):
 		var new_level = SkillTreeManager.get_level(current_skill_name)
-		error_occurred.emit("✅ Upgraded to Lv%d!" % new_level)
+		error_occurred.emit("Upgraded to Lv%d!" % new_level)
 		_update_buttons()
 	else:
 		var current_stacks = SkillTreeManager.get_stacks(current_skill_name)
-		error_occurred.emit("❌ Need %d stacks (have %d)" % [UPGRADE_COST, current_stacks])
+		error_occurred.emit("Need %d stacks (have %d)" % [UPGRADE_COST, current_stacks])
 
 func _on_equip_button_pressed() -> void:
 	if current_skill_name == "":
@@ -179,23 +179,23 @@ func _on_equip_button_pressed() -> void:
 
 	if index != -1:
 		if SkillTreeManager.unequip_skill(index):
-			error_occurred.emit("🗑️ Unequipped from slot %d" % (index + 1))
+			error_occurred.emit("Unequipped from slot %d" % (index + 1))
 			_update_buttons()
 		return
 
 	if not SkillTreeManager.is_unlocked(skill_name) and SkillTreeManager.get_stacks(skill_name) == 0:
-		error_occurred.emit("❌ Skill not unlocked!")
+		error_occurred.emit("Skill not unlocked!")
 		return
 	
 	var bar = SkillTreeManager.get_skillbar()
 	for i in range(bar.size()):
 		if bar[i] == null:
 			if SkillTreeManager.equip_skill(i, skill_name):
-				error_occurred.emit("✅ Equipped to slot %d!" % (i + 1))
+				error_occurred.emit("Equipped to slot %d!" % (i + 1))
 				_update_buttons()
 			return
 	
-	error_occurred.emit("❌ Skill bar is full!")
+	error_occurred.emit("Skill bar is full!")
 
 func _on_skill_unlocked(skill_name: String):
 	if skill_name == current_skill_name:
@@ -219,5 +219,5 @@ func _on_stack_changed(skill_name: String, new_stack: int):
 		stack_label.text = "Stack: %d" % new_stack
 
 func _on_close_button_pressed():
-	print("❌ Close button pressed")
+	print("Close button pressed")
 	visible = false

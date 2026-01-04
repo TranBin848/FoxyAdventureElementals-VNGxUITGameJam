@@ -268,7 +268,7 @@ func collect_blade() -> void:
 	has_blade = true;
 	
 	# HOOK HERE: Trigger tutorial on first weapon pickup
-	GameProgressManager.trigger_event("WEAPON")
+	GameProgressManager.trigger_event("CUTLASS")
 	
 	swap_weapon()
 
