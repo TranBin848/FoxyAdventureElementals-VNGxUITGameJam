@@ -9,6 +9,7 @@ var triggered: bool = false
 
 func _ready() -> void:
 	boss.boss_zone = self
+	pass
 
 func _on_boss_dead() -> void:
 	

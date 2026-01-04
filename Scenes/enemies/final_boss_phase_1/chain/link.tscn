@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cr34qf3dybyt0"]
+
+[node name="PinJoint2D" type="PinJoint2D"]
+disable_collision = false
