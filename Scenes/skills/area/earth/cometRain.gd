@@ -45,6 +45,7 @@ func setup(skill: Skill, caster_position: Vector2, _enemy: EnemyCharacter, _dire
 
 func _start_comet_rain() -> void:
 	print("[RainArea] Starting rain. Count: ", comets_count)
+	AudioManager.play_sound("skill_comet_rain")
 	for i in range(comets_count):
 		_spawn_one_comet()
 		await get_tree().create_timer(spawn_interval).timeout

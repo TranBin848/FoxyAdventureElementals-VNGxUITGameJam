@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://u7s1uttlqth5"]
+
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_81r2a"]
+
+[resource]
+script = ExtResource("1_81r2a")
+name = "Phoenix"
+elemental_type = 4
+level = 1
+cooldown = 1.0
+duration = 1.0
+hit_delay = 0.0
+ground_targeted = false
+texture_path = "res://assets/skills/icon element/Fire_v2.png"
+animation_name = ""
+speed = 250.0
+damage = 10.0
+mana = 1
+type = "ultimate"
+metadata/_custom_type_script = "uid://4fu7i05ai1gp"

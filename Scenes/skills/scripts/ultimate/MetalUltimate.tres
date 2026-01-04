@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://ctl3eu0an05tj"]
+
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_h42dg"]
+
+[resource]
+script = ExtResource("1_h42dg")
+name = "Metal Ultimate"
+elemental_type = 1
+level = 1
+cooldown = 1.0
+duration = 1.0
+hit_delay = 0.0
+ground_targeted = false
+texture_path = "res://assets/skills/icon element/Metal_v2.png"
+animation_name = ""
+speed = 250.0
+damage = 10.0
+mana = 1
+type = "ultimate"
+metadata/_custom_type_script = "uid://4fu7i05ai1gp"

@@ -88,7 +88,7 @@ signal actor_arrived #emit when actor move toward designated target
 @export var dash_dist: float = 200.0
 @export var dash_cd: float = 5.0
 @export var push_strength: float = 100.0
-@export var coyote_time: float = 0.15  # NEW: Grace period after leaving ground
+@export var coyote_time: float = 0.2  # NEW: Grace period after leaving ground
 @export var air_control_multiplier: float = 0.8  # NEW: Air acceleration modifier
 @export var jump_buffer_time: float = 0.1  # Can press jump this early
 
@@ -156,12 +156,14 @@ func _ready() -> void:
 	else: equip_weapon(WeaponType.NORMAL)
 
 func _physics_process(delta: float) -> void:
+	# 1. Update timers/inputs FIRST so the FSM has fresh data
+	_update_jump_buffer(delta)
+	_update_coyote_time(delta)
+	
 	super._physics_process(delta) # Animation, FSM, etc.
 	
 	_handle_invulnerability(delta)
 	_handle_rigid_push()
-	_update_coyote_time(delta)
-	_update_jump_buffer(delta)
 
 	# Enforce visual state
 	if current_buff_state == BuffState.BURROW or current_buff_state == BuffState.INVISIBLE:
@@ -199,13 +201,12 @@ func _update_movement(delta: float) -> void:
 		velocity.y = 0
 
 func jump() -> void:
-	super.jump() # BaseCharacter logic
-	
 	if current_buff_state == BuffState.BURROW:
-		# Special Burrow Exit Jump
-		exit_current_buff() # This triggers the pop-up logic in _set_burrow_state(false)
-	else:
-		jump_fx_factory.create()
+		exit_current_buff()
+		return
+		
+	super.jump() # BaseCharacter logic
+	jump_fx_factory.create()
 		
 func _update_jump_buffer(delta: float) -> void:
 	if jump_buffer_timer > 0:
@@ -447,7 +448,7 @@ func _fire_area(skill: Skill) -> void:
 	area_node.global_position = target_pos
 	
 	if area_node.has_method("setup"):
-		area_node.setup(skill, target_pos, target_enemy)
+		area_node.setup(skill, position, target_enemy)
 
 func _apply_buff_skill(skill: Skill) -> void:
 	var duration = skill.duration * (skill.level + 1.0) / 2.0
@@ -531,19 +532,63 @@ func _set_fireball_state(active: bool) -> void:
 
 func _set_burrow_state(active: bool) -> void:
 	is_in_burrow_state = active
-	default_collision.set_deferred("disabled", active)
-	burrow_collision.set_deferred("disabled", !active)
-	hurt_area.set_deferred("monitorable", !active)
 	
 	if active:
+		AudioManager.play_sound("skill_burrow")
+		# --- ENTERING BURROW ---
+		default_collision.set_deferred("disabled", true)
+		burrow_collision.set_deferred("disabled", false)
+		hurt_area.set_deferred("monitorable", false)
+		
 		speed_multiplier = 1.25
-		_update_visual_state(null, true) # Force silhouette
+		_update_visual_state(null, true) 
+		if is_on_floor():
+			surface_fx_factory.create()
 	else:
+		# --- EXITING BURROW ---
 		speed_multiplier = 1.0
-		# Exit Pop Logic
+		
+		# 1. Physics Launch
+		surface_fx_factory.create()
+		velocity.y = -jump_speed 
 		velocity.x = 400.0 * direction
-		jump_fx_factory.create() # Or surface FX
-		jump()
+		
+		# 2. Visuals
+		if animated_sprite: animated_sprite.play("jump")
+
+		# 3. Dynamic Hitbox Restoration
+		# We DO NOT enable default_collision yet. 
+		# We start the watcher to do it when safe.
+		_await_safe_hitbox_expansion()
+		
+func _await_safe_hitbox_expansion() -> void:
+	# 1. Setup the query using your Default Hitbox's shape
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = default_collision.shape
+	# We use the player's global transform so the query follows you as you jump
+	query.transform = global_transform 
+	# Set this to your World/Environment layer (usually Layer 1)
+	# Do not include enemies or hitboxes, or you'll never un-burrow next to them.
+	query.collision_mask = 1 
+	
+	# 2. Loop until empty
+	while true:
+		# Update query position to match player's current position (in case they are moving)
+		query.transform = global_transform
+		
+		# Ask the physics engine for overlaps
+		var results = space_state.intersect_shape(query, 1) # Max 1 result needed to fail
+		
+		if results.is_empty():
+			# SUCCESS: No walls inside our shape. Safe to expand.
+			default_collision.set_deferred("disabled", false)
+			burrow_collision.set_deferred("disabled", true)
+			hurt_area.set_deferred("monitorable", true)
+			break # Exit the loop
+		
+		# If we hit something, wait for the next physics frame and try again
+		await get_tree().physics_frame
 
 func _set_invisible_state(active: bool) -> void:
 	hurt_area.set_deferred("monitorable", !active)
@@ -551,6 +596,7 @@ func _set_invisible_state(active: bool) -> void:
 	
 	if active:
 		_update_visual_state(null, true) # Force silhouette
+		
 	else:
 		# Handled by generic _update_visual_state in exit_current_buff
 		pass
@@ -628,10 +674,17 @@ func _update_visual_state(forced_main: AnimatedSprite2D = null, force_silhouette
 	_update_elemental_palette()
 
 func _enforce_invisibility_visuals() -> void:
-	# BaseCharacter might try to show the main sprite during animation changes.
-	# We force it hidden here.
-	if animated_sprite and animated_sprite.visible:
+	# 1. Force the Main Sprite (Detailed) to HIDE
+	# BaseCharacter tries to show this every frame when animating, so we must force it off.
+	if animated_sprite:
 		animated_sprite.hide()
+
+	# 2. Force the Silhouette (Shadow) to SHOW and be TRANSPARENT
+	# The silhouette is stored in 'extra_sprites' by _update_visual_state
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.show()
+			s.modulate.a = 0.5
 
 func _update_elemental_palette() -> void:
 	if not is_instance_valid(animated_sprite): return

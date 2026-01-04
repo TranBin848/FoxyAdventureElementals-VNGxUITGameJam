@@ -1,7 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://eb702qll71qk"]
+[gd_scene load_steps=12 format=3 uid="uid://eb702qll71qk"]
 
 [ext_resource type="Texture2D" uid="uid://o08nj8b4unrg" path="res://assets/island/objects/spider/Arigopeaurantia2.png" id="1_3ih74"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_6d016"]
+
+[sub_resource type="Curve2D" id="Curve2D_3ih74"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -40)
+}
+point_count = 2
 
 [sub_resource type="GDScript" id="GDScript_6d016"]
 script/source = "extends PathFollow2D
@@ -137,14 +143,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8q6c"]
-size = Vector2(50, 74.5)
+size = Vector2(28.5, 43.625)
 
 [node name="Path2D" type="Path2D"]
+curve = SubResource("Curve2D_3ih74")
 
 [node name="Line2D" type="Line2D" parent="."]
-position = Vector2(0, -100)
-points = PackedVector2Array(-1, 60)
+position = Vector2(0, -60)
+points = PackedVector2Array(0, 77)
 width = 2.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../PathFollow2D")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
@@ -154,7 +164,8 @@ script = SubResource("GDScript_6d016")
 [node name="Spider" type="Area2D" parent="PathFollow2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/Spider"]
-scale = Vector2(0.6, 0.6)
+position = Vector2(-1.90735e-06, 9.53674e-07)
+scale = Vector2(0.345906, 0.345906)
 sprite_frames = SubResource("SpriteFrames_5ibcm")
 animation = &"moving"
 frame_progress = 0.326223

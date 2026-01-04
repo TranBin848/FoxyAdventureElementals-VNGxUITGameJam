@@ -16,7 +16,7 @@ mass = 9999.0
 physics_material_override = SubResource("PhysicsMaterial_krbv3")
 lock_rotation = true
 script = ExtResource("1_krbv3")
-debris_count = 10
+max_health = 10.0
 debris_texture = ExtResource("1_7ri04")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

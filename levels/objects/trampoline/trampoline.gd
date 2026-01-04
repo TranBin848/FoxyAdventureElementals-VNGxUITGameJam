@@ -4,7 +4,7 @@ extends Area2D
 @export var boost_modifier: float = 1.2 # Multiplier if holding jump
 @export var only_launch_when_falling: bool = true
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 # @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready() -> void:
@@ -28,6 +28,8 @@ func _on_body_entered(body: Node2D) -> void:
 		
 	# 4. Apply Physics
 	_launch_player(body, final_force)
+	
+	AudioManager.play_sound("trampoline_bounce")
 	
 	# 5. Visual Feedback
 	_play_squash_animation()

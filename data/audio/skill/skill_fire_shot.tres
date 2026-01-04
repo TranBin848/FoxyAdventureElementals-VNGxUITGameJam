@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://bg7ak3qcswla7"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_jejib"]
+[ext_resource type="AudioStream" uid="uid://db72d62e3m28a" path="res://assets/sounds/fire_shot.wav" id="2_ij5ru"]
+
+[resource]
+script = ExtResource("1_jejib")
+clip_id = "skill_fire_shot"
+stream = ExtResource("2_ij5ru")
+variations = Array[AudioStream]([])
+volume_db = -15.0
+randomize_pitch = true
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

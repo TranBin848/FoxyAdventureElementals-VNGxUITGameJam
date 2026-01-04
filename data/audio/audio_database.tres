@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AudioDatabase" load_steps=34 format=3 uid="uid://c1ope6ptf8yny"]
+[gd_resource type="Resource" script_class="AudioDatabase" load_steps=50 format=3 uid="uid://c1ope6ptf8yny"]
 
 [ext_resource type="Script" uid="uid://ovmtn36802i6" path="res://scripts/audio/audio_database.gd" id="1_nw313"]
 [ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_x0dso"]
@@ -17,7 +17,7 @@
 [ext_resource type="Resource" uid="uid://c557ffk4oq0fd" path="res://data/audio/stage/checkpoint_activate.tres" id="14_exqm0"]
 [ext_resource type="Resource" uid="uid://cb5dvho6xvyfv" path="res://data/audio/boss/boss_hurt.tres" id="15_b71d2"]
 [ext_resource type="Resource" uid="uid://c584t170hgnev" path="res://data/audio/boss/boss_attack.tres" id="16_4m8v6"]
-[ext_resource type="Resource" uid="uid://cxkh1m1bbekbk" path="res://data/audio/stage/item_collect.tres" id="17_owoq2"]
+[ext_resource type="Resource" uid="uid://cxkh1m1bbekbk" path="res://data/audio/stage/coin_collect.tres" id="17_lubev"]
 [ext_resource type="Resource" uid="uid://co4fq04ryxlaa" path="res://data/audio/stage/chest_open.tres" id="18_1ae7c"]
 [ext_resource type="Resource" uid="uid://cj8y1tca7218x" path="res://data/audio/ambience/ambience_forest.tres" id="19_p1l5c"]
 [ext_resource type="Resource" uid="uid://cgob5ircpevik" path="res://data/audio/ambience/ambience_rainforest.tres" id="20_g7dcs"]
@@ -32,9 +32,25 @@
 [ext_resource type="Resource" uid="uid://co0b2liixwhvj" path="res://data/audio/ambience/ambience_volcano.tres" id="29_bwrda"]
 [ext_resource type="Resource" uid="uid://bxolod2rf57dv" path="res://data/audio/skill/skill_thunderbolt.tres" id="30_j4vq7"]
 [ext_resource type="Resource" uid="uid://c7xo7l7ifeiia" path="res://data/audio/skill/skill_thunderbolt_crackle.tres" id="31_sd3kk"]
-[ext_resource type="Resource" uid="uid://c8pd8nl00d28b" path="res://data/audio/ambience/ambience_beach.tres" id="32_sd3kk"]
+[ext_resource type="Resource" uid="uid://7eieht18b1jb" path="res://data/audio/particle/particle_wood.tres" id="32_sd3kk"]
+[ext_resource type="Resource" uid="uid://bh314dw7dbgdk" path="res://data/audio/ambience/ambience_desert.tres" id="33_lubev"]
+[ext_resource type="Resource" uid="uid://5rbwvbrle24y" path="res://data/audio/stage/key_collect.tres" id="34_rdqdp"]
+[ext_resource type="Resource" uid="uid://mbc53wj2eoa1" path="res://data/audio/stage/trampoline_bounce.tres" id="35_1iflg"]
+[ext_resource type="Resource" uid="uid://nuwg30mh0sea" path="res://data/audio/player/player_cast_skill.tres" id="36_saqkh"]
+[ext_resource type="Resource" uid="uid://cyf5sin6j4oow" path="res://data/audio/skill/skill_wooden_clone.tres" id="37_be375"]
+[ext_resource type="Resource" uid="uid://c8cdpoin5lxwd" path="res://data/audio/skill/skill_water_blast.tres" id="38_03vyq"]
+[ext_resource type="Resource" uid="uid://bru58n7c50w7f" path="res://data/audio/skill/skill_stun_beam.tres" id="39_irwrg"]
+[ext_resource type="Resource" uid="uid://rw4v1dtuomw" path="res://data/audio/skill/skill_stun_shot.tres" id="40_0d4ek"]
+[ext_resource type="Resource" uid="uid://bq88twp1fo2hl" path="res://data/audio/skill/skill_earthquake.tres" id="41_0d4ek"]
+[ext_resource type="Resource" uid="uid://bc4pgs1pjyexv" path="res://data/audio/skill/skill_fire_explosion.tres" id="42_61boq"]
+[ext_resource type="Resource" uid="uid://bg7ak3qcswla7" path="res://data/audio/skill/skill_fire_shot.tres" id="43_0xg7l"]
+[ext_resource type="Resource" uid="uid://bq2m1in8ax13i" path="res://data/audio/skill/skill_comet_rain.tres" id="44_edvfg"]
+[ext_resource type="Resource" uid="uid://pjscneqs0axx" path="res://data/audio/skill/skill_comet_hit.tres" id="45_lq2h1"]
+[ext_resource type="Resource" uid="uid://dhfwmvywckwgs" path="res://data/audio/skill/skill_burrow.tres" id="46_165g3"]
+[ext_resource type="Resource" uid="uid://dsbm1qf0h7xsl" path="res://data/audio/skill/skill_water_spike.tres" id="47_gwagj"]
+[ext_resource type="Resource" uid="uid://c8pd8nl00d28b" path="res://data/audio/ambience/ambience_beach.tres" id="48_fucku"]
 
 [resource]
 script = ExtResource("1_nw313")
-clips = Array[ExtResource("1_x0dso")]([ExtResource("2_g1k8g"), ExtResource("3_ykssl"), ExtResource("4_p1l5c"), ExtResource("5_g7dcs"), ExtResource("4_cw7wr"), ExtResource("5_374as"), ExtResource("6_mjplr"), ExtResource("7_5g16o"), ExtResource("8_ykssl"), ExtResource("9_cw7wr"), ExtResource("12_6cm5n"), ExtResource("13_exqm0"), ExtResource("14_exqm0"), ExtResource("15_b71d2"), ExtResource("16_4m8v6"), ExtResource("17_owoq2"), ExtResource("18_1ae7c"), ExtResource("19_p1l5c"), ExtResource("20_g7dcs"), ExtResource("21_la71c"), ExtResource("22_02cuq"), ExtResource("23_lwt6v"), ExtResource("24_hmft1"), ExtResource("25_r350v"), ExtResource("26_r350v"), ExtResource("27_bwrda"), ExtResource("28_ca5ng"), ExtResource("29_bwrda"), ExtResource("30_j4vq7"), ExtResource("31_sd3kk"), ExtResource("32_sd3kk")])
+clips = Array[ExtResource("1_x0dso")]([ExtResource("2_g1k8g"), ExtResource("3_ykssl"), ExtResource("4_p1l5c"), ExtResource("5_g7dcs"), ExtResource("4_cw7wr"), ExtResource("5_374as"), ExtResource("6_mjplr"), ExtResource("7_5g16o"), ExtResource("8_ykssl"), ExtResource("9_cw7wr"), ExtResource("12_6cm5n"), ExtResource("13_exqm0"), ExtResource("14_exqm0"), ExtResource("15_b71d2"), ExtResource("16_4m8v6"), ExtResource("17_lubev"), ExtResource("18_1ae7c"), ExtResource("19_p1l5c"), ExtResource("20_g7dcs"), ExtResource("21_la71c"), ExtResource("22_02cuq"), ExtResource("23_lwt6v"), ExtResource("24_hmft1"), ExtResource("25_r350v"), ExtResource("26_r350v"), ExtResource("27_bwrda"), ExtResource("28_ca5ng"), ExtResource("29_bwrda"), ExtResource("30_j4vq7"), ExtResource("31_sd3kk"), ExtResource("48_fucku"), ExtResource("32_sd3kk"), ExtResource("33_lubev"), ExtResource("34_rdqdp"), ExtResource("35_1iflg"), ExtResource("36_saqkh"), ExtResource("37_be375"), ExtResource("38_03vyq"), ExtResource("39_irwrg"), ExtResource("40_0d4ek"), ExtResource("41_0d4ek"), ExtResource("42_61boq"), ExtResource("43_0xg7l"), ExtResource("44_edvfg"), ExtResource("45_lq2h1"), ExtResource("46_165g3"), ExtResource("47_gwagj")])
 metadata/_custom_type_script = "uid://ovmtn36802i6"

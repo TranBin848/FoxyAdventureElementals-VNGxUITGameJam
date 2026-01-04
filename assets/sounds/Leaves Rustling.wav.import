@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c7hw4s0bkftrq"
+path="res://.godot/imported/Leaves Rustling.wav-be768796be4f7cb0572afcc7036a4631.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Leaves Rustling.wav"
+dest_files=["res://.godot/imported/Leaves Rustling.wav-be768796be4f7cb0572afcc7036a4631.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

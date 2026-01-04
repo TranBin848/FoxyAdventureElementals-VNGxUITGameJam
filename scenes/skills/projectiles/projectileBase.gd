@@ -7,11 +7,15 @@ var direction: Vector2 = Vector2.RIGHT
 var damage: float
 var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 var affected_enemies: Array[EnemyCharacter] = []
+var level: int
+var skill: Skill
 
 
-func setup(skill: Skill, dir: Vector2) -> void:
+func setup(_skill: Skill, dir: Vector2) -> void:
 	#print(skill.damage)
 	#print(skill.elemental_type)
+	skill = _skill
+	level = skill.level
 	speed = skill.speed
 	damage = skill.damage * (skill.level + 1) / 2
 	elemental_type = skill.elemental_type
@@ -28,8 +32,11 @@ func setup(skill: Skill, dir: Vector2) -> void:
 		$AnimatedSprite2D.play(skill.animation_name)
 	
 	if skill.animation_name != "WaterTornado":
-		rotation = direction.angle()
-
+		# Check if the projectile is moving to the Left (negative X)
+		if direction.x < 0:
+			scale.x = -1  # Flip everything (sprite + collision) to the left
+		else:
+			scale.x = 1   # Face normal (right)
 
 func _physics_process(delta: float) -> void:
 	_move(delta)

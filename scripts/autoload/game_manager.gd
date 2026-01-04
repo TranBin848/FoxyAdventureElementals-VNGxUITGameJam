@@ -21,12 +21,14 @@ var current_checkpoint_id: String = ""
 var checkpoint_data: Dictionary = {}
 signal checkpoint_changed(new_checkpoint_id: String)
 signal checkpoint_loading_complete()
+signal level_ready()
 
 # --- Inventory & Systems ---
 var inventory_system: InventorySystem = null
 
 # --- Stat Storage ---
-# Stores { "max_health": 5, "attack": 2 } (Points Allocated, NOT final values)
+# Add base stat storage
+var player_base_stats: Dictionary = {} # Store original base values ONCE
 var player_stats: Dictionary = {} 
 #endregion
 
@@ -57,20 +59,63 @@ func _on_scene_changed() -> void:
 
 	# Refresh References
 	player = current_stage.find_child("Player", true, false)
-	var skillbarroot = current_stage.find_child("SkillBarUI", true, false)
-	if skillbarroot:
-		skill_bar = skillbarroot.get_node("MarginContainer/SkillBar")
+	
+	if player and player_base_stats.is_empty():
+		_capture_base_stats()
 
 	# Scale Enemies
 	get_tree().call_group("enemies", "scale_health", 0.8 + 0.2 * current_level)
 
-	# Validate & Respawn
-	_handle_checkpoint_validation()
+	await _handle_checkpoint_or_portal_spawn()
+	
+	# ✅ Emit signal so level scripts know spawning is complete
+	if has_signal("level_ready"):
+		level_ready.emit()
 
 func change_stage(stage_path: String, _target_portal_name: String = "") -> void:
 	target_portal_name = _target_portal_name
 	get_tree().change_scene_to_file(stage_path)
 
+func _capture_base_stats() -> void:
+	"""Stores the player's initial stat values on first spawn"""
+	if not player: return
+	
+	player_base_stats = {
+		"max_health": player.max_health,
+		"max_mana": player.max_mana,
+		"base_damage": player.get("base_damage") if "base_damage" in player else 0,
+		"defense_multiplier": player.get("defense_multiplier") if "defense_multiplier" in player else 1.0,
+		"movement_speed": player.movement_speed,
+		"jump_velocity": player.jump_velocity
+	}
+	print("📊 Base stats captured: ", player_base_stats)
+
+func _handle_checkpoint_or_portal_spawn() -> void:
+	"""Unified spawn handler - portals take priority over checkpoints"""
+	if not player: return
+	
+	# 1. Try Portal First (scene transitions)
+	if respawn_at_portal():
+		print("🚪 Spawned at portal: %s" % target_portal_name)
+		return
+	
+	# 2. Try Checkpoint (saved game)
+	if not current_checkpoint_id.is_empty():
+		var checkpoint_scene = checkpoint_data.get(current_checkpoint_id, {}).get("stage_path", "")
+		
+		# Validate checkpoint matches current scene
+		if checkpoint_scene == current_stage.scene_file_path:
+			await get_tree().create_timer(0.1).timeout
+			respawn_at_checkpoint()
+			print("💾 Loaded checkpoint: %s" % current_checkpoint_id)
+			return
+		else:
+			print("⚠️ Checkpoint scene mismatch, clearing...")
+			clear_checkpoint_data()
+	
+	# 3. Default: Player spawns at their scene position
+	print("🎮 Player spawned at default position")
+	
 func respawn_at_portal() -> bool:
 	if target_portal_name.is_empty() or not current_stage or not player:
 		return false
@@ -82,25 +127,24 @@ func respawn_at_portal() -> bool:
 		return true
 	return false
 
-func _handle_checkpoint_validation() -> void:
+func respawn_at_checkpoint() -> void:
 	if current_checkpoint_id.is_empty(): return
 
-	var saved_stage_path := ""
-	
-	# Get path from memory OR disk
-	if checkpoint_data.has(current_checkpoint_id):
-		saved_stage_path = checkpoint_data[current_checkpoint_id].get("stage_path", "")
-	else:
-		var save_file_data = SaveSystem.load_checkpoint_data()
-		saved_stage_path = save_file_data.get("stage_path", "")
+	var data = checkpoint_data.get(current_checkpoint_id, {})
+	if data.is_empty() or not player: return
 
-	# If scene doesn't match checkpoint, the checkpoint is invalid/old
-	if current_stage.scene_file_path != saved_stage_path:
-		clear_checkpoint_data()
-	elif player:
-		# If scene matches, respawn player at checkpoint pos
-		await get_tree().create_timer(0.1).timeout
-		respawn_at_checkpoint()
+	# 1. Load Position/Flags
+	player.load_state(data.get("player_state", {}))
+	
+	# 2. ✅ CALCULATE and SET stats (not add!)
+	_apply_all_stats_from_base()
+
+	# 3. Restore Inventory
+	if inventory_system:
+		inventory_system.load_data(data.get("inventory_data", {}))
+		
+	checkpoint_loading_complete.emit()
+	print("✅ Checkpoint restoration complete")
 #endregion
 
 #region Save & Load System
@@ -152,24 +196,6 @@ func load_checkpoint_data() -> void:
 		checkpoint_data.clear()
 		checkpoint_data[current_checkpoint_id] = loaded_player_data
 
-func respawn_at_checkpoint() -> void:
-	if current_checkpoint_id.is_empty(): return
-
-	var data = checkpoint_data.get(current_checkpoint_id, {})
-	if data.is_empty() or not player: return
-
-	# 1. Load Position/Flags
-	player.load_state(data.get("player_state", {}))
-	
-	# 2. Re-apply Stats (calculate total health/speed based on saved points)
-	_reapply_all_stats()
-
-	# 3. Restore Inventory
-	if inventory_system:
-		inventory_system.load_data(data.get("inventory_data", {}))
-		
-	checkpoint_loading_complete.emit()
-
 func clear_checkpoint_data() -> void:
 	current_checkpoint_id = ""
 	checkpoint_data.clear()
@@ -187,62 +213,54 @@ func _show_upgrade_popup() -> void:
 func get_player_stat(stat_type: String) -> int:
 	return player_stats.get(stat_type, 0)
 
+func _apply_all_stats_from_base() -> void:
+	"""Calculates TOTAL stat values from base + allocated points"""
+	if not player or player_base_stats.is_empty(): return
+	
+	for stat_def in stat_definitions:
+		var points_allocated = get_player_stat(stat_def.type)
+		var bonus = points_allocated * stat_def.value_per_point
+		
+		match stat_def.type:
+			"max_health":
+				player.max_health = player_base_stats.max_health + bonus
+				player.health = min(player.health, player.max_health)
+				player.health_changed.emit()
+			"max_mana":
+				player.max_mana = player_base_stats.max_mana + bonus
+				player.mana = min(player.mana, player.max_mana)
+				player.mana_changed.emit()
+			"attack":
+				if "base_damage" in player:
+					player.base_damage = player_base_stats.base_damage + bonus
+			"defense":
+				if "defense_multiplier" in player:
+					player.defense_multiplier = player_base_stats.defense_multiplier + (bonus * 0.01)
+			"speed":
+				player.movement_speed = player_base_stats.movement_speed + bonus
+			"jump":
+				player.jump_velocity = player_base_stats.jump_velocity + bonus
+	
+	print("📈 Stats applied: %d points allocated" % player_stats.values().reduce(func(a, b): return a + b, 0))
+
 func modify_stat(stat_def: Resource, change: int) -> void:
 	var stat_type = stat_def.type
 	var cost = stat_def.cost_per_point
 	
-	# Validation: Adding
+	# Validation
 	if change > 0:
-		if inventory_system.coins < cost: return # Not enough money
+		if inventory_system.coins < cost: return
 		inventory_system.coins -= cost
-		
-	# Validation: Removing
 	elif change < 0:
-		if get_player_stat(stat_type) <= 0: return # Nothing to refund
+		if get_player_stat(stat_type) <= 0: return
 		inventory_system.coins += cost
 	
-	# Update Data
+	# Update allocated points
 	if not player_stats.has(stat_type): player_stats[stat_type] = 0
 	player_stats[stat_type] += change
 	
-	# Apply to Player
-	_apply_single_stat_change(stat_def, change)
-
-func _apply_single_stat_change(stat_def: Resource, change: int) -> void:
-	if not player: return
-	
-	var amount = change * stat_def.value_per_point
-	
-	match stat_def.type:
-		"max_health":
-			player.max_health += amount
-			player.health = clamp(player.health + amount, 0, player.max_health)
-			player.health_changed.emit()
-		"max_mana":
-			player.max_mana += amount
-			player.mana = clamp(player.mana + amount, 0, player.max_mana)
-			player.mana_changed.emit()
-		"attack":
-			# Assuming player has a property for this, otherwise add it to Player.gd
-			if "base_damage" in player: player.base_damage += amount
-		"defense":
-			if "defense_multiplier" in player: player.defense_multiplier += (amount * 0.01) # e.g., 1 point = 1%
-		"speed":
-			player.movement_speed += amount
-		"jump":
-			player.jump_velocity += amount # Assuming your Player script handles this logic
-		_:
-			push_warning("GameManager: Unhandled stat type '%s'" % stat_def.type)
-
-func _reapply_all_stats() -> void:
-	"""Loops through saved stats and applies them based on definitions"""
-	if not player: return
-	
-	for stat_def in stat_definitions:
-		var points_allocated = get_player_stat(stat_def.type)
-		if points_allocated > 0:
-			# Apply the TOTAL effect of all points
-			_apply_single_stat_change(stat_def, points_allocated)
+	# ✅ Recalculate from base instead of adding incrementally
+	_apply_all_stats_from_base()
 #endregion
 
 func player_act(method_name: String, a1=null, a2=null, a3=null, a4=null, a5=null) -> void:

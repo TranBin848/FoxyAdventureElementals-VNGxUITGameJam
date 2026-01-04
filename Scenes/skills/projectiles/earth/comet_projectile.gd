@@ -134,7 +134,6 @@ func _on_hit_something(_area_or_body) -> void:
 	# --- CHECK: Ignore enemies if we are too high up ---
 	if global_position.y < arming_height:
 		return
-
 	print("[Comet] Hit Enemy/Target! Exploding.")
 	_on_reach_target(true) 
 		
@@ -181,6 +180,7 @@ func _on_reach_target(force_crater: bool) -> void:
 	
 	if sprite and sprite.sprite_frames.has_animation("Comet_End"):
 		print("[Comet] Playing End Animation.")
+		AudioManager.play_sound("skill_comet_hit")
 		sprite.play("Comet_End")
 		sprite.animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
 	else:

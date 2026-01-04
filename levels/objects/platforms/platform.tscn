@@ -1,68 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bx4xi7ffye88x"]
+[gd_scene load_steps=3 format=3 uid="uid://bx4xi7ffye88x"]
 
 [ext_resource type="Texture2D" uid="uid://bn23ps3jhu4ru" path="res://assets/island/objects/moving_platform/moving_platform.png" id="1_kjyib"]
-
-[sub_resource type="GDScript" id="GDScript_5pf0j"]
-script/source = "extends AnimatableBody2D
-
-@export var is_unstable = false
-@export var reset_grace_period: float = 1.0 # New: Time to stay safe after respawn
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-
-var is_triggered = false
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	# If triggers are locked (is_triggered), we ignore the collision
-	if not is_unstable or is_triggered:
-		return
-	
-	_start_sequence()
-
-func _start_sequence() -> void:
-	is_triggered = true
-	
-	# 1. Fade out
-	var tween = create_tween()
-	tween.tween_property(self, \"modulate:a\", 0.0, 1.0)
-	await tween.finished
-	
-	# 2. Disable collision
-	collision_shape.set_deferred(\"disabled\", true)
-	
-	# 3. Wait for respawn
-	await get_tree().create_timer(5.0).timeout
-	
-	if not is_instance_valid(self): return
-	_reset_platform()
-
-func _reset_platform() -> void:
-	# 4. Re-enable collision immediately (so player can land)
-	collision_shape.set_deferred(\"disabled\", false)
-	
-	# 5. Fade in
-	var tween = create_tween()
-	tween.tween_property(self, \"modulate:a\", 1.0, 0.5)
-	await tween.finished
-	
-	# 6. Grace Period (The Logic Update)
-	# We wait here before setting is_triggered to false.
-	# During this time, the platform is solid but ignores triggers.
-	if reset_grace_period > 0:
-		await get_tree().create_timer(reset_grace_period).timeout
-	
-	# 7. Finally allow detection again
-	is_triggered = false
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5dqd"]
 size = Vector2(84, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgrtt"]
-size = Vector2(84, 13)
-
 [node name="platform" type="AnimatableBody2D"]
 sync_to_physics = false
-script = SubResource("GDScript_5pf0j")
 
 [node name="MovingPlatform" type="Sprite2D" parent="."]
 texture = ExtResource("1_kjyib")
@@ -70,14 +14,3 @@ texture = ExtResource("1_kjyib")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_l5dqd")
 one_way_collision = true
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, -10)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -3.5)
-shape = SubResource("RectangleShape2D_bgrtt")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

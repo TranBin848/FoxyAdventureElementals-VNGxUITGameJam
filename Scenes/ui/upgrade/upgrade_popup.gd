@@ -49,7 +49,7 @@ func _refresh_ui() -> void:
 	
 	# 2. Update Header
 	if points_label:
-		points_label.text = "%d Points Remaining" % virtual_coins
+		points_label.text = "%d Coins Remaining" % virtual_coins
 		# Optional: Turn text red if negative (shouldn't happen with checks, but good for debug)
 		points_label.modulate = Color.RED if virtual_coins < 0 else Color.WHITE
 	
@@ -115,9 +115,6 @@ func _on_apply_pressed() -> void:
 			
 			# Reset the staging tracker for this stat
 			session_added_points[stat.type] = 0
-
-	# NOTE: We removed the manual 'inventory_system.coins -= total_cost' line
-	# because GameManager.modify_stat() already does it!
 	
 	# Refresh UI to show the new "Base" state
 	_refresh_ui()

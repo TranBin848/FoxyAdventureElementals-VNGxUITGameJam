@@ -9,7 +9,7 @@ func control_moving() -> bool:
 	return false
 
 func _should_turn_around() -> bool:
-	if (obj.is_touch_wall() or obj.is_can_fall()): return true
+	if (obj.is_touch_wall() or obj.is_can_fall() or obj.is_outside_wander_limit()): return true
 	return false
 
 func control_flying_up() -> void:

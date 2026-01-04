@@ -1,141 +1,84 @@
-extends ProjectileBase
 class_name EarthquakeProjectile
+extends ProjectileBase
 
-@export var wave_count: int = 5
-@export var spacing: float = 48.0
-@export var spawn_stagger_sec: float = 0.05
-@export var segment_lifetime_sec: float = 3.0
-@export var segment_scene: PackedScene = null
+@export_group("Spawner Settings")
+@export var wave_count_base: int = 5
+@export var spawn_interval: float = 0.05
+@export var segment_scene: PackedScene # MUST ASSIGN THIS IN EDITOR
 
 var segments_spawned: int = 0
-var is_hit: bool = false
-
-func setup(skill: Skill, dir: Vector2) -> void:
-	super.setup(skill,dir)
-	self.wave_count = (wave_count * skill.level + 1 )/2
-	#print(skill.damage)
-	#print(skill.elemental_type)
-	speed = skill.speed
-	elemental_type = skill.elemental_type
+var current_wave_target: int = 0
+var is_stopped: bool = false
 
 func _ready() -> void:
-	# 1. HIDE VISUALS
-	if has_node("Skill"):
-		var sprite = get_node("Skill")
-		sprite.flip_h = direction.x < 0
-		sprite.visible = false
-		
-	if has_node("FX"):
-		var sprite = get_node("FX")
-		sprite.flip_h = direction.x < 0
-		sprite.visible = false
+	# Only do configuration here, don't start logic yet
+	collision_layer = 0 
+	collision_mask = 1 
 	
-	# 2. CONFIGURE COLLISION - Re-enable collision mask for terrain detection
-	collision_layer = 0  # Doesn't exist on any layer
-	collision_mask = 1   # Can detect terrain (adjust to your terrain layer)
+	AudioManager.play_sound("skill_earthquake")
 	
-	# Disable the HitArea for enemy damage on the main projectile
-	if has_node("HitArea2D"):
-		get_node("HitArea2D").monitorable = false
-		get_node("HitArea2D").monitoring = false
-	
-	# Connect body_entered signal to detect terrain collision
-	if not body_entered.is_connected(_on_terrain_collision):
-		body_entered.connect(_on_terrain_collision)
+	# REMOVED: _start_spawn_routine() 
 
-	_spawn_wave_continuously()
+func setup(skill: Skill, dir: Vector2) -> void:
+	super.setup(skill, dir)
+	
+	# 1. Calculate the target
+	self.current_wave_target = (wave_count_base * skill.level + 1) / 2
+	
+	# Debug print to verify
+	# print("Target: ", current_wave_target, " | Base: ", wave_count_base, " | Lvl: ", skill.level)
+	
+	speed = skill.speed
+	elemental_type = skill.elemental_type
+	
+	# 2. NOW start the routine, guaranteed to have data
+	_start_spawn_routine()
 
 func _physics_process(delta: float) -> void:
+	if is_stopped: return
 	super._physics_process(delta)
 
-# Detect collision with terrain (TileMapLayer)
-func _on_terrain_collision(body: Node2D) -> void:
-	if body is TileMapLayer:
-		# Spawn one final segment at collision point
-		_spawn_segment()
-		_trigger_end()
+# Detect Wall Collision
+func _on_body_entered(body: Node2D) -> void:
+	# If we hit a wall/terrain
+	if body is TileMapLayer or body.is_in_group("terrain"):
+		_spawn_segment() # Spawn one last one at the wall
+		_stop_projectile()
 
-func _on_hit_area_2d_hitted(_area: Variant) -> void:
-	pass 
-
-func _on_body_entered(_body: Node2D) -> void:
-	pass
-
-func _trigger_end() -> void:
-	if is_hit:
+func _start_spawn_routine() -> void:
+	if not segment_scene:
+		push_error("EarthquakeProjectile: No Segment Scene assigned!")
+		queue_free()
 		return
-	is_hit = true
-	set_physics_process(false)
-	queue_free()
 
-func _spawn_wave_continuously() -> void:
-	while segments_spawned < wave_count and is_inside_tree() and not is_hit:
+	while segments_spawned < current_wave_target and not is_stopped:
 		_spawn_segment()
 		segments_spawned += 1
 		
-		if spawn_stagger_sec > 0.0 and segments_spawned < wave_count:
-			await get_tree().create_timer(spawn_stagger_sec).timeout
-	
-	# Only end if we completed all segments naturally (not from collision)
-	if not is_hit:
-		_trigger_end()
+		# Wait for the stagger time before moving and spawning the next
+		await get_tree().create_timer(spawn_interval).timeout
+		
+		# Safety check: If we died/stopped while waiting
+		if not is_inside_tree(): return
+
+	# Done spawning
+	_stop_projectile()
 
 func _spawn_segment() -> void:
-	var segment: Area2D = null
+	var segment = segment_scene.instantiate() as EarthquakeSegment
+	get_tree().current_scene.add_child(segment)
+	segment.global_position = global_position
 	
-	if segment_scene:
-		segment = segment_scene.instantiate()
-	else:
-		segment = Area2D.new()
-		
-		if has_node("Skill"):
-			var skill_sprite = get_node("Skill").duplicate()
-			skill_sprite.visible = true
-			segment.add_child(skill_sprite)
-			skill_sprite.flip_h = direction.x < 0
-			
-		if has_node("FX"):
-			var fx_sprite = get_node("FX").duplicate()
-			fx_sprite.visible = true
-			segment.add_child(fx_sprite)
-			fx_sprite.flip_h = direction.x < 0
-			
-		if has_node("AnimationPlayer"):
-			var anim_player = get_node("AnimationPlayer").duplicate()
-			segment.add_child(anim_player)
-			anim_player.play("Earthquake")
-			anim_player.animation_finished.connect(
-				func(_anim_name): if is_instance_valid(segment): segment.queue_free(),
-				CONNECT_ONE_SHOT
-			)
-			
-		if has_node("HitArea2D"):
-			var hit = get_node("HitArea2D").duplicate()
-			segment.add_child(hit)
-			hit.monitorable = true
-			hit.monitoring = true
+	# 1. Set the Data
+	segment.damage = damage
+	segment.elemental_type = elemental_type
+	segment.direction = direction 
 	
-	if segment:
-		segment.global_position = global_position
-		get_tree().current_scene.add_child(segment)
-		
-		if segment is ProjectileBase:
-			segment.speed = 0
-			segment.damage = damage
-			segment.elemental_type = elemental_type
-			segment.collision_mask = 2  # Enemies only
-			segment.collision_layer = 0
-			
-			if segment.has_node("Skill"):
-				segment.get_node("Skill").flip_h = direction.x < 0
+	# 2. Update the Visuals NOW (because we just set the direction)
+	if segment.has_method("update_facing_visuals"):
+		segment.update_facing_visuals()
 
-			if segment.has_node("FX"):
-				segment.get_node("FX").flip_h = direction.x < 0
-			
-			if segment.has_node("AnimationPlayer"):
-				var seg_anim = segment.get_node("AnimationPlayer")
-				seg_anim.play("Earthquake")
-				seg_anim.animation_finished.connect(
-					func(_anim_name): if is_instance_valid(segment): segment.queue_free(),
-					CONNECT_ONE_SHOT
-				)
+func _stop_projectile() -> void:
+	is_stopped = true
+	set_physics_process(false)
+	queue_free()
