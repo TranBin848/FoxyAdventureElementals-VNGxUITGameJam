@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d356v232gn1ce"]
 
-[ext_resource type="Script" uid="uid://dcsj0xl6rkv00" path="res://levels/objects/platforms/unstable_platform.gd" id="1_g1n8u"]
+[ext_resource type="Script" path="res://levels/objects/platforms/unstable_platform.gd" id="1_g1n8u"]
 [ext_resource type="Texture2D" uid="uid://bn23ps3jhu4ru" path="res://assets/island/objects/moving_platform/moving_platform.png" id="2_qiubb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbxlp"]

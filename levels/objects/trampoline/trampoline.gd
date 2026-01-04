@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var launch_force: float = 600.0
+@export var launch_force: float = 900.0
 @export var boost_modifier: float = 1.2 # Multiplier if holding jump
 @export var only_launch_when_falling: bool = true
 
