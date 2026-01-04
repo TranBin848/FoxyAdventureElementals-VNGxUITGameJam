@@ -182,7 +182,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 5.0
 }]
 
 [node name="StunnedDebuff" type="Node2D"]
@@ -198,6 +198,8 @@ visible = false
 self_modulate = Color(0.635012, 0.301128, 0, 1)
 position = Vector2(5, -27)
 sprite_frames = SubResource("SpriteFrames_armm3")
+frame = 1
+frame_progress = 0.312113
 
 [node name="Sprite2D" type="Sprite2D" parent="CircleAnimatedSprite2D"]
 texture = ExtResource("4_xse44")

@@ -7,15 +7,18 @@ var direction: Vector2 = Vector2.RIGHT
 var damage: float
 var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 var affected_enemies: Array[EnemyCharacter] = []
-
+var level: int
 
 func setup(skill: Skill, dir: Vector2) -> void:
 	#print(skill.damage)
 	#print(skill.elemental_type)
+	level = skill.level
 	speed = skill.speed
 	damage = skill.damage * (skill.level + 1) / 2
 	elemental_type = skill.elemental_type
 	direction = dir.normalized() if dir.length() > 0 else Vector2.RIGHT
+	
+	print("skill level: " + str(skill.level))
 	
 	if has_node("HitArea2D"):
 		var hit_area: HitArea2D = $HitArea2D

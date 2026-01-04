@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7j32hjxxv7xi"
-path="res://.godot/imported/Wood_v2.png-110933396835c485d7cf1a98cb755025.ctex"
+uid="uid://0d7ui05tapgc"
+path="res://.godot/imported/fox_final_boss_dead_11.png-e828bc6730a43d607d422323ffe01539.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/skills/icon element/Wood_v2.png"
-dest_files=["res://.godot/imported/Wood_v2.png-110933396835c485d7cf1a98cb755025.ctex"]
+source_file="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_11.png"
+dest_files=["res://.godot/imported/fox_final_boss_dead_11.png-e828bc6730a43d607d422323ffe01539.ctex"]
 
 [params]
 

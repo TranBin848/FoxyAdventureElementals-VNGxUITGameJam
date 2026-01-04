@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7j32hjxxv7xi"
-path="res://.godot/imported/Wood_v2.png-110933396835c485d7cf1a98cb755025.ctex"
+uid="uid://decho11oot68r"
+path="res://.godot/imported/fox_final_boss_dash_2.png-36bcd37a719a90e0393c4e63ee53fe0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/skills/icon element/Wood_v2.png"
-dest_files=["res://.godot/imported/Wood_v2.png-110933396835c485d7cf1a98cb755025.ctex"]
+source_file="res://assets/foxy/fox_final_boss/final/fox_final_boss_dash_2.png"
+dest_files=["res://.godot/imported/fox_final_boss_dash_2.png-36bcd37a719a90e0393c4e63ee53fe0f.ctex"]
 
 [params]
 
