@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0jkkqjvv3603"]
+
+[ext_resource type="Script" uid="uid://c1idmqur6y3yc" path="res://scenes/ui/boss_healthbar.gd" id="1_icsup"]
+[ext_resource type="Texture2D" uid="uid://041lpp4nxtyb" path="res://assets/ui/boss_healthbar/under.png" id="2_3f27w"]
+[ext_resource type="Texture2D" uid="uid://2s4mgab2cud0" path="res://assets/ui/boss_healthbar/overlay_metal.png" id="2_nf7ti"]
+[ext_resource type="Texture2D" uid="uid://c4x06yfc6at3v" path="res://assets/ui/boss_healthbar/overlay_fire.png" id="3_lovwd"]
+[ext_resource type="Texture2D" uid="uid://gjp5g0cs52v7" path="res://assets/ui/boss_healthbar/overlay_wood.png" id="3_mxlci"]
+[ext_resource type="Texture2D" uid="uid://chb7fwwn2081j" path="res://assets/ui/boss_healthbar/fill.png" id="4_amais"]
+[ext_resource type="Texture2D" uid="uid://cfic1egf6ia2g" path="res://assets/ui/boss_healthbar/overlay_water.png" id="4_hkd8q"]
+[ext_resource type="Texture2D" uid="uid://gob7rebgrd2f" path="res://assets/ui/boss_healthbar/overlay_earth.png" id="6_hh1p0"]
+
+[node name="BossHealthbar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_icsup")
+metal_overlay = ExtResource("2_nf7ti")
+wood_overlay = ExtResource("3_mxlci")
+water_overlay = ExtResource("4_hkd8q")
+fire_overlay = ExtResource("3_lovwd")
+earth_overlay = ExtResource("6_hh1p0")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -391.0
+offset_right = 391.0
+offset_bottom = 90.0
+grow_horizontal = 2
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_3f27w")
+texture_over = ExtResource("3_lovwd")
+texture_progress = ExtResource("4_amais")

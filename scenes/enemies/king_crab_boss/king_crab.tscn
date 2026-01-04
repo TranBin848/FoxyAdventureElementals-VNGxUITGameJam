@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bulkbnhholp3f"]
+[gd_scene load_steps=58 format=3 uid="uid://bulkbnhholp3f"]
 
 [ext_resource type="Script" uid="uid://7jstni61ay8x" path="res://scenes/enemies/king_crab_boss/boss.gd" id="1_3jl1k"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fh3hm"]
@@ -52,9 +52,7 @@
 [ext_resource type="Script" uid="uid://df18ficl3bsol" path="res://scenes/enemies/king_crab_boss/stand_up.gd" id="45_rxstk"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="45_vjhg0"]
 [ext_resource type="Script" uid="uid://78xvnhlelcbr" path="res://scenes/enemies/king_crab_boss/knock_back.gd" id="51_gkpjl"]
-[ext_resource type="Texture2D" uid="uid://f3notv5k38up" path="res://assets/ui/test_healthbar_1.png" id="53_2is87"]
-[ext_resource type="Texture2D" uid="uid://cw47xt1g40luc" path="res://assets/ui/test_healthbar_3.png" id="54_glysl"]
-[ext_resource type="Texture2D" uid="uid://bf0d50myfenl0" path="res://assets/ui/test_healthbar_2.png" id="55_pv4p0"]
+[ext_resource type="PackedScene" uid="uid://d0jkkqjvv3603" path="res://scenes/ui/boss_healthbar.tscn" id="53_wrilv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
 animations = [{
@@ -250,6 +248,7 @@ radius = 25.0
 collision_layer = 137
 script = ExtResource("1_3jl1k")
 skill_cd = 5.0
+phase_order = Array[int]([5, 1])
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 sight = 200.0
@@ -393,28 +392,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 value = 100.0
 
-[node name="Control2" type="Control" parent="UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Control2"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -293.5
-offset_right = 293.5
-offset_bottom = 80.0
-grow_horizontal = 2
-value = 100.0
-nine_patch_stretch = true
-texture_under = ExtResource("53_2is87")
-texture_over = ExtResource("54_glysl")
-texture_progress = ExtResource("55_pv4p0")
-tint_under = Color(0.806766, 0.896636, 0.916054, 1)
+[node name="BossHealthbar" parent="UI" node_paths=PackedStringArray("boss_node") instance=ExtResource("53_wrilv")]
+boss_node = NodePath("../..")
+transition_duration = 2.0
