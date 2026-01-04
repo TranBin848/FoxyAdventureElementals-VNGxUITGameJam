@@ -84,7 +84,6 @@ func respawn_at_portal() -> bool:
 
 func _handle_checkpoint_validation() -> void:
 	if current_checkpoint_id.is_empty(): return
-
 	var saved_stage_path := ""
 	
 	# Get path from memory OR disk

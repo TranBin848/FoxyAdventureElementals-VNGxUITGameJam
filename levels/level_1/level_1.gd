@@ -19,7 +19,7 @@ func _ready() -> void:
 		AudioManager.play_music("music_background")
 		AudioManager.play_ambience("ambience_forest", -10)
 		
-	var skill_names = ["Thousand Swords", "Wooden Clone", "Earthquake", "Burrow"]
+	var skill_names = ["Thousand Swords", "Wooden Clone", "Earthquake", "Tornado", "Fireball"]
 	
 	for i in skill_names.size():
 		# 🔥 Validate + equip
