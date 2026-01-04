@@ -23,5 +23,5 @@ func _ready() -> void:
 	call_deferred("start_dialogue")
 
 func start_dialogue():
-	Dialogic.start("level0")
+	Dialogic.start("level_0")
 	

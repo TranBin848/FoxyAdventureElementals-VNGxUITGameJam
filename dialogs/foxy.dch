@@ -10,14 +10,14 @@
 "style": "",
 "suffix": ""
 },
-&"default_portrait": "foxy",
+&"default_portrait": "Foxy",
 &"description": "",
-&"display_name": "foxy",
+&"display_name": "Foxy",
 &"mirror": false,
 &"nicknames": [""],
 &"offset": Vector2(0, 0),
 &"portraits": {
-"foxy": {
+"Foxy": {
 "export_overrides": {
 "image": "\"res://assets/foxy/fox_hat/fox_idle_1.png\""
 },

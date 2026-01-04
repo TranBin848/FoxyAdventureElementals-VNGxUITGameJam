@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://dot0vlx7mvjxl" path="res://scenes/enemies/final_boss_phase_1/boss__phase_1.tscn" id="29_6kue7"]
 [ext_resource type="PackedScene" uid="uid://dtgq532abhp77" path="res://scenes/enemies/final_boss_phase_1/chain/chain.tscn" id="30_0e1im"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="30_ig72v"]
-[ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/boss/king_crab.tscn" id="30_ninp4"]
+[ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/king_crab_boss/king_crab.tscn" id="30_ninp4"]
 [ext_resource type="PackedScene" uid="uid://d0ig8xrtjp2v1" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.tscn" id="31_kfbrm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]

@@ -39,14 +39,14 @@ GameProgressManager="*res://scripts/autoload/game_progress_manager.gd"
 [dialogic]
 
 directories/dch_directory={
-"foxy": "res://dialogs/foxy.dch",
+"Foxy": "res://dialogs/Foxy.dch",
 "npc_master_fox": "res://dialogs/npc_master_fox.dch",
 "npc_villager": "res://dialogs/npc_villager.dch"
 }
 directories/dtl_directory={
 "end_lv1": "res://dialogs/end_lv1.dtl",
 "guide_elemental": "res://dialogs/guide_elemental.dtl",
-"level0": "res://dialogic_timelines/level0.dtl",
+"level_0": "res://dialogic_timelines/level_0.dtl",
 "sail_boat": "res://dialogs/sail_boat.dtl",
 "start_game": "res://dialogs/start_game.dtl",
 "upgrade_stats": "res://dialogs/upgrade_stats.dtl"
