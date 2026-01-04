@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=67 format=3 uid="uid://d0a57drf7tx4v"]
 
 [ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
 [ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/king_crab/King_Crab_9.png" id="2_fxnya"]
@@ -61,6 +61,7 @@
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="55_2anp0"]
 [ext_resource type="Script" uid="uid://byheauwog643v" path="res://scenes/enemies/final_boss/dead.gd" id="56_2anp0"]
 [ext_resource type="Script" uid="uid://rs2knmi2vck7" path="res://scenes/enemies/final_boss/charge.gd" id="57_mq2q6"]
+[ext_resource type="Script" uid="uid://nbw04rh8ifur" path="res://scenes/enemies/final_boss/cutscene_5.gd" id="58_jywuh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
 animations = [{
@@ -359,6 +360,10 @@ script = ExtResource("51_cutscene3")
 
 [node name="Cutscene4" type="Node" parent="States"]
 script = ExtResource("51_cutscene4")
+bounce_back_velocity = null
+
+[node name="Cutscene5" type="Node" parent="States"]
+script = ExtResource("58_jywuh")
 
 [node name="SpamEnemies" type="Node" parent="States"]
 script = ExtResource("51_spam")

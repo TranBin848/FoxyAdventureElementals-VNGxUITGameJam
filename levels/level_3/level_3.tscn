@@ -199,7 +199,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.0630394
+shader_parameter/y_zoom = 1.0
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -281,54 +281,18 @@ elemental_type = 4
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(3786, -368)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 5
 
 [node name="Mushroom4" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(7874, -755)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 4
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(6015, -188)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 5
 
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("3_omsu6")]
 position = Vector2(6026, -4)
-spike = 0.0
-jump_height = 0.0
-air_time = 0.0
-attack_speed = 0.0
-movement_speed = 200.0
-gravity = 700.0
-_next_direction = 1
-attack_damage = 1
-max_mana = 1000
 elemental_type = 5
 
 [node name="Crab" parent="Enemies" instance=ExtResource("4_06aei")]
