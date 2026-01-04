@@ -37,6 +37,5 @@ scale = Vector2(0.7, 0.7)
 pivot_offset = Vector2(586.5, 0)
 value = 100.0
 texture_under = ExtResource("2_3f27w")
-texture_over = ExtResource("3_lovwd")
 texture_progress = ExtResource("4_amais")
-texture_progress_offset = Vector2(60, 46)
+texture_progress_offset = Vector2(50, 50)

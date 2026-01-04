@@ -32,6 +32,7 @@ func _ready() -> void:
 		
 	health_bar.hide()
 	health_bar.texture_over = null
+	health_bar.value = 100
 	
 	if boss_node:
 		_connect_signals()
@@ -59,12 +60,13 @@ func _update_health(new_value_percent: float) -> void:
 		
 	health_tween = create_tween()
 	
+	#print(name + str(new_value_percent))
+	
 	health_tween.tween_property(health_bar, "value", new_value_percent, 0.2)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 
 func _on_fight_started() -> void:
-	health_bar.value = 100
 	health_bar.show()
 
 func _on_boss_died() -> void:
