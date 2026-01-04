@@ -249,16 +249,16 @@ func _setup_particle_audio():
 		current_particle.add_child(particle_sfx)
 	
 	var audio_clip = AudioManager.audio_database.get_clip(audio_id)
-	if audio_clip and audio_clip.stream:
-		particle_sfx.stream = audio_clip.stream
+	if audio_clip:
+		# Set constant properties once
 		particle_sfx.volume_db = audio_clip.volume_db
 		particle_sfx.max_distance = 300
 		particle_sfx.autoplay = false
 		
-		# Setup timer
-		_start_particle_audio_timer(particle_sfx)
+		# Pass the clip to the timer setup so we can access variations later
+		_start_particle_audio_timer(particle_sfx, audio_clip)
 
-func _start_particle_audio_timer(audio_player: AudioStreamPlayer2D) -> void:
+func _start_particle_audio_timer(audio_player: AudioStreamPlayer2D, audio_clip: AudioClip) -> void:
 	# Clean up existing timer if any
 	if particle_audio_timer:
 		particle_audio_timer.stop()
@@ -270,15 +270,31 @@ func _start_particle_audio_timer(audio_player: AudioStreamPlayer2D) -> void:
 	add_child(particle_audio_timer)
 	particle_audio_timer.wait_time = particle_audio_interval
 	particle_audio_timer.one_shot = false
-	particle_audio_timer.timeout.connect(_on_particle_audio_timer_timeout.bind(audio_player))
+	
+	# BINDING: We pass both the player AND the clip to the timeout function
+	particle_audio_timer.timeout.connect(_on_particle_audio_timer_timeout.bind(audio_player, audio_clip))
+	
 	particle_audio_timer.start()
 	
-	# Play immediately
-	audio_player.play()
+	# Play immediately (using the helper logic manually for the first time)
+	_play_with_variation(audio_player, audio_clip)
 
-func _on_particle_audio_timer_timeout(audio_player: AudioStreamPlayer2D) -> void:
+func _on_particle_audio_timer_timeout(audio_player: AudioStreamPlayer2D, audio_clip: AudioClip) -> void:
 	if audio_player and is_instance_valid(audio_player):
-		audio_player.play()
+		_play_with_variation(audio_player, audio_clip)
+
+# Shared helper to apply random stream and pitch before playing
+func _play_with_variation(player: AudioStreamPlayer2D, clip: AudioClip) -> void:
+	# 1. Get a random stream variation using the helper you added
+	player.stream = clip.get_playback_stream()
+	
+	# 2. Apply random pitch (since we are resetting the play, we should re-roll pitch too)
+	if clip.randomize_pitch:
+		player.pitch_scale = randf_range(clip.pitch_min, clip.pitch_max)
+	else:
+		player.pitch_scale = 1.0
+		
+	player.play()
 
 func _init_culling() -> void:
 	# Create enabler programmatically

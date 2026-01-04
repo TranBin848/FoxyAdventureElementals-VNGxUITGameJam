@@ -442,7 +442,7 @@ func _fire_area(skill: Skill) -> void:
 	area_node.global_position = target_pos
 	
 	if area_node.has_method("setup"):
-		area_node.setup(skill, target_pos, target_enemy)
+		area_node.setup(skill, position, target_enemy)
 
 func _apply_buff_skill(skill: Skill) -> void:
 	var duration = skill.duration * (skill.level + 1.0) / 2.0

@@ -245,8 +245,11 @@ func get_current_ambience_id() -> String:
 
 ## Play audio clip (internal function)
 func play_audio_clip(clip: AudioClip, volume_override: float = 0.0, is_music: bool = false) -> void:
-	if clip.stream == null:
-		push_error("AudioClip does not have stream!")
+	# CHANGE 1: Get the stream via the helper function/logic
+	var stream_to_play = clip.get_playback_stream()
+
+	if stream_to_play == null:
+		push_error("AudioClip has no stream or variations!")
 		return
 	
 	# Find available player
@@ -260,20 +263,19 @@ func play_audio_clip(clip: AudioClip, volume_override: float = 0.0, is_music: bo
 				player = sfx_player
 				break
 		
-		# If no available player, use first player (override)
 		if player == null:
 			player = sfx_players[0]
 	
-	# Configure and play
-	player.stream = clip.stream
+	# CHANGE 2: Assign stream_to_play instead of clip.stream
+	player.stream = stream_to_play
+	
 	player.volume_db = clip.volume_db + volume_override
 	if clip.randomize_pitch:
 		player.pitch_scale = randf_range(clip.pitch_min, clip.pitch_max)
 	else:
 		player.pitch_scale = 1.0
 	player.play()
-
-
+	
 ## Set volume for bus
 func set_bus_volume(bus_name: String, volume_db: float) -> void:
 	var bus_index = AudioServer.get_bus_index(bus_name)
