@@ -181,10 +181,6 @@ func set_speed_multiplier(multiplier: float) -> void:
 func set_jump_multiplier(multiplier: float) -> void: 
 	jump_multiplier = multiplier
 
-func set_speed_multiplier(multiplier: float) -> void: speed_multiplier = multiplier
-func set_jump_multiplier(multiplier: float) -> void: jump_multiplier = multiplier
-
-
 func _update_movement(delta: float) -> void:
 	if not can_move: 
 		velocity = Vector2.ZERO
