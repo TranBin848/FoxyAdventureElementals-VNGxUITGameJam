@@ -29,8 +29,11 @@ func _ready() -> void:
 	float_tween.tween_property(sprite, "position:y", -5.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	float_tween.tween_property(sprite, "position:y", 5.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
+	if skill:
+		setup_drop(skill,1)
+
 func _on_detection_player_area_2d_body_entered(body: Node2D):
-	if body is Player:
+	if body is Player and skill.type != "ultimate":
 		target_player = body as Player
 		is_attracted = true
 		
@@ -78,6 +81,19 @@ func _collect_item(player: Player) -> void:
 		
 	# Add skill through Player with stack amount
 	SkillTreeManager.collect_skill(skill.name, stack_amount)
+	
+	if (skill.type == "ultimate"):
+		match skill.elemental_type:
+			ElementsEnum.Elements.FIRE:
+				GameProgressManager.trigger_event("FIRE_ULTIMATE")
+			ElementsEnum.Elements.WOOD:
+				GameProgressManager.trigger_event("WOOD_ULTIMATE")
+			ElementsEnum.Elements.METAL:
+				GameProgressManager.trigger_event("METAL_ULTIMATE")
+			ElementsEnum.Elements.WATER:
+				GameProgressManager.trigger_event("WATER_ULTIMATE")
+			ElementsEnum.Elements.EARTH:
+				GameProgressManager.trigger_event("EARTH_ULTIMATE")
 	
 	_play_collect_effect()
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bagtndimgpaee"]
+[gd_scene load_steps=15 format=3 uid="uid://bagtndimgpaee"]
 
 [ext_resource type="Script" uid="uid://cur8abreu6wmw" path="res://levels/objects/chest/boss_chest.gd" id="1_7bnhl"]
 [ext_resource type="Texture2D" uid="uid://bidl5brkimhxo" path="res://assets/items/chest/chest_close_01.png" id="1_o3ntu"]
 [ext_resource type="Texture2D" uid="uid://bjcqjfm23puad" path="res://assets/items/chest/chest_close_02.png" id="2_7bnhl"]
-[ext_resource type="PackedScene" uid="uid://t052oro0itet" path="res://scenes/wand/wand_pickup.tscn" id="2_gkbk2"]
 [ext_resource type="Texture2D" uid="uid://dqrogefu4p788" path="res://assets/items/chest/chest_close_03.png" id="3_jn43n"]
 [ext_resource type="Texture2D" uid="uid://btnwd6wmuxmda" path="res://assets/items/chest/chest_open_01.png" id="4_gkbk2"]
 [ext_resource type="Texture2D" uid="uid://dkn0i1fahffwr" path="res://assets/items/chest/chest_open_02.png" id="5_uy604"]
@@ -59,9 +58,9 @@ size = Vector2(34, 27)
 size = Vector2(82, 33)
 
 [node name="BossChest" type="RigidBody2D"]
+mass = 10000.0
 physics_material_override = SubResource("PhysicsMaterial_o3ntu")
 script = ExtResource("1_7bnhl")
-wand_pickup_scene = ExtResource("2_gkbk2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.6, 0.001, 0.5, 1)

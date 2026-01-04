@@ -8,6 +8,12 @@ var first_coin_collected: bool = false
 var first_key_collected: bool = false
 var first_enemy_killed: bool = false
 var first_cutlass_collected: bool = false
+var first_weapon_collected: bool = false
+var fire_ultimate_collected: bool = false
+var water_ultimate_collected: bool = false
+var wood_ultimate_collected: bool = false
+var metal_ultimate_collected: bool = false
+var earth_ultimate_collected: bool = false
 
 # Configuration for the guides
 # Format: "EVENT_KEY": { "title": "", "content": "", "video": "" }

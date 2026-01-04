@@ -115,6 +115,7 @@ var jump_gravity: float
 var fall_gravity: float
 var coyote_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
+var regen_timer: float = 0.0
 #endregion
 
 # ==============================================================================
@@ -164,6 +165,7 @@ func _physics_process(delta: float) -> void:
 	
 	_handle_invulnerability(delta)
 	_handle_rigid_push()
+	_regen_stat(delta)
 
 	# Enforce visual state
 	if current_buff_state == BuffState.BURROW or current_buff_state == BuffState.INVISIBLE:
@@ -172,6 +174,12 @@ func _physics_process(delta: float) -> void:
 	if debuglabel:
 		debuglabel.text = str(fsm.current_state.name)
 
+func _regen_stat(delta: float) -> void:
+	regen_timer += delta
+	if (regen_timer > 1.0):
+		mana = min(mana + 2,max_mana)
+		mana_changed.emit()
+		regen_timer = 0
 
 # ==============================================================================
 # MOVEMENT & PHYSICS
@@ -461,6 +469,7 @@ func _apply_buff_skill(skill: Skill) -> void:
 		_apply_heal_over_time(skill.heal_per_tick, duration, skill.tick_interval)
 
 func _apply_heal_over_time(amount: float, duration: float, interval: float) -> void:
+	AudioManager.play_sound("skill_heal")
 	var ticks = floor(duration / interval)
 	for i in range(ticks):
 		if health <= 0: break

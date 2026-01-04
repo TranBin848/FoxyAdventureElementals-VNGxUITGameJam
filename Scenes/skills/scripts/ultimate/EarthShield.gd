@@ -3,5 +3,6 @@ class_name EarthShield
 
 func _init():
 	name = "Earth Shield"
-	elemental_type = ElementsEnum.Elements.METAL
+	elemental_type = ElementsEnum.Elements.EARTH
 	type = "ultimate"
+	texture_path = "res://assets/skills/icon element/Earth_v2.png"
