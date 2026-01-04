@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/cute mushroom idle.png-dc03d6bed4a9bfd48e1857
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
