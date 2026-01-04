@@ -102,6 +102,7 @@ elements_debuff = Dictionary[int, PackedScene]({
 shader_path = "uid://doovon2v0i5dx"
 spike = 1.0
 movement_range = 200.0
+movement_speed = 50.0
 max_health = 10
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
