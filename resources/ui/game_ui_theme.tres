@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://dkoho3svds8d5"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://dkoho3svds8d5"]
 
 [ext_resource type="Texture2D" uid="uid://dekwkca5hfw3l" path="res://assets/ui/basic_ui_sprite.png" id="1_5pf0f"]
 [ext_resource type="Texture2D" uid="uid://rb25hlntywjy" path="res://assets/ui/MediavelFree.png" id="1_v3a22"]
 [ext_resource type="Texture2D" uid="uid://pjg067fjvr3h" path="res://assets/ui/pannel_player.png" id="2_yxdl1"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_swjfl"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="5_j2ptf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1nv5v"]
 atlas = ExtResource("1_v3a22")
@@ -87,6 +88,7 @@ texture_margin_right = 4.0
 texture_margin_bottom = 6.0
 
 [resource]
+default_font = ExtResource("5_j2ptf")
 DarkWoodPanel/base_type = &"PanelContainer"
 DarkWoodPanel/styles/panel = SubResource("StyleBoxTexture_yxdl1")
 HBoxContainer/constants/separation = 4

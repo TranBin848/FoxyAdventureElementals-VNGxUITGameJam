@@ -26,7 +26,10 @@ func _ready() -> void:
 func _setup() -> void:
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
-
+	
+	if player == null:
+		return
+	
 	previous_health = player.health
 	player.health_changed.connect(_on_health_change)
 	player.hurt.connect(_show_hurt_icon)
@@ -49,7 +52,7 @@ func _update_health() -> void:
 	# update UI
 	healthbar.value = hp_percent
 
-	health_label.text = str(player.health) + "/" + str(player.max_health)
+	health_label.text = str(max(player.health,0)) + "/" + str(player.max_health)
 
 
 func get_health_percentage() -> float:

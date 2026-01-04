@@ -6,7 +6,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_1f3o5"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 237, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 45, -63)
 }
 point_count = 2
 
@@ -78,13 +78,15 @@ script = ExtResource("1_ca30f")
 position = Vector2(4, 0)
 rotates = false
 
-[node name="StaticBody2D" type="AnimatableBody2D" parent="PathFollow2D"]
-sync_to_physics = false
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../AnimatableBody2D")
 
-[node name="MovingPlatform" type="Sprite2D" parent="PathFollow2D/StaticBody2D"]
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="PathFollow2D"]
+
+[node name="MovingPlatform" type="Sprite2D" parent="PathFollow2D/AnimatableBody2D"]
 texture = ExtResource("1_nma6l")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/AnimatableBody2D"]
 shape = SubResource("RectangleShape2D_lg0vp")
 one_way_collision = true
 

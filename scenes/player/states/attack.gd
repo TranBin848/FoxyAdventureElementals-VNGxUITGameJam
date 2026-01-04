@@ -6,7 +6,13 @@ func _enter() -> void:
 	AudioManager.play_sound("player_attack")
 	obj.velocity.x = 0
 	
+	var hit_area_2d = obj.get_node("Direction/HitArea2D")
+	
 	#Enable collision shape of hit area
+	if obj.current_weapon == obj.WeaponType.BLADE:
+		hit_area_2d.damage = 5
+	elif obj.current_weapon == obj.WeaponType.WAND:
+		hit_area_2d.damage = 1
 	obj.get_node("Direction/HitArea2D/CollisionShape2D").disabled = false
 	
 	#add fx

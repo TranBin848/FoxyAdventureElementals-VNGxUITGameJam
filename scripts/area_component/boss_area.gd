@@ -5,20 +5,27 @@ extends Area2D
 @export var boss_music_id: String = ""
 var previous_music_id
 var player: Player = null
+var triggered: bool = false
 
 func _ready() -> void:
 	boss.boss_zone = self
 
 func _on_boss_dead() -> void:
+	
 	if player:
+		print("trigger")
 		CameraTransition.transition_camera2D(player.camera_2d, 2)
-		player.camera_2d
+		#player.camera_2d
 	collision.disabled = true
 	AudioManager.play_music("music_victory", 0, 2)
 	AudioManager.play_next_music(previous_music_id, 0, 2)
 
 func _on_body_entered(body: Node2D) -> void:
+	if triggered:
+		return
+	
 	if body is Player:
+		triggered = true
 		player = body
 		CameraTransition.transition_camera2D(camera_2d, 2)
 	if boss:
