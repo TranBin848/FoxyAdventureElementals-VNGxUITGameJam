@@ -9,7 +9,7 @@ var has_exploded := false
 
 
 func fire(start_pos: Vector2, target_pos: Vector2, angle_deg: float, dir: float):
-	position = start_pos
+	global_position = start_pos
 	# var v = compute_initial_velocity(start_pos, target_pos, angle_deg, gravity) * dir
 	var v = Vector2(200 * dir, -200)
 	linear_velocity = v

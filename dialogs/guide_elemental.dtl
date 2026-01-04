@@ -1,3 +1,4 @@
+do GameManager.player_act("toggle_actor_state")
 foxy:Cậu… giống hệt tôi… Cậu là ai?
 
 npc_master_fox:Một phần của cậu. Ta đến để nhắc cậu điều quan trọng.
@@ -24,3 +25,4 @@ foxy:Những điều này… sao tôi thấy quen?
 npc_master_fox:Vì cậu từng biết. Chỉ là ký ức đang ngủ. Hãy đi tiếp. Ta sẽ lại gặp cậu sớm thôi.
 
 Chú cáo ánh sáng mờ dần và biến mất. Foxy nhìn cây gậy trong tay, cảm nhận năng lượng yếu ớt tỏa ra từ nó.
+do GameManager.player_act("toggle_actor_state")

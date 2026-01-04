@@ -108,6 +108,7 @@ radius = 16.0
 height = 32.0
 
 [node name="Starfish" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 8
 collision_mask = 129
 script = ExtResource("1_wfme5")

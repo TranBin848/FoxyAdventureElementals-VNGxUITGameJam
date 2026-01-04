@@ -38,7 +38,7 @@ func _ready() -> void:
 	add_child(inventory_system)
 	
 	# Load Data
-	load_checkpoint_data()
+	#load_checkpoint_data()
 	
 	# Connect Scene Handling
 	get_tree().tree_changed.connect(_on_tree_changed)
@@ -262,3 +262,19 @@ func modify_stat(stat_def: Resource, change: int) -> void:
 	# ✅ Recalculate from base instead of adding incrementally
 	_apply_all_stats_from_base()
 #endregion
+
+func player_act(method_name: String, a1=null, a2=null, a3=null, a4=null, a5=null) -> void:
+	if not player: return
+	if not player.has_method(method_name): return
+	
+	#player.fsm.change_state(player.fsm.states.actor)
+	
+	# 1. Collect valid arguments into a real Array
+	var args = []
+	# We check each argument; if it's not null, we add it to the list
+	for val in [a1, a2, a3, a4, a5]:
+		if val != null:
+			args.append(val)
+			
+	# 2. Call the function with the reconstructed array
+	player.callv(method_name, args)

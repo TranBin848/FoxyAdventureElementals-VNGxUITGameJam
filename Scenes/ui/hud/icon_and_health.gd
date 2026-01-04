@@ -26,7 +26,10 @@ func _ready() -> void:
 func _setup() -> void:
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
-
+	
+	if player == null:
+		return
+	
 	previous_health = player.health
 	player.health_changed.connect(_on_health_change)
 	player.hurt.connect(_show_hurt_icon)

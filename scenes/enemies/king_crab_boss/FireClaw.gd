@@ -12,4 +12,6 @@ func _update(_delta: float) -> void:
 	if update_timer(_delta):
 		obj.fire_claw()
 
-	
+func _exit() ->void:
+	if obj.fired_claw:
+		obj.fired_claw.queue_free()

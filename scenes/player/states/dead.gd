@@ -9,7 +9,6 @@ func _enter():
 
 func _update(delta: float):
 	if update_timer(delta):
-		#GameManager.isReloadScene = true
 		GameManager.change_stage(get_tree().current_scene.get_scene_file_path())
 
 # Ignore take damage

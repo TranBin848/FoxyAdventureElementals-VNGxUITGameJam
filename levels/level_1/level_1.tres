@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://yxir4yavpav2"]
+[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://b1rw2jhie3f1r"]
 
 [ext_resource type="Texture2D" uid="uid://bnmuiut4rgvqk" path="res://assets/terrain_plus/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="1_wapvn"]
 [ext_resource type="Texture2D" uid="uid://dk85vjjkah550" path="res://assets/terrain_plus/Floor Tiles1.png" id="2_gecsc"]
