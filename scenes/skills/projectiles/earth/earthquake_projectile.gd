@@ -15,6 +15,8 @@ func _ready() -> void:
 	collision_layer = 0 
 	collision_mask = 1 
 	
+	AudioManager.play_sound("skill_earthquake")
+	
 	# REMOVED: _start_spawn_routine() 
 
 func setup(skill: Skill, dir: Vector2) -> void:

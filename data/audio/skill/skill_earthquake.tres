@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://bq88twp1fo2hl"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_q5lyq"]
+[ext_resource type="AudioStream" uid="uid://cwcepjngficpe" path="res://assets/sounds/earthquake.wav" id="2_48s7g"]
+
+[resource]
+script = ExtResource("1_q5lyq")
+clip_id = "skill_earthquake"
+stream = ExtResource("2_48s7g")
+volume_db = 0.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

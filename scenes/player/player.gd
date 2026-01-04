@@ -528,6 +528,7 @@ func _set_burrow_state(active: bool) -> void:
 	is_in_burrow_state = active
 	
 	if active:
+		AudioManager.play_sound("skill_burrow")
 		# --- ENTERING BURROW ---
 		default_collision.set_deferred("disabled", true)
 		burrow_collision.set_deferred("disabled", false)
@@ -535,7 +536,8 @@ func _set_burrow_state(active: bool) -> void:
 		
 		speed_multiplier = 1.25
 		_update_visual_state(null, true) 
-		surface_fx_factory.create()
+		if is_on_floor():
+			surface_fx_factory.create()
 	else:
 		# --- EXITING BURROW ---
 		speed_multiplier = 1.0
@@ -588,6 +590,7 @@ func _set_invisible_state(active: bool) -> void:
 	
 	if active:
 		_update_visual_state(null, true) # Force silhouette
+		
 	else:
 		# Handled by generic _update_visual_state in exit_current_buff
 		pass
@@ -665,10 +668,17 @@ func _update_visual_state(forced_main: AnimatedSprite2D = null, force_silhouette
 	_update_elemental_palette()
 
 func _enforce_invisibility_visuals() -> void:
-	# BaseCharacter might try to show the main sprite during animation changes.
-	# We force it hidden here.
-	if animated_sprite and animated_sprite.visible:
+	# 1. Force the Main Sprite (Detailed) to HIDE
+	# BaseCharacter tries to show this every frame when animating, so we must force it off.
+	if animated_sprite:
 		animated_sprite.hide()
+
+	# 2. Force the Silhouette (Shadow) to SHOW and be TRANSPARENT
+	# The silhouette is stored in 'extra_sprites' by _update_visual_state
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.show()
+			s.modulate.a = 0.5
 
 func _update_elemental_palette() -> void:
 	if not is_instance_valid(animated_sprite): return

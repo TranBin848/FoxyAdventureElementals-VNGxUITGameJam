@@ -3,7 +3,8 @@ extends ProjectileBase
 
 func _ready() -> void:
 	speed = 0
-
+	
+	
 	# Play Animation
 	if has_node("AnimationPlayer"):
 		var anim = get_node("AnimationPlayer")

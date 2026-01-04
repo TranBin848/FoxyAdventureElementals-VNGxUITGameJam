@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://5rbwvbrle24y"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_sfn2k"]
+[ext_resource type="AudioStream" uid="uid://cns1cg0pauqhr" path="res://assets/sounds/Collect Cartoon Prize.wav" id="2_n41nj"]
+
+[resource]
+script = ExtResource("1_sfn2k")
+clip_id = "key_collect"
+stream = ExtResource("2_n41nj")
+volume_db = -10.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

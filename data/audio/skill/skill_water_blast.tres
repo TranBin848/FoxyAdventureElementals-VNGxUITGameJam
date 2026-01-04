@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://c8cdpoin5lxwd"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_853en"]
+[ext_resource type="AudioStream" uid="uid://bk4wov3cpntsp" path="res://assets/sounds/water_blast.wav" id="2_tqus7"]
+
+[resource]
+script = ExtResource("1_853en")
+clip_id = "skill_water_blast"
+stream = ExtResource("2_tqus7")
+volume_db = -10.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

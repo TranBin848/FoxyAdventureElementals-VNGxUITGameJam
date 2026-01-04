@@ -29,6 +29,8 @@ func _on_body_entered(body: Node2D) -> void:
 	# 4. Apply Physics
 	_launch_player(body, final_force)
 	
+	AudioManager.play_sound("trampoline_bounce")
+	
 	# 5. Visual Feedback
 	_play_squash_animation()
 	# if audio.stream: audio.play()
