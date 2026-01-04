@@ -723,7 +723,7 @@ radius = 7.0
 height = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ru3bc"]
-radius = 17.0
+radius = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lwhcj"]
 size = Vector2(5.5, 3)
@@ -772,6 +772,7 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+light_mask = 0
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"dead"

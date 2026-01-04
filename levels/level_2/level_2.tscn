@@ -1,11 +1,10 @@
-[gd_scene load_steps=42 format=4 uid="uid://docdrr2v8cok6"]
+[gd_scene load_steps=44 format=4 uid="uid://docdrr2v8cok6"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="TileSet" uid="uid://csl01vpplhvw" path="res://levels/level_3/level_3.tres" id="2_s4b5i"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="3_qfhyh"]
 [ext_resource type="Texture2D" uid="uid://dgrgwf4lnmmoi" path="res://assets/island/background/sandria.png" id="7_km4sl"]
 [ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="9_qsvqe"]
-[ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/hud/minimap.tscn" id="10_qsvqe"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="10_r7wcl"]
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="11_gsja5"]
 [ext_resource type="PackedScene" uid="uid://bf2uetkx1otc6" path="res://scenes/objects/house_door/house_door.tscn" id="12_bkbve"]
@@ -16,8 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="23_vdtjt"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="24_nouef"]
 [ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="25_ppf8r"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="25_qfhyh"]
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="25_t8ul1"]
+[ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="26_6fwx2"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="27_6fwx2"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="27_ulcqf"]
 [ext_resource type="Script" uid="uid://cetul0ws8d05n" path="res://scenes/skills/scripts/earth/Earthquake.gd" id="27_xpuws"]
 [ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="28_6fwx2"]
 [ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="28_rdvgg"]
@@ -566,10 +568,25 @@ max_health = 1000
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Minimap" parent="GUI" node_paths=PackedStringArray("tilemap_layers", "player") instance=ExtResource("10_qsvqe")]
-offset_top = -240.0
-offset_bottom = -240.0
-pivot_offset = Vector2(250, 75)
-tilemap_layers = [NodePath("../../TileMaps/TerrainTileMap")]
-player = NodePath("../../Player")
-metadata/_edit_use_anchors_ = true
+[node name="HUD" parent="GUI" instance=ExtResource("25_qfhyh")]
+
+[node name="SkillTreeUI" parent="GUI" instance=ExtResource("26_6fwx2")]
+visible = false
+
+[node name="ErrorLabel" type="Label" parent="GUI"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -99.0
+offset_right = 122.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("27_ulcqf")
+text = "Enemy Out of Range"
+horizontal_alignment = 1

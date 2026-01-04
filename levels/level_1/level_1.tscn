@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://dhghajv3v5q1v"]
+[gd_scene load_steps=62 format=4 uid="uid://dhghajv3v5q1v"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_jq5vq"]
 [ext_resource type="Texture2D" uid="uid://c0brevyq2dma3" path="res://assets/terrain_plus/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 4.png" id="2_daoe1"]
@@ -39,7 +39,6 @@
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="41_aiurf"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="42_60i3m"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="44_81g5i"]
-[ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/hud/minimap.tscn" id="45_rflqb"]
 [ext_resource type="PackedScene" uid="uid://dlo5gf1o05dgq" path="res://scenes/env_particle/rain.tscn" id="53_5oe72"]
 [ext_resource type="AudioStream" uid="uid://da2jb75pixowd" path="res://assets/sounds/44474__bullockjs__waterfall2.mp3" id="54_h8kgu"]
 [ext_resource type="Script" uid="uid://ddphxb2lvd1do" path="res://scripts/area_component/ambience_area_2d.gd" id="54_nx43y"]
@@ -82,7 +81,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.826446
+shader_parameter/y_zoom = 1.21
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -277,7 +276,7 @@ target_stage = "uid://wopr13pq4dnf"
 target_door = "EntryDoor"
 
 [node name="Player" parent="." instance=ExtResource("18_gukcl")]
-position = Vector2(-1443, 394)
+position = Vector2(2355, -353)
 collision_mask = 329
 platform_floor_layers = 4294967231
 max_health = 1000
@@ -508,14 +507,6 @@ position = Vector2(1560, 140)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Minimap" parent="GUI" node_paths=PackedStringArray("tilemap_layers", "player") instance=ExtResource("45_rflqb")]
-offset_top = -240.0
-offset_bottom = -240.0
-pivot_offset = Vector2(250, 75)
-tilemap_layers = [NodePath("../../Ground")]
-player = NodePath("../../Player")
-metadata/_edit_use_anchors_ = true
-
 [node name="HUD" parent="GUI" instance=ExtResource("44_81g5i")]
 
 [node name="SkillTreeUI" parent="GUI" instance=ExtResource("42_60i3m")]
@@ -570,7 +561,7 @@ shape = SubResource("RectangleShape2D_h8kgu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="WorldBorder"]
 position = Vector2(-1822, 395)
-collision_layer = 512
+collision_layer = 256
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder/StaticBody2D"]
@@ -578,7 +569,7 @@ shape = SubResource("WorldBoundaryShape2D_fdo7j")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="WorldBorder"]
 position = Vector2(5853, -906)
-collision_layer = 512
+collision_layer = 256
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder/StaticBody2D2"]
@@ -586,6 +577,8 @@ shape = SubResource("WorldBoundaryShape2D_4idv8")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="WorldBorder"]
 position = Vector2(1991, -765)
+collision_layer = 256
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder/StaticBody2D3"]
 shape = SubResource("WorldBoundaryShape2D_rflqb")
