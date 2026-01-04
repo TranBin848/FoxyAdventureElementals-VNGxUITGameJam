@@ -65,7 +65,6 @@ vertical_alignment = 1
 [node name="SkillTreeRoot" parent="." instance=ExtResource("3_37kbm")]
 
 [node name="SkillInfoPanel" parent="." instance=ExtResource("3_kjyl8")]
-visible = false
 offset_top = -329.5
 offset_bottom = 329.5
 

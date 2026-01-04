@@ -60,7 +60,7 @@ var current_wand_level: WandLevel = WandLevel.NORMAL
 
 # Inventory Flags
 var has_blade: bool = false
-var has_wand: bool = false # Default based on your old code
+var has_wand: bool = true # Default based on your old code
 
 # Combat State
 var is_invulnerable: bool = false
