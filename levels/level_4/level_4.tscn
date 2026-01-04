@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://dsxvyoo4n54nc"]
+[gd_scene load_steps=42 format=4 uid="uid://dsxvyoo4n54nc"]
 
 [ext_resource type="Script" uid="uid://daj5tdirvwlbt" path="res://levels/level_4/level_4.gd" id="1_36jj7"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
@@ -25,11 +25,9 @@
 [ext_resource type="Texture2D" uid="uid://c20cr4u76ve2f" path="res://assets/island/images/blade/blade_target_3.png" id="29_sumgr"]
 [ext_resource type="Script" path="res://scenes/ui/skill_tree/skill_tree_ui.gd" id="30_b06ts"]
 [ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="30_pts6k"]
-[ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="31_36jj7"]
 [ext_resource type="PackedScene" uid="uid://bf2uetkx1otc6" path="res://scenes/objects/house_door/house_door.tscn" id="31_b06ts"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="31_otmpl"]
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="32_36jj7"]
-[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="33_ac2k2"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="34_36jj7"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_2si7y"]
 
@@ -324,67 +322,30 @@ texture = ExtResource("28_otr1q")
 position = Vector2(7232, 1055)
 texture = ExtResource("29_sumgr")
 
-[node name="SkillTreeUI" type="CanvasLayer" parent="."]
-process_mode = 3
-layer = 10
-visible = false
-script = ExtResource("30_b06ts")
-
-[node name="Background" type="TextureRect" parent="SkillTreeUI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 3.05176e-05
-offset_right = 1472.0
-offset_bottom = 816.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.465121, 0.468751)
-texture = ExtResource("31_36jj7")
-
-[node name="OpacityLayer" type="ColorRect" parent="SkillTreeUI"]
-modulate = Color(1, 1, 1, 0.764706)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="InstructionLabel" type="Label" parent="SkillTreeUI"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -88.0
-offset_right = 360.0
-offset_bottom = -16.0
-grow_vertical = 0
-theme_override_constants/line_spacing = 12
-theme_override_fonts/font = ExtResource("45_2si7y")
-theme_override_font_sizes/font_size = 16
-text = "Tab to open/close skill tree
-Mouse wheel: Zoom in/out
-Hold left mouse: Drag"
-
-[node name="TitleLabel" type="Label" parent="SkillTreeUI"]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 332.0
-offset_bottom = 65.0
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("33_ac2k2")
-theme_override_font_sizes/font_size = 32
-text = "SKILL TREE"
-vertical_alignment = 1
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("29_401k1")]
 
 [node name="SkillTreeUI" type="CanvasLayer" parent="CanvasLayer"]
 script = ExtResource("30_b06ts")
+
+[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -99.0
+offset_right = 122.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("45_2si7y")
+text = "Enemy Out of Range"
+horizontal_alignment = 1
 
 [node name="FX" type="Node2D" parent="."]
 
