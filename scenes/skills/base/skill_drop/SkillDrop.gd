@@ -42,8 +42,8 @@ func _on_detection_player_area_2d_body_entered(body: Node2D):
 		var reset_tween = create_tween()
 		reset_tween.tween_property(sprite, "position:y", 0.0, 0.2)
 		
-func setup_drop(skill: Skill, stacks: int = 0) -> void:
-	skill = skill  # Store full Skill (with level!)
+func setup_drop(_skill: Skill, stacks: int = 0) -> void:
+	skill = _skill  # Store full Skill (with level!)
 	
 	# Set stack amount (use provided value or random)
 	if stacks > 0:
@@ -77,7 +77,7 @@ func _collect_item(player: Player) -> void:
 		return
 		
 	# Add skill through Player with stack amount
-	player.add_new_skill(skill, stack_amount)
+	SkillTreeManager.collect_skill(skill.name, stack_amount)
 	
 	_play_collect_effect()
 

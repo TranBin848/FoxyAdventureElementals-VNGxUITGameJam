@@ -1,13 +1,30 @@
 extends GPUParticles2D
 
+# --- WIND SETTINGS ---
+@export_group("Wind Settings")
 @export var wind_force: float = 0.2  # Speed boost when in wind
 @export var base_amount: int = 20
 
+# --- AMBIENCE SETTINGS ---
+@export_group("Ambience Settings")
+@export var ambience_id: String = ""
+@export var volume_db: float = 0.0
+@export var fade_in: float = 1.0
+@export var fade_out: float = 1.0
+
+# --- INTERNAL VARIABLES ---
 var player_in_wind: Node2D = null
 var wind_direction: Vector2 = Vector2.ZERO
 var logger: Logger = ConsoleLogger.new()
 
+# Ambience state
+var previous_ambience_id: String = ""
+
 func _ready():
+	# 0. Safety Check
+	if not AudioManager:
+		push_error("AudioManager not found! Make sure it's in autoload.")
+	
 	# 1. Set initial state
 	_update_particles(SettingsManager.particle_quality)
 	
@@ -52,17 +69,41 @@ func _physics_process(_delta: float):
 
 func _on_body_entered(body: Node2D):
 	logger.log("Body entered: " + str(body.name))
+	
+	# 1. Handle Wind Physics
 	if body.has_method("set_speed_multiplier"):
 		player_in_wind = body
 		logger.log("Player entered wind area - applying wind force: " + str(wind_force))
 
+	# 2. Handle Ambience
+	# We check "is Player" specifically for audio to avoid triggering music for NPCs/enemies
+	if body is Player:
+		if AudioManager and ambience_id != "":
+			previous_ambience_id = AudioManager.get_current_ambience_id()
+			AudioManager.play_ambience(ambience_id, volume_db, fade_in)
+			logger.log("SandStorm Ambience Started: " + ambience_id)
+
 func _on_body_exited(body: Node2D):
 	logger.log("Body exited: " + str(body.name))
+	
+	# 1. Handle Wind Physics
 	if body == player_in_wind:
 		if player_in_wind.has_method("set_speed_multiplier"):
 			player_in_wind.set_speed_multiplier(1.0)
 			logger.log("Player exited wind area. Speed reset to 1.0")
 		player_in_wind = null
+
+	# 2. Handle Ambience
+	if body is Player:
+		if AudioManager:
+			# Restore previous ambience if it existed
+			if previous_ambience_id != "":
+				AudioManager.play_ambience(previous_ambience_id, 0.0, fade_in)
+				logger.log("Restored previous ambience: " + previous_ambience_id)
+			else:
+				# If there was no previous ambience, you might want to stop the current one
+				# or define a default behavior. 
+				pass
 
 func _update_particles(quality_level: int):
 	# Calculate target amount
@@ -71,14 +112,11 @@ func _update_particles(quality_level: int):
 	# CASE 1: Turn OFF (Quality is 0)
 	if new_amount <= 0:
 		emitting = false
-		# Do NOT set amount to 0, or Godot will force it to 1
 		return
 
 	# CASE 2: Turn ON (Quality > 0)
-	# Ensure it's emitting in case it was previously turned off
 	emitting = true
 
 	# Only change 'amount' if the number is different.
-	# Changing 'amount' forces the particle system to restart!
 	if amount != new_amount:
 		amount = new_amount

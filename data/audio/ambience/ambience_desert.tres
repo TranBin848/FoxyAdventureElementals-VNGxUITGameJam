@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://bh314dw7dbgdk"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_8tgvv"]
+[ext_resource type="AudioStream" uid="uid://bb6to3ql81t1c" path="res://assets/sounds/ambience_desert.wav" id="2_j8f7e"]
+
+[resource]
+script = ExtResource("1_8tgvv")
+clip_id = "ambience_desert"
+stream = ExtResource("2_j8f7e")
+volume_db = -10.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"
