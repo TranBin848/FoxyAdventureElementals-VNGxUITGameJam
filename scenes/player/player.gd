@@ -783,6 +783,40 @@ func add_new_skill(skill: Skill, stack_amount: int = 1) -> void:
 	SkillTreeManager.collect_skill(skill.name, stack_amount)
 	skill_collected.emit(skill, stack_amount)
 
+
+var tile_size = 32 
+var max_check_height = 5
+
+func unstuck() -> void:
+	# 1. First, check if we are actually stuck right now.
+	if not test_move(global_transform, Vector2.ZERO):
+		print("You aren't stuck! Request ignored.")
+		return
+		
+	print("Stuck detected! Scanning for safe spot above...")
+	# 2. Loop upwards to find a safe spot
+	for i in range(1, max_check_height + 1):
+		# Calculate the potential target position (moving up i tiles)
+		var offset_y = tile_size * i
+
+		# Create a "fake" transform at that target position
+		var target_transform = global_transform
+		target_transform.origin.y -= offset_y
+		
+		# 3. Check if this specific spot is empty
+		# We use Vector2.ZERO because we just want to know:
+		# "If I were standing HERE, would I be overlapping anything?"
+		if not test_move(target_transform, Vector2.ZERO):
+			# Found a safe spot! Teleport the player.
+			global_position.y -= offset_y
+			velocity = Vector2.ZERO # Stop any falling momentum
+			print("Teleported safely to ", i, " tiles up.")
+			return
+
+	# 4. If the loop finishes and we found nothing (e.g. inside a massive wall)
+	print("Could not find a safe spot nearby.")
+	
+
 # ==============================================================================
 # CUTSCENE LOGIC
 # ==============================================================================
