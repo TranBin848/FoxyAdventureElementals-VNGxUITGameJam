@@ -22,8 +22,7 @@ func _enter():
 	obj.velocity.x = 0
 	
 	# Play animation nếu có
-	if obj.animated_sprite_2d and obj.animated_sprite_2d.sprite_frames.has_animation("cast"):
-		obj.animated_sprite_2d.play("cast")
+	obj.change_animation("idle")
 	
 	# Bay lên độ cao nếu chưa đạt độ cao đó
 	if start_pos.y > obj.fly_target_y:
@@ -33,6 +32,21 @@ func _enter():
 	
 	# Tìm player
 	player_target = _find_player()
+	
+	# Cập nhật direction về phía player với dead zone
+	if is_instance_valid(player_target):
+		var boss_pos = obj.global_position
+		var player_pos = player_target.global_position
+		var x_diff = player_pos.x - boss_pos.x
+		
+		# Chỉ thay đổi direction nếu chênh lệch lớn hơn 50 pixels
+		if abs(x_diff) > 50:
+			if x_diff < 0:
+				obj.direction = -1
+				obj.animated_sprite_2d.flip_h = false
+			else:
+				obj.direction = 1
+				obj.animated_sprite_2d.flip_h = true
 	
 	# Bắt đầu spawn và bắn đạn
 	await _spawn_and_fire_bullets()

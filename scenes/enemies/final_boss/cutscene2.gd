@@ -20,6 +20,8 @@ var is_boss_locked: bool = false
 func _enter() -> void:
 	print("=== State: Cutscene2 Enter ===")
 	
+	obj.change_animation("idle")
+	
 	# Kill tất cả tweens cũ
 	var all_tweens = obj.get_tree().get_processed_tweens()
 	print("Cutscene2: Killing ", all_tweens.size(), " active tweens")
