@@ -1,12 +1,12 @@
 do GameManager.player_act("toggle_actor_state")
 do GameManager.player_act("change_animation", "faint")
-foxy: Where am I?
-foxy: WHO AM I!?
-foxy: My head HURT!!
+foxy: Đây là đâu?
+foxy: Tôi là ai nhỉ?
+foxy: Đầu mình ĐAU QUÁ!!!
 do GameManager.player_act("change_animation", "idle")
-foxy: What happened here.
+foxy: Chuyện gì đã xảy ra ở đây.
 do GameManager.player_act("move_to_scene_point", "point1")
-foxy: Is that...
+foxy: <Empty Text Event>
 do GameManager.player_act("move_to_scene_point", "point2")
-foxy: D\:
+foxy: <Empty Text Event>
 do GameManager.player_act("toggle_actor_state")

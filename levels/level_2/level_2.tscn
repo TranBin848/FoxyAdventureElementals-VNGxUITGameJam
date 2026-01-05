@@ -159,6 +159,8 @@ position = Vector2(1328, 608)
 
 [node name="EntryDoor" parent="." instance=ExtResource("15_oaqh1")]
 position = Vector2(-552, 805)
+target_stage = "uid://dhghajv3v5q1v"
+target_door = "ExitDoor"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0
