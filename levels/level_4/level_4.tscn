@@ -327,14 +327,14 @@ texture_scale = 14.0
 position = Vector2(7241, 882)
 texture = ExtResource("28_otr1q")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("29_401k1")]
+[node name="HUD" parent="GUI" instance=ExtResource("29_401k1")]
 
-[node name="SkillTreeUI" parent="CanvasLayer" instance=ExtResource("24_pts6k")]
+[node name="SkillTreeUI" parent="GUI" instance=ExtResource("24_pts6k")]
 visible = false
 
-[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+[node name="ErrorLabel" type="Label" parent="GUI"]
 visible = false
 anchors_preset = 7
 anchor_left = 0.5
