@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://dsxvyoo4n54nc"]
+[gd_scene load_steps=47 format=4 uid="uid://dsxvyoo4n54nc"]
 
 [ext_resource type="Script" uid="uid://daj5tdirvwlbt" path="res://levels/level_4/level_4.gd" id="1_36jj7"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
@@ -30,7 +30,9 @@
 [ext_resource type="PackedScene" uid="uid://c2nu6ncphw78a" path="res://scripts/area_component/boss_zone_area_2d.tscn" id="31_pts6k"]
 [ext_resource type="PackedScene" uid="uid://d0ig8xrtjp2v1" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.tscn" id="31_xyldm"]
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="32_36jj7"]
+[ext_resource type="PackedScene" uid="uid://iix2qujpr57n" path="res://scenes/skills/base/skill_drop/skill_drop_ultimate.tscn" id="33_36jj7"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="34_36jj7"]
+[ext_resource type="Resource" uid="uid://b2417g2au2g6l" path="res://scenes/skills/scripts/ultimate/EarthUltimate.tres" id="34_otmpl"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_2si7y"]
 
 [sub_resource type="Gradient" id="Gradient_rjkgb"]
@@ -95,7 +97,7 @@ normal = Vector2(-0.00564142, 0.999984)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b06ts"]
 size = Vector2(1592, 524)
 
-[node name="Stage" type="Node2D"]
+[node name="Stage2" type="Node2D"]
 script = ExtResource("1_36jj7")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
@@ -170,7 +172,7 @@ texture = ExtResource("16_s6hm0")
 position = Vector2(-12, 5)
 
 [node name="Player" parent="." instance=ExtResource("2_tu7ib")]
-position = Vector2(6930, -3)
+position = Vector2(7444, 439)
 max_health = 1000
 
 [node name="LightSource" type="Node2D" parent="Player"]
@@ -422,13 +424,22 @@ enemy_to_spawn = Array[PackedScene]([ExtResource("24_rjkgb")])
 elemental_type = 1
 
 [node name="BossZoneArea2D" parent="." node_paths=PackedStringArray("boss") instance=ExtResource("31_pts6k")]
-position = Vector2(8012, 869)
+position = Vector2(8012, 901)
 boss = NodePath("WarLordTurtle")
 boss_music_id = "music_boss"
 
 [node name="WarLordTurtle" parent="BossZoneArea2D" instance=ExtResource("31_xyldm")]
-position = Vector2(0, 140)
+position = Vector2(0, 116)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossZoneArea2D"]
 position = Vector2(-17, -68)
 shape = SubResource("RectangleShape2D_b06ts")
+
+[node name="Door" parent="." instance=ExtResource("7_401k1")]
+position = Vector2(8773, 1029)
+target_stage = "uid://bpfybvhktqi4t"
+target_door = "EntryDoor"
+
+[node name="SkillDropUltimate" parent="." instance=ExtResource("33_36jj7")]
+position = Vector2(8714, 1024)
+skill = ExtResource("34_otmpl")

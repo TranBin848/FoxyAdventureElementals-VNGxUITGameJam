@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=40 format=3 uid="uid://315u2uaue33w"]
+[gd_resource type="TileSet" load_steps=41 format=3 uid="uid://315u2uaue33w"]
 
 [ext_resource type="Texture2D" uid="uid://c6j20haao3tvp" path="res://assets/wood/dark_oak.png" id="1_m8yqy"]
 [ext_resource type="Texture2D" uid="uid://2v2waox8min4" path="res://assets/island/terrain/wood_terrain_32x32.png" id="2_j2nq5"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://u2air8500ab1" path="res://assets/terrain_plus/Pine Trees.png" id="11_8wybm"]
 [ext_resource type="PackedScene" uid="uid://bqolwkmxp86ss" path="res://levels/objects/spikes/top_spike.tscn" id="11_p0klp"]
 [ext_resource type="Texture2D" uid="uid://cpaivu6qvkk7t" path="res://assets/island/terrain/water_terrain_32x32.png" id="12_8ae23"]
+[ext_resource type="PackedScene" uid="uid://d356v232gn1ce" path="res://levels/objects/platforms/unstable_platform.tscn" id="15_2nsk5"]
 [ext_resource type="PackedScene" uid="uid://5nj0c207ldgc" path="res://levels/objects/tree/tree_1.tscn" id="16_vwqna"]
 [ext_resource type="Texture2D" uid="uid://bf6twyfxnbhqt" path="res://assets/terrain_plus/CaveProp1.png" id="17_jx45v"]
 [ext_resource type="PackedScene" uid="uid://dvs3j65i3c27e" path="res://levels/objects/tree/tree_2.tscn" id="17_ujinb"]
@@ -423,6 +424,7 @@ scenes/5/scene = ExtResource("10_dinf3")
 scenes/6/scene = ExtResource("11_p0klp")
 scenes/7/scene = ExtResource("8_u083j")
 scenes/8/scene = ExtResource("9_v08cu")
+scenes/9/scene = ExtResource("15_2nsk5")
 scenes/10/scene = ExtResource("3_2y5ep")
 scenes/11/scene = ExtResource("4_extk5")
 scenes/12/scene = ExtResource("5_fqqsd")

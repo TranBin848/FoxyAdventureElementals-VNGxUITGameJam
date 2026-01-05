@@ -183,14 +183,19 @@ interactable = true
 [node name="GuideTrigger" parent="." instance=ExtResource("104_lii35")]
 z_index = 199
 position = Vector2(623, 150)
-guide_text = "A, D to move left, right\\nSpace to jump"
+guide_text = "A, D to move left, right"
 
 [node name="GuideTrigger2" parent="." instance=ExtResource("104_lii35")]
 z_index = 199
 position = Vector2(1206, 150)
 guide_text = "Get on the boat and press F to sail"
 
+[node name="GuideTrigger3" parent="." instance=ExtResource("104_lii35")]
+z_index = 199
+position = Vector2(790, 150)
+guide_text = "Space to jump\\nZ to dash"
+
 [node name="BladeCollectable" parent="." instance=ExtResource("18_kumio")]
-position = Vector2(944, 147)
+position = Vector2(1016, 155)
 
 [node name="GUI" type="CanvasLayer" parent="."]
