@@ -16,6 +16,11 @@ var metal_ultimate_collected: bool = false
 var earth_ultimate_collected: bool = false
 var first_time_open_skill_tree: bool = false
 
+var cutlass_media_path = "res://scenes/ui/popup/guide_content/cutlass_guide.ogv"
+var coin_media_path = "res://scenes/ui/popup/guide_content/coin_guide.ogv"
+var key_media_path = "res://scenes/ui/popup/guide_content/key_guide.ogv"
+var skill_tree_media_path = "res://scenes/ui/popup/guide_content/skill_tree_guide.png"
+
 var wood_wand_guide := """
 Bạn vừa nhận được trượng gỗ. Viên đá trên cây trượng sẽ giúp bạn đọc được ngôn ngữ phép thuật. Từ đó học được cách sử dụng phép.
 Hãy ấn một số từ 1-5 để chọn một phép trên thanh skill bar.Sau đó bấm C để sử dụng phép.
@@ -27,7 +32,7 @@ Nếu bạn có nhiều cuộn phép của 1 loại phép, bạn có thể học
 var cutlass_guide := """
 Bạn vừa nhặt được một thanh Cutlass.
 Thế giới ngoài kia có thể nguy hiểm lắm nên hãy cầm theo để phòng thân nhé.
-Bấm C để chém và bấm X để ném đi."
+Bấm C để chém và bấm X phóng đi.
 """
 
 var skill_tree_guide := """
@@ -80,12 +85,12 @@ var guide_data: Dictionary = {
 	"COIN": {
 		"title": "Gold Coin",
 		"content": "Bạn vừa nhặt được đồng vàng. Nó có giá trị trao đổi mua bán, hãy thu thập càng nhiều càng tốt nhé.",
-		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png" 
+		"video": coin_media_path 
 	},
 	"KEY": {
 		"title": "Treasure Key",
 		"content": "Bạn vừa tìm được chìa khóa để mở rương kho báu, hãy truy tìm rương báu và mở chúng ra để nhận được nhiều của cải nhé.",
-		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png" 
+		"video": key_media_path
 	},
 	"KILL": {
 		"title": "Enemy Slain",
@@ -100,12 +105,12 @@ var guide_data: Dictionary = {
 	"CUTLASS": {
 		"title": "Cutlass",
 		"content": cutlass_guide,
-		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png"
+		"video": cutlass_media_path
 	},
 	"SKILL_TREE": {
 		"title": "Skill Tree",
 		"content": skill_tree_guide,
-		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png"
+		"image": skill_tree_media_path
 	},
 	"METAL_ULTIMATE": {
 		"title": "Metal Ultimate",

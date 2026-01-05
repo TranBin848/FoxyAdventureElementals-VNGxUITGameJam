@@ -47,7 +47,7 @@
 [ext_resource type="Script" uid="uid://do3sabwty0y1" path="res://scenes/enemies/final_boss/cutscene2.gd" id="51_cutscene2"]
 [ext_resource type="Script" uid="uid://yye803rj20g3" path="res://scenes/enemies/final_boss/cutscene3.gd" id="51_cutscene3"]
 [ext_resource type="Script" uid="uid://cjouhd4hglfwn" path="res://scenes/enemies/final_boss/cutscene4.gd" id="51_cutscene4"]
-[ext_resource type="Script" path="res://scenes/enemies/final_boss/cutscene_6.gd" id="52_ib6y0"]
+[ext_resource type="Script" uid="uid://bkajgco6tqx1g" path="res://scenes/enemies/final_boss/cutscene_6.gd" id="52_ib6y0"]
 [ext_resource type="PackedScene" uid="uid://cfwdngvncdiwu" path="res://scenes/enemies/final_boss/boss_spawner.tscn" id="52_spawner"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="53_qin12"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="55_2anp0"]

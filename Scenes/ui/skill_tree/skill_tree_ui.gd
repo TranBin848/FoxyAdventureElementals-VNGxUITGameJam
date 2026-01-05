@@ -14,6 +14,7 @@ signal skill_tree_toggled(state)
 @onready var notification_label: Label = $NotiLabel
 
 var _tree_camera: Camera2D
+var prev_camera: Camera2D
 
 func _ready():
 	print("🔍 SkillTreeUI initializing...")
@@ -76,9 +77,11 @@ func _open_logic():
 	print("🌳 Opening Skill Tree")
 	
 	# Switch to skill tree camera
-	if GameManager and GameManager.player:
-		GameManager.player.camera_2d.enabled = false
-		print("  📷 Disabled player camera")
+	#if GameManager and GameManager.player:
+		#GameManager.player.camera_2d.enabled = false
+		#print("  📷 Disabled player camera")
+	
+	prev_camera = get_viewport().get_camera_2d()
 	
 	if _tree_camera:
 		_tree_camera.enabled = true
@@ -102,10 +105,12 @@ func _close_logic():
 		_tree_camera.enabled = false
 		print("  📷 Disabled skill tree camera")
 	
-	if GameManager and GameManager.player:
-		GameManager.player.camera_2d.enabled = true
-		GameManager.player.camera_2d.make_current()
-		print("  📷 Re-enabled player camera")
+	#if GameManager and GameManager.player:
+		#GameManager.player.camera_2d.enabled = true
+		#GameManager.player.camera_2d.make_current()
+		#print("  📷 Re-enabled player camera")
+	
+	prev_camera.make_current()
 	
 	# Hide all panels
 	_on_hide_panel_requested()
