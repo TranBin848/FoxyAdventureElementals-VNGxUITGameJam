@@ -1,43 +1,97 @@
-[gd_scene load_steps=15 format=3 uid="uid://dot0vlx7mvjxl"]
+[gd_scene load_steps=28 format=3 uid="uid://dot0vlx7mvjxl"]
 
 [ext_resource type="Script" uid="uid://dccdmdcgwmnjx" path="res://scenes/enemies/final_boss_phase_1/boss__phase_1.gd" id="1_5gnxn"]
-[ext_resource type="Texture2D" uid="uid://cwgjo8l0lmemi" path="res://assets/foxy/fox/fox_idle_1.png" id="2_2vt2g"]
+[ext_resource type="Texture2D" uid="uid://jlbmkvwdm2re" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dash_1.png" id="2_41yhh"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_sxyfo"]
-[ext_resource type="Texture2D" uid="uid://cdiupfoo5xr6u" path="res://assets/foxy/fox/fox_idle_2.png" id="3_78qr5"]
+[ext_resource type="Texture2D" uid="uid://decho11oot68r" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dash_2.png" id="3_cn81x"]
 [ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="3_wbrm6"]
+[ext_resource type="Texture2D" uid="uid://docbg8pirejd0" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dash_3.png" id="4_reyr2"]
 [ext_resource type="Script" uid="uid://dq5y05gdtrfpb" path="res://scenes/enemies/final_boss_phase_1/idle.gd" id="4_sxyfo"]
+[ext_resource type="Texture2D" uid="uid://c7i6ulnbgt5ax" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dash_4.png" id="5_fpslr"]
+[ext_resource type="Texture2D" uid="uid://2w0ko2tsisdq" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dash_5.png" id="6_mlfle"]
+[ext_resource type="Texture2D" uid="uid://bgcq02tqj467s" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_hurt_1.png" id="7_67yil"]
 [ext_resource type="Script" uid="uid://bukm1ysgaxpmp" path="res://scenes/enemies/final_boss_phase_1/inactive.gd" id="7_78qr5"]
+[ext_resource type="Texture2D" uid="uid://j1vbr38a6rnb" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_hurt_2.png" id="8_ba1bl"]
 [ext_resource type="Script" uid="uid://k1h802kx0qli" path="res://scenes/enemies/final_boss_phase_1/to_the_sky.gd" id="8_s4x44"]
 [ext_resource type="Script" uid="uid://do552jrdc5v55" path="res://scenes/enemies/final_boss_phase_1/dead.gd" id="9_2j7v5"]
+[ext_resource type="Texture2D" uid="uid://ct02xl2uo3hri" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_hurt_3.png" id="9_yfipp"]
 [ext_resource type="PackedScene" uid="uid://d0jkkqjvv3603" path="res://scenes/ui/boss_healthbar.tscn" id="10_2j7v5"]
+[ext_resource type="Texture2D" uid="uid://e7724kdltgta" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_hurt_4.png" id="10_l3uho"]
+[ext_resource type="Texture2D" uid="uid://bw0lj4v2jqd7c" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_1.png" id="11_3aqi7"]
+[ext_resource type="Texture2D" uid="uid://bu07xy8c7sahs" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_2.png" id="12_q0d4p"]
+[ext_resource type="Texture2D" uid="uid://m3hdk4fxfum3" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_3.png" id="13_ty7jy"]
+[ext_resource type="Texture2D" uid="uid://bpwkwowucmnif" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_4.png" id="14_ampr0"]
+[ext_resource type="Texture2D" uid="uid://hy4vhn4ex5b6" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_5.png" id="15_qsh32"]
+[ext_resource type="Script" uid="uid://bwje020w4c4to" path="res://scenes/enemies/final_boss_phase_1/hurt.gd" id="19_cn81x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5gnxn"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_41yhh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cn81x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_reyr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fpslr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mlfle")
+}],
 "loop": true,
-"name": &"Hurt",
+"name": &"dead",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2vt2g")
+"texture": ExtResource("7_67yil")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_78qr5")
+"texture": ExtResource("8_ba1bl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yfipp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l3uho")
 }],
 "loop": true,
-"name": &"Idle",
-"speed": 3.0
+"name": &"hurt",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_3aqi7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_q0d4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ty7jy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ampr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_qsh32")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2vt2g"]
-radius = 36.0555
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41yhh"]
+size = Vector2(29, 49)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_78qr5"]
-radius = 36.0555
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cn81x"]
+size = Vector2(36, 60)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s4x44"]
-radius = 29.0172
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_reyr2"]
+size = Vector2(28, 49)
 
 [node name="BossPhase1" type="CharacterBody2D"]
 collision_layer = 0
@@ -51,7 +105,8 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_5gnxn")
-animation = &"Idle"
+animation = &"hurt"
+frame_progress = 0.383482
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)
@@ -80,8 +135,8 @@ script = ExtResource("2_sxyfo")
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HitArea2D"]
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_2vt2g")
+position = Vector2(-0.5, 8.5)
+shape = SubResource("RectangleShape2D_41yhh")
 debug_color = Color(0.575242, 0.0792793, 0, 0.42)
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
@@ -91,19 +146,22 @@ script = ExtResource("3_wbrm6")
 metadata/_custom_type_script = "uid://csu2b21cwchqw"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Direction/HurtArea2D"]
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_78qr5")
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_cn81x")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_s4x44")
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_reyr2")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="States" type="Node" parent="."]
 
 [node name="Inactive" type="Node" parent="States"]
 script = ExtResource("7_78qr5")
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("19_cn81x")
 
 [node name="ToTheSky" type="Node" parent="States"]
 script = ExtResource("8_s4x44")
@@ -117,6 +175,7 @@ script = ExtResource("9_2j7v5")
 [node name="EnergyCenter" type="Node2D" parent="."]
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -25.0
 offset_top = -48.0
 offset_right = 24.0

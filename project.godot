@@ -213,6 +213,7 @@ ui_skilltree={
 2d_physics/layer_8="player_clone"
 2d_physics/layer_9="world_boundary"
 2d_physics/layer_10="boss"
+2d_physics/layer_13="king_crab"
 
 [rendering]
 
