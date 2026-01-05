@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://vky5wul74751"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_k8gl5"]
+[ext_resource type="AudioStream" uid="uid://cdjtc0s7tryla" path="res://assets/sounds/metal_impact.mp3" id="2_xxo24"]
+
+[resource]
+script = ExtResource("1_k8gl5")
+clip_id = "metal impact"
+stream = ExtResource("2_xxo24")
+volume_db = 0.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

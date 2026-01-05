@@ -260,6 +260,7 @@ autoplay = "default"
 frame_progress = 0.914773
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HealhBar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("27_uv1yj")]
 player = NodePath("../../Player")

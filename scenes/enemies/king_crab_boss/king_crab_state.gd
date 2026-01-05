@@ -20,3 +20,11 @@ func take_damage(_direction: Variant, damage: int = 1) -> void:
 	#obj.velocity.x = bounce_back_velocity * direction.x
 	if obj.health <= 0:
 		change_state(fsm.states.dead)
+	
+	if obj.is_phase_changed():
+		obj.update_phase_index()
+		obj.changing_phase = true
+		var dir = sign(_direction)
+		fsm.change_state(fsm.states.knockback)
+		obj.velocity.x = 100.0 * dir.x  #place holder number for testing
+		obj.change_direction(-dir.x)

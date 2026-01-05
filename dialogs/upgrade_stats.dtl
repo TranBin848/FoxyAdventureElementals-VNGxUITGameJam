@@ -1,5 +1,7 @@
+do GameManager.player_act("toggle_actor_state")
 npc_master_fox: Nâng cấp?
 - Có
 	do GameManager._show_upgrade_popup()
 - Không
 	npc_master_fox: Oke
+do GameManager.player_act("toggle_actor_state")
