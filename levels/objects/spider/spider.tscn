@@ -5,7 +5,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_3ih74"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -40)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 60, 0, 0, 0, 0, 0, -40)
 }
 point_count = 2
 
@@ -143,9 +143,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8q6c"]
-size = Vector2(28.5, 43.625)
+size = Vector2(28.5, 31.9063)
 
 [node name="Path2D" type="Path2D"]
+z_index = -1
 curve = SubResource("Curve2D_3ih74")
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -171,6 +172,7 @@ animation = &"moving"
 frame_progress = 0.326223
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Spider"]
+position = Vector2(0, -3.95313)
 shape = SubResource("RectangleShape2D_w8q6c")
 
 [node name="HitArea2D" type="Area2D" parent="PathFollow2D/Spider"]
@@ -180,4 +182,5 @@ script = ExtResource("2_6d016")
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Spider/HitArea2D"]
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_w8q6c")

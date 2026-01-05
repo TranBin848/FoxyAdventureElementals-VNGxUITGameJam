@@ -422,6 +422,7 @@ visible = false
 
 [node name="Starfish" parent="." instance=ExtResource("10_r7wcl")]
 position = Vector2(195, 305)
+elemental_type = 5
 
 [node name="SpearWarrior" parent="." instance=ExtResource("27_6fwx2")]
 position = Vector2(2136, 110)
