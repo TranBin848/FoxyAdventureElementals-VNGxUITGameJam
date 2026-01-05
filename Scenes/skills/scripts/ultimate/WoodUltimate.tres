@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://3rex62uqsal1"]
 
-[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_juogo"]
+[ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_pao8d"]
 
 [resource]
-script = ExtResource("1_juogo")
-name = "Resurrection"
+script = ExtResource("1_pao8d")
+name = "Oshquiel"
 elemental_type = 2
 level = 1
 cooldown = 1.0

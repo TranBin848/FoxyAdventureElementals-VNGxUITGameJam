@@ -23,7 +23,7 @@ script = ExtResource("2_532iv")
 
 [node name="OverlayColorRect" type="ColorRect" parent="."]
 layout_mode = 2
-color = Color(0.0352941, 0.54902, 0.870588, 0.694118)
+color = Color(0.060645, 0.589165, 0.932933, 0)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(1000, 600)

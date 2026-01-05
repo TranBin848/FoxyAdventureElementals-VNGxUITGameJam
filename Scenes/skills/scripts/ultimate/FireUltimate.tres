@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_81r2a")
-name = "Phoenix"
+name = "Vaor’neth"
 elemental_type = 4
 level = 1
 cooldown = 1.0

@@ -57,6 +57,8 @@ func toggle_ui():
 	visible = !visible
 	get_tree().paused = visible
 	skill_tree_toggled.emit(visible)
+	# HOOK HERE
+	GameProgressManager.trigger_event("SKILL_TREE")
 	print("🔄 Toggle UI: visible=%s, paused=%s" % [visible, get_tree().paused])
 	
 	if visible:
