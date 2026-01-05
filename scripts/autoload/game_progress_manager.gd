@@ -16,6 +16,8 @@ var metal_ultimate_collected: bool = false
 var earth_ultimate_collected: bool = false
 var first_time_open_skill_tree: bool = false
 
+var cutlass_media_path = "res://scenes/ui/popup/guide_content/cutlass_guide.ogv"
+
 var wood_wand_guide := """
 Bạn vừa nhận được trượng gỗ. Viên đá trên cây trượng sẽ giúp bạn đọc được ngôn ngữ phép thuật. Từ đó học được cách sử dụng phép.
 Hãy ấn một số từ 1-5 để chọn một phép trên thanh skill bar.Sau đó bấm C để sử dụng phép.
@@ -100,7 +102,7 @@ var guide_data: Dictionary = {
 	"CUTLASS": {
 		"title": "Cutlass",
 		"content": cutlass_guide,
-		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png"
+		"video": cutlass_media_path
 	},
 	"SKILL_TREE": {
 		"title": "Skill Tree",
