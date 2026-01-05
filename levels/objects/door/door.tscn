@@ -84,7 +84,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8nmfm"]
-size = Vector2(19, 50)
+size = Vector2(18, 50)
 
 [node name="Door" type="Node2D"]
 script = ExtResource("1_jobty")
@@ -102,7 +102,7 @@ script = ExtResource("4_427kd")
 metadata/_custom_type_script = "uid://0qvd447gmgon"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
-position = Vector2(0.5, 2)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_8nmfm")
 
 [connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

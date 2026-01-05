@@ -18,7 +18,7 @@ class_name Skill
 @export var sound_effect: AudioStream = null
 @export var mana: int = 1
 
-@export var type: String = "single_shot"  # "single_shot", "multi_shot", "radial", "area", "buff"
+@export var type: String = "single_shot"  # "single_shot", "multi_shot", "radial", "area", "buff", "ultimate"
 
 # ✅ LEVEL SCALING (auto-applies in getters)
 func get_scaled_cooldown() -> float:

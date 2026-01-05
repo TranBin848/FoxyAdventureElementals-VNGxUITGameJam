@@ -33,8 +33,12 @@ var boss_zone: Area2D = null
 var is_fighting: bool = false
 var changing_phase: bool = false
 
-var current_phase_index: int = 0
-var next_phase_index: int = 0
+var elements = ElementsEnum.Elements
+var current_phase_index: int = 1
+var next_phase_index: int = current_phase_index
+#Added by BBNguyen
+signal damaged(amount: int)
+var being_controled = false
 
 var skills = {
 	0: "spin",
@@ -101,6 +105,10 @@ func take_damage(damage: int) -> void:
 	
 	AudioManager.play_sound("boss_hurt")
 	flash_corountine()
+	
+	if(being_controled):
+		emit_signal("damaged", damage)
+		return
 	
 	# 1. Calculate Health Percent
 	var health_percent = (float(health) / max_health) * 100.0

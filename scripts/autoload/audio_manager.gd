@@ -22,6 +22,8 @@ const AMBIENCE_BUS: String = "Ambience SFX"
 
 var current_sfx_bus_name: String = SFX_BUS
 
+var _ambience_tween: Tween # Keep a reference to control interruptions
+
 var current_music_id: String = ""
 var next_music_id: String = ""
 var current_ambience_id: String = ""
@@ -176,36 +178,51 @@ func get_current_music_id() -> String:
 	return current_music_id
 	
 ## Play ambience
-func play_ambience(ambience_id: String, volume_db: float = 0.0, fade_in: float = 0.0) -> void:
+func play_ambience(ambience_id: String, target_vol_db: float = 0.0, fade_in_duration: float = 0.0, fade_out_duration: float = 0.0) -> void:
 	if audio_database == null:
 		push_error("AudioDatabase not loaded!")
 		return
-	
+
 	var audio_clip: AudioClip = audio_database.get_clip(ambience_id)
 	if audio_clip == null:
-		push_error("ambience clip not found with ID: " + ambience_id)
+		push_error("Ambience clip not found: " + ambience_id)
 		return
-	
+
+	# 1. If we are already playing this exact ID, do nothing (or just update volume)
+	if current_ambience_id == ambience_id and ambience_player.playing:
+		return
+		
 	current_ambience_id = ambience_id
-	
-	# Stop current ambience if playing
-	if ambience_player.playing:
-		stop_ambience(1.0)  # Immediate stop, no fade
-		await get_tree().process_frame  # Wait one frame
-	
+
+	# 2. Kill any active fade tween so it doesn't fight us
+	if _ambience_tween:
+		_ambience_tween.kill()
+	_ambience_tween = create_tween()
+
+	# 3. FADE OUT sequence (if something is currently playing)
+	if ambience_player.playing and fade_out_duration > 0.0:
+		# Tween volume down to -80dB
+		_ambience_tween.tween_property(ambience_player, "volume_db", -80.0, fade_out_duration)
+		# Wait for the fade out to finish
+		await _ambience_tween.finished
+		
+		# Re-create tween because 'await' might have consumed the previous one
+		_ambience_tween = create_tween()
+
+	# 4. SWAP STREAM
+	ambience_player.stop()
 	ambience_player.stream = audio_clip.stream
 	
-	if fade_in > 0.0:
-		# Start silent and fade in
-		ambience_player.volume_db = -80.0
+	# Calculate final volume
+	var final_vol = audio_clip.volume_db + target_vol_db
+
+	# 5. FADE IN sequence
+	if fade_in_duration > 0.0:
+		ambience_player.volume_db = -80.0 # Start silent
 		ambience_player.play()
-		
-		var target_vol = audio_clip.volume_db + volume_db
-		var tween = create_tween()
-		tween.tween_property(ambience_player, "volume_db", target_vol, fade_in)
+		_ambience_tween.tween_property(ambience_player, "volume_db", final_vol, fade_in_duration)
 	else:
-		# Play immediately at target volume
-		ambience_player.volume_db = audio_clip.volume_db + volume_db
+		ambience_player.volume_db = final_vol
 		ambience_player.play()
 
 ## Stop ambience
@@ -228,8 +245,11 @@ func get_current_ambience_id() -> String:
 
 ## Play audio clip (internal function)
 func play_audio_clip(clip: AudioClip, volume_override: float = 0.0, is_music: bool = false) -> void:
-	if clip.stream == null:
-		push_error("AudioClip does not have stream!")
+	# CHANGE 1: Get the stream via the helper function/logic
+	var stream_to_play = clip.get_playback_stream()
+
+	if stream_to_play == null:
+		push_error("AudioClip has no stream or variations!")
 		return
 	
 	# Find available player
@@ -243,20 +263,19 @@ func play_audio_clip(clip: AudioClip, volume_override: float = 0.0, is_music: bo
 				player = sfx_player
 				break
 		
-		# If no available player, use first player (override)
 		if player == null:
 			player = sfx_players[0]
 	
-	# Configure and play
-	player.stream = clip.stream
+	# CHANGE 2: Assign stream_to_play instead of clip.stream
+	player.stream = stream_to_play
+	
 	player.volume_db = clip.volume_db + volume_override
 	if clip.randomize_pitch:
 		player.pitch_scale = randf_range(clip.pitch_min, clip.pitch_max)
 	else:
 		player.pitch_scale = 1.0
 	player.play()
-
-
+	
 ## Set volume for bus
 func set_bus_volume(bus_name: String, volume_db: float) -> void:
 	var bus_index = AudioServer.get_bus_index(bus_name)

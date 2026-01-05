@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://bl6hhtc4quudu"]
+
+[ext_resource type="Texture2D" uid="uid://bpsgtuia45xwl" path="res://assets/object/chain/ChainSegment2.png" id="2_ns2yi"]
+[ext_resource type="Texture2D" uid="uid://cda7cja7e46pe" path="res://assets/object/chain/ChainSegment3.png" id="3_jdb7e"]
+[ext_resource type="Texture2D" uid="uid://cg8f3mdhymg2r" path="res://assets/object/chain/ChainSegment4.png" id="4_djl5b"]
+[ext_resource type="Texture2D" uid="uid://bfweq7l5356je" path="res://assets/object/chain/ChainSegment5.png" id="5_6h0fb"]
+[ext_resource type="Texture2D" uid="uid://blpib4nu7trke" path="res://assets/object/chain/ChainSegment6.png" id="6_pbeud"]
+[ext_resource type="Texture2D" uid="uid://cji6hayiuntgi" path="res://assets/object/chain/ChainSegment7.png" id="7_k2ymh"]
+[ext_resource type="Texture2D" uid="uid://bfqiltsh34d47" path="res://assets/object/chain/ChainSegment8.png" id="8_uc4gs"]
+[ext_resource type="Texture2D" uid="uid://crskf4osthyvm" path="res://assets/object/chain/ChainSegment9.png" id="9_0rl6c"]
+
+[sub_resource type="GDScript" id="GDScript_nuev3"]
+resource_name = "chain_segment"
+script/source = "extends RigidBody2D
+
+
+func _ready() -> void:
+	$AnimatedSprite2D.play(\"default\")
+	pass
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4pgkj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ns2yi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jdb7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_djl5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6h0fb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pbeud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_k2ymh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uc4gs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0rl6c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a2yet"]
+radius = 3.0
+height = 12.0
+
+[node name="ChainSegment" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+mass = 2.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = SubResource("GDScript_nuev3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5.36442e-07, 0)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_4pgkj")
+frame_progress = 0.34362
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_a2yet")

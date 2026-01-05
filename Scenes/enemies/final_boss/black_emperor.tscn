@@ -185,8 +185,9 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_4c0df")
-animation = &"hurt"
+animation = &"moving"
 autoplay = "idle"
+frame_progress = 0.373741
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(-1, 0)

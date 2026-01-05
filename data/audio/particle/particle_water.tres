@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://m064m2pvddtu"]
+[gd_resource type="Resource" script_class="AudioClip" load_steps=4 format=3 uid="uid://m064m2pvddtu"]
 
 [ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_dlsox"]
-[ext_resource type="AudioStream" uid="uid://xuhp8yxoj46o" path="res://data/audio/particle/new_audio_stream_randomizer.tres" id="2_gw1do"]
+[ext_resource type="AudioStream" uid="uid://p0wop3qvime6" path="res://assets/sounds/Bubble 1.wav" id="2_v3t17"]
+[ext_resource type="AudioStream" uid="uid://c6cj85qnqr3c2" path="res://assets/sounds/Bubble heavy 1.wav" id="3_l5oyx"]
 
 [resource]
 script = ExtResource("1_dlsox")
 clip_id = "particle_water"
-stream = ExtResource("2_gw1do")
+stream = ExtResource("2_v3t17")
+variations = Array[AudioStream]([ExtResource("3_l5oyx"), ExtResource("2_v3t17")])
 volume_db = 0.0
-randomize_pitch = false
+randomize_pitch = true
 pitch_min = 0.9
 pitch_max = 1.1
 description = ""

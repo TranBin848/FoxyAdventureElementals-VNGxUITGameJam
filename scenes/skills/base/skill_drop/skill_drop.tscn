@@ -18,7 +18,8 @@ script = ExtResource("1_wlvaj")
 shape = SubResource("CircleShape2D_wlvaj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
+position = Vector2(7.15256e-07, 7.15256e-07)
+scale = Vector2(0.458333, 0.458333)
 texture = ExtResource("1_s35po")
 
 [node name="DetectionPlayerArea2D" type="Area2D" parent="."]

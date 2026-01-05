@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqgy7srk05epq"]
+
+[ext_resource type="Texture2D" uid="uid://cj4dndwsubrhg" path="res://assets/island/objects/spikes/spikes.png" id="1_g6dwk"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_1t6js"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xexh"]
+size = Vector2(29, 12.5)
+
+[node name="RightSpike" type="Node2D"]
+position = Vector2(2, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+rotation = 4.71239
+texture = ExtResource("1_g6dwk")
+
+[node name="HitArea2D" type="Area2D" parent="."]
+position = Vector2(-10, 0)
+rotation = 1.5708
+collision_mask = 4
+script = ExtResource("2_1t6js")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(1.49993, -19.75)
+shape = SubResource("RectangleShape2D_0xexh")

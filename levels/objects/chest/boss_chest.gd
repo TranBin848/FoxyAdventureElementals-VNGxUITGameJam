@@ -1,6 +1,7 @@
 extends RigidBody2D
+class_name BossChest
 
-@export var wand_pickup_scene: PackedScene 
+const wand_pickup_scene: PackedScene = preload("res://scenes/wand/wand_pickup.tscn")
 
 # 1. New Export to select level in Editor
 # 0 = Normal, 1 = Sorrow, 2 = Soul (Matches Player Enum)

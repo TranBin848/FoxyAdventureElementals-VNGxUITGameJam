@@ -7,12 +7,20 @@ var current_fly_force: float
 @export var drop_bomb_angle: float = 0
 @export var drop_bomb_force: float = 350
 
+# --- NEW VARIABLES ---
+@export var max_wander_distance: float = 300.0
+var spawn_x: float
+# ---------------------
+
 var ground_ray_cast: RayCast2D
 var leave_timer: float
 var bomb_factory: Node2DFactory
 
 func _ready() -> void:
 	super._ready()
+	
+	spawn_x = global_position.x
+	
 	fsm = FSM.new(self, $States, $States/Moving)
 	_init_ground_ray_cast()
 	_init_leave_timer()
@@ -28,6 +36,18 @@ func _init_current_values() -> void:
 
 func _ground_check() -> bool:
 	return ground_ray_cast != null and ground_ray_cast.is_colliding()
+	
+func is_outside_wander_limit() -> bool:
+	var distance_from_spawn = global_position.x - spawn_x
+	
+	# If moving Right (1) and past positive limit
+	if direction > 0 and distance_from_spawn > max_wander_distance:
+		return true
+	# If moving Left (-1) and past negative limit
+	elif direction < 0 and distance_from_spawn < -max_wander_distance:
+		return true
+		
+	return false
 
 func _init_leave_timer() -> void:
 	leave_timer = leave_time

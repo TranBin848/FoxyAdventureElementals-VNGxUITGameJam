@@ -17,7 +17,11 @@ func _ready():
 	set_process_unhandled_input(false)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-
+	var minimap = GameManager.minimap
+	
+	if minimap:
+		# 2. Register self. MUST match the key in 'group_settings' ("enemies")
+		minimap.register_object("collectibles", self)
 
 func _unhandled_input(event):
 	if event.is_action_pressed(interact_input_action):

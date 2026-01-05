@@ -1,6 +1,7 @@
 class_name WarLordTurtle
 extends EnemyCharacter
 
+signal damaged(amount: int)
 # --- REQUIRED SIGNALS ---
 signal health_percent_changed(new_value_percent: float)
 signal phase_changed(new_phase_index: int)
@@ -28,6 +29,8 @@ var is_fighting = false
 var is_facing_left = true
 var is_attacking = false
 var has_delay_state = false
+
+var being_controled = false
 
 # --- PHASE LOGIC (Imported from KingCrab) ---
 @export_group("Phases")
@@ -108,6 +111,10 @@ func take_damage(damage: int) -> void:
 	AudioManager.play_sound("war_lord_hurt")
 	flash_corountine()
 	
+	if (being_controled): 
+		emit_signal("damaged", damage)
+		return
+	
 	# 1. Calculate Health Percent
 	var health_percent = (float(health) / max_health) * 100.0
 	health_bar.value = health_percent
@@ -152,7 +159,8 @@ func alert_coroutine() -> void:
 		targets.visible = false;
 
 func start_fight() -> void:
-	health_bar.show()
+	if(!being_controled):
+		health_bar.show()
 	is_fighting = true
 	fight_started.emit()
 

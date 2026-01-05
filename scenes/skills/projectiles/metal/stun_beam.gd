@@ -20,6 +20,8 @@ var stun_center: Vector2
 func _ready() -> void:
 	_trigger_stun()
 	
+	AudioManager.play_sound("skill_stun_beam")
+	
 	if has_node("AnimatedSprite2D"):
 		get_node("AnimatedSprite2D").animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
 

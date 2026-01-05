@@ -1,4 +1,4 @@
-extends AnimatedSprite2D
+extends AnimationPlayer
 
 signal cutscene2_started
 signal cutscene3_started
@@ -61,3 +61,6 @@ func play_cutscene_sequence() -> void:
 		var damage_to_deal = int(boss.max_health * 0.3334)  # Mất thêm 33.34% máu
 		boss.take_damage(damage_to_deal)
 		print("Boss took ", damage_to_deal, " damage from cutscene")
+
+func play_sound(sound_name: String) ->void:
+	AudioManager.play_sound(sound_name)

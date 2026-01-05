@@ -17,6 +17,11 @@ func _update(_delta: float) -> void:
 	
 	obj.is_right()
 	
+	# Even if we are falling, if we have coyote time, we allow the jump
+	if obj.has_coyote_time():
+		if control_jump():
+			return
+	
 	if obj.is_on_wall() and is_moving and !obj.is_in_fireball_state:
 		if !is_wall_layer(9): 
 			change_state(fsm.states.wallcling)
