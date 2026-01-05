@@ -175,6 +175,7 @@ script = ExtResource("9_2j7v5")
 [node name="EnergyCenter" type="Node2D" parent="."]
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -25.0
 offset_top = -48.0
 offset_right = 24.0
