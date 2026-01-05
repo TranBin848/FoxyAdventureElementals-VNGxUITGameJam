@@ -802,6 +802,8 @@ func handle_elemental_damage(elem: int) -> void:
 func save_state() -> Dictionary:
 	return {
 		"position": [global_position.x, global_position.y],
+		"max_mana": max_mana,
+		"max_health": max_health,
 		"has_blade": has_blade,
 		"has_wand": has_wand,
 		"wand_level": current_wand_level
@@ -818,6 +820,10 @@ func load_state(data: Dictionary) -> void:
 		if has_wand: equip_weapon(WeaponType.WAND)
 	if "wand_level" in data:
 		current_wand_level = data["wand_level"]
+	if "max_health" in data:
+		max_health = data["max_health"]
+	if "max_mana" in data:
+		max_mana = data["max_mana"]
 	
 	# Helper definitions for FSM/Animation use
 func cast_skill(anim_name: String) -> void:
