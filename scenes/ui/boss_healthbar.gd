@@ -46,6 +46,9 @@ func _connect_signals() -> void:
 	
 	if boss_node.has_signal("phase_changed"):
 		boss_node.phase_changed.connect(_on_phase_changed)
+	
+	if boss_node.has_signal("boss1_phase_changed"):
+		boss_node.boss1_phase_changed.connect(_on_phase_changed)
 		
 	if boss_node.has_signal("fight_started"):
 		boss_node.fight_started.connect(_on_fight_started)

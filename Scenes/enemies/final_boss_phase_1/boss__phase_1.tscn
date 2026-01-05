@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bukm1ysgaxpmp" path="res://scenes/enemies/final_boss_phase_1/inactive.gd" id="7_78qr5"]
 [ext_resource type="Script" uid="uid://k1h802kx0qli" path="res://scenes/enemies/final_boss_phase_1/to_the_sky.gd" id="8_s4x44"]
 [ext_resource type="Script" uid="uid://do552jrdc5v55" path="res://scenes/enemies/final_boss_phase_1/dead.gd" id="9_2j7v5"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="9_si3nb"]
+[ext_resource type="PackedScene" uid="uid://d0jkkqjvv3603" path="res://scenes/ui/boss_healthbar.tscn" id="10_2j7v5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5gnxn"]
 animations = [{
@@ -52,7 +52,6 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_5gnxn")
 animation = &"Idle"
-frame_progress = 0.369674
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)
@@ -126,20 +125,11 @@ text = "debug"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="MarginContainer" parent="UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("9_si3nb")
-theme_override_constants/margin_top = 20
-
-[node name="ProgressBar" type="ProgressBar" parent="UI/Control"]
-custom_minimum_size = Vector2(500, 30)
-layout_mode = 2
-size_flags_horizontal = 4
-value = 100.0
+[node name="BossHealthbar" parent="UI" node_paths=PackedStringArray("boss_node") instance=ExtResource("10_2j7v5")]
+offset_top = 8.0
+offset_bottom = 8.0
+boss_node = NodePath("../..")
+transition_duration = 1.0
 
 [node name="DamageNumbersOrigin" type="Node2D" parent="."]
 position = Vector2(25, -14)
