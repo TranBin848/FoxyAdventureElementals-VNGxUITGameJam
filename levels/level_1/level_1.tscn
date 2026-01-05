@@ -37,7 +37,7 @@
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="40_mmdk3"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="41_aiurf"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="42_60i3m"]
-[ext_resource type="PackedScene" path="res://scenes/skills/base/skill_drop/skill_drop_ultimate.tscn" id="43_wx43u"]
+[ext_resource type="PackedScene" uid="uid://caxfo7enr1d7n" path="res://scenes/skills/base/skill_drop/skill_drop_ultimate.tscn" id="43_wx43u"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="44_81g5i"]
 [ext_resource type="Resource" uid="uid://ctl3eu0an05tj" path="res://scenes/skills/scripts/ultimate/MetalUltimate.tres" id="44_wx43u"]
 [ext_resource type="Resource" uid="uid://3rex62uqsal1" path="res://scenes/skills/scripts/ultimate/WoodUltimate.tres" id="45_rflqb"]
@@ -99,7 +99,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 2.35795
+shader_parameter/y_zoom = 0.318631
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
