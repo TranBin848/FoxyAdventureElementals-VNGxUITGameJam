@@ -25,6 +25,7 @@ var boss_zone_camera: Camera2D = null
 var boss_locked_position: Vector2 = Vector2.ZERO  # Vị trí lock boss
 var is_boss_locked: bool = false  # Flag để lock boss
 var canvas_layer: CanvasLayer = null  # CanvasLayer UI cần ẩn đi
+@onready var ui: CanvasLayer = $"../../UI"
 
 func _enter() -> void:
 	print("State: Cutscene1 Enter")
@@ -57,6 +58,7 @@ func _enter() -> void:
 		if canvas_layer:
 			print("Cutscene1: Found CanvasLayer, hiding it")
 			canvas_layer.visible = false
+			ui.visible = false
 		else:
 			print("Warning: CanvasLayer not found")
 	

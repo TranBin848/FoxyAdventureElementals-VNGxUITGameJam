@@ -9,7 +9,7 @@ extends Control
 @export var water_overlay: Texture2D
 @export var fire_overlay: Texture2D
 @export var earth_overlay: Texture2D
-
+@export var chaos_overlay: Texture2D
 ## The actual bar to update.
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
 
@@ -27,7 +27,8 @@ func _ready() -> void:
 		ElementsEnum.Elements.WOOD: wood_overlay,
 		ElementsEnum.Elements.WATER: water_overlay,
 		ElementsEnum.Elements.FIRE: fire_overlay,
-		ElementsEnum.Elements.EARTH: earth_overlay
+		ElementsEnum.Elements.EARTH: earth_overlay,
+		ElementsEnum.Elements.NONE: chaos_overlay
 	}
 		
 	health_bar.hide()
