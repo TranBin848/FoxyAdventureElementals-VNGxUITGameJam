@@ -21,8 +21,7 @@ func _enter():
 	obj.is_movable = false
 	
 	# Play animation bay nếu có
-	if obj.animated_sprite_2d and obj.animated_sprite_2d.sprite_frames.has_animation("fly"):
-		obj.animated_sprite_2d.play("fly")
+	obj.change_animation("idle")
 	
 	# Bay lên độ cao cố định (nếu chưa đạt độ cao đó)
 	if start_pos.y > obj.fly_target_y:
@@ -62,6 +61,22 @@ func _enter():
 	
 	# Chớp chớp các warning
 	await alert_coroutine(warnings)
+	
+	# Cập nhật direction về phía player với dead zone
+	var player = get_tree().get_first_node_in_group("player")
+	if is_instance_valid(player):
+		var boss_pos = obj.global_position
+		var player_pos = player.global_position
+		var x_diff = player_pos.x - boss_pos.x
+		
+		# Chỉ thay đổi direction nếu chênh lệch lớn hơn 50 pixels
+		if abs(x_diff) > 50:
+			if x_diff < 0:
+				obj.direction = -1
+				obj.animated_sprite_2d.flip_h = false
+			else:
+				obj.direction = 1
+				obj.animated_sprite_2d.flip_h = true
 	
 	# Kiểm tra phase vẫn còn FLY không
 	if obj.current_phase != obj.Phase.FLY:

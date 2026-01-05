@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_1m040"]
 [ext_resource type="Script" uid="uid://pjpf80xw2waa" path="res://scenes/ui/skill_tree/skill_info_panel.gd" id="1_4pcvp"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_tcvtn"]
-[ext_resource type="VideoStream" uid="uid://v2himafrkgh7" path="res://assets/skills/wood/clone.ogv" id="4_50nxf"]
+[ext_resource type="VideoStream" uid="uid://d0eux0ncbfs4n" path="res://assets/skills/fire/FireExplosion.ogv" id="4_1m040"]
 
 [node name="SkillInfoPanel" type="Panel"]
 anchors_preset = 6
@@ -61,9 +61,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 22.0
-offset_top = -5.5
+offset_top = -3.5
 offset_right = 436.0
-offset_bottom = 190.5
+offset_bottom = 178.5
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("1_tcvtn")
 bbcode_enabled = true
@@ -75,9 +75,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 30.0
-offset_top = -75.0
+offset_top = -77.0
 offset_right = 160.0
-offset_bottom = -59.0
+offset_bottom = -61.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 theme_override_font_sizes/font_size = 10
@@ -89,9 +89,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 304.0
-offset_top = -75.0
+offset_top = -77.0
 offset_right = 434.0
-offset_bottom = -59.0
+offset_bottom = -61.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 theme_override_font_sizes/font_size = 10
@@ -103,9 +103,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 21.0
-offset_top = -132.0
+offset_top = -133.0
 offset_right = 151.0
-offset_bottom = -116.0
+offset_bottom = -117.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
 theme_override_font_sizes/font_size = 16
@@ -115,12 +115,12 @@ text = "Stack: 10"
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 21.0
-offset_top = 61.0
-offset_right = -19.0
-offset_bottom = 301.0
+offset_left = 51.0
+offset_top = 59.0
+offset_right = -49.0
+offset_bottom = 299.0
 grow_horizontal = 2
-stream = ExtResource("4_50nxf")
+stream = ExtResource("4_1m040")
 volume_db = -80.0
 autoplay = true
 loop = true
@@ -131,11 +131,12 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -105.0
+offset_top = -106.0
 offset_right = 170.0
-offset_bottom = -81.0
+offset_bottom = -82.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
+theme_override_font_sizes/font_size = 16
 text = "UPGRADE"
 
 [node name="UnlockButton" type="Button" parent="."]
@@ -146,12 +147,13 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -170.0
-offset_top = -105.0
+offset_top = -106.0
 offset_right = -20.0
-offset_bottom = -81.0
+offset_bottom = -82.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
+theme_override_font_sizes/font_size = 16
 text = "UNLOCK"
 
 [node name="EquipButton" type="Button" parent="."]
@@ -168,6 +170,7 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("1_tcvtn")
+theme_override_font_sizes/font_size = 16
 text = "EQUIP"
 
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

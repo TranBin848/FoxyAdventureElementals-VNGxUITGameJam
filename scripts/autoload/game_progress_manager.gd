@@ -46,6 +46,7 @@ var guide_data: Dictionary = {
 }
 
 func trigger_event(event_type: String) -> void:
+	return
 	match event_type:
 		"COIN":
 			if first_coin_collected: return

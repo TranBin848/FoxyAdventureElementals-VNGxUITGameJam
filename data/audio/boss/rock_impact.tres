@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://dhky3t58h4kdm"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_xi43i"]
+[ext_resource type="AudioStream" uid="uid://bhxmgib0mm2yv" path="res://assets/sounds/rock_impact.mp3" id="2_r2648"]
+
+[resource]
+script = ExtResource("1_xi43i")
+clip_id = "rock impact"
+stream = ExtResource("2_r2648")
+volume_db = 0.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

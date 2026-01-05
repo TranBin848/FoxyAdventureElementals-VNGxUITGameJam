@@ -13,5 +13,6 @@ func _ready() -> void:
 
 
 # called when take damage
-func take_damage(direction: Vector2, damage: float, elemental_type: int = 0):
-	hurt.emit(direction, damage, elemental_type)
+func take_damage(direction: Vector2, damage: float, elemental_type: int = 0, source: Node2D = null):
+	print("hit source: " + str(source))
+	hurt.emit(direction, damage, elemental_type, source)

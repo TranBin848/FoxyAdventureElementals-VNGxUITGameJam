@@ -292,6 +292,7 @@ autoplay = "default"
 frame_progress = 0.914773
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("30_h17kd")]
 

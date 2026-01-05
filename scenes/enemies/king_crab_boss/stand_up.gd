@@ -10,5 +10,5 @@ func _update(_delta: float) -> void:
 		fsm.change_state(fsm.states.walk)
 
 func _exit() -> void:
-	if obj.is_phase_changed():
+	if obj.changing_phase:
 		obj.change_phase()

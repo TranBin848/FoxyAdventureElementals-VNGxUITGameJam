@@ -9,7 +9,7 @@ extends BlackEmperorState
 @export var shot_interval: float = 1.0  # Thời gian giữa các lần bắn
 @export var meteor_speed: float = 400.0  # Tốc độ meteor
 @export var meteor_damage: int = 15  # Damage của meteor
-@export var follow_distance: float = 300.0  # Khoảng cách giữ với player
+@export var follow_distance: float = 350.0  # Khoảng cách giữ với player
 @export var move_speed: float = 150.0  # Tốc độ di chuyển của boss
 
 func _enter():
@@ -18,9 +18,7 @@ func _enter():
 	obj.is_movable = true
 	obj.velocity.x = 0
 	
-	# Play animation nếu có
-	if obj.animated_sprite_2d and obj.animated_sprite_2d.sprite_frames.has_animation("cast"):
-		obj.animated_sprite_2d.play("cast")
+	obj.change_animation("idle")
 	
 	# Lấy player
 	var player = get_tree().get_first_node_in_group("player")
@@ -34,11 +32,29 @@ func _enter():
 		# Kiểm tra phase
 		if obj.current_phase != obj.Phase.FLY:
 			obj.is_movable = true
-			#change_state(fsm.states.idle)
+			change_state(fsm.states.idle)
 			return
 		
 		# Di chuyển về phía player giữ khoảng cách
 		await _move_towards_player(player, shot_interval)
+		
+		obj.change_animation("idle")
+		# Dừng lại hoàn toàn
+		obj.velocity = Vector2.ZERO
+		
+		# Cập nhật direction cuối cùng về phía player và lock
+		var boss_pos = obj.global_position
+		var player_pos = player.global_position
+		var x_diff = player_pos.x - boss_pos.x
+		
+		# Chỉ thay đổi direction nếu chênh lệch lớn hơn threshold (50 pixels)
+		if abs(x_diff) > 50:
+			if x_diff < 0:
+				obj.direction = -1
+				obj.animated_sprite_2d.flip_h = false
+			else:
+				obj.direction = 1
+				obj.animated_sprite_2d.flip_h = true
 		
 		# Bắn burst đạn về phía player
 		_shoot_burst_at_player(player)
@@ -46,11 +62,18 @@ func _enter():
 	# Đợi 1.5 giây trước khi kết thúc skill
 	await get_tree().create_timer(1.5).timeout
 	
+	# Kiểm tra phase trước khi kết thúc skill
+	if obj.current_phase != obj.Phase.FLY:
+		# Đã chuyển phase, dừng hẳn
+		obj.is_movable = true
+		return
+	
 	# Kết thúc skill
 	obj.is_movable = true
 	obj.use_skill()
 
 func _move_towards_player(player: Node2D, duration: float):
+	obj.change_animation("moving")
 	"""Di chuyển boss về phía player trong khoảng thời gian duration, giữ khoảng cách follow_distance"""
 	var start_time = Time.get_ticks_msec() / 1000.0
 	var elapsed = 0.0
@@ -66,6 +89,12 @@ func _move_towards_player(player: Node2D, duration: float):
 		# Tính hướng đến player
 		var direction = (player_pos - boss_pos).normalized()
 		
+		# Cập nhật direction của boss dựa trên vị trí player
+		if player_pos.x < boss_pos.x:
+			obj.direction = -1
+		else:
+			obj.direction = 1
+		
 		# Nếu quá xa, di chuyển lại gần
 		if distance > follow_distance + 50:
 			obj.velocity = direction * move_speed
@@ -76,11 +105,11 @@ func _move_towards_player(player: Node2D, duration: float):
 		else:
 			obj.velocity = direction * move_speed * 0.3
 		
-		# Flip sprite theo hướng di chuyển
-		if obj.velocity.x < 0 and not obj.animated_sprite_2d.flip_h:
-			obj.animated_sprite_2d.flip_h = true
-		elif obj.velocity.x > 0 and obj.animated_sprite_2d.flip_h:
+		# Flip sprite theo direction của boss
+		if obj.direction < 0:
 			obj.animated_sprite_2d.flip_h = false
+		else:
+			obj.animated_sprite_2d.flip_h = true
 		
 		await get_tree().process_frame
 		elapsed = (Time.get_ticks_msec() / 1000.0) - start_time

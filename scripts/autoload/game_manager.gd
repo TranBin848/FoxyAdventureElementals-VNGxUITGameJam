@@ -129,9 +129,14 @@ func respawn_at_portal() -> bool:
 
 func respawn_at_checkpoint() -> void:
 	if current_checkpoint_id.is_empty(): return
-
-	var data = checkpoint_data.get(current_checkpoint_id, {})
-	if data.is_empty() or not player: return
+	var saved_stage_path := ""
+	
+	# Get path from memory OR disk
+	if checkpoint_data.has(current_checkpoint_id):
+		saved_stage_path = checkpoint_data[current_checkpoint_id].get("stage_path", "")
+	else:
+		var save_file_data = SaveSystem.load_checkpoint_data()
+		saved_stage_path = save_file_data.get("stage_path", "")
 
 	# 1. Load Position/Flags
 	player.load_state(data.get("player_state", {}))
@@ -278,3 +283,8 @@ func player_act(method_name: String, a1=null, a2=null, a3=null, a4=null, a5=null
 			
 	# 2. Call the function with the reconstructed array
 	player.callv(method_name, args)
+
+func collect_wand() -> void:
+	if not player: return
+	player.equip_weapon(player.WeaponType.WAND)
+	player.has_wand = true

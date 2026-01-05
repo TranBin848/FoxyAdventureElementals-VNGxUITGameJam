@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://by4bwryh7oobl" path="res://levels/objects/platforms/interactable_platform.tscn" id="25_t8ul1"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="26_s4b5i"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="27_6fwx2"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="27_ulcqf"]
 [ext_resource type="Script" uid="uid://cetul0ws8d05n" path="res://scenes/skills/scripts/earth/Earthquake.gd" id="27_xpuws"]
 [ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="28_6fwx2"]
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="28_ulcqf"]
@@ -145,6 +146,8 @@ position = Vector2(1328, 608)
 
 [node name="EntryDoor" parent="." instance=ExtResource("15_oaqh1")]
 position = Vector2(-552, 805)
+target_stage = "uid://dhghajv3v5q1v"
+target_door = "ExitDoor"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0

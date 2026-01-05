@@ -9,6 +9,7 @@ var duration: float
 var direction: Vector2
 var targets_in_area: Array = [] 
 var timer: Timer
+var level: int
 
 func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	self.damage = skill.damage

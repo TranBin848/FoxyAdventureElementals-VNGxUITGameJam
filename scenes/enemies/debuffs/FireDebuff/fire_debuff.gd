@@ -20,7 +20,7 @@ func perform_state_start() -> void:
 func perform_state_update(delta: float) -> void:
 	damage_timer -= delta
 	if damage_timer <= 0:
-		target._on_hurt_area_2d_hurt(Vector2.ZERO, damage, elemental_type)
+		target._on_hurt_area_2d_hurt(Vector2.ZERO, damage, elemental_type, null)
 		damage_timer = damage_interval
 	super.perform_state_update(delta)
 
