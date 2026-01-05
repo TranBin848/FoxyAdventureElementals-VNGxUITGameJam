@@ -95,7 +95,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.217629
+shader_parameter/y_zoom = 2.85312
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -286,7 +286,7 @@ target_stage = "uid://docdrr2v8cok6"
 target_door = "EntryDoor"
 
 [node name="Player" parent="." instance=ExtResource("18_gukcl")]
-position = Vector2(5111, -433)
+position = Vector2(-1869, 434)
 collision_mask = 329
 platform_floor_layers = 4294967231
 max_health = 1000
@@ -601,33 +601,3 @@ skill = ExtResource("45_rflqb")
 
 [node name="NpcStatSeller" parent="." instance=ExtResource("44_wx43u")]
 position = Vector2(5029, -436)
-
-[connection signal="body_entered" from="Ground/Coin" to="Ground/Coin" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119320" to="Ground/@RigidBody2D@119320" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119321" to="Ground/@RigidBody2D@119321" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119322" to="Ground/@RigidBody2D@119322" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119323" to="Ground/@RigidBody2D@119323" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119324" to="Ground/@RigidBody2D@119324" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119325" to="Ground/@RigidBody2D@119325" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119326" to="Ground/@RigidBody2D@119326" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119327" to="Ground/@RigidBody2D@119327" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119328" to="Ground/@RigidBody2D@119328" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119329" to="Ground/@RigidBody2D@119329" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119330" to="Ground/@RigidBody2D@119330" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119331" to="Ground/@RigidBody2D@119331" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119332" to="Ground/@RigidBody2D@119332" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119333" to="Ground/@RigidBody2D@119333" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119334" to="Ground/@RigidBody2D@119334" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119335" to="Ground/@RigidBody2D@119335" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119336" to="Ground/@RigidBody2D@119336" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119337" to="Ground/@RigidBody2D@119337" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119338" to="Ground/@RigidBody2D@119338" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119339" to="Ground/@RigidBody2D@119339" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119340" to="Ground/@RigidBody2D@119340" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119341" to="Ground/@RigidBody2D@119341" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119342" to="Ground/@RigidBody2D@119342" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119343" to="Ground/@RigidBody2D@119343" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119344" to="Ground/@RigidBody2D@119344" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119345" to="Ground/@RigidBody2D@119345" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119346" to="Ground/@RigidBody2D@119346" method="_on_body_entered"]
-[connection signal="body_entered" from="Ground/@RigidBody2D@119347" to="Ground/@RigidBody2D@119347" method="_on_body_entered"]

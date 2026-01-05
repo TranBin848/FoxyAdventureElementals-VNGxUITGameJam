@@ -35,6 +35,13 @@ func use_key() -> bool:
 		return true
 	return false
 	
+func use_coin(amount: int) -> bool:
+	if get_coins() >= amount:
+		coins -= amount
+		coin_changed.emit(coins)
+		return true
+	return false
+	
 func save_data() -> Dictionary:
 	return {"coins": coins, "keys": keys}
 	

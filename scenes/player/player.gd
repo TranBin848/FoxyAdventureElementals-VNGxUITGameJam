@@ -274,18 +274,15 @@ func _handle_rigid_push() -> void:
 
 func collect_blade() -> void:
 	has_blade = true;
-	
 	# HOOK HERE: Trigger tutorial on first weapon pickup
 	GameProgressManager.trigger_event("CUTLASS")
-	
-	swap_weapon()
+	swap_weapon(WeaponType.BLADE)
 
 func collect_wand() -> void:
 	has_wand = true
-	
 	# HOOK HERE: Trigger tutorial on first weapon pickup
 	GameProgressManager.trigger_event("WOOD_WAND")
-	swap_weapon()
+	swap_weapon(WeaponType.WAND)
 	
 func can_attack() -> bool:
 	if not is_able_attack: return false
@@ -311,21 +308,21 @@ func throw_blade() -> void:
 
 func can_throw() -> bool: return has_blade && current_weapon == WeaponType.BLADE
 
-func swap_weapon() -> void:
-	# Block swapping during special states
-	if current_buff_state == BuffState.FIREBALL: return
-	if not has_blade and not has_wand: return
+func swap_weapon(to_weapon: WeaponType) -> void:
+	if current_buff_state == BuffState.FIREBALL:
+		return
 
-	match current_weapon:
-		WeaponType.NORMAL:
-			if has_blade: equip_weapon(WeaponType.BLADE)
-			elif has_wand: equip_weapon(WeaponType.WAND)
+	match to_weapon:
 		WeaponType.BLADE:
-			if has_wand: equip_weapon(WeaponType.WAND)
-			else: equip_weapon(WeaponType.NORMAL)
+			if has_blade:
+				return equip_weapon(WeaponType.BLADE)
+
 		WeaponType.WAND:
-			if has_blade: equip_weapon(WeaponType.BLADE)
-			else: equip_weapon(WeaponType.NORMAL)
+			if has_wand:
+				return equip_weapon(WeaponType.WAND)
+
+	# fallback
+	equip_weapon(WeaponType.NORMAL)
 
 func upgrade_wand_to(level: WandLevel) -> void:
 	has_wand = true # Ensure they own the weapon type

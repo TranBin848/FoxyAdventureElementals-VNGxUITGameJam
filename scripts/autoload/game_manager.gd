@@ -383,7 +383,7 @@ func on_player_death() -> void:
 #endregion
 
 #region New Game & Load Game (Main Menu Functions)
-func start_new_game(starting_scene: String = "res://scenes/levels/level_1.tscn") -> void:
+func start_new_game(starting_scene: String = "res://levels/level_0/level_0.tscn") -> void:
 	"""Start a completely fresh game - call from main menu"""
 	print("🎮 Starting new game")
 	
@@ -393,9 +393,9 @@ func start_new_game(starting_scene: String = "res://scenes/levels/level_1.tscn")
 	current_level = 0
 	
 	# Reset systems
-	if inventory_system:
-		inventory_system.clear()
-	SkillTreeManager.reset()
+	#if inventory_system:
+		#inventory_system.clear()
+	#SkillTreeManager.reset()
 	
 	# Load starting scene
 	get_tree().change_scene_to_file(starting_scene)

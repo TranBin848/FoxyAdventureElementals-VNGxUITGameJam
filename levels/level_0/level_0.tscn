@@ -76,6 +76,7 @@ texture = ExtResource("6_q6r03")
 
 [node name="Player" parent="." instance=ExtResource("19_kumio")]
 position = Vector2(39, 125)
+max_mana = 200
 
 [node name="TileMap" type="TileMapLayer" parent="."]
 z_index = -5

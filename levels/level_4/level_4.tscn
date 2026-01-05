@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://dsxvyoo4n54nc"]
+[gd_scene load_steps=47 format=4 uid="uid://dsxvyoo4n54nc"]
 
 [ext_resource type="Script" uid="uid://daj5tdirvwlbt" path="res://levels/level_4/level_4.gd" id="1_36jj7"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
@@ -95,7 +95,7 @@ metadata/_snap_count = 100
 normal = Vector2(-0.00564142, 0.999984)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36jj7"]
-size = Vector2(596, 351)
+size = Vector2(807.5, 442.5)
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_36jj7")
@@ -173,7 +173,7 @@ texture = ExtResource("16_s6hm0")
 position = Vector2(-12, 5)
 
 [node name="Player" parent="." instance=ExtResource("2_tu7ib")]
-position = Vector2(7444, 439)
+position = Vector2(11, 28)
 max_health = 1000
 
 [node name="LightSource" type="Node2D" parent="Player"]
@@ -421,7 +421,7 @@ enemy_to_spawn = Array[PackedScene]([ExtResource("24_rjkgb")])
 elemental_type = 1
 
 [node name="BossZoneArea2D" parent="." node_paths=PackedStringArray("boss") instance=ExtResource("31_pts6k")]
-position = Vector2(8012, 901)
+position = Vector2(7504, 745)
 boss = NodePath("WarLordTurtle")
 boss_music_id = "music_boss"
 
@@ -429,17 +429,17 @@ boss_music_id = "music_boss"
 position = Vector2(0, 116)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossZoneArea2D"]
-position = Vector2(-17, -68)
-shape = SubResource("RectangleShape2D_b06ts")
+position = Vector2(-0.25, -41)
+shape = SubResource("RectangleShape2D_36jj7")
 
 [node name="Door" parent="." instance=ExtResource("7_401k1")]
-position = Vector2(8773, 1029)
+position = Vector2(8314, 869)
 target_stage = "uid://bpfybvhktqi4t"
 target_door = "EntryDoor"
 
 [node name="SkillDropUltimate" parent="." instance=ExtResource("33_36jj7")]
-position = Vector2(8714, 1024)
+position = Vector2(8240, 857)
 skill = ExtResource("34_otmpl")
 
 [node name="NpcStatSeller" parent="." instance=ExtResource("35_otmpl")]
-position = Vector2(6994, 970)
+position = Vector2(5519, 1034)

@@ -5,7 +5,6 @@ var my_logger: Logger = ConsoleLogger.new()
 func _ready() -> void:
 	# ✅ FIX: Wait for GameManager to finish spawning
 	await GameManager.level_ready
-	
 	# Now safe to add coins
 	#GameManager.inventory_system.add_coin(500)
 	if AudioManager:

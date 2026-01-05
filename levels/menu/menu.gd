@@ -1,15 +1,13 @@
 extends Control
 
 @export var target_scene: PackedScene 
+const settings_popup: PackedScene = preload("res://scenes/ui/popup/settings_popup.tscn")
 
 func _on_play_button_pressed() -> void:
-	if target_scene:
-		get_tree().change_scene_to_packed(target_scene)
-	else:
-		print("No scene assigned to target_scene!")
+	GameManager.load_saved_game()
 
 func _on_setting_button_pressed() -> void:
-	var popup_settings = load("res://scenes/ui/settings_popup.tscn").instantiate()
+	var popup_settings = settings_popup.instantiate()
 	get_parent().add_child(popup_settings)
 
 func _on_quit_button_pressed() -> void:

@@ -7,6 +7,7 @@
 script = ExtResource("2_0bypa")
 name = "Tornado"
 elemental_type = 3
+level = 1
 cooldown = 5.0
 duration = 0.0
 hit_delay = 0.0
@@ -15,7 +16,7 @@ texture_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
 animation_name = "WaterTornado"
 projectile_scene = ExtResource("1_yktl8")
 speed = 180.0
-damage = 2
+damage = 5.0
 mana = 40
 type = "single_shot"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

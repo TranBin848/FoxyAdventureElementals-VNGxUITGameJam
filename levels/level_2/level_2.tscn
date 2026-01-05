@@ -396,6 +396,11 @@ tile_set = ExtResource("33_oaqh1")
 position = Vector2(1279, 180)
 elemental_type = 5
 
+[node name="Spawner" parent="TileMaps" instance=ExtResource("25_ppf8r")]
+position = Vector2(8944, 687)
+enemy_to_spawn = Array[PackedScene]([ExtResource("28_6fwx2"), ExtResource("23_vdtjt"), ExtResource("22_1h50e")])
+enemy_per_spawn = 2
+
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="Spawner" parent="Spawners" instance=ExtResource("25_ppf8r")]
@@ -411,7 +416,7 @@ elemental_type = 5
 [node name="Projectiles" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("14_km4sl")]
-position = Vector2(12308, -1341)
+position = Vector2(-519, 832)
 max_health = 1000
 
 [node name="Starfish" parent="." instance=ExtResource("10_r7wcl")]
@@ -627,4 +632,4 @@ position = Vector2(0, 120)
 shape = SubResource("RectangleShape2D_rdvgg")
 
 [node name="NpcStatSeller" parent="." instance=ExtResource("31_c0166")]
-position = Vector2(12372, -1206)
+position = Vector2(10474, -1622)
