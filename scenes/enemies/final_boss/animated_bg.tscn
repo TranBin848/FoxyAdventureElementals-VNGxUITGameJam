@@ -1,6 +1,6 @@
-[gd_scene load_steps=42 format=3 uid="uid://xkbcnxv5v0y7"]
+[gd_scene load_steps=49 format=3 uid="uid://xkbcnxv5v0y7"]
 
-[ext_resource type="Script" uid="uid://d0djolxvt6im6" path="res://scenes/enemies/final_boss/animated_bg.gd" id="1_bg_script"]
+[ext_resource type="Script" path="res://scenes/enemies/final_boss/animated_bg.gd" id="1_bg_script"]
 [ext_resource type="Texture2D" uid="uid://c1065p6v5vwg8" path="res://assets/skills/finalboss_skill/02.png" id="1_qsvhq"]
 [ext_resource type="Texture2D" uid="uid://cc21yi5v2d6ca" path="res://assets/skills/finalboss_skill/03.png" id="2_d08tj"]
 [ext_resource type="Texture2D" uid="uid://beb5awxfkkluc" path="res://assets/skills/finalboss_skill/04.png" id="3_ay4uv"]
@@ -40,6 +40,13 @@
 [ext_resource type="Texture2D" uid="uid://sf3onah00tbq" path="res://assets/skills/finalboss_skill/38.png" id="36_6odkd"]
 [ext_resource type="Texture2D" uid="uid://bspb0usfbbvax" path="res://assets/skills/finalboss_skill/39.png" id="37_2est4"]
 [ext_resource type="Texture2D" uid="uid://d10h3g2et1y2x" path="res://assets/skills/finalboss_skill/40.png" id="38_3sr47"]
+[ext_resource type="Texture2D" uid="uid://1cyuttuwbelt" path="res://assets/skills/finalboss_skill/42.png" id="39_hg1q2"]
+[ext_resource type="Texture2D" uid="uid://dljqrdww3y4j0" path="res://assets/skills/finalboss_skill/43.png" id="40_ptlj5"]
+[ext_resource type="Texture2D" uid="uid://d4guhao7fj1hi" path="res://assets/skills/finalboss_skill/44.png" id="41_a12aa"]
+[ext_resource type="Texture2D" uid="uid://tl04ftcy0t3j" path="res://assets/skills/finalboss_skill/45.png" id="42_14c8u"]
+[ext_resource type="Texture2D" uid="uid://cq8sic5nxhpop" path="res://assets/skills/finalboss_skill/46.png" id="43_dx5ia"]
+[ext_resource type="Texture2D" uid="uid://du7gnkcoodyp2" path="res://assets/skills/finalboss_skill/47.png" id="44_jyx0n"]
+[ext_resource type="Texture2D" uid="uid://c4xvopt5c20e6" path="res://assets/skills/finalboss_skill/48.png" id="45_wakq8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sxtnh"]
 animations = [{
@@ -187,6 +194,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("39_hg1q2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_ptlj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_a12aa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_14c8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_dx5ia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_jyx0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_wakq8")
+}],
+"loop": false,
+"name": &"cutscene6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("35_euc5r")
 }],
 "loop": true,
@@ -197,8 +230,6 @@ animations = [{
 [node name="AnimatedBg" type="AnimatedSprite2D"]
 scale = Vector2(0.32, 0.290286)
 sprite_frames = SubResource("SpriteFrames_sxtnh")
-animation = &"cutscene5"
+animation = &"cutscene3"
 autoplay = "default"
-frame = 11
-frame_progress = 1.0
 script = ExtResource("1_bg_script")

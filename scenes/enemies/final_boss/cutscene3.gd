@@ -19,6 +19,8 @@ var boss_pos: Node2D = null
 func _enter() -> void:
 	print("=== State: Cutscene3 Enter ===")
 	
+	obj.change_animation("idle")
+	
 	# Setup boss
 	obj.velocity = Vector2.ZERO
 	obj.change_animation("inactive")

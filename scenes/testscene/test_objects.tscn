@@ -33,7 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://cn5t8hmng56sl" path="res://levels/objects/platforms/moving_platform.tscn" id="30_7eyp3"]
 [ext_resource type="PackedScene" uid="uid://bagtndimgpaee" path="res://levels/objects/chest/boss_chest.tscn" id="32_k6a7r"]
 [ext_resource type="PackedScene" uid="uid://yg0w6u1dl0v6" path="res://levels/objects/trampoline/trampoline.tscn" id="33_2c2yo"]
-[ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="34_fhwgh"]
+[ext_resource type="PackedScene" uid="uid://5e7xk2njusm2" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="34_fhwgh"]
 [ext_resource type="PackedScene" uid="uid://bae3h26xicif2" path="res://scenes/ui/hud/minimap.tscn" id="35_im3gq"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="36_v4y5r"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="37_ngimm"]
@@ -344,3 +344,5 @@ horizontal_alignment = 1
 
 [node name="Path2D" parent="." instance=ExtResource("39_v4y5r")]
 position = Vector2(187, 219)
+
+[connection signal="body_entered" from="World/Coin" to="World/Coin" method="_on_body_entered"]

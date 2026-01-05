@@ -20,7 +20,7 @@ var health: float
 func _ready() -> void:
 	health = max_health
 
-func take_damage(_direction: Vector2, _damage: float, elemental_type: int = 0) -> void:
+func take_damage(_direction: Vector2, _damage: float, elemental_type: int = 0, source: Node2D = null) -> void:
 	health -= _damage
 	
 	# Visual feedback (flash)

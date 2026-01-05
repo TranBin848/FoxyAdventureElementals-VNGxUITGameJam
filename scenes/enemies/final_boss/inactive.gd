@@ -1,7 +1,7 @@
 extends BlackEmperorState
 
 func _enter() -> void:
-	obj.change_animation("inactive")
+	obj.change_animation("idle")
 	obj.velocity.x = 0
 	timer = 0
 

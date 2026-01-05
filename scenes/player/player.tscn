@@ -123,7 +123,7 @@
 [ext_resource type="Texture2D" uid="uid://e6n3yam102mw" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_5.png" id="80_0epl4"]
 [ext_resource type="Texture2D" uid="uid://sm5bkiuhns2" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_6.png" id="81_3r8w6"]
 [ext_resource type="Texture2D" uid="uid://cssehk8qyeylv" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_7.png" id="82_i816j"]
-[ext_resource type="Script" uid="uid://vqavncunfnes" path="res://scenes/player/actor.gd" id="83_trum3"]
+[ext_resource type="Script" path="res://scenes/player/actor.gd" id="83_trum3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trum3"]
 shader = ExtResource("2_21yht")
@@ -1033,7 +1033,7 @@ radius = 7.0
 height = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ru3bc"]
-radius = 17.0
+radius = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lwhcj"]
 size = Vector2(5.5, 3)
@@ -1057,6 +1057,7 @@ zoom = Vector2(2, 2)
 
 [node name="SilhouetteSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_trum3")
 position = Vector2(0, -15)
@@ -1065,6 +1066,7 @@ animation = &"cling"
 
 [node name="SilhouetteBladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_4b1ex")
 position = Vector2(0, -15)
@@ -1074,6 +1076,7 @@ autoplay = "idle"
 
 [node name="SilhouetteWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 z_index = 199
 material = SubResource("ShaderMaterial_v8cnd")
 position = Vector2(0, -15)
@@ -1083,6 +1086,7 @@ autoplay = "idle"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"faint"

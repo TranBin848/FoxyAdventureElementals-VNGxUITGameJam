@@ -30,8 +30,6 @@ tile_set = ExtResource("2_0d8vy")
 [node name="AnimatedBg" parent="." instance=ExtResource("2_ic5dq")]
 position = Vector2(-1212, 196)
 animation = &"default"
-frame = 0
-frame_progress = 0.0
 
 [node name="Ground" type="TileMapLayer" parent="."]
 position = Vector2(129, 67)
@@ -39,12 +37,6 @@ tile_map_data = PackedByteArray("AADq/wsABAAGAAEAAADp/wwABAABAAEAAADo/wwABAABAAE
 tile_set = ExtResource("2_0d8vy")
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("3_ic5dq")]
-position = Vector2(-1477, 375)
-collision_mask = 329
-platform_floor_layers = 4294967231
-max_health = 1000
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -143,9 +135,12 @@ debug_color = Color(0.988235, 0, 0.290196, 0)
 zoom = Vector2(1.5, 1.5)
 
 [node name="BlackEmperor" parent="Bosszone" instance=ExtResource("10_djwf0")]
-position = Vector2(1.44445, 7.77778)
+position = Vector2(1.85185, 7.5)
 scale = Vector2(0.037, 0.056)
 collision_layer = 24
 collision_mask = 1
+
+[node name="Player" parent="." instance=ExtResource("3_ic5dq")]
+position = Vector2(-1474, 383)
 
 [connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]

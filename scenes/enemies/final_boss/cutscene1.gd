@@ -29,6 +29,10 @@ var canvas_layer: CanvasLayer = null  # CanvasLayer UI cần ẩn đi
 func _enter() -> void:
 	print("State: Cutscene1 Enter")
 	
+	obj.change_animation("idle")
+	
+	await get_tree().create_timer(0.5).timeout
+	
 	# KILL TẤT CẢ TWEENS từ state cũ ngay lập tức
 	var all_tweens = obj.get_tree().get_processed_tweens()
 	print("Cutscene1: Killing ", all_tweens.size(), " active tweens")
@@ -38,8 +42,6 @@ func _enter() -> void:
 	
 	# Force đặt lại position ngay lập tức
 	obj.velocity = Vector2.ZERO
-	
-	obj.change_animation("inactive")
 	obj.is_stunned = true
 	obj.is_movable = false
 	obj.set_physics_process(false)  # Tắt physics để không bị override position
@@ -138,6 +140,7 @@ func _start_cutscene_sequence() -> void:
 			print("Cutscene1: Player hidden")
 		
 		animated_bg.play("cutscene1")
+		
 		# Đợi animation hoàn thành
 		await animated_bg.animation_finished
 		print("Cutscene1: AnimatedBg cutscene1 finished")
@@ -201,6 +204,8 @@ func _move_boss_to_position() -> void:
 	# Disable velocity/physics để không bị override position
 	obj.velocity = Vector2.ZERO
 	
+	obj.change_animation("moving")
+	
 	# Tạo tween trên obj (boss) thay vì trên state
 	var fly_tween = obj.get_tree().create_tween()
 	fly_tween.bind_node(obj)  # Bind tween vào boss để tự kill khi boss bị remove
@@ -221,6 +226,8 @@ func _move_boss_to_position() -> void:
 	is_boss_locked = true  # Bật lock để _update giữ position
 	
 	print("Cutscene1: Boss arrived at ", obj.global_position)
+	
+	obj.change_animation("idle")
 	
 	## Đợi một chút
 	#await get_tree().create_timer(0.3).timeout

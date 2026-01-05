@@ -28,8 +28,7 @@ var spawned_spawners: Array = []  # Lưu các spawner đã tạo
 
 enum Phase {
 	FLY,
-	CUTSCENE,
-	GROUND
+	CUTSCENE
 }
 
 var skills_phase_1 = {
@@ -41,11 +40,6 @@ var skills_phase_1 = {
 # Phase 2: cutscene transition (không có skill, chỉ cutscene)
 var skills_phase_2 = {}
 
-# Phase 3: charge -> fly skill -> hạ xuống -> charge lại
-var skills_phase_3 = {
-	0: "charge"
-}
-
 var current_phase: Phase = Phase.FLY
 
 var skill_cd_timer = 0
@@ -53,9 +47,9 @@ var cur_skill = 0
 
 func _ready() -> void:
 	super._ready()
-	fsm = FSM.new(self, $States, $States/Inactive)
+	fsm = FSM.new(self, $States, $States/Idle)
 	ground_y = global_position.y  # Lưu độ cao mặt đất
-	fly_target_y = global_position.y - 150  # Lưu độ cao bay
+	fly_target_y = global_position.y - 200 #độ cao bay
 	original_x = global_position.x  # Lưu vị trí x ban đầu
 	
 	add_to_group("enemies")
@@ -75,8 +69,6 @@ func use_skill() -> void:
 			skill_dict = skills_phase_1
 		Phase.CUTSCENE:
 			skill_dict = skills_phase_2
-		Phase.GROUND:
-			skill_dict = skills_phase_3
 
 	if skill_dict.is_empty():
 		return
@@ -97,12 +89,9 @@ func take_damage(damage: int) -> void:
 	var health_percent = (float(health) / max_health) * 100
 	health_bar.value = health_percent
 	
-	# Phase 1 -> Phase 2: khi máu <= 66.67%
-	if health_percent <= 66.67 and current_phase == Phase.FLY:
+	# Phase FLY -> Phase CUTSCENE: khi máu <= 33.33%
+	if health_percent <= 33.33 and current_phase == Phase.FLY:
 		enter_phase_cutscene()
-	# Phase 2 -> Phase 3: khi máu <= 33.33% (sau cutscene)
-	elif health_percent <= 33.33 and current_phase == Phase.CUTSCENE:
-		enter_phase_ground()
 
 func enter_phase_cutscene() -> void:
 	current_phase = Phase.CUTSCENE
@@ -118,27 +107,6 @@ func enter_phase_cutscene() -> void:
 		fsm.change_state(fsm.states.cutscene1)
 	else:
 		print("Error: cutscene1 state not found!")
-		# Nếu không có state, tự động chuyển phase
-		await get_tree().create_timer(5.0).timeout
-		enter_phase_ground()
-
-func enter_phase_ground() -> void:
-	current_phase = Phase.GROUND
-	cur_skill = 0
-	
-	print("Entering Phase GROUND")
-	
-	# Tắt va chạm bay / bật va chạm đất nếu có
-	collision.disabled = false
-	
-	# Chuyển sang state spam_enemies để triệu hồi spawner
-	if fsm.states.has("spamenemies"):
-		fsm.change_state(fsm.states.spamenemies)
-	else:
-		print("Error: spamenemies state not found!")
-		# Fallback: chuyển sang charge
-		if fsm.states.has("charge"):
-			fsm.change_state(fsm.states.charge)
 
 func _spawn_star_spawners(active: bool = true) -> void:
 	if spawner_scene == null:

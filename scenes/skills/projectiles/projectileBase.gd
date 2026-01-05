@@ -21,6 +21,8 @@ func setup(_skill: Skill, dir: Vector2) -> void:
 	elemental_type = skill.elemental_type
 	direction = dir.normalized() if dir.length() > 0 else Vector2.RIGHT
 	
+	print("skill level: " + str(skill.level))
+	
 	if has_node("HitArea2D"):
 		var hit_area: HitArea2D = $HitArea2D
 		hit_area.damage = damage

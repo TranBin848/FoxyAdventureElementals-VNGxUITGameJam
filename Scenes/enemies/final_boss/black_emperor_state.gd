@@ -15,22 +15,13 @@ func _should_turn_around() -> bool:
 	return false
 
 func take_damage(direction: Variant, damage: int = 1) -> void:
-	# Phase FLY: chỉ trừ máu, không chuyển state
-	if obj.current_phase == obj.Phase.FLY:
-		obj.take_damage(damage)
-		return
-	
-	# Phase CUTSCENE: chỉ trừ máu, không chuyển state (đang cutscene quan trọng)
 	if obj.current_phase == obj.Phase.CUTSCENE:
-		obj.take_damage(damage)
+		obj.change_animation("idle")
 		return
+		
+	obj.change_animation("hurt")
+	obj.take_damage(damage)
 	
-	# Các state đặc biệt khác: không chuyển sang hurt
-	var current_state_name = fsm.current_state.name if fsm and fsm.current_state else ""
-	var priority_states = ["Cutscene1", "Cutscene2", "Cutscene3", "Cutscene4", "SpamEnemies"]
-	if current_state_name in priority_states:
-		obj.take_damage(damage)
-		return
-
-	# Các trường hợp còn lại: chuyển sang state hurt như bình thường
-	super.take_damage(direction, damage)
+	if obj.health <= 0:
+		change_state(fsm.states.dead)
+	
