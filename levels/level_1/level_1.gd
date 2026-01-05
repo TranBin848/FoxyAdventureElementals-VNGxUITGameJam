@@ -9,9 +9,9 @@ func _enter_tree() -> void:
 	GameManager.minimap = find_child("Minimap")
 	
 func _ready() -> void:
-	#if not GameManager.respawn_at_portal():
-		#GameManager.respawn_at_checkpoint()
-		#await GameManager.checkpoint_loading_complete
+	if not GameManager.respawn_at_portal():
+		GameManager.respawn_at_checkpoint()
+		await GameManager.checkpoint_loading_complete
 	
 	# Now safe to add coins
 	#GameManager.inventory_system.add_coin(500)

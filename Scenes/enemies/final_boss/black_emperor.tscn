@@ -290,6 +290,7 @@ script = ExtResource("56_2anp0")
 script = ExtResource("57_mq2q6")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -25.0
 offset_top = -48.0
 offset_right = 24.0

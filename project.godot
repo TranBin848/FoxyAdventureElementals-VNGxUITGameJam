@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="FoxyAdventureElementals"
-run/main_scene="uid://dshvtsustqlwx"
+run/main_scene="uid://dhghajv3v5q1v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+<<<<<<<Updatedupstreamrun/main_scene="uid://dsmbhy8c7qvf6"
 
 [audio]
 
