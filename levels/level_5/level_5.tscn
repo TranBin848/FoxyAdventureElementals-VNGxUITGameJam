@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://bpfybvhktqi4t"]
+[gd_scene load_steps=32 format=4 uid="uid://bpfybvhktqi4t"]
 
 [ext_resource type="TileSet" uid="uid://cvniv8hql4cfp" path="res://levels/level_5/level_5.tres" id="1_74p41"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_v5f3f"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="23_y73rq"]
 [ext_resource type="TileSet" uid="uid://315u2uaue33w" path="res://levels/level_2/level_2.tres" id="24_a6bcn"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="25_1arbv"]
+[ext_resource type="PackedScene" uid="uid://c2h06qod7g7le" path="res://scenes/npc/npc_stat_seller.tscn" id="26_cj7kt"]
 
 [sub_resource type="Curve2D" id="Curve2D_1arbv"]
 _data = {
@@ -303,3 +304,6 @@ position = Vector2(23, -27)
 position = Vector2(14274, -2459)
 target_stage = "uid://dshvtsustqlwx"
 target_door = "EntryDoor"
+
+[node name="NpcStatSeller" parent="." instance=ExtResource("26_cj7kt")]
+position = Vector2(10621, -1814)

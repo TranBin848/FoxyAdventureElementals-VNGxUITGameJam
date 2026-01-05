@@ -6,7 +6,7 @@ Wand_Seller: À à! Có chứ! Viên ngọc phép được đính lên cây trư
 Foxy: Vậy sao?! Vậy giá cả thế nào?
 Wand_Seller: Hmm. Nhìn cậu có năng khiếu nhưng thiếu kiến thức vầy chắc là người mới. Cậu dùng trượng gỗ nhé. Giá 10 đồng vàng thôi.
 
-if {GameManager.inventory_system.get_coins()} >= 0:
+if {GameManager.inventory_system.get_coins()} >= 10:
 	Foxy: Umm. 10 đồng sao. Tôi nghĩ mình có đủ. Tôi sẽ lấy nó!
 	Wand_Seller: Haha. Chốt đơn nào! Chúc cậu may mắn trên con đường luyện phép nhé!
 	Foxy: Cảm ơn ông!!

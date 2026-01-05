@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=4 uid="uid://beaf2cwec5xlr"]
+[gd_scene load_steps=66 format=4 uid="uid://beaf2cwec5xlr"]
 
 [ext_resource type="Script" uid="uid://wdfjgyhrjowc" path="res://levels/level_3/level_3.gd" id="1_b7gic"]
 [ext_resource type="TileSet" uid="uid://b1rw2jhie3f1r" path="res://levels/level_1/level_1.tres" id="2_4c4sg"]
@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://iix2qujpr57n" path="res://scenes/skills/base/skill_drop/skill_drop_ultimate.tscn" id="40_7k6of"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="40_8vtkf"]
 [ext_resource type="Resource" uid="uid://bllogn53nra1h" path="res://scenes/skills/scripts/ultimate/WaterUltimate.tres" id="41_4r7ot"]
+[ext_resource type="PackedScene" uid="uid://c2h06qod7g7le" path="res://scenes/npc/npc_stat_seller.tscn" id="42_7k6of"]
 
 [sub_resource type="Curve2D" id="Curve2D_omsu6"]
 _data = {
@@ -196,7 +197,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.424098
+shader_parameter/y_zoom = 1.77156
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -652,6 +653,9 @@ horizontal_alignment = 1
 [node name="SkillDropUltimate" parent="." instance=ExtResource("40_7k6of")]
 position = Vector2(12536, -513)
 skill = ExtResource("41_4r7ot")
+
+[node name="NpcStatSeller" parent="." instance=ExtResource("42_7k6of")]
+position = Vector2(13969, 10)
 
 [connection signal="interacted" from="Object/Platform6/PathFollow2D/InteractiveArea2D" to="Object/Platform6" method="_on_interactive_area_2d_interacted"]
 [connection signal="interacted" from="Object/Platform8/PathFollow2D/InteractiveArea2D" to="Object/Platform8" method="_on_interactive_area_2d_interacted"]

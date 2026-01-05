@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://dsxvyoo4n54nc"]
+[gd_scene load_steps=48 format=4 uid="uid://dsxvyoo4n54nc"]
 
 [ext_resource type="Script" uid="uid://daj5tdirvwlbt" path="res://levels/level_4/level_4.gd" id="1_36jj7"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_tu7ib"]
@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://iix2qujpr57n" path="res://scenes/skills/base/skill_drop/skill_drop_ultimate.tscn" id="33_36jj7"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="34_36jj7"]
 [ext_resource type="Resource" uid="uid://b2417g2au2g6l" path="res://scenes/skills/scripts/ultimate/EarthUltimate.tres" id="34_otmpl"]
+[ext_resource type="PackedScene" uid="uid://c2h06qod7g7le" path="res://scenes/npc/npc_stat_seller.tscn" id="35_otmpl"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_2si7y"]
 
 [sub_resource type="Gradient" id="Gradient_rjkgb"]
@@ -443,3 +444,6 @@ target_door = "EntryDoor"
 [node name="SkillDropUltimate" parent="." instance=ExtResource("33_36jj7")]
 position = Vector2(8714, 1024)
 skill = ExtResource("34_otmpl")
+
+[node name="NpcStatSeller" parent="." instance=ExtResource("35_otmpl")]
+position = Vector2(6994, 970)

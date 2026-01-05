@@ -20,6 +20,7 @@ var cutlass_media_path = "res://scenes/ui/popup/guide_content/cutlass_guide.ogv"
 var coin_media_path = "res://scenes/ui/popup/guide_content/coin_guide.ogv"
 var key_media_path = "res://scenes/ui/popup/guide_content/key_guide.ogv"
 var skill_tree_media_path = "res://scenes/ui/popup/guide_content/skill_tree_guide.png"
+var wand_media_path = "res://scenes/ui/popup/guide_content/wand_guide.ogv"
 
 var wood_wand_guide := """
 Bạn vừa nhận được trượng gỗ. Viên đá trên cây trượng sẽ giúp bạn đọc được ngôn ngữ phép thuật. Từ đó học được cách sử dụng phép.
@@ -94,13 +95,13 @@ var guide_data: Dictionary = {
 	},
 	"KILL": {
 		"title": "Enemy Slain",
-		"content": "Enemies drop elemental skills. Pick them up to grow stronger!",
+		"content": "Enemies drop elemental skills. Pick them up to grow stronger.",
 		"video": "res://assets/videos/tutorial_combat.ogv"
 	},
 	"WOOD_WAND": {
-		"title": "Wooden Wand!",
+		"title": "Wooden Wand",
 		"content": wood_wand_guide,
-		"video": "res://assets/videos/tutorial_weapon_swap.ogv"
+		"video": wand_media_path
 	},
 	"CUTLASS": {
 		"title": "Cutlass",
