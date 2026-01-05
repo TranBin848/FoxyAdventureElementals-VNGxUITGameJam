@@ -29,10 +29,10 @@
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="26_7mgrg"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="27_etxra"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="29_0lii6"]
-[ext_resource type="Texture2D" uid="uid://b05srxtpilibq" path="res://assets/skills/icon element/Fire_v2.png" id="37_xciwo"]
-[ext_resource type="Texture2D" uid="uid://b3m7niu1ye24m" path="res://assets/skills/icon element/Water_v2.png" id="38_x60jx"]
-[ext_resource type="Texture2D" uid="uid://dcvi82xfb8w5v" path="res://assets/skills/icon element/Earth_v2.png" id="39_mwgaq"]
-[ext_resource type="Texture2D" uid="uid://ch3gxklumk8cv" path="res://assets/skills/icon element/Metal_v2.png" id="40_3stc0"]
+[ext_resource type="Texture2D" uid="uid://bk51gkprscokm" path="res://assets/skills/icon element/Fire_v2.png" id="37_xciwo"]
+[ext_resource type="Texture2D" uid="uid://cm0v1judaocq7" path="res://assets/skills/icon element/Water_v2.png" id="38_x60jx"]
+[ext_resource type="Texture2D" uid="uid://butqokb3dnq7u" path="res://assets/skills/icon element/Earth_v2.png" id="39_mwgaq"]
+[ext_resource type="Texture2D" uid="uid://c5ewwmdx1mhhd" path="res://assets/skills/icon element/Metal_v2.png" id="40_3stc0"]
 [ext_resource type="Texture2D" uid="uid://bw0lj4v2jqd7c" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_1.png" id="40_qgkf7"]
 [ext_resource type="Texture2D" uid="uid://bu07xy8c7sahs" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_2.png" id="41_q4qdf"]
 [ext_resource type="Texture2D" uid="uid://m3hdk4fxfum3" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_3.png" id="42_il3ai"]
@@ -167,7 +167,6 @@ animations = [{
 }]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c54he"]
-load_path = "res://.godot/imported/ElementIcon4.png-3ab8c7805f289548a686aaa7b3857592.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1lhn3"]
 animations = [{

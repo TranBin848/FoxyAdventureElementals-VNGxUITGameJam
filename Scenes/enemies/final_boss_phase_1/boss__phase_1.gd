@@ -10,6 +10,7 @@ extends EnemyCharacter
 
 #node for spawhning 2 mini boss
 @onready var energy_center:Node2D = $EnergyCenter
+@onready var boss_healthbar: BossHealthBar = $UI/BossHealthbar
 
 #references
 @export var KING_CRAB_SCENE: PackedScene
@@ -22,13 +23,17 @@ var war_lord_instance: WarLordTurtle = null
 var energy_line_1: EnergyLine = null
 var energy_line_2: EnergyLine = null
 
-@onready var health_bar: ProgressBar = $UI/Control/ProgressBar
 @onready var label: Label = $Label
 
 var boss_zone: Area2D = null
 
 var is_fighting = false
 var movespeed = 1;
+
+signal health_percent_changed(new_value_percent: float)
+signal boss1_phase_changed(new_phase_index: int)
+signal fight_started
+signal boss_died
 
 func _ready() -> void:
 	super._ready()
@@ -39,12 +44,16 @@ func _ready() -> void:
 func take_damage(damage: int) -> void:
 	super.take_damage(damage)
 	
-	health_bar.show()
+	fsm.change_state(fsm.states.hurt)
 	#AudioManager.play_sound("war_lord_hurt")
 	
 	flash_corountine()
 	var health_percent = (float(health) / max_health) * 100
-	health_bar.value = health_percent
+	health_percent_changed.emit(health_percent)
+	
+	if health <= 0:
+		print("chet roi ne")
+		fsm.change_state(fsm.states.dead)
 	
 
 func flash_corountine() -> void:
@@ -54,7 +63,6 @@ func flash_corountine() -> void:
 
 
 func start_fight() -> void:
-	health_bar.show()
 	is_fighting = true;
 
 func spawn_mini_bosses() -> void:
@@ -68,7 +76,7 @@ func spawn_mini_bosses() -> void:
 		king_crab_instance.being_controled = true
 		king_crab_instance.boss_zone = self.boss_zone
 		king_crab_instance.start_fight()
-
+	
 
 	if !is_instance_valid(war_lord_instance):
 		war_lord_instance = WAR_LORD_SCENE.instantiate() as WarLordTurtle
@@ -115,12 +123,16 @@ func mini_boss_is_not_ready() -> bool:
 	return king_crab_instance == null or !is_instance_valid(king_crab_instance) or war_lord_instance == null or !is_instance_valid(war_lord_instance)
 
 func handle_dead() -> void:
+	
 	hurt_box.disabled = true
 	collision.disabled = true
 	hit_box.disabled = true
 	gravity = 0
+	boss_healthbar.hide()
 	velocity.x = 0
-	health_bar.hide()
+	
+	queue_free()
+	
 	if boss_zone:
 		boss_zone._on_boss_dead()
 
@@ -142,6 +154,9 @@ func fade_out(node: CanvasItem, duration: float = 0.5) -> void:
 		node.hide()
 	)
 
+func start_boss_fight() -> void:
+	fight_started.emit()
+	boss1_phase_changed.emit(0)
 
 func get_animation_node() -> Node:
 	return anim

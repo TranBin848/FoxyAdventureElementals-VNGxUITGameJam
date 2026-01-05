@@ -9,7 +9,7 @@ extends Control
 @export var water_overlay: Texture2D
 @export var fire_overlay: Texture2D
 @export var earth_overlay: Texture2D
-
+@export var chaos_overlay: Texture2D
 ## The actual bar to update.
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
 
@@ -27,7 +27,8 @@ func _ready() -> void:
 		ElementsEnum.Elements.WOOD: wood_overlay,
 		ElementsEnum.Elements.WATER: water_overlay,
 		ElementsEnum.Elements.FIRE: fire_overlay,
-		ElementsEnum.Elements.EARTH: earth_overlay
+		ElementsEnum.Elements.EARTH: earth_overlay,
+		ElementsEnum.Elements.NONE: chaos_overlay
 	}
 		
 	health_bar.hide()
@@ -45,6 +46,9 @@ func _connect_signals() -> void:
 	
 	if boss_node.has_signal("phase_changed"):
 		boss_node.phase_changed.connect(_on_phase_changed)
+	
+	if boss_node.has_signal("boss1_phase_changed"):
+		boss_node.boss1_phase_changed.connect(_on_phase_changed)
 		
 	if boss_node.has_signal("fight_started"):
 		boss_node.fight_started.connect(_on_fight_started)

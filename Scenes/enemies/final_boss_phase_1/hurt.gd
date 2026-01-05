@@ -1,11 +1,11 @@
 extends FinalPhaseOneState
 
 func _enter() -> void:
-	obj.change_animation("idle")
-	obj.velocity.y = 0;
+	obj.change_animation("hurt")
+	timer = 0.5
+
 
 func _update(delta: float) -> void:
+	if update_timer(delta):
+		change_state(fsm.previous_state)
 	super._update(delta)
-	handle_mini_bosses()
-	print(obj.health)
-	pass

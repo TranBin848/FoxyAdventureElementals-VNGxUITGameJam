@@ -8,7 +8,6 @@ signal phase_transition_started
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $Direction/AnimatedSprite2D
-@onready var health_bar: ProgressBar = $UI/Control/ProgressBar
 @onready var label: Label = $Label
 
 @export var atk_range: float = 200
@@ -25,6 +24,11 @@ var fly_target_y: float = 0.0  # Độ cao bay cố định khi ở phase FLY
 var ground_y: float = 0.0  # Độ cao mặt đất ban đầu
 var original_x: float = 0.0  # Vị trí x ban đầu để di chuyển qua lại
 var spawned_spawners: Array = []  # Lưu các spawner đã tạo
+
+signal health_percent_changed(new_value_percent: float)
+signal phase_changed(new_phase_index: int)
+signal fight_started
+signal boss_died
 
 enum Phase {
 	FLY,
@@ -87,7 +91,8 @@ func take_damage(damage: int) -> void:
 	
 	flash_corountine()
 	var health_percent = (float(health) / max_health) * 100
-	health_bar.value = health_percent
+	
+	health_percent_changed.emit(health_percent)
 	
 	# Phase FLY -> Phase CUTSCENE: khi máu <= 33.33%
 	if health_percent <= 33.33 and current_phase == Phase.FLY:
@@ -316,8 +321,11 @@ func flash_corountine() -> void:
 	animated_sprite_2d.modulate = Color.WHITE  # go back to normal	
 
 func start_fight() -> void:
-	health_bar.show()
 	is_fighting = true
+
+func start_boss_fight() -> void:
+	fight_started.emit()
+	phase_changed.emit(0)
 
 func handle_dead() -> void:
 	pass

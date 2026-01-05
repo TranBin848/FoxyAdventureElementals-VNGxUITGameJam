@@ -163,7 +163,7 @@ texture = ExtResource("6_63edt")
 position = Vector2(-12, 5)
 
 [node name="Player" parent="." instance=ExtResource("8_ijd4f")]
-position = Vector2(6930, 187)
+position = Vector2(3756, 1046)
 max_health = 1000
 
 [node name="LightSource" type="Node2D" parent="Player"]
@@ -287,10 +287,6 @@ elemental_type = 5
 position = Vector2(4674, 638)
 elemental_type = 5
 
-[node name="Starfish" parent="Enemies" instance=ExtResource("19_kbfqr")]
-position = Vector2(3926, 1016)
-elemental_type = 5
-
 [node name="Crab3" parent="Enemies" instance=ExtResource("20_foiss")]
 position = Vector2(5714, -322)
 elemental_type = 1
@@ -322,6 +318,7 @@ position = Vector2(7232, 1055)
 texture = ExtResource("22_20tlv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("23_e6eqr")]
 

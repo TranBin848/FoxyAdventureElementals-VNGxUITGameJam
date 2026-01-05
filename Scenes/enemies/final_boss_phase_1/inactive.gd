@@ -1,7 +1,7 @@
 extends FinalPhaseOneState
 
 func _enter() -> void:
-	obj.change_animation("inactive")
+	obj.change_animation("idle")
 	timer = 1.5
 
 

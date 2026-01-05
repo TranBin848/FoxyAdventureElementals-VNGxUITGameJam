@@ -1,9 +1,10 @@
 extends FinalPhaseOneState
 
 func _enter() -> void:
-	obj.change_animation("toTheSky")
+	obj.change_animation("idle")
 	timer = 2
-
+	obj.start_boss_fight()
+	
 func _update(delta: float) -> void:
 	
 	control_fly()

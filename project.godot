@@ -14,7 +14,6 @@ config/name="FoxyAdventureElementals"
 run/main_scene="uid://cb08y1slu5bnw"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
-<<<<<<<Updatedupstreamrun/main_scene="uid://dsmbhy8c7qvf6"
 
 [audio]
 
@@ -42,6 +41,7 @@ directories/dch_directory={
 "Foxy": "res://dialogs/Foxy.dch",
 "Stat_Seller": "res://dialogs/Stat_Seller.dch",
 "Wand_Seller": "res://dialogs/Wand_Seller.dch",
+"foxy": "res://dialogs/foxy.dch",
 "npc_master_fox": "res://dialogs/npc_master_fox.dch",
 "npc_villager": "res://dialogs/npc_villager.dch"
 }
@@ -214,6 +214,7 @@ ui_skilltree={
 2d_physics/layer_8="player_clone"
 2d_physics/layer_9="world_boundary"
 2d_physics/layer_10="boss"
+2d_physics/layer_13="king_crab"
 
 [rendering]
 
