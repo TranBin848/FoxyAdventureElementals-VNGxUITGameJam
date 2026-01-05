@@ -17,6 +17,8 @@ var earth_ultimate_collected: bool = false
 var first_time_open_skill_tree: bool = false
 
 var cutlass_media_path = "res://scenes/ui/popup/guide_content/cutlass_guide.ogv"
+var coin_media_path = "res://scenes/ui/popup/guide_content/coin_guide.ogv"
+var key_media_path = "res://scenes/ui/popup/guide_content/key_guide.ogv"
 
 var wood_wand_guide := """
 Bạn vừa nhận được trượng gỗ. Viên đá trên cây trượng sẽ giúp bạn đọc được ngôn ngữ phép thuật. Từ đó học được cách sử dụng phép.
@@ -82,12 +84,12 @@ var guide_data: Dictionary = {
 	"COIN": {
 		"title": "Gold Coin",
 		"content": "Bạn vừa nhặt được đồng vàng. Nó có giá trị trao đổi mua bán, hãy thu thập càng nhiều càng tốt nhé.",
-		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png" 
+		"video": coin_media_path 
 	},
 	"KEY": {
 		"title": "Treasure Key",
 		"content": "Bạn vừa tìm được chìa khóa để mở rương kho báu, hãy truy tìm rương báu và mở chúng ra để nhận được nhiều của cải nhé.",
-		"image": "res://assets/skills/icons_skill/48x48/skill_icons16.png" 
+		"video": key_media_path
 	},
 	"KILL": {
 		"title": "Enemy Slain",
