@@ -21,6 +21,8 @@ signal state_updated(state_name: String)
 @onready var rocket_factory: Node2DFactory = $Direction/RocketFactory
 
 @onready var health_bar: ProgressBar = $UI/Control/ProgressBar
+@onready var boss_healthbar: BossHealthBar = $UI/BossHealthbar
+
 @onready var label: Label = $Label
 
 var boss_zone: Area2D = null
@@ -161,6 +163,8 @@ func alert_coroutine() -> void:
 func start_fight() -> void:
 	if(!being_controled):
 		health_bar.show()
+	else:
+		boss_healthbar.hide()
 	is_fighting = true
 	fight_started.emit()
 
@@ -211,7 +215,7 @@ func handle_dead() -> void:
 	
 	boss_died.emit()
 	
-	if boss_zone:
+	if boss_zone and !being_controled:
 		boss_zone._on_boss_dead()
 
 func get_animation_node() -> Node:

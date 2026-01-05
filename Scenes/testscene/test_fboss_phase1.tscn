@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://d2xmukxa7b0yp"]
+[gd_scene load_steps=39 format=4 uid="uid://cq21ycnrofp7e"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_6kue7"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_dm37j"]
@@ -25,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://dt1od2hyke60g" path="res://assets/island/back_palm_trees/back_palm_tree_regular_02.png" id="23_o1ejc"]
 [ext_resource type="Texture2D" uid="uid://frimagh5yfit" path="res://assets/island/back_palm_trees/back_palm_tree_regular_03.png" id="24_x1usk"]
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_nuu0j"]
-[ext_resource type="PackedScene" uid="uid://dfg7ew4joocvp" path="res://scenes/ui/healh_bar.tscn" id="26_55y57"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="27_8tla6"]
 [ext_resource type="PackedScene" uid="uid://dot0vlx7mvjxl" path="res://scenes/enemies/final_boss_phase_1/boss__phase_1.tscn" id="29_6kue7"]
 [ext_resource type="PackedScene" uid="uid://dtgq532abhp77" path="res://scenes/enemies/final_boss_phase_1/chain/chain.tscn" id="30_0e1im"]
@@ -256,12 +255,6 @@ position = Vector2(320, 226)
 sprite_frames = SubResource("SpriteFrames_et5yk")
 autoplay = "default"
 frame_progress = 0.914773
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HealhBar" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("26_55y57")]
-player = NodePath("../../Player")
-metadata/_edit_use_anchors_ = true
 
 [node name="BladeCollectable" parent="." instance=ExtResource("27_8tla6")]
 position = Vector2(155, 206)
