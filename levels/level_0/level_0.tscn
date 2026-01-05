@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://5f5m765bnxg8"]
+[gd_scene load_steps=20 format=4 uid="uid://5f5m765bnxg8"]
 
 [ext_resource type="Script" uid="uid://clqwsttic13aa" path="res://levels/level_0/level_0.gd" id="1_kumio"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="2_pxy07"]
@@ -8,9 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bm7glj3finew5" path="res://assets/terrain_plus/background4a.png" id="6_q6r03"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="19_kumio"]
 [ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="20_eppev"]
-[ext_resource type="Texture2D" uid="uid://dxgb08biccb24" path="res://assets/island/images/fox_blade/fox_defeat_3.png" id="22_pxy07"]
 [ext_resource type="PackedScene" path="res://scenes/objects/water_reflection.tscn" id="23_v3mv3"]
-[ext_resource type="Texture2D" uid="uid://bnrhstmshrm2u" path="res://assets/island/images/fox/fox_defeat_3.png" id="51_6tf7l"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="56_ioufq"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="58_yjkv6"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud/settings.tscn" id="59_7e416"]
@@ -167,14 +165,6 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/StaticBody2D2"]
 shape = SubResource("WorldBoundaryShape2D_3slpx")
-
-[node name="FoxDefeat3" type="Sprite2D" parent="."]
-position = Vector2(743, 145)
-texture = ExtResource("51_6tf7l")
-
-[node name="FoxDefeat4" type="Sprite2D" parent="."]
-position = Vector2(684, 144)
-texture = ExtResource("22_pxy07")
 
 [node name="Water2" parent="." instance=ExtResource("23_v3mv3")]
 position = Vector2(774, 322)

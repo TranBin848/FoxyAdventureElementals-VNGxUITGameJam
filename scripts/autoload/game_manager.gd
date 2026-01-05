@@ -259,3 +259,8 @@ func player_act(method_name: String, a1=null, a2=null, a3=null, a4=null, a5=null
 			
 	# 2. Call the function with the reconstructed array
 	player.callv(method_name, args)
+
+func collect_wand() -> void:
+	if not player: return
+	player.equip_weapon(player.WeaponType.WAND)
+	player.has_wand = true

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" path="res://levels/objects/spikes/bottom_spike.tscn" id="7_fub6n"]
 [ext_resource type="PackedScene" uid="uid://b4ltylwr220cw" path="res://levels/objects/spikes/right_spike.tscn" id="8_pt76g"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="9_tterj"]
-[ext_resource type="PackedScene" path="res://levels/objects/spikes/left_spike.tscn" id="10_tg65d"]
+[ext_resource type="PackedScene" uid="uid://bons01cnqio5e" path="res://levels/objects/spikes/left_spike.tscn" id="10_tg65d"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="11_pr4o7"]
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="12_rojem"]
 [ext_resource type="PackedScene" uid="uid://bmqknea8bh0ev" path="res://levels/objects/campfire/campfire.tscn" id="14_fub6n"]

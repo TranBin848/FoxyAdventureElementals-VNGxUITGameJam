@@ -30,8 +30,6 @@ tile_set = ExtResource("2_0d8vy")
 [node name="AnimatedBg" parent="." instance=ExtResource("2_ic5dq")]
 position = Vector2(-1212, 196)
 animation = &"default"
-frame = 0
-frame_progress = 0.0
 
 [node name="Ground" type="TileMapLayer" parent="."]
 position = Vector2(129, 67)

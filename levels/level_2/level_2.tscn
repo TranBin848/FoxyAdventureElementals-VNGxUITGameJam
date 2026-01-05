@@ -159,6 +159,8 @@ position = Vector2(1328, 608)
 
 [node name="EntryDoor" parent="." instance=ExtResource("15_oaqh1")]
 position = Vector2(-552, 805)
+target_stage = "uid://dhghajv3v5q1v"
+target_door = "ExitDoor"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_scale = 2.0
@@ -590,44 +592,3 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("27_ulcqf")
 text = "Enemy Out of Range"
 horizontal_alignment = 1
-
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/Quicksand" to="TileMaps/TerrainTileMap/Quicksand" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/Quicksand" to="TileMaps/TerrainTileMap/Quicksand" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43493" to="TileMaps/TerrainTileMap/@Area2D@43493" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43493" to="TileMaps/TerrainTileMap/@Area2D@43493" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43494" to="TileMaps/TerrainTileMap/@Area2D@43494" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43494" to="TileMaps/TerrainTileMap/@Area2D@43494" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43495" to="TileMaps/TerrainTileMap/@Area2D@43495" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43495" to="TileMaps/TerrainTileMap/@Area2D@43495" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43496" to="TileMaps/TerrainTileMap/@Area2D@43496" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43496" to="TileMaps/TerrainTileMap/@Area2D@43496" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43497" to="TileMaps/TerrainTileMap/@Area2D@43497" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43497" to="TileMaps/TerrainTileMap/@Area2D@43497" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43498" to="TileMaps/TerrainTileMap/@Area2D@43498" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43498" to="TileMaps/TerrainTileMap/@Area2D@43498" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43499" to="TileMaps/TerrainTileMap/@Area2D@43499" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43499" to="TileMaps/TerrainTileMap/@Area2D@43499" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43500" to="TileMaps/TerrainTileMap/@Area2D@43500" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43500" to="TileMaps/TerrainTileMap/@Area2D@43500" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43501" to="TileMaps/TerrainTileMap/@Area2D@43501" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43501" to="TileMaps/TerrainTileMap/@Area2D@43501" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43502" to="TileMaps/TerrainTileMap/@Area2D@43502" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43502" to="TileMaps/TerrainTileMap/@Area2D@43502" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43503" to="TileMaps/TerrainTileMap/@Area2D@43503" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43503" to="TileMaps/TerrainTileMap/@Area2D@43503" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43504" to="TileMaps/TerrainTileMap/@Area2D@43504" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43504" to="TileMaps/TerrainTileMap/@Area2D@43504" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43505" to="TileMaps/TerrainTileMap/@Area2D@43505" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43505" to="TileMaps/TerrainTileMap/@Area2D@43505" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43506" to="TileMaps/TerrainTileMap/@Area2D@43506" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43506" to="TileMaps/TerrainTileMap/@Area2D@43506" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43507" to="TileMaps/TerrainTileMap/@Area2D@43507" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43507" to="TileMaps/TerrainTileMap/@Area2D@43507" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43508" to="TileMaps/TerrainTileMap/@Area2D@43508" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43508" to="TileMaps/TerrainTileMap/@Area2D@43508" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43509" to="TileMaps/TerrainTileMap/@Area2D@43509" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43509" to="TileMaps/TerrainTileMap/@Area2D@43509" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43510" to="TileMaps/TerrainTileMap/@Area2D@43510" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43510" to="TileMaps/TerrainTileMap/@Area2D@43510" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMaps/TerrainTileMap/@Area2D@43511" to="TileMaps/TerrainTileMap/@Area2D@43511" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMaps/TerrainTileMap/@Area2D@43511" to="TileMaps/TerrainTileMap/@Area2D@43511" method="_on_body_exited"]
