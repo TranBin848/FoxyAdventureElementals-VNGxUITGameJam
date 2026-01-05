@@ -7,6 +7,7 @@
 script = ExtResource("1_q5lyq")
 clip_id = "skill_earthquake"
 stream = ExtResource("2_48s7g")
+variations = Array[AudioStream]([])
 volume_db = 0.0
 randomize_pitch = false
 pitch_min = 0.9

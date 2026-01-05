@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="9_cb0ua"]
 [ext_resource type="PackedScene" uid="uid://d356v232gn1ce" path="res://levels/objects/platforms/unstable_platform.tscn" id="9_q5oy5"]
 [ext_resource type="PackedScene" uid="uid://eb702qll71qk" path="res://levels/objects/spider/spider.tscn" id="10_000ww"]
-[ext_resource type="PackedScene" uid="uid://blw7h0mcsdlyd" path="res://levels/objects/spikes/right_spike.tscn" id="10_w6pyp"]
+[ext_resource type="PackedScene" uid="uid://b4ltylwr220cw" path="res://levels/objects/spikes/right_spike.tscn" id="10_w6pyp"]
 [ext_resource type="Texture2D" uid="uid://cpaivu6qvkk7t" path="res://assets/island/terrain/water_terrain_32x32.png" id="10_wxphg"]
 [ext_resource type="Texture2D" uid="uid://u2air8500ab1" path="res://assets/terrain_plus/Pine Trees.png" id="11_fe5pp"]
 [ext_resource type="PackedScene" uid="uid://bqolwkmxp86ss" path="res://levels/objects/spikes/top_spike.tscn" id="11_j6gcv"]
