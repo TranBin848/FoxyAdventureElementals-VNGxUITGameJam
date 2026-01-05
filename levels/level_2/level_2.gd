@@ -2,11 +2,12 @@ extends Node
 
 func _enter_tree() -> void:
 	# Handle portal spawning first
-	GameManager.current_stage = self
-	GameManager.current_level = 2
-	GameManager.minimap = find_child("Minimap")
+	#GameManager.current_stage = self
+	#GameManager.minimap = find_child("Minimap")
+	pass
 	
 func _ready() -> void:
+	GameManager.current_level = 2
 	if AudioManager:
 		AudioManager.play_music("music_background")
 		AudioManager.play_ambience("ambience_forest")
