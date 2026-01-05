@@ -23,41 +23,6 @@ signal error_occurred(message: String)
 var current_button: Node 
 var current_skill_name: String = ""
 
-var metal_ultimate_guide := """
-Chúc mừng ngươi đã hé mắt nhìn vào cánh cửa đã bị phong ấn từ thuở cổ xưa của hệ Kim.
-Nhưng với tầm nhìn hạn hẹp hiện tại, ngươi khó mà nhận ra thứ ẩn đằng sau khoảng không ấy.
-Đó là một cõi nơi thép được sinh ra không ngừng, và không thứ gì quay trở lại nguyên vẹn …
-Thôi, cứ thử bước gần thêm chút nữa, rồi ngươi sẽ hiểu vì sao chẳng ai trở ra.
-"""
-
-var fire_ultimate_guide := """
-Chúc mừng ngươi đã chạm tay vào thần thuật bí ẩn của hệ Hỏa.
-Nhưng với trái tim mong manh hiện tại, ngươi khó mà chịu nổi sự thiêu đốt đó.
-Đây là ngọn lửa không bao giờ tắt …
-Rồi một ngày — khi tro tàn biết chuyển mình — ngươi sẽ hiểu.
-"""
-
-var earth_ultimate_guide := """
-Chúc mừng ngươi đã chạm tay vào tuyệt kỹ bất khuất của hệ Thổ.
-Thế nhưng với đôi chân còn lung lay thế kia, ngươi chưa xứng đứng vững cùng sức mạnh này.
-Đây là bí pháp gắn kết với đại địa cổ xưa …
-Nhưng chắc ngươi chưa hiểu nổi đâu. Hãy học cách không bị đè bẹp trước đã.
-"""
-
-var wood_ultimate_guide := """
-Chúc mừng ngươi đã chạm tay vào bí mật sinh trưởng của hệ Mộc.
-Tiếc rằng hiểu biết của ngươi còn quá nông cạn để chạm đến cốt lõi của nó.
-Đây là phép thuật gieo xuống một điều gì đó… nhỏ bé, nhưng dai dẳng hơn cả thời gian …
-Rồi sẽ có ngày, khi thứ tưởng như đã biến mất lại khẽ lay động, ngươi sẽ hiểu vì sao
-"""
-
-var water_ultimate_guide := """
-Chúc mừng ngươi đã chạm tay vào huyền thuật sắc lạnh của hệ Thủy.
-Thế nhưng với ý chí còn chập chờn như làn sóng, ngươi chưa thể nắm bắt nó.
-Đây là sức mạnh tưởng chừng mong manh — nhưng chưa bao giờ bị ngăn cản …
-Rồi đến lúc, trong sự tĩnh lặng tuyệt đối, ngươi sẽ hiểu nó thực sự đi tới đâu.
-"""
-
 func _ready() -> void:
 	if SkillTreeManager:
 		SkillTreeManager.skill_unlocked.connect(_on_skill_unlocked)
@@ -107,42 +72,6 @@ func show_skill(btn: Node):
 		video_player.stop()
 
 func get_stat_text(sk: Skill) -> String:
-	# --- NEW LOGIC: ULTIMATE DESCRIPTION ---
-	if sk.get("type") == "ultimate":
-		var result := ""
-
-		match sk.elemental_type:
-			ElementsEnum.Elements.FIRE:
-				result = "[center][i][color=#a0a0a0]{text}[/color][/i][/center]".format({
-					"text": metal_ultimate_guide
-				})
-
-			ElementsEnum.Elements.WOOD:
-				result = "[center][i][color=#a0a0a0]{text}[/color][/i][/center]".format({
-					"text": wood_ultimate_guide
-				})
-
-			ElementsEnum.Elements.METAL:
-				result = "[center][i][color=#a0a0a0]{text}[/color][/i][/center]".format({
-					"text": metal_ultimate_guide
-				})
-
-			ElementsEnum.Elements.WATER:
-				result = "[center][i][color=#a0a0a0]{text}[/color][/i][/center]".format({
-					"text": water_ultimate_guide
-				})
-
-			ElementsEnum.Elements.EARTH:
-				result = "[center][i][color=#a0a0a0]{text}[/color][/i][/center]".format({
-					"text": earth_ultimate_guide
-				})
-
-			_:
-				result = "[center][i][color=#a0a0a0]\n\nThe stars have not yet aligned...\nThis power remains dormant for now.[/color][/i][/center]"
-
-		return result
-	# ---------------------------------------
-
 	var lines: Array[String] = []
 	
 	var color_map := {
@@ -180,23 +109,6 @@ func get_stat_text(sk: Skill) -> String:
 func _update_buttons():
 	if current_button == null:
 		return
-	
-	# --- NEW LOGIC: HIDE BUTTONS FOR ULTIMATE ---
-	if current_button.skill.get("type") == "ultimate":
-		unlock_btn.visible = false
-		unlock_label.visible = false
-		upgrade_btn.visible = false
-		upgrade_label.visible = false
-		equip_button.visible = false
-		return
-	else:
-		# Make sure to show them again for normal skills
-		unlock_btn.visible = true
-		unlock_label.visible = true
-		upgrade_btn.visible = true
-		upgrade_label.visible = true
-		equip_button.visible = true
-	# --------------------------------------------
 	
 	var skill_name = current_skill_name
 	var is_unlocked = SkillTreeManager.is_unlocked(skill_name)

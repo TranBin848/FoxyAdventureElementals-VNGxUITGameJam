@@ -65,8 +65,19 @@ offset_top = -235.5
 offset_right = 441.0
 offset_bottom = 295.5
 grow_vertical = 2
+theme_override_constants/line_separation = 2
 theme_override_fonts/normal_font = ExtResource("3_abfhp")
+theme_override_fonts/mono_font = ExtResource("3_abfhp")
+theme_override_fonts/italics_font = ExtResource("3_abfhp")
+theme_override_fonts/bold_italics_font = ExtResource("3_abfhp")
+theme_override_fonts/bold_font = ExtResource("3_abfhp")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
 bbcode_enabled = true
 text = "Stat"
+vertical_alignment = 1
 
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
