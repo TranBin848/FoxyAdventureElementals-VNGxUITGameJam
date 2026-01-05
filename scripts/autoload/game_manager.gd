@@ -475,10 +475,10 @@ func modify_stat(stat_def: Resource, change: int) -> void:
 	# Validation
 	if change > 0:
 		if inventory_system.coins < cost: return
-		inventory_system.coins -= cost
+		inventory_system.use_coin(cost)
 	elif change < 0:
 		if get_player_stat(stat_type) <= 0: return
-		inventory_system.coins += cost
+		inventory_system.add_coin(cost)
 	
 	# Update allocated points
 	if not player_stats.has(stat_type): player_stats[stat_type] = 0
