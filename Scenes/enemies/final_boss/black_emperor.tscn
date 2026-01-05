@@ -39,7 +39,6 @@
 [ext_resource type="Script" uid="uid://b8wbpujyvf1qr" path="res://scenes/enemies/final_boss/stand_up.gd" id="41_yr5q8"]
 [ext_resource type="Script" uid="uid://cax5v5vvvpy8n" path="res://scenes/enemies/final_boss/meteor_rain.gd" id="44_mpuyr"]
 [ext_resource type="PackedScene" uid="uid://pgf87lpdsfte" path="res://scenes/enemies/final_boss/star_scene.tscn" id="46_i0lyx"]
-[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="46_mqsvn"]
 [ext_resource type="PackedScene" uid="uid://8ucurw88rfh2" path="res://scenes/enemies/final_boss/fireShotProjectileBoss.tscn" id="47_o7w2u"]
 [ext_resource type="Script" uid="uid://nyc2dcgdpxlh" path="res://scenes/enemies/final_boss/rain_bullets.gd" id="48_o7w2u"]
 [ext_resource type="PackedScene" uid="uid://cb6h82l7nm4a2" path="res://scenes/enemies/final_boss/waterbullet_projectile.tscn" id="49_o7w2u"]
@@ -50,6 +49,7 @@
 [ext_resource type="Script" uid="uid://bkajgco6tqx1g" path="res://scenes/enemies/final_boss/cutscene_6.gd" id="52_ib6y0"]
 [ext_resource type="PackedScene" uid="uid://cfwdngvncdiwu" path="res://scenes/enemies/final_boss/boss_spawner.tscn" id="52_spawner"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="53_qin12"]
+[ext_resource type="PackedScene" uid="uid://d0jkkqjvv3603" path="res://scenes/ui/boss_healthbar.tscn" id="54_g17ih"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="55_2anp0"]
 [ext_resource type="Script" uid="uid://byheauwog643v" path="res://scenes/enemies/final_boss/dead.gd" id="56_2anp0"]
 [ext_resource type="Script" uid="uid://rs2knmi2vck7" path="res://scenes/enemies/final_boss/charge.gd" id="57_mq2q6"]
@@ -300,17 +300,8 @@ text = "debug"
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="MarginContainer" parent="UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("46_mqsvn")
-theme_override_constants/margin_top = 20
-
-[node name="ProgressBar" type="ProgressBar" parent="UI/Control"]
-custom_minimum_size = Vector2(500, 30)
-layout_mode = 2
-size_flags_horizontal = 4
-value = 100.0
+[node name="BossHealthbar" parent="UI" node_paths=PackedStringArray("boss_node") instance=ExtResource("54_g17ih")]
+offset_top = 8.0
+offset_bottom = 8.0
+boss_node = NodePath("../..")
+transition_duration = 2.0
