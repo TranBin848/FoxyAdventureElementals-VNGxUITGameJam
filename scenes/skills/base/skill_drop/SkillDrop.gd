@@ -80,7 +80,6 @@ func _collect_item(player: Player) -> void:
 		return
 		
 	# Add skill through Player with stack amount
-	SkillTreeManager.collect_skill(skill.name, stack_amount)
 	
 	if (skill.type == "ultimate"):
 		match skill.elemental_type:
@@ -94,7 +93,9 @@ func _collect_item(player: Player) -> void:
 				GameProgressManager.trigger_event("WATER_ULTIMATE")
 			ElementsEnum.Elements.EARTH:
 				GameProgressManager.trigger_event("EARTH_ULTIMATE")
-	
+		SkillTreeManager.unlock_skill(skill.name)
+	else:
+		SkillTreeManager.collect_skill(skill.name, stack_amount)
 	_play_collect_effect()
 
 func _play_collect_effect() -> void:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=45 format=3 uid="uid://c24hsf56rny2a"]
 
-[ext_resource type="Script" uid="uid://c613v451tucd0" path="res://scenes/ui/skill_tree/skill_tree_root.gd" id="1_rsrcw"]
+[ext_resource type="Script" uid="uid://bdn1n66kv8ps0" path="res://scenes/ui/skill_tree/skill_tree.gd" id="1_481k6"]
 [ext_resource type="PackedScene" uid="uid://ceb23m3y0l0fh" path="res://scenes/ui/skill_tree/skill_button_skill_tree.tscn" id="2_5qiaq"]
 [ext_resource type="Resource" uid="uid://dyms886k12vqv" path="res://scenes/skills/scripts/fire/FireShot.tres" id="3_5qiaq"]
 [ext_resource type="Resource" uid="uid://duefnr3mddxc7" path="res://scenes/skills/scripts/wood/ToxicBreath.tres" id="4_481k6"]
@@ -26,12 +26,12 @@
 [ext_resource type="VideoStream" uid="uid://bxm3jygx8pmfj" path="res://assets/skills/water/WaterSpike.ogv" id="16_a6do2"]
 [ext_resource type="Resource" uid="uid://bh7ca4qndbgby" path="res://scenes/skills/scripts/earth/Burrow.tres" id="16_xea02"]
 [ext_resource type="Resource" uid="uid://cc6qdlelt05ae" path="res://scenes/skills/scripts/earth/CometRain.tres" id="17_43v2m"]
-[ext_resource type="VideoStream" path="res://assets/skills/metal/Stunshot.ogv" id="18_n402r"]
+[ext_resource type="VideoStream" uid="uid://f7fhar0umvo3" path="res://assets/skills/metal/Stunshot.ogv" id="18_n402r"]
 [ext_resource type="Resource" uid="uid://b2417g2au2g6l" path="res://scenes/skills/scripts/ultimate/EarthUltimate.tres" id="21_m5q67"]
 [ext_resource type="Resource" uid="uid://ctl3eu0an05tj" path="res://scenes/skills/scripts/ultimate/MetalUltimate.tres" id="22_eu7kn"]
 [ext_resource type="VideoStream" uid="uid://dw0sl8ytef4kk" path="res://assets/skills/metal/thousand_swords.ogv" id="23_n402r"]
 [ext_resource type="VideoStream" uid="uid://s4o5ko03tp5t" path="res://assets/skills/metal/thunderbolt.ogv" id="24_k1hmm"]
-[ext_resource type="VideoStream" path="res://assets/skills/earth/Earthquake.ogv" id="24_n402r"]
+[ext_resource type="VideoStream" uid="uid://hf03fhkggdew" path="res://assets/skills/earth/Earthquake.ogv" id="24_n402r"]
 [ext_resource type="VideoStream" uid="uid://dfhfvpmnxesg0" path="res://assets/skills/earth/cometrain.ogv" id="27_481k6"]
 [ext_resource type="VideoStream" uid="uid://bjbo1omlkswse" path="res://assets/skills/earth/burrow.ogv" id="30_otfg3"]
 
@@ -76,7 +76,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_rsrcw")
+script = ExtResource("1_481k6")
 metadata/_edit_use_anchors_ = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]

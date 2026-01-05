@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://crhikmylhv4ty" path="res://scenes/env_particle/sand_storm.tscn" id="20_pvqwi"]
 [ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="22_1h50e"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="22_ppf8r"]
+[ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/king_crab_boss/king_crab.tscn" id="23_qfhyh"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="23_vdtjt"]
 [ext_resource type="PackedScene" uid="uid://cbqtsaa12jxkv" path="res://levels/objects/saw/saw.tscn" id="24_nouef"]
 [ext_resource type="PackedScene" uid="uid://bf7prkg21pu67" path="res://levels/objects/campfire/static_campfire_with_food.tscn" id="24_uuidd"]
@@ -20,6 +21,7 @@
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="26_qfhyh"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="26_s4b5i"]
 [ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="27_6fwx2"]
+[ext_resource type="PackedScene" uid="uid://c2nu6ncphw78a" path="res://scripts/area_component/boss_zone_area_2d.tscn" id="27_qfhyh"]
 [ext_resource type="Script" uid="uid://cetul0ws8d05n" path="res://scenes/skills/scripts/earth/Earthquake.gd" id="27_xpuws"]
 [ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="28_6fwx2"]
 [ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="28_ulcqf"]
@@ -99,6 +101,8 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -1, 43, 0, 0, 0, 0, -168, 616)
 }
 point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fwx2"]
 
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_ppf8r")
