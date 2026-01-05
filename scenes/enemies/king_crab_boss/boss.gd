@@ -190,7 +190,7 @@ func handle_dead() -> void:
 	
 	boss_died.emit()
 	
-	if boss_zone:
+	if boss_zone and !being_controled:
 		boss_zone._on_boss_dead()
 	
 func is_at_camera_edge(margin: float = 15.0) -> bool:

@@ -43,12 +43,17 @@ func _ready() -> void:
 
 func take_damage(damage: int) -> void:
 	super.take_damage(damage)
-
+	
+	fsm.change_state(fsm.states.hurt)
 	#AudioManager.play_sound("war_lord_hurt")
 	
 	flash_corountine()
 	var health_percent = (float(health) / max_health) * 100
 	health_percent_changed.emit(health_percent)
+	
+	if health <= 0:
+		print("chet roi ne")
+		fsm.change_state(fsm.states.dead)
 	
 
 func flash_corountine() -> void:
@@ -118,12 +123,16 @@ func mini_boss_is_not_ready() -> bool:
 	return king_crab_instance == null or !is_instance_valid(king_crab_instance) or war_lord_instance == null or !is_instance_valid(war_lord_instance)
 
 func handle_dead() -> void:
+	
 	hurt_box.disabled = true
 	collision.disabled = true
 	hit_box.disabled = true
 	gravity = 0
 	boss_healthbar.hide()
 	velocity.x = 0
+	
+	queue_free()
+	
 	if boss_zone:
 		boss_zone._on_boss_dead()
 
