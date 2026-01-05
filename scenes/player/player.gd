@@ -284,8 +284,7 @@ func collect_wand() -> void:
 	has_wand = true
 	
 	# HOOK HERE: Trigger tutorial on first weapon pickup
-	#GameProgressManager.trigger_event("WEAPON")
-	
+	GameProgressManager.trigger_event("WOOD_WAND")
 	swap_weapon()
 	
 func can_attack() -> bool:
