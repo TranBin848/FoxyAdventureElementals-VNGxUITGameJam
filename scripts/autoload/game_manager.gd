@@ -4,7 +4,7 @@ extends Node
 @export_group("UI & Scenes")
 @export var upgrade_popup_scene: PackedScene = preload("res://scenes/ui/upgrade/upgrade_popup.tscn")
 @export_group("Stats Data")
-@export var stat_definitions: Array[Resource] = [preload("res://resources/stats/max_health.tres"),preload("res://resources/stats/max_mana.tres")] # Drag ALL your PlayerStat .tres files here!
+@export var stat_definitions: Array[Resource] = [preload("res://resources/stats/max_health.tres"),preload("res://resources/stats/max_mana.tres")] 
 #endregion
 
 #region State Variables
@@ -43,11 +43,10 @@ func _ready() -> void:
 	add_child(inventory_system)
 	print("✅ Inventory system initialized")
 	
-	# ✅ FIX: Use Timer instead of _process()
-	# Timers continue running during scene transitions!
+	# Timer to detect scene changes (handles transitions smoothly)
 	var scene_detector = Timer.new()
 	scene_detector.name = "SceneDetector"
-	scene_detector.wait_time = 0.05  # Check every 50ms
+	scene_detector.wait_time = 0.05
 	scene_detector.autostart = true
 	scene_detector.timeout.connect(_on_scene_detector_timeout)
 	add_child(scene_detector)
@@ -58,7 +57,6 @@ func _ready() -> void:
 	print("⏳ Processing initial scene...")
 	_on_scene_changed()
 
-# ✅ NEW: Timer callback that checks for scene changes
 func _on_scene_detector_timeout() -> void:
 	var current = get_tree().current_scene
 	
@@ -69,19 +67,16 @@ func _on_scene_detector_timeout() -> void:
 		print("  To: %s" % current.scene_file_path)
 		_on_scene_changed()
 
-# Keep change_stage() simple:
 func change_stage(stage_path: String, _target_portal_name: String = "") -> void:
 	print("🌍 Changing scene to: %s (portal: %s)" % [stage_path, _target_portal_name])
 	
 	target_portal_name = _target_portal_name
 	save_run_state()
 	
-	# Just change the scene - timer will detect it
 	get_tree().change_scene_to_file(stage_path)
 
 #region Scene Management
 func _on_tree_changed() -> void:
-	# If the engine has swapped the current scene, and it's different from our cache:
 	if !get_tree(): return
 	if get_tree().current_scene and get_tree().current_scene != current_stage:
 		_on_scene_changed()
@@ -99,9 +94,21 @@ func _on_scene_changed() -> void:
 	# Scale Enemies
 	get_tree().call_group("enemies", "scale_health", 0.8 + 0.2 * current_level)
 
+	# Handle Spawning (Portal vs Checkpoint vs New Game)
 	await _handle_checkpoint_or_portal_spawn()
 	
-	# ✅ Emit signal so level scripts know spawning is complete
+	# =========================================================================
+	# ✅ NEW: Implicit Level Start Checkpoint
+	# =========================================================================
+	# We create a checkpoint only if we are NOT currently loading an existing one.
+	# This ensures that when we enter a new level via Portal or New Game,
+	# we immediately save that state as the "Restart Point".
+	if player and not is_loading_from_checkpoint:
+		print("🚩 Creating implicit level-start checkpoint...")
+		save_checkpoint("auto_level_start")
+	# =========================================================================
+	
+	# Emit signal so level scripts know spawning is complete
 	if has_signal("level_ready"):
 		level_ready.emit()
 
@@ -127,10 +134,9 @@ func _handle_checkpoint_or_portal_spawn() -> void:
 	
 	# 1. Try Portal
 	if not target_portal_name.is_empty():
-		respawn_at_portal() # Sets position if found
-		
+		respawn_at_portal()
 		if is_scene_transition:
-			restore_run_state() # Never changes position
+			restore_run_state()
 			print("✅ Run state restored (after portal attempt)")
 		return
 
@@ -138,6 +144,7 @@ func _handle_checkpoint_or_portal_spawn() -> void:
 	if is_loading_from_checkpoint and not current_checkpoint_id.is_empty():
 		var checkpoint_scene = checkpoint_data.get(current_checkpoint_id, {}).get("stage_path", "")
 		
+		# Allow loading if scene matches OR if we are forcing a reload
 		if checkpoint_scene == current_stage.scene_file_path:
 			await get_tree().create_timer(0.1).timeout
 			respawn_at_checkpoint()
@@ -148,12 +155,11 @@ func _handle_checkpoint_or_portal_spawn() -> void:
 			print("⚠️ Checkpoint scene mismatch")
 			print("  Expected: %s" % checkpoint_scene)
 			print("  Current: %s" % current_stage.scene_file_path)
-			clear_checkpoint_data()
 			is_loading_from_checkpoint = false
 	
-	# 3. Scene transition
+	# 3. Scene transition (no portal specified, just keeping data)
 	if is_scene_transition:
-		restore_run_state() # Never changes position
+		restore_run_state()
 		print("🎮 Run state restored (no portal specified)")
 		return
 	
@@ -161,57 +167,30 @@ func _handle_checkpoint_or_portal_spawn() -> void:
 	print("🎮 Player spawned at default position (new game)")
 
 # ============================================================================
-# Enhanced respawn_at_portal() - Better error handling
+# Respawn Logic
 # ============================================================================
 
 func respawn_at_portal() -> bool:
-	"""
-	Attempts to position player at target portal.
-	Returns true if successful, false if portal not found.
-	Note: This only handles positioning, NOT data restoration.
-	"""
 	if target_portal_name.is_empty() or not current_stage or not player:
 		return false
 	
-	print("🔍 Searching for portal: '%s'" % target_portal_name)
-	
-	# Try multiple search methods
 	var door = null
 	
-	# Method 1: Direct recursive search
+	# Search Priority: Direct Child -> Portals Group -> Spawn Points Group
 	door = current_stage.find_child(target_portal_name, true, false)
-	if door:
-		print("  ✅ Found via find_child: %s" % door.name)
-	
-	# Method 2: Search in portals group
 	if not door:
-		var portals = get_tree().get_nodes_in_group("portals")
-		for p in portals:
-			if p.name == target_portal_name:
-				door = p
-				print("  ✅ Found via group 'portals': %s" % door.name)
-				break
-	
-	# Method 3: Search in spawn_points group
+		for p in get_tree().get_nodes_in_group("portals"):
+			if p.name == target_portal_name: door = p; break
 	if not door:
-		var spawn_points = get_tree().get_nodes_in_group("spawn_points")
-		for sp in spawn_points:
-			if sp.name == target_portal_name or (sp.has_method("get_marker_id") and sp.get_marker_id() == target_portal_name):
-				door = sp
-				print("  ✅ Found via group 'spawn_points': %s" % door.name)
-				break
+		for sp in get_tree().get_nodes_in_group("spawn_points"):
+			if sp.name == target_portal_name: door = sp; break
 	
-	# Position player if door found
 	if door:
-		var old_pos = player.global_position
 		player.global_position = door.global_position
-		print("  📍 Player moved: %s → %s" % [old_pos, door.global_position])
-		target_portal_name = "" # Clear for next use
+		target_portal_name = "" 
 		return true
 	
-	# Portal not found - log but don't fail the transition
-	print("  ❌ Portal '%s' not found in scene" % target_portal_name)
-	print("  ℹ️  Player will stay at current position")
+	print("  ❌ Portal '%s' not found, staying at default spawn" % target_portal_name)
 	return false
 
 func respawn_at_checkpoint() -> void:
@@ -223,14 +202,18 @@ func respawn_at_checkpoint() -> void:
 	# 1. Load Position/Flags
 	player.load_state(data.get("player_state", {}))
 	
-	# 2. ✅ CALCULATE MAX STATS (Base + Allocations)
-	_apply_all_stats_from_base()
-
-	# 3. ✅ RESTORE CURRENT VALUES
-	# Checkpoint data usually stores these in the root or a 'stats' dict
-	if data.has("health"): player.health = data["health"]
-	if data.has("mana"): player.mana = data["mana"]
+	if data.has("player_stats"):
+		player_stats = data.get("player_stats", {}).duplicate()
+		
+	if data.has("player_base_stats"):
+		player_base_stats = data.get("player_base_stats", {}).duplicate()
 	
+	# 2. Recalculate Stats
+	_apply_all_stats_from_base()
+	
+	# 3. Full Heal on Checkpoint Load (Prevents death loops)
+	player.health = player.max_health
+	player.mana = player.max_mana
 	player.health_changed.emit()
 	player.mana_changed.emit()
 
@@ -245,7 +228,6 @@ func respawn_at_checkpoint() -> void:
 
 #region Run State (Session Persistence)
 func save_run_state() -> void:
-	"""Saves current play session state before scene change"""
 	if not player: return
 	
 	current_run_state = {
@@ -261,39 +243,29 @@ func save_run_state() -> void:
 		"skill_tree": SkillTreeManager.save_data(),
 		"guide_data": GameProgressManager.get_save_data()
 	}
-	print("💾 Run state saved")
 
 func restore_run_state() -> void:
-	"""Restores session state but never restores position"""
 	if current_run_state.is_empty() or not player: return
 	
-	# 1. Restore Position & State Flags
 	var current_position = player.global_position
 	player.load_state(current_run_state.get("player_state", {}))
 	player.global_position = current_position
 	
-	# 2. Restore Guide & Inventory
 	if current_run_state.has("guide_data"):
 		GameProgressManager.load_save_data(current_run_state["guide_data"])
 	
 	if inventory_system:
 		inventory_system.load_data(current_run_state.get("inventory_data", {}))
 	
-	# 3. Restore Stats Data (Base & Allocated)
 	if current_run_state.has("player_base_stats"):
 		player_base_stats = current_run_state["player_base_stats"].duplicate()
 	
 	player_stats = current_run_state.get("player_stats", {}).duplicate()
 	
-	# 4. ✅ CALCULATE MAX STATS NOW
-	# This ensures player.max_health is raised (e.g., to 200) BEFORE we set current health
 	_apply_all_stats_from_base()
 	
-	# 5. ✅ RESTORE CURRENT HEALTH/MANA NOW
-	# We rely on the save file for current values, not the clamping logic in _apply_all_stats
 	if current_run_state.has("health"):
 		player.health = current_run_state["health"]
-		# Optional: Safety clamp in case save file is corrupted/higher than max
 		if player.health > player.max_health: player.health = player.max_health 
 		player.health_changed.emit()
 		
@@ -303,12 +275,9 @@ func restore_run_state() -> void:
 		player.mana_changed.emit()
 	
 	SkillTreeManager.load_data(current_run_state.get("skill_tree", {}))
-	
 	current_level = current_run_state.get("current_level", 0)
-	print("✅ Run state restored (position preserved, stats synchronized)")
 
 func clear_run_state() -> void:
-	"""Clear run state (call when starting new game or dying)"""
 	current_run_state.clear()
 	print("🗑️ Run state cleared")
 #endregion
@@ -320,61 +289,49 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	current_checkpoint_id = checkpoint_id
 	checkpoint_changed.emit(checkpoint_id)
 
-	# Gather Data
 	var player_state_dict = player.save_state()
 	var inventory_data = inventory_system.save_data() if inventory_system else {}
-	var guide_data = GameProgressManager.get_save_data()
 	
-	# Update Memory
 	checkpoint_data.clear()
 	checkpoint_data[checkpoint_id] = {
 		"player_state": player_state_dict,
 		"inventory_data": inventory_data,
-		"player_stats": player_stats.duplicate(), # Save allocated stat points
+		"player_stats": player_stats.duplicate(),
 		"player_base_stats": player_base_stats.duplicate(),
 		"stage_path": current_stage.scene_file_path,
 	}
 
-	# Write to Disk
 	SaveSystem.save_checkpoint_data(
 		checkpoint_id,
 		checkpoint_data[checkpoint_id],
 		current_stage.scene_file_path,
 		SkillTreeManager.save_data()
 	)
-	
 	print("💾 Checkpoint saved: %s" % checkpoint_id)
 
 func load_checkpoint_data() -> void:
-	"""Load checkpoint from disk - call this on game start"""
 	var save_data = SaveSystem.load_checkpoint_data()
 	if save_data.is_empty(): 
-		clear_run_state() # Start fresh
+		clear_run_state()
 		return
 	
-	is_loading_from_checkpoint = true # ✅ Set flag so we know to load checkpoint
+	is_loading_from_checkpoint = true
 	
 	current_checkpoint_id = save_data.get("checkpoint_id", "")
 	var loaded_player_data = save_data.get("player", {})
 	
-	# Load Sub-systems
 	if inventory_system:
 		inventory_system.load_data(loaded_player_data.get("inventory_data", {}))
 		
-	# Load Guide Data
 	if loaded_player_data.has("guide_data"):
 		GameProgressManager.load_save_data(loaded_player_data["guide_data"])
 		
-	# Load Base Stats from disk
 	if loaded_player_data.has("player_base_stats"):
 		player_base_stats = loaded_player_data["player_base_stats"].duplicate()
 
 	SkillTreeManager.load_data(save_data.get("skill_tree", {}))
-	
-	# Load Allocated Stats
 	player_stats = loaded_player_data.get("player_stats", {}).duplicate()
 
-	# Store in memory
 	if not current_checkpoint_id.is_empty():
 		checkpoint_data.clear()
 		checkpoint_data[current_checkpoint_id] = loaded_player_data
@@ -391,61 +348,49 @@ func clear_checkpoint_data() -> void:
 
 #region Player Death & Respawn Handling
 func on_player_death() -> void:
-	"""Call this when player dies - respawns at last checkpoint"""
 	print("💀 Player died")
 	
-	# Clear run state so they respawn from checkpoint
+	# 1. Clear run state (prevents carrying over dead state)
 	clear_run_state()
 	
-	# Load the checkpoint scene
+	# 2. Check for valid checkpoint
 	if not current_checkpoint_id.is_empty():
 		var saved_stage_path = checkpoint_data.get(current_checkpoint_id, {}).get("stage_path", "")
+		
+		# 3. ✅ CRITICAL: Set flag to true so _on_scene_changed calls respawn_at_checkpoint()
+		is_loading_from_checkpoint = true
+		
 		if not saved_stage_path.is_empty():
-			is_loading_from_checkpoint = true
+			print("🔄 Reloading scene from checkpoint...")
 			get_tree().change_scene_to_file(saved_stage_path)
 		else:
-			print("⚠️ Checkpoint has no valid stage path!")
+			print("⚠️ Checkpoint path missing, reloading current scene")
+			get_tree().change_scene_to_file(current_stage.scene_file_path)
 	else:
-		print("⚠️ No checkpoint to respawn from!")
-		# Optionally: Return to main menu or restart from beginning
-		# get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+		print("⚠️ No checkpoint found! Restarting level with defaults.")
+		get_tree().change_scene_to_file(current_stage.scene_file_path)
 #endregion
 
-#region New Game & Load Game (Main Menu Functions)
+#region New Game & Load Game
 func start_new_game(starting_scene: String = "res://levels/level_0/level_0.tscn") -> void:
-	"""Start a completely fresh game - call from main menu"""
 	print("🎮 Starting new game")
-	
-	# Clear everything
 	clear_checkpoint_data()
 	clear_run_state()
 	current_level = 0
-	
-	# Reset systems
-	#if inventory_system:
-		#inventory_system.clear()
-	#SkillTreeManager.reset()
-	
-	# Load starting scene
 	get_tree().change_scene_to_file(starting_scene)
 
 func load_saved_game() -> void:
-	"""Load saved game from disk - call from main menu"""
 	print("📂 Loading saved game")
-	
-	# Load checkpoint data
 	load_checkpoint_data()
 	
-	# Get the scene to load
 	var save_data = SaveSystem.load_checkpoint_data()
 	var saved_scene = save_data.get("stage_path", "")
 	
 	if not saved_scene.is_empty():
-		# This will trigger respawn_at_checkpoint in _handle_checkpoint_or_portal_spawn
 		get_tree().change_scene_to_file(saved_scene)
 	else:
 		print("⚠️ No valid save file found!")
-		start_new_game() # Fallback to new game
+		start_new_game()
 #endregion
 
 #region Stat & Upgrade System
@@ -459,7 +404,6 @@ func get_player_stat(stat_type: String) -> int:
 	return player_stats.get(stat_type, 0)
 
 func _apply_all_stats_from_base() -> void:
-	"""Calculates TOTAL stat values from base + allocated points"""
 	if not player or player_base_stats.is_empty(): return
 	
 	for stat_def in stat_definitions:
@@ -485,14 +429,11 @@ func _apply_all_stats_from_base() -> void:
 				player.movement_speed = player_base_stats.movement_speed + bonus
 			"jump":
 				player.jump_velocity = player_base_stats.jump_velocity + bonus
-	
-	print("📈 Stats applied: %d points allocated" % player_stats.values().reduce(func(a, b): return a + b, 0))
 
 func modify_stat(stat_def: Resource, change: int) -> void:
 	var stat_type = stat_def.type
 	var cost = stat_def.cost_per_point
 	
-	# Validation
 	if change > 0:
 		if inventory_system.coins < cost: return
 		inventory_system.coins -= cost
@@ -500,11 +441,9 @@ func modify_stat(stat_def: Resource, change: int) -> void:
 		if get_player_stat(stat_type) <= 0: return
 		inventory_system.coins += cost
 	
-	# Update allocated points
 	if not player_stats.has(stat_type): player_stats[stat_type] = 0
 	player_stats[stat_type] += change
 	
-	# ✅ Recalculate from base instead of adding incrementally
 	_apply_all_stats_from_base()
 #endregion
 
@@ -513,13 +452,10 @@ func player_act(method_name: String, a1=null, a2=null, a3=null, a4=null, a5=null
 	if not player: return
 	if not player.has_method(method_name): return
 	
-	# 1. Collect valid arguments into a real Array
 	var args = []
 	for val in [a1, a2, a3, a4, a5]:
-		if val != null:
-			args.append(val)
+		if val != null: args.append(val)
 			
-	# 2. Call the function with the reconstructed array
 	player.callv(method_name, args)
 
 func collect_wand() -> void:
