@@ -1,15 +1,304 @@
-[gd_scene load_steps=14 format=4 uid="uid://dshvtsustqlwx"]
+[gd_scene load_steps=23 format=4 uid="uid://dshvtsustqlwx"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_vl8x5"]
 [ext_resource type="TileSet" uid="uid://b1rw2jhie3f1r" path="res://levels/level_1/level_1.tres" id="2_0d8vy"]
-[ext_resource type="PackedScene" uid="uid://xkbcnxv5v0y7" path="res://scenes/enemies/final_boss/animated_bg.tscn" id="2_ic5dq"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="3_ic5dq"]
+[ext_resource type="Script" uid="uid://d0djolxvt6im6" path="res://scenes/enemies/final_boss/animated_bg.gd" id="4_djwf0"]
+[ext_resource type="SpriteFrames" path="res://scenes/enemies/final_boss/animated_bg.tres" id="4_rrv5u"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="5_djwf0"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="6_rrv5u"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="7_mws0n"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="9_pw60n"]
 [ext_resource type="PackedScene" uid="uid://d0a57drf7tx4v" path="res://scenes/enemies/final_boss/black_emperor.tscn" id="10_djwf0"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="10_pw60n"]
+
+[sub_resource type="Animation" id="Animation_ixd4x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene2"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mws0n"]
+resource_name = "cutscene1"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene1"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["skill_earthquake"],
+"method": &"play_sound"
+}, {
+"args": ["final_boss_beam"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_djwf0"]
+resource_name = "cutscene2"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene2"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["final_boss_chanting"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rrv5u"]
+resource_name = "cutscene3"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene3"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["final_boss_phoenix"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nr5tq"]
+resource_name = "cutscene4"
+length = 1.8
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": ["final_boss_shield"],
+"method": &"play_sound"
+}, {
+"args": ["player_attack"],
+"method": &"play_sound"
+}, {
+"args": ["final_boss_shield_shatter"],
+"method": &"play_sound"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene4"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 8]
+}
+
+[sub_resource type="Animation" id="Animation_a4okb"]
+resource_name = "cutscene5"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene5"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 11]
+}
+
+[sub_resource type="Animation" id="Animation_llmex"]
+resource_name = "cutscene6"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene6"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 6]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.2001),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["final_boss_healing"],
+"method": &"play_sound"
+}, {
+"args": ["final_boss_resurrection"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nr5tq"]
+_data = {
+&"RESET": SubResource("Animation_ixd4x"),
+&"cutscene1": SubResource("Animation_mws0n"),
+&"cutscene2": SubResource("Animation_djwf0"),
+&"cutscene3": SubResource("Animation_rrv5u"),
+&"cutscene4": SubResource("Animation_nr5tq"),
+&"cutscene5": SubResource("Animation_a4okb"),
+&"cutscene6": SubResource("Animation_llmex")
+}
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fdo7j"]
 normal = Vector2(1, 0)
@@ -20,7 +309,7 @@ normal = Vector2(-0.999974, -0.00714268)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrv5u"]
 
-[node name="Stage" type="Node2D"]
+[node name="Stage2" type="Node2D"]
 script = ExtResource("1_vl8x5")
 
 [node name="Back" type="TileMapLayer" parent="."]
@@ -28,9 +317,18 @@ position = Vector2(-1214, 355)
 tile_map_data = PackedByteArray("AADy//P/BAACAAAAAADy//T/BAACAAEAAADy//X/BAACAAEAAADy//b/BAACAAEAAADy//f/BAACAAEAAADy//j/BAACAAEAAADy//n/BAACAAEAAADy//r/BAACAAEAAADy//v/BAACAAEAAADy//z/BAACAAEAAADy//3/BAACAAEAAADy//7/BAACAAEAAADy////BAACAAEAAADy/wAABAACAAEAAADy/wEABAACAAEAAADx//P/BAABAAAAAAANAPT/BAAAAAAAAAANAPX/BAAAAAEAAAANAPb/BAAAAAEAAAANAPf/BAAAAAEAAAANAPj/BAAAAAEAAAANAPn/BAAAAAEAAAANAPr/BAAAAAEAAAANAPv/BAAAAAEAAAANAPz/BAAAAAEAAAANAP3/BAAAAAEAAAANAP7/BAAAAAEAAAANAP//BAAAAAEAAAANAAAABAAAAAEAAAANAAEABAAAAAEAAAA=")
 tile_set = ExtResource("2_0d8vy")
 
-[node name="AnimatedBg" parent="." instance=ExtResource("2_ic5dq")]
-position = Vector2(-1212, 196)
-animation = &"default"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nr5tq")
+}
+script = ExtResource("4_djwf0")
+
+[node name="AnimatedBG2" type="AnimatedSprite2D" parent="AnimationPlayer"]
+z_index = -10
+position = Vector2(-1229, 173)
+scale = Vector2(0.66744, 0.66744)
+sprite_frames = ExtResource("4_rrv5u")
+animation = &"cutscene2"
 
 [node name="Ground" type="TileMapLayer" parent="."]
 position = Vector2(129, 67)

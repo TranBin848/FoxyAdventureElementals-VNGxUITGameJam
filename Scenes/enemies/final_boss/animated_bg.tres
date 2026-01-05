@@ -1,0 +1,227 @@
+[gd_resource type="SpriteFrames" load_steps=47 format=3]
+
+[ext_resource type="Texture2D" uid="uid://c1065p6v5vwg8" path="res://assets/skills/finalboss_skill/02.png" id="1_8y4e7"]
+[ext_resource type="Texture2D" uid="uid://cc21yi5v2d6ca" path="res://assets/skills/finalboss_skill/03.png" id="2_2su70"]
+[ext_resource type="Texture2D" uid="uid://beb5awxfkkluc" path="res://assets/skills/finalboss_skill/04.png" id="3_gaqhj"]
+[ext_resource type="Texture2D" uid="uid://duk804hal84ct" path="res://assets/skills/finalboss_skill/05.png" id="4_tpcej"]
+[ext_resource type="Texture2D" uid="uid://djkjebkds1inn" path="res://assets/skills/finalboss_skill/06.png" id="5_r1gx5"]
+[ext_resource type="Texture2D" uid="uid://chqsmbdwvagb0" path="res://assets/skills/finalboss_skill/07.png" id="6_eogr5"]
+[ext_resource type="Texture2D" uid="uid://c7v6njomso5sa" path="res://assets/skills/finalboss_skill/08.png" id="7_rfu4u"]
+[ext_resource type="Texture2D" uid="uid://bflylko5wq5b1" path="res://assets/skills/finalboss_skill/09.png" id="8_uct4n"]
+[ext_resource type="Texture2D" uid="uid://k07wqrkufntr" path="res://assets/skills/finalboss_skill/11.png" id="9_waw3y"]
+[ext_resource type="Texture2D" uid="uid://chej7g1wumsl8" path="res://assets/skills/finalboss_skill/12.png" id="10_k0lqw"]
+[ext_resource type="Texture2D" uid="uid://4ssx3o2ko3mf" path="res://assets/skills/finalboss_skill/13.png" id="11_poyrf"]
+[ext_resource type="Texture2D" uid="uid://wym0vuxtxld2" path="res://assets/skills/finalboss_skill/14.png" id="12_d8ipd"]
+[ext_resource type="Texture2D" uid="uid://drli7khqxdfp6" path="res://assets/skills/finalboss_skill/15.png" id="13_7gsdd"]
+[ext_resource type="Texture2D" uid="uid://d4iosrs6f74qy" path="res://assets/skills/finalboss_skill/16.png" id="14_gdnjk"]
+[ext_resource type="Texture2D" uid="uid://cwxg0ur4x48g3" path="res://assets/skills/finalboss_skill/17.png" id="15_kfvvs"]
+[ext_resource type="Texture2D" uid="uid://8i83rsb82r0" path="res://assets/skills/finalboss_skill/18.png" id="16_r78gm"]
+[ext_resource type="Texture2D" uid="uid://nou07yuf1klj" path="res://assets/skills/finalboss_skill/19.png" id="17_u226o"]
+[ext_resource type="Texture2D" uid="uid://dnsjkm28i5xoq" path="res://assets/skills/finalboss_skill/20.png" id="18_5ix8e"]
+[ext_resource type="Texture2D" uid="uid://6dufvv0k8i4a" path="res://assets/skills/finalboss_skill/21.png" id="19_oneqb"]
+[ext_resource type="Texture2D" uid="uid://bxp82lppax3d2" path="res://assets/skills/finalboss_skill/22.png" id="20_vkkvn"]
+[ext_resource type="Texture2D" uid="uid://b1l2cdf51f1ql" path="res://assets/skills/finalboss_skill/23.png" id="21_yxcvf"]
+[ext_resource type="Texture2D" uid="uid://dgnvpbauqoknb" path="res://assets/skills/finalboss_skill/24.png" id="22_63tkf"]
+[ext_resource type="Texture2D" uid="uid://ubqu7hx7441w" path="res://assets/skills/finalboss_skill/25.png" id="23_5gmoi"]
+[ext_resource type="Texture2D" uid="uid://ds30vf8bnn4kg" path="res://assets/skills/finalboss_skill/26.png" id="24_1ytid"]
+[ext_resource type="Texture2D" uid="uid://b1hyrmsyc3qrp" path="res://assets/skills/finalboss_skill/27.png" id="25_2adj0"]
+[ext_resource type="Texture2D" uid="uid://b04p58tq8xtjk" path="res://assets/skills/finalboss_skill/28.png" id="26_f4b2o"]
+[ext_resource type="Texture2D" uid="uid://b664d7578sd8e" path="res://assets/skills/finalboss_skill/29.png" id="27_gbw1r"]
+[ext_resource type="Texture2D" uid="uid://d3x1fbrhglmue" path="res://assets/skills/finalboss_skill/30.png" id="28_nh6oh"]
+[ext_resource type="Texture2D" uid="uid://bpf66j8xpo3nj" path="res://assets/skills/finalboss_skill/31.png" id="29_rpucw"]
+[ext_resource type="Texture2D" uid="uid://cmej4s776v66i" path="res://assets/skills/finalboss_skill/32.png" id="30_qxi80"]
+[ext_resource type="Texture2D" uid="uid://hpsaguay341n" path="res://assets/skills/finalboss_skill/33.png" id="31_3rkab"]
+[ext_resource type="Texture2D" uid="uid://d0bh2xemtt0my" path="res://assets/skills/finalboss_skill/34.png" id="32_b63mq"]
+[ext_resource type="Texture2D" uid="uid://bufp6u8ypw5f2" path="res://assets/skills/finalboss_skill/35.png" id="33_nhpkt"]
+[ext_resource type="Texture2D" uid="uid://ci7c76nu4mvua" path="res://assets/skills/finalboss_skill/36.png" id="34_oqk4t"]
+[ext_resource type="Texture2D" uid="uid://bqqel4nd7k34f" path="res://assets/skills/finalboss_skill/37.png" id="35_ofyts"]
+[ext_resource type="Texture2D" uid="uid://sf3onah00tbq" path="res://assets/skills/finalboss_skill/38.png" id="36_5gal4"]
+[ext_resource type="Texture2D" uid="uid://bspb0usfbbvax" path="res://assets/skills/finalboss_skill/39.png" id="37_svdit"]
+[ext_resource type="Texture2D" uid="uid://d10h3g2et1y2x" path="res://assets/skills/finalboss_skill/40.png" id="38_134hi"]
+[ext_resource type="Texture2D" uid="uid://1cyuttuwbelt" path="res://assets/skills/finalboss_skill/42.png" id="39_88u7d"]
+[ext_resource type="Texture2D" uid="uid://dljqrdww3y4j0" path="res://assets/skills/finalboss_skill/43.png" id="40_flsiq"]
+[ext_resource type="Texture2D" uid="uid://d4guhao7fj1hi" path="res://assets/skills/finalboss_skill/44.png" id="41_85gid"]
+[ext_resource type="Texture2D" uid="uid://tl04ftcy0t3j" path="res://assets/skills/finalboss_skill/45.png" id="42_oovg3"]
+[ext_resource type="Texture2D" uid="uid://cq8sic5nxhpop" path="res://assets/skills/finalboss_skill/46.png" id="43_icokl"]
+[ext_resource type="Texture2D" uid="uid://du7gnkcoodyp2" path="res://assets/skills/finalboss_skill/47.png" id="44_65fpw"]
+[ext_resource type="Texture2D" uid="uid://c4xvopt5c20e6" path="res://assets/skills/finalboss_skill/48.png" id="45_6f7ug"]
+[ext_resource type="Texture2D" uid="uid://60n5v0vh1m7i" path="res://assets/skills/finalboss_skill/01.png" id="46_uf3on"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8y4e7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2su70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gaqhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tpcej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_r1gx5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_eogr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rfu4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uct4n")
+}],
+"loop": false,
+"name": &"cutscene1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_waw3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k0lqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_poyrf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_d8ipd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_7gsdd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_gdnjk")
+}],
+"loop": false,
+"name": &"cutscene2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_kfvvs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_r78gm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_u226o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_5ix8e")
+}],
+"loop": false,
+"name": &"cutscene3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_oneqb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_vkkvn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_yxcvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_63tkf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_5gmoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_1ytid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_2adj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_f4b2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_gbw1r")
+}],
+"loop": false,
+"name": &"cutscene4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_gbw1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_nh6oh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_rpucw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_qxi80")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_3rkab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_b63mq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_nhpkt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_oqk4t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_ofyts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_5gal4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_svdit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_134hi")
+}],
+"loop": false,
+"name": &"cutscene5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39_88u7d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_flsiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_85gid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_oovg3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_icokl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_65fpw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_6f7ug")
+}],
+"loop": false,
+"name": &"cutscene6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_uf3on")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
