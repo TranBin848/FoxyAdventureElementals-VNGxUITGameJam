@@ -3,15 +3,10 @@ extends Node
 
 var my_logger: Logger = ConsoleLogger.new()
 static var player: Player = null
-
-func _enter_tree() -> void:
-	# Handle portal spawning first
-	GameManager.current_stage = self
-	GameManager.current_level = 0
 	
 func _ready() -> void:
-	if not GameManager.respawn_at_portal():
-		GameManager.respawn_at_checkpoint()
+	await GameManager.level_ready
+	
 	if AudioManager:
 		AudioManager.play_music("ambience_beach")
 		#AudioManager.play_ambience("ambience_forest", -10)

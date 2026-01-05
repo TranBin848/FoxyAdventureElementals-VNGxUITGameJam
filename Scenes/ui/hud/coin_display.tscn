@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmimr0vcdeun6"]
+
+[ext_resource type="Texture2D" uid="uid://g6knpxl51v8a" path="res://assets/items/coin.png" id="1_o0wy1"]
+[ext_resource type="Script" uid="uid://c2ueqo6dx301l" path="res://scenes/ui/hud/coin_display.gd" id="1_wrcr7"]
+[ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_wrcr7"]
+
+[node name="CoinDisplay" type="PanelContainer"]
+offset_right = 72.0
+offset_bottom = 24.0
+script = ExtResource("1_wrcr7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_o0wy1")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wrcr7")
+text = "123"
+horizontal_alignment = 1
