@@ -143,7 +143,7 @@ func take_damage(knockback_dir: Vector2, damage: int = 1) -> void:
 	var k_dir = sign(knockback_dir.x) if knockback_dir.x != 0 else -obj.direction
 	obj.velocity.x = -obj.velocity.x
 	obj.velocity.y = -obj.velocity.y
-	obj.velocity.x += DEFAULT_KNOCKBACK_FORCE * k_dir
+	obj.velocity.x -= DEFAULT_KNOCKBACK_FORCE * k_dir
 	
 	# Transition
 	if obj.health <= 0:
