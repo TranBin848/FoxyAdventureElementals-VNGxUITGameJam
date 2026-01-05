@@ -16,7 +16,7 @@ extends BlackEmperorState
 const ELEMENT_SPRITE_SCENE = preload("res://scenes/enemies/final_boss/element_sprite.tscn")
 const FADE_BOSS_SCENE = preload("res://scenes/enemies/final_boss/fade_boss_scene.tscn")
 
-var animated_bg: AnimatedSprite2D = null
+var animated_bg: AnimationPlayer = null
 var player: Player = null
 var player_pos: Node2D = null
 var boss_pos: Node2D = null

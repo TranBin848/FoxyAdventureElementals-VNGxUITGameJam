@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1_40gir")
-clip_id = "boss_phoenix"
+clip_id = "final_boss_phoenix"
 stream = ExtResource("2_y5wul")
 variations = Array[AudioStream]([])
-volume_db = 0.0
+volume_db = -10.0
 randomize_pitch = false
 pitch_min = 0.9
 pitch_max = 1.1
