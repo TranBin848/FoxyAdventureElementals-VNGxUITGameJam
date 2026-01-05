@@ -4,7 +4,7 @@ extends Node
 @export_group("UI & Scenes")
 @export var upgrade_popup_scene: PackedScene = preload("res://scenes/ui/upgrade/upgrade_popup.tscn")
 @export_group("Stats Data")
-@export var stat_definitions: Array[Resource] = [preload("res://resources/stats/max_health.tres"),preload("res://resources/stats/max_health.tres")] # Drag ALL your PlayerStat .tres files here!
+@export var stat_definitions: Array[Resource] = [preload("res://resources/stats/max_health.tres"),preload("res://resources/stats/max_mana.tres")] # Drag ALL your PlayerStat .tres files here!
 #endregion
 
 #region State Variables
@@ -215,7 +215,6 @@ func respawn_at_portal() -> bool:
 	return false
 
 func respawn_at_checkpoint() -> void:
-	"""Enhanced checkpoint respawn"""
 	if current_checkpoint_id.is_empty(): return
 	
 	var data = checkpoint_data.get(current_checkpoint_id, {})
@@ -224,16 +223,22 @@ func respawn_at_checkpoint() -> void:
 	# 1. Load Position/Flags
 	player.load_state(data.get("player_state", {}))
 	
-	# 2. ✅ CALCULATE and SET stats (not add!)
+	# 2. ✅ CALCULATE MAX STATS (Base + Allocations)
 	_apply_all_stats_from_base()
 
-	# 3. Restore Inventory
+	# 3. ✅ RESTORE CURRENT VALUES
+	# Checkpoint data usually stores these in the root or a 'stats' dict
+	if data.has("health"): player.health = data["health"]
+	if data.has("mana"): player.mana = data["mana"]
+	
+	player.health_changed.emit()
+	player.mana_changed.emit()
+
+	# 4. Restore Inventory
 	if inventory_system:
 		inventory_system.load_data(data.get("inventory_data", {}))
 	
-	# ✅ Update run state to match checkpoint
 	save_run_state()
-	
 	checkpoint_loading_complete.emit()
 	print("✅ Checkpoint restoration complete")
 #endregion
@@ -247,6 +252,7 @@ func save_run_state() -> void:
 		"player_state": player.save_state(),
 		"inventory_data": inventory_system.save_data() if inventory_system else {},
 		"player_stats": player_stats.duplicate(),
+		"player_base_stats": player_base_stats.duplicate(),
 		"health": player.health,
 		"max_health": player.max_health,
 		"mana": player.mana,
@@ -261,36 +267,45 @@ func restore_run_state() -> void:
 	"""Restores session state but never restores position"""
 	if current_run_state.is_empty() or not player: return
 	
-	# Save where player currently is (their scene spawn position)
+	# 1. Restore Position & State Flags
 	var current_position = player.global_position
-	
-	# Restore everything including position
 	player.load_state(current_run_state.get("player_state", {}))
-	
-	# Immediately reset position to where they were
 	player.global_position = current_position
 	
-	# Restore everything else
-	player.health = current_run_state.get("health", player.max_health)
-	player.max_health = current_run_state.get("max_health", player.max_health)
-	player.mana = current_run_state.get("mana", player.max_mana)
-	player.max_mana = current_run_state.get("max_mana", player.max_mana)
-	player.health_changed.emit()
-	player.mana_changed.emit()
-	
+	# 2. Restore Guide & Inventory
 	if current_run_state.has("guide_data"):
 		GameProgressManager.load_save_data(current_run_state["guide_data"])
 	
 	if inventory_system:
 		inventory_system.load_data(current_run_state.get("inventory_data", {}))
 	
+	# 3. Restore Stats Data (Base & Allocated)
+	if current_run_state.has("player_base_stats"):
+		player_base_stats = current_run_state["player_base_stats"].duplicate()
+	
 	player_stats = current_run_state.get("player_stats", {}).duplicate()
+	
+	# 4. ✅ CALCULATE MAX STATS NOW
+	# This ensures player.max_health is raised (e.g., to 200) BEFORE we set current health
 	_apply_all_stats_from_base()
+	
+	# 5. ✅ RESTORE CURRENT HEALTH/MANA NOW
+	# We rely on the save file for current values, not the clamping logic in _apply_all_stats
+	if current_run_state.has("health"):
+		player.health = current_run_state["health"]
+		# Optional: Safety clamp in case save file is corrupted/higher than max
+		if player.health > player.max_health: player.health = player.max_health 
+		player.health_changed.emit()
+		
+	if current_run_state.has("mana"):
+		player.mana = current_run_state["mana"]
+		if player.mana > player.max_mana: player.mana = player.max_mana
+		player.mana_changed.emit()
 	
 	SkillTreeManager.load_data(current_run_state.get("skill_tree", {}))
 	
 	current_level = current_run_state.get("current_level", 0)
-	print("✅ Run state restored (position preserved)")
+	print("✅ Run state restored (position preserved, stats synchronized)")
 
 func clear_run_state() -> void:
 	"""Clear run state (call when starting new game or dying)"""
@@ -316,6 +331,7 @@ func save_checkpoint(checkpoint_id: String) -> void:
 		"player_state": player_state_dict,
 		"inventory_data": inventory_data,
 		"player_stats": player_stats.duplicate(), # Save allocated stat points
+		"player_base_stats": player_base_stats.duplicate(),
 		"stage_path": current_stage.scene_file_path,
 	}
 
@@ -348,10 +364,14 @@ func load_checkpoint_data() -> void:
 	# Load Guide Data
 	if loaded_player_data.has("guide_data"):
 		GameProgressManager.load_save_data(loaded_player_data["guide_data"])
-	
+		
+	# Load Base Stats from disk
+	if loaded_player_data.has("player_base_stats"):
+		player_base_stats = loaded_player_data["player_base_stats"].duplicate()
+
 	SkillTreeManager.load_data(save_data.get("skill_tree", {}))
 	
-	# Load Stats
+	# Load Allocated Stats
 	player_stats = loaded_player_data.get("player_stats", {}).duplicate()
 
 	# Store in memory
