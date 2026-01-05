@@ -12,7 +12,7 @@ func collect_coin():
 	GameManager.inventory_system.add_coin(1)
 	$Coin.play("consumed")
 	AudioManager.play_sound("coin_collect")
-	$Coin.animation_finished.connect(queue_free)
+	queue_free()
 
 func _on_body_entered(body: Node) -> void:
 	if body is Player:

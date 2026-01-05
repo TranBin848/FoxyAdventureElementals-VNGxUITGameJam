@@ -2,19 +2,12 @@ extends Node
 
 var my_logger: Logger = ConsoleLogger.new()
 
-func _enter_tree() -> void:
-	# Handle portal spawning first
-	GameManager.current_stage = self
-	GameManager.current_level = 1
-	GameManager.minimap = find_child("Minimap")
-	
 func _ready() -> void:
-	#if not GameManager.respawn_at_portal():
-		#GameManager.respawn_at_checkpoint()
-		#await GameManager.checkpoint_loading_complete
-	
+	# ✅ FIX: Wait for GameManager to finish spawning
+	#await GameManager.level_ready
 	# Now safe to add coins
 	#GameManager.inventory_system.add_coin(500)
+	GameManager.current_level = 1
 	if AudioManager:
 		AudioManager.play_music("music_background")
 		AudioManager.play_ambience("ambience_forest", -10)

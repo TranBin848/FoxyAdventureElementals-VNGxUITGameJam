@@ -1109,7 +1109,7 @@ autoplay = "idle"
 visible = false
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_laqvq")
-animation = &"run"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="SoulWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]

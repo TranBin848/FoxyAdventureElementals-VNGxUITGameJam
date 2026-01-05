@@ -21,7 +21,7 @@ var elemental_tables: Dictionary = {
 		preload("res://scenes/skills/scripts/water/Tornado.gd")
 	],
 	ElementsEnum.Elements.WOOD: [
-		preload("res://scenes/skills/scripts/wood/WoodShot.gd"),
+		preload("res://scenes/skills/scripts/wood/HealOverTime.gd"),
 		preload("res://scenes/skills/scripts/wood/WoodenClone.gd"),
 		preload("res://scenes/skills/scripts/wood/ToxicBreath.gd")
 	],

@@ -7,6 +7,7 @@
 script = ExtResource("1_5tho6")
 name = "Water Spike"
 elemental_type = 3
+level = 1
 cooldown = 3.5
 duration = 1.5
 hit_delay = 0.2
@@ -15,7 +16,7 @@ texture_path = "res://assets/skills/icons_skill/48x48/skill_icons11.png"
 animation_name = "WaterSpike"
 area_scene = ExtResource("1_jydya")
 speed = 0.0
-damage = 2
+damage = 10.0
 mana = 20
 type = "area"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

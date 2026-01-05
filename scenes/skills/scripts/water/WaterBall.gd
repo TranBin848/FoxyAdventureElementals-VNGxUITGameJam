@@ -10,5 +10,5 @@ func _init():
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons23.png"
 	projectile_scene = preload("res://scenes/skills/projectiles/water/waterBlastProjectile.tscn")
 	speed = 250
-	damage = 2
+	damage = 3
 	mana = 5
