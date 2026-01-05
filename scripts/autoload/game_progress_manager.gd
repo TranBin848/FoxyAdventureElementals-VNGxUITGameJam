@@ -215,3 +215,35 @@ func _show_guide(key: String) -> void:
 		data.get("video", ""), 
 		data.get("image", "")
 	)
+	
+#region Save & Load Logic
+func get_save_data() -> Dictionary:
+	return {
+		"first_coin_collected": first_coin_collected,
+		"first_key_collected": first_key_collected,
+		"first_enemy_killed": first_enemy_killed,
+		"first_cutlass_collected": first_cutlass_collected,
+		"first_wood_wand_collected": first_wood_wand_collected,
+		"fire_ultimate_collected": fire_ultimate_collected,
+		"water_ultimate_collected": water_ultimate_collected,
+		"wood_ultimate_collected": wood_ultimate_collected,
+		"metal_ultimate_collected": metal_ultimate_collected,
+		"earth_ultimate_collected": earth_ultimate_collected,
+		"first_time_open_skill_tree": first_time_open_skill_tree
+	}
+
+func load_save_data(data: Dictionary) -> void:
+	if data.is_empty(): return
+	
+	first_coin_collected = data.get("first_coin_collected", false)
+	first_key_collected = data.get("first_key_collected", false)
+	first_enemy_killed = data.get("first_enemy_killed", false)
+	first_cutlass_collected = data.get("first_cutlass_collected", false)
+	first_wood_wand_collected = data.get("first_wood_wand_collected", false)
+	fire_ultimate_collected = data.get("fire_ultimate_collected", false)
+	water_ultimate_collected = data.get("water_ultimate_collected", false)
+	wood_ultimate_collected = data.get("wood_ultimate_collected", false)
+	metal_ultimate_collected = data.get("metal_ultimate_collected", false)
+	earth_ultimate_collected = data.get("earth_ultimate_collected", false)
+	first_time_open_skill_tree = data.get("first_time_open_skill_tree", false)
+#endregion

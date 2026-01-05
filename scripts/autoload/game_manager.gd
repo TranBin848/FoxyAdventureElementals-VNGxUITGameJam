@@ -252,7 +252,8 @@ func save_run_state() -> void:
 		"mana": player.mana,
 		"max_mana": player.max_mana,
 		"current_level": current_level,
-		"skill_tree": SkillTreeManager.save_data()
+		"skill_tree": SkillTreeManager.save_data(),
+		"guide_data": GameProgressManager.get_save_data()
 	}
 	print("💾 Run state saved")
 
@@ -276,6 +277,9 @@ func restore_run_state() -> void:
 	player.max_mana = current_run_state.get("max_mana", player.max_mana)
 	player.health_changed.emit()
 	player.mana_changed.emit()
+	
+	if current_run_state.has("guide_data"):
+		GameProgressManager.load_save_data(current_run_state["guide_data"])
 	
 	if inventory_system:
 		inventory_system.load_data(current_run_state.get("inventory_data", {}))
@@ -304,6 +308,7 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	# Gather Data
 	var player_state_dict = player.save_state()
 	var inventory_data = inventory_system.save_data() if inventory_system else {}
+	var guide_data = GameProgressManager.get_save_data()
 	
 	# Update Memory
 	checkpoint_data.clear()
@@ -311,7 +316,7 @@ func save_checkpoint(checkpoint_id: String) -> void:
 		"player_state": player_state_dict,
 		"inventory_data": inventory_data,
 		"player_stats": player_stats.duplicate(), # Save allocated stat points
-		"stage_path": current_stage.scene_file_path
+		"stage_path": current_stage.scene_file_path,
 	}
 
 	# Write to Disk
@@ -339,6 +344,10 @@ func load_checkpoint_data() -> void:
 	# Load Sub-systems
 	if inventory_system:
 		inventory_system.load_data(loaded_player_data.get("inventory_data", {}))
+		
+	# Load Guide Data
+	if loaded_player_data.has("guide_data"):
+		GameProgressManager.load_save_data(loaded_player_data["guide_data"])
 	
 	SkillTreeManager.load_data(save_data.get("skill_tree", {}))
 	
