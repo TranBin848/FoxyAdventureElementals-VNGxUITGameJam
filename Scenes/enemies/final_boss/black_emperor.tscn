@@ -304,4 +304,4 @@ text = "debug"
 offset_top = 8.0
 offset_bottom = 8.0
 boss_node = NodePath("../..")
-transition_duration = 2.0
+transition_duration = 1.5

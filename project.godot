@@ -39,8 +39,8 @@ GameProgressManager="*res://scripts/autoload/game_progress_manager.gd"
 [dialogic]
 
 directories/dch_directory={
-"Foxy": "res://dialogs/Foxy.dch",
 "Wand_Seller": "res://dialogs/Wand_Seller.dch",
+"foxy": "res://dialogs/foxy.dch",
 "npc_master_fox": "res://dialogs/npc_master_fox.dch",
 "npc_villager": "res://dialogs/npc_villager.dch"
 }

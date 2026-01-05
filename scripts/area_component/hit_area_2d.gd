@@ -1,7 +1,7 @@
 extends Area2D
 class_name HitArea2D
 
-@export var damage = 5
+@export var damage = 20
 @export var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 var owner_character: Node2D = null
 
