@@ -64,14 +64,6 @@ func _update( _delta ):
 	if update_timer(_delta):
 		obj.queue_free()
 	super._update(_delta)
-	
-	if obj.current_state == fsm.states.dead:
-		if shader_material != null:
-			shader_material.set("shader_parameter/line_opacity", max_line_opaque * time_ratio)
-			shader_material.set("shader_parameter/glow_opacity", max_glow_opaque * time_ratio)
-			pass
-		obj.animated_sprite.modulate.a = time_ratio
-	
 
 func get_shader_values() -> void:
 	if obj.animated_sprite:
