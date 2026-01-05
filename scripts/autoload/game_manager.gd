@@ -407,8 +407,7 @@ func on_player_death() -> void:
 			print("⚠️ Checkpoint has no valid stage path!")
 	else:
 		print("⚠️ No checkpoint to respawn from!")
-		# Optionally: Return to main menu or restart from beginning
-		# get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+		get_tree().change_scene_to_file(current_stage.scene_file_path)
 #endregion
 
 #region New Game & Load Game (Main Menu Functions)
