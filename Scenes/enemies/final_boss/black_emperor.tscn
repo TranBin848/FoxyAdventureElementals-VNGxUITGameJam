@@ -52,7 +52,7 @@
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="53_qin12"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="55_2anp0"]
 [ext_resource type="Script" uid="uid://byheauwog643v" path="res://scenes/enemies/final_boss/dead.gd" id="56_2anp0"]
-[ext_resource type="Script" uid="uid://rs2knmi2vck7" path="res://scenes/enemies/final_boss/charge.gd" id="57_mq2q6"]
+[ext_resource type="Script" path="res://scenes/enemies/final_boss/charge.gd" id="57_mq2q6"]
 [ext_resource type="Script" uid="uid://nbw04rh8ifur" path="res://scenes/enemies/final_boss/cutscene_5.gd" id="58_jywuh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]

@@ -128,6 +128,8 @@ func respawn_at_portal() -> bool:
 	return false
 
 func respawn_at_checkpoint() -> void:
+	
+	
 	if current_checkpoint_id.is_empty(): return
 	var saved_stage_path := ""
 	
@@ -137,6 +139,11 @@ func respawn_at_checkpoint() -> void:
 	else:
 		var save_file_data = SaveSystem.load_checkpoint_data()
 		saved_stage_path = save_file_data.get("stage_path", "")
+		
+	var data = checkpoint_data.get(current_checkpoint_id, {})
+	if data.is_empty() or not player: return
+	
+	if data.get("stage_path") != saved_stage_path: return
 
 	# 1. Load Position/Flags
 	player.load_state(data.get("player_state", {}))

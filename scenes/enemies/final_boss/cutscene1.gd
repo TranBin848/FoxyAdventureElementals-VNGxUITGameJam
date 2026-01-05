@@ -140,6 +140,7 @@ func _start_cutscene_sequence() -> void:
 			print("Cutscene1: Player hidden")
 		
 		animated_bg.play("cutscene1")
+		
 		# Đợi animation hoàn thành
 		await animated_bg.animation_finished
 		print("Cutscene1: AnimatedBg cutscene1 finished")

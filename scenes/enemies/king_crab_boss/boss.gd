@@ -34,7 +34,6 @@ var is_fighting: bool = false
 var changing_phase: bool = false
 
 var elements = ElementsEnum.Elements
-var phase_order := [elements.METAL, elements.EARTH]
 var current_phase_index: int = 1
 var next_phase_index: int = current_phase_index
 #Added by BBNguyen
