@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=4 uid="uid://dshvtsustqlwx"]
+[gd_scene load_steps=14 format=4 uid="uid://dshvtsustqlwx"]
 
 [ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_vl8x5"]
-[ext_resource type="TileSet" uid="uid://yxir4yavpav2" path="res://levels/level_1/level_1.tres" id="2_0d8vy"]
+[ext_resource type="TileSet" uid="uid://b1rw2jhie3f1r" path="res://levels/level_1/level_1.tres" id="2_0d8vy"]
 [ext_resource type="PackedScene" uid="uid://xkbcnxv5v0y7" path="res://scenes/enemies/final_boss/animated_bg.tscn" id="2_ic5dq"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="3_ic5dq"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="5_djwf0"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="7_mws0n"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="9_pw60n"]
 [ext_resource type="PackedScene" uid="uid://d0a57drf7tx4v" path="res://scenes/enemies/final_boss/black_emperor.tscn" id="10_djwf0"]
+[ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="10_pw60n"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fdo7j"]
 normal = Vector2(1, 0)
@@ -142,5 +143,8 @@ collision_mask = 1
 
 [node name="Player" parent="." instance=ExtResource("3_ic5dq")]
 position = Vector2(-1474, 383)
+
+[node name="EntryDoor" parent="." instance=ExtResource("10_pw60n")]
+position = Vector2(-1674, -88)
 
 [connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]

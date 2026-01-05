@@ -1,8 +1,5 @@
 extends Node
 
-@onready var player: CharacterBody2D = null
-var has_killed_player: bool = false
-
 func _enter_tree() -> void:
 	# Handle portal spawning first
 	GameManager.current_stage = self
@@ -10,14 +7,18 @@ func _enter_tree() -> void:
 	GameManager.minimap = find_child("Minimap")
 	
 func _ready() -> void:
-	# Reset the flag when entering/respawning in the level
-	has_killed_player = false
-	
 	if not GameManager.respawn_at_portal():
 		GameManager.respawn_at_checkpoint()
 	if AudioManager:
 		AudioManager.play_music("music_background")
 		AudioManager.play_ambience("ambience_forest")
-	
-	# Get player reference
-	player = get_tree().get_first_node_in_group("player")
+
+	#var skill_names = ["Thousand Swords", "Wooden Clone", "Earthquake", "Tornado"]
+	#
+	#for i in skill_names.size():
+		## 🔥 Validate + equip
+		#var skill = SkillDatabase.get_skill_by_name(skill_names[i])
+		#if skill:
+			#SkillTreeManager.unlock_skill(skill_names[i],0)
+			#SkillTreeManager.equip_skill(i, skill_names[i])
+			#print("✅ Equipped %s to slot %d" % [skill_names[i], i])

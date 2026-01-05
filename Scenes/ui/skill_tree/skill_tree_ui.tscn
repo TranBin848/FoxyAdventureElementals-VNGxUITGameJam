@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ceyye5a53ckes"]
+[gd_scene load_steps=9 format=3 uid="uid://ceyye5a53ckes"]
 
 [ext_resource type="Script" uid="uid://8vtovny64gjj" path="res://scenes/ui/skill_tree/skill_tree_ui.gd" id="1_ef1ca"]
 [ext_resource type="Texture2D" uid="uid://wrxgyabh7igf" path="res://assets/skills/skilltreebg.png" id="1_kjyl8"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="3_trb1m"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_2s5r4"]
 [ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar/skill_bar_skill_tree.tscn" id="4_kjyl8"]
+[ext_resource type="PackedScene" uid="uid://cb6wp0k87btfc" path="res://scenes/ui/skill_tree/skill_info_panel_ultimate.tscn" id="8_jibqp"]
 
 [node name="SkillTreeUI" type="CanvasLayer"]
 process_mode = 3
@@ -95,3 +96,6 @@ theme_override_fonts/font = ExtResource("3_trb1m")
 theme_override_font_sizes/font_size = 16
 text = "Enemy Out of Range"
 horizontal_alignment = 1
+
+[node name="SkillInfoPanelUltimate" parent="." instance=ExtResource("8_jibqp")]
+visible = false

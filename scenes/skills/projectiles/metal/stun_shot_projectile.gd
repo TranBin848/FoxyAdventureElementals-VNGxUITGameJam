@@ -9,6 +9,7 @@ var has_triggered: bool = false
 var hit_collection_timer: Timer = null
 
 func _ready() -> void:
+	AudioManager.play_sound("skill_stun_shot")
 	$AnimatedSprite2D.play("StunShot_Start")
 	$AnimatedSprite2D.animation_finished.connect(_on_sprite_animation_finished)
 	

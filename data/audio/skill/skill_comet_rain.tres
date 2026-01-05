@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://bq2m1in8ax13i"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_e1vdl"]
+[ext_resource type="AudioStream" uid="uid://doj1upqn4maq2" path="res://assets/sounds/landslide 1.wav" id="2_grfux"]
+
+[resource]
+script = ExtResource("1_e1vdl")
+clip_id = "skill_comet_rain"
+stream = ExtResource("2_grfux")
+variations = Array[AudioStream]([])
+volume_db = -10.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

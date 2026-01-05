@@ -1,6 +1,9 @@
 extends ProjectileBase
 class_name fireShotProjectile
 
+func _ready() -> void:
+	AudioManager.play_sound("skill_fire_shot")
+
 func _on_hit_area_2d_hitted(_area: Variant) -> void:
 	if $AnimatedSprite2D.animation != "FireShot_End":
 		$AnimatedSprite2D.play("FireShot_End")

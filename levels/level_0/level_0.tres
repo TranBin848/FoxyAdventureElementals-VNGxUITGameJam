@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="3_kb8gf"]
 [ext_resource type="PackedScene" uid="uid://bbatj0xwa0jd4" path="res://levels/objects/coin/coin.tscn" id="4_rotw0"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="5_dvw13"]
-[ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="6_rnvmb"]
+[ext_resource type="PackedScene" uid="uid://5e7xk2njusm2" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="6_rnvmb"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="8_ewhhx"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="10_7lo0f"]
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="11_pws78"]

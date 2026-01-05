@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://b6gae8fsnnjxk"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_xgqib"]
+[ext_resource type="AudioStream" uid="uid://tcwdkho81j6n" path="res://assets/sounds/sword-hit-ground.wav" id="2_i5ffi"]
+
+[resource]
+script = ExtResource("1_xgqib")
+clip_id = "skill_sword_hit_ground"
+stream = ExtResource("2_i5ffi")
+variations = Array[AudioStream]([])
+volume_db = 0.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

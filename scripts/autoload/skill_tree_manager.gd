@@ -35,14 +35,14 @@ func consume_skill_use(skill_name: String) -> void:
 	_stacks[skill_name] = current_stacks - 1
 	stack_changed.emit(skill_name, _stacks[skill_name])
 	
-	print("📉 Used 1 stack of %s (Remaining: %d)" % [skill_name, _stacks[skill_name]])
+	print("Used 1 stack of %s (Remaining: %d)" % [skill_name, _stacks[skill_name]])
 
 	# 4. Auto-Unequip if we just hit 0
 	if _stacks[skill_name] <= 0:
 		var slot_index = find_skill_slot(skill_name)
 		if slot_index != -1:
 			unequip_skill(slot_index)
-			print("🗑️ %s ran out! Unequipping..." % skill_name)
+			print("%s ran out! Unequipping..." % skill_name)
 
 func collect_skill(skill_name: String, stack_amount: int = 1) -> void:
 	"""Called when player picks up a skill in the world"""

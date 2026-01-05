@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://crx2puwrf8kap"]
+[gd_scene load_steps=38 format=4 uid="uid://crx2puwrf8kap"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_h5p3k"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_7eaqf"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dt1od2hyke60g" path="res://assets/island/back_palm_trees/back_palm_tree_regular_02.png" id="23_1upys"]
 [ext_resource type="Texture2D" uid="uid://frimagh5yfit" path="res://assets/island/back_palm_trees/back_palm_tree_regular_03.png" id="24_b4b1q"]
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="25_meh6h"]
+[ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="26_ol1w0"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="27_qv7h7"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/king_crab_boss/king_crab.tscn" id="28_smwot"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="29_ol1w0"]
@@ -34,6 +35,17 @@ script/source = "extends Node2D
 
 func _ready() -> void:
 	GameManager.current_stage = self
+	GameManager.player.collect_wand()
+
+	var skill_names = [\"Thousand Swords\", \"Wooden Clone\", \"Earthquake\", \"Burrow\"]
+	
+	for i in skill_names.size():
+		# 🔥 Validate + equip
+		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
+		if skill:
+			SkillTreeManager.unlock_skill(skill_names[i],0)
+			SkillTreeManager.equip_skill(i, skill_names[i])
+			print(\"✅ Equipped %s to slot %d\" % [skill_names[i], i])
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
@@ -266,6 +278,8 @@ autoplay = "default"
 frame_progress = 0.914773
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("26_ol1w0")]
 
 [node name="Bosszone" type="Area2D" parent="." node_paths=PackedStringArray("boss")]
 position = Vector2(644, 78)

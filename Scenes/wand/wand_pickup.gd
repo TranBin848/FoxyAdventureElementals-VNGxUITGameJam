@@ -25,7 +25,6 @@ var is_hovering: bool = false
 var time_elapsed: float = 0.0
 
 func _ready() -> void:
-	_update_wand_texture()
 	
 	interactive_area.visible = false
 	if collision_shape: collision_shape.disabled = true
@@ -35,12 +34,13 @@ func _ready() -> void:
 	
 	interactive_area.interacted.connect(_on_interacted)
 	start_spawn_animation()
-
+	
 func _update_wand_texture() -> void:
 	if not wand_sprite: return
+	print(wand_level)
 	match wand_level:
-		1: wand_sprite.texture = TEX_SORROW
-		2: wand_sprite.texture = TEX_SOUL
+		Player.WandLevel.SORROW: wand_sprite.texture = TEX_SORROW
+		Player.WandLevel.SOUL: wand_sprite.texture = TEX_SOUL
 		_: wand_sprite.texture = TEX_NORMAL
 
 func start_spawn_animation() -> void:
@@ -56,6 +56,7 @@ func start_spawn_animation() -> void:
 	)
 
 func _process(delta: float) -> void:
+	_update_wand_texture()
 	if is_hovering:
 		time_elapsed += delta
 		visuals.position.y = -float_height + sin(time_elapsed * 2.0) * 5.0

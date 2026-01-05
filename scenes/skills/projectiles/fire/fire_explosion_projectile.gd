@@ -36,6 +36,8 @@ func _trigger_explosion() -> void:
 	exploding = true
 	explosion_center = global_position  # Store center position
 	
+	AudioManager.play_sound("skill_fire_explosion")
+	
 	# Find all enemies in explosion radius
 	var overlaps = explosion_area.get_overlapping_bodies()
 	print(overlaps)

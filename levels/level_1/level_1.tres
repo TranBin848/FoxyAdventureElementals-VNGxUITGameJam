@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://yxir4yavpav2"]
+[gd_resource type="TileSet" load_steps=30 format=3 uid="uid://b1rw2jhie3f1r"]
 
 [ext_resource type="Texture2D" uid="uid://bnmuiut4rgvqk" path="res://assets/terrain_plus/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="1_wapvn"]
 [ext_resource type="Texture2D" uid="uid://dk85vjjkah550" path="res://assets/terrain_plus/Floor Tiles1.png" id="2_gecsc"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bgt2q1tvy7tm" path="res://levels/level_3/Vapor.tscn" id="5_axnr2"]
 [ext_resource type="PackedScene" uid="uid://cu6qwa63uqk5c" path="res://levels/level_3/HorizontalVapor.tscn" id="6_twmtw"]
 [ext_resource type="Texture2D" uid="uid://ca4mpbifj2vre" path="res://assets/terrain_plus/Floor Tiles2.png" id="6_w87ud"]
+[ext_resource type="PackedScene" uid="uid://bbatj0xwa0jd4" path="res://levels/objects/coin/coin.tscn" id="7_hi4jh"]
 [ext_resource type="PackedScene" uid="uid://drpcvsgtydoih" path="res://levels/objects/tree/tree_3.tscn" id="10_3syhl"]
 [ext_resource type="PackedScene" uid="uid://2ao4jldohksr" path="res://levels/objects/tree/tree_4.tscn" id="11_t2hmq"]
 [ext_resource type="Texture2D" uid="uid://bcutbm7w0s6o1" path="res://assets/terrain_plus/Other Tiles2.png" id="12_fd4tu"]
@@ -1032,6 +1033,7 @@ scenes/1/scene = ExtResource("2_t2hmq")
 scenes/2/scene = ExtResource("3_n4nvx")
 scenes/3/scene = ExtResource("5_axnr2")
 scenes/4/scene = ExtResource("6_twmtw")
+scenes/5/scene = ExtResource("7_hi4jh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t2hmq"]
 texture = ExtResource("3_b4b0w")

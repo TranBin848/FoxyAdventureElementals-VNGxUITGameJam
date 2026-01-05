@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://df03017n1d6d4"]
+
+[ext_resource type="Texture2D" uid="uid://bs8ltfacexhsw" path="res://assets/ui/notification_mark.png" id="1_jraeh"]
+[ext_resource type="Script" uid="uid://di0v0f7obaraf" path="res://scenes/ui/notification/notification.gd" id="2_g4rnd"]
+
+[node name="Notification" type="Node2D"]
+script = ExtResource("2_g4rnd")
+
+[node name="OnScreenIcon" type="Sprite2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+texture = ExtResource("1_jraeh")

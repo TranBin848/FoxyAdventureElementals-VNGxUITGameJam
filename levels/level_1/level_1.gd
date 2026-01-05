@@ -32,3 +32,5 @@ func _ready() -> void:
 	#GameManager.logger.log("Hi Im global logger, Im from level 1")
 	#my_logger.log("Hi Im script-level logger, Im from level 1")
 	
+	#Dialogic.start("sail_boat")
+	

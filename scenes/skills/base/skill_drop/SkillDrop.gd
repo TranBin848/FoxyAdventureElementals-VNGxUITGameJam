@@ -2,9 +2,7 @@ extends Area2D
 class_name SkillDrop
 
 # ✅ Store full Skill resource (with level data)
-@export var skill_resource: Skill
-var skill_name: String = ""
-var skill_texture_path: String = ""
+@export var skill: Skill
 
 # ✅ Stack amount configuration
 @export_range(1, 10) var min_stack_amount: int = 2
@@ -22,19 +20,33 @@ var target_player: Player = null
 var float_tween: Tween = null
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
-	detection_area.body_entered.connect(_on_detection_player_area_2d_body_entered)
-	detection_area.body_exited.connect(_on_detection_player_area_2d_body_exited)
-	
-	# Float animation
+	# FIX: Tween the Sprite, not 'self'.
+	# We assume the Sprite starts at local position (0,0).
+	# We tween it to -5 and 5 relative to the root node.
 	float_tween = create_tween().set_loops()
-	float_tween.tween_property(self, "position:y", position.y - 5, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	float_tween.tween_property(self, "position:y", position.y + 5, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	# Note: We use fixed values (-5.0 and 5.0) because the sprite is local to the parent
+	float_tween.tween_property(sprite, "position:y", -5.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	float_tween.tween_property(sprite, "position:y", 5.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-func setup_drop(skill: Skill, display_name: String, texture_path: String, stacks: int = 0) -> void:
-	skill_resource = skill  # Store full Skill (with level!)
-	skill_name = display_name
-	skill_texture_path = texture_path
+	if skill:
+		setup_drop(skill,1)
+
+func _on_detection_player_area_2d_body_entered(body: Node2D):
+	if body is Player and skill.type != "ultimate":
+		target_player = body as Player
+		is_attracted = true
+		
+		# FIX: Stop tween and reset sprite to center so it looks correct while flying
+		if float_tween and float_tween.is_valid():
+			float_tween.kill() # kill() is often safer than stop() for cleanup
+		
+		# Smoothly return sprite to center (0) so it aligns with hitbox
+		var reset_tween = create_tween()
+		reset_tween.tween_property(sprite, "position:y", 0.0, 0.2)
+		
+func setup_drop(_skill: Skill, stacks: int = 0) -> void:
+	skill = _skill  # Store full Skill (with level!)
 	
 	# Set stack amount (use provided value or random)
 	if stacks > 0:
@@ -42,8 +54,8 @@ func setup_drop(skill: Skill, display_name: String, texture_path: String, stacks
 	else:
 		stack_amount = randi_range(min_stack_amount, max_stack_amount)
 	
-	if sprite and skill_texture_path:
-		sprite.texture = load(skill_texture_path)
+	if sprite and skill.texture_path:
+		sprite.texture = load(skill.texture_path)
 	
 	# Debug label (optional)
 	if has_node("Label"):
@@ -63,13 +75,27 @@ func _on_body_entered(body: Node2D):
 
 # ✅ Pass full Skill resource AND stack amount
 func _collect_item(player: Player) -> void:
-	if not skill_resource:
+	if not skill:
 		queue_free()
 		return
-	
+		
 	# Add skill through Player with stack amount
-	player.add_new_skill(skill_resource, stack_amount)
 	
+	if (skill.type == "ultimate"):
+		match skill.elemental_type:
+			ElementsEnum.Elements.FIRE:
+				GameProgressManager.trigger_event("FIRE_ULTIMATE")
+			ElementsEnum.Elements.WOOD:
+				GameProgressManager.trigger_event("WOOD_ULTIMATE")
+			ElementsEnum.Elements.METAL:
+				GameProgressManager.trigger_event("METAL_ULTIMATE")
+			ElementsEnum.Elements.WATER:
+				GameProgressManager.trigger_event("WATER_ULTIMATE")
+			ElementsEnum.Elements.EARTH:
+				GameProgressManager.trigger_event("EARTH_ULTIMATE")
+		SkillTreeManager.unlock_skill(skill.name)
+	else:
+		SkillTreeManager.collect_skill(skill.name, stack_amount)
 	_play_collect_effect()
 
 func _play_collect_effect() -> void:
@@ -87,14 +113,6 @@ func _play_collect_effect() -> void:
 		tween.parallel().tween_property(self, "global_position", heart_pos, 0.4)
 	
 	tween.tween_callback(queue_free)
-
-func _on_detection_player_area_2d_body_entered(body: Node2D):
-	if body is Player:
-		target_player = body as Player
-		is_attracted = true
-		if float_tween and float_tween.is_valid():
-			float_tween.stop()
-		print("🎯 %s attracted to player!" % skill_name)
 
 func _on_detection_player_area_2d_body_exited(body: Node2D):
 	if body is Player and body == target_player:

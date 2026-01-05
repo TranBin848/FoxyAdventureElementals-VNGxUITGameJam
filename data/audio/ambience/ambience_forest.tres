@@ -7,6 +7,7 @@
 script = ExtResource("1_tcowe")
 clip_id = "ambience_forest"
 stream = ExtResource("2_g681m")
+variations = Array[AudioStream]([])
 volume_db = -10.0
 randomize_pitch = false
 pitch_min = 0.9

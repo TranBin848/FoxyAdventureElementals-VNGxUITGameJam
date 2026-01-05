@@ -71,8 +71,8 @@ func control_jump() -> bool:
 	
 	if wants_jump and obj.has_coyote_time():
 		obj.jump()
-		obj.coyote_timer = 0
-		obj.jump_buffer_timer = 0  # Consume buffer
+		obj.coyote_timer = 0       # Correct: Clear coyote time
+		obj.jump_buffer_timer = 0  # Correct: Consume buffer
 		change_state(fsm.states.jump)
 		return true
 	return false

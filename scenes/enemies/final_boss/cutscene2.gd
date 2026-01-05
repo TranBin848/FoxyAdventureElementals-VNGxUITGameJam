@@ -8,7 +8,7 @@ extends BlackEmperorState
 ## 4. Player di chuyển tới PlayerPosCutscene2
 ## 5. Play animation cutscene2 trong AnimatedBg
 
-var animated_bg: AnimatedSprite2D = null
+var animated_bg: AnimationPlayer = null
 var player: Player = null
 var player_pos: Node2D = null
 var boss_pos: Node2D = null

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dcauknneljyty" path="res://scenes/testscene/test_finalboss.gd" id="1_j8o77"]
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_xko0c"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_nyk77"]
-[ext_resource type="PackedScene" uid="uid://xkbcnxv5v0y7" path="res://scenes/enemies/final_boss/animated_bg.tscn" id="2_sxtnh"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/final_boss/animatedbg.tscn" id="2_x14md"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="3_k7016"]
 [ext_resource type="PackedScene" uid="uid://bdl2j4hlt7yy4" path="res://scenes/enemies/final_boss/element_sprite.tscn" id="3_x14md"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="4_ela4x"]
@@ -148,9 +148,9 @@ animations = [{
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_j8o77")
+metadata/_edit_lock_ = true
 
-[node name="AnimatedBg" parent="." instance=ExtResource("2_sxtnh")]
-position = Vector2(651, 53)
+[node name="Animatedbg" parent="." instance=ExtResource("2_x14md")]
 
 [node name="ElementSprite" parent="." instance=ExtResource("3_x14md")]
 position = Vector2(696, 116)
