@@ -40,6 +40,7 @@ GameProgressManager="*res://scripts/autoload/game_progress_manager.gd"
 
 directories/dch_directory={
 "Foxy": "res://dialogs/Foxy.dch",
+"Old_Man_Cave": "res://assets/npc/Old_Man_Cave.dch",
 "Stat_Seller": "res://dialogs/Stat_Seller.dch",
 "Wand_Seller": "res://dialogs/Wand_Seller.dch",
 "npc_master_fox": "res://dialogs/npc_master_fox.dch",
@@ -49,6 +50,7 @@ directories/dtl_directory={
 "end_lv1": "res://dialogs/end_lv1.dtl",
 "guide_elemental": "res://dialogs/guide_elemental.dtl",
 "level_0": "res://dialogic_timelines/level_0.dtl",
+"old_man_of_the_cave": "res://dialogs/old_man_of_the_cave.dtl",
 "sail_boat": "res://dialogs/sail_boat.dtl",
 "start_game": "res://dialogs/start_game.dtl",
 "upgrade_stats": "res://dialogs/upgrade_stats.dtl",
