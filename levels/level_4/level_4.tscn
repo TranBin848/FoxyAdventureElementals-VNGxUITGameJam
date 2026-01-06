@@ -124,7 +124,6 @@ shadow_filter_smooth = 10.0
 max_distance = 16384.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 position = Vector2(19, -330)
 color = Color(0, 0, 0, 1)
 
