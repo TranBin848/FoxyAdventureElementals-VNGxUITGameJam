@@ -1,6 +1,6 @@
 extends Node
 
-const SAVE_FILE: String = "user://checkpoint_save.dat"
+const SAVE_FILE: String = "user://checkpoint1_save.dat"
 
 func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_tree_data: Dictionary) -> void:
 	var save_data := {
