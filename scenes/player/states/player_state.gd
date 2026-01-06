@@ -135,8 +135,8 @@ func take_damage(knockback_dir: Vector2, damage: int = 1) -> void:
 	# Apply Knockback
 	# Ensure knockback_dir is normalized (-1 or 1 on X)
 	var k_dir = sign(knockback_dir.x) if knockback_dir.x != 0 else -obj.direction
-	obj.velocity.x = -obj.velocity.x
-	obj.velocity.y = -obj.velocity.y
+	obj.velocity.x = -obj.velocity.x * 0.25
+	obj.velocity.y = -obj.velocity.y * 0.25
 	obj.velocity.x -= DEFAULT_KNOCKBACK_FORCE * k_dir
 	
 	# Transition

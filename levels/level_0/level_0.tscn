@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://5f5m765bnxg8"]
+[gd_scene load_steps=46 format=4 uid="uid://5f5m765bnxg8"]
 
 [ext_resource type="Script" uid="uid://clqwsttic13aa" path="res://levels/level_0/level_0.gd" id="1_kumio"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="2_pxy07"]
@@ -24,7 +24,6 @@
 [ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="33_6h1n3"]
 [ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="34_42hpr"]
 [ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="35_wprx8"]
-[ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="36_ab7bl"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="56_ioufq"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="58_yjkv6"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud/settings.tscn" id="59_7e416"]
@@ -139,7 +138,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.21
+shader_parameter/y_zoom = 1.77156
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -152,10 +151,6 @@ script = ExtResource("1_kumio")
 [node name="Player" parent="." instance=ExtResource("19_kumio")]
 position = Vector2(39, 156)
 max_mana = 200
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAEAAcAAQAAAAAAAQALAAcAAQAAAAAAAQATAAcAAQAAAAAAAQAYAAcAAQAAAAAAAQAGAAQAAgAAAAAABAAHAAQAAgAAAAAABAAJAAQAAgAAAAAABAAKAAQAAgAAAAAABAALAAQAAgAAAAAABAAQAAQAAgAAAAAABAATAAQAAgAAAAAABAAbAAQAAgAAAAAABAAdAAQAAgAAAAAABAAjAAQAAgAAAAAABAAkAAQAAgAAAAAABAAlAAQAAgAAAAAABAAoAAUAAgAAAAAABQA=")
-tile_set = ExtResource("36_ab7bl")
 
 [node name="TileMap" type="TileMapLayer" parent="."]
 z_index = -5
@@ -254,6 +249,7 @@ position = Vector2(388, 132)
 position = Vector2(650, 127)
 
 [node name="Boat" parent="." instance=ExtResource("20_eppev")]
+z_index = -1
 position = Vector2(1321, 197)
 interactable = true
 
@@ -292,34 +288,34 @@ texture = ExtResource("19_dp5o0")
 
 [node name="SeaSkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(-2, -35)
-scale = Vector2(2, 2)
+scale = Vector2(2, 2.26563)
 texture = ExtResource("2_pxy07")
 centered = false
 
 [node name="BigReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(207.5, 146.5)
+position = Vector2(207.5, 169.5)
 sprite_frames = SubResource("SpriteFrames_5qexg")
 script = SubResource("GDScript_i1ywc")
 
 [node name="MediumReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(376.5, 142.5)
+position = Vector2(376.5, 165.5)
 sprite_frames = SubResource("SpriteFrames_oam0d")
 script = SubResource("GDScript_i1ywc")
 
 [node name="SmallReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(57.5, 142.5)
+position = Vector2(57.5, 165.5)
 sprite_frames = SubResource("SpriteFrames_c6f77")
 script = SubResource("GDScript_i1ywc")
 
 [node name="ParallaxLayerCloud" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(-1, -94)
 motion_scale = Vector2(0.001, 0.8)
-motion_mirroring = Vector2(510, 0)
+motion_mirroring = Vector2(580, 0)
 script = SubResource("GDScript_gd86g")
 
 [node name="BigClouds" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud"]
 position = Vector2(0, 111)
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.38588, 1.2)
 texture = ExtResource("32_o76ta")
 centered = false
 
@@ -349,7 +345,7 @@ centered = false
 
 [node name="Water" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_dp5o0")
-position = Vector2(658.5, 330)
-scale = Vector2(1883, 244.5)
+position = Vector2(750, 349.375)
+scale = Vector2(2868, 283.25)
 texture = SubResource("CanvasTexture_j8vpj")
 script = ExtResource("33_6h1n3")
