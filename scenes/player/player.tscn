@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=3 uid="uid://d0jou4iuydvkg"]
+[gd_scene load_steps=160 format=3 uid="uid://d0jou4iuydvkg"]
 
 [ext_resource type="Script" uid="uid://cxkd8yvl5fi5l" path="res://scenes/player/player.gd" id="1_wodsf"]
 [ext_resource type="Texture2D" uid="uid://dnt7n2db610ps" path="res://assets/foxy/fox_hat_blade/fox_atk_1.png" id="2_6cv16"]
@@ -123,7 +123,10 @@
 [ext_resource type="Texture2D" uid="uid://e6n3yam102mw" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_5.png" id="80_0epl4"]
 [ext_resource type="Texture2D" uid="uid://sm5bkiuhns2" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_6.png" id="81_3r8w6"]
 [ext_resource type="Texture2D" uid="uid://cssehk8qyeylv" path="res://assets/foxy/fox_hat_soul_wand/fox_attack_7.png" id="82_i816j"]
-[ext_resource type="Script" path="res://scenes/player/actor.gd" id="83_trum3"]
+[ext_resource type="Script" uid="uid://vqavncunfnes" path="res://scenes/player/actor.gd" id="83_trum3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_us45u"]
+light_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trum3"]
 shader = ExtResource("2_21yht")
@@ -503,6 +506,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wvv85"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hxu4r"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i6dto"]
+light_mode = 1
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_drv02"]
 animations = [{
 "frames": [{
@@ -644,6 +656,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4d8j4"]
+light_mode = 1
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_laqvq"]
 animations = [{
 "frames": [{
@@ -784,6 +799,9 @@ animations = [{
 "name": &"run",
 "speed": 5.0
 }]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s27sh"]
+light_mode = 1
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aq51r"]
 animations = [{
@@ -1040,6 +1058,7 @@ size = Vector2(5.5, 3)
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 0
+material = SubResource("CanvasItemMaterial_us45u")
 collision_layer = 2
 collision_mask = 257
 safe_margin = 0.1
@@ -1087,12 +1106,15 @@ autoplay = "idle"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
 light_mask = 0
+material = SubResource("CanvasItemMaterial_wvv85")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_ge24q")
 animation = &"faint"
 
 [node name="BladeAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
+material = SubResource("CanvasItemMaterial_hxu4r")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t1aof")
 animation = &"attack"
@@ -1100,6 +1122,7 @@ autoplay = "idle"
 
 [node name="WandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+material = SubResource("CanvasItemMaterial_i6dto")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_drv02")
 animation = &"run"
@@ -1107,6 +1130,8 @@ autoplay = "idle"
 
 [node name="SorrowWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
+material = SubResource("CanvasItemMaterial_4d8j4")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_laqvq")
 animation = &"jump"
@@ -1114,6 +1139,8 @@ autoplay = "idle"
 
 [node name="SoulWandAnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 visible = false
+light_mask = 0
+material = SubResource("CanvasItemMaterial_s27sh")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_aq51r")
 animation = &"attack"
@@ -1190,6 +1217,7 @@ target_container_name = &"FX"
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="HurtArea2D" type="Area2D" parent="Direction"]
+visible = false
 collision_layer = 516
 script = ExtResource("35_o1e43")
 metadata/_custom_type_script = "uid://csu2b21cwchqw"
@@ -1199,6 +1227,7 @@ position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_niom3")
 
 [node name="FireballHitArea2D" type="Area2D" parent="Direction"]
+visible = false
 collision_layer = 0
 collision_mask = 16
 monitoring = false
@@ -1212,6 +1241,7 @@ position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_21yht")
 
 [node name="HitArea2D" type="Area2D" parent="Direction"]
+visible = false
 collision_mask = 16
 script = ExtResource("17_ioxgp")
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
@@ -1251,15 +1281,18 @@ scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_bywm7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_genst")
 
 [node name="FireballShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ru3bc")
 disabled = true
 
 [node name="BurrowShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -39)
 shape = SubResource("RectangleShape2D_lwhcj")
 disabled = true
