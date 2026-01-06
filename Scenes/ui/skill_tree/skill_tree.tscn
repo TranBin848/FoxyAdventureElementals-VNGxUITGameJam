@@ -19,8 +19,8 @@
 [ext_resource type="Resource" uid="uid://ly2bn32wiwrn" path="res://scenes/skills/scripts/water/Tornado.tres" id="10_wq534"]
 [ext_resource type="Resource" uid="uid://bk25mnb7lmoy0" path="res://scenes/skills/scripts/water/WaterSpike.tres" id="11_q815c"]
 [ext_resource type="VideoStream" uid="uid://c1amsbwwrkte4" path="res://assets/skills/water/WaterBall.ogv" id="12_mlv5p"]
-[ext_resource type="Resource" uid="uid://bi6xhg0h8erpa" path="res://scenes/skills/scripts/metal/StunShot.tres" id="12_np4tp"]
-[ext_resource type="Resource" uid="uid://dnqe0sn17m7iq" path="res://scenes/skills/scripts/metal/Thunderbolt.tres" id="13_lv5gw"]
+[ext_resource type="Resource" uid="uid://bi6xhg0h8erpa" path="res://scenes/skills/scripts/metal/Thunderbolt.tres" id="12_np4tp"]
+[ext_resource type="Resource" uid="uid://dnqe0sn17m7iq" path="res://scenes/skills/scripts/metal/ThunderStrike.tres" id="13_lv5gw"]
 [ext_resource type="Resource" uid="uid://ydvgf5lwhd1w" path="res://scenes/skills/scripts/metal/ThousandSwords.tres" id="14_jjh4s"]
 [ext_resource type="Resource" uid="uid://bllogn53nra1h" path="res://scenes/skills/scripts/ultimate/WaterUltimate.tres" id="14_onv8a"]
 [ext_resource type="VideoStream" uid="uid://dfutgpufyyxhv" path="res://assets/skills/water/WaterTornado.ogv" id="14_p7tb3"]
@@ -401,7 +401,7 @@ grow_vertical = 1
 scale = Vector2(1.5, 1.5)
 skill = ExtResource("22_eu7kn")
 
-[node name="StunShot" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate" instance=ExtResource("2_5qiaq")]
+[node name="Thunder" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -416,7 +416,7 @@ scale = Vector2(0.75, 0.75)
 skill = ExtResource("12_np4tp")
 video_stream = ExtResource("18_n402r")
 
-[node name="Thunderbolt" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate/StunShot" instance=ExtResource("2_5qiaq")]
+[node name="Thunderbolt" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate/Thunder" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -431,7 +431,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("13_lv5gw")
 video_stream = ExtResource("24_k1hmm")
 
-[node name="ThousandSwords" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate/StunShot" instance=ExtResource("2_5qiaq")]
+[node name="ThousandSwords" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate/Thunder" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0

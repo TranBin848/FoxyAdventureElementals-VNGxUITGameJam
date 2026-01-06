@@ -31,7 +31,7 @@ var elemental_tables: Dictionary = {
 		preload("res://scenes/skills/scripts/earth/CometRain.gd")
 	],
 	ElementsEnum.Elements.METAL: [
-		preload("res://scenes/skills/scripts/metal/StunShot.gd"),
+		preload("res://scenes/skills/scripts/metal/ThunderStrike.gd"),
 		preload("res://scenes/skills/scripts/metal/Thunderbolt.gd"),
 		preload("res://scenes/skills/scripts/metal/ThousandSwords.gd")
 	],

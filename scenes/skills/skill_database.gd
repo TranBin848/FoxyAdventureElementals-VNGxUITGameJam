@@ -11,7 +11,7 @@ var all_skills = {
 		"Heal Over Time": HealOverTime,
 		"Toxic Breath": ToxicBreath,
 		"Wooden Clone": WoodenClone,
-		"Stun Shot": StunShot,
+		"Thunder Strike": ThunderStrike,
 		"Thunderbolt": Thunderbolt,
 		"Thousand Swords": ThousandSwords,
 		"Earthquake": Earthquake,

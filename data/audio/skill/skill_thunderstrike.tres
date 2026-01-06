@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://rw4v1dtuomw"]
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://bxolod2rf57dv"]
 
 [ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_vehmh"]
-[ext_resource type="AudioStream" uid="uid://dqvhogrlkicfm" path="res://assets/sounds/pew.wav" id="2_cfh7g"]
+[ext_resource type="AudioStream" uid="uid://bji87wjgdgl0x" path="res://assets/sounds/20018__freqman__thunder3-6-18-06.wav" id="2_cfh7g"]
 
 [resource]
 script = ExtResource("1_vehmh")
-clip_id = "skill_thunderbolt"
+clip_id = "skill_thunderstrike"
 stream = ExtResource("2_cfh7g")
 variations = Array[AudioStream]([])
-volume_db = 0.0
+volume_db = -10.0
 randomize_pitch = false
 pitch_min = 0.9
 pitch_max = 1.1

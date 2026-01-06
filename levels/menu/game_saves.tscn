@@ -1,0 +1,378 @@
+[gd_scene load_steps=30 format=3 uid="uid://r71b8x7gt5ah"]
+
+[ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="1_63kg7"]
+[ext_resource type="PackedScene" uid="uid://c1yuxqjek3bpo" path="res://levels/menu/save_slot_button.tscn" id="2_f1wdg"]
+[ext_resource type="FontFile" uid="uid://bf742t4mxgd7l" path="res://assets/fonts/big_font.fnt" id="3_un6gh"]
+[ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="4_mvc3h"]
+[ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="5_qin3o"]
+[ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="6_tbekr"]
+[ext_resource type="Texture2D" uid="uid://b6dilwf04d4be" path="res://assets/island/background/water_reflect_big_02.png" id="7_qcsf3"]
+[ext_resource type="Texture2D" uid="uid://drl3x1wfs0vai" path="res://assets/island/background/water_reflect_big_03.png" id="8_230p8"]
+[ext_resource type="Texture2D" uid="uid://c5ur36rqix0vh" path="res://assets/island/background/water_reflect_big_04.png" id="9_p5vyc"]
+[ext_resource type="Texture2D" uid="uid://clqwctkiuocld" path="res://assets/island/background/water_reflect_medium_01.png" id="10_2m0nf"]
+[ext_resource type="Texture2D" uid="uid://cc473o8yawaex" path="res://assets/island/background/water_reflect_medium_02.png" id="11_cc8ut"]
+[ext_resource type="Texture2D" uid="uid://853x36mkfxu8" path="res://assets/island/background/water_reflect_medium_03.png" id="12_l4i6m"]
+[ext_resource type="Texture2D" uid="uid://7ph1avmw5ka6" path="res://assets/island/background/water_reflect_medium_04.png" id="13_q4ccj"]
+[ext_resource type="Texture2D" uid="uid://do3ghl5b5mpgy" path="res://assets/island/background/water_reflect_small_01.png" id="14_08nxs"]
+[ext_resource type="Texture2D" uid="uid://cm71bsgwox0jq" path="res://assets/island/background/water_reflect_small_02.png" id="15_r58cb"]
+[ext_resource type="Texture2D" uid="uid://d0b0yg85xphrg" path="res://assets/island/background/water_reflect_small_03.png" id="16_eke3o"]
+[ext_resource type="Texture2D" uid="uid://o4iqthotrkum" path="res://assets/island/background/water_reflect_small_04.png" id="17_j68gs"]
+[ext_resource type="Texture2D" uid="uid://m5yds3bm8pou" path="res://assets/island/background/big_clouds.png" id="18_n8tf8"]
+[ext_resource type="Texture2D" uid="uid://ci5tpl05cnmra" path="res://assets/island/background/small_cloud_1.png" id="19_m3u2g"]
+[ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="20_1vwxq"]
+[ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="21_e0mdn"]
+
+[sub_resource type="GDScript" id="GDScript_gv87h"]
+script/source = "extends Control
+
+# --- CONFIGURATION ---
+@export_file(\"*.tscn\") var background_scene_path: String
+@export var scroll_speed: Vector2 = Vector2(30, 15)  # X and Y scroll speeds
+@export var enable_looping: bool = true
+@export var loop_width: float = 1920.0  # Adjust to your background width
+@export var loop_height: float = 1080.0  # Adjust to your background height
+
+# --- REFERENCES ---
+@onready var subviewport: SubViewport = $SubViewportContainer/SubViewport
+@onready var background_holder: Node2D = $SubViewportContainer/SubViewport/BackgroundHolder
+@onready var menu_camera: Camera2D = $SubViewportContainer/SubViewport/BackgroundHolder/MenuCamera
+@onready var slots_container: VBoxContainer = $CenterContainer/MenuPanel/MarginContainer/VBoxContainer
+
+@onready var parallax_background: ParallaxBackground = $ParallaxBackground
+
+func _ready() -> void:
+	_setup_background()
+	_refresh_save_slots()
+	_connect_slot_buttons()
+
+func _process(delta: float) -> void:
+	_handle_scrolling(delta)
+
+# --- BACKGROUND LOGIC ---
+func _setup_background() -> void:
+	if background_scene_path == \"\":
+		return
+	
+	var scene_resource = load(background_scene_path)
+	if not scene_resource:
+		push_error(\"Failed to load background scene: \" + background_scene_path)
+		return
+	
+	var instance = scene_resource.instantiate()
+	background_holder.add_child(instance)
+	
+	# Remove player and other interactive elements
+	_cleanup_background_instance(instance)
+	
+	# Ensure camera is active
+	menu_camera.make_current()
+
+func _cleanup_background_instance(instance: Node) -> void:
+	# Remove common interactive elements
+	var nodes_to_remove = [\"Player\", \"Enemies\", \"Items\", \"Collectibles\"]
+	for node_name in nodes_to_remove:
+		var node = instance.find_child(node_name, true, false)
+		if node:
+			node.queue_free()
+
+# --- SCROLLING LOGIC ---
+func _handle_scrolling(delta: float) -> void:
+	if parallax_background:
+		# If we have a ParallaxBackground, scroll it directly
+		parallax_background.scroll_offset += scroll_speed * delta
+		
+		# Optional looping for ParallaxBackground
+		if enable_looping:
+			if parallax_background.scroll_offset.x > loop_width:
+				parallax_background.scroll_offset.x = 0
+			if parallax_background.scroll_offset.y > loop_height:
+				parallax_background.scroll_offset.y = 0
+	else:
+		# Fallback: Scroll the camera if no ParallaxBackground exists
+		menu_camera.position += scroll_speed * delta
+		
+		# Optional looping for camera
+		if enable_looping:
+			if menu_camera.position.x > loop_width:
+				menu_camera.position.x = 0
+			if menu_camera.position.y > loop_height:
+				menu_camera.position.y = 0
+
+# --- UI LOGIC ---
+func _connect_slot_buttons() -> void:
+	# Connect button signals
+	for child in slots_container.get_children():
+		if child is Button and child.has_signal(\"slot_selected\"):
+			child.slot_selected.connect(_on_slot_selected)
+
+func _refresh_save_slots() -> void:
+	var buttons = [
+		slots_container.get_node_or_null(\"Slot1_Button\"),
+		slots_container.get_node_or_null(\"Slot2_Button\"),
+		slots_container.get_node_or_null(\"Slot3_Button\")
+	]
+	
+	for i in range(buttons.size()):
+		if buttons[i] == null:
+			continue
+			
+		var slot_idx = i + 1
+		var meta = SaveSystem.get_slot_metadata(slot_idx)
+		buttons[i].setup(slot_idx, meta)
+
+func _on_slot_selected(slot_index: int) -> void:
+	var meta = SaveSystem.get_slot_metadata(slot_index)
+	
+	if meta.is_empty():
+		GameManager.start_new_game(slot_index)
+	else:
+		GameManager.load_saved_game(slot_index)
+
+func _on_back_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/ui/main_menu.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_6f8ic"]
+script/source = "extends ParallaxLayer
+
+func _ready() -> void:
+	$BigReflectionSprite2D.play(\"default\")
+	$MediumReflectionSprite2D.play(\"default\")
+	$SmallReflectionSprite2D.play(\"default\")
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gv87h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_tbekr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qcsf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_230p8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p5vyc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_7xeim"]
+script/source = "extends AnimatedSprite2D
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ehrxv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_2m0nf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cc8ut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_l4i6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_q4ccj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8txka"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_08nxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_r58cb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_eke3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_j68gs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_ny856"]
+script/source = "extends ParallaxLayer
+
+func _process(delta: float) -> void:
+	motion_offset.x -= delta * 20
+"
+
+[sub_resource type="GDScript" id="GDScript_d3i3p"]
+script/source = "extends ParallaxLayer
+
+func _process(delta: float) -> void:
+	motion_offset.x -= delta * 40
+"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_gv87h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuPanel" type="NinePatchRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_63kg7")
+region_rect = Rect2(0, 0, 288, 288)
+patch_margin_left = 96
+patch_margin_top = 96
+patch_margin_right = 96
+patch_margin_bottom = 96
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MenuPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_un6gh")
+theme_override_font_sizes/font_size = 60
+text = "SAVE SLOTS"
+horizontal_alignment = 1
+
+[node name="Slot1_Button" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("2_f1wdg")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "GAU GAU GAU"
+
+[node name="Slot2_Button" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("2_f1wdg")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "GAU GAU GAU"
+
+[node name="Slot3_Button" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("2_f1wdg")]
+layout_mode = 2
+size_flags_vertical = 3
+text = "GAU GAU GAU"
+
+[node name="BackButton" type="Button" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "BACK"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+offset = Vector2(500, -40)
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 500, -40)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(767, 0)
+script = SubResource("GDScript_6f8ic")
+
+[node name="SkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(276, -11)
+scale = Vector2(34.9375, 20.531)
+texture = ExtResource("4_mvc3h")
+
+[node name="SeaSkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-2, -35)
+scale = Vector2(2, 2)
+texture = ExtResource("5_qin3o")
+centered = false
+
+[node name="BigReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(207.5, 146.5)
+sprite_frames = SubResource("SpriteFrames_gv87h")
+script = SubResource("GDScript_7xeim")
+
+[node name="MediumReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(376.5, 142.5)
+sprite_frames = SubResource("SpriteFrames_ehrxv")
+script = SubResource("GDScript_7xeim")
+
+[node name="SmallReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(57.5, 142.5)
+sprite_frames = SubResource("SpriteFrames_8txka")
+script = SubResource("GDScript_7xeim")
+
+[node name="ParallaxLayerCloud" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-1, -94)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(510, 0)
+script = SubResource("GDScript_ny856")
+
+[node name="BigClouds" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud"]
+position = Vector2(0, 111)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("18_n8tf8")
+centered = false
+
+[node name="ParallaxLayerCloud2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -16)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(510, 0)
+script = SubResource("GDScript_d3i3p")
+
+[node name="SmallClouds1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(165, 111)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("19_m3u2g")
+centered = false
+
+[node name="SmallClouds2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(12, 60)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("20_1vwxq")
+centered = false
+
+[node name="SmallClouds3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(300, 20)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("21_e0mdn")
+centered = false
+
+[connection signal="pressed" from="CenterContainer/MenuPanel/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

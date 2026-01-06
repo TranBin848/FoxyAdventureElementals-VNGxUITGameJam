@@ -1,0 +1,126 @@
+[gd_scene load_steps=23 format=3 uid="uid://bbk5vp0ss60j5"]
+
+[ext_resource type="Script" uid="uid://b7u8638cjta7m" path="res://scenes/skills/projectiles/metal/thunderbolt.gd" id="1_qxgan"]
+[ext_resource type="Texture2D" uid="uid://bmd75knokqgjh" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact1.png" id="2_5i20v"]
+[ext_resource type="Texture2D" uid="uid://bex6k1xhjjpso" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact2.png" id="3_3wg0n"]
+[ext_resource type="PackedScene" uid="uid://cbjbo6gtyss6f" path="res://scripts/area_component/hit_area_2d.tscn" id="3_4mj1y"]
+[ext_resource type="Texture2D" uid="uid://bmkel1bjq823s" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact3.png" id="4_6ri0s"]
+[ext_resource type="Texture2D" uid="uid://cn3urb2kftlc4" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact4.png" id="5_xhh76"]
+[ext_resource type="Texture2D" uid="uid://3tbrgamyn2uk" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact5.png" id="6_wbku1"]
+[ext_resource type="Texture2D" uid="uid://beqtif78mkimf" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact6.png" id="7_4h71c"]
+[ext_resource type="Texture2D" uid="uid://c2o3ns4td505b" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Impact7.png" id="8_raify"]
+[ext_resource type="Texture2D" uid="uid://chgvwpwq4c63f" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Repeatable1.png" id="9_n7bu4"]
+[ext_resource type="Texture2D" uid="uid://euob3nf85p4v" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Repeatable2.png" id="10_xibde"]
+[ext_resource type="Texture2D" uid="uid://brmaaxktah8" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Repeatable3.png" id="11_7isyn"]
+[ext_resource type="Texture2D" uid="uid://cw2x06c763xoy" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Repeatable4.png" id="12_8pena"]
+[ext_resource type="Texture2D" uid="uid://xvdh5yog6jba" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Repeatable5.png" id="13_ic612"]
+[ext_resource type="Texture2D" uid="uid://7hvl81dvbtqv" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Repeatable6.png" id="14_7upkp"]
+[ext_resource type="Texture2D" uid="uid://0t10krw7wmhd" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Repeatable7.png" id="15_v4voj"]
+[ext_resource type="Texture2D" uid="uid://caifum5fab4ji" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Repeatable8.png" id="16_p8xla"]
+[ext_resource type="Texture2D" uid="uid://b4fey0icie6u4" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Initial1.png" id="17_bmobm"]
+[ext_resource type="Texture2D" uid="uid://pe04cwr3a68i" path="res://assets/skills/metal/stunProjectile/Holy VFX 01 Initial2.png" id="18_i07op"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbddh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5i20v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3wg0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6ri0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xhh76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wbku1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4h71c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_raify")
+}],
+"loop": false,
+"name": &"Thunder_End",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_n7bu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xibde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7isyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8pena")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ic612")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7upkp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_v4voj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_p8xla")
+}],
+"loop": true,
+"name": &"Thunder_Flying",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_bmobm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_i07op")
+}],
+"loop": false,
+"name": &"Thunder_Start",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhoxj"]
+size = Vector2(32.5, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnvla"]
+size = Vector2(32, 20)
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_qxgan")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_tbddh")
+animation = &"Thunder_Start"
+autoplay = "Thunder_Start"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.75, -0.5)
+shape = SubResource("RectangleShape2D_uhoxj")
+
+[node name="HitArea2D" parent="." instance=ExtResource("3_4mj1y")]
+position = Vector2(0, -7)
+collision_layer = 32
+collision_mask = 16
+elemental_type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_tnvla")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="hitted" from="HitArea2D" to="." method="_on_hit_area_2d_hitted"]

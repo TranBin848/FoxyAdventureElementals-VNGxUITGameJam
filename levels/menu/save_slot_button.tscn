@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1yuxqjek3bpo"]
+
+[ext_resource type="Script" uid="uid://b0ata1jtbkggh" path="res://levels/menu/save_slot_button.gd" id="1_k3m5v"]
+
+[node name="SaveSlotButton" type="Button"]
+script = ExtResource("1_k3m5v")
