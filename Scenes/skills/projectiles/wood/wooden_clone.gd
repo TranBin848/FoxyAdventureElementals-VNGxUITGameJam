@@ -14,7 +14,7 @@ var is_active: bool = false
 
 func setup(skill: Skill, dir: Vector2) -> void:
 	super.setup(skill,dir)
-	clone_lifetime_sec = clone_lifetime_sec * (skill.level + 1) / 2
+	clone_lifetime_sec = clone_lifetime_sec * (1.0 + sqrt(skill.level - 1.0))
 
 func _ready() -> void:
 	rotation = 0.0  # cancel ProjectileBase rotation

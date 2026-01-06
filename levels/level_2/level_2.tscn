@@ -532,10 +532,6 @@ position = Vector2(8592, -80)
 position = Vector2(14386, -1211)
 target_stage = "uid://beaf2cwec5xlr"
 
-[node name="Checkpoint" parent="." instance=ExtResource("25_s4b5i")]
-position = Vector2(-493, 816)
-checkpoint_id = "1"
-
 [node name="Checkpoint2" parent="." instance=ExtResource("25_s4b5i")]
 position = Vector2(1132, 112)
 checkpoint_id = "2"

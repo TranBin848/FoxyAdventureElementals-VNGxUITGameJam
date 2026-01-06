@@ -373,10 +373,6 @@ checkpoint_id = "6"
 [node name="NpcGrandpa" parent="." instance=ExtResource("33_4ui4v")]
 position = Vector2(10971, -2078)
 
-[node name="Checkpoint6" parent="." instance=ExtResource("32_s4mus")]
-position = Vector2(81, -16)
-checkpoint_id = "1"
-
 [node name="Tree8" parent="." instance=ExtResource("15_rip27")]
 position = Vector2(129, -96)
 

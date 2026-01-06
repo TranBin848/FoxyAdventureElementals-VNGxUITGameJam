@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://r71b8x7gt5ah"]
 
 [ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="1_63kg7"]
-[ext_resource type="PackedScene" uid="uid://c1yuxqjek3bpo" path="res://levels/menu/save_slot_button.tscn" id="2_f1wdg"]
+[ext_resource type="PackedScene" uid="uid://h40lyd8fh7m2" path="res://levels/menu/save_slot.tscn" id="3_6f8ic"]
 [ext_resource type="FontFile" uid="uid://bf742t4mxgd7l" path="res://assets/fonts/big_font.fnt" id="3_un6gh"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="4_mvc3h"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="5_qin3o"]
@@ -102,14 +102,18 @@ func _handle_scrolling(delta: float) -> void:
 func _connect_slot_buttons() -> void:
 	# Connect button signals
 	for child in slots_container.get_children():
-		if child is Button and child.has_signal(\"slot_selected\"):
-			child.slot_selected.connect(_on_slot_selected)
+		if child is SaveSlot:
+			if child.has_signal(\"slot_selected\"):
+				child.slot_selected.connect(_on_slot_selected)
+			if child.has_signal(\"slot_deleted\"):
+				child.slot_deleted.connect(_on_slot_deleted)
+		
 
 func _refresh_save_slots() -> void:
 	var buttons = [
-		slots_container.get_node_or_null(\"Slot1_Button\"),
-		slots_container.get_node_or_null(\"Slot2_Button\"),
-		slots_container.get_node_or_null(\"Slot3_Button\")
+		slots_container.get_node_or_null(\"Slot1\"),
+		slots_container.get_node_or_null(\"Slot2\"),
+		slots_container.get_node_or_null(\"Slot3\")
 	]
 	
 	for i in range(buttons.size()):
@@ -127,9 +131,13 @@ func _on_slot_selected(slot_index: int) -> void:
 		GameManager.start_new_game(slot_index)
 	else:
 		GameManager.load_saved_game(slot_index)
+		
+func _on_slot_deleted(slot_index: int) -> void:
+	SaveSystem.delete_slot(slot_index)
+	_refresh_save_slots()
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_file(\"res://scenes/ui/main_menu.tscn\")
+	get_tree().change_scene_to_file(\"res://levels/menu/menu.tscn\")
 "
 
 [sub_resource type="GDScript" id="GDScript_6f8ic"]
@@ -283,20 +291,14 @@ theme_override_font_sizes/font_size = 60
 text = "SAVE SLOTS"
 horizontal_alignment = 1
 
-[node name="Slot1_Button" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("2_f1wdg")]
+[node name="Slot1" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("3_6f8ic")]
 layout_mode = 2
-size_flags_vertical = 3
-text = "GAU GAU GAU"
 
-[node name="Slot2_Button" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("2_f1wdg")]
+[node name="Slot2" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("3_6f8ic")]
 layout_mode = 2
-size_flags_vertical = 3
-text = "GAU GAU GAU"
 
-[node name="Slot3_Button" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("2_f1wdg")]
+[node name="Slot3" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("3_6f8ic")]
 layout_mode = 2
-size_flags_vertical = 3
-text = "GAU GAU GAU"
 
 [node name="BackButton" type="Button" parent="CenterContainer/MenuPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2

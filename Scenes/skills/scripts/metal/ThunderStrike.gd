@@ -10,5 +10,5 @@ func _init():
 	mana = 20
 	animation_name = "ThunderStrike"
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons34.png"
-	area_scene = preload("res://scenes/skills/area/metal/thunderstrike.tscn")
+	area_scene_path = "res://scenes/skills/area/metal/thunderstrike.tscn"
 	damage = 10

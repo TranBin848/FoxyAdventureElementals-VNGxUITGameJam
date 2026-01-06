@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://h40lyd8fh7m2"]
+
+[ext_resource type="Script" uid="uid://heutg8iw1gpa" path="res://levels/menu/save_slot.gd" id="1_fro2y"]
+
+[node name="SaveSlot" type="HBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_fro2y")
+
+[node name="Save" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="Delete" type="Button" parent="."]
+layout_mode = 2
+text = "Delete"
+
+[connection signal="pressed" from="Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Delete" to="." method="_on_delete_pressed"]

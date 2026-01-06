@@ -8,7 +8,7 @@ func _init():
 	cooldown = 5.0
 	animation_name = "WaterTornado"
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons24.png"
-	projectile_scene = preload("res://scenes/skills/projectiles/water/waterTornadoProjectile.tscn")
+	projectile_scene_path = "res://scenes/skills/projectiles/water/waterTornadoProjectile.tscn"
 	speed = 180
 	damage = 5
 	mana = 40

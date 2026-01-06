@@ -37,14 +37,16 @@
 script/source = "extends Node2D
 
 func _ready() -> void:
-	var skill_names = [\"Thousand Swords\", \"Earthquake\", \"Thunderbolt\", \"Burrow\", \"Fireball\"]
+	GameManager.current_stage = self
+	GameManager.player.collect_wand()
+	var skill_names = [\"Thousand Swords\", \"Earthquake\", \"Thunder Strike\", \"Burrow\", \"Fireball\"]
 	for i in skill_names.size():
 		# 🔥 Validate + equip
 		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
 		if skill:
 			SkillTreeManager.unlock_skill(skill_names[i])
 			SkillTreeManager.equip_skill(i, skill_names[i])
-			SkillTreeManager._set_level(skill_names[i],3)
+			SkillTreeManager._set_level(skill_names[i],1)
 			print(\"✅ Equipped %s to slot %d\" % [skill_names[i], i])
 "
 
@@ -291,6 +293,7 @@ elements_debuff = Dictionary[int, PackedScene]({})
 
 [node name="Starfish" parent="Enemies" instance=ExtResource("30_roqqn")]
 position = Vector2(688, 231)
+elemental_type = 3
 
 [node name="GUI" type="CanvasLayer" parent="."]
 

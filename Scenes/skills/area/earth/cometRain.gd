@@ -23,7 +23,7 @@ func setup(skill: Skill, caster_position: Vector2, _enemy: EnemyCharacter, _dire
 	self.elemental_type = skill.elemental_type
 	self.duration = skill.duration
 	self.direction = _direction
-	self.comets_count = comets_count * (skill.level+1)
+	self.comets_count = comets_count * (1.0 + sqrt(skill.level - 1.0))
 	
 	# --- CHANGE 1: Offset the Area Position ---
 	# Ensure direction is normalized (length 1) then multiply by offset

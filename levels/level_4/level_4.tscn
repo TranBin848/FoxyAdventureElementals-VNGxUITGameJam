@@ -356,10 +356,6 @@ horizontal_alignment = 1
 
 [node name="Projectiles" type="Node2D" parent="."]
 
-[node name="Checkpoint" parent="." instance=ExtResource("34_36jj7")]
-position = Vector2(78, 16)
-checkpoint_id = "999"
-
 [node name="WorldBoundary" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary"]
@@ -443,3 +439,19 @@ skill = ExtResource("34_otmpl")
 
 [node name="NpcStatSeller" parent="." instance=ExtResource("35_otmpl")]
 position = Vector2(5519, 1034)
+
+[node name="Checkpoint" parent="." instance=ExtResource("34_36jj7")]
+position = Vector2(3290, 80)
+checkpoint_id = "1"
+
+[node name="Checkpoint4" parent="." instance=ExtResource("34_36jj7")]
+position = Vector2(2561, 912)
+checkpoint_id = "2"
+
+[node name="Checkpoint2" parent="." instance=ExtResource("34_36jj7")]
+position = Vector2(5113, -48)
+checkpoint_id = "3"
+
+[node name="Checkpoint3" parent="." instance=ExtResource("34_36jj7")]
+position = Vector2(5598, 1040)
+checkpoint_id = "4"

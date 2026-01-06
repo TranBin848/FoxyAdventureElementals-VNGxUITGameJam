@@ -45,7 +45,7 @@ animations = [{
 "texture": ExtResource("8_raify")
 }],
 "loop": false,
-"name": &"Thunder_End",
+"name": &"Thunderbolt_End",
 "speed": 12.0
 }, {
 "frames": [{
@@ -74,7 +74,7 @@ animations = [{
 "texture": ExtResource("16_p8xla")
 }],
 "loop": true,
-"name": &"Thunder_Flying",
+"name": &"Thunderbolt_Flying",
 "speed": 12.0
 }, {
 "frames": [{
@@ -85,7 +85,7 @@ animations = [{
 "texture": ExtResource("18_i07op")
 }],
 "loop": false,
-"name": &"Thunder_Start",
+"name": &"Thunderbolt_Start",
 "speed": 12.0
 }]
 
@@ -102,8 +102,8 @@ script = ExtResource("1_qxgan")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"Thunder_Start"
-autoplay = "Thunder_Start"
+animation = &"Thunderbolt_Flying"
+autoplay = "Thunderbolt_Start"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

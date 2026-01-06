@@ -10,7 +10,7 @@ class_name SkillButtonNode
 @onready var line_2d: Line2D = $Line2D
 
 @export var skill: Skill
-@export var max_level: int = 3
+@export var max_level: int = 10
 @export var video_stream: VideoStream = null
 
 var children: Array[SkillButtonNode] = []

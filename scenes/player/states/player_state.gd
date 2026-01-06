@@ -115,13 +115,7 @@ func control_throw_blade() -> bool:
 
 func control_swap_weapon() -> bool:
 	if Input.is_action_just_pressed("swap_weapon"):
-		# Player.gd handles the validation logic internally
-		if obj.current_weapon == Player.WeaponType.BLADE:
-			obj.swap_weapon(Player.WeaponType.WAND)
-		elif obj.current_weapon == Player.WeaponType.WAND:
-			obj.swap_weapon(Player.WeaponType.NORMAL)
-		else:
-			obj.swap_weapon(Player.WeaponType.BLADE)
+		obj.cycle_next_weapon()
 		return true
 	return false
 

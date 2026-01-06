@@ -207,8 +207,7 @@ func _show_guide(key: String) -> void:
 	if key == "SKILL_TREE":
 		GameManager.current_stage.find_child("SkillTreeUI").add_child(popup)
 	else:
-		pass
-		#GameManager.current_stage.find_child("GUI").add_child(popup)
+		GameManager.current_stage.find_child("GUI").add_child(popup)
 	
 	# Setup the data
 	popup.setup(

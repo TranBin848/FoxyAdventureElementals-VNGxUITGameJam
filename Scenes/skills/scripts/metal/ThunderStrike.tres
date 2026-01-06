@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dnqe0sn17m7iq"]
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://dnqe0sn17m7iq"]
 
-[ext_resource type="PackedScene" uid="uid://dtygsbfpy3r7i" path="res://scenes/skills/area/metal/thunderstrike.tscn" id="1_w8dt0"]
 [ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="2_w5i07"]
 
 [resource]
@@ -14,7 +13,8 @@ hit_delay = 0.25
 ground_targeted = false
 texture_path = "res://assets/skills/icons_skill/48x48/skill_icons34.png"
 animation_name = "Thunderbolt"
-area_scene = ExtResource("1_w8dt0")
+projectile_scene_path = ""
+area_scene_path = "res://scenes/skills/area/metal/thunderstrike.tscn"
 speed = 250.0
 damage = 10.0
 mana = 20

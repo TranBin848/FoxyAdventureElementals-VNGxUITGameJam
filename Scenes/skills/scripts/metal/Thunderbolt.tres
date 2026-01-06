@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://bi6xhg0h8erpa"]
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://bi6xhg0h8erpa"]
 
 [ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_jeclb"]
-[ext_resource type="PackedScene" uid="uid://bbk5vp0ss60j5" path="res://scenes/skills/projectiles/metal/thunderbolt.tscn" id="1_lpdm1"]
 
 [resource]
 script = ExtResource("1_jeclb")
-name = "Stun Shot"
+name = "Thunderbolt"
 elemental_type = 1
 level = 1
 cooldown = 1.0
@@ -13,10 +12,11 @@ duration = 1.0
 hit_delay = 0.0
 ground_targeted = false
 texture_path = "res://assets/skills/icons_skill/48x48/skill_icons5.png"
-animation_name = "Thunder"
-projectile_scene = ExtResource("1_lpdm1")
+animation_name = "Thunderbolt"
+projectile_scene_path = "res://scenes/skills/projectiles/metal/thunderbolt.tscn"
+area_scene_path = ""
 speed = 200.0
-damage = 10.0
+damage = 0.0
 mana = 1
 type = "single_shot"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

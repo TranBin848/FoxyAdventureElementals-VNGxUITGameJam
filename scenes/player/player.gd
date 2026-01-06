@@ -273,16 +273,16 @@ func _handle_rigid_push() -> void:
 # ==============================================================================
 
 func collect_blade() -> void:
-	has_blade = true;
+	has_blade = true
 	# HOOK HERE: Trigger tutorial on first weapon pickup
 	GameProgressManager.trigger_event("CUTLASS")
-	swap_weapon(WeaponType.BLADE)
+	swap_weapon_to(WeaponType.BLADE)
 
 func collect_wand() -> void:
 	has_wand = true
 	# HOOK HERE: Trigger tutorial on first weapon pickup
 	GameProgressManager.trigger_event("WOOD_WAND")
-	swap_weapon(WeaponType.WAND)
+	swap_weapon_to(WeaponType.WAND)
 	
 func can_attack() -> bool:
 	if not is_able_attack: return false
@@ -302,27 +302,55 @@ func throw_blade() -> void:
 		var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
 		blade.apply_impulse(throw_velocity)
 	
-	# Remove Blade Logic
+	# Remove Blade Logic and cycle to next available
 	has_blade = false
-	equip_weapon(WeaponType.NORMAL)
+	cycle_next_weapon() 
 
 func can_throw() -> bool: return has_blade && current_weapon == WeaponType.BLADE
 
-func swap_weapon(to_weapon: WeaponType) -> void:
+# --- CAROUSEL LOGIC START ---
+
+func is_weapon_unlocked(type: WeaponType) -> bool:
+	match type:
+		WeaponType.NORMAL: return true # Always have normal
+		WeaponType.BLADE: return has_blade
+		WeaponType.WAND: return has_wand
+	return false
+
+# Call this function from your Input (e.g., when pressing 'Q' or 'TAB')
+func cycle_next_weapon() -> void:
 	if current_buff_state == BuffState.FIREBALL:
-		return
+		return # Lock weapon swapping during specific buffs/states
 
-	match to_weapon:
-		WeaponType.BLADE:
-			if has_blade:
-				return equip_weapon(WeaponType.BLADE)
+	# Define the order of the carousel
+	var weapon_order = [
+		WeaponType.NORMAL,
+		WeaponType.BLADE,
+		WeaponType.WAND
+	]
+	
+	var current_index = weapon_order.find(current_weapon)
+	
+	# Loop through the array starting from the next index
+	# We use a loop to skip weapons the player doesn't have yet
+	for i in range(1, weapon_order.size() + 1):
+		var next_index = (current_index + i) % weapon_order.size()
+		var candidate_weapon = weapon_order[next_index]
+		
+		if is_weapon_unlocked(candidate_weapon):
+			equip_weapon(candidate_weapon)
+			return
 
-		WeaponType.WAND:
-			if has_wand:
-				return equip_weapon(WeaponType.WAND)
+# Use this for specific events (Load Game, Pickup Item)
+func swap_weapon_to(to_weapon: WeaponType) -> void:
+	if current_buff_state == BuffState.FIREBALL: return
 
-	# fallback
-	equip_weapon(WeaponType.NORMAL)
+	if is_weapon_unlocked(to_weapon):
+		equip_weapon(to_weapon)
+	else:
+		equip_weapon(WeaponType.NORMAL)
+
+# --- CAROUSEL LOGIC END ---
 
 func upgrade_wand_to(level: WandLevel) -> void:
 	has_wand = true # Ensure they own the weapon type
@@ -337,6 +365,8 @@ func upgrade_wand_to(level: WandLevel) -> void:
 		equip_weapon(WeaponType.WAND)
 
 func equip_weapon(type: WeaponType) -> void:
+	if current_weapon == type && type != WeaponType.NORMAL: return # Optimization: Don't re-equip same weapon
+	
 	current_weapon = type
 	
 	match type:
@@ -350,7 +380,7 @@ func equip_weapon(type: WeaponType) -> void:
 		_: weapon_swapped.emit("normal")
 		
 	_update_visual_state()
-
+	
 # ==============================================================================
 # SKILLS & SPELLS
 # ==============================================================================
@@ -409,8 +439,8 @@ func _fire_radial(skill: Skill, count: int) -> void:
 func _spawn_projectile_node(skill: Skill, dir: Vector2) -> Area2D:
 	# Use specific scene or fallback to factory
 	var proj_node: Node
-	if skill.projectile_scene:
-		proj_node = skill.projectile_scene.instantiate()
+	if skill.projectile_scene_path:
+		proj_node = load(skill.projectile_scene_path).instantiate()
 	elif skill_factory:
 		proj_node = skill_factory.create()
 	else:
@@ -446,8 +476,8 @@ func _fire_area(skill: Skill) -> void:
 		# If no target, maybe fail or cast at self?
 		return
 
-	if not skill.area_scene: return
-	var area_node = skill.area_scene.instantiate()
+	if not skill.area_scene_path: return
+	var area_node = load(skill.area_scene_path).instantiate()
 	get_tree().current_scene.add_child(area_node)
 	area_node.global_position = target_pos
 	
@@ -455,7 +485,7 @@ func _fire_area(skill: Skill) -> void:
 		area_node.setup(skill, position, target_enemy)
 
 func _apply_buff_skill(skill: Skill) -> void:
-	var duration = skill.duration * (skill.level + 1.0) / 2.0
+	var duration = skill.duration * (1.0 + sqrt(skill.level - 1.0))
 	
 	if skill is Fireball:
 		enter_buff_state(BuffState.FIREBALL, duration)

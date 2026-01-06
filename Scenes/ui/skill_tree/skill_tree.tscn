@@ -230,49 +230,48 @@ grow_vertical = 1
 scale = Vector2(1.5, 1.5)
 skill = ExtResource("9_065wu")
 
-[node name="ToxicBreath" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection" instance=ExtResource("2_5qiaq")]
+[node name="Heal Over Time" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -56.6665
-offset_top = -18.6667
-offset_right = -16.6665
-offset_bottom = 21.3333
-grow_horizontal = 1
-grow_vertical = 1
-scale = Vector2(0.75, 0.75)
-skill = ExtResource("4_481k6")
-
-[node name="Heal Over Time" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/ToxicBreath" instance=ExtResource("2_5qiaq")]
-layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = -120.889
-offset_top = -64.0
-offset_right = -80.8887
-offset_bottom = -24.0
+offset_left = -61.3333
+offset_top = -40.0
+offset_right = -21.333
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(1, 1)
 skill = ExtResource("7_pncew")
 video_stream = ExtResource("6_basgh")
 
-[node name="WoodenClone" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/ToxicBreath" instance=ExtResource("2_5qiaq")]
+[node name="WoodenClone" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/Heal Over Time" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -120.889
-offset_top = 48.8889
-offset_right = -80.8887
-offset_bottom = 88.8889
+offset_left = -114.0
+offset_top = 5.99995
+offset_right = -73.9997
+offset_bottom = 46.0
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(1, 1)
 skill = ExtResource("8_da0gi")
 video_stream = ExtResource("8_k1hmm")
+
+[node name="ToxicBreath" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/Heal Over Time" instance=ExtResource("2_5qiaq")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -60.6667
+offset_top = -80.6667
+offset_right = -20.6667
+offset_bottom = -40.6667
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(1, 1)
+skill = ExtResource("4_481k6")
 
 [node name="Phoenix" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
@@ -299,7 +298,7 @@ offset_right = 55.3333
 offset_bottom = -18.6667
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1, 1)
 skill = ExtResource("3_5qiaq")
 video_stream = ExtResource("4_huapc")
 
@@ -358,7 +357,7 @@ offset_right = 121.333
 offset_bottom = 19.3334
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1, 1)
 skill = ExtResource("15_lqd2e")
 video_stream = ExtResource("24_n402r")
 
@@ -412,7 +411,7 @@ offset_right = 121.333
 offset_bottom = 102.0
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1, 1)
 skill = ExtResource("12_np4tp")
 video_stream = ExtResource("18_n402r")
 
@@ -471,7 +470,7 @@ offset_right = -7.33334
 offset_bottom = 102.0
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1, 1)
 skill = ExtResource("9_pncew")
 video_stream = ExtResource("12_mlv5p")
 

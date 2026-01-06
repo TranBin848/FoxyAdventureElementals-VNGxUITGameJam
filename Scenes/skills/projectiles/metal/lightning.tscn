@@ -71,7 +71,7 @@ animations = [{
 "texture": ExtResource("17_eqh22")
 }],
 "loop": false,
-"name": &"Thunderbolt",
+"name": &"Lightning",
 "speed": 12.0
 }]
 
@@ -93,10 +93,8 @@ knockback_force = 0.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_tbddh")
-animation = &"Thunderbolt"
-autoplay = "Thunderbolt"
-frame = 15
-frame_progress = 1.0
+animation = &"Lightning"
+autoplay = "Lightning"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
