@@ -11,8 +11,8 @@ class_name Skill
 @export var ground_targeted: bool = false  # Set TRUE for CometRain
 @export var texture_path: String
 @export var animation_name: String
-@export var projectile_scene: PackedScene = null
-@export var area_scene: PackedScene = null
+@export var projectile_scene_path: String = ""
+@export var area_scene_path: String = ""
 @export var speed: float = 250
 @export var damage: float = 10.0
 @export var sound_effect: AudioStream = null

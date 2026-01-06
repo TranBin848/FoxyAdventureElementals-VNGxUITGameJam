@@ -115,13 +115,7 @@ func control_throw_blade() -> bool:
 
 func control_swap_weapon() -> bool:
 	if Input.is_action_just_pressed("swap_weapon"):
-		# Player.gd handles the validation logic internally
-		if obj.current_weapon == Player.WeaponType.BLADE:
-			obj.swap_weapon(Player.WeaponType.WAND)
-		elif obj.current_weapon == Player.WeaponType.WAND:
-			obj.swap_weapon(Player.WeaponType.NORMAL)
-		else:
-			obj.swap_weapon(Player.WeaponType.BLADE)
+		obj.cycle_next_weapon()
 		return true
 	return false
 
@@ -141,8 +135,8 @@ func take_damage(knockback_dir: Vector2, damage: int = 1) -> void:
 	# Apply Knockback
 	# Ensure knockback_dir is normalized (-1 or 1 on X)
 	var k_dir = sign(knockback_dir.x) if knockback_dir.x != 0 else -obj.direction
-	obj.velocity.x = -obj.velocity.x
-	obj.velocity.y = -obj.velocity.y
+	obj.velocity.x = -obj.velocity.x * 0.25
+	obj.velocity.y = -obj.velocity.y * 0.25
 	obj.velocity.x -= DEFAULT_KNOCKBACK_FORCE * k_dir
 	
 	# Transition

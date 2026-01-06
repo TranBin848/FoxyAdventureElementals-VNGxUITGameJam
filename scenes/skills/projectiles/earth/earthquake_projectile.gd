@@ -24,7 +24,7 @@ func setup(skill: Skill, dir: Vector2) -> void:
 	super.setup(skill, dir)
 	
 	# 1. Calculate the target
-	self.current_wave_target = (wave_count_base * skill.level + 1) / 2
+	self.current_wave_target = (wave_count_base * (1.0 + sqrt(skill.level - 1.0)))
 	
 	# Debug print to verify
 	# print("Target: ", current_wave_target, " | Base: ", wave_count_base, " | Lvl: ", skill.level)

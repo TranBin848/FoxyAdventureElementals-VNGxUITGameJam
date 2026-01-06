@@ -1,59 +1,77 @@
 extends Node
 
-const SAVE_FILE: String = "user://checkpoint1_save.dat"
+# Base path pattern. %d will be replaced by the slot number (1, 2, 3)
+const SAVE_PATH_TEMPLATE: String = "user://save_slot_%d.dat"
+const CURRENT_VERSION: String = "1.0.0"
 
-func save_checkpoint_data(checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_tree_data: Dictionary) -> void:
-	var save_data := {
-		"checkpoint_id": checkpoint_id,
-		"player": player_data,
-		"stage_path": stage_path,
-		"skill_tree": skill_tree_data
+# --- HELPER: Get Dynamic Path ---
+func get_save_path(slot_index: int) -> String:
+	return SAVE_PATH_TEMPLATE % slot_index
+
+# --- CORE: Save ---
+func save_game(slot_index: int, checkpoint_id: String, player_data: Dictionary, stage_path: String, skill_tree_data: Dictionary, guide_data: Dictionary) -> void:
+	
+	var meta_data := {
+		"version": CURRENT_VERSION,
+		"timestamp": Time.get_datetime_string_from_system(),
+		"unix_time": Time.get_unix_time_from_system()
 	}
 
-	var file := FileAccess.open(SAVE_FILE, FileAccess.WRITE)
-	if file == null:
-		push_error("❌ Không mở được file save để ghi.")
-		return
+	var save_data := {
+		"meta": meta_data,
+		"checkpoint_id": checkpoint_id,
+		"stage_path": stage_path,
+		"player": player_data,
+		"skill_tree": skill_tree_data,
+		"guide": guide_data
+	}
 
-	file.store_line(JSON.stringify(save_data))
-	file.close()
+	var file_path = get_save_path(slot_index)
+	var file := FileAccess.open(file_path, FileAccess.WRITE)
+	
+	if file:
+		file.store_line(JSON.stringify(save_data))
+		file.close()
+		print("💾 Saved to Slot %d" % slot_index)
+	else:
+		push_error("❌ Failed to write to slot %d" % slot_index)
 
-func load_checkpoint_data() -> Dictionary:
-	if not has_save_file():
+# --- CORE: Load ---
+func load_game(slot_index: int) -> Dictionary:
+	var file_path = get_save_path(slot_index)
+	
+	if not FileAccess.file_exists(file_path):
 		return {}
 
-	var file := FileAccess.open(SAVE_FILE, FileAccess.READ)
-	if file == null:
-		return {}
-
-	var json_text := file.get_as_text().strip_edges()  # Remove whitespace
-	file.close()
+	var file := FileAccess.open(file_path, FileAccess.READ)
+	if not file: return {}
 	
 	var json = JSON.new()
-	var parse_result = json.parse(json_text)
+	var result = json.parse(file.get_as_text())
 	
-	if parse_result != OK:
-		push_error("❌ JSON Error %d: %s at line %d\n%s" % [
-			parse_result, 
-			json.get_error_message(), 
-			json.get_error_line(), 
-			json_text.substr(0, 100) + "..."
-		])
-		return {}
+	if result == OK:
+		return json.data
+	return {}
 
-	var result: Dictionary = json.data
-	# Validate required keys
-	if not result.has("checkpoint_id") or not result.has("player"):
-		push_error("❌ Missing required keys in save data")
-		return {}
+# --- UTILS: For the UI ---
+func delete_slot(slot_index: int) -> void:
+	var path = get_save_path(slot_index)
+	if FileAccess.file_exists(path):
+		DirAccess.remove_absolute(path)
+
+func get_slot_metadata(slot_index: int) -> Dictionary:
+	"""
+	Reads ONLY the save file to return info for the UI buttons 
+	(e.g., 'Level 5 - 2024-01-01') without loading the whole game state.
+	"""
+	var data = load_game(slot_index)
+	if data.is_empty():
+		return {} # Slot is empty
 	
-	return result
-
-func has_save_file() -> bool:
-	return FileAccess.file_exists(SAVE_FILE)
-
-func delete_save_file() -> void:
-	if has_save_file():
-		var err := DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE_FILE))
-		if err != OK:
-			push_error("❌ Xóa file save thất bại: %s" % str(err))
+	# Extract just what we need for the menu
+	return {
+		"exists": true,
+		"timestamp": data.meta.timestamp,
+		"stage_path": data.stage_path,
+		"level": data.get("player", {}).get("level", 1) # Example usage
+	}

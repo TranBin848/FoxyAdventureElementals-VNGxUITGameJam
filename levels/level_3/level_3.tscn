@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://beaf2cwec5xlr"]
+[gd_scene load_steps=68 format=4 uid="uid://beaf2cwec5xlr"]
 
 [ext_resource type="Script" uid="uid://wdfjgyhrjowc" path="res://levels/level_3/level_3.gd" id="1_b7gic"]
 [ext_resource type="TileSet" uid="uid://b1rw2jhie3f1r" path="res://levels/level_1/level_1.tres" id="2_4c4sg"]
@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="40_8vtkf"]
 [ext_resource type="Resource" uid="uid://bllogn53nra1h" path="res://scenes/skills/scripts/ultimate/WaterUltimate.tres" id="41_4r7ot"]
 [ext_resource type="PackedScene" uid="uid://c2h06qod7g7le" path="res://scenes/npc/npc_stat_seller.tscn" id="42_7k6of"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="43_4r7ot"]
 
 [sub_resource type="Curve2D" id="Curve2D_omsu6"]
 _data = {
@@ -197,7 +198,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.07)
 shader_parameter/wave_strength = 1.25
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.0
+shader_parameter/y_zoom = 0.424098
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -209,6 +210,8 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rrv8b"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2s1pb"]
 
 [node name="Stage2" type="Node2D"]
 script = ExtResource("1_b7gic")
@@ -621,10 +624,6 @@ position = Vector2(4654, -169)
 
 [node name="Projectiles" type="Node2D" parent="."]
 
-[node name="Checkpoint" parent="." instance=ExtResource("24_chb26")]
-position = Vector2(2650, -112)
-checkpoint_id = "999"
-
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="GUI" instance=ExtResource("39_2s1pb")]
@@ -656,6 +655,17 @@ skill = ExtResource("41_4r7ot")
 
 [node name="NpcStatSeller" parent="." instance=ExtResource("42_7k6of")]
 position = Vector2(13969, 10)
+
+[node name="The Void" type="Area2D" parent="."]
+position = Vector2(16413, 1378)
+collision_layer = 0
+collision_mask = 20
+script = ExtResource("43_4r7ot")
+damage = 37159
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="The Void"]
+shape = SubResource("WorldBoundaryShape2D_2s1pb")
 
 [connection signal="interacted" from="Object/Platform6/PathFollow2D/InteractiveArea2D" to="Object/Platform6" method="_on_interactive_area_2d_interacted"]
 [connection signal="interacted" from="Object/Platform8/PathFollow2D/InteractiveArea2D" to="Object/Platform8" method="_on_interactive_area_2d_interacted"]

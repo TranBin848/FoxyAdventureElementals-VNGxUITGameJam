@@ -1,15 +1,29 @@
-[gd_scene load_steps=21 format=4 uid="uid://5f5m765bnxg8"]
+[gd_scene load_steps=46 format=4 uid="uid://5f5m765bnxg8"]
 
 [ext_resource type="Script" uid="uid://clqwsttic13aa" path="res://levels/level_0/level_0.gd" id="1_kumio"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="2_pxy07"]
-[ext_resource type="Texture2D" uid="uid://ck8762h1hy2cf" path="res://assets/island/background/additional_water.png" id="3_v3mv3"]
-[ext_resource type="Texture2D" uid="uid://bojjm6k4aiyh8" path="res://assets/terrain_plus/background3.png" id="4_hk5st"]
-[ext_resource type="Texture2D" uid="uid://ch2rf6wnkg6el" path="res://assets/terrain_plus/background4b.png" id="5_r6d3i"]
-[ext_resource type="Texture2D" uid="uid://bm7glj3finew5" path="res://assets/terrain_plus/background4a.png" id="6_q6r03"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="18_kumio"]
+[ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="19_dp5o0"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="19_kumio"]
 [ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="20_eppev"]
-[ext_resource type="PackedScene" uid="uid://cy3uch5sn63wf" path="res://scenes/objects/water_reflection.tscn" id="23_v3mv3"]
+[ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="20_j8vpj"]
+[ext_resource type="Texture2D" uid="uid://b6dilwf04d4be" path="res://assets/island/background/water_reflect_big_02.png" id="21_ar2qe"]
+[ext_resource type="Texture2D" uid="uid://drl3x1wfs0vai" path="res://assets/island/background/water_reflect_big_03.png" id="22_lnyl4"]
+[ext_resource type="Texture2D" uid="uid://c5ur36rqix0vh" path="res://assets/island/background/water_reflect_big_04.png" id="23_aqexy"]
+[ext_resource type="Texture2D" uid="uid://clqwctkiuocld" path="res://assets/island/background/water_reflect_medium_01.png" id="24_leqqj"]
+[ext_resource type="Texture2D" uid="uid://cc473o8yawaex" path="res://assets/island/background/water_reflect_medium_02.png" id="25_vfsts"]
+[ext_resource type="Texture2D" uid="uid://853x36mkfxu8" path="res://assets/island/background/water_reflect_medium_03.png" id="26_im8cc"]
+[ext_resource type="Texture2D" uid="uid://7ph1avmw5ka6" path="res://assets/island/background/water_reflect_medium_04.png" id="27_tifty"]
+[ext_resource type="Texture2D" uid="uid://do3ghl5b5mpgy" path="res://assets/island/background/water_reflect_small_01.png" id="28_wie3q"]
+[ext_resource type="Texture2D" uid="uid://cm71bsgwox0jq" path="res://assets/island/background/water_reflect_small_02.png" id="29_y3qu2"]
+[ext_resource type="Texture2D" uid="uid://d0b0yg85xphrg" path="res://assets/island/background/water_reflect_small_03.png" id="30_w6f4e"]
+[ext_resource type="Texture2D" uid="uid://o4iqthotrkum" path="res://assets/island/background/water_reflect_small_04.png" id="31_debd5"]
+[ext_resource type="Texture2D" uid="uid://m5yds3bm8pou" path="res://assets/island/background/big_clouds.png" id="32_o76ta"]
+[ext_resource type="Shader" uid="uid://cn08g737h2o3b" path="res://shaders/water_refelection/water_refelection.gdshader" id="32_u460r"]
+[ext_resource type="Texture2D" uid="uid://ci5tpl05cnmra" path="res://assets/island/background/small_cloud_1.png" id="33_0rfg2"]
+[ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="33_6h1n3"]
+[ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="34_42hpr"]
+[ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="35_wprx8"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="56_ioufq"]
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="58_yjkv6"]
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud/settings.tscn" id="59_7e416"]
@@ -25,57 +39,117 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3slpx"]
 normal = Vector2(-1, 0)
 
+[sub_resource type="GDScript" id="GDScript_3dlnu"]
+script/source = "extends ParallaxLayer
+
+func _ready() -> void:
+	$BigReflectionSprite2D.play(\"default\")
+	$MediumReflectionSprite2D.play(\"default\")
+	$SmallReflectionSprite2D.play(\"default\")
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5qexg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_j8vpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ar2qe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_lnyl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_aqexy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_i1ywc"]
+script/source = "extends AnimatedSprite2D
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oam0d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_leqqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_vfsts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_im8cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_tifty")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c6f77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_wie3q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_y3qu2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_w6f4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_debd5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_gd86g"]
+script/source = "extends ParallaxLayer
+
+func _process(delta: float) -> void:
+	motion_offset.x -= delta * 20
+"
+
+[sub_resource type="GDScript" id="GDScript_85cek"]
+script/source = "extends ParallaxLayer
+
+func _process(delta: float) -> void:
+	motion_offset.x -= delta * 40
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2dnbt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lf3p4"]
+noise = SubResource("FastNoiseLite_2dnbt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dp5o0"]
+shader = ExtResource("32_u460r")
+shader_parameter/CAST_COLOR = Color(0, 0.0156863, 0.101961, 1)
+shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
+shader_parameter/speed = Vector2(0.01, 0.02)
+shader_parameter/wave_strength = 1.5
+shader_parameter/scale_y = 450.0
+shader_parameter/y_zoom = 1.77156
+shader_parameter/surface_speed = 3.0
+shader_parameter/surface_frequency = 10.0
+shader_parameter/surface_amplitude = 0.02
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_j8vpj"]
+
 [node name="Stage" type="Node2D"]
 script = ExtResource("1_kumio")
 
-[node name="FarBG" type="Parallax2D" parent="."]
-z_index = -5
-repeat_size = Vector2(1900, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="FarBG"]
-z_index = -100
-position = Vector2(800, -50)
-scale = Vector2(5, 5)
-texture = ExtResource("2_pxy07")
-
-[node name="Sprite2D2" type="Sprite2D" parent="FarBG"]
-z_index = -100
-position = Vector2(801, 558)
-scale = Vector2(60, 20)
-texture = ExtResource("3_v3mv3")
-
-[node name="MediumBG" type="Parallax2D" parent="."]
-visible = false
-z_index = -5
-scroll_scale = Vector2(0.2, 0.2)
-repeat_size = Vector2(1900, 0)
-
-[node name="Sprite2D3" type="Sprite2D" parent="MediumBG"]
-z_index = -100
-position = Vector2(800, 300)
-scale = Vector2(2, 2)
-texture = ExtResource("4_hk5st")
-
-[node name="CloseBG" type="Parallax2D" parent="."]
-visible = false
-z_index = -5
-scroll_scale = Vector2(0.4, 0.4)
-repeat_size = Vector2(1900, 0)
-
-[node name="Sprite2D5" type="Sprite2D" parent="CloseBG"]
-z_index = -100
-position = Vector2(800, 300)
-scale = Vector2(2, 2)
-texture = ExtResource("5_r6d3i")
-
-[node name="Sprite2D4" type="Sprite2D" parent="CloseBG"]
-z_index = -100
-position = Vector2(800, 300)
-scale = Vector2(2, 2)
-texture = ExtResource("6_q6r03")
-
 [node name="Player" parent="." instance=ExtResource("19_kumio")]
-position = Vector2(39, 125)
+position = Vector2(39, 156)
 max_mana = 200
 
 [node name="TileMap" type="TileMapLayer" parent="."]
@@ -168,9 +242,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/StaticBody2D2"]
 shape = SubResource("WorldBoundaryShape2D_3slpx")
 
-[node name="Water2" parent="." instance=ExtResource("23_v3mv3")]
-position = Vector2(774, 322)
-
 [node name="point1" type="Node2D" parent="."]
 position = Vector2(388, 132)
 
@@ -178,6 +249,7 @@ position = Vector2(388, 132)
 position = Vector2(650, 127)
 
 [node name="Boat" parent="." instance=ExtResource("20_eppev")]
+z_index = -1
 position = Vector2(1321, 197)
 interactable = true
 
@@ -200,3 +272,80 @@ guide_text = "Space to jump\\nZ to dash"
 position = Vector2(1016, 155)
 
 [node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(767, 0)
+script = SubResource("GDScript_3dlnu")
+
+[node name="SkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(417, -11)
+scale = Vector2(26.125, 20.531)
+texture = ExtResource("19_dp5o0")
+
+[node name="SeaSkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-2, -35)
+scale = Vector2(2, 2.26563)
+texture = ExtResource("2_pxy07")
+centered = false
+
+[node name="BigReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(207.5, 169.5)
+sprite_frames = SubResource("SpriteFrames_5qexg")
+script = SubResource("GDScript_i1ywc")
+
+[node name="MediumReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(376.5, 165.5)
+sprite_frames = SubResource("SpriteFrames_oam0d")
+script = SubResource("GDScript_i1ywc")
+
+[node name="SmallReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(57.5, 165.5)
+sprite_frames = SubResource("SpriteFrames_c6f77")
+script = SubResource("GDScript_i1ywc")
+
+[node name="ParallaxLayerCloud" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-1, -94)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(580, 0)
+script = SubResource("GDScript_gd86g")
+
+[node name="BigClouds" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud"]
+position = Vector2(0, 111)
+scale = Vector2(1.38588, 1.2)
+texture = ExtResource("32_o76ta")
+centered = false
+
+[node name="ParallaxLayerCloud2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -16)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(510, 0)
+script = SubResource("GDScript_85cek")
+
+[node name="SmallClouds1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(165, 111)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("33_0rfg2")
+centered = false
+
+[node name="SmallClouds2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(12, 60)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("34_42hpr")
+centered = false
+
+[node name="SmallClouds3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(300, 20)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("35_wprx8")
+centered = false
+
+[node name="Water" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dp5o0")
+position = Vector2(750, 349.375)
+scale = Vector2(2868, 283.25)
+texture = SubResource("CanvasTexture_j8vpj")
+script = ExtResource("33_6h1n3")

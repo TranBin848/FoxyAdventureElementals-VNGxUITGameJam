@@ -1,5 +1,5 @@
 extends ProjectileBase
-class_name StunBeamProjectile
+class_name LightningProjectile
 
 # --- Stun Config ---
 @export var start_scale: Vector2 = Vector2.ONE
@@ -7,7 +7,7 @@ class_name StunBeamProjectile
 @export var scale_duration: float = 0.18
 @export var scale_trans := Tween.TRANS_SINE
 @export var scale_ease := Tween.EASE_OUT
-@export var stun_anim: String = "StunBeam"
+@export var stun_anim: String = "Thunderbolt"
 @onready var stun_area: Area2D = $StunArea	
 @export var knockback_force: float = 300.0
 @export var vertical_offset: float = -20.0
@@ -20,7 +20,7 @@ var stun_center: Vector2
 func _ready() -> void:
 	_trigger_stun()
 	
-	AudioManager.play_sound("skill_stun_beam")
+	AudioManager.play_sound("skill_lightning")
 	
 	if has_node("AnimatedSprite2D"):
 		get_node("AnimatedSprite2D").animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)

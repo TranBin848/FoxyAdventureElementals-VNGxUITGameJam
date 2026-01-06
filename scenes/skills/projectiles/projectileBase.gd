@@ -17,7 +17,7 @@ func setup(_skill: Skill, dir: Vector2) -> void:
 	skill = _skill
 	level = skill.level
 	speed = skill.speed
-	damage = skill.damage * (skill.level + 1) / 2
+	damage = skill.damage * (1.0 + sqrt(skill.level - 1.0))
 	elemental_type = skill.elemental_type
 	direction = dir.normalized() if dir.length() > 0 else Vector2.RIGHT
 	

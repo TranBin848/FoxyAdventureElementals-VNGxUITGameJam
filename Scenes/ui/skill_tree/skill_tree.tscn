@@ -19,8 +19,8 @@
 [ext_resource type="Resource" uid="uid://ly2bn32wiwrn" path="res://scenes/skills/scripts/water/Tornado.tres" id="10_wq534"]
 [ext_resource type="Resource" uid="uid://bk25mnb7lmoy0" path="res://scenes/skills/scripts/water/WaterSpike.tres" id="11_q815c"]
 [ext_resource type="VideoStream" uid="uid://c1amsbwwrkte4" path="res://assets/skills/water/WaterBall.ogv" id="12_mlv5p"]
-[ext_resource type="Resource" uid="uid://bi6xhg0h8erpa" path="res://scenes/skills/scripts/metal/StunShot.tres" id="12_np4tp"]
-[ext_resource type="Resource" uid="uid://dnqe0sn17m7iq" path="res://scenes/skills/scripts/metal/Thunderbolt.tres" id="13_lv5gw"]
+[ext_resource type="Resource" uid="uid://bi6xhg0h8erpa" path="res://scenes/skills/scripts/metal/Thunderbolt.tres" id="12_np4tp"]
+[ext_resource type="Resource" uid="uid://dnqe0sn17m7iq" path="res://scenes/skills/scripts/metal/ThunderStrike.tres" id="13_lv5gw"]
 [ext_resource type="Resource" uid="uid://ydvgf5lwhd1w" path="res://scenes/skills/scripts/metal/ThousandSwords.tres" id="14_jjh4s"]
 [ext_resource type="Resource" uid="uid://bllogn53nra1h" path="res://scenes/skills/scripts/ultimate/WaterUltimate.tres" id="14_onv8a"]
 [ext_resource type="VideoStream" uid="uid://dfutgpufyyxhv" path="res://assets/skills/water/WaterTornado.ogv" id="14_p7tb3"]
@@ -230,49 +230,48 @@ grow_vertical = 1
 scale = Vector2(1.5, 1.5)
 skill = ExtResource("9_065wu")
 
-[node name="ToxicBreath" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection" instance=ExtResource("2_5qiaq")]
+[node name="Heal Over Time" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -56.6665
-offset_top = -18.6667
-offset_right = -16.6665
-offset_bottom = 21.3333
-grow_horizontal = 1
-grow_vertical = 1
-scale = Vector2(0.75, 0.75)
-skill = ExtResource("4_481k6")
-
-[node name="Heal Over Time" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/ToxicBreath" instance=ExtResource("2_5qiaq")]
-layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = -120.889
-offset_top = -64.0
-offset_right = -80.8887
-offset_bottom = -24.0
+offset_left = -61.3333
+offset_top = -40.0
+offset_right = -21.333
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(1, 1)
 skill = ExtResource("7_pncew")
 video_stream = ExtResource("6_basgh")
 
-[node name="WoodenClone" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/ToxicBreath" instance=ExtResource("2_5qiaq")]
+[node name="WoodenClone" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/Heal Over Time" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -120.889
-offset_top = 48.8889
-offset_right = -80.8887
-offset_bottom = 88.8889
+offset_left = -114.0
+offset_top = 5.99995
+offset_right = -73.9997
+offset_bottom = 46.0
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(1, 1)
 skill = ExtResource("8_da0gi")
 video_stream = ExtResource("8_k1hmm")
+
+[node name="ToxicBreath" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/Heal Over Time" instance=ExtResource("2_5qiaq")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -60.6667
+offset_top = -80.6667
+offset_right = -20.6667
+offset_bottom = -40.6667
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(1, 1)
+skill = ExtResource("4_481k6")
 
 [node name="Phoenix" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
@@ -299,7 +298,7 @@ offset_right = 55.3333
 offset_bottom = -18.6667
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1, 1)
 skill = ExtResource("3_5qiaq")
 video_stream = ExtResource("4_huapc")
 
@@ -358,7 +357,7 @@ offset_right = 121.333
 offset_bottom = 19.3334
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1, 1)
 skill = ExtResource("15_lqd2e")
 video_stream = ExtResource("24_n402r")
 
@@ -401,7 +400,7 @@ grow_vertical = 1
 scale = Vector2(1.5, 1.5)
 skill = ExtResource("22_eu7kn")
 
-[node name="StunShot" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate" instance=ExtResource("2_5qiaq")]
+[node name="Thunder" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -412,11 +411,11 @@ offset_right = 121.333
 offset_bottom = 102.0
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1, 1)
 skill = ExtResource("12_np4tp")
 video_stream = ExtResource("18_n402r")
 
-[node name="Thunderbolt" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate/StunShot" instance=ExtResource("2_5qiaq")]
+[node name="Thunderbolt" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate/Thunder" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -431,7 +430,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("13_lv5gw")
 video_stream = ExtResource("24_k1hmm")
 
-[node name="ThousandSwords" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate/StunShot" instance=ExtResource("2_5qiaq")]
+[node name="ThousandSwords" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/MetalUltimate/Thunder" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -471,7 +470,7 @@ offset_right = -7.33334
 offset_bottom = 102.0
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1, 1)
 skill = ExtResource("9_pncew")
 video_stream = ExtResource("12_mlv5p")
 
