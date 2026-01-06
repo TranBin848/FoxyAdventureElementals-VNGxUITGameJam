@@ -61,7 +61,7 @@ var current_wand_level: WandLevel = WandLevel.NORMAL
 
 # Inventory Flags
 var has_blade: bool = false
-var has_wand: bool = true
+var has_wand: bool = false
 
 # Combat State
 var is_invulnerable: bool = false
@@ -839,9 +839,7 @@ func add_new_skill(skill: Skill, stack_amount: int = 1) -> void:
 	
 	if stack_amount <= 0:
 		push_warning("Player.add_new_skill: Invalid stack amount %d" % stack_amount)
-	
-	# Add to SkillTreeManager
-	SkillTreeManager.collect_skill(skill.name, stack_amount)
+		
 	skill_collected.emit(skill, stack_amount)
 
 

@@ -96,6 +96,7 @@ func _collect_item(player: Player) -> void:
 		SkillTreeManager.unlock_skill(skill.name)
 	else:
 		SkillTreeManager.collect_skill(skill.name, stack_amount)
+		player.add_new_skill(skill, stack_amount)
 	_play_collect_effect()
 
 func _play_collect_effect() -> void:
