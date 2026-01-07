@@ -45,6 +45,7 @@ func consume_skill_use(skill_name: String) -> void:
 			print("%s ran out! Unequipping..." % skill_name)
 
 func collect_skill(skill_name: String, stack_amount: int = 1) -> void:
+	GameProgressManager.trigger_event("SKILL_SCROLL")
 	"""Called when player picks up a skill in the world"""
 	if not SkillDatabase.get_skill_by_name(skill_name):
 		push_error("Unknown skill: %s" % skill_name)

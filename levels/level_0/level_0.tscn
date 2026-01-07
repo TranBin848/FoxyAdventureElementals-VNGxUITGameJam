@@ -138,7 +138,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.77156
+shader_parameter/y_zoom = 0.163508
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -149,7 +149,7 @@ shader_parameter/surface_amplitude = 0.02
 script = ExtResource("1_kumio")
 
 [node name="Player" parent="." instance=ExtResource("19_kumio")]
-position = Vector2(39, 156)
+position = Vector2(39, 160)
 max_mana = 200
 
 [node name="TileMap" type="TileMapLayer" parent="."]
@@ -314,7 +314,7 @@ motion_mirroring = Vector2(580, 0)
 script = SubResource("GDScript_gd86g")
 
 [node name="BigClouds" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud"]
-position = Vector2(0, 111)
+position = Vector2(-1, 135)
 scale = Vector2(1.38588, 1.2)
 texture = ExtResource("32_o76ta")
 centered = false
