@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://c2ueqo6dx301l" path="res://scenes/ui/hud/coin_display.gd" id="1_wrcr7"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_wrcr7"]
 
-[node name="CoinDisplay" type="PanelContainer"]
-offset_right = 72.0
+[node name="CoinDisplay" type="Container"]
+offset_right = 76.0
 offset_bottom = 24.0
 script = ExtResource("1_wrcr7")
 

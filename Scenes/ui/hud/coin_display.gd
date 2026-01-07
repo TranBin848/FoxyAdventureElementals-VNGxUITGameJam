@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Container
 
 # Adjust this path based on your actual Scene Tree structure
 @onready var coin_label: Label = $HBoxContainer/Label 

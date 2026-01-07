@@ -16,11 +16,19 @@ var metal_ultimate_collected: bool = false
 var earth_ultimate_collected: bool = false
 var first_time_open_skill_tree: bool = false
 
+
 var cutlass_media_path = "res://scenes/ui/popup/guide_content/cutlass_guide.ogv"
 var coin_media_path = "res://scenes/ui/popup/guide_content/coin_guide.ogv"
 var key_media_path = "res://scenes/ui/popup/guide_content/key_guide.ogv"
 var skill_tree_media_path = "res://scenes/ui/popup/guide_content/skill_tree_guide.png"
 var wand_media_path = "res://scenes/ui/popup/guide_content/wand_guide.ogv"
+
+var metal_ultimate_media_path = "res://assets/skills/icon element/Metal_v2.png"
+var wood_ultimate_media_path = "res://assets/skills/icon element/Wood_v2.png"
+var water_ultimate_media_path = "res://assets/skills/icon element/Water_v2.png"
+var fire_ultimate_media_path = "res://assets/skills/icon element/Fire_v2.png"
+var earth_ultimate_media_path = "res://assets/skills/icon element/Earth_v2.png"
+
 
 var wood_wand_guide := """
 Bạn vừa nhận được trượng gỗ. Viên đá trên cây trượng sẽ giúp bạn đọc được ngôn ngữ phép thuật. Từ đó học được cách sử dụng phép.
@@ -116,27 +124,27 @@ var guide_data: Dictionary = {
 	"METAL_ULTIMATE": {
 		"title": "Metal Ultimate",
 		"content": metal_ultimate_guide,
-		"image": "res://assets/skills/icons_skill/48x48/skill_icons16"
+		"image": metal_ultimate_media_path
 	},
 		"FIRE_ULTIMATE": {
 		"title": "Fire Ultimate",
 		"content": fire_ultimate_guide,
-		"image": "res://assets/skills/icons_skill/48x48/skill_placeholder"
+		"image": fire_ultimate_media_path
 	},
 	"EARTH_ULTIMATE": {
 		"title": "Earth Ultimate",
 		"content": earth_ultimate_guide,
-		"image": "res://assets/skills/icons_skill/48x48/skill_placeholder"
+		"image": earth_ultimate_media_path
 	},
 	"WOOD_ULTIMATE": {
 		"title": "Wood Ultimate",
 		"content": wood_ultimate_guide,
-		"image": "res://assets/skills/icons_skill/48x48/skill_placeholder"
+		"image": wood_ultimate_media_path
 	},
 	"WATER_ULTIMATE": {
 		"title": "Water Ultimate",
 		"content": water_ultimate_guide,
-		"image": "res://assets/skills/icons_skill/48x48/skill_placeholder"
+		"image": water_ultimate_media_path
 	}
 }
 

@@ -57,10 +57,10 @@ grow_vertical = 0
 
 [node name="CoinDisplay" parent="." instance=ExtResource("5_4m4yb")]
 layout_mode = 1
-offset_left = 31.0
-offset_top = 116.0
-offset_right = 92.0
-offset_bottom = 139.0
+offset_left = 9.0
+offset_top = 111.0
+offset_right = 84.0
+offset_bottom = 134.0
 
 [node name="ErrorLabel" type="Label" parent="."]
 visible = false
