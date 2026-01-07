@@ -179,6 +179,7 @@ spawner_scene = ExtResource("52_spawner")
 enemies_to_spawn = Array[PackedScene]([ExtResource("53_qin12"), ExtResource("55_2anp0")])
 spike = 1.0
 sight = 200.0
+max_health = 2000
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="Direction" type="Node2D" parent="."]

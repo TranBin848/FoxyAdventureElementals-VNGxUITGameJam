@@ -410,6 +410,7 @@ script = ExtResource("1_ognfm")
 phase_order = Array[int]([2, 3, 4])
 shader_path = "uid://doovon2v0i5dx"
 sight = 300.0
+max_health = 500
 metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="GPUParticles2D" parent="." instance=ExtResource("54_4lnpy")]

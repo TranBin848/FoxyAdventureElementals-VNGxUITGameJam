@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://docdrr2v8cok6"]
+[gd_scene load_steps=48 format=4 uid="uid://docdrr2v8cok6"]
 
 [ext_resource type="Script" uid="uid://bqcvira4xkkrc" path="res://levels/level_2/level_2.gd" id="1_ppf8r"]
 [ext_resource type="Texture2D" uid="uid://dgrgwf4lnmmoi" path="res://assets/island/background/sandria.png" id="7_km4sl"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://c2nu6ncphw78a" path="res://scripts/area_component/boss_zone_area_2d.tscn" id="29_ulcqf"]
 [ext_resource type="PackedScene" uid="uid://bulkbnhholp3f" path="res://scenes/enemies/king_crab_boss/king_crab.tscn" id="30_rdvgg"]
 [ext_resource type="PackedScene" uid="uid://c2h06qod7g7le" path="res://scenes/npc/npc_stat_seller.tscn" id="31_c0166"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="32_4x2cg"]
 [ext_resource type="TileSet" uid="uid://315u2uaue33w" path="res://levels/level_2/level_2.tres" id="33_oaqh1"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="38_oaqh1"]
 
@@ -121,6 +122,9 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/RightBorder"]
 shape = SubResource("WorldBoundaryShape2D_km4sl")
+
+[node name="BladeCollectable" parent="WorldBoundary/RightBorder" instance=ExtResource("32_4x2cg")]
+position = Vector2(-14735.6, 2088.36)
 
 [node name="The Void" type="Area2D" parent="WorldBoundary"]
 position = Vector2(6060, 1154)
@@ -624,6 +628,7 @@ boss = NodePath("KingCrab4")
 
 [node name="KingCrab4" parent="BossZoneArea2D" instance=ExtResource("30_rdvgg")]
 position = Vector2(0, 120)
+max_health = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossZoneArea2D"]
 shape = SubResource("RectangleShape2D_rdvgg")
