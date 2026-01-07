@@ -7,6 +7,9 @@ var previous_music_id
 var player: Player = null
 var triggered: bool = false
 
+signal boss_killed
+signal player_entered
+
 func _ready() -> void:
 	boss.boss_zone = self
 
@@ -25,6 +28,7 @@ func _on_body_entered(body: Node2D) -> void:
 		triggered = true
 		player = body
 		CameraTransition.transition_camera2D(camera_2d, 2)
+		player_entered.emit()
 		
 	if boss:
 		if boss.is_fighting:
@@ -41,6 +45,7 @@ func _on_boss_dead() -> void:
 	collision.disabled = true
 	AudioManager.play_music("music_victory", 0, 2)
 	AudioManager.play_next_music(previous_music_id, 0, 2)
+	boss_killed.emit()
 
 func is_at_camera_edge(source: Node2D, margin: float = 15.0) -> bool:
 	var cam := get_viewport().get_camera_2d()
