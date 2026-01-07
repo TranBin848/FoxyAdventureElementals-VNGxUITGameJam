@@ -400,6 +400,7 @@ elemental_type = 5
 position = Vector2(8944, 687)
 enemy_to_spawn = Array[PackedScene]([ExtResource("28_6fwx2"), ExtResource("23_vdtjt"), ExtResource("22_1h50e")])
 enemy_per_spawn = 2
+elemental_type = 4
 
 [node name="Spawners" type="Node2D" parent="."]
 
