@@ -85,33 +85,32 @@ func _on_tree_changed() -> void:
 func _on_scene_changed() -> void:
 	current_stage = get_tree().current_scene
 	if current_stage == null: return
-
+	
 	# Refresh References
 	player = current_stage.find_child("Player", true, false)
 	
 	if player and player_base_stats.is_empty():
 		_capture_base_stats()
-
+	
 	# Scale Enemies
 	get_tree().call_group("enemies", "scale_health", 0.8 + 0.2 * current_level)
-
-	# Handle Spawning (Portal vs Checkpoint vs New Game)
+	
+	# ✅ FIX: AWAIT the spawn handler so it completes before proceeding
 	await _handle_checkpoint_or_portal_spawn()
 	
 	# =========================================================================
-	# ✅ NEW: Implicit Level Start Checkpoint
+	# ✅ Implicit Level Start Checkpoint
 	# =========================================================================
-	# We create a checkpoint only if we are NOT currently loading an existing one.
-	# This ensures that when we enter a new level via Portal or New Game,
-	# we immediately save that state as the "Restart Point".
+	# Now this runs AFTER spawn handling is complete
 	if player and not is_loading_from_checkpoint:
 		print("🚩 Creating implicit level-start checkpoint...")
 		save_checkpoint("auto_level_start")
 	# =========================================================================
 	
-	# Emit signal so level scripts know spawning is complete
+	# ✅ FIX: level_ready now emits AFTER player is fully positioned/restored
 	if has_signal("level_ready"):
 		level_ready.emit()
+		print("✅ Level setup complete - level_ready signal emitted")
 
 func _capture_base_stats() -> void:
 	"""Stores the player's initial stat values on first spawn"""
@@ -147,7 +146,9 @@ func _handle_checkpoint_or_portal_spawn() -> void:
 		
 		# Allow loading if scene matches OR if we are forcing a reload
 		if checkpoint_scene == current_stage.scene_file_path:
-			await get_tree().create_timer(0.1).timeout
+			# Wait for the physics engine to initialize the new map fully
+			await get_tree().physics_frame
+			await get_tree().physics_frame
 			respawn_at_checkpoint()
 			is_loading_from_checkpoint = false
 			print("💾 Loaded from checkpoint: %s" % current_checkpoint_id)
@@ -209,12 +210,13 @@ func respawn_at_checkpoint() -> void:
 	if data.has("player_base_stats"):
 		player_base_stats = data.get("player_base_stats", {}).duplicate()
 	
-	# 2. Recalculate Stats
+	# 2. Recalculate Stats (Tính lại Max HP dựa trên upgrade)
 	_apply_all_stats_from_base()
 	
-	# 3. Full Heal on Checkpoint Load (Prevents death loops)
+	# 3. XỬ LÝ MÁU
 	player.health = player.max_health
 	player.mana = player.max_mana
+	
 	player.health_changed.emit()
 	player.mana_changed.emit()
 
@@ -351,7 +353,9 @@ func clear_checkpoint_data() -> void:
 
 #region Player Death & Respawn Handling
 func on_player_death() -> void:
-	print("💀 Player died")
+	print("\n💀 ============ PLAYER DEATH ============")
+	print("Current checkpoint: %s" % current_checkpoint_id)
+	print("Checkpoint data exists: %s" % (not checkpoint_data.is_empty()))
 	
 	# 1. Clear run state (prevents carrying over dead state)
 	clear_run_state()
@@ -360,7 +364,10 @@ func on_player_death() -> void:
 	if not current_checkpoint_id.is_empty():
 		var saved_stage_path = checkpoint_data.get(current_checkpoint_id, {}).get("stage_path", "")
 		
-		# 3. ✅ CRITICAL: Set flag to true so _on_scene_changed calls respawn_at_checkpoint()
+		print("Saved stage path: %s" % saved_stage_path)
+		print("Current stage path: %s" % (current_stage.scene_file_path if current_stage else "null"))
+		
+		# 3. ✅ Set flag so _on_scene_changed calls respawn_at_checkpoint()
 		is_loading_from_checkpoint = true
 		
 		if not saved_stage_path.is_empty():
@@ -368,10 +375,18 @@ func on_player_death() -> void:
 			get_tree().change_scene_to_file(saved_stage_path)
 		else:
 			print("⚠️ Checkpoint path missing, reloading current scene")
-			get_tree().change_scene_to_file(current_stage.scene_file_path)
+			if current_stage:
+				get_tree().change_scene_to_file(current_stage.scene_file_path)
+			else:
+				print("❌ ERROR: No current_stage reference!")
 	else:
 		print("⚠️ No checkpoint found! Restarting level with defaults.")
-		get_tree().change_scene_to_file(current_stage.scene_file_path)
+		if current_stage:
+			get_tree().change_scene_to_file(current_stage.scene_file_path)
+		else:
+			print("❌ ERROR: No current_stage reference!")
+	
+	print("========================================\n")
 #endregion
 
 #region New Game & Load Game

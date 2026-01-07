@@ -840,14 +840,19 @@ func save_state() -> Dictionary:
 func load_state(data: Dictionary) -> void:
 	if "position" in data:
 		global_position = Vector2(data["position"][0], data["position"][1])
+	
+	# 1. Load Level của Wand TRƯỚC
+	if "wand_level" in data:
+		current_wand_level = data["wand_level"] # Set level trước
+		
+	# 2. Sau đó mới load quyền sở hữu và trang bị
 	if "has_blade" in data:
 		has_blade = data["has_blade"]
 		if has_blade: equip_weapon(WeaponType.BLADE)
+		
 	if "has_wand" in data:
 		has_wand = data["has_wand"]
-		if has_wand: equip_weapon(WeaponType.WAND)
-	if "wand_level" in data:
-		current_wand_level = data["wand_level"]
+		if has_wand: equip_weapon(WeaponType.WAND) # Lúc này nó mới check đúng current_wand_level
 	
 	# Helper definitions for FSM/Animation use
 func cast_skill(anim_name: String) -> void:
