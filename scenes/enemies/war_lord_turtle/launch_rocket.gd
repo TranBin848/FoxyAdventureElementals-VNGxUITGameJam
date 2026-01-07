@@ -1,7 +1,7 @@
 extends WarLordState
 
 const ROTATE2BACK_TIME := 1.0
-const LAUNCH_ROCKET_TIME := 0.6
+const LAUNCH_ROCKET_TIME := 0.45
 const ROTATE2FRONT_TIME := 1.0
 
 var phase := 0
@@ -14,10 +14,12 @@ func _enter() -> void:
 	launch_index = 0
 	launch_times = obj.targets.size()
 
+	obj.alert_coroutine()
 	obj.change_animation("rotate2Back")
 	obj.is_facing_left = true
 	timer = ROTATE2BACK_TIME
 
+	obj.is_invur = false
 
 func _update(delta: float) -> void:
 	match phase:

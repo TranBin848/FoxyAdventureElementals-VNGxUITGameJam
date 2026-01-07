@@ -6,6 +6,7 @@ func _enter() -> void:
 	obj.change_animation("stun")
 	timer = stun_time
 	obj.is_attacking = false
+	obj.is_invur = false
 	if obj.has_delay_state:
 		obj.has_delay_state = false
 		take_damage(0)
@@ -14,4 +15,5 @@ func _update(delta: float) -> void:
 	super._update(delta)
 	if update_timer(delta):
 		change_state(fsm.states.idle)
+		obj.is_invur = true
 	
