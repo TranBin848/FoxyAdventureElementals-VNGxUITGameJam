@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://bxfetmrfxhdcs"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_761we"]
+[ext_resource type="AudioStream" uid="uid://b50q8afd6yhy3" path="res://assets/sounds/healpop.wav" id="2_v7r3y"]
+
+[resource]
+script = ExtResource("1_761we")
+clip_id = "skill_heal"
+stream = ExtResource("2_v7r3y")
+variations = Array[AudioStream]([])
+volume_db = -10.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

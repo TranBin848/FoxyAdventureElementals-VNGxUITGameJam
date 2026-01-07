@@ -52,6 +52,7 @@ size = Vector2(82, 33)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_4ahkj")
+coin_reward = 15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)

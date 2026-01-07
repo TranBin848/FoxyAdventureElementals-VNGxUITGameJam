@@ -7,6 +7,7 @@
 script = ExtResource("1_xvvta")
 clip_id = "ambience_volcano"
 stream = ExtResource("2_i8syj")
+variations = Array[AudioStream]([])
 volume_db = -10.0
 randomize_pitch = false
 pitch_min = 0.9

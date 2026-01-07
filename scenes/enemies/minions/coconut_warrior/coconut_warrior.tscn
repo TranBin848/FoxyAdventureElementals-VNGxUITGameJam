@@ -96,6 +96,7 @@ radius = 11.0
 height = 28.0
 
 [node name="CoconutWarrior" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 8
 collision_mask = 129
 script = ExtResource("1_g34j8")
@@ -111,6 +112,7 @@ spike = 1.0
 sight = 100.0
 movement_range = 200.0
 attack_speed = 500.0
+movement_speed = 125.0
 max_health = 10
 elemental_type = 5
 metadata/_custom_type_script = "uid://s4xx82espxdt"
@@ -190,8 +192,6 @@ script = ExtResource("22_1gu4w")
 
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("22_3ufwa")
-despawn_time = null
-bounce_back_velocity = null
 
 [node name="DebuffPlaceHolder" type="Node2D" parent="."]
 position = Vector2(-2, 26)

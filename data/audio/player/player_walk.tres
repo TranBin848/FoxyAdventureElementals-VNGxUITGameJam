@@ -1,22 +1,14 @@
-[gd_resource type="Resource" script_class="AudioClip" load_steps=6 format=3 uid="uid://cmx27tqr17kwc"]
+[gd_resource type="Resource" script_class="AudioClip" load_steps=5 format=3 uid="uid://cmx27tqr17kwc"]
 
 [ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_rnhlg"]
 [ext_resource type="AudioStream" uid="uid://fhetboqp0u1p" path="res://assets/sounds/steps_on_grass_01.wav" id="2_ty23j"]
 [ext_resource type="AudioStream" uid="uid://bkpkwq5t54p1k" path="res://assets/sounds/steps_on_grass_02.wav" id="3_ar3hn"]
 [ext_resource type="AudioStream" uid="uid://bq2mm1jamcmh" path="res://assets/sounds/steps_on_grass_03.wav" id="4_qwnmo"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ty23j"]
-random_pitch = 1.2
-random_volume_offset_db = 2.0
-streams_count = 3
-stream_0/stream = ExtResource("2_ty23j")
-stream_1/stream = ExtResource("3_ar3hn")
-stream_2/stream = ExtResource("4_qwnmo")
-
 [resource]
 script = ExtResource("1_rnhlg")
 clip_id = "player_walk"
-stream = SubResource("AudioStreamRandomizer_ty23j")
+variations = Array[AudioStream]([ExtResource("3_ar3hn"), ExtResource("4_qwnmo"), ExtResource("2_ty23j")])
 volume_db = -10.0
 randomize_pitch = true
 pitch_min = 0.9

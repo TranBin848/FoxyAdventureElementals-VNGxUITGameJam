@@ -1,0 +1,351 @@
+[gd_scene load_steps=46 format=4 uid="uid://5f5m765bnxg8"]
+
+[ext_resource type="Script" uid="uid://clqwsttic13aa" path="res://levels/level_0/level_0.gd" id="1_kumio"]
+[ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="2_pxy07"]
+[ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="18_kumio"]
+[ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="19_dp5o0"]
+[ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="19_kumio"]
+[ext_resource type="PackedScene" uid="uid://b0hlcumjqo0a4" path="res://levels/objects/boat/boat.tscn" id="20_eppev"]
+[ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="20_j8vpj"]
+[ext_resource type="Texture2D" uid="uid://b6dilwf04d4be" path="res://assets/island/background/water_reflect_big_02.png" id="21_ar2qe"]
+[ext_resource type="Texture2D" uid="uid://drl3x1wfs0vai" path="res://assets/island/background/water_reflect_big_03.png" id="22_lnyl4"]
+[ext_resource type="Texture2D" uid="uid://c5ur36rqix0vh" path="res://assets/island/background/water_reflect_big_04.png" id="23_aqexy"]
+[ext_resource type="Texture2D" uid="uid://clqwctkiuocld" path="res://assets/island/background/water_reflect_medium_01.png" id="24_leqqj"]
+[ext_resource type="Texture2D" uid="uid://cc473o8yawaex" path="res://assets/island/background/water_reflect_medium_02.png" id="25_vfsts"]
+[ext_resource type="Texture2D" uid="uid://853x36mkfxu8" path="res://assets/island/background/water_reflect_medium_03.png" id="26_im8cc"]
+[ext_resource type="Texture2D" uid="uid://7ph1avmw5ka6" path="res://assets/island/background/water_reflect_medium_04.png" id="27_tifty"]
+[ext_resource type="Texture2D" uid="uid://do3ghl5b5mpgy" path="res://assets/island/background/water_reflect_small_01.png" id="28_wie3q"]
+[ext_resource type="Texture2D" uid="uid://cm71bsgwox0jq" path="res://assets/island/background/water_reflect_small_02.png" id="29_y3qu2"]
+[ext_resource type="Texture2D" uid="uid://d0b0yg85xphrg" path="res://assets/island/background/water_reflect_small_03.png" id="30_w6f4e"]
+[ext_resource type="Texture2D" uid="uid://o4iqthotrkum" path="res://assets/island/background/water_reflect_small_04.png" id="31_debd5"]
+[ext_resource type="Texture2D" uid="uid://m5yds3bm8pou" path="res://assets/island/background/big_clouds.png" id="32_o76ta"]
+[ext_resource type="Shader" uid="uid://cn08g737h2o3b" path="res://shaders/water_refelection/water_refelection.gdshader" id="32_u460r"]
+[ext_resource type="Texture2D" uid="uid://ci5tpl05cnmra" path="res://assets/island/background/small_cloud_1.png" id="33_0rfg2"]
+[ext_resource type="Script" uid="uid://bihk4muna3fpl" path="res://shaders/water_refelection/water.gd" id="33_6h1n3"]
+[ext_resource type="Texture2D" uid="uid://1t3pkyls8wyt" path="res://assets/island/background/small_cloud_2.png" id="34_42hpr"]
+[ext_resource type="Texture2D" uid="uid://dcvs45slp2tv3" path="res://assets/island/background/small_cloud_3.png" id="35_wprx8"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="56_ioufq"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="58_yjkv6"]
+[ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud/settings.tscn" id="59_7e416"]
+[ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/hud/weapon_panel.tscn" id="60_fyh0v"]
+[ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/hud/health_bar_container.tscn" id="61_vfk86"]
+[ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar/skill_bar.tscn" id="62_w1qk2"]
+[ext_resource type="TileSet" uid="uid://di6o1yntkov7w" path="res://levels/level_0/level_0.tres" id="93_0ulml"]
+[ext_resource type="PackedScene" uid="uid://j5oaxshr3fdy" path="res://levels/objects/trigger/guide_trigger.tscn" id="104_lii35"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v3mv3"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3slpx"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="GDScript" id="GDScript_3dlnu"]
+script/source = "extends ParallaxLayer
+
+func _ready() -> void:
+	$BigReflectionSprite2D.play(\"default\")
+	$MediumReflectionSprite2D.play(\"default\")
+	$SmallReflectionSprite2D.play(\"default\")
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5qexg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_j8vpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ar2qe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_lnyl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_aqexy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_i1ywc"]
+script/source = "extends AnimatedSprite2D
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oam0d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_leqqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_vfsts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_im8cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_tifty")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c6f77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_wie3q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_y3qu2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_w6f4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_debd5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_gd86g"]
+script/source = "extends ParallaxLayer
+
+func _process(delta: float) -> void:
+	motion_offset.x -= delta * 20
+"
+
+[sub_resource type="GDScript" id="GDScript_85cek"]
+script/source = "extends ParallaxLayer
+
+func _process(delta: float) -> void:
+	motion_offset.x -= delta * 40
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2dnbt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lf3p4"]
+noise = SubResource("FastNoiseLite_2dnbt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dp5o0"]
+shader = ExtResource("32_u460r")
+shader_parameter/CAST_COLOR = Color(0, 0.0156863, 0.101961, 1)
+shader_parameter/fast_noise = SubResource("NoiseTexture2D_lf3p4")
+shader_parameter/speed = Vector2(0.01, 0.02)
+shader_parameter/wave_strength = 1.5
+shader_parameter/scale_y = 450.0
+shader_parameter/y_zoom = 1.77156
+shader_parameter/surface_speed = 3.0
+shader_parameter/surface_frequency = 10.0
+shader_parameter/surface_amplitude = 0.02
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_j8vpj"]
+
+[node name="Stage" type="Node2D"]
+script = ExtResource("1_kumio")
+
+[node name="Player" parent="." instance=ExtResource("19_kumio")]
+position = Vector2(39, 156)
+max_mana = 200
+
+[node name="TileMap" type="TileMapLayer" parent="."]
+z_index = -5
+tile_map_data = PackedByteArray("AAATAAYADwABAAEAAAASAAgADwABAAIAAAASAAcADwABAAEAAAASAAYADwABAAEAAAARAAgADwABAAIAAAARAAcADwABAAEAAAARAAYADwABAAEAAAAnAAgADwACAAIAAAAnAAcADwACAAEAAAAnAAYADwACAAEAAAAnAAUADwACAAAAAAAmAAgADwABAAIAAAAmAAcADwABAAEAAAAmAAYADwABAAEAAAAmAAUADwABAAAAAAAlAAgADwABAAIAAAAlAAcADwABAAEAAAAlAAYADwABAAEAAAAlAAUADwABAAAAAAAkAAgADwABAAIAAAAkAAcADwABAAEAAAAkAAYADwABAAEAAAAkAAUADwABAAAAAAAjAAgADwABAAIAAAAjAAcADwABAAEAAAAjAAYADwABAAEAAAAjAAUADwABAAAAAAAiAAgADwABAAIAAAAiAAcADwABAAEAAAAiAAYADwABAAEAAAAiAAUADwABAAAAAAAhAAgADwABAAIAAAAhAAcADwABAAEAAAAhAAYADwABAAEAAAAhAAUADwABAAAAAAAgAAgADwABAAIAAAAgAAcADwABAAEAAAAgAAYADwABAAEAAAAgAAUADwABAAAAAAAfAAgADwABAAIAAAAfAAcADwABAAEAAAAfAAYADwABAAEAAAAfAAUADwABAAAAAAAeAAgADwABAAIAAAAeAAcADwABAAEAAAAeAAYADwABAAEAAAAeAAUADwABAAAAAAAdAAgADwABAAIAAAAdAAcADwABAAEAAAAdAAYADwABAAEAAAAdAAUADwABAAAAAAAcAAgADwABAAIAAAAcAAcADwABAAEAAAAcAAYADwABAAEAAAAcAAUADwABAAAAAAAbAAgADwABAAIAAAAbAAcADwABAAEAAAAbAAYADwABAAEAAAAbAAUADwABAAAAAAAaAAgADwABAAIAAAAaAAcADwABAAEAAAAaAAYADwABAAEAAAAaAAUADwABAAAAAAAZAAgADwABAAIAAAAZAAcADwABAAEAAAAZAAYADwABAAEAAAAZAAUADwABAAAAAAAYAAgADwABAAIAAAAYAAcADwABAAEAAAAYAAYADwABAAEAAAAXAAgADwABAAIAAAAXAAcADwABAAEAAAAXAAYADwABAAEAAAAWAAgADwABAAIAAAAWAAcADwABAAEAAAAWAAYADwABAAEAAAAVAAgADwABAAIAAAAVAAcADwABAAEAAAAUAAgADwABAAIAAAAQAAgADwABAAIAAAAQAAcADwABAAEAAAAQAAYADwABAAEAAAAQAAUADwABAAAAAAAPAAgADwABAAIAAAAPAAcADwABAAEAAAAPAAYADwABAAEAAAAPAAUADwABAAAAAAAOAAgADwABAAIAAAAOAAcADwABAAEAAAAOAAYADwABAAEAAAAOAAUADwABAAAAAAANAAgADwABAAIAAAANAAcADwABAAEAAAANAAYADwABAAEAAAANAAUADwABAAAAAAAMAAgADwABAAIAAAAMAAcADwABAAEAAAAMAAYADwABAAEAAAAMAAUADwABAAAAAAALAAgADwABAAIAAAALAAcADwABAAEAAAALAAYADwABAAEAAAALAAUADwABAAAAAAAKAAgADwABAAIAAAAKAAcADwABAAEAAAAKAAYADwABAAEAAAAKAAUADwABAAAAAAAJAAgADwABAAIAAAAJAAcADwABAAEAAAAJAAYADwABAAEAAAAJAAUADwABAAAAAAAIAAgADwABAAIAAAAIAAcADwABAAEAAAAIAAYADwABAAEAAAAIAAUADwABAAAAAAAHAAgADwABAAIAAAAHAAcADwABAAEAAAAHAAYADwABAAEAAAAHAAUADwABAAAAAAAGAAgADwABAAIAAAAGAAcADwABAAEAAAAGAAYADwABAAEAAAAGAAUADwABAAAAAAAFAAgADwABAAIAAAAFAAcADwABAAEAAAAFAAYADwABAAEAAAAFAAUADwABAAAAAAAEAAgADwABAAIAAAAEAAcADwABAAEAAAAEAAYADwABAAEAAAAEAAUADwABAAAAAAADAAgADwABAAIAAAADAAcADwABAAEAAAADAAYADwABAAEAAAADAAUADwABAAAAAAACAAgADwABAAIAAAACAAcADwABAAEAAAACAAYADwABAAEAAAACAAUADwABAAAAAAABAAgADwABAAIAAAABAAcADwABAAEAAAABAAYADwABAAEAAAABAAUADwABAAAAAAAAAAgADwAAAAIAAAAAAAcADwAAAAEAAAAAAAYADwAAAAEAAAAAAAUADwAAAAAAAAACAAQACAAGAAMAAAAEAAQACAAGAAMAAAADAAQACAAHAAMAAAAFAAQACAAJAAMAAAAZAAQACAAJAAUAAAAMAAMACAAAAAEAAAAPAAQACAABAAMAAAAhAAQACAAGAAkAAAAhAAMACAAHAAgAAAARAAUADwABAAAAAAASAAUADwABAAAAAAATAAUADwABAAAAAAAUAAUADwABAAAAAAAVAAUADwABAAAAAAAWAAUADwABAAAAAAAXAAUADwABAAAAAAAYAAUADwABAAAAAAAVAAYADwABAAEAAAAUAAYADwABAAEAAAATAAcADwABAAEAAAAUAAcADwABAAEAAAATAAgADwABAAIAAAAWAAQACwAAAAAAAAAMAAQACAAAAAIAAAAaAAMACAAKAAQAAAAaAAQACAAKAAUAAAA=")
+tile_set = ExtResource("93_0ulml")
+rendering_quadrant_size = 128
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("58_yjkv6")
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("59_7e416")]
+offset_bottom = 100.0
+script = null
+
+[node name="ErrorLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -104.0
+offset_right = 122.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("56_ioufq")
+text = "Enemy Out of Range"
+horizontal_alignment = 1
+
+[node name="WeaponPanel" parent="CanvasLayer" instance=ExtResource("60_fyh0v")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -111.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HealthBarContainer" parent="CanvasLayer" instance=ExtResource("61_vfk86")]
+
+[node name="SkillBarUI" parent="CanvasLayer" groups=["skill_bar"] instance=ExtResource("62_w1qk2")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -78.0
+offset_right = 117.296
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="WorldBoundary" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WorldBoundary"]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_v3mv3")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="WorldBoundary"]
+position = Vector2(1364, 1)
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary/StaticBody2D2"]
+shape = SubResource("WorldBoundaryShape2D_3slpx")
+
+[node name="point1" type="Node2D" parent="."]
+position = Vector2(388, 132)
+
+[node name="point2" type="Node2D" parent="."]
+position = Vector2(650, 127)
+
+[node name="Boat" parent="." instance=ExtResource("20_eppev")]
+z_index = -1
+position = Vector2(1321, 197)
+interactable = true
+
+[node name="GuideTrigger" parent="." instance=ExtResource("104_lii35")]
+z_index = 199
+position = Vector2(623, 150)
+guide_text = "A, D to move left, right"
+
+[node name="GuideTrigger2" parent="." instance=ExtResource("104_lii35")]
+z_index = 199
+position = Vector2(1206, 150)
+guide_text = "Get on the boat and press F to sail"
+
+[node name="GuideTrigger3" parent="." instance=ExtResource("104_lii35")]
+z_index = 199
+position = Vector2(790, 150)
+guide_text = "Space to jump\\nZ to dash"
+
+[node name="BladeCollectable" parent="." instance=ExtResource("18_kumio")]
+position = Vector2(1016, 155)
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(767, 0)
+script = SubResource("GDScript_3dlnu")
+
+[node name="SkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(417, -11)
+scale = Vector2(26.125, 20.531)
+texture = ExtResource("19_dp5o0")
+
+[node name="SeaSkySprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-2, -35)
+scale = Vector2(2, 2.26563)
+texture = ExtResource("2_pxy07")
+centered = false
+
+[node name="BigReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(207.5, 169.5)
+sprite_frames = SubResource("SpriteFrames_5qexg")
+script = SubResource("GDScript_i1ywc")
+
+[node name="MediumReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(376.5, 165.5)
+sprite_frames = SubResource("SpriteFrames_oam0d")
+script = SubResource("GDScript_i1ywc")
+
+[node name="SmallReflectionSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(57.5, 165.5)
+sprite_frames = SubResource("SpriteFrames_c6f77")
+script = SubResource("GDScript_i1ywc")
+
+[node name="ParallaxLayerCloud" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-1, -94)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(580, 0)
+script = SubResource("GDScript_gd86g")
+
+[node name="BigClouds" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud"]
+position = Vector2(0, 111)
+scale = Vector2(1.38588, 1.2)
+texture = ExtResource("32_o76ta")
+centered = false
+
+[node name="ParallaxLayerCloud2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -16)
+motion_scale = Vector2(0.001, 0.8)
+motion_mirroring = Vector2(510, 0)
+script = SubResource("GDScript_85cek")
+
+[node name="SmallClouds1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(165, 111)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("33_0rfg2")
+centered = false
+
+[node name="SmallClouds2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(12, 60)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("34_42hpr")
+centered = false
+
+[node name="SmallClouds3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayerCloud2"]
+position = Vector2(300, 20)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("35_wprx8")
+centered = false
+
+[node name="Water" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dp5o0")
+position = Vector2(750, 349.375)
+scale = Vector2(2868, 283.25)
+texture = SubResource("CanvasTexture_j8vpj")
+script = ExtResource("33_6h1n3")

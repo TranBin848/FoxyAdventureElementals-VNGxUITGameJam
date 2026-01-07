@@ -1,21 +1,22 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://bh7ca4qndbgby"]
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://bh7ca4qndbgby"]
 
 [ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_088v6"]
-[ext_resource type="PackedScene" uid="uid://cnhjct6qvq77d" path="res://scenes/skills/buff/earth/burrow.tscn" id="1_w6jen"]
 
 [resource]
 script = ExtResource("1_088v6")
 name = "Burrow"
 elemental_type = 5
+level = 1
 cooldown = 90.0
 duration = 15.0
 hit_delay = 0.0
 ground_targeted = false
 texture_path = "res://assets/skills/icons_skill/48x48/skill_icons26.png"
 animation_name = "burrow"
-projectile_scene = ExtResource("1_w6jen")
+projectile_scene_path = "res://scenes/skills/buff/earth/burrow.tscn"
+area_scene_path = ""
 speed = 0.0
-damage = 0
+damage = 10.0
 mana = 20
 type = "buff"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

@@ -1,12 +1,13 @@
-[gd_resource type="TileSet" load_steps=114 format=3 uid="uid://bui3wquutm1yg"]
+[gd_resource type="TileSet" load_steps=115 format=3 uid="uid://bui3wquutm1yg"]
 
 [ext_resource type="Texture2D" uid="uid://bnmuiut4rgvqk" path="res://assets/terrain_plus/Animated Sprites/GandalfHardcore Animated Water Tiles.png" id="1_4sxbq"]
 [ext_resource type="Texture2D" uid="uid://ca4mpbifj2vre" path="res://assets/terrain_plus/Floor Tiles2.png" id="2_pt7g2"]
 [ext_resource type="PackedScene" uid="uid://b6urbbuhgc0x7" path="res://levels/objects/sensor_spike/sensor_spike.tscn" id="3_gye4x"]
 [ext_resource type="PackedScene" uid="uid://bbatj0xwa0jd4" path="res://levels/objects/coin/coin.tscn" id="4_hekoh"]
 [ext_resource type="PackedScene" uid="uid://bx4xi7ffye88x" path="res://levels/objects/platforms/platform.tscn" id="5_bi7ob"]
-[ext_resource type="PackedScene" uid="uid://bhf2ehr61a3ks" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="6_tg65d"]
+[ext_resource type="PackedScene" uid="uid://5e7xk2njusm2" path="res://scenes/enemies/minions/barrel/barrel.tscn" id="6_tg65d"]
 [ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/bottom_spike.tscn" id="7_fub6n"]
+[ext_resource type="PackedScene" uid="uid://b4ltylwr220cw" path="res://levels/objects/spikes/right_spike.tscn" id="8_pt76g"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="9_tterj"]
 [ext_resource type="PackedScene" uid="uid://bons01cnqio5e" path="res://levels/objects/spikes/left_spike.tscn" id="10_tg65d"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="11_pr4o7"]
@@ -244,6 +245,7 @@ texture_region_size = Vector2i(32, 32)
 resource_name = "object"
 scenes/1/scene = ExtResource("3_gye4x")
 scenes/2/scene = ExtResource("7_fub6n")
+scenes/3/scene = ExtResource("8_pt76g")
 scenes/4/scene = ExtResource("9_tterj")
 scenes/5/scene = ExtResource("10_tg65d")
 scenes/7/scene = ExtResource("11_pr4o7")

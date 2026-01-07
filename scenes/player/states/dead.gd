@@ -9,8 +9,7 @@ func _enter():
 
 func _update(delta: float):
 	if update_timer(delta):
-		GameManager.isReloadScene = true
-		GameManager.change_stage(get_tree().current_scene.get_scene_file_path())
+		GameManager.on_player_death()
 
 # Ignore take damage
 func take_damage(direction: Variant, _damage: int = 1) -> void:

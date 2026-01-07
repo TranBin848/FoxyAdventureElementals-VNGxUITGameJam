@@ -2,6 +2,7 @@ extends ProjectileBase
 class_name waterBlastProjectile
 
 func _ready() -> void:
+	AudioManager.play_sound("skill_water_blast")
 	if has_node("HitArea2D"):
 		var hit_area: HitArea2D = $HitArea2D
 		hit_area.damage = damage

@@ -11,5 +11,5 @@ description = "Increases your maximum mana"
 icon = ExtResource("1_mvpm0")
 value_per_point = 5
 max_points = 99
-cost_per_point = 1
+cost_per_point = 5
 metadata/_custom_type_script = "uid://c2fs7mx2niu76"

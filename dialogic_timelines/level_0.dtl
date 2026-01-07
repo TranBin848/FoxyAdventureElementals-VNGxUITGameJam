@@ -1,0 +1,19 @@
+do GameManager.player_act("toggle_actor_state")
+do GameManager.player_act("change_animation", "faint")
+Foxy: Ahh! Đầu mình đau quá!
+do GameManager.player_act("change_animation", "idle")
+Foxy: Mình đang ở đâu thế này?
+Foxy: ...
+Foxy: Mà quan trọng hơn!! Mình là ai?!
+Foxy: Ôi không!! Sao không thể nhớ được gì hết vậy?!
+Foxy: Thôi thì thử đi xung quanh xem sao.
+do GameManager.player_act("move_to_scene_point", "point1")
+# #[wait time="1.0"]
+Foxy: Không có ai xung quanh cả! Trong túp lều cũng không có!
+Foxy: Nơi này nhìn hoang tàn quá...
+Foxy: Nhưng mình có cảm giác đã mất đi thứ gì đó quan trọng! Là thứ gì vậy?! Ahh đầu tôi!
+Foxy: ...
+do GameManager.player_act("move_to_scene_point", "point2")
+Foxy: Đi vòng quanh cũng không tìm thấy tí nhu yếu phẩm nào. Chắc không thể sống ở nơi này được.
+Foxy: Có lẽ phải tìm xem có cách nào rời khỏi đây không rồi!
+do GameManager.player_act("toggle_actor_state")

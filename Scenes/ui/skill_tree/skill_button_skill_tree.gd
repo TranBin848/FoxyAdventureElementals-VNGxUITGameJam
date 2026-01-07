@@ -10,7 +10,7 @@ class_name SkillButtonNode
 @onready var line_2d: Line2D = $Line2D
 
 @export var skill: Skill
-@export var max_level: int = 3
+@export var max_level: int = 10
 @export var video_stream: VideoStream = null
 
 var children: Array[SkillButtonNode] = []
@@ -90,7 +90,7 @@ func refresh_visual() -> void:
 	print("🔄 refresh_visual() called for %s" % name)
 	
 	if not skill:
-		print("  ⚠️ No skill assigned")
+		print("  ⚠️ No skill assigned")
 		return
 	
 	if skill.texture_path:
@@ -100,24 +100,36 @@ func refresh_visual() -> void:
 	var level = SkillTreeManager.get_level(skill.name)
 	var stacks = SkillTreeManager.get_stacks(skill.name)
 	
-	print("  %s: unlocked=%s, level=%d, stacks=%d" % [skill.name, is_unlocked, level, stacks])
+	print("  %s: unlocked=%s, level=%d, stacks=%d" % [skill.name, is_unlocked, level, stacks])
 	
-	level_label.text = "Lv.%d/%d" % [level, max_level]
-	stack_label.text = str(stacks)
+	# --- NEW LOGIC START ---
+	if skill.get("type") == "ultimate":
+		# Hide labels for ultimate skills
+		level_label.visible = false
+		stack_label.visible = false
+		panel.visible = false
+	else:
+		# Show and update labels for normal skills
+		level_label.visible = true
+		stack_label.visible = true
+		level_label.text = "Lv.%d/%d" % [level, max_level]
+		stack_label.text = str(stacks)
+	# --- NEW LOGIC END ---
 	
-	#disabled = not is_unlocked and stacks == 0
 	panel.show_behind_parent = is_unlocked
 	tooltip_text = skill.name
 	
-	print("  disabled set to: %s" % disabled)
+	print("  disabled set to: %s" % disabled)
 	
 	_update_line_color()
-
 func _update_line_color() -> void:
 	if not (get_parent() is SkillButtonNode):
 		return
 	
 	var parent_node = get_parent() as SkillButtonNode
+	if parent_node.skill and parent_node.skill.get("type") == "ultimate":
+		line_2d.visible = false
+		return
 	if SkillTreeManager.is_unlocked(parent_node.skill.name):
 		line_2d.default_color = UNLOCKED_COLOR
 		line_2d.width = 4

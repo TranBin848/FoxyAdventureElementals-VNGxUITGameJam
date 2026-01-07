@@ -8,7 +8,6 @@ signal phase_transition_started
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $Direction/AnimatedSprite2D
-@onready var health_bar: ProgressBar = $UI/Control/ProgressBar
 @onready var label: Label = $Label
 
 @export var atk_range: float = 200
@@ -26,10 +25,14 @@ var ground_y: float = 0.0  # Độ cao mặt đất ban đầu
 var original_x: float = 0.0  # Vị trí x ban đầu để di chuyển qua lại
 var spawned_spawners: Array = []  # Lưu các spawner đã tạo
 
+signal health_percent_changed(new_value_percent: float)
+signal phase_changed(new_phase_index: int)
+signal fight_started
+signal boss_died
+
 enum Phase {
 	FLY,
-	CUTSCENE,
-	GROUND
+	CUTSCENE
 }
 
 var skills_phase_1 = {
@@ -41,11 +44,6 @@ var skills_phase_1 = {
 # Phase 2: cutscene transition (không có skill, chỉ cutscene)
 var skills_phase_2 = {}
 
-# Phase 3: charge -> fly skill -> hạ xuống -> charge lại
-var skills_phase_3 = {
-	0: "charge"
-}
-
 var current_phase: Phase = Phase.FLY
 
 var skill_cd_timer = 0
@@ -53,9 +51,9 @@ var cur_skill = 0
 
 func _ready() -> void:
 	super._ready()
-	fsm = FSM.new(self, $States, $States/Inactive)
+	fsm = FSM.new(self, $States, $States/Idle)
 	ground_y = global_position.y  # Lưu độ cao mặt đất
-	fly_target_y = global_position.y - 150  # Lưu độ cao bay
+	fly_target_y = global_position.y - 200 #độ cao bay
 	original_x = global_position.x  # Lưu vị trí x ban đầu
 	
 	add_to_group("enemies")
@@ -75,8 +73,6 @@ func use_skill() -> void:
 			skill_dict = skills_phase_1
 		Phase.CUTSCENE:
 			skill_dict = skills_phase_2
-		Phase.GROUND:
-			skill_dict = skills_phase_3
 
 	if skill_dict.is_empty():
 		return
@@ -95,14 +91,12 @@ func take_damage(damage: int) -> void:
 	
 	flash_corountine()
 	var health_percent = (float(health) / max_health) * 100
-	health_bar.value = health_percent
 	
-	# Phase 1 -> Phase 2: khi máu <= 66.67%
-	if health_percent <= 66.67 and current_phase == Phase.FLY:
+	health_percent_changed.emit(health_percent)
+	
+	# Phase FLY -> Phase CUTSCENE: khi máu <= 33.33%
+	if health_percent <= 33.33 and current_phase == Phase.FLY:
 		enter_phase_cutscene()
-	# Phase 2 -> Phase 3: khi máu <= 33.33% (sau cutscene)
-	elif health_percent <= 33.33 and current_phase == Phase.CUTSCENE:
-		enter_phase_ground()
 
 func enter_phase_cutscene() -> void:
 	current_phase = Phase.CUTSCENE
@@ -118,27 +112,6 @@ func enter_phase_cutscene() -> void:
 		fsm.change_state(fsm.states.cutscene1)
 	else:
 		print("Error: cutscene1 state not found!")
-		# Nếu không có state, tự động chuyển phase
-		await get_tree().create_timer(5.0).timeout
-		enter_phase_ground()
-
-func enter_phase_ground() -> void:
-	current_phase = Phase.GROUND
-	cur_skill = 0
-	
-	print("Entering Phase GROUND")
-	
-	# Tắt va chạm bay / bật va chạm đất nếu có
-	collision.disabled = false
-	
-	# Chuyển sang state spam_enemies để triệu hồi spawner
-	if fsm.states.has("spamenemies"):
-		fsm.change_state(fsm.states.spamenemies)
-	else:
-		print("Error: spamenemies state not found!")
-		# Fallback: chuyển sang charge
-		if fsm.states.has("charge"):
-			fsm.change_state(fsm.states.charge)
 
 func _spawn_star_spawners(active: bool = true) -> void:
 	if spawner_scene == null:
@@ -348,8 +321,11 @@ func flash_corountine() -> void:
 	animated_sprite_2d.modulate = Color.WHITE  # go back to normal	
 
 func start_fight() -> void:
-	health_bar.show()
 	is_fighting = true
+
+func start_boss_fight() -> void:
+	fight_started.emit()
+	phase_changed.emit(0)
 
 func handle_dead() -> void:
 	pass

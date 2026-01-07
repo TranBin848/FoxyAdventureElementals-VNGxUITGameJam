@@ -2,7 +2,10 @@ extends Node2D
 
 func _ready() -> void:
 	var skill_names = ["Stun Shot", "Thunderbolt", "Heal Over Time", "Thousand Swords", "Comet Rain"]
-	ThousandSwords
+	
+	var player = get_tree().get_first_node_in_group("player")
+	(player as Player).collect_blade()
+	(player as Player).collect_wand()
 	for i in skill_names.size():
 		# 🔥 Validate + equip
 		var skill = SkillDatabase.get_skill_by_name(skill_names[i])

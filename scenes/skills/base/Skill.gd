@@ -11,14 +11,14 @@ class_name Skill
 @export var ground_targeted: bool = false  # Set TRUE for CometRain
 @export var texture_path: String
 @export var animation_name: String
-@export var projectile_scene: PackedScene = null
-@export var area_scene: PackedScene = null
+@export var projectile_scene_path: String = ""
+@export var area_scene_path: String = ""
 @export var speed: float = 250
 @export var damage: float = 10.0
 @export var sound_effect: AudioStream = null
 @export var mana: int = 1
 
-@export var type: String = "single_shot"  # "single_shot", "multi_shot", "radial", "area", "buff"
+@export var type: String = "single_shot"  # "single_shot", "multi_shot", "radial", "area", "buff", "ultimate"
 
 # ✅ LEVEL SCALING (auto-applies in getters)
 func get_scaled_cooldown() -> float:

@@ -13,18 +13,18 @@ var center_position: Vector2
 var is_active: bool = false
 
 func _ready() -> void:
-	# Place breath in front of player, based on direction.x
-	var dir_x := direction.x
-	if dir_x == 0:
-		dir_x = 1  # default right if not set
+	# 1. Determine direction
+	var dir_sign := signf(direction.x)
+	if dir_sign == 0: dir_sign = 1.0
 
-	var forward_offset := Vector2(length * dir_x, offset_y)
-	global_position += forward_offset
-	center_position = global_position
+	# 2. FLIP THE OBJECT (Sprite + Hitbox)
+	scale.x = dir_sign
 	
-	# Flip sprite according to facing direction
+	# Apply offsets
+	global_position.y += offset_y
+
+	# 4. Play animation (No need to set flip_h anymore)
 	if sprite:
-		sprite.flip_h = dir_x < 0
 		sprite.play(breath_anim)
 	
 	# Enable hit area on this projectile

@@ -1,21 +1,22 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cc6qdlelt05ae"]
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://cc6qdlelt05ae"]
 
 [ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_3ptjf"]
-[ext_resource type="PackedScene" uid="uid://c5gb2h683tnyv" path="res://scenes/skills/area/earth/cometRain.tscn" id="1_kausm"]
 
 [resource]
 script = ExtResource("1_3ptjf")
 name = "Comet Rain"
 elemental_type = 5
+level = 1
 cooldown = 30.0
 duration = 10.0
 hit_delay = 0.0
 ground_targeted = false
 texture_path = "res://assets/skills/icons_skill/48x48/skill_icons28.png"
 animation_name = ""
-area_scene = ExtResource("1_kausm")
+projectile_scene_path = ""
+area_scene_path = "res://scenes/skills/area/earth/cometRain.tscn"
 speed = 0.0
-damage = 0
+damage = 10.0
 mana = 30
 type = "area"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

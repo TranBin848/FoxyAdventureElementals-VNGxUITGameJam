@@ -35,20 +35,26 @@ func consume_skill_use(skill_name: String) -> void:
 	_stacks[skill_name] = current_stacks - 1
 	stack_changed.emit(skill_name, _stacks[skill_name])
 	
-	print("📉 Used 1 stack of %s (Remaining: %d)" % [skill_name, _stacks[skill_name]])
+	print("Used 1 stack of %s (Remaining: %d)" % [skill_name, _stacks[skill_name]])
 
 	# 4. Auto-Unequip if we just hit 0
 	if _stacks[skill_name] <= 0:
 		var slot_index = find_skill_slot(skill_name)
 		if slot_index != -1:
 			unequip_skill(slot_index)
-			print("🗑️ %s ran out! Unequipping..." % skill_name)
+			print("%s ran out! Unequipping..." % skill_name)
 
 func collect_skill(skill_name: String, stack_amount: int = 1) -> void:
 	"""Called when player picks up a skill in the world"""
 	if not SkillDatabase.get_skill_by_name(skill_name):
 		push_error("Unknown skill: %s" % skill_name)
 		return
+		
+	if not _skill_data.has(skill_name):
+		_skill_data[skill_name] = {
+			"level": 1,        # Start at level 1 (not 0!)
+			"unlocked": false  # Has stacks but not permanently unlocked
+		}
 		
 	if get_stacks(skill_name) == 0 and stack_amount > 0:
 		skill_discovered.emit(skill_name)
@@ -85,7 +91,7 @@ func unlock_skill(skill_name: String, stack_cost: int = 0) -> bool:
 	_remove_stacks(skill_name, stack_cost)
 	_set_unlocked(skill_name, true)
 	skill_unlocked.emit(skill_name)
-	_emit_state()
+	state_changed.emit(get_state())
 	return true
 
 func upgrade_skill(skill_name: String, stack_cost: int) -> bool:
@@ -103,7 +109,7 @@ func upgrade_skill(skill_name: String, stack_cost: int) -> bool:
 	_remove_stacks(skill_name, stack_cost)
 	_set_level(skill_name, current_level + 1)
 	skill_leveled_up.emit(skill_name, current_level + 1)
-	_emit_state()
+	state_changed.emit(get_state())
 	return true
 
 func equip_skill(slot_index: int, skill_name: String) -> bool:
@@ -121,7 +127,7 @@ func equip_skill(slot_index: int, skill_name: String) -> bool:
 	
 	_skillbar[slot_index] = skill_name
 	skill_equipped.emit(slot_index, skill_name)
-	_emit_state()
+	state_changed.emit(get_state())
 	return true
 
 func unequip_skill(slot_index: int) -> bool:
@@ -135,7 +141,7 @@ func unequip_skill(slot_index: int) -> bool:
 	
 	_skillbar[slot_index] = null
 	skill_unequipped.emit(slot_index, skill_name)
-	_emit_state()
+	state_changed.emit(get_state())
 	return true
 
 # --- PUBLIC QUERIES (Read-only access) ---
@@ -200,21 +206,10 @@ func _set_level(skill_name: String, level: int) -> void:
 		_skill_data[skill_name] = {"level": 1, "unlocked": false}
 	_skill_data[skill_name].level = level
 
-func _emit_state() -> void:
-	"""Emit full state for components that need it"""
-	state_changed.emit(get_state())
-
-# --- SAVE/LOAD ---
-
 func save_data() -> Dictionary:
-	print("💾 SAVING SkillTreeManager...")
-	print("  - Skills unlocked: %d" % _skill_data.size())
-	print("  - Total stacks: %d" % _stacks.size())
-	print("  - Skillbar: %s" % str(_skillbar))
-	
 	return {
 		"skill_data": _skill_data.duplicate(true),
-		"skillbar": _skillbar.duplicate(),  # Save skill names directly
+		"skillbar": _skillbar.duplicate(),
 		"stacks": _stacks.duplicate(),
 		"history": _skills_discovered_history.duplicate(),
 		"coins": _coins
@@ -222,27 +217,36 @@ func save_data() -> Dictionary:
 
 func load_data(data: Dictionary) -> void:
 	if data.is_empty():
-		print("📂 No save data to load")
 		return
 	
 	print("📂 LOADING SkillTreeManager...")
+	
+	# 1. State Replacement (Silent)
+	# We update internal variables directly without triggering logic functions
+	# This prevents individual signals (equipped, stack_changed) from firing during the loop
 	
 	_skill_data = data.get("skill_data", {}).duplicate(true)
 	_stacks = data.get("stacks", {}).duplicate()
 	_coins = data.get("coins", 0)
 	_skills_discovered_history = data.get("history", {}).duplicate()
 	
-	# Load skillbar - expects skill names (String)
+	# 2. Skillbar Restoration
+	# We clear and fill the array. We do NOT call equip_skill() here, 
+	# because we don't want runtime side effects during a load.
+	_skillbar.fill(null)
 	var saved_bar = data.get("skillbar", [])
+	
 	for i in range(min(saved_bar.size(), _skillbar.size())):
 		var skill_name = saved_bar[i]
 		
-		# Validate: must be String and unlocked
-		if skill_name is String and skill_name != "" and is_unlocked(skill_name):
+		# Validation: Ensure skill actually exists in DB
+		if skill_name is String and SkillDatabase.get_skill_by_name(skill_name):
 			_skillbar[i] = skill_name
-			print("  ✅ Loaded slot %d: %s" % [i, skill_name])
-		elif skill_name != null:
-			push_warning("  ⚠️ Skipped slot %d: '%s' (not unlocked or invalid)" % [i, str(skill_name)])
+		else:
+			_skillbar[i] = null
+			
+	print("✅ Load Complete. Syncing UI...")
 	
-	print("  - Loaded %d skills, %d stacks" % [_skill_data.size(), _stacks.size()])
-	_emit_state()
+	# 3. The "Single Source of Truth" Handoff
+	# Emit ONE signal telling all UI components to look at the new data.
+	state_changed.emit(get_state())

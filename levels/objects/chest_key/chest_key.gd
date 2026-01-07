@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func collect_key():
 	GameManager.inventory_system.add_key(1)
-	AudioManager.play_sound("item_collect")
+	AudioManager.play_sound("key_collect")
 	queue_free()
 
 func _on_interaction_available() -> void:

@@ -5,11 +5,11 @@ extends Sprite2D
 # 5 đường dẫn icon nguyên tố 48x48
 # TODO: Thay đổi các path này thành đường dẫn icon thật của bạn
 const ELEMENT_ICONS = {
-	"metal": "res://assets/skills/icon element/Metal.png",  # Kim
-	"wood": "res://assets/skills/icon element/wood.png",    # Mộc
-	"water": "res://assets/skills/icon element/Water.png",  # Thủy
-	"fire": "res://assets/skills/icon element/Fire.png",    # Hỏa
-	"earth": "res://assets/skills/icon element/Earth.png"   # Thổ
+	"metal": "res://assets/skills/icon element/Metal_v2.png",  # Kim
+	"wood": "res://assets/skills/icon element/Wood_v2.png",    # Mộc
+	"water": "res://assets/skills/icon element/Water_v2.png",  # Thủy
+	"fire": "res://assets/skills/icon element/Fire_v2.png",    # Hỏa
+	"earth": "res://assets/skills/icon element/Earth_v2.png"   # Thổ
 }
 
 func set_element(element_key: String) -> bool:

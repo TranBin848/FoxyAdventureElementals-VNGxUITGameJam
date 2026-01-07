@@ -1,0 +1,398 @@
+[gd_scene load_steps=58 format=3 uid="uid://bulkbnhholp3f"]
+
+[ext_resource type="Script" uid="uid://7jstni61ay8x" path="res://scenes/enemies/king_crab_boss/boss.gd" id="1_3jl1k"]
+[ext_resource type="Texture2D" uid="uid://cyd12mmn6gdb0" path="res://assets/King_Crab/King_Crab_9.png" id="2_fh3hm"]
+[ext_resource type="PackedScene" uid="uid://2n5igjmuko3r" path="res://scenes/enemies/paritcles/metal_particle.tscn" id="2_k0wpd"]
+[ext_resource type="PackedScene" uid="uid://c7befci0qfbmy" path="res://scenes/enemies/paritcles/wood_particle.tscn" id="3_gkpjl"]
+[ext_resource type="Texture2D" uid="uid://c5xpu72l3gxsv" path="res://assets/King_Crab/King_Crab_10.png" id="3_xr7g7"]
+[ext_resource type="Texture2D" uid="uid://cqf7rppdl0t5w" path="res://assets/King_Crab/King_Crab_11.png" id="4_g3b6p"]
+[ext_resource type="PackedScene" uid="uid://b6htfcmfseu2c" path="res://scenes/enemies/paritcles/dirt_particle.tscn" id="4_wrilv"]
+[ext_resource type="PackedScene" uid="uid://d0llkjwu21gqr" path="res://scenes/enemies/paritcles/water_particle.tscn" id="5_22x15"]
+[ext_resource type="Texture2D" uid="uid://bf2xpbo3hfkcy" path="res://assets/King_Crab/King_Crab_12.png" id="5_bpmbe"]
+[ext_resource type="PackedScene" uid="uid://sa7niutr8ffa" path="res://scenes/enemies/paritcles/fire_particle.tscn" id="6_2is87"]
+[ext_resource type="Texture2D" uid="uid://c1hlrmwm4tw5k" path="res://assets/King_Crab/King_Crab_13.png" id="6_rhcfd"]
+[ext_resource type="Texture2D" uid="uid://darupinmdtse8" path="res://assets/King_Crab/King_Crab_1.png" id="7_p2itk"]
+[ext_resource type="Texture2D" uid="uid://diy043qrr5484" path="res://assets/King_Crab/King_Crab_2.png" id="8_e0g6l"]
+[ext_resource type="Texture2D" uid="uid://b100xpmlhnqqo" path="res://assets/King_Crab/King_Crab_3.png" id="9_lbx4o"]
+[ext_resource type="Texture2D" uid="uid://b2ttvwmwkc406" path="res://assets/King_Crab/King_Crab_4.png" id="10_200mk"]
+[ext_resource type="Texture2D" uid="uid://oknrjbum3s3l" path="res://assets/King_Crab/King_Crab_5.png" id="11_w2egv"]
+[ext_resource type="Texture2D" uid="uid://dhgpf7qpnmcbp" path="res://assets/King_Crab/King_Crab_6.png" id="12_1rml4"]
+[ext_resource type="Texture2D" uid="uid://dpd4ftbhrpme1" path="res://assets/King_Crab/King_Crab_7.png" id="13_5alav"]
+[ext_resource type="Texture2D" uid="uid://ddunge53dx5ai" path="res://assets/King_Crab/King_Crab_8.png" id="14_vjhg0"]
+[ext_resource type="Texture2D" uid="uid://d3hyl6avqr1ek" path="res://assets/King_Crab/King_Crab_14.png" id="15_rxstk"]
+[ext_resource type="Texture2D" uid="uid://b72p5eqaq80ss" path="res://assets/King_Crab/King_Crab_15.png" id="16_8xyni"]
+[ext_resource type="Texture2D" uid="uid://b18unk600vxvy" path="res://assets/King_Crab/King_Crab_16.png" id="17_o477l"]
+[ext_resource type="Texture2D" uid="uid://dqgoeiwjsfup3" path="res://assets/King_Crab/King_Crab_17.png" id="18_x2jn8"]
+[ext_resource type="Texture2D" uid="uid://8x5m5w0fj7c8" path="res://assets/King_Crab/King_Crab_18.png" id="19_63bdl"]
+[ext_resource type="Texture2D" uid="uid://v33mwbyrh22o" path="res://assets/King_Crab/King_Crab_19.png" id="20_yq2fy"]
+[ext_resource type="Texture2D" uid="uid://ddbax4ue3mef0" path="res://assets/King_Crab/King_Crab_20.png" id="21_jaecq"]
+[ext_resource type="Texture2D" uid="uid://c05gr7s3ysoxf" path="res://assets/King_Crab/King_Crab_21.png" id="22_4mcwp"]
+[ext_resource type="Texture2D" uid="uid://cky3y4hbssqqu" path="res://assets/King_Crab/King_Crab_22.png" id="23_x0581"]
+[ext_resource type="Texture2D" uid="uid://c5ti15323v5te" path="res://assets/King_Crab/King_Crab_23.png" id="24_tobdt"]
+[ext_resource type="Texture2D" uid="uid://c5sqexv4tl2cw" path="res://assets/King_Crab/King_Crab_24.png" id="25_vhduq"]
+[ext_resource type="Texture2D" uid="uid://csbe8xs87d8to" path="res://assets/King_Crab/King_Crab_25.png" id="26_ylj3j"]
+[ext_resource type="Texture2D" uid="uid://cc511q48y56lg" path="res://assets/King_Crab/King_Crab_26.png" id="27_7mawt"]
+[ext_resource type="Texture2D" uid="uid://dey7qtyrethq4" path="res://assets/King_Crab/King_Crab_27.png" id="28_vobl5"]
+[ext_resource type="Texture2D" uid="uid://dysuk1bfafggm" path="res://assets/King_Crab/King_Crab_28.png" id="29_570o7"]
+[ext_resource type="Texture2D" uid="uid://dsh3aotiqihg" path="res://assets/King_Crab/King_Crab_29.png" id="30_cpxqy"]
+[ext_resource type="Texture2D" uid="uid://ge1upmdjfbsf" path="res://assets/King_Crab/King_Crab_30.png" id="31_mlv1l"]
+[ext_resource type="Script" uid="uid://fghv33c31uqo" path="res://scenes/enemies/king_crab_boss/moving.gd" id="32_3jl1k"]
+[ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="32_e0g6l"]
+[ext_resource type="Texture2D" uid="uid://dbdtkoapescgw" path="res://assets/King_Crab/King_Crab_33.png" id="32_w2egv"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="32_xr7g7"]
+[ext_resource type="Script" uid="uid://epiedpy5442a" path="res://scenes/enemies/king_crab_boss/FireClaw.gd" id="33_bpmbe"]
+[ext_resource type="Script" uid="uid://cs8woms85hknp" path="res://scenes/enemies/king_crab_boss/spin.gd" id="33_fh3hm"]
+[ext_resource type="PackedScene" uid="uid://bgh51tc6bjjdv" path="res://scenes/enemies/king_crab_boss/king_crab_claw.tscn" id="33_lbx4o"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="34_200mk"]
+[ext_resource type="Script" uid="uid://u2ljgxpr1wtg" path="res://scenes/enemies/king_crab_boss/stun.gd" id="35_g3b6p"]
+[ext_resource type="Script" uid="uid://ykl4ijk6ptbg" path="res://scenes/enemies/king_crab_boss/sleep.gd" id="37_rhcfd"]
+[ext_resource type="Script" uid="uid://ch0s3e74g070t" path="res://scenes/enemies/king_crab_boss/brake.gd" id="38_p2itk"]
+[ext_resource type="Script" uid="uid://op6pss6c2qh4" path="res://scenes/enemies/king_crab_boss/retrieve_claw.gd" id="41_200mk"]
+[ext_resource type="Script" uid="uid://bmnx2xxwrq08j" path="res://scenes/enemies/king_crab_boss/hurt.gd" id="44_5alav"]
+[ext_resource type="Script" uid="uid://df18ficl3bsol" path="res://scenes/enemies/king_crab_boss/stand_up.gd" id="45_rxstk"]
+[ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="45_vjhg0"]
+[ext_resource type="Script" uid="uid://78xvnhlelcbr" path="res://scenes/enemies/king_crab_boss/knock_back.gd" id="51_gkpjl"]
+[ext_resource type="PackedScene" uid="uid://d0jkkqjvv3603" path="res://scenes/ui/boss_healthbar.tscn" id="53_wrilv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4c0df"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fh3hm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xr7g7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g3b6p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bpmbe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rhcfd")
+}],
+"loop": false,
+"name": &"brake",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_cpxqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_mlv1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_570o7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_vobl5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_w2egv")
+}],
+"loop": false,
+"name": &"die",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_rhcfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_rxstk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_8xyni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_o477l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_x2jn8")
+}],
+"loop": false,
+"name": &"fire claw",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_w2egv")
+}],
+"loop": true,
+"name": &"inactive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_cpxqy")
+}],
+"loop": true,
+"name": &"knock back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_p2itk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_e0g6l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lbx4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_200mk")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_7mawt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_vobl5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p2itk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_570o7")
+}],
+"loop": false,
+"name": &"recover",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_63bdl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_yq2fy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_jaecq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_4mcwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_x0581")
+}],
+"loop": false,
+"name": &"retrieve claw",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_w2egv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1rml4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5alav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vjhg0")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_w2egv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_vobl5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_570o7")
+}],
+"loop": false,
+"name": &"stand up",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_tobdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_vhduq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ylj3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_7mawt")
+}],
+"loop": true,
+"name": &"stun",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w2egv"]
+radius = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1rml4"]
+radius = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5alav"]
+radius = 25.0
+
+[node name="KingCrab4" type="CharacterBody2D"]
+collision_layer = 4104
+script = ExtResource("1_3jl1k")
+skill_cd = 5.0
+phase_order = Array[int]([5, 1])
+shader_path = "uid://doovon2v0i5dx"
+spike = 1.0
+sight = 200.0
+elemental_type = 1
+metadata/_custom_type_script = "uid://s4xx82espxdt"
+
+[node name="Particles" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="Metal" parent="Particles" instance=ExtResource("2_k0wpd")]
+position = Vector2(0, -26)
+
+[node name="Wood" parent="Particles" instance=ExtResource("3_gkpjl")]
+position = Vector2(0, -15)
+
+[node name="Earth" parent="Particles" instance=ExtResource("4_wrilv")]
+position = Vector2(0, 10)
+
+[node name="Water" parent="Particles" instance=ExtResource("5_22x15")]
+
+[node name="Fire" parent="Particles" instance=ExtResource("6_2is87")]
+position = Vector2(0, 5)
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_4c0df")
+animation = &"knock back"
+frame_progress = 0.609115
+
+[node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(45, 0)
+target_position = Vector2(20, 0)
+
+[node name="DownRayCast2D" type="RayCast2D" parent="Direction"]
+position = Vector2(45, 0)
+target_position = Vector2(0, 40)
+
+[node name="LeftDetectRayCast2D" type="RayCast2D" parent="Direction"]
+target_position = Vector2(-200, 0)
+collision_mask = 130
+
+[node name="RightDetectRayCast2D" type="RayCast2D" parent="Direction"]
+target_position = Vector2(200, 0)
+collision_mask = 130
+
+[node name="ClawFactory" type="Marker2D" parent="Direction"]
+position = Vector2(61, 0)
+script = ExtResource("32_e0g6l")
+product_packed_scene = ExtResource("33_lbx4o")
+target_container_name = &"Projectiles"
+metadata/_custom_type_script = "uid://b2o007yxvk7qa"
+
+[node name="HitArea2D" type="Area2D" parent="Direction"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("32_xr7g7")
+metadata/_custom_type_script = "uid://ccpqtop0obu2w"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HitArea2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_w2egv")
+debug_color = Color(0.575242, 0.0792793, 0, 0.42)
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("34_200mk")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_1rml4")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_5alav")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(25, -14)
+
+[node name="States" type="Node" parent="."]
+
+[node name="Walk" type="Node" parent="States"]
+script = ExtResource("32_3jl1k")
+
+[node name="Spin" type="Node" parent="States"]
+script = ExtResource("33_fh3hm")
+
+[node name="Stun" type="Node" parent="States"]
+script = ExtResource("35_g3b6p")
+
+[node name="FireClaw" type="Node" parent="States"]
+script = ExtResource("33_bpmbe")
+
+[node name="Inactive" type="Node" parent="States"]
+script = ExtResource("37_rhcfd")
+
+[node name="Brake" type="Node" parent="States"]
+script = ExtResource("38_p2itk")
+
+[node name="RetrieveClaw" type="Node" parent="States"]
+script = ExtResource("41_200mk")
+
+[node name="Dead" type="Node" parent="States"]
+script = ExtResource("44_5alav")
+
+[node name="StandUp" type="Node" parent="States"]
+script = ExtResource("45_rxstk")
+
+[node name="KnockBack" type="Node" parent="States"]
+script = ExtResource("51_gkpjl")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -25.0
+offset_top = -48.0
+offset_right = 24.0
+offset_bottom = -25.0
+text = "debug"
+
+[node name="Claw" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="MarginContainer" parent="UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("45_vjhg0")
+theme_override_constants/margin_top = 20
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Control"]
+custom_minimum_size = Vector2(500, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 100.0
+
+[node name="BossHealthbar" parent="UI" node_paths=PackedStringArray("boss_node") instance=ExtResource("53_wrilv")]
+boss_node = NodePath("../..")
+transition_duration = 2.0

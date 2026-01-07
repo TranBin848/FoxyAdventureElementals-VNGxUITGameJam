@@ -1,21 +1,22 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dalrpimaw8kqv"]
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://dalrpimaw8kqv"]
 
-[ext_resource type="PackedScene" uid="uid://b2se2pnqiq8ba" path="res://scenes/skills/projectiles/wood/wooden_clone.tscn" id="1_bojuf"]
 [ext_resource type="Script" uid="uid://4fu7i05ai1gp" path="res://scenes/skills/base/Skill.gd" id="1_hsbgc"]
 
 [resource]
 script = ExtResource("1_hsbgc")
 name = "Wooden Clone"
 elemental_type = 2
+level = 1
 cooldown = 20.0
 duration = 10.0
 hit_delay = 0.0
 ground_targeted = false
 texture_path = "res://assets/skills/icons_skill/48x48/skill_icons35.png"
 animation_name = ""
-projectile_scene = ExtResource("1_bojuf")
+projectile_scene_path = "res://scenes/skills/projectiles/wood/wooden_clone.tscn"
+area_scene_path = ""
 speed = 0.0
-damage = 0
+damage = 10.0
 mana = 20
 type = "single_shot"
 metadata/_custom_type_script = "uid://4fu7i05ai1gp"

@@ -1,70 +1,41 @@
 extends BlackEmperorState
 # State triệu hồi spawner - chỉ thực hiện 1 lần khi chuyển phase
 
+var boss_camera: Camera2D = null
+var boss_zone_camera: Camera2D = null
+
 func _enter() -> void:
-	# Boss bị stun trong suốt quá trình
+	print("=== State: SpamEnemies Enter ===")
+	
+	obj.change_animation("idle")
+	
+	# Kill tất cả tweens cũ
+	var all_tweens = obj.get_tree().get_processed_tweens()
+	print("SpamEnemies: Killing ", all_tweens.size(), " active tweens")
+	for t in all_tweens:
+		if t.is_valid():
+			t.kill()
+	
+	# Setup boss
+	obj.velocity = Vector2.ZERO
 	obj.is_stunned = true
 	obj.is_movable = false
-	obj.velocity = Vector2.ZERO
+	obj.set_physics_process(false)
 	
-	# === BAY VỀ TRUNG TÂM BOSS ZONE ===
-	await _fly_to_center()
+	# Tìm camera boss
+	if boss_camera == null:
+		boss_camera = obj.get_node_or_null("Camera2D")
+		print("SpamEnemies: Found boss_camera: ", boss_camera != null)
 	
-	# === SLOW MOTION + CAMERA ZOOM ===
-	Engine.time_scale = 0.3
+	# Tìm camera boss_zone
+	if boss_zone_camera == null and obj.boss_zone:
+		boss_zone_camera = obj.boss_zone.camera_2d
+		print("SpamEnemies: Found boss_zone_camera: ", boss_zone_camera != null)
 	
-	if obj.boss_zone and obj.boss_zone.camera_2d:
-		var boss_camera = obj.boss_zone.camera_2d
-		var original_zoom = boss_camera.zoom
-		var target_zoom = original_zoom * 1.5  # Zoom in 1.5x
-		
-		var tween = create_tween()
-		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-		tween.tween_property(boss_camera, "zoom", target_zoom, 0.5)
-		await tween.finished
+	# Bắt đầu sequence
+	await _start_spawn_sequence()
 	
-	# === ANIMATION TRIỆU HỒI ===
-	if obj.animated_sprite_2d:
-		if obj.animated_sprite_2d.sprite_frames.has_animation("summon"):
-			obj.animated_sprite_2d.play("summon")
-		elif obj.animated_sprite_2d.sprite_frames.has_animation("cast"):
-			obj.animated_sprite_2d.play("cast")
-		elif obj.animated_sprite_2d.sprite_frames.has_animation("hurt"):
-			obj.animated_sprite_2d.play("hurt")
-		elif obj.animated_sprite_2d.sprite_frames.has_animation("land"):
-			obj.animated_sprite_2d.play("land")
-	
-	# Đợi một chút để player thấy animation triệu hồi
-	await get_tree().create_timer(0.5 * Engine.time_scale).timeout
-	
-	# === SPAWN 5 SPAWNER VỚI HIỆU ỨNG FADE IN ===
-	_spawn_star_spawners_with_fade()
-	
-	# Đợi thêm một chút
-	await get_tree().create_timer(0.5 * Engine.time_scale).timeout
-	
-	# === ZOOM CAMERA VỀ 1.5 ===
-	if obj.boss_zone and obj.boss_zone.camera_2d:
-		var boss_camera = obj.boss_zone.camera_2d
-		var target_zoom = Vector2(1.5, 1.5)
-		
-		var tween = create_tween()
-		tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-		tween.tween_property(boss_camera, "zoom", target_zoom, 0.3)
-		await tween.finished
-	
-	# === TRẢ VỀ TỐC ĐỘ BÌNH THƯỜNG ===
-	Engine.time_scale = 1.0
-	
-	# === HẠ BOSS XUỐNG MẶT ĐẤT CHẬM CHẬM ===
-	if obj.animated_sprite_2d:
-		obj.animated_sprite_2d.play("land")
-	
-	await _land_on_ground()
-	
-	# === SAU KHI HẠ CÁNH XONG, KÍCH HOẠT SPAWNER ===
-	_activate_spawners()
-	
+	obj.set_physics_process(true)
 	obj.is_stunned = false
 	obj.is_movable = true
 	
@@ -74,19 +45,43 @@ func _enter() -> void:
 	else:
 		obj.use_skill()
 
-func _fly_to_center() -> void:
-	# Tính vị trí trung tâm
-	var center_x = obj.global_position.x
-	if obj.boss_zone:
-		center_x = obj.boss_zone.global_position.x
+func _start_spawn_sequence() -> void:
+	# === STEP 1: ZOOM VÀO BOSS CAMERA ===
+	if boss_camera:
+		boss_camera.enabled = true
+		CameraTransition.transition_camera2D(boss_camera, 1.0)
+		await get_tree().create_timer(1.0).timeout
+		print("SpamEnemies: Camera zoomed to boss")
 	
-	var center_pos = Vector2(center_x, obj.global_position.y)  # Giữ nguyên độ cao
+	# === STEP 3: SLOW MOTION + PLAY CAST ANIMATION ===
+	Engine.time_scale = 0.3
 	
-	# Bay về trung tâm nếu chưa ở đó
-	if obj.global_position.distance_to(center_pos) > 10:
-		var fly_tween = create_tween()
-		fly_tween.tween_property(obj, "global_position", center_pos, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
-		await fly_tween.finished
+	# === STEP 4: SPAWN 5 SPAWNER VỚI HIỆU ỨNG FADE IN ===
+	_spawn_star_spawners_with_fade()
+	
+	# Đợi thêm một chút
+	await get_tree().create_timer(1.0).timeout
+	
+	# === STEP 5: TRẢ VỀ TỐC ĐỘ BÌNH THƯỜNG ===
+	Engine.time_scale = 1.0
+	
+	# === STEP 6: ZOOM RA (BOSS_ZONE CAMERA) ===
+	if boss_zone_camera:
+		print("SpamEnemies: Switching to boss_zone camera (zoom out)")
+		CameraTransition.transition_camera2D(boss_zone_camera, 1.0)
+		await get_tree().create_timer(1.0).timeout
+	
+	await _land_on_ground()
+	
+	# === STEP 8: SAU KHI HẠ CÁNH XONG, KÍCH HOẠT SPAWNER ===
+	_activate_spawners()
+	
+	# Tắt boss camera
+	if boss_camera:
+		boss_camera.enabled = false
+	
+	print("SpamEnemies: Sequence complete")
+
 
 func _spawn_star_spawners_with_fade() -> void:
 	if obj.spawner_scene == null:
