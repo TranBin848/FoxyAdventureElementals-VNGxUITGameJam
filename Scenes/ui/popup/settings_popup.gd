@@ -1,8 +1,8 @@
 extends MarginContainer
 
-@onready var music_check_button: CheckButton = $NinePatchRect/MusicCheckButton
-@onready var sfx_check_button: CheckButton = $NinePatchRect/SFXCheckButton
-@onready var particle_slider: HSlider = $NinePatchRect/ParticleSlider
+@onready var music_check_button: CheckButton = $BackgroundBoard/MarginContainer/SettingsList/MusicRow/MusicCheckButton
+@onready var sfx_check_button: CheckButton = $BackgroundBoard/MarginContainer/SettingsList/SFXRow/SFXCheckButton
+@onready var particle_slider: HSlider = $BackgroundBoard/MarginContainer/SettingsList/ParticlesGroup/SliderWraper/ParticleSlider
 
 func _ready():
 	# Load settings from SettingsManager
@@ -11,7 +11,7 @@ func _ready():
 	particle_slider.value = SettingsManager.particle_quality
 	
 	get_tree().paused = true
-	$NinePatchRect/CloseTextureButton.pressed.connect(_on_close_texture_button_pressed)
+	$BackgroundBoard/CloseTextureButton.pressed.connect(_on_close_texture_button_pressed)
 	
 func _exit_tree() -> void:
 	get_tree().paused = false
@@ -34,3 +34,7 @@ func _on_overlay_color_rect_gui_input(event: InputEvent) -> void:
 
 func _on_close_texture_button_pressed() -> void:
 	hide_popup()
+
+func _on_unstuck_button_pressed() -> void:
+	if GameManager.player:
+		GameManager.player.unstuck()

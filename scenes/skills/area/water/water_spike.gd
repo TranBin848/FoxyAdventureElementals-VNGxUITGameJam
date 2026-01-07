@@ -5,10 +5,13 @@ class_name WaterSpikeArea
 
 func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	super.setup(skill, caster_position, enemy, _direction)
-	self.damage = damage * (skill.level + 1) * 0.5
+	self.damage = damage * (1.0 + sqrt(skill.level - 1.0))
 	
 	if targetenemy and is_instance_valid(targetenemy):
 		targetenemy.enter_stun(global_position)
+
+func _ready() -> void:
+	AudioManager.play_sound("skill_water_spike")
 
 func _apply_knockback_effect() -> void:
 	if targetenemy and is_instance_valid(targetenemy):

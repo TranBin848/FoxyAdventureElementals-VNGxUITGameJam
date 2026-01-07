@@ -16,7 +16,7 @@ extends BlackEmperorState
 const ELEMENT_SPRITE_SCENE = preload("res://scenes/enemies/final_boss/element_sprite.tscn")
 const FADE_BOSS_SCENE = preload("res://scenes/enemies/final_boss/fade_boss_scene.tscn")
 
-var animated_bg: AnimatedSprite2D = null
+var animated_bg: AnimationPlayer = null
 var player: Player = null
 var player_pos: Node2D = null
 var boss_pos: Node2D = null
@@ -25,9 +25,14 @@ var boss_zone_camera: Camera2D = null
 var boss_locked_position: Vector2 = Vector2.ZERO  # Vị trí lock boss
 var is_boss_locked: bool = false  # Flag để lock boss
 var canvas_layer: CanvasLayer = null  # CanvasLayer UI cần ẩn đi
+@onready var ui: CanvasLayer = $"../../UI"
 
 func _enter() -> void:
 	print("State: Cutscene1 Enter")
+	
+	obj.change_animation("idle")
+	
+	await get_tree().create_timer(0.5).timeout
 	
 	# KILL TẤT CẢ TWEENS từ state cũ ngay lập tức
 	var all_tweens = obj.get_tree().get_processed_tweens()
@@ -38,8 +43,6 @@ func _enter() -> void:
 	
 	# Force đặt lại position ngay lập tức
 	obj.velocity = Vector2.ZERO
-	
-	obj.change_animation("inactive")
 	obj.is_stunned = true
 	obj.is_movable = false
 	obj.set_physics_process(false)  # Tắt physics để không bị override position
@@ -51,10 +54,11 @@ func _enter() -> void:
 	
 	# Tìm và ẩn CanvasLayer UI
 	if canvas_layer == null:
-		canvas_layer = obj.get_tree().root.find_child("GameCanvasLayer", true, false) as CanvasLayer
+		canvas_layer = obj.get_tree().root.find_child("GUI", true, false) as CanvasLayer
 		if canvas_layer:
 			print("Cutscene1: Found CanvasLayer, hiding it")
 			canvas_layer.visible = false
+			ui.visible = false
 		else:
 			print("Warning: CanvasLayer not found")
 	
@@ -138,6 +142,7 @@ func _start_cutscene_sequence() -> void:
 			print("Cutscene1: Player hidden")
 		
 		animated_bg.play("cutscene1")
+		
 		# Đợi animation hoàn thành
 		await animated_bg.animation_finished
 		print("Cutscene1: AnimatedBg cutscene1 finished")
@@ -201,6 +206,8 @@ func _move_boss_to_position() -> void:
 	# Disable velocity/physics để không bị override position
 	obj.velocity = Vector2.ZERO
 	
+	obj.change_animation("moving")
+	
 	# Tạo tween trên obj (boss) thay vì trên state
 	var fly_tween = obj.get_tree().create_tween()
 	fly_tween.bind_node(obj)  # Bind tween vào boss để tự kill khi boss bị remove
@@ -221,6 +228,8 @@ func _move_boss_to_position() -> void:
 	is_boss_locked = true  # Bật lock để _update giữ position
 	
 	print("Cutscene1: Boss arrived at ", obj.global_position)
+	
+	obj.change_animation("idle")
 	
 	## Đợi một chút
 	#await get_tree().create_timer(0.3).timeout

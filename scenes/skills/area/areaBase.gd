@@ -9,13 +9,13 @@ var duration: float
 var direction: Vector2
 var targets_in_area: Array = [] 
 var timer: Timer
+var level: int
 
 func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	self.damage = skill.damage
 	self.elemental_type = skill.elemental_type
 	self.duration = skill.duration
 	self.direction = _direction
-	self.global_position = caster_position
 	
 	targetenemy = enemy
 	
@@ -26,15 +26,21 @@ func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direc
 		# If we have a target, look at them
 		var direction_to_enemy = (enemy.global_position - caster_position).normalized()
 		is_facing_right = direction_to_enemy.x > 0
+		self.global_position = enemy.global_position
+		
 	else:
+		self.global_position = caster_position
 		# If enemy is null, use the fallback 'direction' passed from the player
 		is_facing_right = direction.x > 0
 	# --- FIX END ---
 	
-	# Flip sprite based on direction
-	var sprite = get_node_or_null("Sprite2D")
-	if sprite:
-		sprite.flip_h = not is_facing_right  # Flip if facing left
+	# Alternative: Flip the entire root or specific containers
+	if not is_facing_right:
+		# Flip X axis to point left
+		scale.x = -1 
+	else:
+		# Reset to normal
+		scale.x = 1
 	
 	var hit_area: HitArea2D = null
 	if has_node("HitArea2D"):

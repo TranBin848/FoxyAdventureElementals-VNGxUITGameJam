@@ -13,7 +13,7 @@ extends BlackEmperorState
 # Scene
 const ELEMENT_SPRITE_SCENE = preload("res://scenes/enemies/final_boss/element_sprite.tscn")
 
-var animated_bg: AnimatedSprite2D = null
+var animated_bg: AnimationPlayer = null
 var player: Player = null
 var player_pos: Node2D = null
 var boss_pos: Node2D = null
@@ -25,6 +25,8 @@ var canvas_layer: CanvasLayer = null  # CanvasLayer UI cần bật lại
 
 func _enter() -> void:
 	print("=== State: Cutscene4 Enter ===")
+	
+	obj.change_animation("idle")
 	
 	# Kill tất cả tweens cũ
 	var all_tweens = obj.get_tree().get_processed_tweens()

@@ -11,8 +11,8 @@ func collect_coin():
 	#freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
 	GameManager.inventory_system.add_coin(1)
 	$Coin.play("consumed")
-	AudioManager.play_sound("item_collect")
-	$Coin.animation_finished.connect(queue_free)
+	AudioManager.play_sound("coin_collect")
+	queue_free()
 
 func _on_body_entered(body: Node) -> void:
 	if body is Player:

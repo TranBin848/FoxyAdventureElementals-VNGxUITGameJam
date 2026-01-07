@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgel203a2pxx2"]
+
+[ext_resource type="Script" uid="uid://cmdt34mpufdb8" path="res://scenes/npc/npc_villager.gd" id="1_npovp"]
+[ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="2_rqhb7"]
+[ext_resource type="Texture2D" uid="uid://bio2n0pl4h53r" path="res://assets/npc/old_man.png" id="3_shex8"]
+[ext_resource type="PackedScene" uid="uid://df03017n1d6d4" path="res://scenes/ui/notification/notification.tscn" id="4_npovp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kok2d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_shex8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fa8dx"]
+size = Vector2(55, 63.5)
+
+[node name="NpcGrandpa" type="Node2D"]
+script = ExtResource("1_npovp")
+hoithoai = "old_man_of_the_cave"
+
+[node name="InteractiveArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_rqhb7")
+metadata/_custom_type_script = "uid://0qvd447gmgon"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="InteractiveArea2D"]
+position = Vector2(0, -2.86102e-06)
+scale = Vector2(0.675, 0.675)
+sprite_frames = SubResource("SpriteFrames_kok2d")
+autoplay = "default"
+frame_progress = 0.663047
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+position = Vector2(0, -1.25)
+shape = SubResource("RectangleShape2D_fa8dx")
+
+[node name="Notification" parent="." instance=ExtResource("4_npovp")]
+
+[connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

@@ -22,6 +22,11 @@ func _ready() -> void:
 	label.position.y = -16.0
 
 	GameManager.checkpoint_changed.connect(_on_checkpoint_changed)
+	
+	var minimap = GameManager.minimap
+	
+	if minimap:
+		minimap.register_object("checkpoints",self)
 
 	if GameManager.current_checkpoint_id == checkpoint_id:
 		activate_visual_only()

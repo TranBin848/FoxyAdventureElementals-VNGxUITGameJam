@@ -6,7 +6,7 @@ signal stat_changed(stat_def: Resource, change: int)
 
 var _def: Resource 
 
-@onready var icon_rect: TextureRect = $Icon
+@onready var icon_rect: TextureRect = $IconContainer/Icon
 @onready var name_lbl: Label = $NameLabel
 @onready var val_lbl: Label = $ValueLabel
 @onready var btn_minus: TextureButton = $MinusButton

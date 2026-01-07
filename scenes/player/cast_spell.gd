@@ -3,6 +3,7 @@ extends PlayerState
 func _enter() -> void:
 	#Change animation to attack
 	obj.change_animation("attack")
+	AudioManager.play_sound("player_cast_skill")
 	timer = 0.5
 	obj.velocity.x = 0
 

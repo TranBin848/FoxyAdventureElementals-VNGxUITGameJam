@@ -1,11 +1,10 @@
-[gd_scene load_steps=44 format=4 uid="uid://qv25yj3rt5ql"]
+[gd_scene load_steps=48 format=4 uid="uid://qv25yj3rt5ql"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_4qlm2"]
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_aq1cd"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="2_qg72l"]
 [ext_resource type="PackedScene" uid="uid://dg8jpqwmm4tc2" path="res://scenes/ui/skill_bar/skill_bar_skill_tree.tscn" id="3_0lii6"]
 [ext_resource type="Texture2D" uid="uid://dcrnqve71d36p" path="res://assets/island/background/additional_sky.png" id="4_8nwpw"]
-[ext_resource type="PackedScene" uid="uid://u0fxijnn4sx" path="res://scenes/enemies/minions/mushroom/mushroom.tscn" id="4_qg72l"]
 [ext_resource type="Texture2D" uid="uid://bqde0l4at7gv8" path="res://assets/island/background/bg_image.png" id="5_82uhe"]
 [ext_resource type="Texture2D" uid="uid://dekyi7oa4n0sg" path="res://assets/island/background/water_reflect_big_01.png" id="6_aq1cd"]
 [ext_resource type="Texture2D" uid="uid://b6dilwf04d4be" path="res://assets/island/background/water_reflect_big_02.png" id="7_dc5j8"]
@@ -30,17 +29,31 @@
 [ext_resource type="Texture2D" uid="uid://cjcxdxoq8hp4l" path="res://assets/island/back_palm_trees/back_palm_tree_regular_04.png" id="26_7mgrg"]
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="27_etxra"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="29_0lii6"]
-[ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="30_8nwpw"]
-[ext_resource type="PackedScene" uid="uid://b55wlvp8e3emi" path="res://scenes/enemies/minions/pelican/pelican.tscn" id="31_82uhe"]
-[ext_resource type="PackedScene" uid="uid://b35vjjohukg22" path="res://scenes/enemies/minions/spear_warrior/spear_warrior.tscn" id="32_aq1cd"]
-[ext_resource type="PackedScene" uid="uid://qq7375scp7fc" path="res://scenes/enemies/minions/turtle/turtle.tscn" id="33_dc5j8"]
-[ext_resource type="PackedScene" uid="uid://d2xnvvob5vkgl" path="res://scenes/enemies/minions/seahorse/seahorse.tscn" id="34_2b55n"]
-[ext_resource type="PackedScene" uid="uid://dglmldw2eudyb" path="res://scenes/enemies/minions/coconut_warrior/coconut_warrior.tscn" id="35_31pr2"]
+[ext_resource type="Texture2D" uid="uid://bk51gkprscokm" path="res://assets/skills/icon element/Fire_v2.png" id="37_xciwo"]
+[ext_resource type="Texture2D" uid="uid://cm0v1judaocq7" path="res://assets/skills/icon element/Water_v2.png" id="38_x60jx"]
+[ext_resource type="Texture2D" uid="uid://butqokb3dnq7u" path="res://assets/skills/icon element/Earth_v2.png" id="39_mwgaq"]
+[ext_resource type="Texture2D" uid="uid://c5ewwmdx1mhhd" path="res://assets/skills/icon element/Metal_v2.png" id="40_3stc0"]
+[ext_resource type="Texture2D" uid="uid://bw0lj4v2jqd7c" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_1.png" id="40_qgkf7"]
+[ext_resource type="Texture2D" uid="uid://bu07xy8c7sahs" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_2.png" id="41_q4qdf"]
+[ext_resource type="Texture2D" uid="uid://m3hdk4fxfum3" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_3.png" id="42_il3ai"]
+[ext_resource type="Texture2D" uid="uid://bpwkwowucmnif" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_4.png" id="43_4mbfk"]
+[ext_resource type="Texture2D" uid="uid://hy4vhn4ex5b6" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_idle_5.png" id="44_aheaj"]
 
 [sub_resource type="GDScript" id="GDScript_82uhe"]
 script/source = "extends Node2D
 
 @export var background_music: AudioStream = null
+
+func _ready() -> void:
+	var skill_names = [\"Thousand Swords\", \"Wooden Clone\", \"Earthquake\", \"Burrow\", \"Toxic Breath\"]
+	
+	for i in skill_names.size():
+		# 🔥 Validate + equip
+		var skill = SkillDatabase.get_skill_by_name(skill_names[i])
+		if skill:
+			SkillTreeManager.unlock_skill(skill_names[i],0)
+			SkillTreeManager.equip_skill(i, skill_names[i])
+			print(\"✅ Equipped %s to slot %d\" % [skill_names[i], i])
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lmnj4"]
@@ -153,6 +166,31 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c54he"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1lhn3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_qgkf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_q4qdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_il3ai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_4mbfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_aheaj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
 [node name="Stage" type="Node2D"]
 script = SubResource("GDScript_82uhe")
 background_music = ExtResource("1_aq1cd")
@@ -164,6 +202,26 @@ tile_set = ExtResource("1_4qlm2")
 
 [node name="Player" parent="." instance=ExtResource("2_qg72l")]
 position = Vector2(-361, 235)
+wall_slide_speed = null
+dash_speed_mul = null
+push_strength = null
+coyote_time = null
+air_control_multiplier = null
+jump_buffer_time = null
+blade_throw_speed = null
+skill_throw_speed = null
+invulnerable_duration = null
+fireball_bounciness = null
+jump_height = null
+jump_time_to_peak = null
+jump_time_to_descent = null
+movement_speed = null
+gravity = null
+_next_direction = null
+attack_damage = null
+max_health = null
+max_mana = null
+elemental_type = null
 
 [node name="UI" type="CanvasLayer" parent="Player"]
 
@@ -281,126 +339,30 @@ position = Vector2(-270, 229)
 
 [node name="Coconuts" type="Node2D" parent="."]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(202, 45)
+texture = SubResource("CompressedTexture2D_c54he")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(274, 45)
+texture = ExtResource("37_xciwo")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(346, 45)
+texture = ExtResource("38_x60jx")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(415, 45)
+texture = ExtResource("39_mwgaq")
+
+[node name="EvilFoxy" type="AnimatedSprite2D" parent="."]
+position = Vector2(234, 320)
+sprite_frames = SubResource("SpriteFrames_1lhn3")
+frame_progress = 0.463358
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(484, 45)
+texture = ExtResource("40_3stc0")
+
 [node name="Crab" parent="." instance=ExtResource("29_0lii6")]
-position = Vector2(982, 334)
-elemental_type = 4
-
-[node name="Mushroom" parent="." instance=ExtResource("4_qg72l")]
-position = Vector2(307, 335)
-elemental_type = 1
-
-[node name="Mushroom2" parent="." instance=ExtResource("4_qg72l")]
-position = Vector2(478, 335)
-elemental_type = 2
-
-[node name="Mushroom3" parent="." instance=ExtResource("4_qg72l")]
-position = Vector2(651, 335)
-elemental_type = 3
-
-[node name="Crab2" parent="." instance=ExtResource("29_0lii6")]
-position = Vector2(2606, 234)
-elemental_type = 5
-
-[node name="Starfish" parent="." instance=ExtResource("30_8nwpw")]
-position = Vector2(330, 141)
-elemental_type = 2
-
-[node name="Starfish2" parent="." instance=ExtResource("30_8nwpw")]
-position = Vector2(585, 141)
-elemental_type = 4
-
-[node name="Turtle" parent="." instance=ExtResource("33_dc5j8")]
-position = Vector2(994, 140)
-elemental_type = 3
-
-[node name="Turtle2" parent="." instance=ExtResource("33_dc5j8")]
-position = Vector2(1320, 140)
-elemental_type = 5
-
-[node name="SpearWarrior" parent="." instance=ExtResource("32_aq1cd")]
-position = Vector2(311, -85)
-elemental_type = 1
-
-[node name="SpearWarrior2" parent="." instance=ExtResource("32_aq1cd")]
-position = Vector2(603, -86)
-elemental_type = 4
-
-[node name="SeaHorse" parent="." instance=ExtResource("34_2b55n")]
-position = Vector2(989, -95)
-elemental_type = 2
-
-[node name="SeaHorse2" parent="." instance=ExtResource("34_2b55n")]
-position = Vector2(1319, -95)
-elemental_type = 3
-
-[node name="Pelican" parent="." instance=ExtResource("31_82uhe")]
-position = Vector2(1814, 117)
-elemental_type = 2
-
-[node name="Pelican2" parent="." instance=ExtResource("31_82uhe")]
-position = Vector2(1864, 119)
-elemental_type = 2
-
-[node name="Pelican3" parent="." instance=ExtResource("31_82uhe")]
-position = Vector2(1921, 119)
-elemental_type = 2
-
-[node name="Pelican4" parent="." instance=ExtResource("31_82uhe")]
-position = Vector2(1971, 121)
-elemental_type = 2
-
-[node name="Pelican5" parent="." instance=ExtResource("31_82uhe")]
-position = Vector2(1604, 112)
-elemental_type = 2
-
-[node name="Pelican6" parent="." instance=ExtResource("31_82uhe")]
-position = Vector2(1654, 114)
-elemental_type = 2
-
-[node name="Pelican7" parent="." instance=ExtResource("31_82uhe")]
-position = Vector2(1711, 114)
-elemental_type = 2
-
-[node name="Pelican8" parent="." instance=ExtResource("31_82uhe")]
-position = Vector2(1761, 116)
-elemental_type = 2
-
-[node name="CoconutWarrior" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(517, -325)
-elemental_type = 4
-
-[node name="CoconutWarrior2" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(464, -325)
-elemental_type = 4
-
-[node name="CoconutWarrior3" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(699, -331)
-elemental_type = 4
-
-[node name="CoconutWarrior4" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(285, -323)
-elemental_type = 4
-
-[node name="CoconutWarrior5" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(654, -331)
-elemental_type = 4
-
-[node name="CoconutWarrior6" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(333, -321)
-elemental_type = 4
-
-[node name="CoconutWarrior7" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(609, -327)
-elemental_type = 4
-
-[node name="CoconutWarrior8" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(370, -326)
-elemental_type = 4
-
-[node name="CoconutWarrior9" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(554, -327)
-elemental_type = 4
-
-[node name="CoconutWarrior10" parent="." instance=ExtResource("35_31pr2")]
-position = Vector2(423, -327)
-elemental_type = 4
+position = Vector2(469, 320)

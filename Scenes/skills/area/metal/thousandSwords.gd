@@ -24,7 +24,7 @@ var is_firing: bool = false
 func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	# 1. Base Setup (Handles damage, elemental type, duration timer)
 	super.setup(skill, caster_position, enemy, _direction)
-	var level_multiplier = (skill.level+1) * 0.5
+	var level_multiplier = 1.0 + sqrt(skill.level - 1.0)
 	self.sword_count = sword_count * level_multiplier
 	self.ring_radius = ring_radius * sqrt(level_multiplier)
 	self.hover_height = hover_height * level_multiplier / 2

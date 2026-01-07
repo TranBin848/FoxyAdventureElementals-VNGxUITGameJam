@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba2bhwl205has"]
+
+[ext_resource type="Script" uid="uid://cmdt34mpufdb8" path="res://scenes/npc/npc_villager.gd" id="1_2a7al"]
+[ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="2_8nh38"]
+[ext_resource type="Texture2D" uid="uid://mlnq7s30ptu4" path="res://assets/npc/wand_seller.png" id="3_2a7al"]
+[ext_resource type="PackedScene" uid="uid://df03017n1d6d4" path="res://scenes/ui/notification/notification.tscn" id="4_8nh38"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kok2d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2a7al")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fa8dx"]
+size = Vector2(39.75, 50)
+
+[node name="NpcWandSeller" type="Node2D"]
+position = Vector2(0, 3)
+script = ExtResource("1_2a7al")
+hoithoai = "wand_seller"
+
+[node name="InteractiveArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_8nh38")
+metadata/_custom_type_script = "uid://0qvd447gmgon"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="InteractiveArea2D"]
+position = Vector2(0, -2.86102e-06)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_kok2d")
+autoplay = "default"
+frame_progress = 0.663047
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_fa8dx")
+
+[node name="Notification" parent="." instance=ExtResource("4_8nh38")]
+position = Vector2(3693.05, -364.168)
+
+[connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

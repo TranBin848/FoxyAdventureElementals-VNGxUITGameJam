@@ -1,0 +1,24 @@
+do GameManager.player_act("toggle_actor_state")
+if {GameManager.player.has_wand}:
+	Wand_Seller: Oh! Lại là cậu à!
+	Wand_Seller: Đi phiêu lưu luyện phép đi. Ta đang bận việc riêng tư.
+else:
+	Wand_Seller: Này chàng trai trẻ, ta nhìn cậu cũng có khiếu làm pháp sư đó, sẵn đây ta có bán trượng phép, cậu có muốn mua không?
+	Foxy: Hmm, pháp sư sao. Sẵn trên đường tôi cũng nhặt được vài cuộn giấy phép thuật nhưng không biết sao để sử dụng. 
+	Foxy: Cây trượng mà ông bán có giúp ích gì cho việc này không?
+	Wand_Seller: À à! Có chứ! Viên ngọc phép được đính lên cây trượng có thể giúp người cầm hiểu được ngôn ngữ phép thuật đấy.
+	Foxy: Vậy sao?! Vậy giá cả thế nào?
+	Wand_Seller: Hmm. Nhìn cậu có năng khiếu nhưng thiếu kiến thức vầy chắc là người mới. Cậu dùng trượng gỗ nhé. Giá 10 đồng vàng thôi.
+	
+	if {GameManager.inventory_system.get_coins()} >= 10:
+		Foxy: Umm. 10 đồng sao. Tôi nghĩ mình có đủ. Tôi sẽ lấy nó!
+		Wand_Seller: Haha. Chốt đơn nào! Chúc cậu may mắn trên con đường luyện phép nhé!
+		Foxy: Cảm ơn ông!!
+		do GameManager.player.collect_wand()
+		do GameManager.inventory_system.use_coin(10)
+	else:
+		Foxy: Umm. 10 đồng sao. Tiếc quá, hiện tại tôi không đủ tiền rồi.
+		Wand_Seller: Ồ tiếc quá. Khi nào có đủ tiền thì quay lại tìm ta nhé!
+		Foxy: Chắc chắn rồi. Hẹn gặp lại ông.
+
+do GameManager.player_act("toggle_actor_state")

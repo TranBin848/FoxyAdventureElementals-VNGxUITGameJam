@@ -61,6 +61,7 @@ trail_enabled = true
 trail_lifetime = 0.6
 process_material = SubResource("ParticleProcessMaterial_ummkf")
 script = ExtResource("1_vt8gy")
+ambience_id = "ambience_desert"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

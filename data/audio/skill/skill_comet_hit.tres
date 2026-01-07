@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://pjscneqs0axx"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_a1rse"]
+[ext_resource type="AudioStream" uid="uid://2qv62q63edcy" path="res://assets/sounds/block_break_2.wav" id="2_2bie0"]
+
+[resource]
+script = ExtResource("1_a1rse")
+clip_id = "skill_comet_hit"
+stream = ExtResource("2_2bie0")
+variations = Array[AudioStream]([])
+volume_db = -20.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

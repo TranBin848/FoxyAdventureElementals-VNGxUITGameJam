@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://iix2qujpr57n"]
+
+[ext_resource type="Script" uid="uid://dtsmbq3vxwwmy" path="res://scenes/skills/base/skill_drop/SkillDrop.gd" id="1_oq64y"]
+[ext_resource type="Texture2D" uid="uid://ctosdrmqgke0f" path="res://assets/skills/icons_skill/48x48/skill_icons1.png" id="2_jk338"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wlvaj"]
+radius = 23.0
+
+[node name="SkillDropUltimate" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_oq64y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wlvaj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, 4.76837e-07)
+scale = Vector2(0.833333, 0.833333)
+texture = ExtResource("2_jk338")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

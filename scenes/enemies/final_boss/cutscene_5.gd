@@ -13,7 +13,7 @@ extends BlackEmperorState
 # Scene
 const ELEMENT_SPRITE_SCENE = preload("res://scenes/enemies/final_boss/element_sprite.tscn")
 
-var animated_bg: AnimatedSprite2D = null
+var animated_bg: AnimationPlayer = null
 var player: Player = null
 var player_pos: Node2D = null
 var boss_pos: Node2D = null
@@ -26,6 +26,8 @@ var canvas_layer: CanvasLayer = null  # CanvasLayer UI cần bật lại
 func _enter() -> void:
 	print("=== State: Cutscene5 Enter ===")
 	
+	obj.change_animation("idle")
+	
 	# Kill tất cả tweens cũ
 	var all_tweens = obj.get_tree().get_processed_tweens()
 	print("Cutscene5: Killing ", all_tweens.size(), " active tweens")
@@ -35,7 +37,6 @@ func _enter() -> void:
 	
 	# Setup boss
 	obj.velocity = Vector2.ZERO
-	obj.change_animation("inactive")
 	obj.is_stunned = true
 	obj.is_movable = false
 	obj.set_physics_process(false)
@@ -116,10 +117,16 @@ func _start_cutscene_sequence() -> void:
 	
 	obj.set_physics_process(true)
 	
-	# === STEP 8: KẾT THÚC CUTSCENES - TRIGGER BOSS MẤT MÁU ===
-	print("Cutscene5: All cutscenes complete - Emitting signal")
-	if animated_bg:
-		animated_bg.all_cutscenes_finished.emit()
+	if is_instance_valid(fsm) and fsm.states.has("cutscene6"):
+		print("Cutscene5: Finished, transitioning to Cutscene6")
+		fsm.change_state(fsm.states.cutscene6)
+	else:
+		print("ERROR: Cannot transition to cutscene5!")
+	
+	## === STEP 8: KẾT THÚC CUTSCENES - TRIGGER BOSS MẤT MÁU ===
+	#print("Cutscene5: All cutscenes complete - Emitting signal")
+	#if animated_bg:
+		#animated_bg.all_cutscenes_finished.emit()
 
 func _move_boss_to_position() -> void:
 	if not boss_pos:
@@ -219,12 +226,5 @@ func _exit() -> void:
 	# Tắt boss camera
 	if boss_camera:
 		boss_camera.enabled = false
-	
-	# Bật lại CanvasLayer UI
-	if canvas_layer == null:
-		canvas_layer = obj.get_tree().root.find_child("GameCanvasLayeaad", true, false) as CanvasLayer
-	if canvas_layer:
-		print("Cutscene5: Showing CanvasLayer again")
-		canvas_layer.visible = true
 	
 	print("Cutscene5: Exit")

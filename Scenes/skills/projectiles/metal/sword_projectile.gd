@@ -25,7 +25,8 @@ var is_stuck: bool = false
 var stick_duration: float = 5.0
 var sword_id := randi()
 
-#func _ready() -> void:
+func _ready() -> void:
+	AudioManager.play_sound("skill_sword_hit_enemy")
 	#print("Sword ready: ", sword_id, " parent: ", get_parent())
 
 func setup_hover(pos: Vector2, dmg: int, elem: ElementsEnum.Elements, duration: float) -> void:
@@ -113,6 +114,7 @@ func _physics_process(delta: float) -> void:
 	global_position = next_pos
 
 func _stick_to_ground(hit_pos: Vector2, embed_dir: Vector2) -> void:
+	AudioManager.play_sound("skill_sword_hit_ground")
 	set_as_top_level(true)
 	global_position = hit_pos
 	is_stuck = true

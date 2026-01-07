@@ -12,4 +12,4 @@ func _init():
 	mana = 10
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons12.png"
 	animation_name = "ToxicBreath"
-	projectile_scene = preload("res://scenes/skills/projectiles/wood/toxic_breath.tscn")
+	projectile_scene_path = "res://scenes/skills/projectiles/wood/toxic_breath.tscn"

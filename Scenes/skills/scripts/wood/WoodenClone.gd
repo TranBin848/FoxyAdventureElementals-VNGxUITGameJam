@@ -13,4 +13,4 @@ func _init():
 	mana = 20
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons35.png"
 	animation_name = ""
-	projectile_scene = preload("res://scenes/skills/projectiles/wood/wooden_clone.tscn")
+	projectile_scene_path = "res://scenes/skills/projectiles/wood/wooden_clone.tscn"

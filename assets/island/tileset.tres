@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://clee474g44v61"]
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://clee474g44v61"]
 
 [ext_resource type="Texture2D" uid="uid://v2dtejovry7r" path="res://assets/island/terrain/terrain_32x32.png" id="1_x61fc"]
 [ext_resource type="PackedScene" uid="uid://clv23qmtscnof" path="res://scenes/objects/quicksand/quicksand.tscn" id="2_8e75p"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://c8iyq6ukbtgdh" path="res://levels/objects/tree/palm_tree_1.tscn" id="2_ysup1"]
 [ext_resource type="PackedScene" uid="uid://bghk1nocyicg" path="res://levels/objects/tree/palm_tree_2.tscn" id="3_fgag5"]
 [ext_resource type="PackedScene" uid="uid://kgiks45x5kpk" path="res://levels/objects/tree/palm_tree_3.tscn" id="4_7a5rw"]
-[ext_resource type="PackedScene" uid="uid://ux63f4jmpobf" path="res://levels/objects/spikes/bottom_spike.tscn" id="5_fgag5"]
 [ext_resource type="PackedScene" uid="uid://plkay1dhhsoh" path="res://levels/objects/chest/chest.tscn" id="7_8e75p"]
 [ext_resource type="PackedScene" uid="uid://sabusv0gjw3u" path="res://levels/objects/chest_key/chest_key.tscn" id="8_wlw37"]
 
@@ -395,7 +394,6 @@ scenes/1/scene = ExtResource("2_8e75p")
 scenes/4/scene = ExtResource("2_ysup1")
 scenes/5/scene = ExtResource("3_fgag5")
 scenes/6/scene = ExtResource("4_7a5rw")
-scenes/7/scene = ExtResource("5_fgag5")
 scenes/8/scene = ExtResource("7_8e75p")
 scenes/9/scene = ExtResource("8_wlw37")
 scenes/10/scene = ExtResource("2_k86ad")

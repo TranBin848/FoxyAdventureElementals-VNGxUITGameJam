@@ -2,6 +2,7 @@ class_name Player
 extends BaseCharacter
 
 #region Signal Definitions
+signal coin_collected(first_coin_collected: bool)
 signal weapon_swapped(equipped_weapon_type: String)
 signal skill_collected(skill_resource_class)
 #endregion
@@ -60,7 +61,7 @@ var current_wand_level: WandLevel = WandLevel.NORMAL
 
 # Inventory Flags
 var has_blade: bool = false
-var has_wand: bool = true # Default based on your old code
+var has_wand: bool = false
 
 # Combat State
 var is_invulnerable: bool = false
@@ -72,6 +73,11 @@ var is_able_attack: bool = true
 
 # Targeting
 var _targets_in_range: Array[Node2D] = []
+
+# Actor state
+var actor_target_x: float = 0.0
+var is_actor_moving: bool = false
+signal actor_arrived #emit when actor move toward designated target
 #endregion
 
 #region Configuration (Exports)
@@ -82,7 +88,7 @@ var _targets_in_range: Array[Node2D] = []
 @export var dash_dist: float = 200.0
 @export var dash_cd: float = 5.0
 @export var push_strength: float = 100.0
-@export var coyote_time: float = 0.15  # NEW: Grace period after leaving ground
+@export var coyote_time: float = 0.2  # NEW: Grace period after leaving ground
 @export var air_control_multiplier: float = 0.8  # NEW: Air acceleration modifier
 @export var jump_buffer_time: float = 0.1  # Can press jump this early
 
@@ -109,6 +115,7 @@ var jump_gravity: float
 var fall_gravity: float
 var coyote_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
+var regen_timer: float = 0.0
 #endregion
 
 # ==============================================================================
@@ -140,8 +147,8 @@ func _ready() -> void:
 	if fireball_hit_area:
 		fireball_hit_area.hitted.connect(_on_fireball_hit_enemy)
 	
-	Dialogic.timeline_started.connect(func(): can_move = false)
-	Dialogic.timeline_ended.connect(func(): can_move = true)
+	#Dialogic.timeline_started.connect(func(): can_move = false)
+	#Dialogic.timeline_ended.connect(func(): can_move = true)
 	
 	# Initial Visual Setup
 	_hide_all_visuals()
@@ -150,12 +157,15 @@ func _ready() -> void:
 	else: equip_weapon(WeaponType.NORMAL)
 
 func _physics_process(delta: float) -> void:
+	# 1. Update timers/inputs FIRST so the FSM has fresh data
+	_update_jump_buffer(delta)
+	_update_coyote_time(delta)
+	
 	super._physics_process(delta) # Animation, FSM, etc.
 	
 	_handle_invulnerability(delta)
 	_handle_rigid_push()
-	_update_coyote_time(delta)
-	_update_jump_buffer(delta)
+	_regen_stat(delta)
 
 	# Enforce visual state
 	if current_buff_state == BuffState.BURROW or current_buff_state == BuffState.INVISIBLE:
@@ -164,10 +174,20 @@ func _physics_process(delta: float) -> void:
 	if debuglabel:
 		debuglabel.text = str(fsm.current_state.name)
 
+func _regen_stat(delta: float) -> void:
+	regen_timer += delta
+	if (regen_timer > 1.0):
+		mana = min(mana + 2,max_mana)
+		mana_changed.emit()
+		regen_timer = 0
 
 # ==============================================================================
 # MOVEMENT & PHYSICS
 # ==============================================================================
+func set_speed_multiplier(multiplier: float) -> void: 
+	speed_multiplier = multiplier
+func set_jump_multiplier(multiplier: float) -> void: 
+	jump_multiplier = multiplier
 
 func _update_movement(delta: float) -> void:
 	if not can_move: 
@@ -189,13 +209,12 @@ func _update_movement(delta: float) -> void:
 		velocity.y = 0
 
 func jump() -> void:
-	super.jump() # BaseCharacter logic
-	
 	if current_buff_state == BuffState.BURROW:
-		# Special Burrow Exit Jump
-		exit_current_buff() # This triggers the pop-up logic in _set_burrow_state(false)
-	else:
-		jump_fx_factory.create()
+		exit_current_buff()
+		return
+		
+	super.jump() # BaseCharacter logic
+	jump_fx_factory.create()
 		
 func _update_jump_buffer(delta: float) -> void:
 	if jump_buffer_timer > 0:
@@ -254,20 +273,16 @@ func _handle_rigid_push() -> void:
 # ==============================================================================
 
 func collect_blade() -> void:
-	has_blade = true;
-	
+	has_blade = true
 	# HOOK HERE: Trigger tutorial on first weapon pickup
-	GameProgressManager.trigger_event("WEAPON")
-	
-	swap_weapon()
+	GameProgressManager.trigger_event("CUTLASS")
+	swap_weapon_to(WeaponType.BLADE)
 
 func collect_wand() -> void:
 	has_wand = true
-	
 	# HOOK HERE: Trigger tutorial on first weapon pickup
-	GameProgressManager.trigger_event("WEAPON")
-	
-	swap_weapon()
+	GameProgressManager.trigger_event("WOOD_WAND")
+	swap_weapon_to(WeaponType.WAND)
 	
 func can_attack() -> bool:
 	if not is_able_attack: return false
@@ -287,27 +302,55 @@ func throw_blade() -> void:
 		var throw_velocity := Vector2(blade_throw_speed * direction, 0.0)
 		blade.apply_impulse(throw_velocity)
 	
-	# Remove Blade Logic
+	# Remove Blade Logic and cycle to next available
 	has_blade = false
-	equip_weapon(WeaponType.NORMAL)
+	cycle_next_weapon() 
 
 func can_throw() -> bool: return has_blade && current_weapon == WeaponType.BLADE
 
-func swap_weapon() -> void:
-	# Block swapping during special states
-	if current_buff_state == BuffState.FIREBALL: return
-	if not has_blade and not has_wand: return
+# --- CAROUSEL LOGIC START ---
 
-	match current_weapon:
-		WeaponType.NORMAL:
-			if has_blade: equip_weapon(WeaponType.BLADE)
-			elif has_wand: equip_weapon(WeaponType.WAND)
-		WeaponType.BLADE:
-			if has_wand: equip_weapon(WeaponType.WAND)
-			else: equip_weapon(WeaponType.NORMAL)
-		WeaponType.WAND:
-			if has_blade: equip_weapon(WeaponType.BLADE)
-			else: equip_weapon(WeaponType.NORMAL)
+func is_weapon_unlocked(type: WeaponType) -> bool:
+	match type:
+		WeaponType.NORMAL: return true # Always have normal
+		WeaponType.BLADE: return has_blade
+		WeaponType.WAND: return has_wand
+	return false
+
+# Call this function from your Input (e.g., when pressing 'Q' or 'TAB')
+func cycle_next_weapon() -> void:
+	if current_buff_state == BuffState.FIREBALL:
+		return # Lock weapon swapping during specific buffs/states
+
+	# Define the order of the carousel
+	var weapon_order = [
+		WeaponType.NORMAL,
+		WeaponType.BLADE,
+		WeaponType.WAND
+	]
+	
+	var current_index = weapon_order.find(current_weapon)
+	
+	# Loop through the array starting from the next index
+	# We use a loop to skip weapons the player doesn't have yet
+	for i in range(1, weapon_order.size() + 1):
+		var next_index = (current_index + i) % weapon_order.size()
+		var candidate_weapon = weapon_order[next_index]
+		
+		if is_weapon_unlocked(candidate_weapon):
+			equip_weapon(candidate_weapon)
+			return
+
+# Use this for specific events (Load Game, Pickup Item)
+func swap_weapon_to(to_weapon: WeaponType) -> void:
+	if current_buff_state == BuffState.FIREBALL: return
+
+	if is_weapon_unlocked(to_weapon):
+		equip_weapon(to_weapon)
+	else:
+		equip_weapon(WeaponType.NORMAL)
+
+# --- CAROUSEL LOGIC END ---
 
 func upgrade_wand_to(level: WandLevel) -> void:
 	has_wand = true # Ensure they own the weapon type
@@ -322,6 +365,8 @@ func upgrade_wand_to(level: WandLevel) -> void:
 		equip_weapon(WeaponType.WAND)
 
 func equip_weapon(type: WeaponType) -> void:
+	if current_weapon == type && type != WeaponType.NORMAL: return # Optimization: Don't re-equip same weapon
+	
 	current_weapon = type
 	
 	match type:
@@ -335,9 +380,7 @@ func equip_weapon(type: WeaponType) -> void:
 		_: weapon_swapped.emit("normal")
 		
 	_update_visual_state()
-
-func set_speed_multiplier(val: float) -> void: speed_multiplier = val
-
+	
 # ==============================================================================
 # SKILLS & SPELLS
 # ==============================================================================
@@ -396,8 +439,8 @@ func _fire_radial(skill: Skill, count: int) -> void:
 func _spawn_projectile_node(skill: Skill, dir: Vector2) -> Area2D:
 	# Use specific scene or fallback to factory
 	var proj_node: Node
-	if skill.projectile_scene:
-		proj_node = skill.projectile_scene.instantiate()
+	if skill.projectile_scene_path:
+		proj_node = load(skill.projectile_scene_path).instantiate()
 	elif skill_factory:
 		proj_node = skill_factory.create()
 	else:
@@ -433,16 +476,16 @@ func _fire_area(skill: Skill) -> void:
 		# If no target, maybe fail or cast at self?
 		return
 
-	if not skill.area_scene: return
-	var area_node = skill.area_scene.instantiate()
+	if not skill.area_scene_path: return
+	var area_node = load(skill.area_scene_path).instantiate()
 	get_tree().current_scene.add_child(area_node)
 	area_node.global_position = target_pos
 	
 	if area_node.has_method("setup"):
-		area_node.setup(skill, target_pos, target_enemy)
+		area_node.setup(skill, position, target_enemy)
 
 func _apply_buff_skill(skill: Skill) -> void:
-	var duration = skill.duration * (skill.level + 1.0) / 2.0
+	var duration = skill.duration * (1.0 + sqrt(skill.level - 1.0))
 	
 	if skill is Fireball:
 		enter_buff_state(BuffState.FIREBALL, duration)
@@ -452,6 +495,7 @@ func _apply_buff_skill(skill: Skill) -> void:
 		_apply_heal_over_time(skill.heal_per_tick, duration, skill.tick_interval)
 
 func _apply_heal_over_time(amount: float, duration: float, interval: float) -> void:
+	AudioManager.play_sound("skill_heal")
 	var ticks = floor(duration / interval)
 	for i in range(ticks):
 		if health <= 0: break
@@ -523,19 +567,63 @@ func _set_fireball_state(active: bool) -> void:
 
 func _set_burrow_state(active: bool) -> void:
 	is_in_burrow_state = active
-	default_collision.set_deferred("disabled", active)
-	burrow_collision.set_deferred("disabled", !active)
-	hurt_area.set_deferred("monitorable", !active)
 	
 	if active:
+		AudioManager.play_sound("skill_burrow")
+		# --- ENTERING BURROW ---
+		default_collision.set_deferred("disabled", true)
+		burrow_collision.set_deferred("disabled", false)
+		hurt_area.set_deferred("monitorable", false)
+		
 		speed_multiplier = 1.25
-		_update_visual_state(null, true) # Force silhouette
+		_update_visual_state(null, true) 
+		if is_on_floor():
+			surface_fx_factory.create()
 	else:
+		# --- EXITING BURROW ---
 		speed_multiplier = 1.0
-		# Exit Pop Logic
+		
+		# 1. Physics Launch
+		surface_fx_factory.create()
+		velocity.y = -jump_speed 
 		velocity.x = 400.0 * direction
-		jump_fx_factory.create() # Or surface FX
-		jump()
+		
+		# 2. Visuals
+		if animated_sprite: animated_sprite.play("jump")
+
+		# 3. Dynamic Hitbox Restoration
+		# We DO NOT enable default_collision yet. 
+		# We start the watcher to do it when safe.
+		_await_safe_hitbox_expansion()
+		
+func _await_safe_hitbox_expansion() -> void:
+	# 1. Setup the query using your Default Hitbox's shape
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = default_collision.shape
+	# We use the player's global transform so the query follows you as you jump
+	query.transform = global_transform 
+	# Set this to your World/Environment layer (usually Layer 1)
+	# Do not include enemies or hitboxes, or you'll never un-burrow next to them.
+	query.collision_mask = 1 
+	
+	# 2. Loop until empty
+	while true:
+		# Update query position to match player's current position (in case they are moving)
+		query.transform = global_transform
+		
+		# Ask the physics engine for overlaps
+		var results = space_state.intersect_shape(query, 1) # Max 1 result needed to fail
+		
+		if results.is_empty():
+			# SUCCESS: No walls inside our shape. Safe to expand.
+			default_collision.set_deferred("disabled", false)
+			burrow_collision.set_deferred("disabled", true)
+			hurt_area.set_deferred("monitorable", true)
+			break # Exit the loop
+		
+		# If we hit something, wait for the next physics frame and try again
+		await get_tree().physics_frame
 
 func _set_invisible_state(active: bool) -> void:
 	hurt_area.set_deferred("monitorable", !active)
@@ -543,6 +631,7 @@ func _set_invisible_state(active: bool) -> void:
 	
 	if active:
 		_update_visual_state(null, true) # Force silhouette
+		
 	else:
 		# Handled by generic _update_visual_state in exit_current_buff
 		pass
@@ -620,10 +709,17 @@ func _update_visual_state(forced_main: AnimatedSprite2D = null, force_silhouette
 	_update_elemental_palette()
 
 func _enforce_invisibility_visuals() -> void:
-	# BaseCharacter might try to show the main sprite during animation changes.
-	# We force it hidden here.
-	if animated_sprite and animated_sprite.visible:
+	# 1. Force the Main Sprite (Detailed) to HIDE
+	# BaseCharacter tries to show this every frame when animating, so we must force it off.
+	if animated_sprite:
 		animated_sprite.hide()
+
+	# 2. Force the Silhouette (Shadow) to SHOW and be TRANSPARENT
+	# The silhouette is stored in 'extra_sprites' by _update_visual_state
+	for s in extra_sprites:
+		if is_instance_valid(s):
+			s.show()
+			s.modulate.a = 0.5
 
 func _update_elemental_palette() -> void:
 	if not is_instance_valid(animated_sprite): return
@@ -661,7 +757,7 @@ func get_closest_target() -> Node2D:
 			closest = t
 	return closest
 
-func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int) -> void:
+func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int, _source: Node2D) -> void:
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	
 	# Let FSM handle the animation/knockback
@@ -744,14 +840,19 @@ func save_state() -> Dictionary:
 func load_state(data: Dictionary) -> void:
 	if "position" in data:
 		global_position = Vector2(data["position"][0], data["position"][1])
+	
+	# 1. Load Level của Wand TRƯỚC
+	if "wand_level" in data:
+		current_wand_level = data["wand_level"] # Set level trước
+		
+	# 2. Sau đó mới load quyền sở hữu và trang bị
 	if "has_blade" in data:
 		has_blade = data["has_blade"]
 		if has_blade: equip_weapon(WeaponType.BLADE)
+		
 	if "has_wand" in data:
 		has_wand = data["has_wand"]
-		if has_wand: equip_weapon(WeaponType.WAND)
-	if "wand_level" in data:
-		current_wand_level = data["wand_level"]
+		if has_wand: equip_weapon(WeaponType.WAND) # Lúc này nó mới check đúng current_wand_level
 	
 	# Helper definitions for FSM/Animation use
 func cast_skill(anim_name: String) -> void:
@@ -773,7 +874,94 @@ func add_new_skill(skill: Skill, stack_amount: int = 1) -> void:
 	
 	if stack_amount <= 0:
 		push_warning("Player.add_new_skill: Invalid stack amount %d" % stack_amount)
-	
-	# Add to SkillTreeManager
-	SkillTreeManager.collect_skill(skill.name, stack_amount)
+		
 	skill_collected.emit(skill, stack_amount)
+
+
+var tile_size = 32 
+var max_check_height = 5
+
+func unstuck() -> void:
+	# 1. First, check if we are actually stuck right now.
+	if not test_move(global_transform, Vector2.ZERO):
+		print("You aren't stuck! Request ignored.")
+		return
+		
+	print("Stuck detected! Scanning for safe spot above...")
+	# 2. Loop upwards to find a safe spot
+	for i in range(1, max_check_height + 1):
+		# Calculate the potential target position (moving up i tiles)
+		var offset_y = tile_size * i
+
+		# Create a "fake" transform at that target position
+		var target_transform = global_transform
+		target_transform.origin.y -= offset_y
+		
+		# 3. Check if this specific spot is empty
+		# We use Vector2.ZERO because we just want to know:
+		# "If I were standing HERE, would I be overlapping anything?"
+		if not test_move(target_transform, Vector2.ZERO):
+			# Found a safe spot! Teleport the player.
+			global_position.y -= offset_y
+			velocity = Vector2.ZERO # Stop any falling momentum
+			print("Teleported safely to ", i, " tiles up.")
+			return
+
+	# 4. If the loop finishes and we found nothing (e.g. inside a massive wall)
+	print("Could not find a safe spot nearby.")
+	
+
+# ==============================================================================
+# CUTSCENE LOGIC
+# ==============================================================================
+
+func toggle_actor_state() -> void:
+	if fsm.current_state == fsm.states.actor:
+		fsm.change_state(fsm.states.idle)
+	else:
+		fsm.change_state(fsm.states.actor)
+
+func move_to_scene_point(point_name: String) -> void:
+	# 1. Find the node in the current scene (recursive search)
+	var scene = get_tree().current_scene
+	var target_node = scene.find_child(point_name, true, false)
+	
+	if not target_node:
+		push_error("Player: Could not find node named '%s' for actor movement." % point_name)
+		return
+
+	# 2. Setup Movement State
+	actor_target_x = target_node.global_position.x
+	print(actor_target_x)
+	is_actor_moving = true
+	
+	fsm.change_state(fsm.states.actor)
+	change_animation("run")
+	Dialogic.paused = true
+	
+	# 3. Switch FSM to Actor/Cutscene state to disable standard logic
+	# (Assuming 'actor' is the state name in your FSM)
+	#if fsm.has_state("actor"):
+		#fsm.change_state(fsm.states.actor)
+
+func _handle_actor_physics() -> void:
+	# Calculate distance to target
+	var dist = actor_target_x - global_position.x
+	#print(str(actor_target_x) + " " + str(global_position.x))
+	# if arrive then stop and resume dialogic
+	if abs(dist) < 5.0:
+		velocity.x = 0
+		is_actor_moving = false
+		change_animation("idle")
+		actor_arrived.emit() # Signal Dialogic that we are done
+		Dialogic.paused = false
+	else: #moving logic
+		direction = sign(dist)
+		velocity.x = direction * movement_speed
+
+func _apply_gravity_only(delta: float) -> void:
+	# Copied strictly gravity logic from _update_movement
+	# This ensures the actor falls if the target is on a lower platform
+	var current_gravity = jump_gravity if velocity.y < 0 else fall_gravity
+	velocity.y += current_gravity * delta
+	velocity.y = clamp(velocity.y, -INF, max_fall_speed)

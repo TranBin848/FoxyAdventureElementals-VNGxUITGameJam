@@ -14,7 +14,7 @@ var is_active: bool = false
 
 func setup(skill: Skill, dir: Vector2) -> void:
 	super.setup(skill,dir)
-	clone_lifetime_sec = clone_lifetime_sec * (skill.level + 1) / 2
+	clone_lifetime_sec = clone_lifetime_sec * (1.0 + sqrt(skill.level - 1.0))
 
 func _ready() -> void:
 	rotation = 0.0  # cancel ProjectileBase rotation
@@ -31,11 +31,13 @@ func _ready() -> void:
 		clone_sprite.flip_v = false
 		clone_sprite.play(clone_anim)
 
+	AudioManager.play_sound("skill_wooden_clone")
+
 	speed = 0
 	set_physics_process(false)
 
-	if GameManager.player and GameManager.player.has_method("go_invisible"):
-		GameManager.player.go_invisible(clone_lifetime_sec)
+	if GameManager.player and GameManager.player.has_method("enter_buff_state"):
+		GameManager.player.enter_buff_state(Player.BuffState.INVISIBLE,clone_lifetime_sec)
 
 	_start_lifetime()
 

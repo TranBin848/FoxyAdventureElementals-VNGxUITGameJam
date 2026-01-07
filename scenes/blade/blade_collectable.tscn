@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1hph2plir0qc"]
+[gd_scene load_steps=16 format=3 uid="uid://c1hph2plir0qc"]
 
 [ext_resource type="Texture2D" uid="uid://d0s8rm2fj4wef" path="res://assets/foxy/blade/blade_anim_1.png" id="1_vlr3n"]
 [ext_resource type="Script" uid="uid://c2ontfkxki7ms" path="res://scenes/blade/blade_collectable.gd" id="1_y0t1o"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d2rh0qqgmaqir" path="res://assets/foxy/blade/blade_target_3.png" id="8_4actv"]
 [ext_resource type="Texture2D" uid="uid://baucskhqdceas" path="res://assets/foxy/blade/blade_target_4.png" id="9_ddflp"]
 [ext_resource type="Texture2D" uid="uid://bng34woae2g8q" path="res://assets/foxy/blade/blade_throw_1.png" id="10_1u2f7"]
+[ext_resource type="PackedScene" uid="uid://df03017n1d6d4" path="res://scenes/ui/notification/notification.tscn" id="12_2qvt5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_836ip"]
 animations = [{
@@ -86,5 +87,11 @@ shape = SubResource("RectangleShape2D_elrge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_p0yh0")
+
+[node name="Notification" parent="." instance=ExtResource("12_2qvt5")]
+position = Vector2(8, -7)
+smoothing_speed = 2.0
+max_detection_distance = 1000.0
+fade_distance = 100.0
 
 [connection signal="body_entered" from="CollectableArea2D" to="." method="_on_body_entered"]

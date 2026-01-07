@@ -7,7 +7,6 @@
 light_mode = 1
 
 [node name="Ghost" type="Sprite2D"]
-z_index = -1
 material = SubResource("CanvasItemMaterial_p4gax")
 texture = ExtResource("1_xyxib")
 script = ExtResource("2_i1hew")

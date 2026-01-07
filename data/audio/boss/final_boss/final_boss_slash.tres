@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://c6t30wy8a73il"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_wkjiy"]
+[ext_resource type="AudioStream" uid="uid://d4ikfxj8u6k02" path="res://assets/sounds/final_boss_slash.wav" id="2_exh1u"]
+
+[resource]
+script = ExtResource("1_wkjiy")
+clip_id = "final_boss_slash"
+stream = ExtResource("2_exh1u")
+variations = Array[AudioStream]([])
+volume_db = 0.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

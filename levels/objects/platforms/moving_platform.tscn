@@ -71,3 +71,4 @@ libraries = {
 &"": SubResource("AnimationLibrary_8a3cw")
 }
 autoplay = "move"
+speed_scale = 0.35

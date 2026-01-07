@@ -184,7 +184,7 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rrv8b"]
 normal = Vector2(-1, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2s1pb"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2s1pb"]
 
 [node name="Stage2" type="Node2D"]
 script = ExtResource("1_b7gic")
@@ -597,24 +597,9 @@ shape = SubResource("WorldBoundaryShape2D_rrv8b")
 [node name="BladeCollectable" parent="SafeObjects" instance=ExtResource("38_xb74x")]
 position = Vector2(4654, -169)
 
-[node name="Bosszone" type="Area2D" parent="." node_paths=PackedStringArray("boss")]
-position = Vector2(13730, -620)
-scale = Vector2(27, 18)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("39_8vtkf")
-boss = NodePath("Boss")
+[node name="FX" type="Node2D" parent="."]
 
-[node name="Boss" parent="Bosszone" instance=ExtResource("40_7k6of")]
-position = Vector2(-2.74074, 4.5)
-scale = Vector2(0.037037, 0.0555556)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bosszone"]
-shape = SubResource("RectangleShape2D_2s1pb")
-debug_color = Color(0.988235, 0, 0.290196, 0)
-
-[node name="Camera2D" type="Camera2D" parent="Bosszone"]
-zoom = Vector2(2, 2)
+[node name="Projectiles" type="Node2D" parent="."]
 
 [node name="FX" type="Node2D" parent="."]
 
@@ -656,4 +641,3 @@ horizontal_alignment = 1
 
 [connection signal="interacted" from="Object/Platform6/PathFollow2D/InteractiveArea2D" to="Object/Platform6" method="_on_interactive_area_2d_interacted"]
 [connection signal="interacted" from="Object/Platform8/PathFollow2D/InteractiveArea2D" to="Object/Platform8" method="_on_interactive_area_2d_interacted"]
-[connection signal="body_entered" from="Bosszone" to="Bosszone" method="_on_body_entered"]

@@ -8,20 +8,28 @@
 
 [node name="StatRow" type="HBoxContainer"]
 process_mode = 3
-offset_right = 170.0
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 128.0
+grow_horizontal = 2
 theme_override_constants/separation = 10
 script = ExtResource("1_ttdva")
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="IconContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="IconContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("1_5b2e0")
+expand_mode = 3
 stretch_mode = 5
 
 [node name="NameLabel" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_uuray")
 theme_override_font_sizes/font_size = 36
 text = "TEST"

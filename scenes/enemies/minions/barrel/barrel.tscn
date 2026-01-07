@@ -1,50 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhf2ehr61a3ks"]
+[gd_scene load_steps=6 format=3 uid="uid://5e7xk2njusm2"]
 
-[ext_resource type="Script" uid="uid://780dumn4jaur" path="res://scenes/enemies/minions/barrel/barrel.gd" id="1_d1rwy"]
-[ext_resource type="Texture2D" uid="uid://ch0hp25m7evv1" path="res://assets/object/barrel/barrel_hurt_01.png" id="2_588nf"]
-[ext_resource type="Texture2D" uid="uid://ckjp4ccybo5i6" path="res://assets/object/barrel/barrel_hurt_02.png" id="3_tnlx8"]
-[ext_resource type="Texture2D" uid="uid://dfnk2rp7cs1vg" path="res://assets/object/barrel/barrel_01.png" id="4_jni0l"]
+[ext_resource type="Texture2D" uid="uid://dfnk2rp7cs1vg" path="res://assets/object/barrel/barrel_01.png" id="1_7ri04"]
+[ext_resource type="Script" uid="uid://h4qi8gxmvkv" path="res://scenes/enemies/minions/barrel/barrel.gd" id="1_krbv3"]
+[ext_resource type="Script" uid="uid://csu2b21cwchqw" path="res://scripts/area_component/hurt_area_2d.gd" id="2_shyqh"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4xqu7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_588nf")
-}],
-"loop": true,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_588nf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_tnlx8")
-}],
-"loop": false,
-"name": &"hurt",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_jni0l")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_krbv3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xqu7"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shyqh"]
 size = Vector2(32, 32)
 
-[node name="Barrel" type="StaticBody2D"]
-script = ExtResource("1_d1rwy")
+[node name="Barrel" type="RigidBody2D"]
+collision_mask = 65
+mass = 9999.0
+physics_material_override = SubResource("PhysicsMaterial_krbv3")
+lock_rotation = true
+script = ExtResource("1_krbv3")
+max_health = 10.0
+debris_texture = ExtResource("1_7ri04")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_4xqu7")
-animation = &"dead"
-autoplay = "idle"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7ri04")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_4xqu7")
+shape = SubResource("RectangleShape2D_shyqh")
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="HurtArea2D" type="Area2D" parent="Direction"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("2_shyqh")
+metadata/_custom_type_script = "uid://csu2b21cwchqw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/HurtArea2D"]
+shape = SubResource("RectangleShape2D_shyqh")
+
+[connection signal="hurt" from="Direction/HurtArea2D" to="." method="take_damage"]

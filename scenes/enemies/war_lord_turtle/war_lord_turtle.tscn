@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://d0ig8xrtjp2v1"]
+[gd_scene load_steps=82 format=3 uid="uid://d0ig8xrtjp2v1"]
 
 [ext_resource type="Script" uid="uid://ckyw4uljyk87h" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.gd" id="1_ognfm"]
 [ext_resource type="Texture2D" uid="uid://b5kffli05vjsc" path="res://assets/war_lord/war_lord_turtle19.png" id="2_e3bfs"]
@@ -76,6 +76,7 @@
 [ext_resource type="Script" uid="uid://crhlo3of68gvb" path="res://scenes/enemies/war_lord_turtle/dead.gd" id="37_3ub61"]
 [ext_resource type="Texture2D" uid="uid://tinptqnegyd7" path="res://assets/war_lord_bullet/target_tile.png" id="44_f8pc6"]
 [ext_resource type="PackedScene" uid="uid://d0gxe3bh60m7y" path="res://scenes/enemies/war_lord_turtle/power_particles.tscn" id="54_4lnpy"]
+[ext_resource type="PackedScene" uid="uid://d0jkkqjvv3603" path="res://scenes/ui/boss_healthbar.tscn" id="76_evh1h"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ayec0"]
 animations = [{
@@ -213,7 +214,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"launchRocket",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -404,7 +405,9 @@ radius = 36.0555
 radius = 31.0161
 
 [node name="WarLordTurtle" type="CharacterBody2D"]
+collision_layer = 8
 script = ExtResource("1_ognfm")
+phase_order = Array[int]([2, 3, 4])
 shader_path = "uid://doovon2v0i5dx"
 sight = 300.0
 metadata/_custom_type_script = "uid://s4xx82espxdt"
@@ -433,7 +436,7 @@ position = Vector2(0, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_ayec0")
-animation = &"die"
+animation = &"launchRocket"
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(45, 0)
@@ -456,13 +459,11 @@ target_position = Vector2(300, 0)
 collision_mask = 130
 
 [node name="RocketFactory" type="Marker2D" parent="Direction"]
-position = Vector2(61, 0)
 script = ExtResource("2_m5be7")
 product_packed_scene = ExtResource("27_3foqi")
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
 
 [node name="BulletFactory" type="Marker2D" parent="Direction"]
-position = Vector2(61, 0)
 script = ExtResource("2_m5be7")
 product_packed_scene = ExtResource("26_uwb07")
 metadata/_custom_type_script = "uid://b2o007yxvk7qa"
@@ -533,6 +534,7 @@ text = "debug"
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Control" type="MarginContainer" parent="UI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -548,49 +550,137 @@ layout_mode = 2
 size_flags_horizontal = 4
 value = 100.0
 
+[node name="BossHealthbar" parent="UI" node_paths=PackedStringArray("boss_node") instance=ExtResource("76_evh1h")]
+boss_node = NodePath("../..")
+
 [node name="RocketTargets" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, 25)
 
 [node name="Target 1" type="Node2D" parent="RocketTargets"]
-position = Vector2(-150, 0)
+visible = false
+position = Vector2(-55, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 1"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("44_f8pc6")
 
-[node name="Target 3" type="Node2D" parent="RocketTargets"]
-position = Vector2(-210, 0)
+[node name="Target 9" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(55, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 3"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("44_f8pc6")
-
-[node name="Target 5" type="Node2D" parent="RocketTargets"]
-position = Vector2(-270, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 5"]
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 9"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("44_f8pc6")
 
 [node name="Target 2" type="Node2D" parent="RocketTargets"]
-position = Vector2(270, 0)
+visible = false
+position = Vector2(-89, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 2"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("44_f8pc6")
 
+[node name="Target 10" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(89, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 10"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 3" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(-120, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 3"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 11" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(120, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 11"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
 [node name="Target 4" type="Node2D" parent="RocketTargets"]
-position = Vector2(210, 0)
+visible = false
+position = Vector2(-152, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 4"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("44_f8pc6")
 
+[node name="Target 12" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 12"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 5" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(-183, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 5"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 13" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(183, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 13"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
 [node name="Target 6" type="Node2D" parent="RocketTargets"]
-position = Vector2(150, 0)
+visible = false
+position = Vector2(-217, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 6"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 14" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(217, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 14"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 7" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(-245, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 7"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 15" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(245, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 15"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 8" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(-270, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 8"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("44_f8pc6")
+
+[node name="Target 16" type="Node2D" parent="RocketTargets"]
+visible = false
+position = Vector2(270, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RocketTargets/Target 16"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("44_f8pc6")
 

@@ -136,7 +136,7 @@ metadata/_custom_type_script = "uid://5btdwob525wm"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.4, 0.05, 2, 1)
-position = Vector2(12.5, -16.5)
+position = Vector2(42, -21)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_yjavm")
 animation = &"ToxicBreath"
@@ -145,13 +145,15 @@ frame = 5
 frame_progress = 0.970013
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(29.5, -4.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3.75, -0.5)
+position = Vector2(33.25, -5)
 shape = SubResource("RectangleShape2D_w7bhr")
 disabled = true
 
 [node name="HitArea2D" parent="." instance=ExtResource("2_n5yf3")]
+position = Vector2(29.5, -4.5)
 collision_layer = 32
 collision_mask = 16
 elemental_type = 2
