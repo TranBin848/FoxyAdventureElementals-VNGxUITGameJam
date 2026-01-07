@@ -51,6 +51,12 @@ func collect_skill(skill_name: String, stack_amount: int = 1) -> void:
 		push_error("Unknown skill: %s" % skill_name)
 		return
 		
+	if not _skill_data.has(skill_name):
+		_skill_data[skill_name] = {
+			"level": 1,        # Start at level 1 (not 0!)
+			"unlocked": false  # Has stacks but not permanently unlocked
+		}
+		
 	if get_stacks(skill_name) == 0 and stack_amount > 0:
 		skill_discovered.emit(skill_name)
 		_skills_discovered_history[skill_name] = true
