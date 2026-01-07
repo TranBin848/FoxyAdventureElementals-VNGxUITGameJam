@@ -33,7 +33,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kc5hd"]
-size = Vector2(80, 50)
+size = Vector2(81, 50)
 
 [sub_resource type="Animation" id="Animation_kc5hd"]
 length = 0.001
@@ -91,7 +91,7 @@ script = ExtResource("7_2l30g")
 metadata/_custom_type_script = "uid://0qvd447gmgon"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoatFrame/InteractiveArea2D"]
-position = Vector2(-1, -16)
+position = Vector2(-0.5, -16)
 shape = SubResource("RectangleShape2D_kc5hd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

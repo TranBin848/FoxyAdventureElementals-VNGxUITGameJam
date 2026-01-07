@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgel203a2pxx2"]
+[gd_scene load_steps=7 format=3 uid="uid://dgel203a2pxx2"]
 
 [ext_resource type="Script" uid="uid://cmdt34mpufdb8" path="res://scenes/npc/npc_villager.gd" id="1_npovp"]
 [ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="2_rqhb7"]
 [ext_resource type="Texture2D" uid="uid://bio2n0pl4h53r" path="res://assets/npc/old_man.png" id="3_shex8"]
+[ext_resource type="PackedScene" uid="uid://df03017n1d6d4" path="res://scenes/ui/notification/notification.tscn" id="4_npovp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kok2d"]
 animations = [{
@@ -20,7 +21,7 @@ size = Vector2(55, 63.5)
 
 [node name="NpcGrandpa" type="Node2D"]
 script = ExtResource("1_npovp")
-hoithoai = "level_0"
+hoithoai = "old_man_of_the_cave"
 
 [node name="InteractiveArea2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -38,5 +39,7 @@ frame_progress = 0.663047
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
 position = Vector2(0, -1.25)
 shape = SubResource("RectangleShape2D_fa8dx")
+
+[node name="Notification" parent="." instance=ExtResource("4_npovp")]
 
 [connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

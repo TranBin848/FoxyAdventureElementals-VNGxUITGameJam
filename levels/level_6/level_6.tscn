@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://dshvtsustqlwx"]
+[gd_scene load_steps=23 format=4 uid="uid://dshvtsustqlwx"]
 
-[ext_resource type="Script" uid="uid://o5nsxhelg4y8" path="res://levels/level_1/level_1.gd" id="1_vl8x5"]
-[ext_resource type="TileSet" uid="uid://b1rw2jhie3f1r" path="res://levels/level_1/level_1.tres" id="2_0d8vy"]
-[ext_resource type="PackedScene" uid="uid://xkbcnxv5v0y7" path="res://scenes/enemies/final_boss/animated_bg.tscn" id="2_ic5dq"]
+[ext_resource type="Script" uid="uid://n6xv0j7ugjbl" path="res://levels/level_6/level_6.gd" id="1_djwf0"]
+[ext_resource type="TileSet" uid="uid://luhdhg8n240a" path="res://levels/level_6/level_6.tres" id="2_rrv5u"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="3_ic5dq"]
+[ext_resource type="Script" uid="uid://d0djolxvt6im6" path="res://scenes/enemies/final_boss/animated_bg.gd" id="4_djwf0"]
+[ext_resource type="SpriteFrames" path="res://scenes/enemies/final_boss/animated_bg.tres" id="4_rrv5u"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="5_djwf0"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="6_rrv5u"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="7_mws0n"]
@@ -11,31 +12,328 @@
 [ext_resource type="PackedScene" uid="uid://d0a57drf7tx4v" path="res://scenes/enemies/final_boss/black_emperor.tscn" id="10_djwf0"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="10_pw60n"]
 
+[sub_resource type="Animation" id="Animation_ixd4x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene2"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mws0n"]
+resource_name = "cutscene1"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene1"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["skill_earthquake"],
+"method": &"play_sound"
+}, {
+"args": ["final_boss_beam"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_djwf0"]
+resource_name = "cutscene2"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene2"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["final_boss_chanting"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rrv5u"]
+resource_name = "cutscene3"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene3"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["final_boss_phoenix"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nr5tq"]
+resource_name = "cutscene4"
+length = 1.8
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": ["final_boss_shield"],
+"method": &"play_sound"
+}, {
+"args": ["player_attack"],
+"method": &"play_sound"
+}, {
+"args": ["final_boss_shield_shatter"],
+"method": &"play_sound"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene4"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 8]
+}
+
+[sub_resource type="Animation" id="Animation_a4okb"]
+resource_name = "cutscene5"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene5"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 11]
+}
+
+[sub_resource type="Animation" id="Animation_llmex"]
+resource_name = "cutscene6"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/AnimatedBG2:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"cutscene6"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AnimatedBG2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 6]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.2001),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["final_boss_healing"],
+"method": &"play_sound"
+}, {
+"args": ["final_boss_resurrection"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nr5tq"]
+_data = {
+&"RESET": SubResource("Animation_ixd4x"),
+&"cutscene1": SubResource("Animation_mws0n"),
+&"cutscene2": SubResource("Animation_djwf0"),
+&"cutscene3": SubResource("Animation_rrv5u"),
+&"cutscene4": SubResource("Animation_nr5tq"),
+&"cutscene5": SubResource("Animation_a4okb"),
+&"cutscene6": SubResource("Animation_llmex")
+}
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fdo7j"]
 normal = Vector2(1, 0)
-distance = -82.0
+distance = -41.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4idv8"]
 normal = Vector2(-0.999974, -0.00714268)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrv5u"]
 
-[node name="Stage" type="Node2D"]
-script = ExtResource("1_vl8x5")
+[node name="Stage2" type="Node2D"]
+script = ExtResource("1_djwf0")
 
 [node name="Back" type="TileMapLayer" parent="."]
 position = Vector2(-1214, 355)
 tile_map_data = PackedByteArray("AADy//P/BAACAAAAAADy//T/BAACAAEAAADy//X/BAACAAEAAADy//b/BAACAAEAAADy//f/BAACAAEAAADy//j/BAACAAEAAADy//n/BAACAAEAAADy//r/BAACAAEAAADy//v/BAACAAEAAADy//z/BAACAAEAAADy//3/BAACAAEAAADy//7/BAACAAEAAADy////BAACAAEAAADy/wAABAACAAEAAADy/wEABAACAAEAAADx//P/BAABAAAAAAANAPT/BAAAAAAAAAANAPX/BAAAAAEAAAANAPb/BAAAAAEAAAANAPf/BAAAAAEAAAANAPj/BAAAAAEAAAANAPn/BAAAAAEAAAANAPr/BAAAAAEAAAANAPv/BAAAAAEAAAANAPz/BAAAAAEAAAANAP3/BAAAAAEAAAANAP7/BAAAAAEAAAANAP//BAAAAAEAAAANAAAABAAAAAEAAAANAAEABAAAAAEAAAA=")
-tile_set = ExtResource("2_0d8vy")
+tile_set = ExtResource("2_rrv5u")
 
-[node name="AnimatedBg" parent="." instance=ExtResource("2_ic5dq")]
-position = Vector2(-1212, 196)
-animation = &"default"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nr5tq")
+}
+script = ExtResource("4_djwf0")
+
+[node name="AnimatedBG2" type="AnimatedSprite2D" parent="AnimationPlayer"]
+z_index = -10
+position = Vector2(-1229, 173)
+scale = Vector2(0.66744, 0.66744)
+sprite_frames = ExtResource("4_rrv5u")
+animation = &"cutscene2"
 
 [node name="Ground" type="TileMapLayer" parent="."]
 position = Vector2(129, 67)
 tile_map_data = PackedByteArray("AADq/wsABAAGAAEAAADp/wwABAABAAEAAADo/wwABAABAAEAAADo/w0ABAABAAEAAADn/w0ABAABAAEAAADm/w0ABAABAAEAAADm/w4ABAAHAAAAAADl/w4ABAABAAIAAADq/w4ABAACAAIAAADq/w0ABAAGAAEAAADq/wwABAAGAAEAAADq/woABAAGAAEAAADp/w4ABAAHAAAAAADp/w0ABAABAAEAAADp/wsABAABAAEAAADo/w4ABAABAAIAAADo/wsABAABAAEAAADn/w4ABAABAAIAAADn/wwABAABAAEAAADn/wsABAABAAEAAADm/wwABAABAAEAAADm/wsABAABAAEAAADl/w0ABAABAAEAAADl/wsABAABAAEAAADk/w4ABAAHAAAAAADk/w0ABAABAAEAAADk/wwABAABAAEAAADk/wsABAABAAEAAADj/w4ABAABAAIAAADj/w0ABAABAAEAAADj/wwABAABAAEAAADj/wsABAABAAEAAADi/w4ABAABAAIAAADi/w0ABAABAAEAAADi/wwABAABAAEAAADi/wsABAABAAEAAADh/w4ABAABAAIAAADh/w0ABAABAAEAAADh/wwABAABAAEAAADh/wsABAABAAEAAADg/w4ABAAHAAAAAADg/w0ABAABAAEAAADg/wwABAABAAEAAADg/wsABAABAAEAAADf/w4ABAAHAAAAAADf/w0ABAABAAEAAADf/wwABAABAAEAAADf/wsABAABAAEAAADe/w4ABAABAAIAAADe/w0ABAABAAEAAADe/wwABAABAAEAAADe/wsABAABAAEAAADd/w4ABAABAAIAAADd/w0ABAABAAEAAADd/wwABAABAAEAAADd/wsABAABAAEAAADc/w4ABAAHAAAAAADc/w0ABAABAAEAAADc/wwABAABAAEAAADc/wsABAABAAEAAADb/w4ABAABAAIAAADb/w0ABAABAAEAAADb/wwABAABAAEAAADb/wsABAABAAEAAADa/w4ABAAHAAAAAADa/w0ABAABAAEAAADa/wwABAABAAEAAADa/wsABAABAAEAAADZ/w4ABAAHAAAAAADZ/w0ABAABAAEAAADZ/wwABAABAAEAAADZ/wsABAABAAEAAADY/w4ABAABAAIAAADY/w0ABAABAAEAAADY/wwABAABAAEAAADY/wsABAABAAEAAADX/w4ABAAHAAAAAADX/w0ABAABAAEAAADX/wwABAABAAEAAADW/w4ABAAHAAAAAADW/w0ABAABAAEAAADW/wwABAABAAEAAADV/w4ABAABAAIAAADV/w0ABAABAAEAAADV/wwABAABAAEAAADU/w4ABAAHAAAAAADU/w0ABAABAAEAAADU/wwABAABAAEAAADT/w4ABAAHAAAAAADT/w0ABAABAAEAAADT/wwABAABAAEAAADS/w4ABAAHAAAAAADS/w0ABAABAAEAAADS/wwABAABAAEAAADR/w4ABAABAAIAAADR/w0ABAABAAEAAADR/wwABAABAAEAAADQ/w4ABAAHAAAAAADQ/w0ABAABAAEAAADQ/wwABAABAAEAAADP/w4ABAABAAIAAADP/w0ABAABAAEAAADP/wwABAABAAEAAADO/w4ABAAHAAAAAADO/w0ABAABAAEAAADO/wwABAABAAEAAADX/wsABAABAAEAAADW/wsABAABAAEAAADV/wsABAABAAEAAADU/wsABAABAAEAAADT/wsABAABAAEAAADS/wsABAABAAEAAADR/wsABAABAAEAAADQ/wsABAABAAEAAADP/wsABAABAAEAAADO/wsABAABAAEAAADN/w4ABAABAAIAAADN/w0ABAABAAEAAADN/wwABAABAAEAAADN/wsABAABAAEAAADM/w4ABAABAAIAAADM/w0ABAABAAEAAADM/wwABAABAAEAAADM/wsABAABAAEAAADL/w4ABAABAAIAAADL/w0ABAABAAEAAADL/wwABAABAAEAAADL/wsABAABAAEAAADK/w4ABAABAAIAAADK/w0ABAABAAEAAADK/wwABAABAAEAAADK/wsABAABAAEAAADJ/w4ABAABAAIAAADJ/w0ABAABAAEAAADJ/wwABAABAAEAAADJ/wsABAABAAEAAADI/wsABAABAAEAAADH/wsABAABAAEAAADG/wsABAABAAEAAADF/wsABAABAAEAAADE/wsABAABAAEAAADD/wsABAABAAEAAADI/w0ABAABAAEAAADI/wwABAABAAEAAADH/w0ABAABAAEAAADH/wwABAABAAEAAADG/w0ABAABAAEAAADG/wwABAABAAEAAADF/w0ABAABAAEAAADF/wwABAABAAEAAADE/w0ABAABAAEAAADE/wwABAABAAEAAADD/w0ABAABAAEAAADD/wwABAABAAEAAADl/wwABAABAAEAAADD/w4ABAAHAAAAAADE/w4ABAABAAIAAADF/w4ABAABAAIAAADG/w4ABAAHAAAAAADH/w4ABAABAAIAAADI/w4ABAAHAAAAAADD/woABAABAAEAAADE/woABAABAAEAAADp/woABAABAAEAAADI/woABAABAAAAAADJ/woABAABAAAAAADK/woABAABAAAAAADL/woABAABAAAAAADM/woABAABAAAAAADN/woABAABAAAAAADO/woABAABAAAAAADP/woABAABAAAAAADQ/woABAABAAAAAADR/woABAABAAAAAADS/woABAABAAAAAADT/woABAABAAAAAADU/woABAABAAAAAADV/woABAABAAAAAADW/woABAABAAAAAADX/woABAABAAAAAADY/woABAABAAAAAADZ/woABAABAAAAAADa/woABAABAAAAAADb/woABAABAAAAAADc/woABAABAAAAAADd/woABAABAAAAAADe/woABAABAAAAAADf/woABAABAAAAAADg/woABAABAAAAAADh/woABAABAAAAAADi/woABAABAAAAAADj/woABAABAAAAAADH/woABAAGAAIAAADH/wkABAABAAEAAADH/wgABAABAAEAAADH/wcABAABAAEAAADH/wYABAABAAEAAADH/wUABAABAAEAAADH/wQABAABAAEAAADH/wMABAABAAEAAADH/wIABAABAAEAAADH/wEABAABAAEAAADH/wAABAABAAEAAADG/woABAABAAEAAADG/wkABAABAAEAAADG/wgABAABAAEAAADG/wcABAABAAEAAADG/wYABAABAAEAAADG/wUABAABAAEAAADG/wQABAABAAEAAADG/wMABAABAAEAAADG/wIABAABAAEAAADG/wEABAABAAEAAADG/wAABAABAAEAAADF/woABAABAAEAAADF/wkABAABAAEAAADF/wgABAABAAEAAADF/wcABAABAAEAAADF/wYABAABAAEAAADF/wUABAABAAEAAADF/wQABAABAAEAAADF/wMABAABAAEAAADF/wIABAABAAEAAADF/wEABAABAAEAAADF/wAABAABAAEAAADE/wkABAABAAEAAADE/wgABAABAAEAAADE/wcABAABAAEAAADE/wYABAABAAEAAADE/wUABAABAAEAAADE/wQABAABAAEAAADE/wMABAABAAEAAADE/wIABAABAAEAAADE/wEABAABAAEAAADE/wAABAABAAEAAADD/wkABAABAAEAAADD/wgABAABAAEAAADD/wcABAABAAEAAADD/wYABAABAAEAAADD/wUABAABAAEAAADD/wQABAABAAEAAADD/wMABAABAAEAAADD/wIABAABAAEAAADD/wEABAABAAEAAADD/wAABAABAAEAAADq/wkABAAGAAEAAADq/wgABAAGAAEAAADq/wcABAACAAEAAADq/wYABAACAAEAAADq/wUABAACAAEAAADq/wQABAAGAAEAAADq/wMABAACAAEAAADq/wIABAAGAAEAAADq/wEABAACAAEAAADq/wAABAAGAAEAAADp/wkABAABAAEAAADp/wgABAABAAEAAADp/wcABAABAAEAAADp/wYABAABAAEAAADp/wUABAABAAEAAADp/wQABAABAAEAAADp/wMABAABAAEAAADp/wIABAABAAEAAADp/wEABAABAAEAAADp/wAABAABAAEAAADo/woABAABAAEAAADo/wkABAABAAEAAADo/wgABAABAAEAAADo/wcABAABAAEAAADo/wYABAABAAEAAADo/wUABAABAAEAAADo/wQABAABAAEAAADo/wMABAABAAEAAADo/wIABAABAAEAAADo/wEABAABAAEAAADo/wAABAABAAEAAADn/woABAABAAEAAADn/wkABAABAAEAAADn/wgABAABAAEAAADn/wcABAABAAEAAADn/wYABAABAAEAAADn/wUABAABAAEAAADn/wQABAABAAEAAADn/wMABAABAAEAAADn/wIABAABAAEAAADn/wEABAABAAEAAADn/wAABAABAAEAAADm/woABAABAAEAAADm/wkABAABAAEAAADm/wgABAABAAEAAADm/wcABAABAAEAAADm/wYABAABAAEAAADm/wUABAABAAEAAADm/wQABAABAAEAAADm/wMABAABAAEAAADm/wIABAABAAEAAADm/wEABAABAAEAAADm/wAABAABAAEAAADl/woABAABAAEAAADl/wkABAABAAEAAADl/wgABAABAAEAAADl/wcABAABAAEAAADl/wYABAABAAEAAADl/wUABAABAAEAAADl/wQABAABAAEAAADl/wMABAABAAEAAADl/wIABAABAAEAAADl/wEABAABAAEAAADl/wAABAABAAEAAADk/woABAAIAAIAAADk/wkABAABAAEAAADk/wgABAABAAEAAADk/wcABAABAAEAAADk/wYABAABAAEAAADk/wUABAABAAEAAADk/wQABAABAAEAAADk/wMABAABAAEAAADk/wIABAABAAEAAADk/wEABAABAAEAAADk/wAABAABAAEAAADH////BAABAAEAAADH//7/BAABAAEAAADH//z/BAABAAAAAADG////BAABAAEAAADG//7/BAABAAEAAADG//3/BAABAAEAAADG//z/BAABAAAAAADF////BAABAAEAAADF//7/BAABAAEAAADF//3/BAABAAEAAADF//z/BAABAAAAAADE////BAABAAEAAADE//7/BAABAAEAAADE//3/BAABAAEAAADE//z/BAABAAAAAADD////BAABAAEAAADD//7/BAABAAEAAADD//3/BAABAAEAAADD//z/BAABAAAAAADC/wgABAABAAEAAADC/wcABAABAAEAAADC/wYABAABAAEAAADC/wUABAABAAEAAADC/wQABAABAAEAAADC/wMABAABAAEAAADC/wIABAABAAEAAADC/wEABAABAAEAAADC/wAABAABAAEAAADC////BAABAAEAAADC//7/BAABAAEAAADC//3/BAABAAEAAADC//z/BAABAAAAAADB/wgABAABAAEAAADB/wcABAABAAEAAADB/wYABAABAAEAAADB/wUABAABAAEAAADB/wQABAABAAEAAADB/wMABAABAAEAAADB/wIABAABAAEAAADB/wEABAABAAEAAADB/wAABAABAAEAAADB////BAABAAEAAADB//7/BAABAAEAAADB//3/BAABAAEAAADB//z/BAABAAAAAADA/wgABAABAAEAAADA/wcABAABAAEAAADA/wYABAABAAEAAADA/wUABAABAAEAAADA/wQABAABAAEAAADA/wMABAABAAEAAADA/wIABAABAAEAAADA/wEABAABAAEAAADA/wAABAABAAEAAADA////BAABAAEAAADA//7/BAABAAEAAADA//3/BAABAAEAAADA//z/BAABAAAAAAC//wgABAABAAEAAAC//wcABAABAAEAAAC//wYABAABAAEAAAC//wUABAABAAEAAAC//wQABAABAAEAAAC//wMABAABAAEAAAC//wIABAABAAEAAAC//wEABAABAAEAAAC//wAABAABAAEAAAC/////BAABAAEAAAC///7/BAABAAEAAAC///3/BAABAAEAAAC///z/BAABAAAAAAC+/wgABAAAAAEAAAC+/wcABAAIAAEAAAC+/wYABAAIAAEAAAC+/wUABAAIAAEAAAC+/wQABAAIAAEAAAC+/wMABAAIAAEAAAC+/wIABAAIAAEAAAC+/wEABAAIAAEAAAC+/wAABAAIAAEAAAC+////BAAIAAEAAAC+//7/BAAAAAEAAAC+//3/BAAAAAEAAAC+//z/BAAAAAAAAADC/w4ABAAHAAAAAADC/w0ABAABAAEAAADC/wwABAABAAEAAADC/wsABAABAAEAAADC/woABAABAAEAAADC/wkABAABAAEAAADB/w4ABAAHAAAAAADB/w0ABAABAAEAAADB/wwABAABAAEAAADB/wsABAABAAEAAADB/woABAABAAEAAADB/wkABAABAAEAAADA/w4ABAABAAIAAADA/w0ABAABAAEAAADA/wwABAABAAEAAADA/wsABAABAAEAAADA/woABAABAAEAAADA/wkABAABAAEAAAC//w4ABAABAAIAAAC//w0ABAABAAEAAAC//wwABAABAAEAAAC//wsABAABAAEAAAC//woABAABAAEAAAC//wkABAABAAEAAAC+/w4ABAAAAAIAAAC+/w0ABAAIAAEAAAC+/wwABAAIAAEAAAC+/wsABAAIAAEAAAC+/woABAAIAAEAAAC+/wkABAAAAAEAAADH//3/BAABAAEAAADq////BAAGAAEAAADq//7/BAACAAEAAADq//3/BAACAAAAAADp////BAABAAEAAADp//7/BAABAAEAAADp//3/BAABAAAAAADo////BAABAAEAAADo//7/BAABAAEAAADo//3/BAABAAAAAADn////BAABAAEAAADn//7/BAABAAEAAADn//3/BAABAAAAAADm////BAABAAEAAADm//7/BAABAAEAAADm//3/BAABAAAAAADl////BAABAAEAAADl//7/BAABAAEAAADl//3/BAABAAAAAADk////BAABAAEAAADk//7/BAABAAEAAADk//3/BAABAAAAAAA=")
-tile_set = ExtResource("2_0d8vy")
+tile_set = ExtResource("2_rrv5u")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -44,7 +342,6 @@ tile_set = ExtResource("2_0d8vy")
 [node name="HUD" parent="GUI" instance=ExtResource("5_djwf0")]
 
 [node name="SkillTreeUI" parent="GUI" instance=ExtResource("6_rrv5u")]
-visible = false
 
 [node name="ErrorLabel" type="Label" parent="GUI"]
 visible = false
@@ -77,6 +374,7 @@ collision_layer = 256
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder/StaticBody2D"]
+position = Vector2(-177, -135)
 shape = SubResource("WorldBoundaryShape2D_fdo7j")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="WorldBorder"]

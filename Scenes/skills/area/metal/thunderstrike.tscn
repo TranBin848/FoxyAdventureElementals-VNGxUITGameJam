@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dtygsbfpy3r7i"]
 
-[ext_resource type="Script" uid="uid://b4hpwvhtqcvm" path="res://scenes/skills/area/metal/thunderbolt.gd" id="1_5xajf"]
-[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_qytdy"]
-[ext_resource type="Texture2D" uid="uid://bplw6ih3je446" path="res://assets/fx/explosion/explosion.png" id="3_0ffbf"]
-[ext_resource type="Texture2D" uid="uid://bhm50qwr2xhri" path="res://assets/skills/metal/Thunder/Thunderstrike w blur.png" id="4_qclog"]
+[ext_resource type="Script" uid="uid://b4hpwvhtqcvm" path="res://scenes/skills/area/metal/thunderstrike.gd" id="1_v7bc4"]
+[ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_3ja6u"]
+[ext_resource type="Texture2D" uid="uid://bplw6ih3je446" path="res://assets/fx/explosion/explosion.png" id="3_r8pog"]
+[ext_resource type="Texture2D" uid="uid://bhm50qwr2xhri" path="res://assets/skills/metal/Thunder/Thunderstrike w blur.png" id="4_3poaj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gp0ck"]
 radius = 19.0263
@@ -39,7 +39,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_agpdt"]
-resource_name = "Thunderbolt"
+resource_name = "ThunderStrike"
 length = 1.5
 step = 0.0166667
 tracks/0/type = "value"
@@ -87,13 +87,13 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jmicw"]
 _data = {
 &"RESET": SubResource("Animation_4o8rp"),
-&"Thunderbolt": SubResource("Animation_agpdt")
+&"ThunderStrike": SubResource("Animation_agpdt")
 }
 
-[node name="Thunderbolt" type="Area2D"]
+[node name="ThunderStrike" type="Area2D"]
 collision_layer = 32
 collision_mask = 8
-script = ExtResource("1_5xajf")
+script = ExtResource("1_v7bc4")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -104,7 +104,7 @@ shape = SubResource("CircleShape2D_gp0ck")
 position = Vector2(0, -23)
 collision_mask = 16
 monitoring = false
-script = ExtResource("2_qytdy")
+script = ExtResource("2_3ja6u")
 elemental_type = 1
 metadata/_custom_type_script = "uid://ccpqtop0obu2w"
 
@@ -114,14 +114,14 @@ shape = SubResource("RectangleShape2D_wnhec")
 [node name="FX" type="Sprite2D" parent="."]
 position = Vector2(-9.53674e-07, 12.5)
 scale = Vector2(1.25, 0.21875)
-texture = ExtResource("3_0ffbf")
+texture = ExtResource("3_r8pog")
 hframes = 22
 frame = 21
 
 [node name="Skill" type="Sprite2D" parent="."]
 position = Vector2(0, -20)
 scale = Vector2(1.75, 1.75)
-texture = ExtResource("4_qclog")
+texture = ExtResource("4_3poaj")
 offset = Vector2(0, -12)
 hframes = 13
 frame = 12

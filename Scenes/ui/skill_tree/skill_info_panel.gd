@@ -118,8 +118,8 @@ func _update_buttons():
 	unlock_btn.disabled = is_unlocked
 	unlock_btn.text = "UNLOCKED" if is_unlocked else "UNLOCK (%d)" % UNLOCK_COST
 	
-	upgrade_btn.disabled = not is_unlocked or level >= 3
-	upgrade_btn.text = "MAX LEVEL" if level >= 3 else "UPGRADE (%d)" % UPGRADE_COST
+	upgrade_btn.disabled = not is_unlocked or level >= 10
+	upgrade_btn.text = "MAX LEVEL" if level >= 10 else "UPGRADE (%d)" % UPGRADE_COST
 	
 	var index = SkillTreeManager.find_skill_slot(skill_name)
 	equip_button.text = "UNEQUIP" if index != -1 else "EQUIP"

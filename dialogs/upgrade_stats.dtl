@@ -1,7 +1,7 @@
 do GameManager.player_act("toggle_actor_state")
-npc_master_fox: Nâng cấp?
+Stat_Seller: Ngươi muốn nâng cấp chỉ số của mình à?
 - Có
 	do GameManager._show_upgrade_popup()
 - Không
-	npc_master_fox: Oke
+	Stat_Seller: Hứ! Tên kẹt xỉ!
 do GameManager.player_act("toggle_actor_state")

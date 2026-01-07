@@ -86,7 +86,7 @@ func get_stat_text(sk: Skill) -> String:
 			ElementsEnum.Elements.EARTH:
 				result = "[center][i][color=#a0a0a0]%s[/color][/i][/center]" % earth_ultimate_guide
 	else:
-		result = "[center][i][color=#a0a0a0]\n\nThe stars have not yet aligned...\nThis power remains dormant for now.[/color][/i][/center]"
+		result = "[center][i][color=#a0a0a0]\n\nBánh răng số phận vẫn đang chuyển mình\nCuộc hành trình của bạn vẫn chưa đến hồi kết...[/color][/i][/center]"
 	return result
 
 func _on_close_button_pressed():

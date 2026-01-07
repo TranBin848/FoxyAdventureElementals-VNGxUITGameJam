@@ -9,7 +9,8 @@ func _enter() -> void:
 	obj.handle_dead()
 	obj.change_animation("die")
 	obj.animated_sprite.animation_finished.connect(_spawn_chest)
-	Engine.time_scale = 0.2
+	if(not obj.being_controled):
+		Engine.time_scale = 0.2
 	timer = get_current_anim_duration()
 
 func _update(_delta: float) -> void:

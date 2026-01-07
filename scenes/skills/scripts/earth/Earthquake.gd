@@ -11,4 +11,4 @@ func _init():
 	mana = 10
 	texture_path = "res://assets/skills/icons_skill/48x48/skill_icons32.png"
 	animation_name = "Earthquake"
-	projectile_scene = preload("res://scenes/skills/projectiles/earth/earthquake_projectile.tscn")
+	projectile_scene_path = "res://scenes/skills/projectiles/earth/earthquake_projectile.tscn"

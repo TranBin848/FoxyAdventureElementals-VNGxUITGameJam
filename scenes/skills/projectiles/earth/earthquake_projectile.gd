@@ -4,8 +4,9 @@ extends ProjectileBase
 @export_group("Spawner Settings")
 @export var wave_count_base: int = 5
 @export var spawn_interval: float = 0.05
-@export var segment_scene: PackedScene # MUST ASSIGN THIS IN EDITOR
+@export var segment_scene_path: String # MUST ASSIGN THIS IN EDITOR
 
+var segment_scene: PackedScene
 var segments_spawned: int = 0
 var current_wave_target: int = 0
 var is_stopped: bool = false
@@ -23,10 +24,12 @@ func setup(skill: Skill, dir: Vector2) -> void:
 	super.setup(skill, dir)
 	
 	# 1. Calculate the target
-	self.current_wave_target = (wave_count_base * skill.level + 1) / 2
+	self.current_wave_target = (wave_count_base * (1.0 + sqrt(skill.level - 1.0)))
 	
 	# Debug print to verify
 	# print("Target: ", current_wave_target, " | Base: ", wave_count_base, " | Lvl: ", skill.level)
+	
+	segment_scene = load(segment_scene_path)
 	
 	speed = skill.speed
 	elemental_type = skill.elemental_type

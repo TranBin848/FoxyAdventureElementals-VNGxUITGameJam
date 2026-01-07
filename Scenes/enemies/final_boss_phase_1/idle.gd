@@ -7,4 +7,5 @@ func _enter() -> void:
 func _update(delta: float) -> void:
 	super._update(delta)
 	handle_mini_bosses()
+	print(obj.health)
 	pass
