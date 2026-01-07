@@ -31,6 +31,7 @@ var is_fighting = false
 var is_facing_left = true
 var is_attacking = false
 var has_delay_state = false
+var is_invur = true
 
 var being_controled = false
 
@@ -80,10 +81,26 @@ func fire() -> void:
 		bullet.fire(get_fire_poss(), player_pos,atk_angle, 1)
 
 var targets: Array[Vector2] = [
+	#Vector2(100, -600),
+	#Vector2(-100, -600),
+	#Vector2(150, -600),
+	#Vector2(-150, -600),
+	#Vector2(200, -600),
+	#Vector2(-200, -600)
+	Vector2(20, -600),
+	Vector2(-20, -600),
+	Vector2(50, -600),
+	Vector2(-50, -600),
+	Vector2(75, -600),
+	Vector2(-75, -600),
 	Vector2(100, -600),
 	Vector2(-100, -600),
+	Vector2(125, -600),
+	Vector2(-125, -600),
 	Vector2(150, -600),
 	Vector2(-150, -600),
+	Vector2(175, -600),
+	Vector2(-175, -600),
 	Vector2(200, -600),
 	Vector2(-200, -600)
 ]
@@ -95,7 +112,6 @@ var fire_point: Array[Vector2] = [
 func launch(index: int) -> void:
 	if targets.is_empty() or fire_point.is_empty():
 		return
-	alert_coroutine()
 
 	var rocket := rocket_factory.create() as WarLordRocket
 	rocket.launch(global_position + fire_point[index % fire_point.size()], targets[index])
@@ -108,6 +124,8 @@ func get_fire_poss() -> Vector2:
 		return global_position + Vector2(45, -25)
 
 func take_damage(damage: int) -> void:
+	if(is_invur == true): return
+	
 	super.take_damage(damage)
 	
 	AudioManager.play_sound("war_lord_hurt")
@@ -152,13 +170,28 @@ func flash_corountine() -> void:
 	animated_sprite_2d.modulate = Color.WHITE 
 
 func alert_coroutine() -> void:
-	var targets = $RocketTargets
-	var times = 5;
-	for i in times:
-		await get_tree().create_timer(0.05).timeout
-		targets.visible = true;
-		await get_tree().create_timer(0.25).timeout
-		targets.visible = false;
+	var targets = $RocketTargets.get_children()
+	await get_tree().create_timer(0.5).timeout
+	for i in range(0, targets.size(), 2):
+		# hiện cặp
+		targets[i].visible = true
+		targets[i + 1].visible = true
+		await get_tree().create_timer(0.2).timeout
+		
+		# ẩn cặp
+		targets[i].visible = false
+		targets[i + 1].visible = false
+		
+		await get_tree().create_timer(0.4).timeout
+
+#func alert_coroutine() -> void:
+	#var targets = $RocketTargets
+	#var times = 5;
+	#for i in times:
+		#await get_tree().create_timer(0.05).timeout
+		#targets.visible = true;
+		#await get_tree().create_timer(0.25).timeout
+		#targets.visible = false;
 
 func start_fight() -> void:
 	if(!being_controled):
