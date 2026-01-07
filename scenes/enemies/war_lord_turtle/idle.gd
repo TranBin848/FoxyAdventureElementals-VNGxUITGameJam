@@ -1,6 +1,6 @@
 extends WarLordState
 
-@export var cd_skill: float = 3.0
+@export var cd_skill: float = 1.5
 
 func _enter() -> void:
 	obj.change_animation("idle")

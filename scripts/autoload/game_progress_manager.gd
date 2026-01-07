@@ -6,7 +6,7 @@ const POPUP_SCENE = preload("res://scenes/ui/popup/guide_popup.tscn")
 # State Flags
 var first_coin_collected: bool = false
 var first_key_collected: bool = false
-var first_enemy_killed: bool = false
+var first_skill_scroll_collected: bool = false
 var first_cutlass_collected: bool = false
 var first_wood_wand_collected: bool = false
 var fire_ultimate_collected: bool = false
@@ -22,6 +22,7 @@ var coin_media_path = "res://scenes/ui/popup/guide_content/coin_guide.ogv"
 var key_media_path = "res://scenes/ui/popup/guide_content/key_guide.ogv"
 var skill_tree_media_path = "res://scenes/ui/popup/guide_content/skill_tree_guide.png"
 var wand_media_path = "res://scenes/ui/popup/guide_content/wand_guide.ogv"
+var skill_scroll_media_path = "res://scenes/ui/popup/guide_content/skill_scroll_guide.png"
 
 var metal_ultimate_media_path = "res://assets/skills/icon element/Metal_v2.png"
 var wood_ultimate_media_path = "res://assets/skills/icon element/Wood_v2.png"
@@ -29,6 +30,11 @@ var water_ultimate_media_path = "res://assets/skills/icon element/Water_v2.png"
 var fire_ultimate_media_path = "res://assets/skills/icon element/Fire_v2.png"
 var earth_ultimate_media_path = "res://assets/skills/icon element/Earth_v2.png"
 
+var skill_scroll_guide := """
+Bạn vừa nhặt được một cuộn phép thuật. 
+Nhưng ngôn ngữ mà chúng sử dụng vô cùng phức tạp.
+Có lẽ bạn sẽ cần công cụ gì đó để có thể dùng được chúng.
+"""
 
 var wood_wand_guide := """
 Bạn vừa nhận được trượng gỗ. Viên đá trên cây trượng sẽ giúp bạn đọc được ngôn ngữ phép thuật. Từ đó học được cách sử dụng phép.
@@ -101,11 +107,6 @@ var guide_data: Dictionary = {
 		"content": "Bạn vừa tìm được chìa khóa để mở rương kho báu, hãy truy tìm rương báu và mở chúng ra để nhận được nhiều của cải nhé.",
 		"video": key_media_path
 	},
-	"KILL": {
-		"title": "Enemy Slain",
-		"content": "Enemies drop elemental skills. Pick them up to grow stronger.",
-		"video": "res://assets/videos/tutorial_combat.ogv"
-	},
 	"WOOD_WAND": {
 		"title": "Wooden Wand",
 		"content": wood_wand_guide,
@@ -115,6 +116,11 @@ var guide_data: Dictionary = {
 		"title": "Cutlass",
 		"content": cutlass_guide,
 		"video": cutlass_media_path
+	},
+	"SKILL_SCROLL": {
+		"title": "Skill Scroll",
+		"content": skill_scroll_guide,
+		"image": skill_scroll_media_path
 	},
 	"SKILL_TREE": {
 		"title": "Skill Tree",
@@ -126,7 +132,7 @@ var guide_data: Dictionary = {
 		"content": metal_ultimate_guide,
 		"image": metal_ultimate_media_path
 	},
-		"FIRE_ULTIMATE": {
+	"FIRE_ULTIMATE": {
 		"title": "Fire Ultimate",
 		"content": fire_ultimate_guide,
 		"image": fire_ultimate_media_path
@@ -160,11 +166,6 @@ func trigger_event(event_type: String) -> void:
 			first_key_collected = true
 			_show_guide("KEY")
 			
-		"KILL":
-			if first_enemy_killed: return
-			first_enemy_killed = true
-			_show_guide("KILL")
-			
 		"CUTLASS":
 			if first_cutlass_collected: return
 			first_cutlass_collected = true
@@ -179,7 +180,12 @@ func trigger_event(event_type: String) -> void:
 			if first_time_open_skill_tree: return
 			first_time_open_skill_tree = true
 			_show_guide("SKILL_TREE")
-			
+		
+		"SKILL_SCROLL":
+			if first_skill_scroll_collected: return
+			first_skill_scroll_collected = true
+			_show_guide("SKILL_SCROLL")
+		
 		"METAL_ULTIMATE":
 			if metal_ultimate_collected: return
 			metal_ultimate_collected = true
@@ -230,7 +236,6 @@ func get_save_data() -> Dictionary:
 	return {
 		"first_coin_collected": first_coin_collected,
 		"first_key_collected": first_key_collected,
-		"first_enemy_killed": first_enemy_killed,
 		"first_cutlass_collected": first_cutlass_collected,
 		"first_wood_wand_collected": first_wood_wand_collected,
 		"fire_ultimate_collected": fire_ultimate_collected,
@@ -246,7 +251,6 @@ func load_save_data(data: Dictionary) -> void:
 	
 	first_coin_collected = data.get("first_coin_collected", false)
 	first_key_collected = data.get("first_key_collected", false)
-	first_enemy_killed = data.get("first_enemy_killed", false)
 	first_cutlass_collected = data.get("first_cutlass_collected", false)
 	first_wood_wand_collected = data.get("first_wood_wand_collected", false)
 	fire_ultimate_collected = data.get("fire_ultimate_collected", false)
