@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://qv25yj3rt5ql"]
+[gd_scene load_steps=49 format=4 uid="uid://qv25yj3rt5ql"]
 
 [ext_resource type="TileSet" uid="uid://clee474g44v61" path="res://assets/island/tileset.tres" id="1_4qlm2"]
 [ext_resource type="AudioStream" uid="uid://8ig7y4yrrv5e" path="res://assets/sounds/music.mp3" id="1_aq1cd"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://c1hph2plir0qc" path="res://scenes/blade/blade_collectable.tscn" id="27_etxra"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="29_0lii6"]
 [ext_resource type="Texture2D" uid="uid://bk51gkprscokm" path="res://assets/skills/icon element/Fire_v2.png" id="37_xciwo"]
+[ext_resource type="PackedScene" uid="uid://eam3ft7648pk" path="res://scenes/enemies/spawner/spawner.tscn" id="38_31ekc"]
 [ext_resource type="Texture2D" uid="uid://cm0v1judaocq7" path="res://assets/skills/icon element/Water_v2.png" id="38_x60jx"]
 [ext_resource type="Texture2D" uid="uid://butqokb3dnq7u" path="res://assets/skills/icon element/Earth_v2.png" id="39_mwgaq"]
 [ext_resource type="Texture2D" uid="uid://c5ewwmdx1mhhd" path="res://assets/skills/icon element/Metal_v2.png" id="40_3stc0"]
@@ -364,5 +365,7 @@ frame_progress = 0.463358
 position = Vector2(484, 45)
 texture = ExtResource("40_3stc0")
 
-[node name="Crab" parent="." instance=ExtResource("29_0lii6")]
-position = Vector2(469, 320)
+[node name="Spawner" parent="." instance=ExtResource("38_31ekc")]
+position = Vector2(408, 263)
+enemy_to_spawn = Array[PackedScene]([ExtResource("29_0lii6")])
+elemental_type = 3
