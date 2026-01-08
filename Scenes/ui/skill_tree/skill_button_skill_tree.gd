@@ -21,26 +21,13 @@ const UNLOCKED_COLOR: Color = Color(1, 1, 0.3, 1.0)
 signal skill_node_selected(button_node: SkillButtonNode)
 
 func _ready() -> void:
-	print("🔍 BUTTON DIAGNOSTIC: %s" % name)
-	
-	# Check basic properties
-	print("📋 BUTTON PROPERTIES:")
-	print("  disabled: %s" % disabled)
-	print("  mouse_filter: %s" % mouse_filter)
-	print("  visible: %s" % visible)
-	print("  skill assigned: %s" % (skill != null))
-	if skill:
-		print("  skill.name: %s" % skill.name)
 	
 	# Check if pressed signal exists
-	print("\n🔌 SIGNAL CHECK:")
 	var has_pressed = has_signal("pressed")
-	print("  'pressed' signal exists: %s" % ("✅" if has_pressed else "❌"))
 	
 	# Connect pressed signal
 	if has_pressed:
 		pressed.connect(_on_pressed)
-		print("  ✅ Connected pressed signal to _on_pressed()")
 	else:
 		push_error("  ❌ CRITICAL: Button has no 'pressed' signal!")
 	
@@ -54,43 +41,24 @@ func _ready() -> void:
 		line_2d.default_color = NORMAL_COLOR
 	
 	# Connect to SkillTreeManager signals
-	print("\n🌐 MANAGER SIGNALS:")
 	if SkillTreeManager:
-		print("  SkillTreeManager exists: ✅")
 		if SkillTreeManager.has_signal("stack_changed"):
 			SkillTreeManager.stack_changed.connect(_on_stack_changed)
-			print("  ✅ Connected to stack_changed")
-		else:
-			print("  ❌ stack_changed signal not found")
-		
 		if SkillTreeManager.has_signal("skill_leveled_up"):
 			SkillTreeManager.skill_leveled_up.connect(_on_level_changed)
-			print("  ✅ Connected to skill_leveled_up")
-		
 		if SkillTreeManager.has_signal("skill_unlocked"):
 			SkillTreeManager.skill_unlocked.connect(_on_skill_unlocked)
-			print("  ✅ Connected to skill_unlocked")
 	else:
 		push_error("  ❌ CRITICAL: SkillTreeManager not found!")
 	
 
 func _on_pressed() -> void:
-	print("🖱️ _on_pressed() CALLED for %s" % name)
-	print("  Emitting skill_node_selected signal...")
 	skill_node_selected.emit(self)
-	print("  ✅ Signal emitted")
-
-func _gui_input(event):
-	# Debug input events
-	if event is InputEventMouseButton:
-		print("🖱️ Mouse event on %s: button=%d, pressed=%s" % [name, event.button_index, event.pressed])
 
 func refresh_visual() -> void:
 	"""Update visuals from SkillTreeManager state"""
-	print("🔄 refresh_visual() called for %s" % name)
 	
 	if not skill:
-		print("  ⚠️ No skill assigned")
 		return
 	
 	if skill.texture_path:
@@ -99,8 +67,6 @@ func refresh_visual() -> void:
 	var is_unlocked = SkillTreeManager.is_unlocked(skill.name)
 	var level = SkillTreeManager.get_level(skill.name)
 	var stacks = SkillTreeManager.get_stacks(skill.name)
-	
-	print("  %s: unlocked=%s, level=%d, stacks=%d" % [skill.name, is_unlocked, level, stacks])
 	
 	# --- NEW LOGIC START ---
 	if skill.get("type") == "ultimate":
@@ -118,8 +84,6 @@ func refresh_visual() -> void:
 	
 	panel.show_behind_parent = is_unlocked
 	tooltip_text = skill.name
-	
-	print("  disabled set to: %s" % disabled)
 	
 	_update_line_color()
 func _update_line_color() -> void:
@@ -140,7 +104,6 @@ func _update_line_color() -> void:
 # Signal handlers
 func _on_skill_unlocked(skill_name: String) -> void:
 	if skill and skill_name == skill.name:
-		print("✨ %s unlocked!" % skill_name)
 		refresh_visual()
 		for child in children:
 			child._update_line_color()
