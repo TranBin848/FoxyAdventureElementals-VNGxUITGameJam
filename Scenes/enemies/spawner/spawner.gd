@@ -13,6 +13,7 @@ extends EnemyCharacter
 @onready var detect_player_area_2d: Area2D = $DetectPlayerArea2D
 
 var spawn_timer: float = 0
+const MAX_ALIVE_ENEMIES: int = 10
 
 func _ready() -> void:
 	super._ready()
@@ -22,6 +23,12 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	spawn_timer -= delta
+
+func _alive_enemies_count() -> int:
+	return get_tree().get_nodes_in_group("enemies").size()
+
+func _can_spawn_more() -> bool:
+	return _alive_enemies_count() < MAX_ALIVE_ENEMIES
 
 func _init_detect_player_area() -> void:
 	if detect_player_area_2d != null:
@@ -46,8 +53,13 @@ func _init_animated_sprite() -> void:
 	pass
 
 func spawn_enemy() -> bool:
-	if enemy_to_spawn == null or enemy_to_spawn.size() == 0: 
+	if not _can_spawn_more():
+		reset_spawn_timer()
+		return false
+
+	if enemy_to_spawn == null or enemy_to_spawn.is_empty():
 		print("Please assign an enemy for the spawner")
+		reset_spawn_timer()
 		return true
 	if health <= 0: return false
 	for i in enemy_per_spawn:
