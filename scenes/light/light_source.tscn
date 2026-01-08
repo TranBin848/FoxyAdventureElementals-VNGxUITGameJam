@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dchattqocr4ae"]
 
-[sub_resource type="Gradient" id="Gradient_rjkgb"]
+[sub_resource type="Gradient" id="Gradient_2xhx5"]
 offsets = PackedFloat32Array(0.293413, 0.748503)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_s6hm0"]
-gradient = SubResource("Gradient_rjkgb")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5qnna"]
+gradient = SubResource("Gradient_2xhx5")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -17,7 +17,7 @@ energy = 0.5
 shadow_enabled = true
 shadow_filter = 2
 shadow_filter_smooth = 2.0
-texture = SubResource("GradientTexture2D_s6hm0")
+texture = SubResource("GradientTexture2D_5qnna")
 texture_scale = 5.0
 
 [node name="AreaPointLight2D" type="PointLight2D" parent="."]
@@ -25,5 +25,5 @@ position = Vector2(3, -17)
 energy = 0.5
 shadow_filter = 2
 shadow_filter_smooth = 2.0
-texture = SubResource("GradientTexture2D_s6hm0")
+texture = SubResource("GradientTexture2D_5qnna")
 texture_scale = 5.0

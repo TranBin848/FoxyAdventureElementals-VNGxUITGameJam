@@ -94,7 +94,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_wx43u")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 1.77156
+shader_parameter/y_zoom = 0.163508
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -416,7 +416,7 @@ guide_text = "F to interact"
 [node name="GuideTrigger3" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
 z_index = 199
 position = Vector2(-23, 310)
-guide_text = "Take the blade \\n C to attack, X to throw"
+guide_text = "V to draw the blade\\n C to attack, X to throw"
 
 [node name="GuideTrigger4" parent="GuideTrigger" instance=ExtResource("31_dy5lu")]
 z_index = 199
@@ -516,6 +516,7 @@ position = Vector2(1560, 140)
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="GUI" instance=ExtResource("44_81g5i")]
+metadata/_edit_use_anchors_ = true
 
 [node name="SkillTreeUI" parent="GUI" instance=ExtResource("42_60i3m")]
 visible = false
@@ -590,31 +591,31 @@ tile_map_data = PackedByteArray("AADn/woACgAAAAAABQDp/woACgAAAAAABQDo/woACgAAAAA
 tile_set = ExtResource("3_2jmd8")
 
 [connection signal="body_entered" from="ObjectTileMap/Coin" to="ObjectTileMap/Coin" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46495" to="ObjectTileMap/@RigidBody2D@46495" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46496" to="ObjectTileMap/@RigidBody2D@46496" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46497" to="ObjectTileMap/@RigidBody2D@46497" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46498" to="ObjectTileMap/@RigidBody2D@46498" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46499" to="ObjectTileMap/@RigidBody2D@46499" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46500" to="ObjectTileMap/@RigidBody2D@46500" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46501" to="ObjectTileMap/@RigidBody2D@46501" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46502" to="ObjectTileMap/@RigidBody2D@46502" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46503" to="ObjectTileMap/@RigidBody2D@46503" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46504" to="ObjectTileMap/@RigidBody2D@46504" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46505" to="ObjectTileMap/@RigidBody2D@46505" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46506" to="ObjectTileMap/@RigidBody2D@46506" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46507" to="ObjectTileMap/@RigidBody2D@46507" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46508" to="ObjectTileMap/@RigidBody2D@46508" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46509" to="ObjectTileMap/@RigidBody2D@46509" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46510" to="ObjectTileMap/@RigidBody2D@46510" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46511" to="ObjectTileMap/@RigidBody2D@46511" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46512" to="ObjectTileMap/@RigidBody2D@46512" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46513" to="ObjectTileMap/@RigidBody2D@46513" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46514" to="ObjectTileMap/@RigidBody2D@46514" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46515" to="ObjectTileMap/@RigidBody2D@46515" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46516" to="ObjectTileMap/@RigidBody2D@46516" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46517" to="ObjectTileMap/@RigidBody2D@46517" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46518" to="ObjectTileMap/@RigidBody2D@46518" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46519" to="ObjectTileMap/@RigidBody2D@46519" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46520" to="ObjectTileMap/@RigidBody2D@46520" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46521" to="ObjectTileMap/@RigidBody2D@46521" method="_on_body_entered"]
-[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@46522" to="ObjectTileMap/@RigidBody2D@46522" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50735" to="ObjectTileMap/@RigidBody2D@50735" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50736" to="ObjectTileMap/@RigidBody2D@50736" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50737" to="ObjectTileMap/@RigidBody2D@50737" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50738" to="ObjectTileMap/@RigidBody2D@50738" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50739" to="ObjectTileMap/@RigidBody2D@50739" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50740" to="ObjectTileMap/@RigidBody2D@50740" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50741" to="ObjectTileMap/@RigidBody2D@50741" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50742" to="ObjectTileMap/@RigidBody2D@50742" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50743" to="ObjectTileMap/@RigidBody2D@50743" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50744" to="ObjectTileMap/@RigidBody2D@50744" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50745" to="ObjectTileMap/@RigidBody2D@50745" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50746" to="ObjectTileMap/@RigidBody2D@50746" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50747" to="ObjectTileMap/@RigidBody2D@50747" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50748" to="ObjectTileMap/@RigidBody2D@50748" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50749" to="ObjectTileMap/@RigidBody2D@50749" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50750" to="ObjectTileMap/@RigidBody2D@50750" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50751" to="ObjectTileMap/@RigidBody2D@50751" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50752" to="ObjectTileMap/@RigidBody2D@50752" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50753" to="ObjectTileMap/@RigidBody2D@50753" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50754" to="ObjectTileMap/@RigidBody2D@50754" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50755" to="ObjectTileMap/@RigidBody2D@50755" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50756" to="ObjectTileMap/@RigidBody2D@50756" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50757" to="ObjectTileMap/@RigidBody2D@50757" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50758" to="ObjectTileMap/@RigidBody2D@50758" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50759" to="ObjectTileMap/@RigidBody2D@50759" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50760" to="ObjectTileMap/@RigidBody2D@50760" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50761" to="ObjectTileMap/@RigidBody2D@50761" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@50762" to="ObjectTileMap/@RigidBody2D@50762" method="_on_body_entered"]
