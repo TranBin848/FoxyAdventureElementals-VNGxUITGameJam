@@ -214,13 +214,13 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_qv7tn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_w41tc")
 text = "UNSTUCK"
 
-[node name="Button2" type="Button" parent="BackgroundBoard/MarginContainer/SettingsList/ButtonsRow"]
-visible = false
+[node name="MenuButton" type="Button" parent="BackgroundBoard/MarginContainer/SettingsList/ButtonsRow"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_styles/hover = SubResource("StyleBoxTexture_gevyv")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qv7tn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_w41tc")
+text = "MENU"
 
 [node name="CloseTextureButton" type="TextureButton" parent="BackgroundBoard"]
 custom_minimum_size = Vector2(50, 50)
@@ -241,4 +241,5 @@ stretch_mode = 0
 [connection signal="toggled" from="BackgroundBoard/MarginContainer/SettingsList/SFXRow/SFXCheckButton" to="." method="_on_sound_check_button_toggled"]
 [connection signal="value_changed" from="BackgroundBoard/MarginContainer/SettingsList/ParticlesGroup/SliderWraper/ParticleSlider" to="." method="_on_particle_slider_value_changed"]
 [connection signal="pressed" from="BackgroundBoard/MarginContainer/SettingsList/ButtonsRow/UnstuckButton" to="." method="_on_unstuck_button_pressed"]
+[connection signal="pressed" from="BackgroundBoard/MarginContainer/SettingsList/ButtonsRow/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="BackgroundBoard/CloseTextureButton" to="." method="_on_close_texture_button_pressed"]
