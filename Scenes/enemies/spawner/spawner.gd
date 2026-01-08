@@ -7,15 +7,26 @@ extends EnemyCharacter
 @export var spawn_min_distance: float = 2
 @export var spawn_max_distance: float = 10
 
+@export var detect_player_area_center: Vector2 = Vector2.ZERO
+@export var detect_player_area_size: Vector2 = Vector2(500, 500)
+
+@onready var detect_player_area_2d: Area2D = $DetectPlayerArea2D
+
 var spawn_timer: float = 0
 
 func _ready() -> void:
 	super._ready()
 	_init_animated_sprite()
+	_init_detect_player_area()
 	fsm = FSM.new(self, $States, $States/Idle)
 	
 func _process(delta: float) -> void:
 	spawn_timer -= delta
+
+func _init_detect_player_area() -> void:
+	if detect_player_area_2d != null:
+		detect_player_area_2d.position = detect_player_area_center
+		detect_player_area_2d.scale = detect_player_area_size
 
 func _init_animated_sprite() -> void:
 	if has_node("Direction/AnimatedSprites"):
@@ -69,3 +80,15 @@ func update_spawn_timer(delta: float) -> bool:
 	if (spawn_timer <= 0):
 		return true
 	return false
+	
+
+func _on_detect_player_area_2d_body_entered(body: Node2D) -> void:
+	if body is Player: 
+		found_player = body as Player
+
+func _on_detect_player_area_2d_body_exited(body: Node2D) -> void:
+	if found_player != null && body == found_player:
+		found_player = null
+
+func _check_player_in_sight():
+	pass

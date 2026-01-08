@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://eam3ft7648pk"]
+[gd_scene load_steps=54 format=3 uid="uid://eam3ft7648pk"]
 
 [ext_resource type="Script" uid="uid://dfm8mev0b22np" path="res://scenes/enemies/spawner/spawner.gd" id="1_j8wy5"]
 [ext_resource type="Texture2D" uid="uid://bnrcrc2grwxk7" path="res://assets/enemy/spawner/spawner_dead7.png" id="2_5xtu1"]
@@ -422,6 +422,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vm5qj"]
 radius = 19.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y3pa7"]
+size = Vector2(1, 1)
+
 [node name="Spawner" type="CharacterBody2D"]
 script = ExtResource("1_j8wy5")
 spawn_min_distance = 40.0
@@ -500,3 +503,12 @@ bounce_back_velocity = 0.0
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("43_vm5qj")
 bounce_back_velocity = 0.0
+
+[node name="DetectPlayerArea2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayerArea2D"]
+shape = SubResource("RectangleShape2D_y3pa7")
+
+[connection signal="body_entered" from="DetectPlayerArea2D" to="." method="_on_detect_player_area_2d_body_entered"]
+[connection signal="body_exited" from="DetectPlayerArea2D" to="." method="_on_detect_player_area_2d_body_exited"]
