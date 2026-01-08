@@ -628,7 +628,7 @@ shape = SubResource("WorldBoundaryShape2D_8xvdf")
 position = Vector2(14288, -534)
 
 [node name="Player" parent="." instance=ExtResource("8_q4xca")]
-position = Vector2(4035, -215)
+position = Vector2(3869, -18)
 
 [connection signal="interacted" from="Object/Platform6/PathFollow2D/InteractiveArea2D" to="Object/Platform6" method="_on_interactive_area_2d_interacted"]
 [connection signal="interacted" from="Object/Platform8/PathFollow2D/InteractiveArea2D" to="Object/Platform8" method="_on_interactive_area_2d_interacted"]
