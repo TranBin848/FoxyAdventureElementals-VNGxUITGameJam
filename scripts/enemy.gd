@@ -68,6 +68,7 @@ var found_player: Player = null
 
 # Spike Hit Area
 var spike_hit_area: HitArea2D = null
+var hurt_area: HurtArea2D = null
 
 # Material to change outline
 var shader_material: Material
@@ -173,7 +174,7 @@ func _init_detect_player_raycast():
 # --- Initialize hurt area
 func _init_hurt_area():
 	if has_node("Direction/HurtArea2D"):
-		var hurt_area = $Direction/HurtArea2D
+		hurt_area = $Direction/HurtArea2D
 		hurt_area.hurt.connect(_on_hurt_area_2d_hurt)
 
 # --- Initialize hit area
@@ -486,6 +487,8 @@ func disable_collision():
 	collision_layer = 0
 	if spike_hit_area != null and spike_hit_area.has_node("CollisionShape2D"):
 		spike_hit_area.get_node("CollisionShape2D").disabled = true
+	if hurt_area != null and hurt_area.has_node("CollisionShape2D"):
+		hurt_area.get_node("CollisionShape2D").disabled = true
 
 # Enemy bị hút vào vùng nổ
 func enter_tornado(tornado_pos: Vector2) -> void:
