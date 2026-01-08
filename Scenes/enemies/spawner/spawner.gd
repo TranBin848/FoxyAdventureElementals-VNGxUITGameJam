@@ -14,6 +14,7 @@ extends EnemyCharacter
 
 var spawn_timer: float = 0
 const MAX_ALIVE_ENEMIES: int = 10
+var _spawned_enemies: Array[EnemyCharacter] = []
 
 func _ready() -> void:
 	super._ready()
@@ -21,11 +22,18 @@ func _ready() -> void:
 	_init_detect_player_area()
 	fsm = FSM.new(self, $States, $States/Idle)
 	
+func _exit_tree() -> void:
+	for enemy in _spawned_enemies:
+		if is_instance_valid(enemy):
+			enemy.disconnect("tree_exited", Callable(self, "_on_spawned_enemy_exited"))
+	_spawned_enemies.clear()
+	
 func _process(delta: float) -> void:
 	spawn_timer -= delta
 
 func _alive_enemies_count() -> int:
-	return get_tree().get_nodes_in_group("enemies").size()
+	_spawned_enemies = _spawned_enemies.filter(func(e): return is_instance_valid(e))
+	return _spawned_enemies.size()
 
 func _can_spawn_more() -> bool:
 	return _alive_enemies_count() < MAX_ALIVE_ENEMIES
@@ -55,7 +63,7 @@ func _init_animated_sprite() -> void:
 func spawn_enemy() -> bool:
 	if not _can_spawn_more():
 		reset_spawn_timer()
-		return false
+		return true
 
 	if enemy_to_spawn == null or enemy_to_spawn.is_empty():
 		print("Please assign an enemy for the spawner")
@@ -77,12 +85,20 @@ func spawn_enemy() -> bool:
 			(enemy as EnemyCharacter).position.y = position.y
 			(enemy as EnemyCharacter).elemental_type = elemental_type
 			(enemy as EnemyCharacter)._ready()
+			_spawned_enemies.append(enemy)
+			# When the enemy is removed from the scene tree (die, despawn, etc.)
+			# we get notified and can erase it from our list.
+			enemy.connect("tree_exited", Callable(self, "_on_spawned_enemy_exited").bind(enemy))
 		health-=1
 		health_changed.emit()
-		if health <= 0: return false			
+		if health <= 0: 
+			return false			
 
 	reset_spawn_timer()
 	return true
+
+func _on_spawned_enemy_exited(enemy: EnemyCharacter) -> void:
+	_spawned_enemies.erase(enemy)
 
 func reset_spawn_timer() -> void:
 	spawn_timer = spawn_interval

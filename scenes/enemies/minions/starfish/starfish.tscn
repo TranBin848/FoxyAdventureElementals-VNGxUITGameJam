@@ -144,6 +144,7 @@ position = Vector2(0, 10)
 position = Vector2(0, 5)
 
 [node name="Direction" type="Node2D" parent="."]
+position = Vector2(0, 2)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_ji8a0")
