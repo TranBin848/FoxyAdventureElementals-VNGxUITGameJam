@@ -299,31 +299,44 @@ func _play_with_variation(player: AudioStreamPlayer2D, clip: AudioClip) -> void:
 	player.play()
 
 func _init_culling() -> void:
-	# Create enabler programmatically
-	var enabler = VisibleOnScreenEnabler2D.new()
-	add_child(enabler)
+	var notifier = VisibleOnScreenNotifier2D.new()
+	add_child(notifier)
 	
-	# Get viewport size to extend culling area
 	if is_inside_tree():
-		_setup_culling_rect(enabler)
+		_setup_culling_rect(notifier)
 	else:
-		call_deferred("_setup_culling_rect", enabler)
+		call_deferred("_setup_culling_rect", notifier)
+	
+	notifier.screen_exited.connect(_on_screen_exited)
+	notifier.screen_entered.connect(_on_screen_entered)
 
-func _setup_culling_rect(enabler: VisibleOnScreenEnabler2D) -> void:
+func _setup_culling_rect(notifier: VisibleOnScreenNotifier2D) -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
-
-	# Fallback size if viewport_size is invalid / zero
 	if viewport_size == Vector2.ZERO:
-		viewport_size = Vector2(1280, 720)  # your fallback resolution
+		viewport_size = Vector2(1280, 720)
+	
+	var extended_rect := Rect2(-viewport_size, viewport_size * 3.0)
+	notifier.rect = extended_rect
 
-	# Extend the rect to 2x viewport size
-	var extended_rect := Rect2(
-		-viewport_size,          # position
-		viewport_size * 3.0      # size
-	)
+func _on_screen_exited() -> void:
+	# Pause only what you want
+	set_physics_process(false)
+	set_process(false)
+	
+	# Keep critical systems alive
+	if particle_audio_timer:
+		particle_audio_timer.paused = true
+	if current_particle:
+		current_particle.emitting = false
 
-	enabler.rect = extended_rect
-	enabler.enable_mode = VisibleOnScreenEnabler2D.ENABLE_MODE_INHERIT
+func _on_screen_entered() -> void:
+	set_physics_process(true)
+	set_process(true)
+	
+	if particle_audio_timer:
+		particle_audio_timer.paused = false
+	if current_particle:
+		current_particle.emitting = true
 
 # --- Check if touching wall
 func is_touch_wall() -> bool:

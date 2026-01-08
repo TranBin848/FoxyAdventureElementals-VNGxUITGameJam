@@ -15,7 +15,7 @@
 [ext_resource type="Resource" uid="uid://dalrpimaw8kqv" path="res://scenes/skills/scripts/wood/WoodenClone.tres" id="8_da0gi"]
 [ext_resource type="VideoStream" uid="uid://v2himafrkgh7" path="res://assets/skills/wood/clone.ogv" id="8_k1hmm"]
 [ext_resource type="Resource" uid="uid://3rex62uqsal1" path="res://scenes/skills/scripts/ultimate/WoodUltimate.tres" id="9_065wu"]
-[ext_resource type="VideoStream" uid="uid://dacv6vori06gn" path="res://assets/skills/wood/ToxicBreath.ogv" id="9_k1hmm"]
+[ext_resource type="VideoStream" path="res://assets/skills/wood/ToxicBreath.ogv" id="9_k1hmm"]
 [ext_resource type="Resource" uid="uid://dgk56c5pavl8r" path="res://scenes/skills/scripts/water/WaterBall.tres" id="9_pncew"]
 [ext_resource type="Resource" uid="uid://ly2bn32wiwrn" path="res://scenes/skills/scripts/water/Tornado.tres" id="10_wq534"]
 [ext_resource type="Resource" uid="uid://bk25mnb7lmoy0" path="res://scenes/skills/scripts/water/WaterSpike.tres" id="11_q815c"]
@@ -29,12 +29,12 @@
 [ext_resource type="VideoStream" uid="uid://bxm3jygx8pmfj" path="res://assets/skills/water/WaterSpike.ogv" id="16_a6do2"]
 [ext_resource type="Resource" uid="uid://bh7ca4qndbgby" path="res://scenes/skills/scripts/earth/Burrow.tres" id="16_xea02"]
 [ext_resource type="Resource" uid="uid://cc6qdlelt05ae" path="res://scenes/skills/scripts/earth/CometRain.tres" id="17_43v2m"]
-[ext_resource type="VideoStream" uid="uid://f7fhar0umvo3" path="res://assets/skills/metal/Stunshot.ogv" id="18_n402r"]
+[ext_resource type="VideoStream" path="res://assets/skills/metal/Stunshot.ogv" id="18_n402r"]
 [ext_resource type="Resource" uid="uid://b2417g2au2g6l" path="res://scenes/skills/scripts/ultimate/EarthUltimate.tres" id="21_m5q67"]
 [ext_resource type="Resource" uid="uid://ctl3eu0an05tj" path="res://scenes/skills/scripts/ultimate/MetalUltimate.tres" id="22_eu7kn"]
 [ext_resource type="VideoStream" uid="uid://dw0sl8ytef4kk" path="res://assets/skills/metal/thousand_swords.ogv" id="23_n402r"]
 [ext_resource type="VideoStream" uid="uid://s4o5ko03tp5t" path="res://assets/skills/metal/thunderbolt.ogv" id="24_k1hmm"]
-[ext_resource type="VideoStream" uid="uid://hf03fhkggdew" path="res://assets/skills/earth/Earthquake.ogv" id="24_n402r"]
+[ext_resource type="VideoStream" path="res://assets/skills/earth/Earthquake.ogv" id="24_n402r"]
 [ext_resource type="VideoStream" uid="uid://dfhfvpmnxesg0" path="res://assets/skills/earth/cometrain.ogv" id="27_481k6"]
 [ext_resource type="VideoStream" uid="uid://bjbo1omlkswse" path="res://assets/skills/earth/burrow.ogv" id="30_otfg3"]
 
@@ -217,7 +217,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Resurrection" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
+[node name="WoodUltimate" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -231,51 +231,52 @@ grow_vertical = 1
 scale = Vector2(1.5, 1.5)
 skill = ExtResource("9_065wu")
 
-[node name="Heal Over Time" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection" instance=ExtResource("2_5qiaq")]
+[node name="Heal Over Time" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WoodUltimate" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -61.3333
-offset_top = -40.0
-offset_right = -21.333
+offset_left = -58.6667
+offset_top = -19.3333
+offset_right = -18.6664
+offset_bottom = 20.6667
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(1, 1)
 skill = ExtResource("7_pncew")
 video_stream = ExtResource("6_basgh")
 
-[node name="WoodenClone" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/Heal Over Time" instance=ExtResource("2_5qiaq")]
+[node name="WoodenClone" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WoodUltimate/Heal Over Time" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -114.0
-offset_top = 5.99995
-offset_right = -73.9997
-offset_bottom = 46.0
+offset_left = -120.667
+offset_top = 71.3333
+offset_right = -80.6662
+offset_bottom = 111.333
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(1, 1)
 skill = ExtResource("8_da0gi")
 video_stream = ExtResource("8_k1hmm")
 
-[node name="ToxicBreath" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Resurrection/Heal Over Time" instance=ExtResource("2_5qiaq")]
+[node name="ToxicBreath" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WoodUltimate/Heal Over Time" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -60.6667
-offset_top = -80.6667
-offset_right = -20.6667
-offset_bottom = -40.6667
+offset_left = -122.667
+offset_top = -57.3333
+offset_right = -82.6666
+offset_bottom = -17.3333
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(1, 1)
 skill = ExtResource("4_481k6")
 video_stream = ExtResource("9_k1hmm")
 
-[node name="Phoenix" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
+[node name="FireUltimate" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -289,7 +290,7 @@ grow_vertical = 1
 scale = Vector2(1.5, 1.5)
 skill = ExtResource("6_eu7kn")
 
-[node name="FireShot" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Phoenix" instance=ExtResource("2_5qiaq")]
+[node name="FireShot" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/FireUltimate" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -304,7 +305,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("3_5qiaq")
 video_stream = ExtResource("4_huapc")
 
-[node name="FireExplosion" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Phoenix/FireShot" instance=ExtResource("2_5qiaq")]
+[node name="FireExplosion" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/FireUltimate/FireShot" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -319,7 +320,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("4_yebq3")
 video_stream = ExtResource("6_7emyy")
 
-[node name="Fireball" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/Phoenix/FireShot" instance=ExtResource("2_5qiaq")]
+[node name="Fireball" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/FireUltimate/FireShot" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -334,7 +335,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("5_svryp")
 video_stream = ExtResource("8_481k6")
 
-[node name="EarthShield" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
+[node name="EarthUltimate" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -348,7 +349,7 @@ grow_vertical = 1
 scale = Vector2(1.5, 1.5)
 skill = ExtResource("21_m5q67")
 
-[node name="Earthqua" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/EarthShield" instance=ExtResource("2_5qiaq")]
+[node name="Earthqua" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/EarthUltimate" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -363,7 +364,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("15_lqd2e")
 video_stream = ExtResource("24_n402r")
 
-[node name="Burrow" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/EarthShield/Earthqua" instance=ExtResource("2_5qiaq")]
+[node name="Burrow" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/EarthUltimate/Earthqua" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -378,7 +379,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("16_xea02")
 video_stream = ExtResource("30_otfg3")
 
-[node name="CometRain" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/EarthShield/Earthqua" instance=ExtResource("2_5qiaq")]
+[node name="CometRain" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/EarthUltimate/Earthqua" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 offset_left = 120.889
 offset_top = 49.7778
@@ -447,7 +448,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("14_jjh4s")
 video_stream = ExtResource("23_n402r")
 
-[node name="WaterSlash" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
+[node name="WaterUltimate" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -461,7 +462,7 @@ grow_vertical = 1
 scale = Vector2(1.5, 1.5)
 skill = ExtResource("14_onv8a")
 
-[node name="WaterBlast" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WaterSlash" instance=ExtResource("2_5qiaq")]
+[node name="WaterBlast" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WaterUltimate" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -476,7 +477,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("9_pncew")
 video_stream = ExtResource("12_mlv5p")
 
-[node name="WaterTornado" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WaterSlash/WaterBlast" instance=ExtResource("2_5qiaq")]
+[node name="WaterTornado" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WaterUltimate/WaterBlast" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
@@ -491,7 +492,7 @@ scale = Vector2(1, 1)
 skill = ExtResource("10_wq534")
 video_stream = ExtResource("14_p7tb3")
 
-[node name="WaterSpike" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WaterSlash/WaterBlast" instance=ExtResource("2_5qiaq")]
+[node name="WaterSpike" parent="SubViewportContainer/SubViewport/SkillTreeButtonGroup/WaterUltimate/WaterBlast" instance=ExtResource("2_5qiaq")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0

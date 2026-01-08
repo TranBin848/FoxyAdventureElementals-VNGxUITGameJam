@@ -882,6 +882,9 @@ var tile_size = 32
 var max_check_height = 5
 
 func unstuck() -> void:
+	if fsm.current_state == fsm.states.actor:
+		fsm.change_state(fsm.states.idle)
+		
 	# 1. First, check if we are actually stuck right now.
 	if not test_move(global_transform, Vector2.ZERO):
 		print("You aren't stuck! Request ignored.")

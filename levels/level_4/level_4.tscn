@@ -30,10 +30,10 @@
 [ext_resource type="PackedScene" uid="uid://c2nu6ncphw78a" path="res://scripts/area_component/boss_zone_area_2d.tscn" id="31_pts6k"]
 [ext_resource type="PackedScene" uid="uid://d0ig8xrtjp2v1" path="res://scenes/enemies/war_lord_turtle/war_lord_turtle.tscn" id="31_xyldm"]
 [ext_resource type="PackedScene" uid="uid://b4f2nweypsibr" path="res://scenes/objects/lever/lever.tscn" id="32_36jj7"]
-[ext_resource type="PackedScene" path="res://scenes/skills/base/skill_drop/skill_drop_ultimate.tscn" id="33_36jj7"]
+[ext_resource type="PackedScene" uid="uid://iix2qujpr57n" path="res://scenes/skills/base/skill_drop/skill_drop_ultimate.tscn" id="33_36jj7"]
 [ext_resource type="PackedScene" uid="uid://cf4iwith0d7ne" path="res://levels/objects/checkpoint/checkpoint.tscn" id="34_36jj7"]
 [ext_resource type="Resource" uid="uid://b2417g2au2g6l" path="res://scenes/skills/scripts/ultimate/EarthUltimate.tres" id="34_otmpl"]
-[ext_resource type="PackedScene" path="res://scenes/npc/npc_stat_seller.tscn" id="35_otmpl"]
+[ext_resource type="PackedScene" uid="uid://c2h06qod7g7le" path="res://scenes/npc/npc_stat_seller.tscn" id="35_otmpl"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="45_2si7y"]
 
 [sub_resource type="Gradient" id="Gradient_rjkgb"]
@@ -435,7 +435,6 @@ boss_music_id = "music_boss"
 [node name="WarLordTurtle" parent="BossZoneArea2D" instance=ExtResource("31_xyldm")]
 position = Vector2(0, 116)
 shader_path = "uid://b6k6j3xo4vtbm"
-max_health = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossZoneArea2D"]
 position = Vector2(-0.25, -41)
