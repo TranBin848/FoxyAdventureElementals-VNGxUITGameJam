@@ -101,7 +101,7 @@ func upgrade_skill(skill_name: String, stack_cost: int) -> bool:
 		return false
 	
 	var current_level = get_level(skill_name)
-	if current_level >= 3:
+	if current_level >= 10:
 		return false
 	
 	if get_stacks(skill_name) < stack_cost:
