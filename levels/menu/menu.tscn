@@ -10,7 +10,7 @@ texture = ExtResource("1_hw0b7")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw0b7"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="CanvasLayer2" type="CanvasLayer"]
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
@@ -74,14 +74,5 @@ theme_type_variation = &"ToolButton"
 theme_override_font_sizes/font_size = 29
 text = "SETTINGS"
 
-[node name="QuitButton" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_type_variation = &"ToolButton"
-theme_override_font_sizes/font_size = 29
-text = "QUIT"
-
 [connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="Menu" method="_on_play_button_pressed"]
 [connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/SettingButton" to="Menu" method="_on_setting_button_pressed"]
-[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/QuitButton" to="Menu" method="_on_quit_button_pressed"]

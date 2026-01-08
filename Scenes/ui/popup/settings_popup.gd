@@ -38,3 +38,8 @@ func _on_close_texture_button_pressed() -> void:
 func _on_unstuck_button_pressed() -> void:
 	if GameManager.player:
 		GameManager.player.unstuck()
+
+
+func _on_menu_button_pressed() -> void:
+	var warning_popup = load("res://scenes/ui/popup/menu_return_popup.tscn").instantiate()
+	get_parent().add_child(warning_popup)
