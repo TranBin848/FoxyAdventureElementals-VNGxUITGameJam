@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PlayerStat" load_steps=3 format=3 uid="uid://bmxxtbsbks2dx"]
 
 [ext_resource type="Script" uid="uid://c2fs7mx2niu76" path="res://scripts/player_stat.gd" id="1_dvobs"]
-[ext_resource type="Texture2D" uid="uid://cx1cqnm2lrgxo" path="res://icon.svg" id="1_mvpm0"]
+[ext_resource type="Texture2D" uid="uid://c8rsbne5d1a61" path="res://assets/ui/mana.png" id="1_mvpm0"]
 
 [resource]
 script = ExtResource("1_dvobs")
