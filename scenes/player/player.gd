@@ -466,26 +466,42 @@ func _fire_area(skill: Skill) -> void:
 	var target_pos = global_position
 	var target_enemy = null
 	
+	# Determine cast direction (convert int direction to Vector2)
+	var cast_direction = Vector2(direction, 0)  # direction is 1 or -1
+	
 	if skill.ground_targeted:
+		# Skills like Comet Rain - cast at ground in front of player
 		target_pos = global_position
 	elif has_valid_target_in_range():
 		target_enemy = get_closest_target()
 		if is_instance_valid(target_enemy):
 			target_pos = target_enemy.global_position
+		else:
+			# No valid target found - don't cast targeted skills
+			if not skill.ground_targeted:
+				return
 	else:
-		# If no target, maybe fail or cast at self?
-		return
+		# No enemies in range
+		if skill.ground_targeted:
+			# Ground-targeted skills can still cast
+			target_pos = global_position + cast_direction * 100
+		else:
+			# Targeted skills (like Thunder Strike) need an enemy - don't cast
+			return
 
-	if not skill.area_scene_path: return
+	if not skill.area_scene_path: 
+		return
+		
 	var area_node = load(skill.area_scene_path).instantiate()
 	get_tree().current_scene.add_child(area_node)
 	area_node.global_position = target_pos
 	
 	if area_node.has_method("setup"):
-		area_node.setup(skill, position, target_enemy)
-
+		# Pass: skill, caster_position, target_enemy, direction
+		area_node.setup(skill, global_position, target_enemy, cast_direction)
+		
 func _apply_buff_skill(skill: Skill) -> void:
-	var duration = skill.duration * (1.0 + sqrt(skill.level - 1.0))
+	var duration = skill.get_scaled_duration()
 	
 	if skill is Fireball:
 		enter_buff_state(BuffState.FIREBALL, duration)

@@ -1,4 +1,3 @@
-# res://skills/projectiles/ProjectileBase.gd
 extends Area2D
 class_name ProjectileBase
 
@@ -7,38 +6,30 @@ var direction: Vector2 = Vector2.RIGHT
 var damage: float
 var elemental_type: ElementsEnum.Elements = ElementsEnum.Elements.NONE
 var affected_enemies: Array[EnemyCharacter] = []
-var level: int
 var skill: Skill
 
-
 func setup(_skill: Skill, dir: Vector2) -> void:
-	#print(skill.damage)
-	#print(skill.elemental_type)
 	skill = _skill
-	level = skill.level
-	speed = skill.speed
-	damage = skill.damage * (1.0 + sqrt(skill.level - 1.0))
+	
+	# Use scaled values from skill
+	speed = skill.get_scaled_speed()
+	damage = skill.get_scaled_damage()
 	elemental_type = skill.elemental_type
 	direction = dir.normalized() if dir.length() > 0 else Vector2.RIGHT
-	
-	print("skill level: " + str(skill.level))
 	
 	if has_node("HitArea2D"):
 		var hit_area: HitArea2D = $HitArea2D
 		hit_area.damage = damage
 		hit_area.elemental_type = elemental_type
-		#print("✅ Gán HitArea cho WaterTornado:", damage, elemental_type)
 		
-	# Play animation if có AnimatedSprite2D
 	if has_node("AnimatedSprite2D"):
 		$AnimatedSprite2D.play(skill.animation_name)
 	
 	if skill.animation_name != "WaterTornado":
-		# Check if the projectile is moving to the Left (negative X)
 		if direction.x < 0:
-			scale.x = -1  # Flip everything (sprite + collision) to the left
+			scale.x = -1
 		else:
-			scale.x = 1   # Face normal (right)
+			scale.x = 1
 
 func _physics_process(delta: float) -> void:
 	_move(delta)

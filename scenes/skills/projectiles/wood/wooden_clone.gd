@@ -12,12 +12,14 @@ class_name WoodenCloneProjectile
 var center_position: Vector2
 var is_active: bool = false
 
-func setup(skill: Skill, dir: Vector2) -> void:
-	super.setup(skill,dir)
-	clone_lifetime_sec = clone_lifetime_sec * (1.0 + sqrt(skill.level - 1.0))
+func setup(_skill: Skill, dir: Vector2) -> void:
+	super.setup(_skill, dir)
+	
+	# Scale clone lifetime based on skill duration
+	clone_lifetime_sec = skill.get_scaled_duration()
 
 func _ready() -> void:
-	rotation = 0.0  # cancel ProjectileBase rotation
+	rotation = 0.0
 
 	var dir_x := direction.x
 	if dir_x == 0:
@@ -37,7 +39,7 @@ func _ready() -> void:
 	set_physics_process(false)
 
 	if GameManager.player and GameManager.player.has_method("enter_buff_state"):
-		GameManager.player.enter_buff_state(Player.BuffState.INVISIBLE,clone_lifetime_sec)
+		GameManager.player.enter_buff_state(Player.BuffState.INVISIBLE, clone_lifetime_sec)
 
 	_start_lifetime()
 
