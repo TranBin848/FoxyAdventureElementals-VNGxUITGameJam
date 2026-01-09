@@ -174,7 +174,6 @@ texture = ExtResource("7_km4sl")
 position = Vector2(-534, 632)
 amount = 200
 wind_force = 0.1
-base_amount = 200
 
 [node name="HouseDoor2" parent="." instance=ExtResource("12_bkbve")]
 position = Vector2(-272, -256)

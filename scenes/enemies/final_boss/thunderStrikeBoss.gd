@@ -7,13 +7,13 @@ func _ready() -> void:
 	if not anim_player:
 		return
 
-	anim_player.play("Thunderbolt")
+	anim_player.play("ThunderStrike")
 		
-	AudioManager.play_sound("skill_thunderbolt_crackle")
+	AudioManager.play_sound("skill_thunderstrike_crackle")
 	
 # Called by AnimationPlayer method track when startup animation completes
 func _on_startup_complete() -> void:
-	AudioManager.play_sound("skill_thunderbolt")
+	AudioManager.play_sound("skill_thunderstrike")
 	_enable_hitbox()  # Enable damage detection
 
 # Called by AnimationPlayer method track at knockback frame

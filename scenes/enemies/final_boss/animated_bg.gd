@@ -4,6 +4,7 @@ signal cutscene2_started
 signal cutscene3_started
 signal cutscene4_started
 signal all_cutscenes_finished
+signal qte_trigger_moment
 
 var boss: BlackEmperor = null
 var player: Player = null
@@ -64,3 +65,6 @@ func play_cutscene_sequence() -> void:
 
 func play_sound(sound_name: String) ->void:
 	AudioManager.play_sound(sound_name)
+	
+func anim_trigger_qte() -> void:
+	qte_trigger_moment.emit()

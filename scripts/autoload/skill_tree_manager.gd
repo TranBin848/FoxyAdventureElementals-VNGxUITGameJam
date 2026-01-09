@@ -5,7 +5,6 @@ var _skill_data := {}  # {skill_name: {level: int, unlocked: bool}}
 var _skillbar := [null, null, null, null, null]
 var _stacks := {}  # {skill_name: int}
 var _skills_discovered_history: Dictionary = {}
-var _coins: int = 0
 
 # --- SIGNALS (Components listen to these) ---
 signal state_changed(state: Dictionary)  # Emits full state
@@ -15,7 +14,6 @@ signal skill_leveled_up(skill_name: String, new_level: int)
 signal skill_equipped(slot_index: int, skill_name: String)
 signal skill_unequipped(slot_index: int, skill_name: String)
 signal stack_changed(skill_name: String, amount: int)
-signal coins_changed(amount: int)
 
 # --- PUBLIC API (Commands - only way to modify state) ---
 
@@ -143,7 +141,6 @@ func get_state() -> Dictionary:
 		"skill_data": _skill_data.duplicate(true),
 		"skillbar": _skillbar.duplicate(),
 		"stacks": _stacks.duplicate(),
-		"coins": _coins
 	}
 
 func is_unlocked(skill_name: String) -> bool:
@@ -203,8 +200,13 @@ func save_data() -> Dictionary:
 		"skillbar": _skillbar.duplicate(),
 		"stacks": _stacks.duplicate(),
 		"history": _skills_discovered_history.duplicate(),
-		"coins": _coins
 	}
+	
+func clear_data() -> void:
+	_skill_data = {}  # {skill_name: {level: int, unlocked: bool}}
+	_skillbar = [null, null, null, null, null]
+	_stacks = {}  # {skill_name: int}
+	_skills_discovered_history = {}
 
 func load_data(data: Dictionary) -> void:
 	if data.is_empty():
@@ -214,7 +216,6 @@ func load_data(data: Dictionary) -> void:
 	
 	_skill_data = data.get("skill_data", {}).duplicate(true)
 	_stacks = data.get("stacks", {}).duplicate()
-	_coins = data.get("coins", 0)
 	_skills_discovered_history = data.get("history", {}).duplicate()
 	
 	_skillbar.fill(null)
