@@ -62,6 +62,7 @@ func _show_hurt_icon() -> void:
 	cur_icon.texture = hurt_icon
 
 	await get_tree().create_timer(0.5).timeout
+	cur_icon.texture = null
 	_set_mood_icon()
 
 func _set_mood_icon() -> void:
