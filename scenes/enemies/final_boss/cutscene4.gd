@@ -1,20 +1,21 @@
 extends BlackEmperorState
 
-## Cutscene 4: Zoom boss, di chuyển, zoom ra, player di chuyển, hiển thị metal element, play animation + QTE
+## Cutscene 4: Zoom boss, di chuyển, zoom ra, player di chuyển, QTE -> Water Icon -> Animation
 ## Flow:
 ## 1. Zoom vào boss camera
 ## 2. Boss di chuyển tới BossPosCutscene4
 ## 3. Zoom ra (boss_zone camera)
 ## 4. Player di chuyển tới PlayerPosCutscene4
-## 5. Hiển thị icon nguyên tố Kim (Metal)
-## 6. Play animation -> Wait for Signal -> Slow Motion -> QTE (Key R) -> Resume
-## 7. Chuyển sang cutscene5 (Phase Change)
+## 5. STANDALONE QTE (Key R) -> Slow Motion -> Success/Fail
+## 6. Hiển thị icon nguyên tố Kim (Water)
+## 7. Play animation "cutscene4"
+## 8. Transition to Combat (Idle State)
 
 # Scene
 const ELEMENT_SPRITE_SCENE = preload("res://scenes/enemies/final_boss/element_sprite.tscn")
 const QTE_PATH = "res://scenes/ui/popup/quick_time_event.tscn"
 
-# ✅ SIGNAL to break the await immediately when QTE is done
+# Signal to break the await immediately when QTE is done
 signal qte_sequence_complete
 
 var animated_bg: AnimationPlayer = null
@@ -30,9 +31,9 @@ var canvas_layer: CanvasLayer = null
 
 # QTE Variables
 var qte_container: Control = null
-# Config for Metal Element QTE (Key R)
+# Config for Water Element QTE (Key R)
 var qte_keys = [
-	{"keyString": "R", "keyCode": KEY_R, "delay": 0.0, "eventDuration": 2.0, "displayDuration": 1.0}
+	{"keyString": "F", "keyCode": KEY_F, "delay": 0.0, "eventDuration": 2.0, "displayDuration": 1.0}
 ]
 var qte_results: Array = []
 var qte_active: bool = false
@@ -117,7 +118,37 @@ func _start_cutscene_sequence() -> void:
 		boss_camera.enabled = true
 		CameraTransition.transition_camera2D(boss_camera, 1.0)
 		await get_tree().create_timer(1.0).timeout
+
 	
+	# === STEP 5: STANDALONE QTE (NO ANIMATION DEPENDENCY) ===
+	print("Cutscene4: Triggering Standalone QTE...")
+	
+	# 1. Slow Motion immediately
+	Engine.time_scale = 0.05
+	
+	# 2. Start QTE Logic
+	_start_qte_sequence()
+	
+	# 3. Wait for Input
+	await qte_sequence_complete
+	
+	# 4. Cleanup
+	_stop_qte_sequence()
+	
+	# 5. Restore Speed
+	print("Cutscene4: Restoring normal time scale")
+	Engine.time_scale = 1.0
+	
+	# 6. Handle Fail
+	if qte_failed:
+		await _handle_qte_failure()
+		return
+
+	print("Cutscene4: QTE Success")
+
+	# === STEP 6: HIỂN THỊ ICON NGUYÊN TỐ KIM (Water) ===
+	await _show_element_icons()
+		
 	# === STEP 2: BOSS DI CHUYỂN TỚI VỊ TRÍ CUTSCENE4 ===
 	await _move_boss_to_position()
 	
@@ -130,61 +161,45 @@ func _start_cutscene_sequence() -> void:
 	# === STEP 4: PLAYER DI CHUYỂN TỚI VỊ TRÍ CUTSCENE4 ===
 	await _move_player_to_position()
 	
-	# === STEP 5: HIỂN THỊ ICON NGUYÊN TỐ KIM (METAL) ===
-	await _show_element_icons()
-	
-	# === STEP 6: PLAY ANIMATION + QTE ===
+	# === STEP 7: PLAY ANIMATION (NOW THAT QTE IS DONE) ===
 	if animated_bg:
-		print("Cutscene4: Triggering AnimatedBg...")
-		
-		# 1. Start Animation
+		print("Cutscene4: Playing AnimatedBg cutscene4...")
 		animated_bg.play("cutscene4")
-		
-		# 2. ✅ WAIT FOR SIGNAL
-		print("Cutscene4: Waiting for animation trigger...")
-		await animated_bg.qte_trigger_moment
-		
-		# 3. Slow Motion
-		print("Cutscene4: Trigger received! Slowing down...")
-		Engine.time_scale = 0.05
-		
-		# 4. Start QTE
-		_start_qte_sequence()
-		
-		# 5. Wait for Input
-		await qte_sequence_complete
-		
-		# 6. Cleanup
-		_stop_qte_sequence()
-		
-		# 7. Restore Speed
-		print("Cutscene4: Restoring normal time scale")
-		Engine.time_scale = 1.0
-		
-		# 8. Handle Fail
-		if qte_failed:
-			animated_bg.pause()
-			await _handle_qte_failure()
-			return
-		
-		# 9. Success Logic
-		print("Cutscene4: QTE Success")
-		if animated_bg.is_playing():
-			await animated_bg.animation_finished
-			print("Cutscene4: AnimatedBg cutscene4 finished")
+		await animated_bg.animation_finished
+		print("Cutscene4: AnimatedBg cutscene4 finished")
 	
 	# Đợi một chút
 	await get_tree().create_timer(1.0).timeout
 	
-	# Unlock logic
+	# === CRITICAL FIX: RESTORE COMBAT STATE ===
+	# Unlock boss
 	obj.set_physics_process(true)
+	is_boss_locked = false
 	
-	# Transition to Cutscene 5 (Phase Change)
-	if is_instance_valid(fsm) and fsm.states.has("cutscene5"):
-		print("Cutscene4: Finished, transitioning to Cutscene5")
-		fsm.change_state(fsm.states.cutscene5)
+	# Re-enable hurtbox so boss can take damage again
+	if obj.has_method("enable_hurtbox"):
+		obj.enable_hurtbox()
+	
+	# Show UI again
+	if canvas_layer:
+		canvas_layer.visible = true
+	if ui:
+		ui.visible = true
+	
+	# Return boss to combat phase (FLY)
+	obj.current_phase = obj.Phase.FLY
+	
+	# Re-enable player
+	if player:
+		player.set_physics_process(true)
+		player.visible = true
+	
+	# Transition to Idle (combat state)
+	if is_instance_valid(fsm) and fsm.states.has("standup"):
+		print("Cutscene4: Finished successfully, transitioning to combat (standup)")
+		fsm.change_state(fsm.states.standup)
 	else:
-		print("ERROR: Cannot transition to cutscene5!")
+		print("ERROR: Cannot transition to idle!")
 
 # ============= QTE FUNCTIONS =============
 
@@ -219,6 +234,8 @@ func _start_qte_sequence() -> void:
 		timer.start()
 
 func _stop_qte_sequence() -> void:
+	if qte_container and qte_container.get_parent():
+		qte_container.get_parent().queue_free()
 	qte_active = false
 	for timer in qte_timers:
 		if is_instance_valid(timer):
@@ -269,16 +286,28 @@ func _handle_qte_failure() -> void:
 	Engine.time_scale = 1.0
 	if animated_bg: animated_bg.speed_scale = 1.0
 	
+	# Show UI before killing player
 	if canvas_layer: canvas_layer.visible = true
 	if ui: ui.visible = true
 	
+	# Kill player
 	if GameManager and GameManager.player:
 		player.take_damage(99999)
 
+	# === CRITICAL FIX: RESTORE COMBAT STATE ===
 	obj.set_physics_process(true)
 	is_boss_locked = false
 	
+	# Re-enable hurtbox
+	if obj.has_method("enable_hurtbox"):
+		obj.enable_hurtbox()
+	
+	# Reset boss phase to combat (FLY)
+	obj.current_phase = obj.Phase.FLY
+	
+	# Transition to Idle (Combat)
 	if is_instance_valid(fsm) and fsm.states.has("idle"):
+		print("Cutscene4: QTE Failed, transitioning to combat (idle)")
 		fsm.change_state(fsm.states.idle)
 
 # ============= MOVEMENT & VISUAL FUNCTIONS =============
@@ -309,15 +338,15 @@ func _move_player_to_position() -> void:
 	await player_tween.finished
 
 func _show_element_icons() -> void:
-	"""Hiển thị icon nguyên tố Kim (Metal) phóng to lên toàn màn hình rồi mờ dần"""
+	"""Hiển thị icon nguyên tố Kim (Water) phóng to lên toàn màn hình rồi mờ dần"""
 	var viewport_size = obj.get_viewport_rect().size
 	var center = viewport_size / 2.0
 	
 	var sprite = ELEMENT_SPRITE_SCENE.instantiate()
 	
-	# Updated to "metal" based on prompt flow
-	if not sprite.set_element("metal"):
-		print("Warning: Failed to load metal element icon")
+	# Updated to "Water"
+	if not sprite.set_element("water"):
+		print("Warning: Failed to load Water element icon")
 		sprite.queue_free()
 		return
 	
@@ -344,13 +373,16 @@ func _exit() -> void:
 	is_boss_locked = false
 	
 	_stop_qte_sequence()
-	if qte_container and qte_container.get_parent():
-		qte_container.get_parent().queue_free()
 	
 	if player:
 		player.set_physics_process(true)
+		player.visible = true
 	
 	if boss_camera:
 		boss_camera.enabled = false
+	
+	# Ensure hurtbox is enabled when exiting
+	if obj.has_method("enable_hurtbox"):
+		obj.enable_hurtbox()
 	
 	print("Cutscene4: Exit")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqw2hs1cw106b"]
+[gd_scene load_steps=9 format=3 uid="uid://cqw2hs1cw106b"]
 
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_mabun"]
 [ext_resource type="Script" uid="uid://eheybhst42ce" path="res://scenes/ui/popup/guide_popup.gd" id="2_532iv"]
@@ -10,6 +10,9 @@
 [sub_resource type="LabelSettings" id="LabelSettings_6rodm"]
 font = ExtResource("4_bi0kk")
 font_size = 60
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uoqwc"]
+content_margin_top = 4.0
 
 [node name="GuidePopup" type="MarginContainer"]
 process_mode = 3
@@ -74,16 +77,22 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 40.0
-offset_top = -183.0
+offset_top = -198.0
 offset_right = 490.0
-offset_bottom = 212.0
+offset_bottom = 256.0
 grow_vertical = 2
 theme = ExtResource("1_mabun")
 theme_override_constants/line_separation = 10
 theme_override_fonts/normal_font = ExtResource("6_uoqwc")
-theme_override_font_sizes/normal_font_size = 24
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet augue convallis elit aliquet pretium. Quisque ut ante urna. Pellentesque nec metus eu leo dignissim posuere. Proin at massa ipsum."
+theme_override_font_sizes/normal_font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uoqwc")
+text = "Bạn vừa nhặt được một cuộn phép thuật rơi ra từ việc tiêu diệt quái vật. 
+Nhưng ngôn ngữ mà chúng sử dụng vô cùng phức tạp. Bạn sẽ cần công cụ gì đó để có thể dùng được chúng.
+Ngoài ra, quái vật và phép thuật trong thế giới này thuộc về một thuộc tính nguyên tố riêng trong ngũ hành.
+Chúng tuân theo quy luật sinh khắc của ngũ hành, từ đó, phép thuật thi triển lên quái vật có thể tăng giảm sát thương dựa trên quy luật này.
+Hãy thu thập thật nhiều loại phép thuật và khám phá những điều tuyệt diệu quanh chúng nhé."
 fit_content = true
+scroll_active = false
 justification_flags = 35
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="NinePatchRect"]

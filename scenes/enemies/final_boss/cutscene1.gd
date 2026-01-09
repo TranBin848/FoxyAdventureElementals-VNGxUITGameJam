@@ -2,17 +2,18 @@ extends BlackEmperorState
 
 ## Cutscene 1: Di chuyển player và boss về vị trí cutscene với camera zoom + QTE
 ## Flow:
-## 1-9: Setup positions
-## 10: QTE sequence (Fixed: Immediate end on input, correct time scaling)
-## 11: Flash effect
-## 12: Land player (Fixed: Manual gravity loop)
+## 1-6: Setup positions & Boss Movement
+## 7: STANDALONE QTE (No Animation Dependency)
+## 8: Element Icons (Earth)
+## 9: Play Animation "cutscene1"
+## 10-12: Zoom Out, Player Move, Land
 
 # Scene paths
 const ELEMENT_SPRITE_PATH = "res://scenes/enemies/final_boss/element_sprite.tscn"
 const FADE_BOSS_PATH = "res://scenes/enemies/final_boss/fade_boss_scene.tscn"
 const QTE_PATH = "res://scenes/ui/popup/quick_time_event.tscn"
 
-# ✅ ADDED: Signal to break the await immediately when QTE is done
+# Signal to break the await immediately when QTE is done
 signal qte_sequence_complete
 
 var animated_bg: AnimationPlayer = null
@@ -109,6 +110,7 @@ func _start_cutscene_sequence() -> void:
 		if player.fsm.states.has("idle"):
 			player.fsm.change_state(player.fsm.states.idle)
 		player.set_physics_process(false)
+		player.visible = false # Hide player during initial boss move if desired
 	
 	# === STEP 2: ĐỨNG IM MỘT CHÚT ===
 	await get_tree().create_timer(0.5).timeout
@@ -130,75 +132,84 @@ func _start_cutscene_sequence() -> void:
 		CameraTransition.transition_camera2D(boss_zone_camera, 1.0)
 		await get_tree().create_timer(1.0).timeout
 	
-	# === STEP 7: HIỂN THỊ ICON NGUYÊN TỐ ===
+	# === STEP 7: STANDALONE QTE (NO ANIMATION DEPENDENCY) ===
+	print("Cutscene1: Triggering Standalone QTE...")
+	
+	# 1. Slow Motion immediately
+	Engine.time_scale = 0.05
+	
+	# 2. Start QTE Logic
+	_start_qte_sequence()
+	
+	# 3. Wait for player input
+	await qte_sequence_complete
+	
+	# 4. Cleanup
+	_stop_qte_sequence()
+	
+	# 5. Restore Speed
+	print("Cutscene1: Restoring normal time scale")
+	Engine.time_scale = 1.0
+	
+	# 6. Handle Fail
+	if qte_failed:
+		await _handle_qte_failure()
+		return
+
+	print("Cutscene1: QTE Success")
+
+	# === STEP 8: HIỂN THỊ ICON NGUYÊN TỐ ===
 	await _show_element_icons()
 	
-	# === STEP 8: ZOOM CAMERA RA ===
+	# === STEP 9: PLAY ANIMATION (NOW THAT QTE IS DONE) ===
+	if animated_bg:
+		print("Cutscene1: Playing AnimatedBg cutscene1...")
+		animated_bg.play("cutscene1")
+		await animated_bg.animation_finished
+	
+	# === STEP 10: ZOOM CAMERA RA ===
 	await _zoom_camera_out()
 	
-	# === STEP 9: PLAYER BAY TỚI VỊ TRÍ ===
+	# === STEP 11: PLAYER BAY TỚI VỊ TRÍ ===
 	await _move_player_to_position()
 	
-	# === STEP 10: BẮT ĐẦU ANIMATION + QTE SEQUENCE ===
-	if animated_bg:
-		print("Cutscene1: Triggering AnimatedBg...")
-		
-		if player:
-			player.visible = false
-		
-		# 1. Start the animation normally
-		animated_bg.play("cutscene1")
-		
-		# 2. ✅ WAIT FOR THE SIGNAL FROM THE ANIMATION TRACK
-		# The code now pauses here until the animation timeline hits the "anim_trigger_qte" keyframe.
-		print("Cutscene1: Waiting for animation trigger...")
-		await animated_bg.qte_trigger_moment
-		
-		# 3. The exact frame has been hit. Apply Slow Motion immediately.
-		print("Cutscene1: Trigger received! Slowing down...")
-		Engine.time_scale = 0.05 # Very slow motion for dramatic effect
-		
-		# 4. Start QTE Logic
-		_start_qte_sequence()
-		
-		# 5. Wait for player input (Success/Fail signal)
-		await qte_sequence_complete
-		
-		# 6. Cleanup
-		_stop_qte_sequence()
-		
-		# 7. Restore Speed immediately
-		print("Cutscene1: Restoring normal time scale")
-		Engine.time_scale = 1.0
-		
-		# 8. Handle Fail/Continue logic
-		if qte_failed:
-			# Pause immediately at the failure point
-			animated_bg.pause() 
-			await _handle_qte_failure()
-			return 
-		
-		# Success logic...
-		print("Cutscene1: QTE Success")
-		if animated_bg.is_playing():
-			await animated_bg.animation_finished
-	
-	# === STEP 11: FLASH EFFECT ===
+	# === STEP 12: FLASH EFFECT ===
 	await _play_flash_effect()
 	
-	# === STEP 12: THẢ PLAYER XUỐNG ĐẤT (FIXED) ===
+	# === STEP 13: THẢ PLAYER XUỐNG ĐẤT ===
+	if player:
+		player.visible = true # Ensure player is visible for landing
 	await _land_player_on_ground()
 	
 	await get_tree().create_timer(1.0).timeout
 	
+	# === CRITICAL FIX: RESTORE COMBAT STATE ===
 	# Unlock boss
 	is_boss_locked = false
 	obj.set_physics_process(true)
 	
-	# Chuyển sang Cutscene2
-	if is_instance_valid(fsm) and fsm.states.has("cutscene2"):
-		print("Cutscene1: Finished, transitioning to Cutscene2")
-		fsm.change_state(fsm.states.cutscene2)
+	# Re-enable hurtbox so boss can take damage again
+	if obj.has_method("enable_hurtbox"):
+		obj.enable_hurtbox()
+	
+	# Show UI again
+	if canvas_layer:
+		canvas_layer.visible = true
+	if ui:
+		ui.visible = true
+	
+	# Return boss to combat phase (FLY)
+	obj.current_phase = obj.Phase.FLY
+	
+	# Re-enable player
+	if player:
+		player.set_physics_process(true)
+		player.visible = true
+	
+	# Chuyển sang Idle (combat state)
+	if is_instance_valid(fsm) and fsm.states.has("standup"):
+		print("Cutscene1: Finished successfully, transitioning to combat (standup)")
+		fsm.change_state(fsm.states.standup)
 
 # ============= QTE FUNCTIONS =============
 
@@ -215,15 +226,10 @@ func _start_qte_sequence() -> void:
 		var key_data = qte_keys[i]
 		var delay = key_data.delay
 		
-		# ✅ FIX 1: If delay is effectively zero, spawn IMMEDIATELY.
-		# Do not create a Timer for instantaneous events when time_scale is modified.
 		if delay <= 0.05:
 			_spawn_qte_key(i)
 			continue
 
-		# ✅ FIX 2: If we must wait, scale the delay down.
-		# If time_scale is 0.1 (10% speed), a 2.0s real-world delay 
-		# needs to be 0.2s game-time to finish in 2 real seconds.
 		var adjusted_delay = delay * Engine.time_scale
 		
 		var timer = Timer.new()
@@ -239,6 +245,8 @@ func _start_qte_sequence() -> void:
 		timer.start()
 
 func _stop_qte_sequence() -> void:
+	if qte_container and qte_container.get_parent():
+		qte_container.get_parent().queue_free()
 	qte_active = false
 	for timer in qte_timers:
 		if is_instance_valid(timer):
@@ -356,27 +364,15 @@ func _land_player_on_ground() -> void:
 	
 	print("Cutscene1: Landing player...")
 	
-	# ✅ FIXED: Manually apply gravity loop until collision
-	# We do NOT rely on player.set_physics_process(true) alone because
-	# the idle state might not apply gravity if there is no input.
-	
-	# Ensure physics is off so we can control it manually
-	player.set_physics_process(false) 
-	
+	player.set_physics_process(false)
 	var gravity = 980.0
 	
-	# Loop until we hit the floor
 	while not player.is_on_floor():
 		var delta = obj.get_physics_process_delta_time()
-		
-		# Apply simple gravity
 		player.velocity.y += gravity * delta
 		player.move_and_slide()
-		
-		# Wait for next physics frame
 		await obj.get_tree().physics_frame
 	
-	# Reset state once grounded
 	player.velocity = Vector2.ZERO
 	print("Cutscene1: Player landed successfully")
 
@@ -398,12 +394,12 @@ func _handle_qte_failure() -> void:
 		player.visible = true
 		player.set_physics_process(false)
 	
-	# Wait 1 real second
-	await get_tree().create_timer(1.0, true, false, true).timeout 
+	await get_tree().create_timer(1.0, true, false, true).timeout
 	
 	Engine.time_scale = 1.0
 	if animated_bg: animated_bg.speed_scale = 1.0
 	
+	# Show UI before killing player
 	if canvas_layer: canvas_layer.visible = true
 	if ui: ui.visible = true
 	
@@ -411,10 +407,20 @@ func _handle_qte_failure() -> void:
 	if GameManager and GameManager.player:
 		player.take_damage(99999)
 
+	# === CRITICAL FIX: RESTORE COMBAT STATE ===
 	is_boss_locked = false
 	obj.set_physics_process(true)
 	
+	# Re-enable hurtbox
+	if obj.has_method("enable_hurtbox"):
+		obj.enable_hurtbox()
+	
+	# Reset boss phase to combat (FLY)
+	obj.current_phase = obj.Phase.FLY
+	
+	# Transition to Idle (Combat)
 	if is_instance_valid(fsm) and fsm.states.has("idle"):
+		print("Cutscene1: QTE Failed, transitioning to combat (idle)")
 		fsm.change_state(fsm.states.idle)
 
 func _physics_process(_delta):
@@ -430,8 +436,6 @@ func _exit() -> void:
 	is_boss_locked = false
 	
 	_stop_qte_sequence()
-	if qte_container and qte_container.get_parent():
-		qte_container.get_parent().queue_free()
 	
 	if player:
 		player.set_physics_process(true)
@@ -439,3 +443,7 @@ func _exit() -> void:
 	
 	if boss_camera:
 		boss_camera.enabled = false
+	
+	# Ensure hurtbox is enabled when exiting
+	if obj.has_method("enable_hurtbox"):
+		obj.enable_hurtbox()

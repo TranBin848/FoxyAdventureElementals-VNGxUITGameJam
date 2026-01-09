@@ -20,10 +20,10 @@ signal phase_transition_started
 var is_stunned: bool = false
 var boss_zone: Area2D = null
 var is_fighting: bool = false
-var fly_target_y: float = 0.0  # Độ cao bay cố định khi ở phase FLY
-var ground_y: float = 0.0  # Độ cao mặt đất ban đầu
-var original_x: float = 0.0  # Vị trí x ban đầu để di chuyển qua lại
-var spawned_spawners: Array = []  # Lưu các spawner đã tạo
+var fly_target_y: float = 0.0 
+var ground_y: float = 0.0 
+var original_x: float = 0.0 
+var spawned_spawners: Array = [] 
 
 signal health_percent_changed(new_value_percent: float)
 signal phase_changed(new_phase_index: int)
@@ -49,12 +49,21 @@ var current_phase: Phase = Phase.FLY
 var skill_cd_timer = 0
 var cur_skill = 0
 
+# --- PHASE TRACKING ---
+# Tracks if a specific threshold has been triggered to prevent repeating it
+var phases_triggered = {
+	75: false,
+	50: false,
+	25: false,
+	0: false
+}
+
 func _ready() -> void:
 	super._ready()
 	fsm = FSM.new(self, $States, $States/Idle)
-	ground_y = global_position.y  # Lưu độ cao mặt đất
-	fly_target_y = global_position.y - 200 #độ cao bay
-	original_x = global_position.x  # Lưu vị trí x ban đầu
+	ground_y = global_position.y 
+	fly_target_y = global_position.y - 200 
+	original_x = global_position.x 
 	
 	add_to_group("enemies")
 
@@ -65,7 +74,6 @@ func _physics_process(delta: float) -> void:
 	label.text = str(fsm.current_state)
 	
 func use_skill() -> void:
-	
 	var skill_dict
 
 	match current_phase:
@@ -78,53 +86,102 @@ func use_skill() -> void:
 		return
 	
 	var skill = skill_dict[cur_skill]
-	print("Skill: ", skill)
+	# print("Skill: ", skill)
 	fsm.change_state(fsm.states[skill])
 
 	cur_skill = (cur_skill + 1) % skill_dict.size()
 
-
+# 1. Update take_damage to ensure we catch thresholds properly
 func take_damage(damage: int) -> void:
+	# If in cutscene, strictly ignore damage
+	if current_phase == Phase.CUTSCENE:
+		return
+
+	# Handle 0% HP (Death Phase) explicitly
+	# We anticipate the damage. If it would kill, we stop at 1 HP.
+	if (health - damage) <= 0 and not phases_triggered[0]:
+		health = 1 
+		phases_triggered[0] = true
+		health_percent_changed.emit(0.0) # Update UI to 0%
+		enter_phase_cutscene("cutscene5")
+		return
+
 	super.take_damage(damage)
 	
 	AudioManager.play_sound("boss_hurt")
-	
 	flash_corountine()
+	
 	var health_percent = (float(health) / max_health) * 100
 	
-	health_percent_changed.emit(health_percent)
+	# Check thresholds AFTER damage, but allow clamping inside the check
+	check_phase_thresholds(health_percent)
 	
-	# Phase FLY -> Phase CUTSCENE: khi máu <= 33.33%
-	if health_percent <= 33.33 and current_phase == Phase.FLY:
-		enter_phase_cutscene()
+	# Emit the final health percent (in case it was clamped by the threshold check)
+	health_percent_changed.emit((float(health) / max_health) * 100)
 
-func enter_phase_cutscene() -> void:
+# 2. Update logic to CLAMP health and disable hurtbox
+func check_phase_thresholds(percent: float) -> void:
+	# 25% Threshold -> Cutscene 4
+	if percent <= 25.0 and not phases_triggered[25]:
+		health = int(max_health * 0.25) # CLAMP HEALTH TO LIMIT
+		phases_triggered[25] = true
+		phases_triggered[50] = true 
+		phases_triggered[75] = true
+		enter_phase_cutscene("cutscene4")
+		return
+
+	# 50% Threshold -> Cutscene 2
+	if percent <= 50.0 and not phases_triggered[50]:
+		health = int(max_health * 0.50) # CLAMP HEALTH TO LIMIT
+		phases_triggered[50] = true
+		phases_triggered[75] = true
+		enter_phase_cutscene("cutscene2")
+		return
+
+	# 75% Threshold -> Cutscene 1
+	if percent <= 75.0 and not phases_triggered[75]:
+		health = int(max_health * 0.75) # CLAMP HEALTH TO LIMIT
+		phases_triggered[75] = true
+		enter_phase_cutscene("cutscene1")
+		return
+
+func enter_phase_cutscene(cutscene_state_name: String) -> void:
 	current_phase = Phase.CUTSCENE
 	cur_skill = 0
 	
-	print("Entering Phase CUTSCENE")
+	# === CRITICAL FIX: DISABLE HURTBOX ===
+	# This ensures no stray bullets or lingering damage hit the boss during transition
+	if hurt_box:
+		hurt_box.set_deferred("disabled", true)
 	
-	# Emit signal để AnimatedBg bắt đầu cutscene sequence
+	print("Entering Phase CUTSCENE: ", cutscene_state_name)
+	
 	phase_transition_started.emit()
 	
-	# Chuyển sang state cutscene1
-	if fsm.states.has("cutscene1"):
-		fsm.change_state(fsm.states.cutscene1)
+	if fsm.states.has(cutscene_state_name):
+		fsm.change_state(fsm.states[cutscene_state_name])
 	else:
-		print("Error: cutscene1 state not found!")
+		print("Error: State ", cutscene_state_name, " not found!")
+
+# 3. Add this helper function!
+# You MUST call this in your Cutscene State's _exit() function (e.g., Cutscene1.gd)
+# or when the boss returns to "Idle"/"Attack" state.
+func enable_hurtbox() -> void:
+	if hurt_box:
+		hurt_box.set_deferred("disabled", false)
+
+# --- SPAWNER LOGIC (UNCHANGED) ---
 
 func _spawn_star_spawners(active: bool = true) -> void:
 	if spawner_scene == null:
 		print("Error: spawner_scene not assigned in BlackEmperor!")
 		return
 	
-	# Xóa spawner cũ nếu có
 	for s in spawned_spawners:
 		if is_instance_valid(s):
 			s.queue_free()
 	spawned_spawners.clear()
 	
-	# 5 hệ nguyên tố
 	var element_types = [
 		ElementsEnum.Elements.METAL,
 		ElementsEnum.Elements.WOOD, 
@@ -133,57 +190,39 @@ func _spawn_star_spawners(active: bool = true) -> void:
 		ElementsEnum.Elements.EARTH
 	]
 	
-	# Tâm của boss zone theo trục x, y cố định ở trên cao
 	var center_x = global_position.x
-	var center_y = ground_y - 200  # Y cố định, cao hơn mặt đất 100 pixel
+	var center_y = ground_y - 200 
 	
-	# Nếu có boss_zone, lấy tâm x của boss_zone
 	if boss_zone:
 		var zone_center = boss_zone.global_position
 		center_x = zone_center.x
 	
 	var center = Vector2(center_x, center_y)
-	
-	# Góc bắt đầu từ đỉnh trên (-90 độ)
 	var start_angle = -PI / 2
 	
 	for i in range(5):
 		var spawner = spawner_scene.instantiate()
-		
-		# Tính góc cho đỉnh thứ i của ngôi sao (ngũ giác)
 		var angle = start_angle + (i * 2 * PI / 5)
-		
-		# Tính vị trí theo tọa độ cực
 		var offset_x = cos(angle) * spawner_radius
 		var offset_y = sin(angle) * spawner_radius
 		
 		spawner.global_position = Vector2(center.x + offset_x, center.y + offset_y)
 		
-		# Set elemental type
 		if "elemental_type" in spawner:
 			spawner.elemental_type = element_types[i]
-		
-		# Set enemies để spawn
 		if enemies_to_spawn.size() > 0 and "enemy_to_spawn" in spawner:
 			spawner.enemy_to_spawn = enemies_to_spawn
-		
-		# Set máu spawner (spawn liên tục nhiều con)
 		if "max_health" in spawner:
 			spawner.max_health = spawner_health
 			spawner.health = spawner_health
-		
-		# Set spawn_interval chậm hơn nhiều
 		if "spawn_interval" in spawner:
-			spawner.spawn_interval = 8.0  # Spawn chậm hơn (8 giây)
-		
-		# Nếu chưa active, pause spawner
+			spawner.spawn_interval = 8.0 
 		if not active and "is_paused" in spawner:
 			spawner.is_paused = true
 		elif not active:
 			spawner.set_process(false)
 			spawner.set_physics_process(false)
 		
-		# Thêm vào scene
 		var enemies_container = GameManager.current_stage.find_child("Enemies")
 		if enemies_container:
 			enemies_container.add_child(spawner)
@@ -196,16 +235,13 @@ func _spawn_star_spawners(active: bool = true) -> void:
 
 func _spawn_star_spawners_with_fade(active: bool = true) -> void:
 	if spawner_scene == null:
-		print("Error: spawner_scene not assigned in BlackEmperor!")
 		return
 	
-	# Xóa spawner cũ nếu có
 	for s in spawned_spawners:
 		if is_instance_valid(s):
 			s.queue_free()
 	spawned_spawners.clear()
 	
-	# 5 hệ nguyên tố
 	var element_types = [
 		ElementsEnum.Elements.METAL,
 		ElementsEnum.Elements.WOOD, 
@@ -214,61 +250,40 @@ func _spawn_star_spawners_with_fade(active: bool = true) -> void:
 		ElementsEnum.Elements.EARTH
 	]
 	
-	# Tâm của boss zone theo trục x, y cố định ở trên cao
 	var center_x = global_position.x
-	var center_y = ground_y - 200  # Y cố định, cao hơn mặt đất
-	
-	# Nếu có boss_zone, lấy tâm x của boss_zone
+	var center_y = ground_y - 200 
 	if boss_zone:
 		var zone_center = boss_zone.global_position
 		center_x = zone_center.x
 	
 	var center = Vector2(center_x, center_y)
-	
-	# Góc bắt đầu từ đỉnh trên (-90 độ)
 	var start_angle = -PI / 2
 	
 	for i in range(5):
 		var spawner = spawner_scene.instantiate()
-		
-		# Tính góc cho đỉnh thứ i của ngôi sao (ngũ giác)
 		var angle = start_angle + (i * 2 * PI / 5)
-		
-		# Tính vị trí theo tọa độ cực
 		var offset_x = cos(angle) * spawner_radius
 		var offset_y = sin(angle) * spawner_radius
 		
 		spawner.global_position = Vector2(center.x + offset_x, center.y + offset_y)
 		
-		# Set elemental type
 		if "elemental_type" in spawner:
 			spawner.elemental_type = element_types[i]
-		
-		# Set enemies để spawn
 		if enemies_to_spawn.size() > 0 and "enemy_to_spawn" in spawner:
 			spawner.enemy_to_spawn = enemies_to_spawn
-		
-		# Set máu spawner (spawn liên tục nhiều con)
 		if "max_health" in spawner:
 			spawner.max_health = spawner_health
 			spawner.health = spawner_health
-		
-		# Set spawn_interval chậm hơn nhiều
 		if "spawn_interval" in spawner:
-			spawner.spawn_interval = 8.0  # Spawn chậm hơn (8 giây)
-		
-		# Nếu chưa active, pause spawner
+			spawner.spawn_interval = 8.0 
 		if not active and "is_paused" in spawner:
 			spawner.is_paused = true
 		elif not active:
 			spawner.set_process(false)
 			spawner.set_physics_process(false)
 		
-		# === HIỆU ỨNG FADE IN ===
-		# Set alpha ban đầu = 0 (trong suốt hoàn toàn)
 		spawner.modulate = Color(1, 1, 1, 0)
 		
-		# Thêm vào scene
 		var enemies_container = GameManager.current_stage.find_child("Enemies")
 		if enemies_container:
 			enemies_container.add_child(spawner)
@@ -277,15 +292,11 @@ func _spawn_star_spawners_with_fade(active: bool = true) -> void:
 		
 		spawned_spawners.append(spawner)
 		
-		# Tween fade in với delay giữa các spawner
 		var fade_tween = create_tween()
 		fade_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 		fade_tween.tween_property(spawner, "modulate", Color(1, 1, 1, 1), 0.5).set_delay(i * 0.1)
-	
-	print("Spawned 5 spawners with fade effect in star shape around boss")
 
 func _activate_spawners() -> void:
-	# Kích hoạt tất cả spawner sau khi boss hạ cánh
 	for spawner in spawned_spawners:
 		if is_instance_valid(spawner):
 			if "is_paused" in spawner:
@@ -295,30 +306,23 @@ func _activate_spawners() -> void:
 	print("Spawners activated!")
 
 func _land_on_ground() -> void:
-	# Di chuyển boss từ vị trí bay xuống mặt đất CHẬM
-	var land_speed = 80.0  # Tốc độ hạ cánh chậm
+	var land_speed = 80.0 
 	
 	while global_position.y < ground_y:
 		var delta = get_physics_process_delta_time()
 		global_position.y += land_speed * delta
-		
-		# Đảm bảo không vượt quá mặt đất
 		if global_position.y >= ground_y:
 			global_position.y = ground_y
 			break
-		
 		await get_tree().process_frame
 	
-	# Đảm bảo boss ở đúng vị trí mặt đất
 	global_position.y = ground_y
-	
-	# Đợi thêm một chút sau khi hạ cánh - boss đứng im
 	await get_tree().create_timer(1.0).timeout
 	
 func flash_corountine() -> void:
 	animated_sprite_2d.modulate = Color(20, 20, 20)
 	await get_tree().create_timer(0.3).timeout
-	animated_sprite_2d.modulate = Color.WHITE  # go back to normal	
+	animated_sprite_2d.modulate = Color.WHITE 
 
 func start_fight() -> void:
 	is_fighting = true
@@ -328,6 +332,7 @@ func start_boss_fight() -> void:
 	phase_changed.emit(0)
 
 func handle_dead() -> void:
+	# Handled via take_damage triggering cutscene5
 	pass
 	
 func is_at_camera_edge(margin: float = 15.0) -> bool:
@@ -338,12 +343,10 @@ func is_at_camera_edge(margin: float = 15.0) -> bool:
 	var viewport := get_viewport()
 	var screen_size := viewport.get_visible_rect().size
 
-	# Convert screen coords → world coords
 	var canvas_xform := viewport.get_canvas_transform().affine_inverse()
 
 	var left_edge  = canvas_xform * Vector2(0, screen_size.y * 0.5)
 	var right_edge = canvas_xform * Vector2(screen_size.x, screen_size.y * 0.5)
 
 	var x := global_position.x
-	#print("camera edges:", left_edge, right_edge, " obj:", x)
-	return (x <= left_edge.x + margin and velocity.x < 0) or (x >= right_edge.x - margin and velocity.x > 0) 
+	return (x <= left_edge.x + margin and velocity.x < 0) or (x >= right_edge.x - margin and velocity.x > 0)

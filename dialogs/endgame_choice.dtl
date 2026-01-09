@@ -1,0 +1,22 @@
+black_emperor: Black Emperor\: Khụ... Khụ... (Thở dốc) Không thể nào... Một kẻ phàm trần... lại có thể dung hợp được sức mạnh của Linh hồn Cổ xưa (Ancient Soul) sao?
+
+Foxy: Kết thúc rồi. Ngươi không còn khả năng chiến đấu nữa đâu. Dừng lại đi, trước khi mọi thứ đi quá xa.
+
+black_emperor: Black Emperor\: (Cười khẩy đau đớn) Dừng lại? Ngươi nghĩ ta làm tất cả những điều này vì bản thân ta sao? Sức mạnh này... sự đau thương này (Sorrow)... Ngươi còn quá trẻ để hiểu được cái giá phải trả để duy trì sự cân bằng của thế giới này.
+
+black_emperor: Nhưng kẻ thắng làm vua. Số phận ta giờ nằm trong tay ngươi. Nào... Đừng do dự. Kết liễu ta đi, hoặc ta sẽ lại gieo rắc nỗi kinh hoàng mà ngươi lo sợ đấy.
+- Chữa lành hắn
+	set {boss_choice} = "goodEnding"
+	Foxy: Không. Ta không phải là đao phủ.
+	
+	Foxy: Ngươi nói cây trượng này chứa đựng nỗi đau? Vậy thì hãy sống để chuộc lại những nỗi đau mà ngươi đã gây ra đi.
+	
+	black_emperor: Ngươi... tha cho ta sao? Ngươi đúng là một tên ngốc... hoặc là một vị cứu tinh mà thế giới này đang cần.
+
+- Mặc kệ hắn
+	set {boss_choice} = "badEnding"
+	Foxy: Thế giới ngoài kia đã đủ nguy hiểm rồi. Ta không thể để một mối đe dọa như ngươi tồn tại được nữa.
+	
+	black_emperor: Khá lắm... Ít nhất ngươi cũng có sự quyết đoán của một kẻ chinh phạt...
+	
+	Foxy: Vĩnh biệt.

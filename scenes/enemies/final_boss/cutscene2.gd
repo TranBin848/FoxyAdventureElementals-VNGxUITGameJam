@@ -1,12 +1,17 @@
 extends BlackEmperorState
 
-## Cutscene 2: Camera focus boss, boss di chuyển, zoom out, player di chuyển, play animation
+## Cutscene 2: Camera focus boss, boss di chuyển, zoom out, player di chuyển, play animation + QTE
 ## Flow:
-## 1. Chuyển camera sang boss camera
-## 2. Boss di chuyển tới BossPosCutscene2
-## 3. Zoom camera ra toàn cảnh
-## 4. Player di chuyển tới PlayerPosCutscene2
-## 5. Play animation cutscene2 trong AnimatedBg
+## 1-6: Setup positions & Boss Movement
+## 7: QTE Sequence (Via Animation Trigger)
+## 8: Element Icons
+## 9-10: Camera Zoom Out & Player Movement
+## 11: Flash effect
+## 12: Land player
+
+# Scene paths
+const ELEMENT_SPRITE_PATH = "res://scenes/enemies/final_boss/element_sprite.tscn"
+const FADE_BOSS_PATH = "res://scenes/enemies/final_boss/fade_boss_scene.tscn"
 
 var animated_bg: AnimationPlayer = null
 var player: Player = null
@@ -16,11 +21,15 @@ var boss_camera: Camera2D = null
 var boss_zone_camera: Camera2D = null
 var boss_locked_position: Vector2 = Vector2.ZERO
 var is_boss_locked: bool = false
+var canvas_layer: CanvasLayer = null
+@onready var ui: CanvasLayer = $"../../UI"
 
 func _enter() -> void:
 	print("=== State: Cutscene2 Enter ===")
 	
 	obj.change_animation("idle")
+	
+	await get_tree().create_timer(0.5).timeout
 	
 	# Kill tất cả tweens cũ
 	var all_tweens = obj.get_tree().get_processed_tweens()
@@ -31,7 +40,6 @@ func _enter() -> void:
 	
 	# Setup boss
 	obj.velocity = Vector2.ZERO
-	obj.change_animation("inactive")
 	obj.is_stunned = true
 	obj.is_movable = false
 	obj.set_physics_process(false)
@@ -41,24 +49,22 @@ func _enter() -> void:
 	if animated_bg == null:
 		animated_bg = obj.get_tree().get_first_node_in_group("animated_bg")
 	
+	# Tìm và ẩn CanvasLayer UI
+	if canvas_layer == null:
+		canvas_layer = obj.get_tree().root.find_child("GUI", true, false) as CanvasLayer
+		if canvas_layer:
+			canvas_layer.visible = false
+			ui.visible = false
+	
 	# Tìm position nodes
 	var pos_container = obj.get_tree().root.find_child("PosBossPlayer", true, false)
 	if pos_container:
 		boss_pos = pos_container.get_node_or_null("BossPosCutscene2")
 		player_pos = pos_container.get_node_or_null("PLayerPosCutscene2")
-		
-		if player_pos:
-			print("Cutscene2: Found PlayerPosCutscene2 at ", player_pos.global_position)
-		if boss_pos:
-			print("Cutscene2: Found BossPosCutscene2 at ", boss_pos.global_position)
-		if not player_pos or not boss_pos:
-			print("Warning: Position nodes not found in PosBossPlayer")
-	else:
-		print("Warning: PosBossPlayer container not found")
 	
 	# Tìm player
 	if player == null:
-		player = obj.get_tree().root.find_child("Player", true, false) as Player
+		player = GameManager.player as Player
 	
 	# Tìm camera boss
 	if boss_camera == null:
@@ -91,20 +97,33 @@ func _start_cutscene_sequence() -> void:
 	# === STEP 4: ZOOM CAMERA RA TOÀN CẢNH ===
 	await _zoom_camera_out()
 	
-	# === STEP 5: PLAYER DI CHUYỂN TỚI VỊ TRÍ CUTSCENE2 ===
+	# === STEP 5: BẮT ĐẦU ANIMATION + QTE SEQUENCE ===
+	if animated_bg:
+		print("Cutscene2: Triggering AnimatedBg...")
+		
+		if player:
+			player.visible = false
+		
+		# 1. Start animation
+		animated_bg.play("cutscene2")
+		
+		if animated_bg.is_playing():
+			await animated_bg.animation_finished
+	
+	# === STEP 6: PLAYER DI CHUYỂN TỚI VỊ TRÍ CUTSCENE2 ===
 	await _move_player_to_position()
 	
-	# === STEP 6: PLAY ANIMATION CUTSCENE2 ===
-	if animated_bg:
-		print("Cutscene2: Playing AnimatedBg cutscene2")
-		animated_bg.play("cutscene2")
-		await animated_bg.animation_finished
-		print("Cutscene2: AnimatedBg cutscene2 finished")
+	# === STEP 7: FLASH EFFECT ===
+	await _play_flash_effect()
 	
-	player.change_animation("dead")
+	# === STEP 8: PLAYER DEAD ANIMATION & LANDING ===
+	if player:
+		player.change_animation("dead") # Keep existing logic from original script
+	
+	await _land_player_on_ground()
 	
 	# Đợi một chút trước khi chuyển sang cutscene3
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(1.5).timeout
 	
 	# Unlock boss và chuyển sang cutscene3
 	is_boss_locked = false
@@ -116,19 +135,21 @@ func _start_cutscene_sequence() -> void:
 	else:
 		print("ERROR: Cannot transition to cutscene3!")
 
+# ============= MOVEMENT & EFFECTS FUNCTIONS =============
+
 func _move_boss_to_position() -> void:
-	if not boss_pos:
-		print("Warning: BossPosCutscene2 not found!")
-		await get_tree().create_timer(0.5).timeout
-		return
+	if not boss_pos: return
 	
 	var target_pos = boss_pos.global_position
-	print("Cutscene2: Moving boss from ", obj.global_position, " to ", target_pos)
+	var all_tweens = obj.get_tree().get_processed_tweens()
+	for t in all_tweens:
+		if t.is_valid(): t.kill()
 	
-	# Disable velocity
+	await get_tree().process_frame
+	
 	obj.velocity = Vector2.ZERO
+	obj.change_animation("moving")
 	
-	# Tạo tween
 	var fly_tween = obj.get_tree().create_tween()
 	fly_tween.bind_node(obj)
 	fly_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
@@ -136,40 +157,49 @@ func _move_boss_to_position() -> void:
 	
 	await fly_tween.finished
 	
-	# Lock position
 	obj.global_position = target_pos
 	boss_locked_position = target_pos
 	is_boss_locked = true
-	
-	print("Cutscene2: Boss arrived at ", obj.global_position)
+	obj.change_animation("idle")
 
 func _zoom_camera_out() -> void:
-	# Chuyển về boss_zone camera để zoom out toàn cảnh
 	if boss_zone_camera:
 		print("Cutscene2: Switching to boss_zone camera (zoom out)")
 		CameraTransition.transition_camera2D(boss_zone_camera, 1.0)
 		await get_tree().create_timer(1.0).timeout
 
 func _move_player_to_position() -> void:
-	if not player or not player_pos:
-		print("Warning: Player or PlayerPosCutscene2 not found!")
-		await get_tree().create_timer(0.5).timeout
-		return
+	if not player or not player_pos: return
 	
-	print("Cutscene2: Moving player from ", player.global_position, " to ", player_pos.global_position)
-	
-	# Player di chuyển tới vị trí
 	var player_tween = create_tween()
 	player_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	player_tween.tween_property(player, "global_position", player_pos.global_position, 1.2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	await player_tween.finished
-	
-	print("Cutscene2: Player arrived at position")
+
+func _land_player_on_ground() -> void:
+	if not player: return
+	print("Cutscene2: Landing player...")
+	player.set_physics_process(false)
+	var gravity = 980.0
+	while not player.is_on_floor():
+		var delta = obj.get_physics_process_delta_time()
+		player.velocity.y += gravity * delta
+		player.move_and_slide()
+		await obj.get_tree().physics_frame
+	player.velocity = Vector2.ZERO
+	print("Cutscene2: Player landed")
+
+func _play_flash_effect() -> void:
+	var flash = load(FADE_BOSS_PATH).instantiate()
+	var canvas = CanvasLayer.new()
+	canvas.layer = 99
+	obj.get_tree().root.add_child(canvas)
+	canvas.add_child(flash)
+	await flash.play_flash_effect(0.8)
+	canvas.queue_free()
 
 func _physics_process(_delta):
-	if not is_instance_valid(obj) or not is_instance_valid(fsm):
-		return
-	
+	if not is_instance_valid(obj) or not is_instance_valid(fsm): return
 	if is_boss_locked:
 		obj.velocity = Vector2.ZERO
 		obj.global_position = boss_locked_position
@@ -180,11 +210,10 @@ func _exit() -> void:
 	obj.set_physics_process(true)
 	is_boss_locked = false
 	
-	# Re-enable player input
 	if player:
 		player.set_physics_process(true)
+		player.visible = true
 	
-	# Tắt boss camera
 	if boss_camera:
 		boss_camera.enabled = false
 	

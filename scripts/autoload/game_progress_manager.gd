@@ -22,6 +22,8 @@ var coin_media_path = "res://scenes/ui/popup/guide_content/coin_guide.ogv"
 var key_media_path = "res://scenes/ui/popup/guide_content/key_guide.ogv"
 var skill_tree_media_path = "res://scenes/ui/popup/guide_content/skill_tree_guide.png"
 var wand_media_path = "res://scenes/ui/popup/guide_content/wand_guide.ogv"
+var sorrow_wand_media_path = "res://assets/foxy/fox_hat_sorrow_wand/wand.png"
+var soul_wand_media_path = "res://assets/foxy/fox_hat_soul_wand/wand.png"
 var skill_scroll_media_path = "res://scenes/ui/popup/guide_content/skill_scroll_guide.png"
 
 var metal_ultimate_media_path = "res://assets/skills/icon element/Metal_v2.png"
@@ -44,6 +46,19 @@ Khi cầm trượng, hãy ấn một số từ 1-5 để thi triển một phép
 Nếu phép bạn chọn hiện chỉ ở dạng cuộn giấy phép. Bạn sẽ mất đi 1 cuộn giấy phép đó.
 Nếu bạn có nhiều cuộn phép của 1 loại phép, bạn có thể học vĩnh viễn phép đó.
 Ấn Tab để bật Skill Tree và học phép trong đó nhé.
+"""
+
+var sorrow_wand_guide := """
+Bạn đã nhận được Trượng phép của sự đau thương. 
+Cây trượng này bản thân nó được tạo thành từ những phép thuật gây ra sự đau khổ. 
+Sử dụng nó để thi triển phép thuật sẽ cho bạn khả năng áp dụng hiệu ứng bật lợi lên kẻ địch trúng chiêu.
+"""
+
+var soul_wand_guide := """
+Bạn đã nhận được Trượng phép của linh hồn cổ xưa.
+Cây trượng này dường như có một linh hồn ma thuật từ thời thượng cổ trú ngụ bên trong nó.
+Có lẽ đây là một công cụ phép thuật rất quyền năng nhưng đồng thời lại rất bí hiểm. 
+Hãy đồng hành cùng cây trượng này trên con đường sắp tới để khám phá ra những khả năng siêu việt của nó nhé.
 """
 
 var cutlass_guide := """
@@ -113,6 +128,16 @@ var guide_data: Dictionary = {
 		"content": wood_wand_guide,
 		"video": wand_media_path
 	},
+	"SORROW_WAND": {
+		"title": "Wand of Sorrow",
+		"content": sorrow_wand_guide,
+		"video": sorrow_wand_media_path
+	},
+	"SOUL WAND": {
+		"title": "Soul Wand",
+		"content": soul_wand_guide,
+		"video": soul_wand_media_path
+	},
 	"CUTLASS": {
 		"title": "Cutlass",
 		"content": cutlass_guide,
@@ -176,6 +201,12 @@ func trigger_event(event_type: String) -> void:
 			if first_wood_wand_collected: return
 			first_wood_wand_collected = true
 			_show_guide("WOOD_WAND")
+			
+		"SORROW_WAND":
+			_show_guide("SORROW_WAND")
+			
+		"SOUL_WAND":
+			_show_guide("SOUL_WAND")
 			
 		"SKILL_TREE":
 			if first_time_open_skill_tree: return

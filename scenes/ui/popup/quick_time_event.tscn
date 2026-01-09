@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://gvoevfs4piww"]
+[gd_scene load_steps=5 format=3 uid="uid://gvoevfs4piww"]
 
 [ext_resource type="Shader" uid="uid://buc11seir5dmi" path="res://scenes/ui/popup/quick_time_event.gdshader" id="1_bhs3b"]
-[ext_resource type="Script" uid="uid://bvl25jygt6rpv" path="res://scenes/ui/popup/quick_time_event.gd" id="1_sdrar"]
+[ext_resource type="Script" path="res://scenes/ui/popup/quick_time_event.gd" id="1_sdrar"]
+[ext_resource type="FontFile" uid="uid://coes1s3eo0n6p" path="res://assets/fonts/SVN-Determination-Sans.ttf" id="3_pjqik"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sdrar"]
 shader = ExtResource("1_bhs3b")
@@ -9,7 +10,9 @@ shader_parameter/first_color = Color(0.0823529, 1, 0, 1)
 shader_parameter/second_color = Color(1, 0.827451, 0.00392157, 1)
 shader_parameter/third_color = Color(0.839216, 0.121569, 0.121569, 1)
 shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/unfilled_color = Color(0.443, 0.443, 0.443, 1)
+shader_parameter/unfilled_color = Color(0.517184, 0.517184, 0.517184, 1)
+shader_parameter/center_color = Color(0, 0, 0, 0.745098)
+shader_parameter/center_blur_softness = 0.1
 shader_parameter/value = 1.0
 shader_parameter/smooth_ = 0.012
 shader_parameter/width_in = 0.85
@@ -51,16 +54,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -34.5
-offset_right = 20.0
-offset_bottom = 34.5
+offset_left = -11.0
+offset_top = -18.0
+offset_right = 15.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(-5, 0)
 theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_pjqik")
 theme_override_font_sizes/font_size = 50
-text = "X"
+text = "F"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SuccessLabel" type="Label" parent="ColorRect"]
 unique_name_in_owner = true

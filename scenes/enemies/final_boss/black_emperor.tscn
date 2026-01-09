@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://d0a57drf7tx4v"]
+[gd_scene load_steps=60 format=3 uid="uid://d0a57drf7tx4v"]
 
 [ext_resource type="Script" uid="uid://cmkrg13xtjdxt" path="res://scenes/enemies/final_boss/black_emperor.gd" id="1_hljwo"]
 [ext_resource type="Texture2D" uid="uid://d24pc25cha5hw" path="res://assets/foxy/fox_final_boss/final/fox_final_boss_dead_1.png" id="5_2anp0"]
@@ -50,6 +50,7 @@
 [ext_resource type="PackedScene" uid="uid://cfwdngvncdiwu" path="res://scenes/enemies/final_boss/boss_spawner.tscn" id="52_spawner"]
 [ext_resource type="PackedScene" uid="uid://dd7umy7lqfimd" path="res://scenes/enemies/minions/crab/crab.tscn" id="53_qin12"]
 [ext_resource type="PackedScene" uid="uid://d0jkkqjvv3603" path="res://scenes/ui/boss_healthbar.tscn" id="54_g17ih"]
+[ext_resource type="Script" uid="uid://dxaogovwyx8vi" path="res://scenes/enemies/final_boss/cutscene7.gd" id="54_ib6y0"]
 [ext_resource type="PackedScene" uid="uid://c74auvuhbghse" path="res://scenes/enemies/minions/starfish/starfish.tscn" id="55_2anp0"]
 [ext_resource type="Script" uid="uid://byheauwog643v" path="res://scenes/enemies/final_boss/dead.gd" id="56_2anp0"]
 [ext_resource type="Script" uid="uid://rs2knmi2vck7" path="res://scenes/enemies/final_boss/charge.gd" id="57_mq2q6"]
@@ -186,9 +187,10 @@ metadata/_custom_type_script = "uid://s4xx82espxdt"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Direction"]
 sprite_frames = SubResource("SpriteFrames_4c0df")
-animation = &"moving"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.373741
+frame = 1
+frame_progress = 0.982986
 
 [node name="FrontRayCast2D" type="RayCast2D" parent="Direction"]
 position = Vector2(-1, 0)
@@ -281,6 +283,7 @@ script = ExtResource("51_cutscene4")
 
 [node name="Cutscene5" type="Node" parent="States"]
 script = ExtResource("58_jywuh")
+bounce_back_velocity = null
 
 [node name="Cutscene6" type="Node" parent="States"]
 script = ExtResource("52_ib6y0")
@@ -290,6 +293,9 @@ script = ExtResource("56_2anp0")
 
 [node name="Charge" type="Node" parent="States"]
 script = ExtResource("57_mq2q6")
+
+[node name="Cutscene7" type="Node" parent="States"]
+script = ExtResource("54_ib6y0")
 
 [node name="Label" type="Label" parent="."]
 visible = false

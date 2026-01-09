@@ -361,12 +361,9 @@ func upgrade_wand_to(level: WandLevel) -> void:
 	GameProgressManager.trigger_event("WEAPON_UPGRADE_" + level_name.to_upper())
 	
 	# Refresh visuals if holding the wand
-	if current_weapon == WeaponType.WAND:
-		equip_weapon(WeaponType.WAND)
+	equip_weapon(WeaponType.WAND)
 
 func equip_weapon(type: WeaponType) -> void:
-	if current_weapon == type && type != WeaponType.NORMAL: return # Optimization: Don't re-equip same weapon
-	
 	current_weapon = type
 	
 	match type:

@@ -43,12 +43,14 @@ directories/dch_directory={
 "Old_Man_Cave": "res://assets/npc/Old_Man_Cave.dch",
 "Stat_Seller": "res://dialogs/Stat_Seller.dch",
 "Wand_Seller": "res://dialogs/Wand_Seller.dch",
+"black_emperor": "res://dialogs/black_emperor.dch",
 "foxy": "res://dialogs/foxy.dch",
 "npc_master_fox": "res://dialogs/npc_master_fox.dch",
 "npc_villager": "res://dialogs/npc_villager.dch"
 }
 directories/dtl_directory={
 "end_lv1": "res://dialogs/end_lv1.dtl",
+"endgame_choice": "res://dialogs/endgame_choice.dtl",
 "guide_elemental": "res://dialogs/guide_elemental.dtl",
 "level_0": "res://dialogic_timelines/level_0.dtl",
 "old_man_of_the_cave": "res://dialogs/old_man_of_the_cave.dtl",
@@ -97,7 +99,9 @@ audio/channel_defaults={
 "volume": 0.0
 }
 }
-variables={}
+variables={
+"boss_choice": ""
+}
 
 [display]
 
