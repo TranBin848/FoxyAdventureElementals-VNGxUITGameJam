@@ -94,7 +94,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_wx43u")
 shader_parameter/speed = Vector2(0.01, 0.02)
 shader_parameter/wave_strength = 1.5
 shader_parameter/scale_y = 450.0
-shader_parameter/y_zoom = 0.424098
+shader_parameter/y_zoom = 0.148644
 shader_parameter/surface_speed = 3.0
 shader_parameter/surface_frequency = 10.0
 shader_parameter/surface_amplitude = 0.02
@@ -145,7 +145,7 @@ color_initial_ramp = SubResource("GradientTexture1D_8al0x")
 alpha_curve = SubResource("CurveTexture_32rye")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8kgu"]
-size = Vector2(797, 858)
+size = Vector2(654, 780)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fdo7j"]
 normal = Vector2(1, 0)
@@ -237,9 +237,35 @@ elements_color = Dictionary[int, Color]({
 })
 elemental_type = 2
 
+[node name="Mushroom7" parent="Enemies" instance=ExtResource("10_xsvho")]
+position = Vector2(2672, -365)
+elements_color = Dictionary[int, Color]({
+0: Color(0, 0, 0, 1),
+1: Color(0.941176, 0.941176, 0.941176, 1),
+2: Color(0.196078, 0.803922, 0.196078, 1),
+3: Color(0, 1, 1, 1),
+4: Color(1, 0.321569, 0.0980392, 1),
+5: Color(0.827451, 0.435294, 0, 1)
+})
+elemental_type = 2
+
 [node name="Mushroom3" parent="Enemies" instance=ExtResource("10_xsvho")]
 z_index = 0
 position = Vector2(3097, -107)
+scale = Vector2(1.02679, 0.975904)
+elements_color = Dictionary[int, Color]({
+0: Color(0, 0, 0, 1),
+1: Color(0.941176, 0.941176, 0.941176, 1),
+2: Color(0.196078, 0.803922, 0.196078, 1),
+3: Color(0, 1, 1, 1),
+4: Color(1, 0.321569, 0.0980392, 1),
+5: Color(0.827451, 0.435294, 0, 1)
+})
+elemental_type = 3
+
+[node name="Mushroom6" parent="Enemies" instance=ExtResource("10_xsvho")]
+z_index = 0
+position = Vector2(2894, -80)
 scale = Vector2(1.02679, 0.975904)
 elements_color = Dictionary[int, Color]({
 0: Color(0, 0, 0, 1),
@@ -264,16 +290,41 @@ elements_color = Dictionary[int, Color]({
 })
 elemental_type = 3
 
+[node name="Mushroom5" parent="Enemies" instance=ExtResource("10_xsvho")]
+z_index = 0
+position = Vector2(3017, 173)
+elements_color = Dictionary[int, Color]({
+0: Color(0, 0, 0, 1),
+1: Color(0.941176, 0.941176, 0.941176, 1),
+2: Color(0.196078, 0.803922, 0.196078, 1),
+3: Color(0, 1, 1, 1),
+4: Color(1, 0.321569, 0.0980392, 1),
+5: Color(0.827451, 0.435294, 0, 1)
+})
+elemental_type = 3
+
 [node name="Crab" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(1720, -394)
 elemental_type = 2
+
+[node name="Crab4" parent="Enemies" instance=ExtResource("14_onjut")]
+position = Vector2(2749, 147)
+elemental_type = 3
+
+[node name="Crab5" parent="Enemies" instance=ExtResource("14_onjut")]
+position = Vector2(3324, 147)
+elemental_type = 3
+
+[node name="Crab6" parent="Enemies" instance=ExtResource("14_onjut")]
+position = Vector2(2652, -106)
+elemental_type = 3
 
 [node name="Crab2" parent="Enemies" instance=ExtResource("14_onjut")]
 position = Vector2(2823, -362)
 elemental_type = 2
 
 [node name="Crab3" parent="Enemies" instance=ExtResource("14_onjut")]
-position = Vector2(2624, -362)
+position = Vector2(2521, -363)
 elemental_type = 2
 
 [node name="Boat" parent="." instance=ExtResource("16_plcgd")]
@@ -545,7 +596,7 @@ ambience_id = "ambience_rainforest"
 metadata/_custom_type_script = "uid://ddphxb2lvd1do"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RainGPUParticles2D/AmbienceArea2D"]
-position = Vector2(-61.5, 28)
+position = Vector2(-82, 67)
 shape = SubResource("RectangleShape2D_h8kgu")
 
 [node name="WorldBorder" type="Node2D" parent="."]
@@ -589,3 +640,33 @@ z_index = 2
 position = Vector2(129, 67)
 tile_map_data = PackedByteArray("AADn/woACgAAAAAABQDp/woACgAAAAAABQDo/woACgAAAAAABQAIAAIACgAAAAAABQAJAAIACgAAAAAABQARAAIACgAAAAAABQASAAIACgAAAAAABQAaAAEACgAAAAAABQAbAAEACgAAAAAABQAcAAEACgAAAAAABQBPAAIACgAAAAAABQBTAAIACgAAAAAABQBoAAAACgAAAAAABQBjAPz/CgAAAAAABQBiAPz/CgAAAAAABQBhAPz/CgAAAAAABQBOAPr/CgAAAAAABQBNAPr/CgAAAAAABQBPAPr/CgAAAAAABQAzAPj/CgAAAAAABQA0APj/CgAAAAAABQAkAPb/CgAAAAAABQA7AO//CgAAAAAABQBdAPT/CgAAAAAABQBeAPT/CgAAAAAABQBfAPT/CgAAAAAABQBhAPT/CgAAAAAABQBgAPT/CgAAAAAABQB0APD/CgAAAAAABQA=")
 tile_set = ExtResource("3_2jmd8")
+
+[connection signal="body_entered" from="ObjectTileMap/Coin" to="ObjectTileMap/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71045" to="ObjectTileMap/@RigidBody2D@71045" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71046" to="ObjectTileMap/@RigidBody2D@71046" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71047" to="ObjectTileMap/@RigidBody2D@71047" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71048" to="ObjectTileMap/@RigidBody2D@71048" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71049" to="ObjectTileMap/@RigidBody2D@71049" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71050" to="ObjectTileMap/@RigidBody2D@71050" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71051" to="ObjectTileMap/@RigidBody2D@71051" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71052" to="ObjectTileMap/@RigidBody2D@71052" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71053" to="ObjectTileMap/@RigidBody2D@71053" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71054" to="ObjectTileMap/@RigidBody2D@71054" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71055" to="ObjectTileMap/@RigidBody2D@71055" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71056" to="ObjectTileMap/@RigidBody2D@71056" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71057" to="ObjectTileMap/@RigidBody2D@71057" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71058" to="ObjectTileMap/@RigidBody2D@71058" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71059" to="ObjectTileMap/@RigidBody2D@71059" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71060" to="ObjectTileMap/@RigidBody2D@71060" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71061" to="ObjectTileMap/@RigidBody2D@71061" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71062" to="ObjectTileMap/@RigidBody2D@71062" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71063" to="ObjectTileMap/@RigidBody2D@71063" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71064" to="ObjectTileMap/@RigidBody2D@71064" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71065" to="ObjectTileMap/@RigidBody2D@71065" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71066" to="ObjectTileMap/@RigidBody2D@71066" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71067" to="ObjectTileMap/@RigidBody2D@71067" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71068" to="ObjectTileMap/@RigidBody2D@71068" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71069" to="ObjectTileMap/@RigidBody2D@71069" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71070" to="ObjectTileMap/@RigidBody2D@71070" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71071" to="ObjectTileMap/@RigidBody2D@71071" method="_on_body_entered"]
+[connection signal="body_entered" from="ObjectTileMap/@RigidBody2D@71072" to="ObjectTileMap/@RigidBody2D@71072" method="_on_body_entered"]
