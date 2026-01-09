@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://1dqxpkxolbg"]
 
-[ext_resource type="Script" uid="uid://bhoineofcfxd5" path="res://scenes/enemies/final_boss/thunderboltBoss.gd" id="1_bifge"]
+[ext_resource type="Script" uid="uid://bhoineofcfxd5" path="res://scenes/enemies/final_boss/thunderStrikeBoss.gd" id="1_bifge"]
 [ext_resource type="Script" uid="uid://ccpqtop0obu2w" path="res://scripts/area_component/hit_area_2d.gd" id="2_gk4sj"]
 [ext_resource type="Texture2D" uid="uid://bplw6ih3je446" path="res://assets/fx/explosion/explosion.png" id="3_mpjp5"]
 [ext_resource type="Texture2D" uid="uid://bhm50qwr2xhri" path="res://assets/skills/metal/Thunder/Thunderstrike w blur.png" id="4_waqlv"]
@@ -39,7 +39,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_agpdt"]
-resource_name = "Thunderbolt"
+resource_name = "ThunderStrike"
 length = 1.5
 step = 0.0166667
 tracks/0/type = "value"
@@ -87,10 +87,10 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jmicw"]
 _data = {
 &"RESET": SubResource("Animation_4o8rp"),
-&"Thunderbolt": SubResource("Animation_agpdt")
+&"ThunderStrike": SubResource("Animation_agpdt")
 }
 
-[node name="Thunderbolt" type="Area2D"]
+[node name="ThunderStrike" type="Area2D"]
 scale = Vector2(1.65, 1.65)
 collision_layer = 32
 collision_mask = 8

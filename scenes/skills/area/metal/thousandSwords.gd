@@ -23,8 +23,8 @@ var active_swords: Array[SwordProjectile] = []
 var current_target: Node2D = null 
 var is_firing: bool = false 
 
-func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
-	super.setup(skill, caster_position, enemy, _direction)
+func setup(_skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
+	super.setup(_skill, caster_position, enemy, _direction)
 	
 	# Use skill's scaled damage
 	self.damage = skill.get_scaled_damage()

@@ -93,7 +93,7 @@ func _on_scene_changed() -> void:
 		_capture_base_stats()
 	
 	# Scale Enemies
-	get_tree().call_group("enemies", "scale_health", 0.8 + 0.2 * current_level)
+	get_tree().call_group("enemies", "scale_health", 0.5 + 0.5 * current_level)
 	
 	# ✅ FIX: AWAIT the spawn handler so it completes before proceeding
 	await _handle_checkpoint_or_portal_spawn()
@@ -315,11 +315,17 @@ func save_checkpoint(checkpoint_id: String) -> void:
 	print("💾 Checkpoint saved: %s" % checkpoint_id)
 
 func load_checkpoint_data() -> void:
+	# ✅ CLEAR ALL DATA FIRST
+	print("🗑️ Clearing all existing data before loading...")
+	_clear_all_data()
+	
 	var save_data = SaveSystem.load_game(current_save_slot_index)
 	if save_data.is_empty(): 
+		print("⚠️ No save data found for slot %d" % current_save_slot_index)
 		clear_run_state()
 		return
 	
+	print("📂 Loading fresh data from slot %d..." % current_save_slot_index)
 	is_loading_from_checkpoint = true
 	
 	current_checkpoint_id = save_data.get("checkpoint_id", "")
@@ -341,7 +347,39 @@ func load_checkpoint_data() -> void:
 		checkpoint_data.clear()
 		checkpoint_data[current_checkpoint_id] = loaded_player_data
 	
-	print("📂 Checkpoint data loaded from disk")
+	print("✅ Checkpoint data loaded from disk")
+
+func _clear_all_data() -> void:
+	"""Clears all game state data before loading"""
+	# Clear checkpoint data
+	current_checkpoint_id = ""
+	checkpoint_data.clear()
+	
+	# Clear player stats
+	player_stats.clear()
+	player_base_stats.clear()
+	
+	# Clear run state
+	current_run_state.clear()
+	
+	# Clear level progression
+	current_level = 0
+	
+	# Clear inventory
+	if inventory_system:
+		inventory_system.clear_all()
+	
+	# Clear skill tree
+	SkillTreeManager.clear_data()
+	
+	# Clear game progress
+	GameProgressManager.clear_all_data()
+	
+	# Reset flags
+	is_loading_from_checkpoint = false
+	target_portal_name = ""
+	
+	print("✅ All game data cleared")
 
 func clear_checkpoint_data() -> void:
 	current_checkpoint_id = ""
@@ -390,27 +428,25 @@ func on_player_death() -> void:
 #endregion
 
 #region New Game & Load Game
-# 2. UPDATED NEW GAME LOGIC
 func start_new_game(slot_index: int) -> void:
 	print("🎮 Starting New Game on Slot %d" % slot_index)
 	
 	current_save_slot_index = slot_index
 	
-	# Optional: Delete old data if user overwrites a slot
-	SaveSystem.delete_slot(slot_index) 
+	# ✅ Clear ALL data before starting new game
+	_clear_all_data()
 	
-	clear_checkpoint_data()
-	clear_run_state()
+	# Delete old save file
+	SaveSystem.delete_slot(slot_index)
+	
 	get_tree().change_scene_to_file("res://levels/level_0/level_0.tscn")
 
-# 3. UPDATED LOAD LOGIC
 func load_saved_game(slot_index: int) -> void:
 	print("📂 Loading Game from Slot %d" % slot_index)
 	
 	current_save_slot_index = slot_index
 
-	# 1. Load data from disk into memory variables
-	# This populates 'checkpoint_data', 'player_stats', 'is_loading_from_checkpoint = true', etc.
+	# 1. Load data from disk (this now clears old data first)
 	load_checkpoint_data()
 	
 	# 2. Validation: Did we actually get a checkpoint ID?
@@ -420,7 +456,6 @@ func load_saved_game(slot_index: int) -> void:
 		return
 	
 	# 3. Retrieve the scene path
-	# We dig into the data we just loaded into 'checkpoint_data'
 	var saved_scene_path = checkpoint_data[current_checkpoint_id].get("stage_path", "")
 	
 	if saved_scene_path.is_empty():
@@ -428,8 +463,6 @@ func load_saved_game(slot_index: int) -> void:
 		return
 
 	# 4. Change Scene
-	# Since 'is_loading_from_checkpoint' is now true, _on_scene_changed() will
-	# automatically handle placing the player and restoring stats once the scene finishes loading.
 	print("🔄 Transitioning to saved scene: %s" % saved_scene_path)
 	get_tree().change_scene_to_file(saved_scene_path)
 #endregion
@@ -498,3 +531,4 @@ func player_act(method_name: String, a1=null, a2=null, a3=null, a4=null, a5=null
 		if val != null: args.append(val)
 			
 	player.callv(method_name, args)
+#endregion

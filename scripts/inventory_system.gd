@@ -48,6 +48,10 @@ func save_data() -> Dictionary:
 func load_data(saved_data: Dictionary) -> void:
 	coins = saved_data.get("coins", 0)
 	keys = saved_data.get("keys", 0)
+	
+func clear_all() -> void:
+	keys = 0
+	coins = 0
 
 func has_key() -> bool:
 	return keys > 0	

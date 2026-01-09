@@ -300,24 +300,22 @@ func _play_with_variation(player: AudioStreamPlayer2D, clip: AudioClip) -> void:
 	player.play()
 
 func _init_culling() -> void:
-	var notifier = VisibleOnScreenNotifier2D.new()
-	add_child(notifier)
+	# Use Enabler instead of Notifier
+	var enabler = VisibleOnScreenEnabler2D.new()
 	
-	if is_inside_tree():
-		_setup_culling_rect(notifier)
-	else:
-		call_deferred("_setup_culling_rect", notifier)
+	# Configure what gets disabled when off-screen
+	enabler.enable_mode = VisibleOnScreenEnabler2D.ENABLE_MODE_INHERIT # Disables Physics + Process
 	
-	notifier.screen_exited.connect(_on_screen_exited)
-	notifier.screen_entered.connect(_on_screen_entered)
-
-func _setup_culling_rect(notifier: VisibleOnScreenNotifier2D) -> void:
-	var viewport_size: Vector2 = get_viewport_rect().size
-	if viewport_size == Vector2.ZERO:
-		viewport_size = Vector2(1280, 720)
+	# Define a rect based on the ENEMY SIZE, not the viewport
+	# Example: A 100x100 box centered on the enemy
+	var enemy_size = Vector2(128, 128) # Adjust this to match your Sprite size
+	enabler.rect = Rect2(-enemy_size / 2, enemy_size)
 	
-	var extended_rect := Rect2(-viewport_size, viewport_size * 3.0)
-	notifier.rect = extended_rect
+	add_child(enabler)
+	
+	# If you need custom logic (like pausing particles), connect the signals manually
+	enabler.screen_exited.connect(_on_screen_exited)
+	enabler.screen_entered.connect(_on_screen_entered)
 
 func _on_screen_exited() -> void:
 	# Pause only what you want

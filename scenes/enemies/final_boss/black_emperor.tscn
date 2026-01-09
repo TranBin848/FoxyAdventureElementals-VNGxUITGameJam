@@ -35,7 +35,7 @@
 [ext_resource type="Script" uid="uid://b2o007yxvk7qa" path="res://scripts/node2d_factory.gd" id="38_u2mao"]
 [ext_resource type="PackedScene" uid="uid://6g7y4d1dahuk" path="res://scenes/enemies/final_boss/warning.tscn" id="39_wk8ah"]
 [ext_resource type="Script" uid="uid://d1toxknqfdla6" path="res://scenes/enemies/final_boss/inactive.gd" id="40_wk8ah"]
-[ext_resource type="PackedScene" uid="uid://1dqxpkxolbg" path="res://scenes/enemies/final_boss/thunderboltBoss.tscn" id="41_u2mao"]
+[ext_resource type="PackedScene" uid="uid://1dqxpkxolbg" path="res://scenes/enemies/final_boss/thunderStrikeBoss.tscn" id="41_u2mao"]
 [ext_resource type="Script" uid="uid://b8wbpujyvf1qr" path="res://scenes/enemies/final_boss/stand_up.gd" id="41_yr5q8"]
 [ext_resource type="Script" uid="uid://cax5v5vvvpy8n" path="res://scenes/enemies/final_boss/meteor_rain.gd" id="44_mpuyr"]
 [ext_resource type="PackedScene" uid="uid://pgf87lpdsfte" path="res://scenes/enemies/final_boss/star_scene.tscn" id="46_i0lyx"]
