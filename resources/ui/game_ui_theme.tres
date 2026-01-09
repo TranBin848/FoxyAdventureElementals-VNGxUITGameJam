@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=23 format=3 uid="uid://dkoho3svds8d5"]
+[gd_resource type="Theme" load_steps=25 format=3 uid="uid://dkoho3svds8d5"]
 
 [ext_resource type="Texture2D" uid="uid://dekwkca5hfw3l" path="res://assets/ui/basic_ui_sprite.png" id="1_5pf0f"]
 [ext_resource type="Texture2D" uid="uid://rb25hlntywjy" path="res://assets/ui/MediavelFree.png" id="1_v3a22"]
 [ext_resource type="Texture2D" uid="uid://pjg067fjvr3h" path="res://assets/ui/pannel_player.png" id="2_yxdl1"]
 [ext_resource type="FontFile" uid="uid://jiilm8js0owl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_swjfl"]
+[ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="4_bixmm"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="5_j2ptf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1nv5v"]
@@ -31,6 +32,13 @@ texture_margin_top = 8.0
 texture_margin_right = 7.0
 texture_margin_bottom = 8.0
 region_rect = Rect2(0, 0, 67, 69)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5i32w"]
+texture = ExtResource("4_bixmm")
+texture_margin_left = 96.0
+texture_margin_top = 96.0
+texture_margin_right = 96.0
+texture_margin_bottom = 96.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yxdl1"]
 load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
@@ -102,6 +110,7 @@ Menu/base_type = &"PanelContainer"
 Menu/styles/panel = SubResource("StyleBoxEmpty_mfetm")
 PlayerPanel/base_type = &"PanelContainer"
 PlayerPanel/styles/panel = SubResource("StyleBoxTexture_m26ve")
+PopupPanel/styles/panel = SubResource("StyleBoxTexture_5i32w")
 ToolButton/base_type = &"Button"
 ToolButton/colors/font_color = Color(1, 1, 1, 1)
 ToolButton/colors/font_disabled_color = Color(0, 0, 0, 1)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://by4bwryh7oobl"]
+[gd_scene load_steps=12 format=3 uid="uid://by4bwryh7oobl"]
 
 [ext_resource type="Script" uid="uid://cfevsw3ed4bnn" path="res://levels/objects/platforms/interactable_platform.gd" id="1_ca30f"]
 [ext_resource type="Texture2D" uid="uid://bn23ps3jhu4ru" path="res://assets/island/objects/moving_platform/moving_platform.png" id="1_nma6l"]
 [ext_resource type="Script" uid="uid://0qvd447gmgon" path="res://scripts/area_component/interactive_area_2d.gd" id="3_ca30f"]
+[ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="3_h4cub"]
 
 [sub_resource type="Curve2D" id="Curve2D_1f3o5"]
 _data = {
@@ -90,6 +91,24 @@ texture = ExtResource("1_nma6l")
 shape = SubResource("RectangleShape2D_lg0vp")
 one_way_collision = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="PathFollow2D/AnimatableBody2D"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -24.0
+offset_right = 78.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("3_h4cub")
+theme_override_font_sizes/normal_font_size = 8
+text = "Press F to interact"
+horizontal_alignment = 1
+
 [node name="InteractiveArea2D" type="Area2D" parent="PathFollow2D"]
 collision_mask = 2
 script = ExtResource("3_ca30f")
@@ -105,3 +124,5 @@ libraries = {
 }
 
 [connection signal="interacted" from="PathFollow2D/InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]
+[connection signal="interaction_available" from="PathFollow2D/InteractiveArea2D" to="." method="_on_interactive_area_2d_interaction_available"]
+[connection signal="interaction_unavailable" from="PathFollow2D/InteractiveArea2D" to="." method="_on_interactive_area_2d_interaction_unavailable"]
