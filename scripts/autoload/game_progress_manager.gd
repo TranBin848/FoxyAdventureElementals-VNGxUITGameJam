@@ -31,14 +31,16 @@ var fire_ultimate_media_path = "res://assets/skills/icon element/Fire_v2.png"
 var earth_ultimate_media_path = "res://assets/skills/icon element/Earth_v2.png"
 
 var skill_scroll_guide := """
-Bạn vừa nhặt được một cuộn phép thuật. 
-Nhưng ngôn ngữ mà chúng sử dụng vô cùng phức tạp.
-Có lẽ bạn sẽ cần công cụ gì đó để có thể dùng được chúng.
+Bạn vừa nhặt được một cuộn phép thuật rơi ra từ việc tiêu diệt quái vật. 
+Nhưng ngôn ngữ mà chúng sử dụng vô cùng phức tạp. Bạn sẽ cần công cụ gì đó để có thể dùng được chúng.
+Ngoài ra, quái vật và phép thuật trong thế giới này thuộc về một thuộc tính nguyên tố riêng trong ngũ hành.
+Chúng tuân theo quy luật sinh khác của ngũ hành, từ đó, phép thuật thi triển lên quái vật có thể tăng giảm sát thương dựa trên quy luật này.
+Hãy thu thập thật nhiều loại phép thuật và khám phá những điều tuyệt diệu quanh chúng nhé.
 """
 
 var wood_wand_guide := """
 Bạn vừa nhận được trượng gỗ. Viên đá trên cây trượng sẽ giúp bạn đọc được ngôn ngữ phép thuật. Từ đó học được cách sử dụng phép.
-Hãy ấn một số từ 1-5 để chọn một phép trên thanh skill bar.Sau đó bấm C để sử dụng phép.
+Khi cầm trượng, hãy ấn một số từ 1-5 để thi triển một phép trên thanh skill bar.
 Nếu phép bạn chọn hiện chỉ ở dạng cuộn giấy phép. Bạn sẽ mất đi 1 cuộn giấy phép đó.
 Nếu bạn có nhiều cuộn phép của 1 loại phép, bạn có thể học vĩnh viễn phép đó.
 Ấn Tab để bật Skill Tree và học phép trong đó nhé.
@@ -52,8 +54,7 @@ Bấm C để chém và bấm X phóng đi.
 
 var skill_tree_guide := """
 Chào mừng bạn đến với Skill Tree lần đầu tiên.
-Bạn có thể chọn 1 phép và học nó nếu bạn có đủ số lượng cuộn phép.
-Khi đã học, bạn có thể dùng phép đó mà không tốn cuộn phép.
+Bạn có thể chọn 1 phép và học nó nếu bạn có đủ số lượng cuộn phép. Khi đã học, bạn có thể dùng phép đó mà không tốn cuộn phép.
 Để nâng cấp 1 phép đã học nhằm tăng các chỉ số của nó, bạn phải thu thập thêm cuộn phép của phép đó.
 Số lượng cuộn phép bạn thu thập được sẽ hiển thị ở góc trên bên phải mỗi ô phép.
 Bấm vào 1 phép để xem mô tả chi tiết của nó.

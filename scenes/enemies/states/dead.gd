@@ -1,4 +1,3 @@
-class_name EnemyStateDead
 extends EnemyState
 
 @export var despawn_time: float = 2
@@ -52,8 +51,7 @@ func _drop_skill_item():
 		#])
 
 
-	
-func _update( _delta ):
+func _update(_delta):
 	if obj.animated_sprite:
 		var time_ratio: float = timer / despawn_time
 		obj.animated_sprite.modulate.a = time_ratio

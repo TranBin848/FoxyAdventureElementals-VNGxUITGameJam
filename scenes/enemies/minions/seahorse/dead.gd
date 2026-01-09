@@ -8,7 +8,7 @@ func _enter() -> void:
 	obj.disable_collision()
 	timer = despawn_time
 
-func _update( _delta ):
+func _update(_delta ):
 	if update_timer(_delta):
 		obj.queue_free()
 	super._update(_delta)
