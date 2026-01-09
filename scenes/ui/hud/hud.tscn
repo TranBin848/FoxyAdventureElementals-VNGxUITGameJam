@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bp5uk1uk53vpn" path="res://scenes/ui/hud/settings.tscn" id="3_8qguk"]
 [ext_resource type="PackedScene" uid="uid://dns4h3bxal3p1" path="res://scenes/ui/hud/health_bar_container.tscn" id="4_gss2c"]
 [ext_resource type="PackedScene" uid="uid://dn0lqvt5ra32c" path="res://scenes/ui/skill_bar/skill_bar.tscn" id="5_2wu1p"]
-[ext_resource type="PackedScene" path="res://scenes/ui/hud/coin_display.tscn" id="5_4m4yb"]
+[ext_resource type="PackedScene" uid="uid://bmimr0vcdeun6" path="res://scenes/ui/hud/coin_display.tscn" id="5_4m4yb"]
 [ext_resource type="PackedScene" uid="uid://bfs6srlf24660" path="res://scenes/ui/hud/weapon_panel.tscn" id="5_136eg"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="6_4m4yb"]
 
