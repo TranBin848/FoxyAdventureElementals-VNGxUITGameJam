@@ -42,4 +42,4 @@ func spawn_wand():
 	
 	# 2. Pass the selected level to the wand
 	if "wand_level" in wand_instance:
-		wand_instance.wand_level = drop_wand_level
+		wand_instance.set_wand_level(drop_wand_level)
