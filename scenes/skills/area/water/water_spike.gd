@@ -5,7 +5,9 @@ class_name WaterSpikeArea
 
 func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	super.setup(skill, caster_position, enemy, _direction)
-	self.damage = damage * (1.0 + sqrt(skill.level - 1.0))
+	
+	# Use scaled damage
+	self.damage = skill.get_scaled_damage()
 	
 	if targetenemy and is_instance_valid(targetenemy):
 		targetenemy.enter_stun(global_position)
@@ -17,17 +19,14 @@ func _apply_knockback_effect() -> void:
 	if targetenemy and is_instance_valid(targetenemy):
 		targetenemy.exit_skill()
 		
-		# Use stored casting_direction from parent
 		var knockback_vector = Vector2(
 			direction.x * knockback_force * 0.5,
-			-knockback_force  # Upward launch
+			-knockback_force
 		)
 		
 		targetenemy.apply_knockback(knockback_vector)
 
-# Called by AnimationPlayer method track when startup animation completes
 func _on_startup_complete() -> void:
-	_enable_hitbox()  # Enable damage detection
-		# Immediately disable enemy movement
+	_enable_hitbox()
 	if targetenemy and is_instance_valid(targetenemy):
 		targetenemy.enter_tornado(global_position)

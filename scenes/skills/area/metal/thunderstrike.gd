@@ -5,18 +5,18 @@ class_name ThunderStrikeArea
 
 func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.ZERO) -> void:
 	super.setup(skill, caster_position, enemy)
-	self.damage = damage * (1.0 + sqrt(skill.level - 1.0))
-	# Immediately disable enemy movement
+	
+	# Use scaled damage
+	self.damage = skill.get_scaled_damage()
+	
 	if targetenemy and is_instance_valid(targetenemy):
 		targetenemy.enter_stun(global_position)
 		
 	AudioManager.play_sound("skill_thunderstrike_crackle")
 
-# Called by AnimationPlayer method track when startup animation completes
 func _on_startup_complete() -> void:
-	_enable_hitbox()  # Enable damage detection
+	_enable_hitbox()
 
-# Called by AnimationPlayer method track at knockback frame
 func _apply_stun_effect() -> void:
 	AudioManager.play_sound("skill_thunderstrike")
 	if targetenemy and is_instance_valid(targetenemy):

@@ -20,24 +20,18 @@ signal coins_changed(amount: int)
 # --- PUBLIC API (Commands - only way to modify state) ---
 
 func consume_skill_use(skill_name: String) -> void:
-	# 1. If unlocked, we don't consume stacks (Infinite use)
 	if is_unlocked(skill_name):
 		return
 
-	# 2. Check if we actually have stacks
 	var current_stacks = get_stacks(skill_name)
 	if current_stacks <= 0:
 		return
 
-	# 3. Reduce stack count
-	# We use existing logic but negative. 
-	# (Assuming collect_skill handles addition, we essentially add -1)
 	_stacks[skill_name] = current_stacks - 1
 	stack_changed.emit(skill_name, _stacks[skill_name])
 	
 	print("Used 1 stack of %s (Remaining: %d)" % [skill_name, _stacks[skill_name]])
 
-	# 4. Auto-Unequip if we just hit 0
 	if _stacks[skill_name] <= 0:
 		var slot_index = find_skill_slot(skill_name)
 		if slot_index != -1:
@@ -46,15 +40,15 @@ func consume_skill_use(skill_name: String) -> void:
 
 func collect_skill(skill_name: String, stack_amount: int = 1) -> void:
 	GameProgressManager.trigger_event("SKILL_SCROLL")
-	"""Called when player picks up a skill in the world"""
+	
 	if not SkillDatabase.get_skill_by_name(skill_name):
 		push_error("Unknown skill: %s" % skill_name)
 		return
 		
 	if not _skill_data.has(skill_name):
 		_skill_data[skill_name] = {
-			"level": 1,        # Start at level 1 (not 0!)
-			"unlocked": false  # Has stacks but not permanently unlocked
+			"level": 1,        # Start at level 1
+			"unlocked": false
 		}
 		
 	if get_stacks(skill_name) == 0 and stack_amount > 0:
@@ -65,24 +59,25 @@ func collect_skill(skill_name: String, stack_amount: int = 1) -> void:
 	_add_stacks(skill_name, stack_amount)
 	
 	if stack_amount > 0:
-		# Check if it's already on the bar to avoid duplicates
 		if not (skill_name in _skillbar):
-		# Find the first empty slot (null)
 			var empty_slot = -1
 			for i in range(_skillbar.size()):
 				if _skillbar[i] == null:
 					empty_slot = i
 					break
 
-				# If we found a spot, equip it!
 			if empty_slot != -1:
 				equip_skill(empty_slot, skill_name)
 				print("⚡ Auto-equipped %s to slot %d" % [skill_name, empty_slot])
 		
-	print("📦 Collected +%d %s (Total: %d)" % [stack_amount, skill_name, get_stacks(skill_name)])
+	print("📦 Collected +%d %s (Total: %d stacks, Level: %d)" % [
+		stack_amount, 
+		skill_name, 
+		get_stacks(skill_name),
+		get_level(skill_name)
+	])
 
 func unlock_skill(skill_name: String, stack_cost: int = 0) -> bool:
-	"""Unlock a skill permanently using stacks"""
 	if is_unlocked(skill_name):
 		return false
 	
@@ -96,7 +91,6 @@ func unlock_skill(skill_name: String, stack_cost: int = 0) -> bool:
 	return true
 
 func upgrade_skill(skill_name: String, stack_cost: int) -> bool:
-	"""Upgrade skill level using stacks"""
 	if not is_unlocked(skill_name):
 		return false
 	
@@ -114,14 +108,12 @@ func upgrade_skill(skill_name: String, stack_cost: int) -> bool:
 	return true
 
 func equip_skill(slot_index: int, skill_name: String) -> bool:
-	"""Equip a skill to the action bar"""
 	if slot_index < 0 or slot_index >= _skillbar.size():
 		return false
 	
 	if not is_unlocked(skill_name) and get_stacks(skill_name) == 0:
 		return false
 	
-	# Unequip old skill if exists
 	var old_skill = _skillbar[slot_index]
 	if old_skill:
 		skill_unequipped.emit(slot_index, old_skill)
@@ -132,7 +124,6 @@ func equip_skill(slot_index: int, skill_name: String) -> bool:
 	return true
 
 func unequip_skill(slot_index: int) -> bool:
-	"""Remove skill from action bar"""
 	if slot_index < 0 or slot_index >= _skillbar.size():
 		return false
 	
@@ -148,7 +139,6 @@ func unequip_skill(slot_index: int) -> bool:
 # --- PUBLIC QUERIES (Read-only access) ---
 
 func get_state() -> Dictionary:
-	"""Get complete state snapshot for UI sync"""
 	return {
 		"skill_data": _skill_data.duplicate(true),
 		"skillbar": _skillbar.duplicate(),
@@ -160,7 +150,7 @@ func is_unlocked(skill_name: String) -> bool:
 	return _skill_data.get(skill_name, {}).get("unlocked", false)
 
 func get_level(skill_name: String) -> int:
-	return _skill_data.get(skill_name, {}).get("level", 0)
+	return _skill_data.get(skill_name, {}).get("level", 1)  # Default to 1, not 0
 
 func get_stacks(skill_name: String) -> int:
 	return _stacks.get(skill_name, 0)
@@ -172,7 +162,7 @@ func find_skill_slot(skill_name: String) -> int:
 	return _skillbar.find(skill_name)
 
 func get_skill_resource(skill_name: String) -> Skill:
-	"""Get a configured skill resource for gameplay"""
+	"""Get a configured skill resource for gameplay - scaling handled automatically"""
 	if not is_unlocked(skill_name) and get_stacks(skill_name) == 0:
 		return null
 	
@@ -180,9 +170,9 @@ func get_skill_resource(skill_name: String) -> Skill:
 	if not base:
 		return null
 	
-	var instance = base.duplicate()
-	instance.level = get_level(skill_name)
-	return instance
+	# Just return the base skill - it will query SkillTreeManager for its level
+	# when get_scaled_damage() etc. are called
+	return base
 
 # --- PRIVATE HELPERS ---
 
@@ -222,32 +212,21 @@ func load_data(data: Dictionary) -> void:
 	
 	print("📂 LOADING SkillTreeManager...")
 	
-	# 1. State Replacement (Silent)
-	# We update internal variables directly without triggering logic functions
-	# This prevents individual signals (equipped, stack_changed) from firing during the loop
-	
 	_skill_data = data.get("skill_data", {}).duplicate(true)
 	_stacks = data.get("stacks", {}).duplicate()
 	_coins = data.get("coins", 0)
 	_skills_discovered_history = data.get("history", {}).duplicate()
 	
-	# 2. Skillbar Restoration
-	# We clear and fill the array. We do NOT call equip_skill() here, 
-	# because we don't want runtime side effects during a load.
 	_skillbar.fill(null)
 	var saved_bar = data.get("skillbar", [])
 	
 	for i in range(min(saved_bar.size(), _skillbar.size())):
 		var skill_name = saved_bar[i]
 		
-		# Validation: Ensure skill actually exists in DB
 		if skill_name is String and SkillDatabase.get_skill_by_name(skill_name):
 			_skillbar[i] = skill_name
 		else:
 			_skillbar[i] = null
 			
 	print("✅ Load Complete. Syncing UI...")
-	
-	# 3. The "Single Source of Truth" Handoff
-	# Emit ONE signal telling all UI components to look at the new data.
 	state_changed.emit(get_state())

@@ -19,7 +19,6 @@ signal error_occurred(message: String)
 @onready var video_player: VideoStreamPlayer = $VideoStreamPlayer
 @onready var close_button: Button = $CloseButton
 
-# Changed type to 'Node' to accept both SkillButtonNode and UltimateSkillButton
 var current_button: Node 
 var current_skill_name: String = ""
 
@@ -34,9 +33,7 @@ func _ready() -> void:
 	if close_button:
 		close_button.pressed.connect(_on_close_button_pressed)
 
-# Changed argument type to 'Node' to prevent crashes with Ultimate buttons
 func show_skill(btn: Node):
-	# Check if node has 'skill' property
 	if not "skill" in btn or btn.skill == null:
 		push_error("SkillInfoPanel: Received button with no skill!")
 		return
@@ -51,7 +48,6 @@ func show_skill(btn: Node):
 	
 	title_label.text = sk.name
 	
-	# Only show level/stack info if NOT ultimate (optional, but cleaner)
 	if sk.get("type") == "ultimate":
 		level_label.text = "Level: ???"
 		stack_label.text = ""
@@ -63,7 +59,6 @@ func show_skill(btn: Node):
 	
 	_update_buttons()
 	
-	# Safe check for video_stream property
 	if "video_stream" in btn and btn.video_stream:
 		video_player.stream = btn.video_stream
 		video_player.play()
@@ -89,10 +84,25 @@ func get_stat_text(sk: Skill) -> String:
 	var elem_name = ElementsEnum.Elements.keys()[sk.elemental_type]
 	var elemental_type_text := "%s%s[/color]" % [elem_color, elem_name]
 	lines.append("Stats:                          " + elemental_type_text)
-	lines.append("Damage: %d" % sk.damage)
-	lines.append("Cooldown: %.2f s" % sk.cooldown)
-	lines.append("Mana: %d" % sk.mana)
-	lines.append("Duration: %.2f s" % sk.duration)
+	
+	var level = SkillTreeManager.get_level(sk.name)
+	
+	if level > 1:
+		lines.append("Damage: %.1f (Base: %.1f)" % [sk.get_scaled_damage(), sk.damage])
+	else:
+		lines.append("Damage: %.1f" % sk.damage)
+	
+	lines.append("Cooldown: %.2f s" % sk.get_scaled_cooldown())
+	
+	if level > 1:
+		lines.append("Mana: %d (Base: %d)" % [sk.get_scaled_mana(), sk.mana])
+	else:
+		lines.append("Mana: %d" % sk.mana)
+	
+	if level > 1:
+		lines.append("Duration: %.2f s (Base: %.2f s)" % [sk.get_scaled_duration(), sk.duration])
+	else:
+		lines.append("Duration: %.2f s" % sk.duration)
 	
 	var type_map := {
 		"single_shot": "Single Shot",
@@ -124,6 +134,9 @@ func _update_buttons():
 	var index = SkillTreeManager.find_skill_slot(skill_name)
 	equip_button.text = "UNEQUIP" if index != -1 else "EQUIP"
 	equip_button.disabled = not is_unlocked and stack_count == 0
+	
+	if current_button and "skill" in current_button:
+		stat_label.text = get_stat_text(current_button.skill)
 
 func _on_unlock_button_pressed() -> void:
 	if current_skill_name == "":
@@ -182,6 +195,8 @@ func _on_skill_unlocked(skill_name: String):
 func _on_skill_leveled_up(skill_name: String, new_level: int):
 	if skill_name == current_skill_name:
 		level_label.text = "Level: %d" % new_level
+		if current_button and "skill" in current_button:
+			stat_label.text = get_stat_text(current_button.skill)
 		_update_buttons()
 
 func _on_skill_equipped(_slot_index: int, skill_name: String):

@@ -1,6 +1,6 @@
 extends Node
 
-# ✅ 5 LEVELS × 3 SKILL LEVELS (Lv1, Lv2, Lv3 drop quality)
+# ✅ 5 LEVELS - Controls which skills drop (not skill level!)
 @export_group("Level Weights")
 @export var level1_weights: Array[float] = [70.0, 20.0, 10.0]  # 70% skill1, 20% skill2, 10% skill3
 @export var level2_weights: Array[float] = [50.0, 35.0, 15.0]
@@ -37,6 +37,7 @@ var elemental_tables: Dictionary = {
 	],
 	ElementsEnum.Elements.NONE: []
 }
+
 var current_level: int = 0  # 0=Level1, 1=Level2, ..., 4=Level5
 signal level_changed(new_level: int)
 
@@ -44,7 +45,7 @@ func _ready():
 	print("✅ SkillDropManager loaded %d elemental tables" % elemental_tables.size())
 	debug_print_tables()
 
-# ✅ Get skill weights by current level (0-4) → weights[0]=skill1, weights[1]=skill2, weights[2]=skill3
+# ✅ Get skill weights by current level (0-4)
 func _get_level_weights() -> Array[float]:
 	match current_level:
 		0: return level1_weights
@@ -54,7 +55,8 @@ func _get_level_weights() -> Array[float]:
 		4: return level5_weights
 		_: return [50.0, 30.0, 20.0]  # Default
 
-# ✅ PERFECT: Element → Weighted skill by level weights → Specific skill drop!
+# ✅ Element → Weighted skill selection → Returns base skill resource
+# Note: Skill power comes from SkillTreeManager level, NOT drop level
 func roll_skill_drop(enemy_element: int) -> Skill:
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -64,7 +66,7 @@ func roll_skill_drop(enemy_element: int) -> Skill:
 	if table.is_empty():
 		return null
 	
-	# 2. Pick SPECIFIC SKILL by level weights (70%→skill1[0], 20%→skill2[1], 10%→skill3[2])
+	# 2. Pick SPECIFIC SKILL by level weights
 	var weights = _get_level_weights()
 	var total_weight: float = 0.0
 	for w in weights: 
@@ -72,20 +74,19 @@ func roll_skill_drop(enemy_element: int) -> Skill:
 	if total_weight == 0:
 		return null
 	
-	var skill_index = rng.rand_weighted(weights)  # Returns 0,1,2 weighted by level1_weights etc.
+	var skill_index = rng.rand_weighted(weights)
 	var skill_script: Script = table[skill_index]
 	var skill_resource = skill_script.new() as Skill
 	if not skill_resource:
 		return null
 	
-	# 3. Level = skill index + 1 (skill1→Lv1, skill2→Lv2, skill3→Lv3)
-	skill_resource.level = skill_index + 1
+	# 3. Return base skill - NO LEVEL ASSIGNMENT
+	# The skill's power will come from SkillTreeManager.get_level(skill.name)
 	
-	print("🎲 Level%d %s → %s **Lv%d** (%.0f%%)" % [
+	print("🎲 Level%d %s → %s (%.0f%% drop chance)" % [
 		current_level + 1,
 		ElementsEnum.Elements.keys()[enemy_element],
 		skill_resource.name, 
-		skill_resource.level,
 		weights[skill_index]
 	])
 	
@@ -96,13 +97,13 @@ func set_level(level: int):
 	level_changed.emit(current_level)
 	
 	var weights = _get_level_weights()
-	print("📊 Level %d set (**skill1:%.0f%% skill2:%.0f%% skill3:%.0f%%**)" % [
+	print("📊 Drop Level %d set (skill1:%.0f%% skill2:%.0f%% skill3:%.0f%%)" % [
 		level + 1, 
 		weights[0], weights[1], weights[2]
 	])
 
 func debug_print_tables():
-	print("=== SKILL TABLES (skill1, skill2, skill3 order) ===")
+	print("=== SKILL DROP TABLES ===")
 	for element in elemental_tables:
 		var skills = elemental_tables[element]
 		if not skills.is_empty():

@@ -1,7 +1,7 @@
 extends Area2D
 class_name SkillDrop
 
-# ✅ Store full Skill resource (with level data)
+# ✅ Store Skill resource (level comes from SkillTreeManager)
 @export var skill: Skill
 
 # ✅ Stack amount configuration
@@ -20,33 +20,27 @@ var target_player: Player = null
 var float_tween: Tween = null
 
 func _ready() -> void:
-	# FIX: Tween the Sprite, not 'self'.
-	# We assume the Sprite starts at local position (0,0).
-	# We tween it to -5 and 5 relative to the root node.
 	float_tween = create_tween().set_loops()
 	
-	# Note: We use fixed values (-5.0 and 5.0) because the sprite is local to the parent
 	float_tween.tween_property(sprite, "position:y", -5.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	float_tween.tween_property(sprite, "position:y", 5.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	if skill:
-		setup_drop(skill,1)
+		setup_drop(skill, 0)
 
 func _on_detection_player_area_2d_body_entered(body: Node2D):
 	if body is Player and skill.type != "ultimate":
 		target_player = body as Player
 		is_attracted = true
 		
-		# FIX: Stop tween and reset sprite to center so it looks correct while flying
 		if float_tween and float_tween.is_valid():
-			float_tween.kill() # kill() is often safer than stop() for cleanup
+			float_tween.kill()
 		
-		# Smoothly return sprite to center (0) so it aligns with hitbox
 		var reset_tween = create_tween()
 		reset_tween.tween_property(sprite, "position:y", 0.0, 0.2)
 		
 func setup_drop(_skill: Skill, stacks: int = 0) -> void:
-	skill = _skill  # Store full Skill (with level!)
+	skill = _skill
 	
 	# Set stack amount (use provided value or random)
 	if stacks > 0:
@@ -57,9 +51,12 @@ func setup_drop(_skill: Skill, stacks: int = 0) -> void:
 	if sprite and skill.texture_path:
 		sprite.texture = load(skill.texture_path)
 	
-	# Debug label (optional)
+	# Debug label - show current level from SkillTreeManager
 	if has_node("Label"):
-		$Label.text = "%s\nLv%d x%d" % [skill.name, skill.level, stack_amount]
+		var current_level = 1
+		if SkillTreeManager:
+			current_level = SkillTreeManager.get_level(skill.name)
+		$Label.text = "%s\nLv%d x%d" % [skill.name, current_level, stack_amount]
 
 func _physics_process(delta: float) -> void:
 	if is_attracted and is_instance_valid(target_player):
@@ -73,14 +70,11 @@ func _on_body_entered(body: Node2D):
 	if body is Player:
 		_collect_item(body as Player)
 
-# ✅ Pass full Skill resource AND stack amount
 func _collect_item(player: Player) -> void:
 	if not skill:
 		queue_free()
 		return
 		
-	# Add skill through Player with stack amount
-	
 	if (skill.type == "ultimate"):
 		match skill.elemental_type:
 			ElementsEnum.Elements.FIRE:
@@ -105,7 +99,6 @@ func _play_collect_effect() -> void:
 	
 	var tween = create_tween()
 	
-	# Scale down + fade + fly to player
 	tween.parallel().tween_property(sprite, "scale", Vector2(0.2, 0.2), 0.3).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(sprite, "modulate:a", 0.0, 0.3)
 	
