@@ -71,7 +71,7 @@ func spawn_mini_bosses() -> void:
 		king_crab_instance = KING_CRAB_SCENE.instantiate() as KingCrab
 		king_crab_instance.modulate = Color8(144, 0, 255, 255)
 		energy_center.add_child(king_crab_instance)
-		king_crab_instance.position = Vector2(300, 0)
+		king_crab_instance.position = Vector2(-300, 0)
 		
 		king_crab_instance.being_controled = true
 		king_crab_instance.boss_zone = self.boss_zone
@@ -82,7 +82,7 @@ func spawn_mini_bosses() -> void:
 		war_lord_instance = WAR_LORD_SCENE.instantiate() as WarLordTurtle
 		war_lord_instance.modulate = Color8(144, 0, 255, 255)
 		energy_center.add_child(war_lord_instance)
-		war_lord_instance.position = Vector2(-300, 0)
+		war_lord_instance.position = Vector2(300, 0)
 
 		war_lord_instance.being_controled = true
 		king_crab_instance.boss_zone = self.boss_zone

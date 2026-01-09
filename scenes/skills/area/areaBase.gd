@@ -9,17 +9,21 @@ var duration: float
 var direction: Vector2
 var targets_in_area: Array = [] 
 var timer: Timer
-var level: int
+var skill: Skill  # ✅ ADD THIS - Store reference to skill for level checks
 
-func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
-	self.damage = skill.damage
+func setup(_skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
+	# Store the skill reference FIRST
+	skill = _skill
+	
+	# Use scaled values from skill
+	self.damage = skill.get_scaled_damage()
 	self.elemental_type = skill.elemental_type
-	self.duration = skill.duration
+	self.duration = skill.get_scaled_duration()
 	self.direction = _direction
 	
 	targetenemy = enemy
 	
-	# --- FIX START: Safely determine facing direction ---
+	# --- Safely determine facing direction ---
 	var is_facing_right = true
 	
 	if enemy and is_instance_valid(enemy):
@@ -27,19 +31,15 @@ func setup(skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direc
 		var direction_to_enemy = (enemy.global_position - caster_position).normalized()
 		is_facing_right = direction_to_enemy.x > 0
 		self.global_position = enemy.global_position
-		
 	else:
 		self.global_position = caster_position
 		# If enemy is null, use the fallback 'direction' passed from the player
 		is_facing_right = direction.x > 0
-	# --- FIX END ---
 	
-	# Alternative: Flip the entire root or specific containers
+	# Flip the entire root or specific containers
 	if not is_facing_right:
-		# Flip X axis to point left
 		scale.x = -1 
 	else:
-		# Reset to normal
 		scale.x = 1
 	
 	var hit_area: HitArea2D = null

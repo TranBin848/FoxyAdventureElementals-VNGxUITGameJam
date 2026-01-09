@@ -402,27 +402,30 @@ func _on_player_not_in_sight() -> void:
 
 # --- When enemy takes damage
 func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type: int, source: Node2D) -> void:
-	# Demo debuff
-	#var debuff: PackedScene = load("res://scenes/enemies/debuffs/FreezeDebuff/freeze_debuff.tscn") as PackedScene
-	#set_debuff(debuff)
-	# Tính damage dựa trên quan hệ sinh - khắc
 	var modified_damage = calculate_elemental_damage(_damage, _elemental_type)
 	modified_damage += ceilf(modified_damage * current_vulnerability)
-	#print(elemental_type)
+	
 	var is_critical = (check_element(_elemental_type, elemental_type) == -1)
 	print("my element: " + str(elemental_type) + " enemy: " + str(_elemental_type) + " is critical: " + str(is_critical))
 	DamageNumbers.display_number(modified_damage, damage_number_origin.global_position, is_critical)
-	if (fsm.current_state != null): fsm.current_state.take_damage(_direction, modified_damage)
+	
+	if (fsm.current_state != null): 
+		fsm.current_state.take_damage(_direction, modified_damage)
+	
 	if source != null:
+		# Check if source has a skill property to determine level
+		var skill_level = 1
+		
 		if source is AreaBase or source is ProjectileBase:
-			if source is AreaBase:
-				print("AreaBase level: " + str((source as AreaBase).level))
-				if (source as AreaBase).level >= skill_level_to_debuff:
-					handle_elemental_damage(_elemental_type)
-			if source is ProjectileBase:
-				print("ProjectileBase level: " + str((source as ProjectileBase).level))
-				if (source as ProjectileBase).level >= skill_level_to_debuff:
-					handle_elemental_damage(_elemental_type)
+			# Get skill level from the skill resource
+			if "skill" in source and source.skill:
+				skill_level = SkillTreeManager.get_level(source.skill.name)
+			
+			print("Source skill level: " + str(skill_level))
+			
+			# Apply debuff if level is high enough
+			if skill_level >= skill_level_to_debuff:
+				handle_elemental_damage(_elemental_type)
 
 func calculate_elemental_damage(base_damage: float, attacker_element: int) -> float:
 	var check_element = check_element(attacker_element, elemental_type)
