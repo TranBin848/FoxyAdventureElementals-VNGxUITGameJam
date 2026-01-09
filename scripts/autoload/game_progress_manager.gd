@@ -259,4 +259,16 @@ func load_save_data(data: Dictionary) -> void:
 	metal_ultimate_collected = data.get("metal_ultimate_collected", false)
 	earth_ultimate_collected = data.get("earth_ultimate_collected", false)
 	first_time_open_skill_tree = data.get("first_time_open_skill_tree", false)
+
+func clear_all_data() -> void:
+	first_coin_collected = false
+	first_key_collected = false
+	first_cutlass_collected = false
+	first_wood_wand_collected = false
+	fire_ultimate_collected = false
+	water_ultimate_collected = false
+	wood_ultimate_collected = false
+	metal_ultimate_collected = false
+	earth_ultimate_collected = false
+	first_time_open_skill_tree = false
 #endregion
