@@ -6,7 +6,6 @@
 script = ExtResource("1_h42dg")
 name = "Ilraequin"
 elemental_type = 1
-level = 1
 cooldown = 1.0
 duration = 1.0
 hit_delay = 0.0

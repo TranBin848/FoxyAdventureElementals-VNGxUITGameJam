@@ -1,31 +1,7 @@
-foxy:Mình đã ra khỏi khu dân cư rồi…
-foxy:Phía trước trông lạnh lẽo hơn hẳn…
-
-Foxy tiến lại cổng gỗ, nơi một người đàn ông mặc giáp nhẹ đang đứng canh với vẻ mệt mỏi nhưng cảnh giác.
-
-npc_villager:Dừng lại! Cậu là người lạ… đang định đi vào khu rừng phía trước sao?
-
-foxy:Vâng… tôi đang cố tìm hiểu chuyện gì đang xảy ra với đảo này.
-foxy:Người dân trong làng bảo có nhiều vùng dị thường ở sâu bên trong?
-
-npc_villager:Cậu nghe đúng rồi.
-npc_villager:Vùng đất bên ngoài rìa đảo có vẻ yên bình, nhưng đi thêm vài bước thôi mọi thứ sẽ… khác.
-
-
-foxy:Tôi hiểu nguy hiểm… nhưng tôi không thể quay lại khi chưa biết mình là ai và vì sao lại xuất hiện ở đây.
-
-npc_villager:Cậu bé này…
-npc_villager:Ta cảm nhận được ý chí trong ánh mắt cậu.
-npc_villager:Nếu đã quyết tâm, ta không ngăn được.
-
-
-npc_villager:Hãy đi theo con đường mòn phía trước.
-npc_villager:Nó sẽ dẫn cậu đến Khu Rừng Sương Mù, nơi năng lượng nguyên tố thổ và thủy đang phân tán rất mạnh.
-npc_villager:Nhưng nhớ luôn giữ cảnh giác — ngay cả không khí ở đó cũng có thể phản bội cậu.
-
-foxy:Cảm ơn ông… Tôi sẽ cẩn thận.
-
-npc_villager:Vậy thì…
-npc_villager:chúc cậu may mắn, chàng cáo trẻ.
-npc_villager:Không nhiều người đi vào sâu trong đảo mà còn trở lại được.
-npc_villager:Hy vọng cậu sẽ là ngoại lệ.
+do GameManager.player_act("toggle_actor_state")
+Foxy: Hello?
+npc_villager: Ugala nomi kara-tu… hrrm.
+Foxy: Banu! Banu! Uru-ka, uru-ka!
+npc_villager: Hâk! Nomi kara-tu. Seka banu?
+Foxy: Grrra! Târa! Târa! Moku han!
+do GameManager.player_act("toggle_actor_state")

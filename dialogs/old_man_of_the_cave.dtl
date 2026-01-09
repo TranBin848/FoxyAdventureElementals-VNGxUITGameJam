@@ -1,3 +1,4 @@
+do GameManager.player_act("toggle_actor_state")
 Old_Man_Cave: Oh! Chào cậu trai trẻ! Đang trên đường du hành à?
 Foxy: Vâng chào ngài! Ngài sống ở đây à?
 Old_Man_Cave: Hoho! Ta đã sống ở đây gần như cả đời người rồi.
@@ -10,3 +11,4 @@ Old_Man_Cave: Ta nghe nói gần đây ở nơi đó có kẻ nào rất nguy hi
 Old_Man_Cave: Nhớ cẩn thận và nếu thấy nguy hiểm thì hãy bỏ chạy nhé! Dù sao mạng sống cũng là quan trọng nhất.
 Foxy: Nguy hiểm vậy sao ngài. Tôi sẽ thật cẩn thận, cảm ơn lời khuyên của ngài!
 Old_Man_Cave: Tạm biệt!
+do GameManager.player_act("toggle_actor_state")

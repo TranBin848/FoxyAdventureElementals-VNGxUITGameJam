@@ -34,7 +34,7 @@ var skill_scroll_guide := """
 Bạn vừa nhặt được một cuộn phép thuật rơi ra từ việc tiêu diệt quái vật. 
 Nhưng ngôn ngữ mà chúng sử dụng vô cùng phức tạp. Bạn sẽ cần công cụ gì đó để có thể dùng được chúng.
 Ngoài ra, quái vật và phép thuật trong thế giới này thuộc về một thuộc tính nguyên tố riêng trong ngũ hành.
-Chúng tuân theo quy luật sinh khác của ngũ hành, từ đó, phép thuật thi triển lên quái vật có thể tăng giảm sát thương dựa trên quy luật này.
+Chúng tuân theo quy luật sinh khắc của ngũ hành, từ đó, phép thuật thi triển lên quái vật có thể tăng giảm sát thương dựa trên quy luật này.
 Hãy thu thập thật nhiều loại phép thuật và khám phá những điều tuyệt diệu quanh chúng nhé.
 """
 

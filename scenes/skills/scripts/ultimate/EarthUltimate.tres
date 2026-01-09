@@ -6,7 +6,6 @@
 script = ExtResource("1_agpfh")
 name = "Qylnareth"
 elemental_type = 5
-level = 1
 cooldown = 1.0
 duration = 1.0
 hit_delay = 0.0
