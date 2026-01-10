@@ -410,18 +410,28 @@ func _on_hurt_area_2d_hurt(_direction: Vector2, _damage: float, _elemental_type:
 	if (fsm.current_state != null): 
 		fsm.current_state.take_damage(_direction, modified_damage)
 	
-	if source != null:
-		# Check if source has a skill property to determine level
-		var skill_level = 1
+	if source:
+		var skill_name = ""
 		
-		if source is AreaBase or source is ProjectileBase:
-			# Get skill level from the skill resource
-			if "skill" in source and source.skill:
-				skill_level = SkillTreeManager.get_level(source.skill.name)
+		# 1. Priority: Check if the source has a direct reference to a Skill resource
+		if "skill" in source and source.skill:
+			skill_name = source.skill.name
+		
+		# 2. Fallback: Check class types if no skill resource is found
+		elif source is SwordProjectile:
+			skill_name = "Thousand Swords"
+		elif source is CometProjectile:
+			skill_name = "Comet Rain"
+		elif source is EarthquakeSegment:
+			skill_name = "Earthquake"
+		elif source is Player and source.current_buff_state == Player.BuffState.FIREBALL:
+			skill_name = "Fireball"
+		
+		# 3. Get level and apply logic
+		if skill_name != "":
+			var skill_level = SkillTreeManager.get_level(skill_name)
+			print("Source skill (%s) level: %d" % [skill_name, skill_level])
 			
-			print("Source skill level: " + str(skill_level))
-			
-			# Apply debuff if level is high enough
 			if skill_level >= skill_level_to_debuff:
 				handle_elemental_damage(_elemental_type)
 
