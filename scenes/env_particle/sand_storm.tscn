@@ -4,7 +4,7 @@
 
 [sub_resource type="Gradient" id="Gradient_32rye"]
 offsets = PackedFloat32Array(0, 0.530769, 1)
-colors = PackedColorArray(0.54902, 0.215686, 0, 0.341176, 0.54902, 0.215686, 0, 1, 0.54902, 0.215686, 0, 0.408014)
+colors = PackedColorArray(0.631373, 0, 0.145098, 0.439216, 0.936079, 0.321055, 0.217153, 1, 0.631373, 0, 0.145098, 0.439216)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_x2nkm"]
 gradient = SubResource("Gradient_32rye")
@@ -51,7 +51,7 @@ color_initial_ramp = SubResource("GradientTexture1D_32rye")
 size = Vector2(2000, 400)
 
 [node name="SandStormParticle" type="GPUParticles2D"]
-amount = 100
+amount = 20
 texture = SubResource("GradientTexture2D_x2nkm")
 lifetime = 5.0
 preprocess = 2.0
