@@ -393,6 +393,7 @@ func _handle_qte_failure() -> void:
 	if player:
 		player.visible = true
 		player.set_physics_process(false)
+		player.is_invulnerable = false
 	
 	await get_tree().create_timer(1.0, true, false, true).timeout
 	
@@ -403,25 +404,13 @@ func _handle_qte_failure() -> void:
 	if canvas_layer: canvas_layer.visible = true
 	if ui: ui.visible = true
 	
+	# Re-enable physics processing so dead state can run
+	if player:
+		player.set_physics_process(true)
+	
 	# Kill player
 	if GameManager and GameManager.player:
-		player.take_damage(99999)
-
-	# === CRITICAL FIX: RESTORE COMBAT STATE ===
-	is_boss_locked = false
-	obj.set_physics_process(true)
-	
-	# Re-enable hurtbox
-	if obj.has_method("enable_hurtbox"):
-		obj.enable_hurtbox()
-	
-	# Reset boss phase to combat (FLY)
-	obj.current_phase = obj.Phase.FLY
-	
-	# Transition to Idle (Combat)
-	if is_instance_valid(fsm) and fsm.states.has("idle"):
-		print("Cutscene1: QTE Failed, transitioning to combat (idle)")
-		fsm.change_state(fsm.states.idle)
+		player.fsm.current_state.take_damage(Vector2.ZERO, 99999)
 
 func _physics_process(_delta):
 	if not is_instance_valid(obj) or not is_instance_valid(fsm): return

@@ -86,31 +86,49 @@ func _on_scene_changed() -> void:
 	current_stage = get_tree().current_scene
 	if current_stage == null: return
 	
-	# Refresh References
-	player = current_stage.find_child("Player", true, false)
+	# ---------------------------------------------------------
+	# 1. EXTRACT LEVEL NUMBER FROM FILENAME (but don't apply yet)
+	# ---------------------------------------------------------
+	var file_name = current_stage.scene_file_path.get_file().get_basename()
+	var regex = RegEx.new()
+	regex.compile("level_(\\d+)")
+	var result = regex.search(file_name)
 	
+	var detected_level = current_level # Default to current
+	if result:
+		detected_level = int(result.get_string(1))
+	# ---------------------------------------------------------
+
+	# 2. Find Player (Retry logic included)
+	player = current_stage.find_child("Player", true, false)
+	if not player:
+		await get_tree().process_frame
+		player = current_stage.find_child("Player", true, false)
+	
+	# 3. Handle Stats & Enemies
 	if player and player_base_stats.is_empty():
 		_capture_base_stats()
+		
+	get_tree().call_group("enemies", "scale_health", 0.5 + 0.5 * detected_level)
 	
-	# Scale Enemies
-	get_tree().call_group("enemies", "scale_health", 0.5 + 0.5 * current_level)
-	
-	# ✅ FIX: AWAIT the spawn handler so it completes before proceeding
 	await _handle_checkpoint_or_portal_spawn()
 	
-	# =========================================================================
-	# ✅ Implicit Level Start Checkpoint
-	# =========================================================================
-	# Now this runs AFTER spawn handling is complete
-	if player and not is_loading_from_checkpoint:
-		print("🚩 Creating implicit level-start checkpoint...")
-		save_checkpoint("auto_level_start")
-	# =========================================================================
+	# ---------------------------------------------------------
+	# 4. NOW UPDATE current_level (after restoration completes)
+	# ---------------------------------------------------------
+	if current_level != detected_level:
+		print("📊 Level Updated from %d to %d" % [current_level, detected_level])
+		current_level = detected_level
+	# ---------------------------------------------------------
 	
-	# ✅ FIX: level_ready now emits AFTER player is fully positioned/restored
+	# 5. Save Checkpoint with CORRECT level number
+	if player and not is_loading_from_checkpoint:
+		var checkpoint_name = "auto_start_%d" % current_level 
+		print("🚩 Creating implicit level-start checkpoint: %s" % checkpoint_name)
+		save_checkpoint(checkpoint_name)
+	
 	if has_signal("level_ready"):
 		level_ready.emit()
-		print("✅ Level setup complete - level_ready signal emitted")
 
 func _capture_base_stats() -> void:
 	"""Stores the player's initial stat values on first spawn"""
@@ -278,8 +296,12 @@ func restore_run_state() -> void:
 		player.mana_changed.emit()
 	
 	SkillTreeManager.load_data(current_run_state.get("skill_tree", {}))
-	current_level = current_run_state.get("current_level", 0)
-
+	
+	# ❌ REMOVED: Don't restore level number - let filename detection handle it
+	# current_level = current_run_state.get("current_level", 0)
+	
+	print("✅ Run state restored (level number preserved from filename)")
+	
 func clear_run_state() -> void:
 	current_run_state.clear()
 	print("🗑️ Run state cleared")
