@@ -278,9 +278,13 @@ func _handle_qte_failure() -> void:
 	if canvas_layer: canvas_layer.visible = true
 	if ui: ui.visible = true
 	
+	# Re-enable physics processing so dead state can run
+	if player:
+		player.set_physics_process(true)
+	
 	# Kill player
 	if GameManager and GameManager.player:
-		player.take_damage(99999)
+		player.fsm.current_state.take_damage(Vector2.ZERO, 99999)
 
 	# === CRITICAL FIX: RESTORE COMBAT STATE ===
 	obj.set_physics_process(true)
