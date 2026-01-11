@@ -1,25 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxu3dosyig3i8"]
+[gd_scene load_steps=17 format=3 uid="uid://dxu3dosyig3i8"]
 
 [ext_resource type="Theme" uid="uid://dkoho3svds8d5" path="res://resources/ui/game_ui_theme.tres" id="1_1bpm1"]
 [ext_resource type="Texture2D" uid="uid://d2xfg016s1m0w" path="res://assets/ui/popup.png" id="1_d402b"]
 [ext_resource type="Script" uid="uid://dmbpxi55j21as" path="res://scenes/ui/popup/settings_popup.gd" id="1_yjfti"]
 [ext_resource type="FontFile" uid="uid://bf742t4mxgd7l" path="res://assets/fonts/big_font.fnt" id="2_yjfti"]
 [ext_resource type="Texture2D" uid="uid://bvstiwpyblmnv" path="res://assets/ui/close_button.png" id="3_1bpm1"]
-[ext_resource type="Texture2D" uid="uid://bmcu8k7wl5pke" path="res://assets/ui/on_button.png" id="4_h7ats"]
-[ext_resource type="Texture2D" uid="uid://c25m38u7k6gou" path="res://assets/ui/off_button.png" id="5_kqam1"]
 [ext_resource type="Texture2D" uid="uid://b3a285d0cwoiy" path="res://assets/ui/settings/3.png" id="8_m1ppw"]
 [ext_resource type="Texture2D" uid="uid://bc2l7ofqih1su" path="res://assets/ui/button.png" id="9_u5ssl"]
 [ext_resource type="Texture2D" uid="uid://dad58vienj64d" path="res://assets/ui/settings/slider.png" id="9_uy18l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uy18l"]
-font = ExtResource("2_yjfti")
-font_size = 60
-
-[sub_resource type="LabelSettings" id="LabelSettings_u5ssl"]
-font = ExtResource("2_yjfti")
-font_size = 60
-
-[sub_resource type="LabelSettings" id="LabelSettings_6rodm"]
 font = ExtResource("2_yjfti")
 font_size = 60
 
@@ -31,6 +21,14 @@ expand_margin_top = 2.0
 expand_margin_bottom = 4.0
 axis_stretch_horizontal = 2
 region_rect = Rect2(0, 0, 30, 6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u5ssl"]
+font = ExtResource("2_yjfti")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rodm"]
+font = ExtResource("2_yjfti")
+font_size = 60
 
 [sub_resource type="LabelSettings" id="LabelSettings_rrlud"]
 font = ExtResource("2_yjfti")
@@ -109,15 +107,38 @@ layout_mode = 2
 
 [node name="MusicLabel" type="Label" parent="BackgroundBoard/MarginContainer/SettingsList/MusicRow"]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "MUSIC"
 label_settings = SubResource("LabelSettings_uy18l")
 vertical_alignment = 1
 
-[node name="MusicCheckButton" type="CheckButton" parent="BackgroundBoard/MarginContainer/SettingsList/MusicRow"]
+[node name="SliderWraper" type="Control" parent="BackgroundBoard/MarginContainer/SettingsList/MusicRow"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme_override_icons/checked = ExtResource("4_h7ats")
-theme_override_icons/unchecked = ExtResource("5_kqam1")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MusicSlider" type="HSlider" parent="BackgroundBoard/MarginContainer/SettingsList/MusicRow/SliderWraper"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -6.5
+offset_right = -223.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 3)
+pivot_offset = Vector2(0, 6)
+size_flags_vertical = 2
+theme_override_icons/grabber = ExtResource("8_m1ppw")
+theme_override_icons/grabber_highlight = ExtResource("8_m1ppw")
+theme_override_icons/grabber_disabled = ExtResource("8_m1ppw")
+theme_override_styles/slider = SubResource("StyleBoxTexture_u5ssl")
+rounded = true
+scrollable = false
 
 [node name="SFXRow" type="HBoxContainer" parent="BackgroundBoard/MarginContainer/SettingsList"]
 layout_mode = 2
@@ -125,15 +146,38 @@ alignment = 1
 
 [node name="SFXLabel" type="Label" parent="BackgroundBoard/MarginContainer/SettingsList/SFXRow"]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "SFX"
 label_settings = SubResource("LabelSettings_u5ssl")
 vertical_alignment = 1
 
-[node name="SFXCheckButton" type="CheckButton" parent="BackgroundBoard/MarginContainer/SettingsList/SFXRow"]
+[node name="SliderWraper" type="Control" parent="BackgroundBoard/MarginContainer/SettingsList/SFXRow"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-theme_override_icons/checked = ExtResource("4_h7ats")
-theme_override_icons/unchecked = ExtResource("5_kqam1")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SFXSlider" type="HSlider" parent="BackgroundBoard/MarginContainer/SettingsList/SFXRow/SliderWraper"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 104.0
+offset_top = -6.5
+offset_right = -220.0
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 3)
+pivot_offset = Vector2(0, 6)
+size_flags_vertical = 2
+theme_override_icons/grabber = ExtResource("8_m1ppw")
+theme_override_icons/grabber_highlight = ExtResource("8_m1ppw")
+theme_override_icons/grabber_disabled = ExtResource("8_m1ppw")
+theme_override_styles/slider = SubResource("StyleBoxTexture_u5ssl")
+rounded = true
+scrollable = false
 
 [node name="HSeparator" type="HSeparator" parent="BackgroundBoard/MarginContainer/SettingsList"]
 layout_mode = 2
@@ -237,8 +281,6 @@ texture_normal = ExtResource("3_1bpm1")
 stretch_mode = 0
 
 [connection signal="gui_input" from="OverlayColorRect" to="." method="_on_overlay_color_rect_gui_input"]
-[connection signal="toggled" from="BackgroundBoard/MarginContainer/SettingsList/MusicRow/MusicCheckButton" to="." method="_on_music_check_button_toggled"]
-[connection signal="toggled" from="BackgroundBoard/MarginContainer/SettingsList/SFXRow/SFXCheckButton" to="." method="_on_sound_check_button_toggled"]
 [connection signal="value_changed" from="BackgroundBoard/MarginContainer/SettingsList/ParticlesGroup/SliderWraper/ParticleSlider" to="." method="_on_particle_slider_value_changed"]
 [connection signal="pressed" from="BackgroundBoard/MarginContainer/SettingsList/ButtonsRow/UnstuckButton" to="." method="_on_unstuck_button_pressed"]
 [connection signal="pressed" from="BackgroundBoard/MarginContainer/SettingsList/ButtonsRow/MenuButton" to="." method="_on_menu_button_pressed"]

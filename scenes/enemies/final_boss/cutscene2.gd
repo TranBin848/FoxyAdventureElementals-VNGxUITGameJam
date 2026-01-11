@@ -24,19 +24,26 @@ var is_boss_locked: bool = false
 var canvas_layer: CanvasLayer = null
 @onready var ui: CanvasLayer = $"../../UI"
 
+# --- NEW VARIABLE FOR SYNC ---
+var chant_signal_received: bool = false
+
+# Tween management
+var active_tweens: Array[Tween] = []
+
 func _enter() -> void:
 	print("=== State: Cutscene2 Enter ===")
+	
+	# --- CONNECT DIALOGIC SIGNAL ---
+	if not Dialogic.signal_event.is_connected(_on_dialogic_signal):
+		Dialogic.signal_event.connect(_on_dialogic_signal)
+	chant_signal_received = false
 	
 	obj.change_animation("idle")
 	
 	await get_tree().create_timer(0.5).timeout
 	
-	# Kill tất cả tweens cũ
-	var all_tweens = obj.get_tree().get_processed_tweens()
-	print("Cutscene2: Killing ", all_tweens.size(), " active tweens")
-	for t in all_tweens:
-		if t.is_valid():
-			t.kill()
+	# Kill only our managed tweens (not CameraTransition's!)
+	_kill_active_tweens()
 	
 	# Setup boss
 	obj.velocity = Vector2.ZERO
@@ -74,8 +81,23 @@ func _enter() -> void:
 	if boss_zone_camera == null and obj.boss_zone:
 		boss_zone_camera = obj.boss_zone.camera_2d
 	
+	# Switch to boss_zone camera immediately
+	if boss_zone_camera:
+		print("Cutscene2: Switching to boss_zone camera")
+		CameraTransition.transition_camera2D(boss_zone_camera, 1.5)
+	else:
+		push_warning("Boss zone camera not found")
+	
+	await get_tree().create_timer(0.3).timeout
+	
 	# Bắt đầu sequence
 	_start_cutscene_sequence()
+
+# --- NEW FUNCTION TO HANDLE DIALOGIC SIGNALS ---
+func _on_dialogic_signal(argument: String) -> void:
+	if argument == "fire_boss_chant":
+		print("Cutscene2: Received signal 'fire_boss_chant' from Dialogic")
+		chant_signal_received = true
 
 func _start_cutscene_sequence() -> void:
 	# === STEP 1: DISABLE PLAYER INPUT ===
@@ -84,27 +106,30 @@ func _start_cutscene_sequence() -> void:
 			player.fsm.change_state(player.fsm.states.idle)
 		player.set_physics_process(false)
 	
-	# === STEP 2: CHUYỂN SANG CAMERA BOSS ===
-	if boss_camera:
-		boss_camera.enabled = true
-		CameraTransition.transition_camera2D(boss_camera, 1.0)
-		await get_tree().create_timer(1.0).timeout
-		print("Cutscene2: Camera switched to boss")
-	
-	# === STEP 3: BOSS DI CHUYỂN TỚI VỊ TRÍ CUTSCENE2 ===
+	# === STEP 2: BOSS DI CHUYỂN TỚI VỊ TRÍ CUTSCENE2 ===
 	await _move_boss_to_position()
 	
-	# === STEP 4: ZOOM CAMERA RA TOÀN CẢNH ===
-	await _zoom_camera_out()
+	# === STEP 3: ZOOM CAMERA RA TOÀN CẢNH ===
+	await get_tree().create_timer(0.5).timeout
 	
-	# === STEP 5: BẮT ĐẦU ANIMATION + QTE SEQUENCE ===
+	# Start dialog
+	Dialogic.start("boss_chanting")
+	
+	# === STEP 5: BẮT ĐẦU ANIMATION + QTE SEQUENCE (SYNCED) ===
 	if animated_bg:
-		print("Cutscene2: Triggering AnimatedBg...")
+		print("Cutscene2: Waiting for 'fire_boss_chant' signal...")
+		
+		# --- PAUSE HERE UNTIL SIGNAL IS RECEIVED ---
+		while not chant_signal_received:
+			await obj.get_tree().process_frame
+			
+		print("Cutscene2: Signal received. Triggering AnimatedBg...")
 		
 		if player:
 			player.visible = false
 		
 		# 1. Start animation
+		await get_tree().create_timer(0.5).timeout
 		animated_bg.play("cutscene2")
 		
 		if animated_bg.is_playing():
@@ -118,6 +143,7 @@ func _start_cutscene_sequence() -> void:
 	
 	# === STEP 8: PLAYER DEAD ANIMATION & LANDING ===
 	if player:
+		player.visible = true
 		player.change_animation("dead") # Keep existing logic from original script
 	
 	await _land_player_on_ground()
@@ -141,32 +167,24 @@ func _move_boss_to_position() -> void:
 	if not boss_pos: return
 	
 	var target_pos = boss_pos.global_position
-	var all_tweens = obj.get_tree().get_processed_tweens()
-	for t in all_tweens:
-		if t.is_valid(): t.kill()
 	
 	await get_tree().process_frame
 	
 	obj.velocity = Vector2.ZERO
 	obj.change_animation("moving")
 	
-	var fly_tween = obj.get_tree().create_tween()
+	var fly_tween = _create_managed_tween()
 	fly_tween.bind_node(obj)
 	fly_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	fly_tween.tween_property(obj, "global_position", target_pos, 1.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	
 	await fly_tween.finished
+	_remove_tween(fly_tween)
 	
 	obj.global_position = target_pos
 	boss_locked_position = target_pos
 	is_boss_locked = true
 	obj.change_animation("idle")
-
-func _zoom_camera_out() -> void:
-	if boss_zone_camera:
-		print("Cutscene2: Switching to boss_zone camera (zoom out)")
-		CameraTransition.transition_camera2D(boss_zone_camera, 1.0)
-		await get_tree().create_timer(1.0).timeout
 
 func _move_player_to_position() -> void:
 	if not player or not player_pos: return
@@ -204,7 +222,33 @@ func _physics_process(_delta):
 		obj.velocity = Vector2.ZERO
 		obj.global_position = boss_locked_position
 
+# ==============================================================================
+#  TWEEN MANAGEMENT
+# ==============================================================================
+
+func _create_managed_tween() -> Tween:
+	var tween = get_tree().create_tween()
+	active_tweens.append(tween)
+	return tween
+
+func _remove_tween(tween: Tween) -> void:
+	var idx = active_tweens.find(tween)
+	if idx != -1:
+		active_tweens.remove_at(idx)
+
+func _kill_active_tweens() -> void:
+	for tween in active_tweens:
+		if is_instance_valid(tween) and tween.is_valid():
+			tween.kill()
+	active_tweens.clear()
+
 func _exit() -> void:
+	_kill_active_tweens()
+	
+	# --- CLEANUP SIGNAL ---
+	if Dialogic.signal_event.is_connected(_on_dialogic_signal):
+		Dialogic.signal_event.disconnect(_on_dialogic_signal)
+		
 	obj.is_stunned = false
 	obj.is_movable = true
 	obj.set_physics_process(true)

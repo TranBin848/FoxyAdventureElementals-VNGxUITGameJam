@@ -40,15 +40,16 @@ var qte_active: bool = false
 var qte_timers: Array = []
 var qte_failed: bool = false
 
+# Tween management
+var active_tweens: Array[Tween] = []
+
 func _enter() -> void:
 	print("=== State: Cutscene4 Enter ===")
 	
 	obj.change_animation("idle")
 	
-	# Kill all active tweens
-	var all_tweens = obj.get_tree().get_processed_tweens()
-	for t in all_tweens:
-		if t.is_valid(): t.kill()
+	# Kill only our managed tweens (not CameraTransition's!)
+	_kill_active_tweens()
 	
 	# Setup boss
 	obj.velocity = Vector2.ZERO
@@ -88,11 +89,14 @@ func _enter() -> void:
 	if boss_zone_camera == null and obj.boss_zone:
 		boss_zone_camera = obj.boss_zone.camera_2d
 	
-	# Disable player input
-	if player and player.fsm:
-		if player.fsm.states.has("idle"):
-			player.fsm.change_state(player.fsm.states.idle)
-		player.set_physics_process(false)
+	# Switch to boss_zone camera immediately
+	if boss_zone_camera:
+		print("Cutscene4: Switching to boss_zone camera")
+		CameraTransition.transition_camera2D(boss_zone_camera, 1.5)
+	else:
+		push_warning("Boss zone camera not found")
+	
+	await get_tree().create_timer(0.3).timeout
 	
 	# Setup QTE
 	_setup_qte_container()
@@ -113,12 +117,16 @@ func _setup_qte_container() -> void:
 	canvas.add_child(qte_container)
 
 func _start_cutscene_sequence() -> void:
+	Dialogic.start("boss_shield_activate")
+	await Dialogic.timeline_ended
+	
 	# === STEP 1: ZOOM VÀO BOSS CAMERA ===
 	if boss_camera:
-		boss_camera.enabled = true
 		CameraTransition.transition_camera2D(boss_camera, 1.0)
 		await get_tree().create_timer(1.0).timeout
-
+	
+	Dialogic.start("boss_shield_slash")
+	await Dialogic.timeline_ended
 	
 	# === STEP 5: STANDALONE QTE (NO ANIMATION DEPENDENCY) ===
 	print("Cutscene4: Triggering Standalone QTE...")
@@ -170,6 +178,9 @@ func _start_cutscene_sequence() -> void:
 	
 	# Đợi một chút
 	await get_tree().create_timer(1.0).timeout
+	
+	Dialogic.start("boss_shield_break")
+	await Dialogic.timeline_ended
 	
 	# === CRITICAL FIX: RESTORE COMBAT STATE ===
 	# Unlock boss
@@ -370,7 +381,29 @@ func _physics_process(_delta):
 		obj.velocity = Vector2.ZERO
 		obj.global_position = boss_locked_position
 
+# ==============================================================================
+#  TWEEN MANAGEMENT
+# ==============================================================================
+
+func _create_managed_tween() -> Tween:
+	var tween = get_tree().create_tween()
+	active_tweens.append(tween)
+	return tween
+
+func _remove_tween(tween: Tween) -> void:
+	var idx = active_tweens.find(tween)
+	if idx != -1:
+		active_tweens.remove_at(idx)
+
+func _kill_active_tweens() -> void:
+	for tween in active_tweens:
+		if is_instance_valid(tween) and tween.is_valid():
+			tween.kill()
+	active_tweens.clear()
+
 func _exit() -> void:
+	_kill_active_tweens()
+	
 	obj.is_stunned = false
 	obj.is_movable = true
 	obj.set_physics_process(true)

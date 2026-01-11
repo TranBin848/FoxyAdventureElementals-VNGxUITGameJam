@@ -40,15 +40,16 @@ var qte_active: bool = false
 var qte_timers: Array = []
 var qte_failed: bool = false
 
+# Tween management
+var active_tweens: Array[Tween] = []
+
 func _enter() -> void:
 	print("=== State: Cutscene5 Enter ===")
 	
 	obj.change_animation("idle")
 	
-	# Kill active tweens
-	var all_tweens = obj.get_tree().get_processed_tweens()
-	for t in all_tweens:
-		if t.is_valid(): t.kill()
+	# Kill only our managed tweens (not CameraTransition's!)
+	_kill_active_tweens()
 	
 	# Setup boss
 	obj.velocity = Vector2.ZERO
@@ -87,6 +88,15 @@ func _enter() -> void:
 	if boss_zone_camera == null and obj.boss_zone:
 		boss_zone_camera = obj.boss_zone.camera_2d
 	
+	# Switch to boss_zone camera immediately
+	if boss_zone_camera:
+		print("Cutscene5: Switching to boss_zone camera")
+		CameraTransition.transition_camera2D(boss_zone_camera, 1.5)
+	else:
+		push_warning("Boss zone camera not found")
+	
+	await get_tree().create_timer(0.3).timeout
+	
 	# Disable player input
 	if player and player.fsm:
 		if player.fsm.states.has("idle"):
@@ -115,6 +125,9 @@ func _start_cutscene_sequence() -> void:
 	# === STEP 1: PARALLEL MOVEMENT & CAMERA ===
 	# We perform camera switch, boss move, and player move ALL AT ONCE
 	await _move_characters_and_camera()
+	
+	Dialogic.start("metal_ultimate")
+	await Dialogic.timeline_ended
 	
 	# === STEP 2: STANDALONE QTE ===
 	print("Cutscene5: Triggering Standalone QTE...")
@@ -369,7 +382,29 @@ func _physics_process(_delta):
 		obj.velocity = Vector2.ZERO
 		obj.global_position = boss_locked_position
 
+# ==============================================================================
+#  TWEEN MANAGEMENT
+# ==============================================================================
+
+func _create_managed_tween() -> Tween:
+	var tween = get_tree().create_tween()
+	active_tweens.append(tween)
+	return tween
+
+func _remove_tween(tween: Tween) -> void:
+	var idx = active_tweens.find(tween)
+	if idx != -1:
+		active_tweens.remove_at(idx)
+
+func _kill_active_tweens() -> void:
+	for tween in active_tweens:
+		if is_instance_valid(tween) and tween.is_valid():
+			tween.kill()
+	active_tweens.clear()
+
 func _exit() -> void:
+	_kill_active_tweens()
+	
 	obj.is_stunned = false
 	obj.is_movable = true
 	obj.set_physics_process(true)

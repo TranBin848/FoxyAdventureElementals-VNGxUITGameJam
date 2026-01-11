@@ -38,6 +38,9 @@ var qte_timers: Array = []
 var qte_failed: bool = false
 var qte_pause_frame: float = -1.0
 
+# Tween management
+var active_tweens: Array[Tween] = []
+
 func _enter() -> void:
 	print("State: Cutscene1 Enter")
 	
@@ -45,11 +48,8 @@ func _enter() -> void:
 	
 	await get_tree().create_timer(0.5).timeout
 	
-	# KILL TẤT CẢ TWEENS từ state cũ
-	var all_tweens = obj.get_tree().get_processed_tweens()
-	for t in all_tweens:
-		if t.is_valid():
-			t.kill()
+	# Kill only our managed tweens (not CameraTransition's!)
+	_kill_active_tweens()
 	
 	# Force đặt lại position
 	obj.velocity = Vector2.ZERO
@@ -86,6 +86,15 @@ func _enter() -> void:
 	if boss_zone_camera == null and obj.boss_zone:
 		boss_zone_camera = obj.boss_zone.camera_2d
 	
+	# Switch to boss_zone camera immediately
+	if boss_zone_camera:
+		print("Cutscene1: Switching to boss_zone camera")
+		CameraTransition.transition_camera2D(boss_zone_camera, 1.5)
+	else:
+		push_warning("Boss zone camera not found")
+	
+	await get_tree().create_timer(0.3).timeout
+	
 	# Setup QTE container
 	_setup_qte_container()
 	
@@ -105,6 +114,9 @@ func _setup_qte_container() -> void:
 	canvas.add_child(qte_container)
 
 func _start_cutscene_sequence() -> void:
+	Dialogic.start("earth_ultimate")
+	await Dialogic.timeline_ended
+	
 	# === STEP 1: DISABLE PLAYER INPUT ===
 	if player and player.fsm:
 		if player.fsm.states.has("idle"):
@@ -115,22 +127,8 @@ func _start_cutscene_sequence() -> void:
 	# === STEP 2: ĐỨNG IM MỘT CHÚT ===
 	await get_tree().create_timer(0.5).timeout
 	
-	# === STEP 3: CHUYỂN SANG CAMERA BOSS ===
-	if boss_camera:
-		boss_camera.enabled = true
-		CameraTransition.transition_camera2D(boss_camera, 1.0)
-		await get_tree().create_timer(1.0).timeout
-	
-	# === STEP 4: ZOOM CAMERA BOSS VÀO ===
-	await _zoom_boss_camera_in()
-	
-	# === STEP 5: BOSS BAY LÊN VỊ TRÍ CUTSCENE ===
+	# === STEP 3: BOSS BAY LÊN VỊ TRÍ CUTSCENE ===
 	await _move_boss_to_position()
-	
-	# === STEP 6: CHUYỂN LẠI CAMERA BOSS_ZONE ===
-	if boss_zone_camera:
-		CameraTransition.transition_camera2D(boss_zone_camera, 1.0)
-		await get_tree().create_timer(1.0).timeout
 	
 	# === STEP 7: STANDALONE QTE (NO ANIMATION DEPENDENCY) ===
 	print("Cutscene1: Triggering Standalone QTE...")
@@ -182,6 +180,9 @@ func _start_cutscene_sequence() -> void:
 	await _land_player_on_ground()
 	
 	await get_tree().create_timer(1.0).timeout
+	
+	Dialogic.start("earth_ultimate_after")
+	await Dialogic.timeline_ended
 	
 	# === CRITICAL FIX: RESTORE COMBAT STATE ===
 	# Unlock boss
@@ -305,21 +306,19 @@ func _move_boss_to_position() -> void:
 	if not boss_pos: return
 	
 	var target_pos = boss_pos.global_position
-	var all_tweens = obj.get_tree().get_processed_tweens()
-	for t in all_tweens:
-		if t.is_valid(): t.kill()
 	
 	await get_tree().process_frame
 	
 	obj.velocity = Vector2.ZERO
 	obj.change_animation("moving")
 	
-	var fly_tween = obj.get_tree().create_tween()
+	var fly_tween = _create_managed_tween()
 	fly_tween.bind_node(obj)
 	fly_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	fly_tween.tween_property(obj, "global_position", target_pos, 1.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	
 	await fly_tween.finished
+	_remove_tween(fly_tween)
 	
 	obj.global_position = target_pos
 	boss_locked_position = target_pos
@@ -418,7 +417,29 @@ func _physics_process(_delta):
 		obj.velocity = Vector2.ZERO
 		obj.global_position = boss_locked_position
 
+# ==============================================================================
+#  TWEEN MANAGEMENT
+# ==============================================================================
+
+func _create_managed_tween() -> Tween:
+	var tween = get_tree().create_tween()
+	active_tweens.append(tween)
+	return tween
+
+func _remove_tween(tween: Tween) -> void:
+	var idx = active_tweens.find(tween)
+	if idx != -1:
+		active_tweens.remove_at(idx)
+
+func _kill_active_tweens() -> void:
+	for tween in active_tweens:
+		if is_instance_valid(tween) and tween.is_valid():
+			tween.kill()
+	active_tweens.clear()
+
 func _exit() -> void:
+	_kill_active_tweens()
+	
 	obj.is_stunned = false
 	obj.is_movable = true
 	obj.set_physics_process(true)

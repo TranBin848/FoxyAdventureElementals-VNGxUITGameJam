@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AudioClip" load_steps=3 format=3 uid="uid://btac4biap8fo3"]
+
+[ext_resource type="Script" uid="uid://chlphbiuq1gay" path="res://scripts/audio/audio_clip.gd" id="1_5mmfq"]
+[ext_resource type="AudioStream" uid="uid://b7m230t120iv2" path="res://assets/sounds/LinkinPark-WhatIveDone.mp3" id="2_ui87w"]
+
+[resource]
+script = ExtResource("1_5mmfq")
+clip_id = "music_credits_copyrighted"
+stream = ExtResource("2_ui87w")
+variations = Array[AudioStream]([])
+volume_db = -10.0
+randomize_pitch = false
+pitch_min = 0.9
+pitch_max = 1.1
+description = ""
+metadata/_custom_type_script = "uid://chlphbiuq1gay"

@@ -3,9 +3,10 @@ signal text_finished
 
 @onready var label: RichTextLabel = $DialogText
 @onready var type_sound: AudioStreamPlayer = $TypeSound
+@onready var continue_indicator: Sprite2D = $ContinueIndicator  # Can be Label, TextureRect, AnimatedSprite, etc.
 
 # Configuration
-var typing_speed: float = 0.05
+var typing_speed: float = 0.02
 var current_tween: Tween
 
 # === THE FIX: Hold a reference to the specific effect instance ===
@@ -15,10 +16,12 @@ var jump_effect_instance: RichTextJump = null
 var pitch_min: float = 0.95
 var pitch_max: float = 1.05
 var volume_variation: float = 3.0  # dB variation
-var base_volume: float = -20.0  # Base volume in dB
+var base_volume: float = -17.0  # Base volume in dB
 
 # Track the parsed text for character detection
 var parsed_text: String = ""
+var is_waiting_for_input: bool = false
+var is_typing: bool = false
 
 func _ready() -> void:
 	# 1. Create the effect instance
@@ -30,11 +33,21 @@ func _ready() -> void:
 	# Set base volume
 	type_sound.volume_db = base_volume
 	
+	# Hide continue indicator initially
+	if continue_indicator:
+		continue_indicator.visible = false
+	
 	# Hide UI initially
 	visible = false
 
 func show_text(text: String, wait_time_after: float = 1.0) -> void:
 	visible = true
+	is_waiting_for_input = false
+	is_typing = true
+	
+	# Hide continue indicator while typing
+	if continue_indicator:
+		continue_indicator.visible = false
 	
 	# Reset the limit on our effect instance
 	jump_effect_instance.current_limit = 0.0
@@ -89,4 +102,34 @@ func _handle_typewriter_sound(value: float) -> void:
 func _on_sequence_finished() -> void:
 	last_char_index = -1
 	parsed_text = ""
-	text_finished.emit()
+	is_typing = false
+	is_waiting_for_input = true
+	
+	# Show continue indicator
+	if continue_indicator:
+		continue_indicator.visible = true
+		_animate_continue_indicator()
+
+func _animate_continue_indicator() -> void:
+	# Optional: Add a pulsing/blinking animation to the indicator
+	if not continue_indicator:
+		return
+		
+	var anim_tween = create_tween().set_loops()
+	anim_tween.tween_property(continue_indicator, "modulate:a", 0.3, 0.5)
+	anim_tween.tween_property(continue_indicator, "modulate:a", 1.0, 0.5)
+
+func _input(event: InputEvent) -> void:
+	# Only accept input when text is completely finished displaying
+	if not is_waiting_for_input:
+		return
+		
+	# Accept any key press or mouse click
+	if event.is_action_pressed("ui_accept") or \
+	   event.is_action_pressed("ui_select") or \
+	   (event is InputEventMouseButton and event.pressed) or \
+	   (event is InputEventKey and event.pressed):
+		is_waiting_for_input = false
+		if continue_indicator:
+			continue_indicator.visible = false
+		text_finished.emit()

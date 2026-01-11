@@ -21,6 +21,7 @@ var animated_bg: AnimationPlayer = null
 var player: Player = null
 var player_pos: Node2D = null
 var boss_pos: Node2D = null
+var boss_zone_camera: Camera2D = null
 var canvas_layer: CanvasLayer = null
 @onready var ui: CanvasLayer = $"../../UI"
 
@@ -35,15 +36,16 @@ var qte_active: bool = false
 var qte_timers: Array = []
 var qte_failed: bool = false
 
+# Tween management
+var active_tweens: Array[Tween] = []
+
 func _enter() -> void:
 	print("=== State: Cutscene3 Enter ===")
 	
 	obj.change_animation("idle")
 	
-	# Kill tweens
-	var all_tweens = obj.get_tree().get_processed_tweens()
-	for t in all_tweens:
-		if t.is_valid(): t.kill()
+	# Kill only our managed tweens (not CameraTransition's!)
+	_kill_active_tweens()
 	
 	# Setup boss
 	obj.velocity = Vector2.ZERO
@@ -55,6 +57,7 @@ func _enter() -> void:
 	# Tìm AnimatedBg
 	if animated_bg == null:
 		animated_bg = obj.get_tree().get_first_node_in_group("animated_bg")
+		(animated_bg.get_child(0) as AnimatedSprite2D).animation = "cutscene3"
 	
 	# Tìm và ẩn UI
 	if canvas_layer == null:
@@ -66,6 +69,19 @@ func _enter() -> void:
 	# Tìm player
 	if player == null:
 		player = obj.get_tree().root.find_child("Player", true, false) as Player
+	
+	# Tìm camera
+	if boss_zone_camera == null and obj.boss_zone:
+		boss_zone_camera = obj.boss_zone.camera_2d
+	
+	# Switch to boss_zone camera immediately
+	if boss_zone_camera:
+		print("Cutscene3: Switching to boss_zone camera")
+		CameraTransition.transition_camera2D(boss_zone_camera, 1.5)
+	else:
+		push_warning("Boss zone camera not found")
+	
+	await get_tree().create_timer(0.3).timeout
 	
 	# Tìm position nodes
 	var pos_container = obj.get_tree().root.find_child("PosBossPlayer", true, false)
@@ -99,6 +115,9 @@ func _start_cutscene_sequence() -> void:
 		if player.fsm.states.has("idle"):
 			player.fsm.change_state(player.fsm.states.idle)
 		player.set_physics_process(false)
+		
+	Dialogic.start("boss_phoenix")
+	await Dialogic.timeline_ended
 
 	# === STEP 3: STANDALONE QTE (NO ANIMATION DEPENDENCY) ===
 	print("Cutscene3: Triggering Standalone QTE...")
@@ -141,6 +160,8 @@ func _start_cutscene_sequence() -> void:
 		print("Cutscene3: Playing AnimatedBg cutscene3...")
 		animated_bg.play("cutscene3")
 	
+	Dialogic.start("boss_phoenix_after")
+	await Dialogic.timeline_ended
 	
 	# === STEP 5: WAIT FOR ANIMATION TO FINISH ===
 	if animated_bg and animated_bg.is_playing():
@@ -178,12 +199,12 @@ func _start_cutscene_sequence() -> void:
 		player.set_physics_process(true)
 		player.visible = true
 	
-	# Transition to Idle (combat state)
-	if is_instance_valid(fsm) and fsm.states.has("idle"):
-		print("Cutscene3: Finished successfully, transitioning to combat (idle)")
-		fsm.change_state(fsm.states.idle)
+	# Transition to standup (combat state)
+	if is_instance_valid(fsm) and fsm.states.has("standup"):
+		print("Cutscene3: Finished successfully, transitioning to standup")
+		fsm.change_state(fsm.states.standup)
 	else:
-		print("ERROR: Cannot transition to idle!")
+		print("ERROR: Cannot transition to standup!")
 
 # ============= QTE FUNCTIONS =============
 
@@ -374,7 +395,29 @@ func _physics_process(_delta):
 	if is_instance_valid(obj):
 		obj.velocity = Vector2.ZERO
 
+# ==============================================================================
+#  TWEEN MANAGEMENT
+# ==============================================================================
+
+func _create_managed_tween() -> Tween:
+	var tween = get_tree().create_tween()
+	active_tweens.append(tween)
+	return tween
+
+func _remove_tween(tween: Tween) -> void:
+	var idx = active_tweens.find(tween)
+	if idx != -1:
+		active_tweens.remove_at(idx)
+
+func _kill_active_tweens() -> void:
+	for tween in active_tweens:
+		if is_instance_valid(tween) and tween.is_valid():
+			tween.kill()
+	active_tweens.clear()
+
 func _exit() -> void:
+	_kill_active_tweens()
+	
 	obj.is_stunned = false
 	obj.is_movable = true
 	obj.set_physics_process(true)
