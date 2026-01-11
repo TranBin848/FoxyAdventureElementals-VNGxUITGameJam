@@ -107,8 +107,7 @@ func _collect_wand(player: Player) -> void:
 	if detection_shape:
 		detection_shape.set_deferred("disabled", true)
 	
-	player.upgrade_wand_to(_wand_level)
-	player.collect_wand()
+	player.collect_wand(_wand_level)
 	
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.3)\
