@@ -278,10 +278,21 @@ func collect_blade() -> void:
 	GameProgressManager.trigger_event("CUTLASS")
 	swap_weapon_to(WeaponType.BLADE)
 
-func collect_wand() -> void:
+func collect_wand(level: WandLevel = WandLevel.NORMAL) -> void:
 	has_wand = true
-	# HOOK HERE: Trigger tutorial on first weapon pickup
-	GameProgressManager.trigger_event("WOOD_WAND")
+	current_wand_level = level
+	
+	# Trigger specific events based on the wand level
+	match level:
+		WandLevel.NORMAL: # Assuming WOOD is your enum for the base level
+			GameProgressManager.trigger_event("WOOD_WAND")
+		WandLevel.SORROW:
+			GameProgressManager.trigger_event("SORROW_WAND")
+		WandLevel.SOUL:
+			GameProgressManager.trigger_event("SOUL_WAND")
+			
+	# Update visuals and force switch to the wand
+	# We use swap_weapon_to to ensure the player holds the new/upgraded weapon immediately
 	swap_weapon_to(WeaponType.WAND)
 	
 func can_attack() -> bool:
@@ -352,16 +363,6 @@ func swap_weapon_to(to_weapon: WeaponType) -> void:
 
 # --- CAROUSEL LOGIC END ---
 
-func upgrade_wand_to(level: WandLevel) -> void:
-	has_wand = true # Ensure they own the weapon type
-	current_wand_level = level
-	
-	# Show notification
-	var level_name = "Sorrow" if level == WandLevel.SORROW else "Soul"
-	GameProgressManager.trigger_event("WEAPON_UPGRADE_" + level_name.to_upper())
-	
-	# Refresh visuals if holding the wand
-	equip_weapon(WeaponType.WAND)
 
 func equip_weapon(type: WeaponType) -> void:
 	current_weapon = type
@@ -501,7 +502,7 @@ func _apply_buff_skill(skill: Skill) -> void:
 	var duration = skill.get_scaled_duration()
 	
 	if skill is Fireball:
-		enter_buff_state(BuffState.FIREBALL, duration)
+		enter_buff_state(BuffState.FIREBALL, duration/1.25)
 	elif skill is Burrow:
 		enter_buff_state(BuffState.BURROW, duration)
 	elif skill is HealOverTime:

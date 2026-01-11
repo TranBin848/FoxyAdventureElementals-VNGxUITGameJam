@@ -25,10 +25,6 @@ var is_stuck: bool = false
 var stick_duration: float = 5.0
 var sword_id := randi()
 
-func _ready() -> void:
-	AudioManager.play_sound("skill_sword_hit_enemy")
-	#print("Sword ready: ", sword_id, " parent: ", get_parent())
-
 func setup_hover(pos: Vector2, dmg: int, elem: ElementsEnum.Elements, duration: float) -> void:
 	damage = dmg
 	elemental_type = elem

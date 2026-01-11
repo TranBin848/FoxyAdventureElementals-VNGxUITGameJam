@@ -7,11 +7,11 @@ class_name ThousandSwordsArea
 @export_group("Sword Settings")
 @export var sword_scene_path: String = "res://skills/projectiles/SwordProjectile.tscn"
 @export var sword_count: int = 12
-@export var spawn_interval: float = 0.05    
+@export var spawn_interval: float = 0.1 
 @export var fire_interval: float = 0.08     
 
 @export_group("Positioning")
-@export var hover_height: float = 120.0     
+@export var hover_height: float = 200.0     
 @export var ring_radius: float = 40.0      
 @export var grave_scatter: float = 20.0     
 
@@ -22,6 +22,7 @@ var sword_scene: PackedScene
 var active_swords: Array[SwordProjectile] = []
 var current_target: Node2D = null 
 var is_firing: bool = false 
+var is_spawning_swords: bool = false
 
 func setup(_skill: Skill, caster_position: Vector2, enemy: EnemyCharacter, _direction: Vector2 = Vector2.RIGHT) -> void:
 	super.setup(_skill, caster_position, enemy, _direction)
@@ -72,10 +73,16 @@ func _sequence_start() -> void:
 	is_firing = false
 	can_rotate_swords = false
 
+	# --- AUDIO LOOP START ---
+	is_spawning_swords = true
+	_play_spawning_audio_loop() # Starts the sound loop coroutine
+	# ------------------------
+
 	var angle_step = (2.0 * PI) / sword_count
 
 	for i in range(sword_count):
 		if not is_instance_valid(self):
+			is_spawning_swords = false # Safety stop
 			return
 
 		var angle = i * angle_step - (PI / 2)
@@ -87,8 +94,12 @@ func _sequence_start() -> void:
 		sword.setup_hover(spawn_pos, damage, elemental_type, duration + 2.0)
 		sword.rotation = angle
 		active_swords.append(sword)
-
+		
 		await get_tree().create_timer(spawn_interval).timeout
+
+	# --- AUDIO LOOP STOP ---
+	is_spawning_swords = false
+	# -----------------------
 
 	current_target = _find_highest_hp_enemy()
 	await get_tree().create_timer(0.3).timeout
@@ -96,7 +107,7 @@ func _sequence_start() -> void:
 
 	await get_tree().create_timer(0.5).timeout
 	is_firing = true
-
+	
 	# Fallback position based on caster direction
 	var fallback_pos = global_position + (direction.normalized() * 300) + Vector2(0, hover_height)
 
@@ -118,6 +129,21 @@ func _sequence_start() -> void:
 		await get_tree().create_timer(fire_interval).timeout
 
 	can_rotate_swords = false
+	
+func _play_spawning_audio_loop() -> void:
+	# This loop runs in parallel with the sword spawning
+	while is_spawning_swords:
+		# Check validity before playing to avoid errors if scene changes
+		if not is_instance_valid(self):
+			return
+			
+		AudioManager.play_sound("skill_sword_hit_enemy")
+		
+		# Define the "slight delay" here. 
+		# We use max() to ensure it doesn't get too fast if spawn_interval is tiny.
+		# 0.08s is roughly 12 sounds per second (fast but distinct).
+		var audio_delay = max(spawn_interval, 0.1)
+		await get_tree().create_timer(audio_delay).timeout
 
 func _find_highest_hp_enemy() -> Node2D:
 	var candidates = get_tree().get_nodes_in_group("enemies")
@@ -129,6 +155,11 @@ func _find_highest_hp_enemy() -> Node2D:
 	
 	for enemy in candidates:
 		if not is_instance_valid(enemy):
+			continue
+			
+		if enemy is FinalBossPhaseOne:
+			continue
+		if enemy.fsm.current_state == enemy.fsm.states.dead:
 			continue
 		
 		var screen_pos = canvas_transform * enemy.global_position

@@ -5,4 +5,3 @@ func _ready() -> void:
 	if AudioManager:
 		AudioManager.play_music("music_background")
 		AudioManager.play_ambience("ambience_forest", -10)
-	

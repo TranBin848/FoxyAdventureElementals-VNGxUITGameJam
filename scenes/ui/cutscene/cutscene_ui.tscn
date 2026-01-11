@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://drvrwd0fl6w5p"]
+
+[ext_resource type="Script" uid="uid://bhtp5cgwnb5u1" path="res://scenes/ui/cutscene/cutscene_ui.gd" id="1_2lgkv"]
+[ext_resource type="Script" uid="uid://cmeewracyuje4" path="res://scenes/ui/cutscene/jump_text_effect.gd" id="1_ycap7"]
+[ext_resource type="FontFile" uid="uid://coes1s3eo0n6p" path="res://assets/fonts/SVN-Determination-Sans.ttf" id="2_e3m4w"]
+[ext_resource type="AudioStream" uid="uid://bvyvc4qf6a3cu" path="res://assets/sounds/820353__bryansaraiva__typewriter-key-press-06.wav" id="4_2qyll"]
+[ext_resource type="Texture2D" uid="uid://bivrrv03u3h81" path="res://assets/ui/freeversion.png" id="5_5bfrt"]
+
+[node name="CutsceneUI" type="CanvasLayer"]
+script = ExtResource("1_2lgkv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DialogText" type="RichTextLabel" parent="."]
+clip_contents = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_e3m4w")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "BANANANAN"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [ExtResource("1_ycap7")]
+
+[node name="TypeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2qyll")
+volume_db = -20.0
+
+[node name="ContinueIndicator" type="Sprite2D" parent="."]
+position = Vector2(1214, 673)
+texture = ExtResource("5_5bfrt")
+region_enabled = true
+region_rect = Rect2(64, 181, 48, 24)

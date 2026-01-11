@@ -39,20 +39,30 @@ GameProgressManager="*res://scripts/autoload/game_progress_manager.gd"
 [dialogic]
 
 directories/dch_directory={
-"Foxy": "res://dialogs/Foxy.dch",
 "Old_Man_Cave": "res://assets/npc/Old_Man_Cave.dch",
 "Stat_Seller": "res://dialogs/Stat_Seller.dch",
 "Wand_Seller": "res://dialogs/Wand_Seller.dch",
 "black_emperor": "res://dialogs/black_emperor.dch",
 "foxy": "res://dialogs/foxy.dch",
 "npc_master_fox": "res://dialogs/npc_master_fox.dch",
-"npc_villager": "res://dialogs/npc_villager.dch"
+"npc_villager": "res://dialogs/npc_villager.dch",
+"soul_wand": "res://dialogs/soul_wand.dch"
 }
 directories/dtl_directory={
+"bad_ending": "res://dialogs/bad_ending.dtl",
+"boss_chanting": "res://dialogs/boss_chanting.dtl",
+"boss_phoenix": "res://dialogs/boss_phoenix.dtl",
+"boss_phoenix_after": "res://dialogs/boss_phoenix_after.dtl",
+"boss_shield_activate": "res://dialogs/boss_shield_activate.dtl",
+"boss_shield_break": "res://dialogs/boss_shield_break.dtl",
+"boss_shield_slash": "res://dialogs/boss_shield_slash.dtl",
+"earth_ultimate": "res://dialogs/earth_ultimate.dtl",
+"earth_ultimate_after": "res://dialogs/earth_ultimate_after.dtl",
 "end_lv1": "res://dialogs/end_lv1.dtl",
 "endgame_choice": "res://dialogs/endgame_choice.dtl",
 "guide_elemental": "res://dialogs/guide_elemental.dtl",
 "level_0": "res://dialogic_timelines/level_0.dtl",
+"metal_ultimate": "res://dialogs/metal_ultimate.dtl",
 "old_man_of_the_cave": "res://dialogs/old_man_of_the_cave.dtl",
 "sail_boat": "res://dialogs/sail_boat.dtl",
 "start_game": "res://dialogs/start_game.dtl",

@@ -288,14 +288,14 @@ bounce_back_velocity = null
 [node name="Cutscene6" type="Node" parent="States"]
 script = ExtResource("52_ib6y0")
 
+[node name="Cutscene7" type="Node" parent="States"]
+script = ExtResource("54_ib6y0")
+
 [node name="Dead" type="Node" parent="States"]
 script = ExtResource("56_2anp0")
 
 [node name="Charge" type="Node" parent="States"]
 script = ExtResource("57_mq2q6")
-
-[node name="Cutscene7" type="Node" parent="States"]
-script = ExtResource("54_ib6y0")
 
 [node name="Label" type="Label" parent="."]
 visible = false

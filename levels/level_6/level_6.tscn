@@ -1,13 +1,13 @@
-[gd_scene load_steps=23 format=4 uid="uid://dshvtsustqlwx"]
+[gd_scene load_steps=24 format=4 uid="uid://dshvtsustqlwx"]
 
 [ext_resource type="Script" uid="uid://n6xv0j7ugjbl" path="res://levels/level_6/level_6.gd" id="1_djwf0"]
 [ext_resource type="TileSet" uid="uid://luhdhg8n240a" path="res://levels/level_6/level_6.tres" id="2_rrv5u"]
 [ext_resource type="PackedScene" uid="uid://d0jou4iuydvkg" path="res://scenes/player/player.tscn" id="3_ic5dq"]
-[ext_resource type="Script" uid="uid://d0djolxvt6im6" path="res://scenes/enemies/final_boss/animated_bg.gd" id="4_djwf0"]
 [ext_resource type="SpriteFrames" path="res://scenes/enemies/final_boss/animated_bg.tres" id="4_rrv5u"]
 [ext_resource type="PackedScene" uid="uid://e7bvnjghygn7" path="res://scenes/ui/hud/hud.tscn" id="5_djwf0"]
 [ext_resource type="PackedScene" uid="uid://ceyye5a53ckes" path="res://scenes/ui/skill_tree/skill_tree_ui.tscn" id="6_rrv5u"]
 [ext_resource type="FontFile" uid="uid://bg5tapse57x18" path="res://assets/fonts/PixelOperator8.ttf" id="7_mws0n"]
+[ext_resource type="PackedScene" uid="uid://drvrwd0fl6w5p" path="res://scenes/ui/cutscene/cutscene_ui.tscn" id="8_rrv5u"]
 [ext_resource type="Script" uid="uid://bm7m142n06sne" path="res://scripts/area_component/boss_area.gd" id="9_pw60n"]
 [ext_resource type="PackedScene" uid="uid://d0a57drf7tx4v" path="res://scenes/enemies/final_boss/black_emperor.tscn" id="10_djwf0"]
 [ext_resource type="PackedScene" uid="uid://ddoge3thw6gl1" path="res://levels/objects/door/door.tscn" id="10_pw60n"]
@@ -284,6 +284,17 @@ _data = {
 &"cutscene6": SubResource("Animation_llmex")
 }
 
+[sub_resource type="GDScript" id="GDScript_djwf0"]
+script/source = "extends AnimationPlayer
+
+func _ready() -> void:
+	# Thêm vào group để các state có thể tìm thấy
+	add_to_group(\"animated_bg\")
+
+func play_sound(sound_name: String) ->void:
+	AudioManager.play_sound(sound_name)
+"
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fdo7j"]
 normal = Vector2(1, 0)
 distance = -41.0
@@ -305,12 +316,12 @@ tile_set = ExtResource("2_rrv5u")
 libraries = {
 &"": SubResource("AnimationLibrary_nr5tq")
 }
-script = ExtResource("4_djwf0")
+script = SubResource("GDScript_djwf0")
 
 [node name="AnimatedBG2" type="AnimatedSprite2D" parent="AnimationPlayer"]
 z_index = -10
-position = Vector2(-1229, 173)
-scale = Vector2(0.66744, 0.66744)
+position = Vector2(-1212.26, 156.488)
+scale = Vector2(0.614027, 0.614027)
 sprite_frames = ExtResource("4_rrv5u")
 animation = &"cutscene1"
 
@@ -345,6 +356,9 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_mws0n")
 text = "Enemy Out of Range"
 horizontal_alignment = 1
+
+[node name="CutsceneUI" parent="GUI" instance=ExtResource("8_rrv5u")]
+layer = 100
 
 [node name="FX" type="Node2D" parent="."]
 
@@ -403,6 +417,12 @@ position = Vector2(414, 145)
 [node name="BossPosCutscene5" type="Node2D" parent="PosBossPlayer"]
 position = Vector2(757, -59)
 
+[node name="PLayerPosCutscene6" type="Node2D" parent="PosBossPlayer"]
+position = Vector2(390, 250)
+
+[node name="BossPosCutscene6" type="Node2D" parent="PosBossPlayer"]
+position = Vector2(702, 221)
+
 [node name="Bosszone" type="Area2D" parent="." node_paths=PackedStringArray("boss")]
 position = Vector2(-1213, 218)
 scale = Vector2(27, 18)
@@ -416,13 +436,15 @@ shape = SubResource("RectangleShape2D_rrv5u")
 debug_color = Color(0.988235, 0, 0.290196, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Bosszone"]
-zoom = Vector2(1.5, 1.5)
+position = Vector2(0.037037, -1.88889)
+zoom = Vector2(1.4, 1.4)
 
 [node name="BlackEmperor" parent="Bosszone" instance=ExtResource("10_djwf0")]
 position = Vector2(1.85185, 7.5)
 scale = Vector2(0.037, 0.056)
 collision_layer = 24
 collision_mask = 1
+max_health = 200
 
 [node name="Player" parent="." instance=ExtResource("3_ic5dq")]
 position = Vector2(-1474, 383)
