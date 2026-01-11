@@ -501,7 +501,7 @@ func _apply_buff_skill(skill: Skill) -> void:
 	var duration = skill.get_scaled_duration()
 	
 	if skill is Fireball:
-		enter_buff_state(BuffState.FIREBALL, duration)
+		enter_buff_state(BuffState.FIREBALL, duration/1.25)
 	elif skill is Burrow:
 		enter_buff_state(BuffState.BURROW, duration)
 	elif skill is HealOverTime:

@@ -9,7 +9,8 @@ func _enter() -> void:
 	obj.animated_sprite.animation_finished.connect(_spawn_chest)
 	
 func _spawn_chest() -> void:
-	var chest_drop = CHEST_DROP_SCENE.instantiate() as BossChest
-	get_tree().current_scene.add_child(chest_drop)
-	chest_drop.drop_wand_level = Player.WandLevel.SOUL
-	chest_drop.global_position = obj.global_position
+	if not obj.being_controled:
+		var chest_drop = CHEST_DROP_SCENE.instantiate() as BossChest
+		get_tree().current_scene.add_child(chest_drop)
+		chest_drop.drop_wand_level = Player.WandLevel.SOUL
+		chest_drop.global_position = obj.global_position

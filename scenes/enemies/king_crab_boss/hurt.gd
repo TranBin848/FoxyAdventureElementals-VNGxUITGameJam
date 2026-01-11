@@ -17,9 +17,9 @@ func _update(_delta: float) -> void:
 	if update_timer(_delta):
 		Engine.time_scale = 1.0
 		
-	
 func _spawn_chest() -> void:
-	var chest_drop = CHEST_DROP_SCENE.instantiate() as BossChest
-	get_tree().current_scene.add_child(chest_drop)
-	chest_drop.drop_wand_level = Player.WandLevel.SORROW
-	chest_drop.global_position = obj.global_position
+	if not obj.being_controled:
+		var chest_drop = CHEST_DROP_SCENE.instantiate() as BossChest
+		get_tree().current_scene.add_child(chest_drop)
+		chest_drop.drop_wand_level = Player.WandLevel.SORROW
+		chest_drop.global_position = obj.global_position
