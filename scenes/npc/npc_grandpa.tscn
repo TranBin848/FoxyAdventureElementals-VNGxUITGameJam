@@ -20,6 +20,7 @@ animations = [{
 size = Vector2(55, 63.5)
 
 [node name="NpcGrandpa" type="Node2D"]
+scale = Vector2(0.786093, 0.751786)
 script = ExtResource("1_npovp")
 hoithoai = "old_man_of_the_cave"
 
