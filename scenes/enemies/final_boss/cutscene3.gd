@@ -57,7 +57,6 @@ func _enter() -> void:
 	# Tìm AnimatedBg
 	if animated_bg == null:
 		animated_bg = obj.get_tree().get_first_node_in_group("animated_bg")
-		(animated_bg.get_child(0) as AnimatedSprite2D).animation = "cutscene3"
 	
 	# Tìm và ẩn UI
 	if canvas_layer == null:
@@ -115,9 +114,6 @@ func _start_cutscene_sequence() -> void:
 		if player.fsm.states.has("idle"):
 			player.fsm.change_state(player.fsm.states.idle)
 		player.set_physics_process(false)
-		
-	Dialogic.start("boss_phoenix")
-	await Dialogic.timeline_ended
 
 	# === STEP 3: STANDALONE QTE (NO ANIMATION DEPENDENCY) ===
 	print("Cutscene3: Triggering Standalone QTE...")
@@ -147,7 +143,10 @@ func _start_cutscene_sequence() -> void:
 	
 	# === STEP 4: HIỂN THỊ ICON NGUYÊN TỐ HỎA ===
 	await _show_element_icons()
-	
+	if animated_bg:
+		(animated_bg.get_child(0) as AnimatedSprite2D).animation = "cutscene3"
+		await get_tree().create_timer(0.5).timeout
+		Dialogic.start("boss_phoenix")
 	
 	# === STEP 2: TRIGGER PARALLEL ACTIONS (NO AWAIT HERE) ===
 	print("Cutscene3: Starting parallel movement and animation...")
